@@ -22,4 +22,4 @@ COPY --from=install /usr/src/app/ .
 ENV NODE_ENV production
 USER bun
 EXPOSE 3000/tcp
-ENTRYPOINT [ "bun", "src/index.ts" ]
+ENTRYPOINT [ "bun", "run", "start:prod" ]
