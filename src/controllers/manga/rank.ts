@@ -1,4 +1,4 @@
-import prisma from "../../models/prisma";
+import { prisma } from "../../models/prisma";
 
 
 export const createRanking = async (manga_slug: string, rank: string, comment: string, user_id?: number) => {

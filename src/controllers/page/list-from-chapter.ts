@@ -1,4 +1,4 @@
-import prisma from "../../models/prisma";
+import { prisma } from "../../models/prisma";
 
 export const listFromChapter = async (manga_slug: string, chapter_slug: string) => {
 	const manga = await prisma.manga.findFirst({

@@ -1,4 +1,4 @@
-import prisma from "../../models/prisma";
+import { prisma } from "../../models/prisma";
 
 
 export const createToken = async (token: string, userId: number) => {

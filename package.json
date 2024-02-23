@@ -3,19 +3,19 @@
   "module": "src/index.ts",
   "type": "module",
   "scripts": {
-    "db:generate": "drizzle-kit generate:pg",
-    "db:migrate": "bun src/commands/migrate.ts",
     "scrap": "bun src/commands/scrap.ts",
     "sanitize": "bun src/commands/sanitize.ts",
-    "start": "bun index.ts",
-    "dev": "bun --watch index.ts",
+    "start": "bun src/index.ts",
+    "prisma:migrate": "bunx prisma migrate deploy",
+    "prisma:generate": "bunx prisma generate",
+    "start:prod": "bun run prisma:migrate && bun run prisma:generate && bun run start",
+    "dev": "bun --watch src/index.ts",
     "format": "bunx @biomejs/biome format --write ./src"
   },
   "devDependencies": {
     "@biomejs/biome": "1.5.3",
     "@types/slug": "^5.0.7",
-    "bun-types": "latest",
-    "prisma": "^5.9.1"
+    "bun-types": "latest"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
@@ -25,7 +25,7 @@
     "@elysiajs/cors": "^0.8.0",
     "@elysiajs/jwt": "^0.8.0",
     "@grotto/logysia": "^0.1.1",
-    "@prisma/client": "^5.9.1",
+    "@prisma/client": "latest",
     "elysia": "^0.8.17",
     "elysia-http-error": "^1.2.0",
     "linkedom": "^0.16.8",
