@@ -1,6 +1,6 @@
 import slug from "slug";
 
-import prisma from "../../models/prisma";
+import { prisma } from "../../models/prisma";
 
 
 export const register = async (email: string, username: string, password: string) => {
