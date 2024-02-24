@@ -14,8 +14,8 @@ COPY ./package.json ./bun.lockb ./
 COPY ./src ./src
 COPY ./prisma ./prisma
 RUN bun install
-RUN npx prisma generate
-RUN npx prisma migrate deploy
+RUN bunx prisma generate
+RUN bunx prisma migrate deploy
 
 FROM base AS release
 COPY --from=install /usr/src/app/ .
