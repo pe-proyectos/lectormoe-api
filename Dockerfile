@@ -1,4 +1,4 @@
-FROM oven/bun:latest as base
+FROM oven/bun:1.0.29 as base
 WORKDIR /usr/src/app
 
 FROM base AS install
@@ -14,11 +14,12 @@ COPY ./package.json ./bun.lockb ./
 COPY ./src ./src
 COPY ./prisma ./prisma
 RUN bun install
-RUN bunx prisma generate
+RUN npx prisma generate
+RUN npx prisma migrate deploy
 
 FROM base AS release
 COPY --from=install /usr/src/app/ .
 
 USER root
 EXPOSE 3000/tcp
-ENTRYPOINT [ "bun", "run", "start:prod" ]
+ENTRYPOINT [ "bun", "run", "start" ]

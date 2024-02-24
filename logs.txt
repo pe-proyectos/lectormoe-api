@@ -1,0 +1,79 @@
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 2B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/oven/bun:latest
+#3 DONE 0.7s
+
+#4 [base 1/2] FROM docker.io/oven/bun:latest@sha256:2b283192796dfa02fc2f0f9f3749b4f64ef53bc0a4c7006f3816b7011bcecb0e
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 3.32kB done
+#5 DONE 0.0s
+
+#6 [install 4/7] COPY ./src ./src
+#6 CACHED
+
+#7 [install 2/7] RUN curl -L https://raw.githubusercontent.com/tj/n/master/bin/n -o n     && bash n 20     && rm n     && npm install -g n
+#7 CACHED
+
+#8 [install 3/7] COPY ./package.json ./bun.lockb ./
+#8 CACHED
+
+#9 [install 1/7] RUN apt update     && apt install -y curl
+#9 CACHED
+
+#10 [install 7/7] RUN bunx prisma generate
+#10 CACHED
+
+#11 [install 6/7] RUN bun install
+#11 CACHED
+
+#12 [base 2/2] WORKDIR /usr/src/app
+#12 CACHED
+
+#13 [install 5/7] COPY ./prisma ./prisma
+#13 CACHED
+
+#14 [release 1/1] COPY --from=install /usr/src/app/ .
+#14 CACHED
+
+#15 exporting to image
+#15 exporting layers done
+#15 writing image sha256:97acbbb9b7af42de41c8707af2e948aecac8f5069dad8d2236211264b6362b3a done
+#15 naming to docker.io/library/latmanga-api done
+#15 DONE 0.0s
+Container latmanga-api-1  Recreate
+Container latmanga-api-1  Recreated
+Attaching to latmanga-api-1
+latmanga-api-1  | $ bun run prisma:migrate && bun run start
+latmanga-api-1  | $ bunx prisma migrate deploy
+latmanga-api-1  |  Resolving dependencies
+latmanga-api-1  |  Resolved, downloaded and extracted [24]
+latmanga-api-1  |  Saved lockfile
+latmanga-api-1  | $ bun src/index.ts
+latmanga-api-1  | 🦊 Elysia is running at localhost:3000
+latmanga-api-1  | Loaded routes: 
+latmanga-api-1  | 	- POST: /api/auth/login
+latmanga-api-1  | 	- GET: /api/auth/check
+latmanga-api-1  | 	- POST: /api/auth/register
+latmanga-api-1  | 	- GET: /api/auth/logout
+latmanga-api-1  | 	- GET: /api/manga/:manga_slug/chapter/:chapter_slug
+latmanga-api-1  | 	- GET: /api/demography
+latmanga-api-1  | 	- GET: /api/genre
+latmanga-api-1  | 	- POST: /api/manga/:manga_slug/rank
+latmanga-api-1  | 	- GET: /api/manga
+latmanga-api-1  | 	- GET: /api/manga/:manga_slug
+Gracefully stopping... (press Ctrl+C again to force)
+Aborting on container exit...
+Container latmanga-api-1  Stopping
+time="2024-02-23T19:44:48-05:00" level=error msg="got 3 SIGTERM/SIGINTs, forcing shutdown"
+Container latmanga-api-1  Killing
+Container latmanga-api-1  Stopped
+Container latmanga-api-1  Killed
+canceled
