@@ -22,4 +22,4 @@ COPY --from=install /usr/src/app/ .
 
 USER root
 EXPOSE 3000/tcp
-ENTRYPOINT [ "bun", "run", "start" ]
+ENTRYPOINT [ "bun", "run", "start:prod" ]
