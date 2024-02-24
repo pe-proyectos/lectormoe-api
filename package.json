@@ -12,6 +12,9 @@
     "dev": "bun --watch src/index.ts",
     "format": "bunx @biomejs/biome format --write ./src"
   },
+  "trustedDependencies": [
+    "@prisma/client"
+  ],
   "devDependencies": {
     "@biomejs/biome": "1.5.3",
     "@types/slug": "^5.0.7",
@@ -25,7 +28,7 @@
     "@elysiajs/cors": "^0.8.0",
     "@elysiajs/jwt": "^0.8.0",
     "@grotto/logysia": "^0.1.1",
-    "@prisma/client": "latest",
+    "@prisma/client": "^5.10.2",
     "elysia": "^0.8.17",
     "elysia-http-error": "^1.2.0",
     "linkedom": "^0.16.8",
