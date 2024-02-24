@@ -6,9 +6,6 @@
     "scrap": "bun src/commands/scrap.ts",
     "sanitize": "bun src/commands/sanitize.ts",
     "start": "bun src/index.ts",
-    "prisma:migrate": "bunx prisma migrate deploy",
-    "prisma:generate": "bunx prisma generate",
-    "start:prod": "bunx prisma mirgate deploy",
     "dev": "bun --watch src/index.ts",
     "format": "bunx @biomejs/biome format --write ./src"
   },
