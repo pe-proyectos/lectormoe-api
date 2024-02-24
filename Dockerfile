@@ -13,13 +13,14 @@ RUN curl -L https://raw.githubusercontent.com/tj/n/master/bin/n -o n \
 COPY ./package.json ./bun.lockb ./
 COPY ./src ./src
 COPY ./prisma ./prisma
+COPY ./env.ts ./env.ts
 RUN bun install
-RUN bunx prisma generate
-RUN bunx prisma migrate deploy
+# RUN bunx prisma generate
+# RUN bunx prisma migrate deploy
 
 FROM base AS release
 COPY --from=install /usr/src/app/ .
 
 USER root
 EXPOSE 3000/tcp
-ENTRYPOINT [ "bun", "run", "start:prod" ]
+ENTRYPOINT [ "bun", "run", "env.ts" ]
