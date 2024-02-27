@@ -86,7 +86,7 @@ model Chapter {
   id       Int @id @default(autoincrement())
   manga_id Int
 
-  slug       String   @unique @db.VarChar(256)
+  slug       String   @db.VarChar(256)
   number     Int
   title      String   @db.VarChar(256)
   image_url  String   @db.VarChar(256)
@@ -96,6 +96,7 @@ model Chapter {
   manga Manga  @relation(fields: [manga_id], references: [id])
   pages Page[]
 
+  @@unique([slug, manga_id])
   @@map("chapter")
 }
 
