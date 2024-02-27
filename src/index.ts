@@ -13,14 +13,18 @@ export const app = new Elysia()
 				const validation = JSON.parse(error.message);
 				return {
 					status: false,
-					code,
-					error: `[${validation.at}] ${validation?.message}`,
+					data: {
+						error: code,
+						message: `[${validation.at}] ${validation?.message}`,
+					}
 				};
 			} catch (err) {
 				return {
 					status: false,
-					code,
-					error: error?.message,
+					data: {
+						error: error?.code || code,
+						message: error?.message,
+					}
 				};
 			}
 		}
@@ -30,8 +34,10 @@ export const app = new Elysia()
 		}
 		return {
 			status: false,
-			code,
-			error: error.message,
+			data: {
+				error: code,
+				message: error?.message,
+			}
 		};
 	})
 	.use(router())

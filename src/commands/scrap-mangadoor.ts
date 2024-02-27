@@ -1,6 +1,6 @@
 import { DOMParser } from "linkedom";
 import { parseArgs } from "util";
-import prisma from "../models/prisma";
+import { prisma } from "../models/prisma";
 import slugify from "slugify";
 
 const { positionals } = parseArgs({
@@ -26,10 +26,22 @@ async function scrapPages(
 		return chapter;
 	}
 	console.log(`Scraping page: ${manga_slug} - #${chapter_number} - ${page}`);
-	const image_url = `https://mangadoor.com/uploads/manga/${manga_slug}/chapters/${chapter_number}/${page}.jpg`;
+	let image_url = `https://mangadoor.com/uploads/manga/${manga_slug}/chapters/${chapter_number}/${page}.jpg`;
 	const f = await fetch(image_url);
 	if (f.status == 404) {
-		return chapter;
+		image_url = `https://mangadoor.com/uploads/manga/${manga_slug}/chapters/${chapter_number}/${page}.webp`;
+		const fWebP = await fetch(image_url);
+		if (fWebP.status == 404) {
+			image_url = `https://mangadoor.com/uploads/manga/${manga_slug}/chapters/${chapter_number}/${page}.png`;
+			const fPNG = await fetch(image_url);
+			if (fPNG.status == 404) {
+				image_url = `https://mangadoor.com/uploads/manga/${manga_slug}/chapters/${chapter_number}/${page}.jpeg`;
+				const fJPEG = await fetch(image_url);
+				if (fJPEG.status == 404) {
+					return chapter;
+				}
+			}
+		}
 	}
 	if (!chapter.pages) {
 		chapter.pages = [];
@@ -167,14 +179,23 @@ for (const chapter_data of chaptersDetails) {
 
 	if (!chapter) {
 		console.log(`Creating chapter: ${chapter_data.title}`);
-		chapter = await prisma.chapter.create({
-			data: {
+		chapter = await prisma.chapter.upsert({
+			where: {
+				slug: toSlug(chapter_data.title),
+				manga_id: manga.id,
+			},
+			create: {
 				title: chapter_data.title,
 				slug: toSlug(chapter_data.title),
 				number: parseFloat(chapter_data.url.split("/").pop()),
 				image_url: chapter_data?.pages[0]?.image_url || image_url,
 				manga_id: manga.id,
 			},
+			update: {
+				title: chapter_data.title,
+				number: parseFloat(chapter_data.url.split("/").pop()),
+				image_url: chapter_data?.pages[0]?.image_url || image_url,
+			}
 		});
 	}
 
