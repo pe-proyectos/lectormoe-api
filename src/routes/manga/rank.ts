@@ -7,9 +7,9 @@ import { createRanking } from '../../controllers/manga/rank';
 export const router = () => new Elysia()
     .use(authMiddleware({ loggedOnly: false }))
     .post(
-        '/api/manga/:manga_slug/rank',
-        async ({ user, params: { manga_slug }, body: { rank, comment } }) => {
-            const ranking = await createRanking(manga_slug, rank, comment, user?.id || undefined);
+        '/api/manga/:mangaSlug/rank',
+        async ({ user, params: { mangaSlug }, body: { rank, comment } }) => {
+            const ranking = await createRanking(mangaSlug, rank, comment, user?.id || undefined);
             return { status: true, message: 'OK' };
         },
         {

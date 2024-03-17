@@ -1,29 +1,25 @@
 import { prisma } from "../../models/prisma";
 
-export const getMangaBySlug = async (mangaSlug: string) => {
-	const manga = await prisma.manga.findFirst({
+export const getMangaCustomBySlug = async (organizationSlug: string, mangaSlug: string) => {
+	const mangaCustom = await prisma.mangaCustom.findFirst({
 		where: {
-			slug: mangaSlug,
+			organization: {
+				slug: organizationSlug,
+			},
+			manga: {
+				slug: mangaSlug,
+			},
 		},
 		include: {
+			manga: {
+				include: {
+					authors: true,
+					demography: true,
+				}
+			},
 			chapters: {
 				orderBy: {
 					number: "desc",
-				},
-			},
-			authors: {
-				select: {
-					id: true,
-					name: true,
-					slug: true,
-				},
-			},
-			demography: {
-				select: {
-					id: true,
-					name: true,
-					slug: true,
-					description: true,
 				},
 			},
 			genres: {
@@ -52,5 +48,14 @@ export const getMangaBySlug = async (mangaSlug: string) => {
 			},
 		},
 	});
-	return manga;
+	if (!mangaCustom) {
+		return null;
+	}
+	const result = {
+		...mangaCustom.manga,
+		...mangaCustom,
+		manga: undefined,
+	}
+	delete result.manga;
+	return result;
 };

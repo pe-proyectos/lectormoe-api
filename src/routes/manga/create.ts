@@ -1,15 +1,16 @@
 import { Elysia, t } from 'elysia';
 
-import { getMangaBySlug } from '../../controllers/manga/get';
+import { CreateMangaRequest } from '../../types/manga/create';
+import { createManga } from '../../controllers/manga/create';
 
 export const router = () => new Elysia()
-    .get(
-        '/api/manga/:mangaSlug',
-        async ({ params: { mangaSlug } }) => {
-            const manga = await getMangaBySlug(mangaSlug);
+    .post(
+        '/api/manga',
+        async ({ body }) => {
+            const manga = await createManga(body);
 
             if (!manga) {
-                throw new Error("Manga no encontrado.");
+                throw new Error("No se pudo crear el manga.");
             }
 
             return {
@@ -18,6 +19,7 @@ export const router = () => new Elysia()
             };
         },
         {
+            body: CreateMangaRequest,
             response: t.Object({
                 status: t.Boolean(),
                 data: t.Any(),

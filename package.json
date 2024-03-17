@@ -13,23 +13,24 @@
     "@prisma/client"
   ],
   "devDependencies": {
-    "@biomejs/biome": "1.5.3",
-    "@types/slug": "^5.0.7",
+    "@biomejs/biome": "1.6.1",
+    "@types/slug": "^5.0.8",
     "bun-types": "latest"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "@elysiajs/bearer": "^0.8.0",
-    "@elysiajs/cors": "^0.8.0",
-    "@elysiajs/jwt": "^0.8.0",
+    "@elysiajs/bearer": "^1.0.0",
+    "@elysiajs/cors": "^1.0.0",
+    "@elysiajs/jwt": "^1.0.0",
     "@grotto/logysia": "^0.1.1",
-    "@prisma/client": "^5.10.2",
-    "elysia": "^0.8.17",
+    "@prisma/client": "5.11.0",
+    "elysia": "^1.0.0",
     "elysia-http-error": "^1.2.0",
-    "linkedom": "^0.16.8",
-    "slug": "^8.2.3",
+    "linkedom": "^0.16.10",
+    "prisma": "5.11.0",
+    "slug": "^9.0.0",
     "slugify": "^1.6.6"
   }
 }

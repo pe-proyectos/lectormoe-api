@@ -13,7 +13,7 @@ console.log({ _runtime, _path, manga });
 
 async function scrapPages(
 	chapter: any,
-	manga_slug: string,
+	mangaSlug: string,
 	chapter_number: string,
 	page: number,
 ) {
@@ -23,9 +23,9 @@ async function scrapPages(
 	if (!page) {
 		return chapter;
 	}
-	// console.log(`Scraping chapter: ${manga_slug} - ${chapter_number} - ${page}`);
-	const image_url = `https://mangadoor.com/uploads/manga/${manga_slug}/chapters/${chapter_number}/${page}.jpg`;
-	const f = await fetch(image_url);
+	// console.log(`Scraping chapter: ${mangaSlug} - ${chapter_number} - ${page}`);
+	const imageUrl = `https://mangadoor.com/uploads/manga/${mangaSlug}/chapters/${chapter_number}/${page}.jpg`;
+	const f = await fetch(imageUrl);
 	if (f.status == 404) {
 		return chapter;
 	}
@@ -34,9 +34,9 @@ async function scrapPages(
 	}
 	chapter.pages.push({
 		page,
-		image_url,
+		imageUrl,
 	});
-	return await scrapPages(chapter, manga_slug, chapter_number, page + 1);
+	return await scrapPages(chapter, mangaSlug, chapter_number, page + 1);
 }
 
 async function scrapManga(manga: any) {
@@ -130,7 +130,7 @@ async function scrapList(data: any, page: number) {
 				.classList.value.replace("demography", "")
 				.trim()
 				.toLowerCase(),
-			image_url: elem
+			imageUrl: elem
 				.querySelector("style")
 				.innerText.split("url('")
 				.pop()

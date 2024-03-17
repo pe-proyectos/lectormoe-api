@@ -38,168 +38,168 @@ await prisma.demography.createMany({
 const genre = [
     {
         "name": "Nekketsu",
-        "name_es": "Ardiente",
+        "nameEs": "Ardiente",
         "slug": "nekketsu",
         "display": true,
         "description": "Tipo de manga en el que abundan las escenas de acción protagonizadas por un personaje exaltado que defiende valores como la amistad y la superación personal."
     },
     {
         "name": "Spokon",
-        "name_es": "Deportivo",
+        "nameEs": "Deportivo",
         "slug": "spokon",
         "display": true,
         "description": "Manga de temática deportiva. El término proviene de contraer la palabra inglesa 'sports' y la japonesa 'konjo', que significa 'valor', 'coraje'."
     },
     {
         "name": "Gekiga",
-        "name_es": "Drama Gráfico",
+        "nameEs": "Drama Gráfico",
         "slug": "gekiga",
         "display": true,
         "description": "Manga de temática adulta y dramática."
     },
     {
         "name": "Mahō Shōjo",
-        "name_es": "Chicas Mágicas",
+        "nameEs": "Chicas Mágicas",
         "slug": "mahou-shoujo",
         "display": true,
         "description": "Niñas/os o chicos que tienen algún objeto mágico o poder especial."
     },
     {
         "name": "Yuri",
-        "name_es": "Amor entre chicas",
+        "nameEs": "Amor entre chicas",
         "slug": "yuri",
         "display": true,
         "description": "Historia de amor entre chicas."
     },
     {
         "name": "Yaoi",
-        "name_es": "Amor entre chicos",
+        "nameEs": "Amor entre chicos",
         "slug": "yaoi",
         "display": true,
         "description": "Historia de amor entre chicos."
     },
     {
         "name": "Harem",
-        "name_es": "Harén",
+        "nameEs": "Harén",
         "slug": "harem",
         "display": true,
         "description": "Grupo femenino, pero con algún chico como coprotagonista."
     },
     {
         "name": "Mecha",
-        "name_es": "Mecánico",
+        "nameEs": "Mecánico",
         "slug": "mecha",
         "display": true,
         "description": "Tienen presencia importante los robots, en muchas ocasiones gigantes y tripulados por humanos."
     },
     {
         "name": "Ecchi",
-        "name_es": "Subido de tono",
+        "nameEs": "Subido de tono",
         "slug": "ecchi",
         "display": true,
         "description": "De corte humorístico con contenido erótico."
     },
     {
         "name": "Jidaimono",
-        "name_es": "Histórico",
+        "nameEs": "Histórico",
         "slug": "jidaimono",
         "display": true,
         "description": "Ambientado en el Japón feudal."
     },
     {
         "name": "Gore",
-        "name_es": "Sangriento",
+        "nameEs": "Sangriento",
         "slug": "gore",
         "display": true,
         "description": "Género de anime asignado a aquellas series que poseen alta violencia gráfica, comúnmente estos son de terror. Literalmente, sangre derramada."
     },
     {
         "name": "Progresivo",
-        "name_es": "Progresivo",
+        "nameEs": "Progresivo",
         "slug": "progresivo",
         "display": true,
         "description": "Animación hecha con propósito de emular la originalidad japonesa."
     },
     {
         "name": "Cyberpunk",
-        "name_es": "Ciberpunk",
+        "nameEs": "Ciberpunk",
         "slug": "cyberpunk",
         "display": true,
         "description": "La historia sucede en un mundo donde los avances tecnológicos toman parte crucial en la historia, junto con algún grado de desintegración o cambio radical en el orden social."
     },
     {
         "name": "Furry",
-        "name_es": "Furros",
+        "nameEs": "Furros",
         "slug": "furry",
         "display": true,
         "description": "Significa peludo, conformado de Animales antropomórficos, que es la combinación de rasgos humanos y animales."
     },
     {
         "name": "Harem Inverso",
-        "name_es": "Harén Inverso",
+        "nameEs": "Harén Inverso",
         "slug": "harem-inverso",
         "display": true,
         "description": "Muchos hombres son atraídos por una misma mujer."
     },
     {
         "name": "Isekai",
-        "name_es": "Otro Mundo",
+        "nameEs": "Otro Mundo",
         "slug": "isekai",
         "display": true,
         "description": "Historia donde el protagonista es transportado a otro mundo, lugar donde comúnmente se desarrolla la historia."
     },
     {
         "name": "Kemono",
-        "name_es": "Animal",
+        "nameEs": "Animal",
         "slug": "kemono",
         "display": true,
         "description": "Humanos con rasgos de animales o viceversa."
     },
     {
         "name": "Meitantei",
-        "name_es": "Detective",
+        "nameEs": "Detective",
         "slug": "meitantei",
         "display": true,
         "description": "Es una historia policíaca."
     },
     {
         "name": "Victorian Fantasy",
-        "name_es": "Victoriana Fantástica",
+        "nameEs": "Victoriana Fantástica",
         "slug": "victoriana-fantasy",
         "display": true,
         "description": "La historia sigue a un chico/chica del siglo xix que normalmente tiene alguna relación con alguna organización religiosa o gubernamental y que se enfrenta a energías sobrenaturales."
     },
     {
         "name": "Victorian Era",
-        "name_es": "Victoriana Histórica",
+        "nameEs": "Victoriana Histórica",
         "slug": "victorian-era",
         "display": true,
         "description": "A diferencia de la fantástica, la histórica nos muestra sucesos que ocurrieron en el siglo xix, con un toque de romance o comedia."
     },
     {
         "name": "Virtual Reality",
-        "name_es": "Realidad virtual",
+        "nameEs": "Realidad virtual",
         "slug": "virtual-reality",
         "display": true,
         "description": "En este caso los protagonistas están dentro de un videojuego en línea (RPG) y siguen una historia que puede ir variando mucho."
     },
     {
         "name": "Survival Game",
-        "name_es": "Juego de Supervivencia",
+        "nameEs": "Juego de Supervivencia",
         "slug": "survival-game",
         "display": true,
         "description": "Este género es bastante conocido y siempre tiene bastante gore. Las historias de este tipo tratan de varios personajes que por diversos motivos se ven obligados a participar en un juego de supervivencia ya sea matándose unos a otros o haciendo equipo con otros personajes."
     },
     {
         "name": "Romakome",
-        "name_es": "Comedia Romántica",
+        "nameEs": "Comedia Romántica",
         "slug": "romcom",
         "display": true,
         "description": "Es una comedia romántica."
     },
     {
         "name": "Sentai",
-        "name_es": "Escuadrón",
+        "nameEs": "Escuadrón",
         "slug": "sentai",
         "display": true,
         "description": "En anime, se refiere a un grupo de superheróes."

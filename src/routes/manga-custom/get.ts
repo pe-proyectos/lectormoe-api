@@ -1,12 +1,12 @@
 import { Elysia, t } from 'elysia';
 
-import { getMangaBySlug } from '../../controllers/manga/get';
+import { getMangaCustomBySlug } from '../../controllers/manga-custom/get';
 
 export const router = () => new Elysia()
     .get(
-        '/api/manga/:mangaSlug',
-        async ({ params: { mangaSlug } }) => {
-            const manga = await getMangaBySlug(mangaSlug);
+        '/api/organization/:organizationSlug/manga-custom/:mangaSlug',
+        async ({ params: { organizationSlug, mangaSlug } }) => {
+            const manga = await getMangaCustomBySlug(organizationSlug, mangaSlug);
 
             if (!manga) {
                 throw new Error("Manga no encontrado.");

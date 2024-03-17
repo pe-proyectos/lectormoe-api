@@ -8,15 +8,15 @@ datasource db {
 }
 
 model Token {
-  id      Int @id @default(autoincrement())
-  user_id Int
+  id     Int @id @default(autoincrement())
+  userId Int
 
   token String @db.Text
 
-  created_at DateTime @default(now()) @db.Timestamp
-  updated_at DateTime @updatedAt
+  createdAt DateTime @default(now()) @db.Timestamp
+  updatedAt DateTime @updatedAt
 
-  user User @relation(fields: [user_id], references: [id])
+  user User @relation(fields: [userId], references: [id])
 
   @@map("token")
 }
@@ -29,103 +29,177 @@ model User {
   email    String @unique @db.VarChar(256)
   password String @db.VarChar(256)
 
-  created_at DateTime @default(now()) @db.Timestamp
-  updated_at DateTime @updatedAt
+  createdAt DateTime @default(now()) @db.Timestamp
+  updatedAt DateTime @updatedAt
 
   rankings Ranking[]
   tokens   Token[]
-  mangas   Manga[]
+  members  Member[]
 
   @@map("user")
+}
+
+model Organization {
+  id Int @id @default(autoincrement())
+
+  name        String @unique @db.VarChar(256)
+  title       String @unique @db.VarChar(256)
+  domain      String @unique @db.VarChar(256)
+  slug        String @unique @db.VarChar(256)
+  description String @db.Text
+  imageUrl    String @db.Text
+
+  createdAt DateTime @default(now()) @db.Timestamp
+  updatedAt DateTime @updatedAt
+
+  members Member[]
+  custom  MangaCustom[]
+
+  @@map("organization")
+}
+
+model Member {
+  id             Int @id @default(autoincrement())
+  organizationId Int
+  userId         Int
+
+  role        String @db.VarChar(256)
+  description String @db.Text
+
+  canEditOrganization   Boolean @default(false)
+  canDeleteOrganization Boolean @default(false)
+  canInviteMember       Boolean @default(false)
+  canEditMember         Boolean @default(false)
+  canDeleteMember       Boolean @default(false)
+  canUploadManga        Boolean @default(false)
+  canEditManga          Boolean @default(false)
+  canDeleteManga        Boolean @default(false)
+  canUploadChapter      Boolean @default(false)
+  canEditChapter        Boolean @default(false)
+  canDeleteChapter      Boolean @default(false)
+  canUploadPage         Boolean @default(false)
+  canEditPage           Boolean @default(false)
+  canDeletePage         Boolean @default(false)
+
+  createdAt DateTime @default(now()) @db.Timestamp
+  updatedAt DateTime @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id])
+  user         User         @relation(fields: [userId], references: [id])
+
+  @@unique([organizationId, userId])
+  @@map("member")
 }
 
 model Author {
   id Int @id @default(autoincrement())
 
-  name              String @unique @db.VarChar(256)
-  slug              String @unique @db.VarChar(256)
-  short_description String @db.VarChar(256)
-  description       String @db.Text
-  image_url         String @db.Text
+  name             String @unique @db.VarChar(256)
+  slug             String @unique @db.VarChar(256)
+  shortDescription String @db.VarChar(256)
+  description      String @db.Text
+  imageUrl         String @db.Text
 
-  created_at DateTime @default(now()) @db.Timestamp
-  updated_at DateTime @updatedAt
+  createdAt DateTime @default(now()) @db.Timestamp
+  updatedAt DateTime @updatedAt
 
-  favorite_mangas Manga[]
+  mangas Manga[]
 
   @@map("author")
 }
 
 model Manga {
-  id            Int @id @default(autoincrement())
-  author_id     Int
-  demography_id Int
+  id           Int @id @default(autoincrement())
+  demographyId Int
 
-  title             String    @unique @db.VarChar(256)
-  slug              String    @unique @db.VarChar(256)
-  short_description String    @db.VarChar(256)
-  description       String    @db.Text
-  image_url         String    @db.Text
-  released_at       DateTime?
-  next_chapter_at   DateTime?
+  title            String    @unique @db.VarChar(256)
+  slug             String    @unique @db.VarChar(256)
+  shortDescription String    @db.VarChar(256)
+  description      String    @db.Text
+  imageUrl         String?   @db.Text
+  releasedAt       DateTime?
+  nextChapterAt    DateTime?
 
-  created_at DateTime @default(now()) @db.Timestamp
-  updated_at DateTime @updatedAt
+  createdAt DateTime @default(now()) @db.Timestamp
+  updatedAt DateTime @updatedAt
 
-  chapters   Chapter[]
-  rankings   Ranking[]
-  genres     Genre[]
-  users      User[]
-  demography Demography @relation(fields: [demography_id], references: [id])
-  author     Author     @relation(fields: [author_id], references: [id])
+  authors Author[]
+  custom  MangaCustom[]
+
+  demography Demography @relation(fields: [demographyId], references: [id])
 
   @@map("manga")
 }
 
+model MangaCustom {
+  id             Int @id @default(autoincrement())
+  mangaId        Int
+  organizationId Int
+
+  title            String    @db.VarChar(256)
+  shortDescription String    @db.VarChar(256)
+  description      String    @db.Text
+  imageUrl         String    @db.Text
+  releasedAt       DateTime?
+  nextChapterAt    DateTime?
+
+  createdAt DateTime @default(now()) @db.Timestamp
+  updatedAt DateTime @updatedAt
+
+  chapters     Chapter[]
+  rankings     Ranking[]
+  genres       Genre[]
+  manga        Manga        @relation(fields: [mangaId], references: [id])
+  organization Organization @relation(fields: [organizationId], references: [id])
+
+  @@unique([mangaId, organizationId])
+  @@map("manga_custom")
+}
+
 model Chapter {
-  id       Int @id @default(autoincrement())
-  manga_id Int
+  id            Int @id @default(autoincrement())
+  mangaCustomId Int
 
-  slug       String   @db.VarChar(256)
-  number     Int
-  title      String   @db.VarChar(256)
-  image_url  String   @db.VarChar(256)
-  created_at DateTime @default(now()) @db.Timestamp
-  updated_at DateTime @updatedAt
+  number    Int
+  title     String   @db.VarChar(256)
+  imageUrl  String?  @db.VarChar(256)
+  createdAt DateTime @default(now()) @db.Timestamp
+  updatedAt DateTime @updatedAt
 
-  manga Manga  @relation(fields: [manga_id], references: [id])
-  pages Page[]
+  mangaCustom MangaCustom @relation(fields: [mangaCustomId], references: [id])
+  pages       Page[]
 
-  @@unique([slug, manga_id])
+  @@unique([number, mangaCustomId])
   @@map("chapter")
 }
 
 model Page {
-  id         Int @id @default(autoincrement())
-  chapter_id Int
+  id        Int @id @default(autoincrement())
+  chapterId Int
 
-  number     Int
-  image_url  String   @db.Text
-  created_at DateTime @default(now()) @db.Timestamp
-  updated_at DateTime @updatedAt
+  number    Int
+  imageUrl  String   @db.Text
+  createdAt DateTime @default(now()) @db.Timestamp
+  updatedAt DateTime @updatedAt
 
-  chapter Chapter @relation(fields: [chapter_id], references: [id])
+  chapter Chapter @relation(fields: [chapterId], references: [id])
 
+  @@unique([number, chapterId])
   @@map("page")
 }
 
 model Ranking {
-  id       Int  @id @default(autoincrement())
-  manga_id Int
-  user_id  Int?
+  id            Int  @id @default(autoincrement())
+  mangaCustomId Int
+  userId        Int?
 
-  rank       String   @db.Char(1)
-  comment    String?  @db.Text
-  created_at DateTime @default(now()) @db.Timestamp
-  updated_at DateTime @updatedAt
+  rank      String   @db.Char(1)
+  comment   String?  @db.Text
+  createdAt DateTime @default(now()) @db.Timestamp
+  updatedAt DateTime @updatedAt
 
-  manga Manga @relation(fields: [manga_id], references: [id])
-  user  User? @relation(fields: [user_id], references: [id])
+  mangaCustom MangaCustom @relation(fields: [mangaCustomId], references: [id])
+  user        User?       @relation(fields: [userId], references: [id])
 
   @@map("ranking")
 }
@@ -137,8 +211,8 @@ model Demography {
   slug        String @unique @db.VarChar(256)
   description String @db.Text
 
-  created_at DateTime @default(now()) @db.Timestamp
-  updated_at DateTime @updatedAt
+  createdAt DateTime @default(now()) @db.Timestamp
+  updatedAt DateTime @updatedAt
 
   mangas Manga[]
 
@@ -149,15 +223,15 @@ model Genre {
   id Int @id @default(autoincrement())
 
   name        String  @unique @db.VarChar(256)
-  name_es     String  @db.VarChar(256)
+  nameEs      String  @db.VarChar(256)
   slug        String  @unique @db.VarChar(256)
   description String  @db.Text
   display     Boolean @default(true)
 
-  created_at DateTime @default(now()) @db.Timestamp
-  updated_at DateTime @updatedAt
+  createdAt DateTime @default(now()) @db.Timestamp
+  updatedAt DateTime @updatedAt
 
-  mangas Manga[]
+  mangasCustom MangaCustom[]
 
   @@map("genre")
 }
