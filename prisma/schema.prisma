@@ -49,6 +49,8 @@ model Organization {
   description String @db.Text
   imageUrl    String @db.Text
 
+  googleAdsMetaContent String? @db.Text
+
   createdAt DateTime @default(now()) @db.Timestamp
   updatedAt DateTime @updatedAt
 
@@ -94,11 +96,11 @@ model Member {
 model Author {
   id Int @id @default(autoincrement())
 
-  name             String @unique @db.VarChar(256)
-  slug             String @unique @db.VarChar(256)
-  shortDescription String @db.VarChar(256)
-  description      String @db.Text
-  imageUrl         String @db.Text
+  name             String  @unique @db.VarChar(256)
+  slug             String  @unique @db.VarChar(256)
+  shortDescription String? @db.VarChar(256)
+  description      String? @db.Text
+  imageUrl         String  @db.Text
 
   createdAt DateTime @default(now()) @db.Timestamp
   updatedAt DateTime @updatedAt
