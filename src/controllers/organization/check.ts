@@ -10,6 +10,7 @@ export const checkOrganization = async (domain: string, token: string) => {
             imageUrl: true,
             description: true,
             googleAdsMetaContent: true,
+            googleAdsAdsTxtContent: true,
         },
         where: {
             domain,

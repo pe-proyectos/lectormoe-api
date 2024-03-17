@@ -49,7 +49,8 @@ model Organization {
   description String @db.Text
   imageUrl    String @db.Text
 
-  googleAdsMetaContent String? @db.Text
+  googleAdsMetaContent   String? @db.Text
+  googleAdsAdsTxtContent String? @db.Text
 
   createdAt DateTime @default(now()) @db.Timestamp
   updatedAt DateTime @updatedAt
