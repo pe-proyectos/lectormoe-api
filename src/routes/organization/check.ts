@@ -34,6 +34,7 @@ export const router = () => new Elysia()
                     title: t.String(),
                     imageUrl: t.String(),
                     description: t.String(),
+                    googleAdsMetaContent: t.Optional(t.String()),
                 }),
             }),
         }
