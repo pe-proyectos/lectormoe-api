@@ -9,13 +9,13 @@ const { positionals } = parseArgs({
 	allowPositionals: true,
 });
 
-const [_runtime, _path, scrap_manga_slug] = positionals;
+const [_runtime, _path, scrap_mangaSlug] = positionals;
 
-console.log({ _runtime, _path, scrap_manga_slug });
+console.log({ _runtime, _path, scrap_mangaSlug });
 
 async function scrapPages(
 	chapter: any,
-	manga_slug: string,
+	mangaSlug: string,
 	chapter_number: string,
 	page: number,
 ) {
@@ -25,18 +25,18 @@ async function scrapPages(
 	if (!page) {
 		return chapter;
 	}
-	console.log(`Scraping page: ${manga_slug} - #${chapter_number} - ${page}`);
-	let image_url = `https://mangadoor.com/uploads/manga/${manga_slug}/chapters/${chapter_number}/${page}.jpg`;
-	const f = await fetch(image_url);
+	console.log(`Scraping page: ${mangaSlug} - #${chapter_number} - ${page}`);
+	let imageUrl = `https://mangadoor.com/uploads/manga/${mangaSlug}/chapters/${chapter_number}/${page}.jpg`;
+	const f = await fetch(imageUrl);
 	if (f.status == 404) {
-		image_url = `https://mangadoor.com/uploads/manga/${manga_slug}/chapters/${chapter_number}/${page}.webp`;
-		const fWebP = await fetch(image_url);
+		imageUrl = `https://mangadoor.com/uploads/manga/${mangaSlug}/chapters/${chapter_number}/${page}.webp`;
+		const fWebP = await fetch(imageUrl);
 		if (fWebP.status == 404) {
-			image_url = `https://mangadoor.com/uploads/manga/${manga_slug}/chapters/${chapter_number}/${page}.png`;
-			const fPNG = await fetch(image_url);
+			imageUrl = `https://mangadoor.com/uploads/manga/${mangaSlug}/chapters/${chapter_number}/${page}.png`;
+			const fPNG = await fetch(imageUrl);
 			if (fPNG.status == 404) {
-				image_url = `https://mangadoor.com/uploads/manga/${manga_slug}/chapters/${chapter_number}/${page}.jpeg`;
-				const fJPEG = await fetch(image_url);
+				imageUrl = `https://mangadoor.com/uploads/manga/${mangaSlug}/chapters/${chapter_number}/${page}.jpeg`;
+				const fJPEG = await fetch(imageUrl);
 				if (fJPEG.status == 404) {
 					return chapter;
 				}
@@ -48,17 +48,17 @@ async function scrapPages(
 	}
 	chapter.pages.push({
 		page,
-		image_url,
+		imageUrl,
 	});
-	return await scrapPages(chapter, manga_slug, chapter_number, page + 1);
+	return await scrapPages(chapter, mangaSlug, chapter_number, page + 1);
 }
 
-console.log(`Scraping manga: ${scrap_manga_slug}`);
-const f = await fetch("https://mangadoor.com/manga/" + scrap_manga_slug);
+console.log(`Scraping manga: ${scrap_mangaSlug}`);
+const f = await fetch("https://mangadoor.com/manga/" + scrap_mangaSlug);
 const html = await f.text();
 const parser = new DOMParser();
 const document = parser.parseFromString(html, "text/html");
-const image_url = document.querySelector(".boxed img").getAttribute("data-src");
+const imageUrl = document.querySelector(".boxed img").getAttribute("data-src");
 const title = document.querySelector(".widget-title").innerText;
 const description = document.querySelector(".well p")?.innerText || "";
 const categories =
@@ -89,7 +89,7 @@ const chaptersDetails = await Promise.all(
 	chapters.map((chapter) =>
 		scrapPages(
 			chapter,
-			scrap_manga_slug,
+			scrap_mangaSlug,
 			chapter.url.split("/").pop(),
 			1,
 		),
@@ -102,7 +102,7 @@ console.log({
 	author_name,
 	status,
 	categories,
-	image_url,
+	imageUrl,
 	chaptersDetails
 });
 
@@ -128,15 +128,15 @@ if (!author) {
 			name: author_name,
 			slug: toSlug(author_name),
 			description: "",
-			short_description: "",
-			image_url: "",
+			shortDescription: "",
+			imageUrl: "",
 		},
 	});
 }
 
 let manga = await prisma.manga.findFirst({
 	where: {
-		slug: toSlug(title),
+		slug: toSlug(title.trim()),
 	},
 });
 
@@ -145,13 +145,13 @@ if (!manga) {
 	
 	manga = await prisma.manga.create({
 		data: {
-			title,
-			demography_id: 1,
-			slug: toSlug(title),
+			title: title.trim(),
+			demographyId: 1,
+			slug: toSlug(title.trim()),
 			description,
-			short_description: "",
-			image_url,
-			author_id: author.id,
+			shortDescription: "",
+			imageUrl,
+			authorId: author.id,
 		},
 	});
 }
@@ -173,7 +173,7 @@ for (const chapter_data of chaptersDetails) {
 	let chapter  = await prisma.chapter.findFirst({
 		where: {
 			slug: toSlug(chapter_data.title),
-			manga_id: manga.id,
+			mangaId: manga.id,
 		},
 	});
 
@@ -181,20 +181,22 @@ for (const chapter_data of chaptersDetails) {
 		console.log(`Creating chapter: ${chapter_data.title}`);
 		chapter = await prisma.chapter.upsert({
 			where: {
-				slug: toSlug(chapter_data.title),
-				manga_id: manga.id,
+				slug_mangaId: {
+					mangaId: manga.id,
+					slug: toSlug(chapter_data.title.trim()),
+				},
 			},
 			create: {
-				title: chapter_data.title,
-				slug: toSlug(chapter_data.title),
+				title: chapter_data.title.trim(),
+				slug: toSlug(chapter_data.title.trim()),
 				number: parseFloat(chapter_data.url.split("/").pop()),
-				image_url: chapter_data?.pages[0]?.image_url || image_url,
-				manga_id: manga.id,
+				imageUrl: chapter_data?.pages[0]?.imageUrl || imageUrl,
+				mangaId: manga.id,
 			},
 			update: {
-				title: chapter_data.title,
+				title: chapter_data.title.trim(),
 				number: parseFloat(chapter_data.url.split("/").pop()),
-				image_url: chapter_data?.pages[0]?.image_url || image_url,
+				imageUrl: chapter_data?.pages[0]?.imageUrl || imageUrl,
 			}
 		});
 	}
@@ -202,7 +204,7 @@ for (const chapter_data of chaptersDetails) {
 	for (const page of chapter_data.pages) {
 		let page_ = await prisma.page.findFirst({
 			where: {
-				chapter_id: chapter.id,
+				chapterId: chapter.id,
 				number: page.page,
 			},
 		});
@@ -211,9 +213,9 @@ for (const chapter_data of chaptersDetails) {
 			console.log(`Creating page: ${page.page}`);
 			page_ = await prisma.page.create({
 				data: {
-					image_url: page.image_url,
+					imageUrl: page.imageUrl,
 					number: page.page,
-					chapter_id: chapter.id,
+					chapterId: chapter.id,
 				},
 			});
 		}

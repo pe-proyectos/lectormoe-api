@@ -12,7 +12,7 @@ export const authMiddleware = (opts: { loggedOnly: boolean }) => new Elysia()
             secret: Bun.env.JWT_SECRET as string,
         })
     )
-    .derive(async ({ jwt, request: { headers } }) => {
+    .derive({ as: 'global' }, async ({ jwt, request: { headers } }) => {
         const token = headers.get('Authorization')?.split('Bearer ')[1];
         if (!token) {
             if (!opts.loggedOnly) return { logged: false };
