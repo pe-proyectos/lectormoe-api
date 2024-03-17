@@ -6,11 +6,6 @@ export const getMangaBySlug = async (mangaSlug: string) => {
 			slug: mangaSlug,
 		},
 		include: {
-			chapters: {
-				orderBy: {
-					number: "desc",
-				},
-			},
 			authors: {
 				select: {
 					id: true,
@@ -24,30 +19,6 @@ export const getMangaBySlug = async (mangaSlug: string) => {
 					name: true,
 					slug: true,
 					description: true,
-				},
-			},
-			genres: {
-				select: {
-					id: true,
-					name: true,
-					description: true,
-					slug: true,
-				},
-			},
-			rankings: {
-				take: 4,
-				select: {
-					rank: true,
-					comment: true,
-					createdAt: true,
-					user: {
-						select: {
-							username: true,
-						},
-					},
-				},
-				orderBy: {
-					createdAt: "desc",
 				},
 			},
 		},
