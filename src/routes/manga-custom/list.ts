@@ -1,14 +1,14 @@
 import { Elysia, t } from 'elysia';
 
 import { listMangaCustom } from '../../controllers/manga-custom/list';
-import { authMiddleware } from '../../plugins/auth';
+import { useOrganization } from '../../plugins/organization';
 
 export const router = () => new Elysia()
-    .use(authMiddleware({ loggedOnly: false }))
+    .use(useOrganization())
     .get(
-        '/api/organization/:organizationSlug/manga-custom',
-        async ({ params: { organizationSlug }}) => {
-            const data = await listMangaCustom(organizationSlug);
+        '/api/manga-custom',
+        async ({ organizationId }) => {
+            const data = await listMangaCustom(organizationId);
             return { status: true, data };
         },
         {

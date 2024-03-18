@@ -2,11 +2,11 @@ import { prisma } from "../../models/prisma";
 import type { CreateMangaCustomRequest } from "../../types/manga-custom/create";
 import { uploadFile } from "../../util/upload-file";
 
-export const createMangaCustom = async (organizationSlug: string, params: CreateMangaCustomRequest) => {
+export const createMangaCustom = async (organizationId: number, params: CreateMangaCustomRequest) => {
 	const [organization, manga] = await Promise.all([
 		prisma.organization.findFirst({
 			where: {
-				slug: organizationSlug,
+				id: organizationId,
 			},
 		}),
 		prisma.manga.findFirst({
@@ -24,9 +24,6 @@ export const createMangaCustom = async (organizationSlug: string, params: Create
 		throw new Error(`No se encontró el manga`);
 	}
 
-	const imageBuffer = await params.image.arrayBuffer();
-	const imageUrl = await uploadFile(imageBuffer, params.image.name);
-
 	const mangaCustomExists = await prisma.mangaCustom.findFirst({
 		select: {
 			id: true,
@@ -38,7 +35,7 @@ export const createMangaCustom = async (organizationSlug: string, params: Create
 	});
 
 	if (mangaCustomExists) {
-		throw new Error(`Ya existe un manga custom con el título '${params.title}'`);
+		throw new Error(`Tu organización ya tiene un manga basado en '${manga.title}'`);
 	}
 
 	const mangaCustom = await prisma.mangaCustom.create({
@@ -48,11 +45,23 @@ export const createMangaCustom = async (organizationSlug: string, params: Create
 			title: params.title,
 			shortDescription: params.shortDescription,
 			description: params.description,
-			imageUrl,
 			releasedAt: params.releasedAt,
 			nextChapterAt: params.nextChapterAt,
 		}
 	});
+
+	if (params.image) {
+		const imageBuffer = await params.image.arrayBuffer();
+		const imageUrl = await uploadFile(imageBuffer, params.image.name);
+		await prisma.mangaCustom.update({
+			where: {
+				id: mangaCustom.id,
+			},
+			data: {
+				imageUrl,
+			},
+		});
+	}
 
 	return mangaCustom;
 };

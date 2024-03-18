@@ -1,11 +1,11 @@
 import { Elysia, t } from 'elysia';
 
 import { deleteToken } from '../../controllers/auth/logout';
-import { authMiddleware } from '../../plugins/auth';
+import { loggedUserOnly } from '../../plugins/auth';
 
 
 export const router = () => new Elysia()
-    .use(authMiddleware({ loggedOnly: true }))
+    .use(loggedUserOnly())
     .get(
         '/api/auth/logout',
         async ({ token }) => {

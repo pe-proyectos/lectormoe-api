@@ -1,6 +1,6 @@
 import { prisma } from "../../models/prisma";
 
-export const getChapter = async (organizationSlug: string, mangaSlug: string, number: number) => {
+export const getChapter = async (organizationId: number, mangaSlug: string, number: number) => {
 	const chapter = await prisma.chapter.findFirst({
 		where: {
 			number,
@@ -9,7 +9,7 @@ export const getChapter = async (organizationSlug: string, mangaSlug: string, nu
 					slug: mangaSlug
 				},
 				organization: {
-					slug: organizationSlug
+					id: organizationId
 				}
 			}
 		}

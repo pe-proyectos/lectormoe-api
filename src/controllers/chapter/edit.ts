@@ -2,7 +2,7 @@ import { prisma } from "../../models/prisma";
 import { EditChapterRequest } from "../../types/chapter/edit";
 import { uploadFile } from "../../util/upload-file";
 
-export const editChapter = async (userId: number, organizationSlug: string, mangaSlug: string, chapterNumber: number, params: EditChapterRequest) => {
+export const editChapter = async (organizationId: number, mangaSlug: string, chapterNumber: number, params: EditChapterRequest) => {
 	const chapterExists = await prisma.chapter.findFirst({
 		where: {
 			number: chapterNumber,
@@ -11,12 +11,7 @@ export const editChapter = async (userId: number, organizationSlug: string, mang
 					slug: mangaSlug,
 				},
 				organization: {
-					slug: organizationSlug,
-					members: {
-						some: {
-							userId
-						}
-					}
+					id: organizationId,
 				}
 			}
 		}

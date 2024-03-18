@@ -1,6 +1,6 @@
 import { prisma } from "../../models/prisma";
 
-export const listPages = async (organizationSlug: string, mangaSlug: string, chapterNumber: number) => {
+export const listPages = async (organizationId: number, mangaSlug: string, chapterNumber: number) => {
 	const pages = await prisma.page.findMany({
 		orderBy: {
 			number: 'asc',
@@ -13,7 +13,7 @@ export const listPages = async (organizationSlug: string, mangaSlug: string, cha
 						slug: mangaSlug
 					},
 					organization: {
-						slug: organizationSlug
+						id: organizationId
 					}
 				}
 			}

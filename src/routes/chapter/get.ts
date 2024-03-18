@@ -1,12 +1,14 @@
 import { Elysia, t } from 'elysia';
 
 import { getChapter } from '../../controllers/chapter/get';
+import { useOrganization } from '../../plugins/organization';
 
 export const router = () => new Elysia()
+    .use(useOrganization())
     .get(
-        '/api/organization/:organizationSlug/manga-custom/:mangaSlug/chapter/:chapterNumber',
-        async ({ params: { organizationSlug, mangaSlug, chapterNumber } }) => {
-            const chapter = await getChapter(organizationSlug, mangaSlug, chapterNumber);
+        '/api/manga-custom/:mangaSlug/chapter/:chapterNumber',
+        async ({ organizationId, params: { mangaSlug, chapterNumber } }) => {
+            const chapter = await getChapter(organizationId, mangaSlug, chapterNumber);
 
             if (!chapter) {
                 throw new Error("Capitulo no encontrado.");
@@ -19,7 +21,6 @@ export const router = () => new Elysia()
         },
         {
             params: t.Object({
-                organizationSlug: t.String(),
                 mangaSlug: t.String(),
                 chapterNumber: t.Number(),
             }),

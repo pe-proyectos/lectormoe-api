@@ -2,19 +2,14 @@ import { prisma } from "../../models/prisma";
 import { CreateChapterRequest } from "../../types/chapter/create";
 import { uploadFile } from "../../util/upload-file";
 
-export const createChapter = async (userId: number, organizationSlug: string, mangaSlug: string, params: CreateChapterRequest) => {
+export const createChapter = async (organizationId: number, mangaSlug: string, params: CreateChapterRequest) => {
 	const mangaCustom = await prisma.mangaCustom.findFirst({
 		where: {
 			manga: {
 				slug: mangaSlug,
 			},
 			organization: {
-				slug: organizationSlug,
-				members: {
-					some: {
-						userId
-					}
-				}
+				id: organizationId,
 			}
 		},
 	});

@@ -1,12 +1,14 @@
 import { Elysia, t } from 'elysia';
 
 import { listPages } from '../../controllers/pages/list';
+import { useOrganization } from '../../plugins/organization';
 
 export const router = () => new Elysia()
+    .use(useOrganization())
     .get(
-        '/api/organization/:organizationSlug/manga-custom/:mangaSlug/chapter/:chapterNumber/pages',
-        async ({ params: { organizationSlug, mangaSlug, chapterNumber } }) => {
-            const pages = await listPages(organizationSlug, mangaSlug, chapterNumber);
+        '/api/manga-custom/:mangaSlug/chapter/:chapterNumber/pages',
+        async ({ organizationId, params: { mangaSlug, chapterNumber } }) => {
+            const pages = await listPages(organizationId, mangaSlug, chapterNumber);
 
             return {
                 status: true,
@@ -15,7 +17,6 @@ export const router = () => new Elysia()
         },
         {
             params: t.Object({
-                organizationSlug: t.String(),
                 mangaSlug: t.String(),
                 chapterNumber: t.Number(),
             }),

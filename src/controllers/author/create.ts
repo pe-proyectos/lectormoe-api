@@ -14,9 +14,6 @@ export const createAuthor = async (params: CreateAuthorRequest) => {
 		}),
 	]);
 
-	const imageBuffer = await params.image.arrayBuffer();
-	const imageUrl = await uploadFile(imageBuffer, params.image.name);
-
 	if (authorExists) {
 		throw new Error(`Ya existe un autor con el nombre '${params.name}'`);
 	}
@@ -24,12 +21,24 @@ export const createAuthor = async (params: CreateAuthorRequest) => {
 	const manga = await prisma.author.create({
 		data: {
 			name: params.name,
-			imageUrl,
 			slug,
 			shortDescription: params.shortDescription,
 			description: params.description,
 		}
 	});
+
+	if (params.image) {
+		const imageBuffer = await params.image.arrayBuffer();
+		const imageUrl = await uploadFile(imageBuffer, params.image.name);
+		await prisma.author.update({
+			where: {
+				id: manga.id,
+			},
+			data: {
+				imageUrl,
+			},
+		});
+	}
 
 	return manga;
 };

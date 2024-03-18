@@ -66,23 +66,40 @@ model Member {
   organizationId Int
   userId         Int
 
-  role        String @db.VarChar(256)
-  description String @db.Text
+  role        String  @db.VarChar(256)
+  description String? @db.Text
 
+  hierarchyLevel Int @default(0)
+
+  // ## Permissions
+  // Organization
   canEditOrganization   Boolean @default(false)
   canDeleteOrganization Boolean @default(false)
+  // Organization Members
   canInviteMember       Boolean @default(false)
   canEditMember         Boolean @default(false)
   canDeleteMember       Boolean @default(false)
-  canUploadManga        Boolean @default(false)
-  canEditManga          Boolean @default(false)
-  canDeleteManga        Boolean @default(false)
-  canUploadChapter      Boolean @default(false)
+  // Author
+  canCreateAuthor       Boolean @default(false)
+  // Manga Profile
+  canCreateMangaProfile Boolean @default(false)
+  // Manga Custom
+  canCreateMangaCustom  Boolean @default(false)
+  canEditMangaCustom    Boolean @default(false)
+  canDeleteMangaCustom  Boolean @default(false)
+  // Genre
+  canCreateGenre        Boolean @default(false)
+  canEditGenre          Boolean @default(false)
+  canDeleteGenre        Boolean @default(false)
+  // Chapter
+  canCreateChapter      Boolean @default(false)
   canEditChapter        Boolean @default(false)
   canDeleteChapter      Boolean @default(false)
-  canUploadPage         Boolean @default(false)
+  // Pages
+  canCreatePage         Boolean @default(false)
   canEditPage           Boolean @default(false)
   canDeletePage         Boolean @default(false)
+  // ## / Permissions
 
   createdAt DateTime @default(now()) @db.Timestamp
   updatedAt DateTime @updatedAt
@@ -101,7 +118,7 @@ model Author {
   slug             String  @unique @db.VarChar(256)
   shortDescription String? @db.VarChar(256)
   description      String? @db.Text
-  imageUrl         String  @db.Text
+  imageUrl         String? @db.Text
 
   createdAt DateTime @default(now()) @db.Timestamp
   updatedAt DateTime @updatedAt
@@ -117,8 +134,8 @@ model Manga {
 
   title            String    @unique @db.VarChar(256)
   slug             String    @unique @db.VarChar(256)
-  shortDescription String    @db.VarChar(256)
-  description      String    @db.Text
+  shortDescription String?   @db.VarChar(256)
+  description      String?   @db.Text
   imageUrl         String?   @db.Text
   releasedAt       DateTime?
   nextChapterAt    DateTime?
@@ -140,9 +157,9 @@ model MangaCustom {
   organizationId Int
 
   title            String    @db.VarChar(256)
-  shortDescription String    @db.VarChar(256)
-  description      String    @db.Text
-  imageUrl         String    @db.Text
+  shortDescription String?   @db.VarChar(256)
+  description      String?   @db.Text
+  imageUrl         String?   @db.Text
   releasedAt       DateTime?
   nextChapterAt    DateTime?
 

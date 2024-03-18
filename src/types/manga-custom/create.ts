@@ -1,11 +1,11 @@
 import { Static, t } from 'elysia';
 
 export const CreateMangaCustomRequest = t.Object({
-    title: t.String(),
     mangaId: t.Number(),
-    shortDescription: t.String(),
-    description: t.String(),
-    image: t.File(),
+    title: t.String(),
+    shortDescription: t.Optional(t.String()),
+    description: t.Optional(t.String()),
+    image: t.Optional(t.File()),
     releasedAt: t.Optional(t.Date()),
     nextChapterAt: t.Optional(t.Date()),
 });
