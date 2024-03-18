@@ -1,18 +1,22 @@
 import { Elysia, t } from 'elysia';
 
-import { authMiddleware } from '../../plugins/auth';
+import { loggedMemberOnly } from '../../plugins/auth';
 import { listPages } from '../../controllers/pages/list';
 import { OrderPagesRequest } from '../../types/pages/order';
 import { orderPages } from '../../controllers/pages/order';
 
 export const router = () => new Elysia()
-    .use(authMiddleware({ loggedOnly: true }))
+    .use(loggedMemberOnly())
     .post(
-        '/api/organization/:organizationSlug/manga-custom/:mangaSlug/chapter/:chapterNumber/pages/order',
-        async ({ user, body, params: { organizationSlug, mangaSlug, chapterNumber } }) => {
-            await orderPages(user?.id!, organizationSlug, mangaSlug, chapterNumber, body);
+        '/api/manga-custom/:mangaSlug/chapter/:chapterNumber/pages/order',
+        async ({ organizationId, member, body, params: { mangaSlug, chapterNumber } }) => {
+            if (!member.canEditPage) {
+                throw new Error("No tiene permisos para ordenar páginas.");
+            }
 
-            const allPages = await listPages(organizationSlug, mangaSlug, chapterNumber);
+            await orderPages(organizationId, mangaSlug, chapterNumber, body);
+
+            const allPages = await listPages(organizationId, mangaSlug, chapterNumber);
 
             return {
                 status: true,
@@ -21,7 +25,6 @@ export const router = () => new Elysia()
         },
         {
             params: t.Object({
-                organizationSlug: t.String(),
                 mangaSlug: t.String(),
                 chapterNumber: t.Number(),
             }),

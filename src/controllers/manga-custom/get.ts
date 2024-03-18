@@ -1,10 +1,10 @@
 import { prisma } from "../../models/prisma";
 
-export const getMangaCustomBySlug = async (organizationSlug: string, mangaSlug: string) => {
+export const getMangaCustomBySlug = async (organizationId: number, mangaSlug: string) => {
 	const mangaCustom = await prisma.mangaCustom.findFirst({
 		where: {
 			organization: {
-				slug: organizationSlug,
+				id: organizationId,
 			},
 			manga: {
 				slug: mangaSlug,

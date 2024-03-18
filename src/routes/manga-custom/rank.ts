@@ -1,16 +1,16 @@
 import { Elysia, t } from 'elysia';
 
-import { authMiddleware } from '../../plugins/auth';
-import { createRanking } from '../../controllers/manga/rank';
+import { loggedUserOnly } from '../../plugins/auth';
+import { createRanking } from '../../controllers/manga-custom/rank';
 
 
 export const router = () => new Elysia()
-    .use(authMiddleware({ loggedOnly: false }))
+    .use(loggedUserOnly())
     .post(
-        '/api/manga/:mangaSlug/rank',
+        '/api/manga-custom/:mangaSlug/rank',
         async ({ user, params: { mangaSlug }, body: { rank, comment } }) => {
-            const ranking = await createRanking(mangaSlug, rank, comment, user?.id || undefined);
-            return { status: true, message: 'OK' };
+            const ranking = await createRanking(mangaSlug, rank, comment, user.id);
+            return { status: true, data: ranking };
         },
         {
             body: t.Object({
@@ -19,7 +19,7 @@ export const router = () => new Elysia()
             }),
             response: t.Object({
                 status: t.Boolean(),
-                message: t.String(),
+                data: t.Any(),
             }),
         }
     );

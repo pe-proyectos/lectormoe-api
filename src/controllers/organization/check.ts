@@ -1,6 +1,6 @@
 import { prisma } from "../../models/prisma";
 
-export const checkOrganization = async (domain: string, token: string) => {
+export const checkOrganization = async (domain: string) => {
     return await prisma.organization.findFirst({
         select: {
             id: true,

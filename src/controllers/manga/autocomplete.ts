@@ -6,6 +6,7 @@ export const autocompleteManga = async () => {
 			id: true,
 			title: true,
 			slug: true,
+			imageUrl: true,
 		}
 	});
 };

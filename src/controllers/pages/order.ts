@@ -1,7 +1,7 @@
 import { prisma } from "../../models/prisma";
 import { OrderPagesRequest } from "../../types/pages/order";
 
-export const orderPages = async (userId: number, organizationSlug: string, mangaSlug: string, chapterNumber: number, params: OrderPagesRequest) => {
+export const orderPages = async (organizationId: number, mangaSlug: string, chapterNumber: number, params: OrderPagesRequest) => {
     await prisma.$transaction(async db => {
         const randomCollisionAvoider = Math.floor(Math.random() * 100) + 1;
         const pages = await db.page.findMany({
@@ -16,12 +16,7 @@ export const orderPages = async (userId: number, organizationSlug: string, manga
                             slug: mangaSlug,
                         },
                         organization: {
-                            slug: organizationSlug,
-                            members: {
-                                some: {
-                                    userId
-                                }
-                            }
+                            id: organizationId,
                         }
                     }
                 }

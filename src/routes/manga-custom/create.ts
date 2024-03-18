@@ -2,12 +2,18 @@ import { Elysia, t } from 'elysia';
 
 import { CreateMangaCustomRequest } from '../../types/manga-custom/create';
 import { createMangaCustom } from '../../controllers/manga-custom/create';
+import { loggedMemberOnly } from '../../plugins/auth';
 
 export const router = () => new Elysia()
+    .use(loggedMemberOnly())
     .post(
-        '/api/organization/:organizationSlug/manga-custom',
-        async ({ body, params: { organizationSlug } }) => {
-            const manga = await createMangaCustom(organizationSlug, body);
+        '/api/manga-custom',
+        async ({ organizationId, member, body }) => {
+            if (!member.canCreateMangaCustom) {
+                throw new Error("No tiene permisos para crear mangas custom.");
+            }
+
+            const manga = await createMangaCustom(organizationId, body);
 
             if (!manga) {
                 throw new Error("No se pudo crear el manga custom.");

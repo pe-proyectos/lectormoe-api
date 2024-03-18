@@ -1,11 +1,10 @@
 import { Elysia, t } from 'elysia';
 
 import { checkToken } from '../../controllers/auth/check';
-import { authMiddleware } from '../../plugins/auth';
-
+import { loggedOptional } from '../../plugins/auth';
 
 export const router = () => new Elysia()
-    .use(authMiddleware({ loggedOnly: false }))
+    .use(loggedOptional())
     .get(
         '/api/auth/check',
         async ({ token }) => {

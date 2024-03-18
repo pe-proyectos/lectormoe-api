@@ -1,10 +1,10 @@
 import { prisma } from "../../models/prisma";
 
-export const listMangaCustom = async (organizationSlug: string) => {
+export const listMangaCustom = async (organizationId: number) => {
 	const mangasCustom = await prisma.mangaCustom.findMany({
 		where: {
 			organization: {
-				slug: organizationSlug,
+				id: organizationId,
 			},
 		},
 		include: {

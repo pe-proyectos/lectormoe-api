@@ -1,6 +1,6 @@
 import { prisma } from "../../models/prisma";
 
-export const deletePage = async (userId: number, organizationSlug: string, mangaSlug: string, chapterNumber: number, pageId: number) => {
+export const deletePage = async (organizationId: number, mangaSlug: string, chapterNumber: number, pageId: number) => {
     await prisma.page.delete({
         where: {
             id: pageId,
@@ -11,12 +11,7 @@ export const deletePage = async (userId: number, organizationSlug: string, manga
                         slug: mangaSlug,
                     },
                     organization: {
-                        slug: organizationSlug,
-                        members: {
-                            some: {
-                                userId
-                            }
-                        }
+                        id: organizationId,
                     }
                 }
             }

@@ -1,18 +1,18 @@
 import { Elysia, t } from 'elysia';
 
 import { checkOrganization } from '../../controllers/organization/check';
-import { authMiddleware } from '../../plugins/auth';
+import { loggedOptional } from '../../plugins/auth';
 
 
 export const router = () => new Elysia()
-    .use(authMiddleware({ loggedOnly: false }))
+    .use(loggedOptional())
     .get(
         '/api/organization/check',
         async ({ query: { domain } }) => {
             if (!domain) {
                 throw new Error('No se recibió el dominio.');
             }
-            const organization = await checkOrganization(domain, '');
+            const organization = await checkOrganization(domain);
             if (!organization) {
                 throw new Error(`No se encontró la organización '${domain}'.`);
             }

@@ -1,17 +1,21 @@
 import { Elysia, t } from 'elysia';
 
-import { authMiddleware } from '../../plugins/auth';
+import { loggedMemberOnly } from '../../plugins/auth';
 import { listPages } from '../../controllers/pages/list';
 import { deletePage } from '../../controllers/pages/delete';
 
 export const router = () => new Elysia()
-    .use(authMiddleware({ loggedOnly: true }))
+    .use(loggedMemberOnly())
     .delete(
-        '/api/organization/:organizationSlug/manga-custom/:mangaSlug/chapter/:chapterNumber/pages/:pageId',
-        async ({ user, params: { organizationSlug, mangaSlug, chapterNumber, pageId } }) => {
-            await deletePage(user?.id!, organizationSlug, mangaSlug, chapterNumber, pageId);
+        '/api/manga-custom/:mangaSlug/chapter/:chapterNumber/pages/:pageId',
+        async ({ organizationId, member, params: { mangaSlug, chapterNumber, pageId } }) => {
+            if (!member.canDeletePage) {
+                throw new Error("No tiene permisos para eliminar páginas.");
+            }
 
-            const allPages = await listPages(organizationSlug, mangaSlug, chapterNumber);
+            await deletePage(organizationId, mangaSlug, chapterNumber, pageId);
+
+            const allPages = await listPages(organizationId, mangaSlug, chapterNumber);
 
             return {
                 status: true,
@@ -20,7 +24,6 @@ export const router = () => new Elysia()
         },
         {
             params: t.Object({
-                organizationSlug: t.String(),
                 mangaSlug: t.String(),
                 chapterNumber: t.Number(),
                 pageId: t.Number(),

@@ -2,7 +2,7 @@ import { prisma } from "../../models/prisma";
 import { CreatePagesRequest } from "../../types/pages/create";
 import { uploadFile } from "../../util/upload-file";
 
-export const createPages = async (userId: number, organizationSlug: string, mangaSlug: string, chapterNumber: number, params: CreatePagesRequest) => {
+export const createPages = async (organizationId: number, mangaSlug: string, chapterNumber: number, params: CreatePagesRequest) => {
     const chapterExists = await prisma.chapter.findFirst({
         include: {
             pages: {
@@ -19,12 +19,7 @@ export const createPages = async (userId: number, organizationSlug: string, mang
                     slug: mangaSlug,
                 },
                 organization: {
-                    slug: organizationSlug,
-                    members: {
-                        some: {
-                            userId
-                        }
-                    }
+                    id: organizationId,
                 }
             }
         }

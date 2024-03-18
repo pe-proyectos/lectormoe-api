@@ -2,14 +2,18 @@ import { Elysia, t } from 'elysia';
 
 import { EditChapterRequest } from '../../types/chapter/edit';
 import { editChapter } from '../../controllers/chapter/edit';
-import { authMiddleware } from '../../plugins/auth';
+import { loggedMemberOnly } from '../../plugins/auth';
 
 export const router = () => new Elysia()
-    .use(authMiddleware({ loggedOnly: true }))
+    .use(loggedMemberOnly())
     .patch(
-        '/api/organization/:organizationSlug/manga-custom/:mangaSlug/chapter/:chapterNumber',
-        async ({ user, body, params: { organizationSlug, mangaSlug, chapterNumber } }) => {
-            const manga = await editChapter(user?.id!, organizationSlug, mangaSlug, chapterNumber, body);
+        '/api/manga-custom/:mangaSlug/chapter/:chapterNumber',
+        async ({ organizationId, member, body, params: { mangaSlug, chapterNumber } }) => {
+            if (!member.canEditChapter) {
+                throw new Error("No tiene permisos para editar capítulos.");
+            }
+
+            const manga = await editChapter(organizationId, mangaSlug, chapterNumber, body);
 
             if (!manga) {
                 throw new Error("No se pudo crear el manga.");
@@ -22,7 +26,6 @@ export const router = () => new Elysia()
         },
         {
             params: t.Object({
-                organizationSlug: t.String(),
                 mangaSlug: t.String(),
                 chapterNumber: t.Number(),
             }),
