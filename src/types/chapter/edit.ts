@@ -4,6 +4,14 @@ export const EditChapterRequest = t.Object({
     title: t.Optional(t.String()),
     number: t.Optional(t.Number()),
     image: t.Optional(t.File()),
+    pages: t.Optional(
+        t.Array(
+            t.Union([
+                t.File(),
+                t.String(),
+            ])
+        )
+    ),
 });
 
 export type EditChapterRequest = Static<typeof EditChapterRequest>;

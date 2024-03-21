@@ -2,17 +2,13 @@ import { Elysia } from "elysia";
 
 export const errorHandler = () => new Elysia()
     .onError({ as: "global" }, ({ code, error }) => {
-        console.log('errorHandler');
-
         if (code === 'VALIDATION') {
             try {
                 const validation = JSON.parse(error.message);
-                console.log(validation);
-                
                 return {
                     status: false,
                     error: code,
-                    message: `${validation?.at || ''}: ${validation?.message}`,
+                    message: `${validation?.at || validation?.property || ''}: ${validation?.message}`,
                 };
             } catch (err) {
                 return {

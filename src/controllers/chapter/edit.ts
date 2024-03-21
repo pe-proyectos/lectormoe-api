@@ -21,9 +21,6 @@ export const editChapter = async (organizationId: number, mangaSlug: string, cha
 		throw new Error(`El capítulo ${chapterNumber} no existe`);
 	}
 
-	const imageBuffer = params.image && await params.image.arrayBuffer();
-	const imageUrl = params.image && imageBuffer && await uploadFile(imageBuffer, params.image.name);
-
 	const chapter = await prisma.chapter.update({
 		where: {
 			id: chapterExists.id,
@@ -31,9 +28,52 @@ export const editChapter = async (organizationId: number, mangaSlug: string, cha
 		data: {
 			number: params.number || chapterExists.number,
 			title: params.title || chapterExists.title,
-			imageUrl: imageUrl || chapterExists.imageUrl,
 		},
 	});
+
+	if (params.image) {
+		const imageBuffer = await params.image.arrayBuffer();
+		const imageUrl = await uploadFile(imageBuffer, params.image.name);
+		await prisma.chapter.update({
+			where: {
+				id: chapter.id,
+			},
+			data: {
+				imageUrl,
+			},
+		});
+	}
+
+	console.log("params.pages");
+	console.log(params.pages);
+	if (params.pages) {
+		await prisma.page.deleteMany({
+			where: {
+				chapterId: chapter.id,
+			},
+		});
+		await Promise.all(params.pages.map(async (page, index) => {
+			if (page instanceof File) {
+				const pageBuffer = await page.arrayBuffer();
+				const pageUrl = await uploadFile(pageBuffer, page.name);
+				await prisma.page.create({
+					data: {
+						imageUrl: pageUrl,
+						number: index + 1,
+						chapterId: chapter.id,
+					},
+				})
+			} else if (typeof page === "string") {
+				await prisma.page.create({
+					data: {
+						imageUrl: page,
+						number: index + 1,
+						chapterId: chapter.id,
+					},
+				});
+			}
+		}));
+	}
 
 	return chapter;
 };
