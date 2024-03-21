@@ -29,17 +29,40 @@ export const createChapter = async (organizationId: number, mangaSlug: string, p
 		throw new Error(`El capítulo ${params.number} ya existe`);
 	}
 
-	const imageBuffer = await params.image.arrayBuffer();
-	const imageUrl = await uploadFile(imageBuffer, params.image.name);
-
 	const chapter = await prisma.chapter.create({
 		data: {
 			mangaCustomId: mangaCustom.id,
 			number: params.number,
 			title: params.title,
-			imageUrl,
 		},
 	});
+
+	if (params.image) {
+		const imageBuffer = await params.image.arrayBuffer();
+		const imageUrl = await uploadFile(imageBuffer, params.image.name);
+		await prisma.chapter.update({
+			where: {
+				id: chapter.id,
+			},
+			data: {
+				imageUrl,
+			},
+		});
+	}
+	
+	if (params.pages) {
+		await Promise.all(params.pages.map(async (page, index) => {
+			const pageBuffer = await page.arrayBuffer();
+			const pageUrl = await uploadFile(pageBuffer, page.name);
+			await prisma.page.create({
+				data: {
+					imageUrl: pageUrl,
+					number: index + 1,
+					chapterId: chapter.id,
+				},
+			})
+		}));
+	}
 
 	return chapter;
 };
