@@ -27,10 +27,13 @@ export const editMangaCustom = async (organizationId: number, mangaSlug: string,
 			description: params.description,
 			releasedAt: params.releasedAt,
 			nextChapterAt: params.nextChapterAt,
+			...params.image && params.image instanceof File ? {} : {
+				imageUrl: params.image === "null" ? null : params.image,
+			},
 		}
 	});
 
-	if (params.image) {
+	if (params.image && params.image instanceof File) {
 		const imageBuffer = await params.image.arrayBuffer();
 		const imageUrl = await uploadFile(imageBuffer, params.image.name);
 		await prisma.mangaCustom.update({

@@ -28,10 +28,13 @@ export const editChapter = async (organizationId: number, mangaSlug: string, cha
 		data: {
 			number: params.number || chapterExists.number,
 			title: params.title || chapterExists.title,
+			...params.image && params.image instanceof File ? {} : {
+				imageUrl: params.image === "null" ? null : params.image,
+			},
 		},
 	});
 
-	if (params.image) {
+	if (params.image && params.image instanceof File) {
 		const imageBuffer = await params.image.arrayBuffer();
 		const imageUrl = await uploadFile(imageBuffer, params.image.name);
 		await prisma.chapter.update({
@@ -44,8 +47,6 @@ export const editChapter = async (organizationId: number, mangaSlug: string, cha
 		});
 	}
 
-	console.log("params.pages");
-	console.log(params.pages);
 	if (params.pages) {
 		await prisma.page.deleteMany({
 			where: {
