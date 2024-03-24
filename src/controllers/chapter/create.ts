@@ -1,6 +1,7 @@
 import { prisma } from "../../models/prisma";
 import { CreateChapterRequest } from "../../types/chapter/create";
 import { uploadFile } from "../../util/upload-file";
+import sizeOf from "buffer-image-size";
 
 export const createChapter = async (organizationId: number, mangaSlug: string, params: CreateChapterRequest) => {
 	const mangaCustom = await prisma.mangaCustom.findFirst({
@@ -49,16 +50,20 @@ export const createChapter = async (organizationId: number, mangaSlug: string, p
 			},
 		});
 	}
-	
+
 	if (params.pages) {
 		await Promise.all(params.pages.map(async (page, index) => {
 			const pageBuffer = await page.arrayBuffer();
+			const pageSize = sizeOf(Buffer.from(pageBuffer));
 			const pageUrl = await uploadFile(pageBuffer, page.name);
 			await prisma.page.create({
 				data: {
 					imageUrl: pageUrl,
 					number: index + 1,
 					chapterId: chapter.id,
+					imageWidth: pageSize.width,
+					imageHeight: pageSize.height,
+					imageType: pageSize.type,
 				},
 			})
 		}));

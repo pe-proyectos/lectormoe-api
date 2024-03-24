@@ -1,3 +1,4 @@
+import sizeOf from "buffer-image-size";
 import { prisma } from "../../models/prisma";
 import { EditChapterRequest } from "../../types/chapter/edit";
 import { uploadFile } from "../../util/upload-file";
@@ -13,7 +14,10 @@ export const editChapter = async (organizationId: number, mangaSlug: string, cha
 				organization: {
 					id: organizationId,
 				}
-			}
+			},
+		},
+		include: {
+			pages: true,
 		}
 	});
 
@@ -56,22 +60,43 @@ export const editChapter = async (organizationId: number, mangaSlug: string, cha
 		await Promise.all(params.pages.map(async (page, index) => {
 			if (page instanceof File) {
 				const pageBuffer = await page.arrayBuffer();
+				const pageSize = sizeOf(Buffer.from(pageBuffer));
 				const pageUrl = await uploadFile(pageBuffer, page.name);
 				await prisma.page.create({
 					data: {
 						imageUrl: pageUrl,
 						number: index + 1,
 						chapterId: chapter.id,
+						imageWidth: pageSize.width,
+						imageHeight: pageSize.height,
+						imageType: pageSize.type,
 					},
 				})
 			} else if (typeof page === "string") {
-				await prisma.page.create({
-					data: {
-						imageUrl: page,
-						number: index + 1,
-						chapterId: chapter.id,
-					},
-				});
+				const existingPage = chapterExists.pages.find(p => p.imageUrl === page);
+				if (existingPage) {
+					await prisma.page.create({
+						data: {
+							imageUrl: existingPage.imageUrl,
+							number: index + 1,
+							chapterId: chapter.id,
+							imageHeight: existingPage.imageHeight,
+							imageWidth: existingPage.imageWidth,
+							imageType: existingPage.imageType,
+						},
+					});
+				} else {
+					await prisma.page.create({
+						data: {
+							imageUrl: page,
+							number: index + 1,
+							chapterId: chapter.id,
+							imageHeight: 100,
+							imageWidth: 100,
+							imageType: "any",
+						},
+					});
+				}
 			}
 		}));
 	}

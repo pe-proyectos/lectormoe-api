@@ -32,9 +32,10 @@ model User {
   createdAt DateTime @default(now()) @db.Timestamp
   updatedAt DateTime @updatedAt
 
-  rankings Ranking[]
-  tokens   Token[]
-  members  Member[]
+  rankings  Ranking[]
+  tokens    Token[]
+  members   Member[]
+  analytics Analytics[]
 
   @@map("user")
 }
@@ -42,21 +43,33 @@ model User {
 model Organization {
   id Int @id @default(autoincrement())
 
-  name        String @unique @db.VarChar(256)
-  title       String @unique @db.VarChar(256)
-  domain      String @unique @db.VarChar(256)
-  slug        String @unique @db.VarChar(256)
-  description String @db.Text
-  imageUrl    String @db.Text
+  name        String  @unique @db.VarChar(256)
+  title       String  @unique @db.VarChar(256)
+  domain      String  @unique @db.VarChar(256)
+  slug        String  @unique @db.VarChar(256)
+  description String? @db.Text
+  logoUrl     String? @db.Text
+  imageUrl    String? @db.Text
+  bannerUrl   String? @db.Text
 
   googleAdsMetaContent   String? @db.Text
   googleAdsAdsTxtContent String? @db.Text
 
+  facebookUrl  String? @db.Text
+  twitterUrl   String? @db.Text
+  instagramUrl String? @db.Text
+  youtubeUrl   String? @db.Text
+  patreonUrl   String? @db.Text
+  tiktokUrl    String? @db.Text
+  discordUrl   String? @db.Text
+  twitchUrl    String? @db.Text
+
   createdAt DateTime @default(now()) @db.Timestamp
   updatedAt DateTime @updatedAt
 
-  members Member[]
-  custom  MangaCustom[]
+  members   Member[]
+  custom    MangaCustom[]
+  analytics Analytics[]
 
   @@map("organization")
 }
@@ -162,6 +175,7 @@ model MangaCustom {
   imageUrl         String?   @db.Text
   releasedAt       DateTime?
   nextChapterAt    DateTime?
+  views            Int       @default(0)
 
   createdAt DateTime @default(now()) @db.Timestamp
   updatedAt DateTime @updatedAt
@@ -180,9 +194,11 @@ model Chapter {
   id            Int @id @default(autoincrement())
   mangaCustomId Int
 
-  number    Int
-  title     String   @db.VarChar(256)
-  imageUrl  String?  @db.VarChar(256)
+  number   Int
+  title    String  @db.VarChar(256)
+  imageUrl String? @db.VarChar(256)
+  views    Int     @default(0)
+
   createdAt DateTime @default(now()) @db.Timestamp
   updatedAt DateTime @updatedAt
 
@@ -197,10 +213,13 @@ model Page {
   id        Int @id @default(autoincrement())
   chapterId Int
 
-  number    Int
-  imageUrl  String   @db.Text
-  createdAt DateTime @default(now()) @db.Timestamp
-  updatedAt DateTime @updatedAt
+  number      Int
+  imageWidth  Int
+  imageHeight Int
+  imageType   String   @db.VarChar(256)
+  imageUrl    String   @db.Text
+  createdAt   DateTime @default(now()) @db.Timestamp
+  updatedAt   DateTime @updatedAt
 
   chapter Chapter @relation(fields: [chapterId], references: [id])
 
@@ -254,4 +273,28 @@ model Genre {
   mangasCustom MangaCustom[]
 
   @@map("genre")
+}
+
+model Analytics {
+  id Int @id @default(autoincrement())
+
+  organizationId Int?
+  userId         Int?
+
+  path          String
+  ip            String
+  browser       String?
+  language      String?
+  deviceType    String?
+  trafficSource String?
+  payload       Json?
+
+  createdAt DateTime @default(now()) @db.Timestamp
+  updatedAt DateTime @updatedAt
+
+  organization Organization? @relation(fields: [organizationId], references: [id])
+  user         User?         @relation(fields: [userId], references: [id])
+
+  @@unique([organizationId, userId])
+  @@map("analytics")
 }
