@@ -26,6 +26,7 @@
     "@elysiajs/jwt": "^1.0.0",
     "@grotto/logysia": "^0.1.1",
     "@prisma/client": "5.11.0",
+    "buffer-image-size": "^0.6.4",
     "elysia": "^1.0.0",
     "elysia-http-error": "^1.2.0",
     "linkedom": "^0.16.10",

@@ -16,6 +16,42 @@ export const getChapter = async (organizationId: number, mangaSlug: string, numb
 	});
 	if (!chapter) {
 		return null;
-	}	
-	return chapter;
+	}
+	const nextChapter = (await prisma.chapter.findMany({
+		where: {
+			mangaCustomId: chapter.mangaCustomId,
+			number: {
+				gt: number
+			}
+		},
+		select: {
+			number: true,
+			title: true,
+		},
+		orderBy: {
+			number: 'asc'
+		},
+		take: 1,
+	}))?.[0];
+	const previousChapter = (await prisma.chapter.findMany({
+		where: {
+			mangaCustomId: chapter.mangaCustomId,
+			number: {
+				lt: number
+			}
+		},
+		select: {
+			number: true,
+			title: true,
+		},
+		orderBy: {
+			number: 'desc'
+		},
+		take: 1
+	}))?.[0];
+	return {
+		...chapter,
+		nextChapter,
+		previousChapter,
+	};
 };
