@@ -5,6 +5,10 @@ export const EditOrganizationRequest = t.Object({
     name: t.Optional(t.String()),
     title: t.Optional(t.String()),
     description: t.Optional(t.String()),
+    // Integrations
+    enableGoogleAds: t.Optional(t.Boolean()),
+    enableDisqusIntegration: t.Optional(t.Boolean()),
+    disqusEmbedUrl: t.Optional(t.String()),
     // Social
     facebookUrl: t.Optional(t.String()),
     twitterUrl: t.Optional(t.String()),
