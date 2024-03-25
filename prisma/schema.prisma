@@ -36,6 +36,7 @@ model User {
   tokens    Token[]
   members   Member[]
   analytics Analytics[]
+  history   UserChapterHistory[]
 
   @@map("user")
 }
@@ -52,8 +53,12 @@ model Organization {
   imageUrl    String? @db.Text
   bannerUrl   String? @db.Text
 
+  enableGoogleAds        Boolean @default(false)
   googleAdsMetaContent   String? @db.Text
   googleAdsAdsTxtContent String? @db.Text
+
+  enableDisqusIntegration Boolean @default(false)
+  disqusEmbedUrl          String? @db.Text
 
   facebookUrl  String? @db.Text
   twitterUrl   String? @db.Text
@@ -202,8 +207,9 @@ model Chapter {
   createdAt DateTime @default(now()) @db.Timestamp
   updatedAt DateTime @updatedAt
 
-  mangaCustom MangaCustom @relation(fields: [mangaCustomId], references: [id])
+  mangaCustom MangaCustom          @relation(fields: [mangaCustomId], references: [id])
   pages       Page[]
+  userHistory UserChapterHistory[]
 
   @@unique([number, mangaCustomId])
   @@map("chapter")
@@ -297,4 +303,25 @@ model Analytics {
 
   @@unique([organizationId, userId])
   @@map("analytics")
+}
+
+model UserChapterHistory {
+  id Int @id @default(autoincrement())
+
+  userId    Int
+  chapterId Int
+
+  pageId     Int?
+  startedAt  DateTime?
+  lastReadAt DateTime?
+  finishedAt DateTime?
+
+  createdAt DateTime @default(now()) @db.Timestamp
+  updatedAt DateTime @updatedAt
+
+  chapter Chapter @relation(fields: [chapterId], references: [id])
+  user    User    @relation(fields: [userId], references: [id])
+
+  @@unique([chapterId, userId])
+  @@map("user_chapter_history")
 }

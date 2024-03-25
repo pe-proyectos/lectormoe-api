@@ -30,5 +30,11 @@ export const router = () => new Elysia()
                 status: t.Boolean(),
                 data: t.Any(),
             }),
+            transform({ body }) {
+                if (typeof body.enableGoogleAds === 'string')
+                    body.enableGoogleAds = body.enableGoogleAds === 'true';
+                if (typeof body.enableDisqusIntegration === 'string')
+                    body.enableDisqusIntegration = body.enableDisqusIntegration === 'true';
+            },
         }
     );
