@@ -5,14 +5,18 @@ export const EditChapterRequest = t.Object({
     number: t.Optional(t.Number()),
     image: t.Optional(
         t.Union([
-            t.File(),
+            t.File({
+                maxSize: '25m',
+            }),
             t.String(),
         ])
     ),
     pages: t.Optional(
         t.Array(
             t.Union([
-                t.File(),
+                t.File({
+                    maxSize: '25m',
+                }),
                 t.String(),
             ])
         )

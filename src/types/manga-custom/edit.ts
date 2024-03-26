@@ -7,7 +7,9 @@ export const EditMangaCustomRequest = t.Object({
     description: t.Optional(t.String()),
     image: t.Optional(
         t.Union([
-            t.File(),
+            t.File({
+                maxSize: '25m',
+            }),
             t.String(),
         ])
     ),
