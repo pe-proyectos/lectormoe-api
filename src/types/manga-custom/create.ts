@@ -5,7 +5,9 @@ export const CreateMangaCustomRequest = t.Object({
     title: t.String(),
     shortDescription: t.Optional(t.String()),
     description: t.Optional(t.String()),
-    image: t.Optional(t.File()),
+    image: t.Optional(t.File({
+        maxSize: '25m',
+    })),
     releasedAt: t.Optional(t.Date()),
     nextChapterAt: t.Optional(t.Date()),
 });

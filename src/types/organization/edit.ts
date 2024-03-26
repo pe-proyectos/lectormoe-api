@@ -21,19 +21,25 @@ export const EditOrganizationRequest = t.Object({
     // Images
     logo: t.Optional(
         t.Union([
-            t.File(),
+            t.File({
+                maxSize: '25m',
+            }),
             t.String(),
         ])
     ),
     image: t.Optional(
         t.Union([
-            t.File(),
+            t.File({
+                maxSize: '25m',
+            }),
             t.String(),
         ])
     ),
     banner: t.Optional(
         t.Union([
-            t.File(),
+            t.File({
+                maxSize: '25m',
+            }),
             t.String(),
         ])
     ),
