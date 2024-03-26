@@ -199,7 +199,7 @@ model Chapter {
   id            Int @id @default(autoincrement())
   mangaCustomId Int
 
-  number   Int
+  number   Float
   title    String  @db.VarChar(256)
   imageUrl String? @db.VarChar(256)
   views    Int     @default(0)
