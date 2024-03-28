@@ -69,5 +69,14 @@ export const createChapter = async (organizationId: number, mangaSlug: string, p
 		}));
 	}
 
+	await prisma.mangaCustom.update({
+		where: {
+			id: mangaCustom.id,
+		},
+		data: {
+			lastChapterAt: new Date(),
+		},
+	});
+
 	return chapter;
 };

@@ -25,10 +25,11 @@ export const loggedOptional = () => new Elysia()
         if (!tokenPayload) {
             return { logged: false };
         }
-        const [organization, user] = await Promise.all([checkOrganization(organizationDomain), checkToken(token)]);
+        const organization = await checkOrganization(organizationDomain);
         if (!organization) {
             return { logged: false };
         }
+        const user = await checkToken(token, organization.id);
         if (!user) {
             return { logged: false };
         }
@@ -55,10 +56,11 @@ export const loggedUserOnly = () => new Elysia()
         if (!tokenPayload) {
             throw HttpError.Unauthorized('No autorizado, token incorrecto.');
         }
-        const [organization, user] = await Promise.all([checkOrganization(organizationDomain), checkToken(token)]);
+        const organization = await checkOrganization(organizationDomain);
         if (!organization) {
             throw HttpError.Unauthorized('No autorizado, organización no encontrada.');
         }
+        const user = await checkToken(token, organization.id);
         if (!user) {
             throw HttpError.Unauthorized('No autorizado, usuario no encontrado.');
         }

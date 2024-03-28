@@ -31,17 +31,13 @@ export const router = () => new Elysia()
                 data: {
                     token: tokenCreated.token,
                     username: user.username,
-                    user_slug: user.slug,
+                    userSlug: user.slug,
                 }
             };
         },
         {
             body: t.Object({
-                email: t.String({
-                    format: 'email',
-                    default: '',
-                    error: 'El email no es válido.',
-                }),
+                email: t.String(),
                 password: t.String({
                     minLength: 4,
                     maxLength: 30,
@@ -53,7 +49,7 @@ export const router = () => new Elysia()
                 data: t.Object({
                     token: t.String(),
                     username: t.String(),
-                    user_slug: t.String(),
+                    userSlug: t.String(),
                 }),
             }),
         }

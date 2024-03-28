@@ -7,8 +7,8 @@ export const router = () => new Elysia()
     .use(loggedOptional())
     .get(
         '/api/auth/check',
-        async ({ token }) => {
-            const user = await checkToken(token as string);
+        async ({ token, organizationId }) => {
+            const user = await checkToken(token as string, organizationId as number);
             if (!token) {
                 throw new Error('No se pudo verificar la sesión.');
             }
@@ -20,7 +20,8 @@ export const router = () => new Elysia()
                 data: {
                     token,
                     username: user.username,
-                    user_slug: user.slug,
+                    userSlug: user.slug,
+                    member: user?.members?.[0],
                 }
             };
         },
@@ -30,7 +31,8 @@ export const router = () => new Elysia()
                 data: t.Object({
                     token: t.String(),
                     username: t.String(),
-                    user_slug: t.String(),
+                    userSlug: t.String(),
+                    member: t.Any(),
                 }),
             }),
         }
