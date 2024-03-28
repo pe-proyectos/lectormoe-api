@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "chapter" ALTER COLUMN "number" SET DATA TYPE DOUBLE PRECISION;

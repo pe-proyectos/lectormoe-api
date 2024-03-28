@@ -1,6 +1,6 @@
 import { prisma } from "../../models/prisma";
 
-export const checkToken = async (token: string) => {
+export const checkToken = async (token: string, organizationId: number) => {
     const user = await prisma.user.findFirst({
         where: {
             tokens: {
@@ -8,7 +8,15 @@ export const checkToken = async (token: string) => {
                     token,
                 }
             }
-        }
+        },
+        include: {
+            members: {
+                where: {
+                    organizationId,
+                },
+                take: 1,
+            },
+        },
     });
 
     return user;

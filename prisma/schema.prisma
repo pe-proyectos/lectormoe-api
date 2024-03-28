@@ -32,11 +32,13 @@ model User {
   createdAt DateTime @default(now()) @db.Timestamp
   updatedAt DateTime @updatedAt
 
-  rankings  Ranking[]
-  tokens    Token[]
-  members   Member[]
-  analytics Analytics[]
-  history   UserChapterHistory[]
+  rankings      Ranking[]
+  tokens        Token[]
+  members       Member[]
+  analytics     Analytics[]
+  history       UserChapterHistory[]
+  invitations   Invitation[]
+  subscriptions Subscription[]
 
   @@map("user")
 }
@@ -72,9 +74,12 @@ model Organization {
   createdAt DateTime @default(now()) @db.Timestamp
   updatedAt DateTime @updatedAt
 
-  members   Member[]
-  custom    MangaCustom[]
-  analytics Analytics[]
+  members       Member[]
+  mangaCustoms  MangaCustom[]
+  genres        Genre[]
+  analytics     Analytics[]
+  invitations   Invitation[]
+  subscriptions Subscription[]
 
   @@map("organization")
 }
@@ -125,8 +130,44 @@ model Member {
   organization Organization @relation(fields: [organizationId], references: [id])
   user         User         @relation(fields: [userId], references: [id])
 
+  news   News[]
+  audits Audit[]
+
   @@unique([organizationId, userId])
   @@map("member")
+}
+
+model Subscription {
+  id             Int @id @default(autoincrement())
+  organizationId Int
+  userId         Int
+
+  createdAt DateTime @default(now()) @db.Timestamp
+  updatedAt DateTime @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id])
+  user         User         @relation(fields: [userId], references: [id])
+
+  @@unique([organizationId, userId])
+  @@map("subscription")
+}
+
+model Invitation {
+  id             Int @id @default(autoincrement())
+  organizationId Int
+  userId         Int
+
+  message   String?  @db.Text
+  expiresAt DateTime @db.Timestamp
+  status    String
+
+  createdAt DateTime @default(now()) @db.Timestamp
+  updatedAt DateTime @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id])
+  user         User         @relation(fields: [userId], references: [id])
+
+  @@map("invitation")
 }
 
 model Author {
@@ -134,7 +175,7 @@ model Author {
 
   name             String  @unique @db.VarChar(256)
   slug             String  @unique @db.VarChar(256)
-  shortDescription String? @db.VarChar(256)
+  shortDescription String? @db.VarChar(300)
   description      String? @db.Text
   imageUrl         String? @db.Text
 
@@ -152,7 +193,7 @@ model Manga {
 
   title            String    @unique @db.VarChar(256)
   slug             String    @unique @db.VarChar(256)
-  shortDescription String?   @db.VarChar(256)
+  shortDescription String?   @db.VarChar(300)
   description      String?   @db.Text
   imageUrl         String?   @db.Text
   releasedAt       DateTime?
@@ -175,12 +216,16 @@ model MangaCustom {
   organizationId Int
 
   title            String    @db.VarChar(256)
-  shortDescription String?   @db.VarChar(256)
+  shortDescription String?   @db.VarChar(300)
   description      String?   @db.Text
   imageUrl         String?   @db.Text
   releasedAt       DateTime?
   nextChapterAt    DateTime?
+  lastChapterAt    DateTime?
   views            Int       @default(0)
+  status           String    @default("ongoing") @db.VarChar(256)
+  visibility       String    @default("public") @db.VarChar(256)
+  isSubscription   Boolean   @default(false)
 
   createdAt DateTime @default(now()) @db.Timestamp
   updatedAt DateTime @updatedAt
@@ -188,8 +233,9 @@ model MangaCustom {
   chapters     Chapter[]
   rankings     Ranking[]
   genres       Genre[]
-  manga        Manga        @relation(fields: [mangaId], references: [id])
-  organization Organization @relation(fields: [organizationId], references: [id])
+  viewsHistory ViewsHistory[]
+  manga        Manga          @relation(fields: [mangaId], references: [id])
+  organization Organization   @relation(fields: [organizationId], references: [id])
 
   @@unique([mangaId, organizationId])
   @@map("manga_custom")
@@ -199,17 +245,19 @@ model Chapter {
   id            Int @id @default(autoincrement())
   mangaCustomId Int
 
-  number   Float
-  title    String  @db.VarChar(256)
-  imageUrl String? @db.VarChar(256)
-  views    Int     @default(0)
+  number         Float
+  title          String  @db.VarChar(256)
+  imageUrl       String? @db.VarChar(256)
+  views          Int     @default(0)
+  isSubscription Boolean @default(false)
 
   createdAt DateTime @default(now()) @db.Timestamp
   updatedAt DateTime @updatedAt
 
-  mangaCustom MangaCustom          @relation(fields: [mangaCustomId], references: [id])
-  pages       Page[]
-  userHistory UserChapterHistory[]
+  mangaCustom  MangaCustom          @relation(fields: [mangaCustomId], references: [id])
+  pages        Page[]
+  userHistory  UserChapterHistory[]
+  viewsHistory ViewsHistory[]
 
   @@unique([number, mangaCustomId])
   @@map("chapter")
@@ -267,9 +315,11 @@ model Demography {
 model Genre {
   id Int @id @default(autoincrement())
 
-  name        String  @unique @db.VarChar(256)
+  organizationId Int
+
+  name        String  @db.VarChar(256)
   nameEs      String  @db.VarChar(256)
-  slug        String  @unique @db.VarChar(256)
+  slug        String  @db.VarChar(256)
   description String  @db.Text
   display     Boolean @default(true)
 
@@ -277,7 +327,9 @@ model Genre {
   updatedAt DateTime @updatedAt
 
   mangasCustom MangaCustom[]
+  organization Organization  @relation(fields: [organizationId], references: [id])
 
+  @@unique([organizationId, slug])
   @@map("genre")
 }
 
@@ -324,4 +376,63 @@ model UserChapterHistory {
 
   @@unique([chapterId, userId])
   @@map("user_chapter_history")
+}
+
+model News {
+  id Int @id @default(autoincrement())
+
+  memberId Int
+
+  title       String  @db.VarChar(256)
+  slug        String  @db.VarChar(256)
+  description String? @db.Text
+  imageUrl    String? @db.Text
+  content     String? @db.Text
+  views       Int     @default(0)
+
+  createdAt DateTime @default(now()) @db.Timestamp
+  updatedAt DateTime @updatedAt
+
+  member Member @relation(fields: [memberId], references: [id])
+
+  @@unique([memberId, slug])
+  @@map("news")
+}
+
+model Audit {
+  id Int @id @default(autoincrement())
+
+  memberId Int
+
+  action   String  @db.VarChar(256)
+  payload  Json?
+  ip       String
+  browser  String?
+  language String?
+  device   String?
+
+  createdAt DateTime @default(now()) @db.Timestamp
+  updatedAt DateTime @updatedAt
+
+  member Member @relation(fields: [memberId], references: [id])
+
+  @@map("audit")
+}
+
+model ViewsHistory {
+  id Int @id @default(autoincrement())
+
+  mangaCustomId Int?
+  chapterId     Int?
+
+  ip       String
+  viewedAt DateTime
+
+  createdAt DateTime @default(now()) @db.Timestamp
+  updatedAt DateTime @updatedAt
+
+  mangaCustom MangaCustom? @relation(fields: [mangaCustomId], references: [id])
+  chapter     Chapter?     @relation(fields: [chapterId], references: [id])
+
+  @@map("views")
 }
