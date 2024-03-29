@@ -54,6 +54,7 @@ model Organization {
   logoUrl     String? @db.Text
   imageUrl    String? @db.Text
   bannerUrl   String? @db.Text
+  faviconUrl  String? @db.Text
 
   enableGoogleAds        Boolean @default(false)
   googleAdsMetaContent   String? @db.Text

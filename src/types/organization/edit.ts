@@ -43,6 +43,14 @@ export const EditOrganizationRequest = t.Object({
             t.String(),
         ])
     ),
+    favicon: t.Optional(
+        t.Union([
+            t.File({
+                maxSize: '25m',
+            }),
+            t.String(),
+        ])
+    ),
 });
 
 export type EditOrganizationRequest = Static<typeof EditOrganizationRequest>;

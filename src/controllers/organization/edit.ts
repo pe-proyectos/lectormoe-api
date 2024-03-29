@@ -31,6 +31,9 @@ export const editOrganization = async (organizationId: number, params: EditOrgan
 			...params.banner && params.banner instanceof File ? {} : {
 				bannerUrl: params.banner === "null" ? null : params.banner,
 			},
+			...params.favicon && params.favicon instanceof File ? {} : {
+				faviconUrl: params.favicon === "null" ? null : params.favicon,
+			},
 		},
 	});
 
@@ -69,6 +72,19 @@ export const editOrganization = async (organizationId: number, params: EditOrgan
 			},
 			data: {
 				bannerUrl,
+			},
+		});
+	}
+
+	if (params.favicon && params.favicon instanceof File) {
+		const faviconBuffer = await params.favicon.arrayBuffer();
+		const faviconUrl = await uploadFile(faviconBuffer, params.favicon.name);
+		await prisma.organization.update({
+			where: {
+				id: organizationId,
+			},
+			data: {
+				faviconUrl,
 			},
 		});
 	}
