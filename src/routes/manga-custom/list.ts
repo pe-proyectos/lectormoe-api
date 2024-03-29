@@ -9,15 +9,19 @@ export const router = () => new Elysia()
     .get(
         '/api/manga-custom',
         async ({ organizationId, query }) => {
-            const data = await listMangaCustom(organizationId, query);
+            const { data, maxPage, total } = await listMangaCustom(organizationId, query);
             
-            return { status: true, data };
+            return { status: true, data: {
+                data,
+                maxPage,
+                total,
+            } };
         },
         {
             query: MangaCustomListQuery,
             response: t.Object({
                 status: t.Boolean(),
-                data: t.Array(t.Any()),
+                data: t.Any(),
             }),
         }
     );
