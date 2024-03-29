@@ -5,7 +5,7 @@ const prepareCustomManga = (mangaCustom: any) => {
 	const result = {
 		...mangaCustom.manga,
 		...mangaCustom,
-		lastChapterNumber: mangaCustom.chapters?.[0]?.number,
+		lastChapterNumbers: mangaCustom.chapters.map((chapter: any) => chapter.number),
 		manga: undefined,
 		chapters: undefined,
 	};
@@ -34,12 +34,15 @@ export const listMangaCustom = async (organizationId: number, filters: MangaCust
 				},
 				title: {
 					contains: filters.title,
+					mode: "insensitive"
 				},
 				shortDescription: {
 					contains: filters.shortDescription,
+					mode: "insensitive"
 				},
 				description: {
 					contains: filters.description,
+					mode: "insensitive"
 				},
 			},
 			include: {
@@ -51,7 +54,7 @@ export const listMangaCustom = async (organizationId: number, filters: MangaCust
 					orderBy: {
 						number: 'desc',
 					},
-					take: 1,
+					take: 2,
 				},
 				viewsHistory: {
 					select: {
@@ -70,7 +73,12 @@ export const listMangaCustom = async (organizationId: number, filters: MangaCust
 			filters.page ? (parseInt(filters?.page || "1") - 1) * parseInt(filters?.limit || "10") : 0,
 			parseInt(filters?.limit || "10"),
 		);
-		return result.map(prepareCustomManga);
+		const data = result.map(prepareCustomManga);
+		return {
+			data,
+			maxPage: Math.ceil(popularMangasCustoms.length / parseInt(filters?.limit || "10")),
+			total: popularMangasCustoms.length,
+		};
 	}
 
 	const mangasCustoms = await prisma.mangaCustom.findMany({
@@ -80,12 +88,15 @@ export const listMangaCustom = async (organizationId: number, filters: MangaCust
 			},
 			title: {
 				contains: filters.title,
+				mode: "insensitive"
 			},
 			shortDescription: {
 				contains: filters.shortDescription,
+				mode: "insensitive"
 			},
 			description: {
 				contains: filters.description,
+				mode: "insensitive"
 			},
 		},
 		include: {
@@ -97,7 +108,7 @@ export const listMangaCustom = async (organizationId: number, filters: MangaCust
 				orderBy: {
 					number: 'desc',
 				},
-				take: 1,
+				take: 2,
 			},
 		},
 		...(order || {}),
@@ -105,5 +116,29 @@ export const listMangaCustom = async (organizationId: number, filters: MangaCust
 		take: parseInt(filters?.limit || "10"),
 	});
 
-	return mangasCustoms.map(prepareCustomManga);
+	const total = await prisma.mangaCustom.count({
+		where: {
+			organization: {
+				id: organizationId,
+			},
+			title: {
+				contains: filters.title,
+				mode: "insensitive"
+			},
+			shortDescription: {
+				contains: filters.shortDescription,
+				mode: "insensitive"
+			},
+			description: {
+				contains: filters.description,
+				mode: "insensitive"
+			},
+		},
+	});
+
+	return {
+		data: mangasCustoms.map(prepareCustomManga),
+		maxPage: Math.ceil(total / parseInt(filters?.limit || "10")),
+		total,
+	}
 };
