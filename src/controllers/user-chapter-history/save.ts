@@ -5,6 +5,9 @@ export const saveUserChapterHistory = async (organizationId: number, userId: num
         select: {
             id: true,
             pages: {
+                orderBy: {
+                    number: 'desc',
+                },
                 select: {
                     number: true,
                 }
@@ -26,8 +29,14 @@ export const saveUserChapterHistory = async (organizationId: number, userId: num
     if (!chapter) {
         return null;
     }
-
+    console.log({ pageNumber });
+    console.log("chapter.pages.length", chapter.pages.length);
+    console.log("chapter.pages");
+    console.log(chapter.pages);
+    
     const isLastPage = chapter.pages.length > 0 && (pageNumber === chapter.pages[chapter.pages.length - 1].number);
+    console.log("isLastPage ", isLastPage);
+    
 
     await prisma.userChapterHistory.upsert({
         where: {
