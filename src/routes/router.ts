@@ -12,7 +12,7 @@ export const router = () => async (app: Elysia) => {
 			app.group("", (app) => app.use(router()));
 		}
 	}
-	console.log(
+	console.info(
 		`Loaded routes: \n${app.routes
 			.filter((route) => route.method !== "OPTIONS")
 			.map((route) => `\t- ${route.method}: ${route.path}`)

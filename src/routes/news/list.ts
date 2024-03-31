@@ -7,14 +7,14 @@ export const router = () => new Elysia()
     .use(useOrganization())
     .get(
         '/api/news',
-        async ({ organizationId }) => {
-            const data = await listNews(organizationId);
+        async ({ organizationId, query }) => {
+            const data = await listNews(organizationId, query);
             return { status: true, data };
         },
         {
             response: t.Object({
                 status: t.Boolean(),
-                data: t.Array(t.Any()),
+                data: t.Any(),
             }),
         }
     );

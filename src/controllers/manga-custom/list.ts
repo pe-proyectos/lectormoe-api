@@ -5,7 +5,7 @@ const prepareCustomManga = (mangaCustom: any) => {
 	const result = {
 		...mangaCustom.manga,
 		...mangaCustom,
-		lastChapterNumbers: mangaCustom.chapters.map((chapter: any) => chapter.number),
+		lastChapters: mangaCustom.chapters,
 		manga: undefined,
 		chapters: undefined,
 	};
@@ -50,6 +50,7 @@ export const listMangaCustom = async (organizationId: number, filters: MangaCust
 				chapters: {
 					select: {
 						number: true,
+						createdAt: true,
 					},
 					orderBy: {
 						number: 'desc',
@@ -70,7 +71,7 @@ export const listMangaCustom = async (organizationId: number, filters: MangaCust
 			},
 		});
 		const result = popularMangasCustoms.sort((a, b) => b.viewsHistory.length - a.viewsHistory.length).slice(
-			filters.page ? (parseInt(filters?.page || "1") - 1) * parseInt(filters?.limit || "10") : 0,
+			filters?.page ? (parseInt(filters?.page || "1") - 1) * parseInt(filters?.limit || "10") : 0,
 			parseInt(filters?.limit || "10"),
 		);
 		const data = result.map(prepareCustomManga);
@@ -104,6 +105,7 @@ export const listMangaCustom = async (organizationId: number, filters: MangaCust
 			chapters: {
 				select: {
 					number: true,
+					createdAt: true,
 				},
 				orderBy: {
 					number: 'desc',
@@ -112,7 +114,7 @@ export const listMangaCustom = async (organizationId: number, filters: MangaCust
 			},
 		},
 		...(order || {}),
-		skip: filters.page ? (parseInt(filters?.page || "1") - 1) * parseInt(filters?.limit || "10") : 0,
+		skip: filters?.page ? (parseInt(filters?.page || "1") - 1) * parseInt(filters?.limit || "10") : 0,
 		take: parseInt(filters?.limit || "10"),
 	});
 

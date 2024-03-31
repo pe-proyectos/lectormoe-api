@@ -364,7 +364,7 @@ model UserChapterHistory {
   userId    Int
   chapterId Int
 
-  pageId     Int?
+  pageNumber Int?
   startedAt  DateTime?
   lastReadAt DateTime?
   finishedAt DateTime?
