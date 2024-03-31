@@ -30,14 +30,8 @@ export const saveUserChapterHistory = async (organizationId: number, userId: num
     if (!chapter) {
         return null;
     }
-    console.log({ pageNumber });
-    console.log("chapter.pages.length", chapter.pages.length);
-    console.log("chapter.pages");
-    console.log(chapter.pages);
-    
+
     const isLastPage = chapter.pages.length > 0 && (pageNumber === chapter.pages[0].number);
-    console.log("isLastPage ", isLastPage);
-    
 
     await prisma.userChapterHistory.upsert({
         where: {
@@ -58,6 +52,46 @@ export const saveUserChapterHistory = async (organizationId: number, userId: num
             lastReadAt: new Date(),
         },
     });
+
+    if (isLastPage) {
+        const nextChapters = await prisma.chapter.findMany({
+            where: {
+                mangaCustom: {
+                    organization: {
+                        id: organizationId,
+                    },
+                    manga: {
+                        slug: mangaSlug,
+                    }
+                },
+                number: {
+                    gt: chapterNumber,
+                },
+            },
+            orderBy: {
+                number: 'asc',
+            },
+            take: 1,
+        });
+
+        if (nextChapters.length > 0) {
+            await prisma.userChapterHistory.upsert({
+                where: {
+                    chapterId_userId: {
+                        chapterId: nextChapters[0].id,
+                        userId,
+                    }
+                },
+                update: {},
+                create: {
+                    userId,
+                    chapterId: nextChapters[0].id,
+                    pageNumber: 1,
+                    lastReadAt: new Date(),
+                },
+            });
+        }
+    }
 
     return true;
 }
