@@ -8,6 +8,7 @@ export const saveUserChapterHistory = async (organizationId: number, userId: num
                 orderBy: {
                     number: 'desc',
                 },
+                take: 1,
                 select: {
                     number: true,
                 }
@@ -34,7 +35,7 @@ export const saveUserChapterHistory = async (organizationId: number, userId: num
     console.log("chapter.pages");
     console.log(chapter.pages);
     
-    const isLastPage = chapter.pages.length > 0 && (pageNumber === chapter.pages[chapter.pages.length - 1].number);
+    const isLastPage = chapter.pages.length > 0 && (pageNumber === chapter.pages[0].number);
     console.log("isLastPage ", isLastPage);
     
 
