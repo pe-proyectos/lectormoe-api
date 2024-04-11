@@ -14,7 +14,7 @@ export const editMangaCustom = async (organizationId: number, mangaSlug: string,
 	});
 
 	if (!mangaCustom) {
-		throw new Error(`Tu organización no tiene este manga`);
+		throw new Error("Tu organización no tiene este manga");
 	}
 	
 	await prisma.mangaCustom.update({
@@ -30,6 +30,9 @@ export const editMangaCustom = async (organizationId: number, mangaSlug: string,
 			...params.image && params.image instanceof File ? {} : {
 				imageUrl: params.image === "null" ? null : params.image,
 			},
+			...params.banner && params.banner instanceof File ? {} : {
+				bannerUrl: params.banner === "null" ? null : params.banner,
+			},
 		}
 	});
 
@@ -42,6 +45,19 @@ export const editMangaCustom = async (organizationId: number, mangaSlug: string,
 			},
 			data: {
 				imageUrl,
+			},
+		});
+	}
+
+	if (params.banner && params.banner instanceof File) {
+		const bannerBuffer = await params.banner.arrayBuffer();
+		const bannerUrl = await uploadFile(bannerBuffer, params.banner.name);
+		await prisma.mangaCustom.update({
+			where: {
+				id: mangaCustom.id,
+			},
+			data: {
+				bannerUrl,
 			},
 		});
 	}

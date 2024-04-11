@@ -10,7 +10,7 @@ export const app = new Elysia()
 	.use(logger({ logIP: true }))
 	.use(errorHandler())
 	.use(router())
-	.listen(parseInt(process.env.PORT as string));
+	.listen(Number.parseInt(process.env.PORT as string));
 
 console.info(
 	`🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`,

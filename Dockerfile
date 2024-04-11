@@ -9,7 +9,6 @@ RUN curl -L https://raw.githubusercontent.com/tj/n/master/bin/n -o n \
     && bash n $NODE_VERSION \
     && rm n \
     && npm install -g n
-
 COPY ./package.json ./bun.lockb ./
 COPY ./src ./src
 COPY ./prisma ./prisma

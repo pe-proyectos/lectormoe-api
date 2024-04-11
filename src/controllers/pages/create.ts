@@ -1,6 +1,6 @@
 import sizeOf from "buffer-image-size";
 import { prisma } from "../../models/prisma";
-import { CreatePagesRequest } from "../../types/pages/create";
+import type { CreatePagesRequest } from "../../types/pages/create";
 import { uploadFile } from "../../util/upload-file";
 
 export const createPages = async (organizationId: number, mangaSlug: string, chapterNumber: number, params: CreatePagesRequest) => {

@@ -29,11 +29,11 @@ export const createManga = async (params: CreateMangaRequest) => {
 	]);
 
 	if (authors.length !== params.authorIds.length) {
-		throw new Error(`No se encontraron todos los autores`);
+		throw new Error("No se encontraron todos los autores");
 	}
 
 	if (!demography) {
-		throw new Error(`No se encontró la demografía`);
+		throw new Error("No se encontró la demografía");
 	}
 
 	if (mangaExists) {

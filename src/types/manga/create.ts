@@ -1,4 +1,4 @@
-import { Static, t } from 'elysia';
+import { type Static, t } from 'elysia';
 
 export const CreateMangaRequest = t.Object({
     title: t.String(),
