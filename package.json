@@ -27,10 +27,11 @@
     "@grotto/logysia": "^0.1.1",
     "@prisma/client": "5.11.0",
     "buffer-image-size": "^0.6.4",
+    "canvas": "^2.11.2",
     "elysia": "^1.0.0",
-    "elysia-http-error": "^1.2.0",
     "linkedom": "^0.16.10",
     "prisma": "5.11.0",
+    "puppeteer": "^22.6.2",
     "slug": "^9.0.0",
     "slugify": "^1.6.6"
   }

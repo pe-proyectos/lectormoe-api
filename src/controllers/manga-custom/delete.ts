@@ -11,7 +11,7 @@ export const deleteMangaCustom = async (organizationId: number, mangaSlug: strin
 	});
 
 	if (!mangaCustom) {
-		throw new Error(`Tu organización no tiene este manga`);
+		throw new Error("Tu organización no tiene este manga");
 	}
 	
 	await prisma.page.deleteMany({

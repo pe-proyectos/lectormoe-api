@@ -1,4 +1,4 @@
-import { Static, t } from 'elysia';
+import { type Static, t } from 'elysia';
 
 export const EditMangaCustomRequest = t.Object({
     mangaCustomId: t.Number(),
@@ -6,6 +6,14 @@ export const EditMangaCustomRequest = t.Object({
     shortDescription: t.Optional(t.String()),
     description: t.Optional(t.String()),
     image: t.Optional(
+        t.Union([
+            t.File({
+                maxSize: '25m',
+            }),
+            t.String(),
+        ])
+    ),
+    banner: t.Optional(
         t.Union([
             t.File({
                 maxSize: '25m',

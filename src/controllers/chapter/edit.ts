@@ -1,6 +1,6 @@
 import sizeOf from "buffer-image-size";
 import { prisma } from "../../models/prisma";
-import { EditChapterRequest } from "../../types/chapter/edit";
+import type { EditChapterRequest } from "../../types/chapter/edit";
 import { uploadFile } from "../../util/upload-file";
 
 export const editChapter = async (organizationId: number, mangaSlug: string, chapterNumber: number, params: EditChapterRequest) => {

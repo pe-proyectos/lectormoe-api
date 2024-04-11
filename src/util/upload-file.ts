@@ -1,4 +1,4 @@
-export async function uploadFile(fileBuffer: ArrayBuffer, filename: string): Promise<string> {
+export async function uploadFile(fileBuffer: ArrayBuffer | Buffer, filename: string): Promise<string> {
     const extension = filename.split('.').pop();
 
     const timestamp = new Date().getTime();

@@ -1,6 +1,5 @@
 import jwt from '@elysiajs/jwt';
 import { Elysia, t } from 'elysia';
-import { HttpError } from 'elysia-http-error';
 
 import { register } from '../../controllers/auth/register';
 
@@ -18,7 +17,7 @@ export const router = () => new Elysia()
             const registered = await register(email, username, password);
 
             if (!registered) {
-                throw HttpError.BadRequest('No se pudo registrar el usuario.');
+                throw new Error('No se pudo registrar el usuario.');
             }
 
             return {

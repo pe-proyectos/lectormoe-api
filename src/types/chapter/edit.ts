@@ -1,4 +1,4 @@
-import { Static, t } from 'elysia';
+import { type Static, t } from 'elysia';
 
 export const EditChapterRequest = t.Object({
     title: t.Optional(t.String()),

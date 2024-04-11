@@ -17,11 +17,11 @@ export const createMangaCustom = async (organizationId: number, params: CreateMa
 	]);
 
 	if (!organization) {
-		throw new Error(`No se encontró la organización`);
+		throw new Error("No se encontró la organización");
 	}
 
 	if (!manga) {
-		throw new Error(`No se encontró el manga`);
+		throw new Error("No se encontró el manga");
 	}
 
 	const mangaCustomExists = await prisma.mangaCustom.findFirst({
@@ -59,6 +59,19 @@ export const createMangaCustom = async (organizationId: number, params: CreateMa
 			},
 			data: {
 				imageUrl,
+			},
+		});
+	}
+
+	if (params.banner) {
+		const bannerBuffer = await params.banner.arrayBuffer();
+		const bannerUrl = await uploadFile(bannerBuffer, params.banner.name);
+		await prisma.mangaCustom.update({
+			where: {
+				id: mangaCustom.id,
+			},
+			data: {
+				bannerUrl,
 			},
 		});
 	}

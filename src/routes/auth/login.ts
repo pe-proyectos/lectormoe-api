@@ -1,6 +1,5 @@
 import jwt from '@elysiajs/jwt';
 import { Elysia, t } from 'elysia';
-import { HttpError } from 'elysia-http-error';
 
 import { login } from '../../controllers/auth/login';
 import { createToken } from '../../controllers/auth/token';
@@ -19,7 +18,7 @@ export const router = () => new Elysia()
             const user = await login(email, password);
 
             if (!user) {
-                throw HttpError.BadRequest('No se pudo iniciar sesión.');
+                throw new Error('No se pudo iniciar sesión.');
             }
 
             const token = await jwt.sign({ userId: user.id });

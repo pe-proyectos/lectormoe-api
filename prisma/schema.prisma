@@ -197,6 +197,7 @@ model Manga {
   shortDescription String?   @db.VarChar(300)
   description      String?   @db.Text
   imageUrl         String?   @db.Text
+  bannerUrl        String?   @db.Text
   releasedAt       DateTime?
   nextChapterAt    DateTime?
 
@@ -220,6 +221,7 @@ model MangaCustom {
   shortDescription String?   @db.VarChar(300)
   description      String?   @db.Text
   imageUrl         String?   @db.Text
+  bannerUrl        String?   @db.Text
   releasedAt       DateTime?
   nextChapterAt    DateTime?
   lastChapterAt    DateTime?
