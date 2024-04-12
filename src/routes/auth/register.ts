@@ -21,8 +21,10 @@ export const router = () => new Elysia()
             }
 
             return {
-                status: registered,
-                message: registered ? 'Usuario registrado correctamente.' : 'No se pudo registrar el usuario.',
+                status: true,
+                data: {
+                    registered
+                }
             };
         },
         {
@@ -47,7 +49,9 @@ export const router = () => new Elysia()
             }),
             response:  t.Object({
                 status: t.Boolean(),
-                message: t.String(),
+                data: t.Object({
+                    registered: t.Boolean(),
+                }),
             }),
         }
     );

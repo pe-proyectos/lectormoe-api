@@ -13,13 +13,13 @@ export const login = async (email: string, password: string) => {
     });
 
     if (!userEmailExists) {
-        throw new Error("El correo no está registrado.");
+        throw new Error("El usuario/email/contraseña son incorrectos.");
     }
 
     const isMatch = await Bun.password.verify(password, userEmailExists.password);
 
     if (!isMatch) {
-        throw new Error("La contraseña es incorrecta.");
+        throw new Error("El usuario/email/contraseña son incorrectos.");
     }
 
     return userEmailExists;
