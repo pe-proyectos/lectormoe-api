@@ -50,7 +50,7 @@ export const createMangaCustom = async (organizationId: number, params: CreateMa
 		}
 	});
 
-	if (params.image) {
+	if (params.image && params.image instanceof File) {
 		const imageBuffer = await params.image.arrayBuffer();
 		const imageUrl = await uploadFile(imageBuffer, params.image.name);
 		await prisma.mangaCustom.update({
@@ -63,7 +63,7 @@ export const createMangaCustom = async (organizationId: number, params: CreateMa
 		});
 	}
 
-	if (params.banner) {
+	if (params.banner && params.banner instanceof File) {
 		const bannerBuffer = await params.banner.arrayBuffer();
 		const bannerUrl = await uploadFile(bannerBuffer, params.banner.name);
 		await prisma.mangaCustom.update({

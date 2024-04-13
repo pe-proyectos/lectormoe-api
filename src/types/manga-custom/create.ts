@@ -5,12 +5,22 @@ export const CreateMangaCustomRequest = t.Object({
     title: t.String(),
     shortDescription: t.Optional(t.String()),
     description: t.Optional(t.String()),
-    image: t.Optional(t.File({
-        maxSize: '25m',
-    })),
-    banner: t.Optional(t.File({
-        maxSize: '25m',
-    })),
+    image: t.Optional(
+        t.Union([
+            t.File({
+                maxSize: '25m',
+            }),
+            t.String(),
+        ])
+    ),
+    banner: t.Optional(
+        t.Union([
+            t.File({
+                maxSize: '25m',
+            }),
+            t.String(),
+        ])
+    ),
     releasedAt: t.Optional(t.Date()),
     nextChapterAt: t.Optional(t.Date()),
 });

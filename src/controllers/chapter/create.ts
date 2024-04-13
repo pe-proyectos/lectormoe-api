@@ -1,5 +1,5 @@
 import { prisma } from "../../models/prisma";
-import { CreateChapterRequest } from "../../types/chapter/create";
+import type { CreateChapterRequest } from "../../types/chapter/create";
 import { uploadFile } from "../../util/upload-file";
 import sizeOf from "buffer-image-size";
 
@@ -16,7 +16,7 @@ export const createChapter = async (organizationId: number, mangaSlug: string, p
 	});
 
 	if (!mangaCustom) {
-		throw new Error(`No se encontró el manga`);
+		throw new Error("No se encontró el manga");
 	}
 
 	const chapterExists = await prisma.chapter.findFirst({
@@ -38,7 +38,7 @@ export const createChapter = async (organizationId: number, mangaSlug: string, p
 		},
 	});
 
-	if (params.image) {
+	if (params.image && params.image instanceof File) {
 		const imageBuffer = await params.image.arrayBuffer();
 		const imageUrl = await uploadFile(imageBuffer, params.image.name);
 		await prisma.chapter.update({
@@ -53,19 +53,21 @@ export const createChapter = async (organizationId: number, mangaSlug: string, p
 
 	if (params.pages) {
 		await Promise.all(params.pages.map(async (page, index) => {
-			const pageBuffer = await page.arrayBuffer();
-			const pageSize = sizeOf(Buffer.from(pageBuffer));
-			const pageUrl = await uploadFile(pageBuffer, page.name);
-			await prisma.page.create({
-				data: {
-					imageUrl: pageUrl,
-					number: index + 1,
-					chapterId: chapter.id,
-					imageWidth: pageSize.width,
-					imageHeight: pageSize.height,
-					imageType: pageSize.type,
-				},
-			})
+			if (page instanceof File) {
+				const pageBuffer = await page.arrayBuffer();
+				const pageSize = sizeOf(Buffer.from(pageBuffer));
+				const pageUrl = await uploadFile(pageBuffer, page.name);
+				await prisma.page.create({
+					data: {
+						imageUrl: pageUrl,
+						number: index + 1,
+						chapterId: chapter.id,
+						imageWidth: pageSize.width,
+						imageHeight: pageSize.height,
+						imageType: pageSize.type,
+					},
+				})
+			}
 		}));
 	}
 
