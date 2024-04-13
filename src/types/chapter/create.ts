@@ -1,14 +1,24 @@
-import { Static, t } from 'elysia';
+import { type Static, t } from 'elysia';
 
 export const CreateChapterRequest = t.Object({
     title: t.String(),
     number: t.Number(),
-    image: t.Optional(t.File({
-        maxSize: '25m',
-    })),
-    pages: t.Optional(t.Array(t.File({
-        maxSize: '25m',
-    }))),
+    image: t.Optional(
+        t.Union([
+            t.File({
+                maxSize: '25m',
+            }),
+            t.String(),
+        ])
+    ),
+    pages: t.Optional(t.Array(
+        t.Union([
+            t.File({
+                maxSize: '25m',
+            }),
+            t.String(),
+        ])
+    )),
 });
 
 export type CreateChapterRequest = Static<typeof CreateChapterRequest>;

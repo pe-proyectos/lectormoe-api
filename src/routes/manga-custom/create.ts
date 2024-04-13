@@ -31,7 +31,7 @@ export const router = () => new Elysia()
                 data: t.Any(),
             }),
             transform({ body }) {
-                body.mangaId = parseInt(body.mangaId.toString());
+                body.mangaId = Number.parseInt(body.mangaId.toString());
                 if (body.nextChapterAt) {
                     body.nextChapterAt = new Date(body.nextChapterAt);
                 }
