@@ -31,6 +31,21 @@ export const saveUserChapterHistory = async (organizationId: number, userId: num
         return null;
     }
 
+    const existingHistory = await prisma.userChapterHistory.findFirst({
+        where: {
+            chapterId: chapter.id,
+            userId,
+            finishedAt: {
+                not: null,
+            },
+        }
+    });
+
+    if (existingHistory) {
+        // we don't update the history if the user has already finished the chapter
+        return null;
+    }
+
     const isLastPage = chapter.pages.length > 0 && (pageNumber === chapter.pages[0].number);
 
     await prisma.userChapterHistory.upsert({

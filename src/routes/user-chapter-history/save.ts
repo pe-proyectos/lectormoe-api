@@ -11,7 +11,10 @@ export const router = () => new Elysia()
             const view = await saveUserChapterHistory(organizationId, user.id, mangaSlug, chapterNumber, pageNumber);
 
             if (!view) {
-                throw new Error("No se pudo guardar el historial.");
+                return {
+                    status: true,
+                    data: false,
+                };
             }
 
             return {
@@ -30,8 +33,8 @@ export const router = () => new Elysia()
                 data: t.Any(),
             }),
             transform({ params }) {
-                params.chapterNumber = parseFloat(params.chapterNumber.toString());
-                params.pageNumber = parseFloat(params.pageNumber.toString());
+                params.chapterNumber = Number.parseFloat(params.chapterNumber.toString());
+                params.pageNumber = Number.parseFloat(params.pageNumber.toString());
             },
         }
     );
