@@ -1,9 +1,16 @@
 import { prisma } from "../../models/prisma";
 
 
-export const login = async (email: string, password: string) => {
+export const login = async (organizationId: number, email: string, password: string) => {
     const userEmailExists = await prisma.user.findFirst({
-        where: { OR: [{ email: email }, { username: email }] },
+        where: {
+            OR: [{ email: email }, { username: email }],
+            members: {
+                some: {
+                    organizationId,
+                }
+            },
+        },
         select: {
             id: true,
             username: true,

@@ -1,4 +1,4 @@
-import { Static, t } from 'elysia';
+import { type Static, t } from 'elysia';
 import { PaginationQuery } from '../common/pagination';
 
 export enum OrderEnum {

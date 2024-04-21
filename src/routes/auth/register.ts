@@ -2,9 +2,11 @@ import jwt from '@elysiajs/jwt';
 import { Elysia, t } from 'elysia';
 
 import { register } from '../../controllers/auth/register';
+import { useOrganization } from '../../plugins/organization';
 
 
 export const router = () => new Elysia()
+    .use(useOrganization())
     .use(
         jwt({
             name: 'jwt',
@@ -13,8 +15,8 @@ export const router = () => new Elysia()
     )
     .post(
         '/api/auth/register',
-        async ({ body: { email, username, password } }) => {
-            const registered = await register(email, username, password);
+        async ({ organizationId, body: { email, username, password } }) => {
+            const registered = await register(organizationId, email, username, password);
 
             if (!registered) {
                 throw new Error('No se pudo registrar el usuario.');

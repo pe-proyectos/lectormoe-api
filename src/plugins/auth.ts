@@ -28,7 +28,7 @@ export const loggedOptional = () => new Elysia()
         if (!organization) {
             return { logged: false };
         }
-        const user = await checkToken(token, organization.id);
+        const user = await checkToken(organization.id, token);
         if (!user) {
             return { logged: false };
         }
@@ -59,7 +59,7 @@ export const loggedUserOnly = () => new Elysia()
         if (!organization) {
             throw new Error('No autorizado, organización no encontrada.');
         }
-        const user = await checkToken(token, organization.id);
+        const user = await checkToken(organization.id, token);
         if (!user) {
             throw new Error('No autorizado, usuario no encontrado.');
         }
@@ -90,7 +90,7 @@ export const loggedMemberOnly = () => new Elysia()
         if (!organization) {
             throw new Error('No autorizado, organización no encontrada.');
         }
-        const member = await checkMemberToken(token, organization.id);
+        const member = await checkMemberToken(organization.id, token);
         if (!member) {
             throw new Error('No autorizado, no es miembro de la organización.');
         }

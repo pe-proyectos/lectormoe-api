@@ -3,9 +3,11 @@ import { Elysia, t } from 'elysia';
 
 import { login } from '../../controllers/auth/login';
 import { createToken } from '../../controllers/auth/token';
+import { useOrganization } from '../../plugins/organization';
 
 
 export const router = () => new Elysia()
+    .use(useOrganization())
     .use(
         jwt({
             name: 'jwt',
@@ -14,8 +16,8 @@ export const router = () => new Elysia()
     )
     .post(
         '/api/auth/login',
-        async ({ jwt, body: { email, password } }) => {
-            const user = await login(email, password);
+        async ({ organizationId, jwt, body: { email, password } }) => {
+            const user = await login(organizationId, email, password);
 
             if (!user) {
                 throw new Error('No se pudo iniciar sesión.');

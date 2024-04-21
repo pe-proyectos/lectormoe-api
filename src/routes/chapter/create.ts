@@ -32,6 +32,8 @@ export const router = () => new Elysia()
             }),
             transform({ body }) {
                 body.number = Number.parseFloat(body.number.toString());
+                body.releasedAt = new Date(body.releasedAt);
+                body.isSubscription = body?.isSubscription?.toString() === 'true';
                 if (body.pages instanceof File || typeof body.pages === 'string')
                     body.pages = [body.pages];
             },

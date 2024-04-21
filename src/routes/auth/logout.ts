@@ -8,8 +8,8 @@ export const router = () => new Elysia()
     .use(loggedUserOnly())
     .get(
         '/api/auth/logout',
-        async ({ token }) => {
-            await deleteToken(token as string);
+        async ({ organizationId, token }) => {
+            await deleteToken(organizationId, token as string);
             return { status: true, message: 'OK' };
         },
         {

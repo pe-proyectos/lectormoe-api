@@ -29,7 +29,7 @@ export const router = () => new Elysia()
                 data: t.Any(),
             }),
             transform({ params }) {
-                params.chapterNumber = parseFloat(params.chapterNumber.toString());
+                params.chapterNumber = Number.parseFloat(params.chapterNumber.toString());
             },
         }
     );
