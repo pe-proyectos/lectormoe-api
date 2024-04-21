@@ -7,8 +7,8 @@ export const router = () => new Elysia()
     .use(loggedOptional())
     .get(
         '/api/auth/check',
-        async ({ token, organizationId }) => {
-            const user = await checkToken(token as string, organizationId as number);
+        async ({ organizationId, token }) => {
+            const user = await checkToken(organizationId as number, token as string);
             if (!token) {
                 throw new Error('No se pudo verificar la sesión.');
             }

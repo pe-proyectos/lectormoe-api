@@ -1,6 +1,6 @@
 import { prisma } from "../../models/prisma";
 
-export const checkToken = async (token: string, organizationId: number) => {
+export const checkToken = async (organizationId: number, token: string) => {
     const user = await prisma.user.findFirst({
         where: {
             tokens: {
@@ -22,7 +22,7 @@ export const checkToken = async (token: string, organizationId: number) => {
     return user;
 }
 
-export const checkMemberToken = async (token: string, organizationId: number) => {
+export const checkMemberToken = async (organizationId: number, token: string) => {
     const member = await prisma.member.findFirst({
         where: {
             organizationId,

@@ -3,7 +3,7 @@ import slug from "slug";
 import { prisma } from "../../models/prisma";
 
 
-export const register = async (email: string, username: string, password: string) => {
+export const register = async (organizationId: number, email: string, username: string, password: string) => {
 	const userEmailExists = await prisma.user.findFirst({ where: { email } });
 	if (userEmailExists) {
 		throw new Error("El correo ya está en uso.");
@@ -18,7 +18,7 @@ export const register = async (email: string, username: string, password: string
         throw new Error("El nombre de usuario ya está en uso.");
     }
     const hashedPassword = await Bun.password.hash(password);
-    await prisma.user.create({
+    const user = await prisma.user.create({
         data: {
             email,
             username,
@@ -26,7 +26,15 @@ export const register = async (email: string, username: string, password: string
             password: hashedPassword,
         },
         select: {
+            id: true,
             username: true,
+        }
+    });
+    await prisma.member.create({
+        data: {
+            organizationId,
+            userId: user.id,
+            role: "user",
         }
     });
 	return true;

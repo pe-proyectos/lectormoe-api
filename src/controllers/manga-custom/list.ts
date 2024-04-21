@@ -1,6 +1,7 @@
 import { prisma } from "../../models/prisma";
-import { MangaCustomListQuery, OrderEnum } from "../../types/manga-custom/list";
+import { type MangaCustomListQuery, OrderEnum } from "../../types/manga-custom/list";
 
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 const prepareCustomManga = (mangaCustom: any) => {
 	const result = {
 		...mangaCustom.manga,
@@ -9,11 +10,12 @@ const prepareCustomManga = (mangaCustom: any) => {
 		manga: undefined,
 		chapters: undefined,
 	};
-	delete result.manga;
+	result.manga = undefined;
 	return result;
 }
 
 export const listMangaCustom = async (organizationId: number, filters: MangaCustomListQuery) => {
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	const order: any = {};
 	if (filters.order === OrderEnum.FEATURED) {
 		order.orderBy = {
@@ -50,7 +52,7 @@ export const listMangaCustom = async (organizationId: number, filters: MangaCust
 				chapters: {
 					select: {
 						number: true,
-						createdAt: true,
+						releasedAt: true,
 					},
 					orderBy: {
 						number: 'desc',
@@ -71,13 +73,13 @@ export const listMangaCustom = async (organizationId: number, filters: MangaCust
 			},
 		});
 		const result = popularMangasCustoms.sort((a, b) => b.viewsHistory.length - a.viewsHistory.length).slice(
-			filters?.page ? (parseInt(filters?.page || "1") - 1) * parseInt(filters?.limit || "10") : 0,
-			parseInt(filters?.limit || "10"),
+			filters?.page ? (Number.parseInt(filters?.page || "1") - 1) * Number.parseInt(filters?.limit || "10") : 0,
+			Number.parseInt(filters?.limit || "10"),
 		);
 		const data = result.map(prepareCustomManga);
 		return {
 			data,
-			maxPage: Math.ceil(popularMangasCustoms.length / parseInt(filters?.limit || "10")),
+			maxPage: Math.ceil(popularMangasCustoms.length / Number.parseInt(filters?.limit || "10")),
 			total: popularMangasCustoms.length,
 		};
 	}
@@ -105,7 +107,7 @@ export const listMangaCustom = async (organizationId: number, filters: MangaCust
 			chapters: {
 				select: {
 					number: true,
-					createdAt: true,
+					releasedAt: true,
 				},
 				orderBy: {
 					number: 'desc',
@@ -114,8 +116,8 @@ export const listMangaCustom = async (organizationId: number, filters: MangaCust
 			},
 		},
 		...(order || {}),
-		skip: filters?.page ? (parseInt(filters?.page || "1") - 1) * parseInt(filters?.limit || "10") : 0,
-		take: parseInt(filters?.limit || "10"),
+		skip: filters?.page ? (Number.parseInt(filters?.page || "1") - 1) * Number.parseInt(filters?.limit || "10") : 0,
+		take: Number.parseInt(filters?.limit || "10"),
 	});
 
 	const total = await prisma.mangaCustom.count({
@@ -140,7 +142,7 @@ export const listMangaCustom = async (organizationId: number, filters: MangaCust
 
 	return {
 		data: mangasCustoms.map(prepareCustomManga),
-		maxPage: Math.ceil(total / parseInt(filters?.limit || "10")),
+		maxPage: Math.ceil(total / Number.parseInt(filters?.limit || "10")),
 		total,
-	}
+	};
 };

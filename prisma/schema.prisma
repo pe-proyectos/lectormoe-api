@@ -97,6 +97,7 @@ model Member {
 
   // ## Permissions
   // Organization
+  canSeeAdminPanel      Boolean @default(false)
   canEditOrganization   Boolean @default(false)
   canDeleteOrganization Boolean @default(false)
   // Organization Members
@@ -138,16 +139,51 @@ model Member {
   @@map("member")
 }
 
-model Subscription {
-  id             Int @id @default(autoincrement())
-  organizationId Int
-  userId         Int
+model SubscriptionModel {
+  id Int @id @default(autoincrement())
+
+  title                 String  @db.VarChar(256)
+  description           String? @db.Text
+  benefits              String? @db.Text
+  readAnticipationHours Int
+  monthlyPrice          Float
+  yearlyPrice           Float
+  discountMonthlyPrice  Float
+  discountYearlyPrice   Float
+  active                Boolean @default(false)
 
   createdAt DateTime @default(now()) @db.Timestamp
   updatedAt DateTime @updatedAt
 
-  organization Organization @relation(fields: [organizationId], references: [id])
-  user         User         @relation(fields: [userId], references: [id])
+  subscriptions Subscription[]
+
+  @@map("subscription_model")
+}
+
+model Subscription {
+  id                  Int @id @default(autoincrement())
+  organizationId      Int
+  userId              Int
+  subscriptionModelId Int
+
+  expiresAt               DateTime  @db.Timestamp
+  active                  Boolean   @default(false)
+  autoRenew               Boolean   @default(false)
+  autoRenewAt             DateTime? @db.Timestamp
+  autoRenewCanceledReason String?   @db.Text
+  note                    String?
+  paymentMethod           String?   @db.VarChar(256)
+  payingMonthly           Boolean   @default(false)
+  payingYearly            Boolean   @default(false)
+  payingMonthlyAmount     Float
+  payingYearlyAmount      Float
+
+  createdAt DateTime @default(now()) @db.Timestamp
+  updatedAt DateTime @updatedAt
+
+  organization      Organization      @relation(fields: [organizationId], references: [id])
+  user              User              @relation(fields: [userId], references: [id])
+  subscriptionModel SubscriptionModel @relation(fields: [subscriptionModelId], references: [id])
 
   @@unique([organizationId, userId])
   @@map("subscription")
@@ -249,10 +285,11 @@ model Chapter {
   mangaCustomId Int
 
   number         Float
-  title          String  @db.VarChar(256)
-  imageUrl       String? @db.VarChar(256)
-  views          Int     @default(0)
-  isSubscription Boolean @default(false)
+  title          String   @db.VarChar(256)
+  imageUrl       String?  @db.VarChar(256)
+  views          Int      @default(0)
+  isSubscription Boolean  @default(false)
+  releasedAt     DateTime @default(now()) @db.Timestamp
 
   createdAt DateTime @default(now()) @db.Timestamp
   updatedAt DateTime @updatedAt
