@@ -10,16 +10,9 @@ export const router = () => new Elysia()
         async ({ organizationId, user, params: { mangaSlug, chapterNumber, pageNumber } }) => {
             const view = await saveUserChapterHistory(organizationId, user.id, mangaSlug, chapterNumber, pageNumber);
 
-            if (!view) {
-                return {
-                    status: true,
-                    data: false,
-                };
-            }
-
             return {
                 status: true,
-                data: true,
+                data: !!view,
             };
         },
         {

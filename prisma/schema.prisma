@@ -379,13 +379,16 @@ model Analytics {
   organizationId Int?
   userId         Int?
 
-  path          String
-  ip            String
-  browser       String?
-  language      String?
-  deviceType    String?
-  trafficSource String?
-  payload       Json?
+  ip           String?
+  event        String?
+  path         String?
+  userAgent    String?
+  screenWidth  Int?
+  screenHeight Int?
+  browser      String?
+  deviceType   String?
+  capturedAt   DateTime @default(now()) @db.Timestamp
+  payload      Json?
 
   createdAt DateTime @default(now()) @db.Timestamp
   updatedAt DateTime @updatedAt
@@ -393,7 +396,6 @@ model Analytics {
   organization Organization? @relation(fields: [organizationId], references: [id])
   user         User?         @relation(fields: [userId], references: [id])
 
-  @@unique([organizationId, userId])
   @@map("analytics")
 }
 
