@@ -23,5 +23,10 @@ export const router = () => new Elysia()
                 status: t.Boolean(),
                 data: t.Any(),
             }),
+            transform({ query }) {
+                if (query.include_finished) {
+                    query.include_finished = query?.include_finished?.toString() === 'true'
+                }
+            },
         }
     );
