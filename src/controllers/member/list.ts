@@ -50,6 +50,12 @@ export const listMember = async (organizationId: number, filters: MemberListQuer
 		select: {
 			id: true,
 			role: true,
+			subscriptions: {
+				select: {
+					id: true,
+					active: true,
+				}
+			},
 			user: {
 				select: {
 					id: true,

@@ -32,13 +32,12 @@ model User {
   createdAt DateTime @default(now()) @db.Timestamp
   updatedAt DateTime @updatedAt
 
-  rankings      Ranking[]
-  tokens        Token[]
-  members       Member[]
-  analytics     Analytics[]
-  history       UserChapterHistory[]
-  invitations   Invitation[]
-  subscriptions Subscription[]
+  rankings    Ranking[]
+  tokens      Token[]
+  members     Member[]
+  analytics   Analytics[]
+  history     UserChapterHistory[]
+  invitations Invitation[]
 
   @@map("user")
 }
@@ -75,12 +74,12 @@ model Organization {
   createdAt DateTime @default(now()) @db.Timestamp
   updatedAt DateTime @updatedAt
 
-  members       Member[]
-  mangaCustoms  MangaCustom[]
-  genres        Genre[]
-  analytics     Analytics[]
-  invitations   Invitation[]
-  subscriptions Subscription[]
+  members            Member[]
+  mangaCustoms       MangaCustom[]
+  genres             Genre[]
+  analytics          Analytics[]
+  invitations        Invitation[]
+  subscriptionModels SubscriptionModel[]
 
   @@map("organization")
 }
@@ -97,33 +96,41 @@ model Member {
 
   // ## Permissions
   // Organization
-  canSeeAdminPanel      Boolean @default(false)
-  canEditOrganization   Boolean @default(false)
-  canDeleteOrganization Boolean @default(false)
+  canSeeAdminPanel           Boolean @default(false)
+  canEditOrganization        Boolean @default(false)
+  canDeleteOrganization      Boolean @default(false)
   // Organization Members
-  canInviteMember       Boolean @default(false)
-  canEditMember         Boolean @default(false)
-  canDeleteMember       Boolean @default(false)
+  canInviteMember            Boolean @default(false)
+  canEditMember              Boolean @default(false)
+  canDeleteMember            Boolean @default(false)
   // Author
-  canCreateAuthor       Boolean @default(false)
+  canCreateAuthor            Boolean @default(false)
   // Manga Profile
-  canCreateMangaProfile Boolean @default(false)
+  canCreateMangaProfile      Boolean @default(false)
   // Manga Custom
-  canCreateMangaCustom  Boolean @default(false)
-  canEditMangaCustom    Boolean @default(false)
-  canDeleteMangaCustom  Boolean @default(false)
+  canCreateMangaCustom       Boolean @default(false)
+  canEditMangaCustom         Boolean @default(false)
+  canDeleteMangaCustom       Boolean @default(false)
   // Genre
-  canCreateGenre        Boolean @default(false)
-  canEditGenre          Boolean @default(false)
-  canDeleteGenre        Boolean @default(false)
+  canCreateGenre             Boolean @default(false)
+  canEditGenre               Boolean @default(false)
+  canDeleteGenre             Boolean @default(false)
   // Chapter
-  canCreateChapter      Boolean @default(false)
-  canEditChapter        Boolean @default(false)
-  canDeleteChapter      Boolean @default(false)
+  canCreateChapter           Boolean @default(false)
+  canEditChapter             Boolean @default(false)
+  canDeleteChapter           Boolean @default(false)
   // Pages
-  canCreatePage         Boolean @default(false)
-  canEditPage           Boolean @default(false)
-  canDeletePage         Boolean @default(false)
+  canCreatePage              Boolean @default(false)
+  canEditPage                Boolean @default(false)
+  canDeletePage              Boolean @default(false)
+  // Subscription
+  canCreateSubscription      Boolean @default(false)
+  canEditSubscription        Boolean @default(false)
+  canDeleteSubscription      Boolean @default(false)
+  // Subscription Model
+  canCreateSubscriptionModel Boolean @default(false)
+  canEditSubscriptionModel   Boolean @default(false)
+  canDeleteSubscriptionModel Boolean @default(false)
   // ## / Permissions
 
   createdAt DateTime @default(now()) @db.Timestamp
@@ -132,15 +139,17 @@ model Member {
   organization Organization @relation(fields: [organizationId], references: [id])
   user         User         @relation(fields: [userId], references: [id])
 
-  news   News[]
-  audits Audit[]
+  news          News[]
+  audits        Audit[]
+  subscriptions Subscription[]
 
   @@unique([organizationId, userId])
   @@map("member")
 }
 
 model SubscriptionModel {
-  id Int @id @default(autoincrement())
+  id             Int @id @default(autoincrement())
+  organizationId Int
 
   title                 String  @db.VarChar(256)
   description           String? @db.Text
@@ -156,14 +165,14 @@ model SubscriptionModel {
   updatedAt DateTime @updatedAt
 
   subscriptions Subscription[]
+  organization  Organization   @relation(fields: [organizationId], references: [id])
 
   @@map("subscription_model")
 }
 
 model Subscription {
   id                  Int @id @default(autoincrement())
-  organizationId      Int
-  userId              Int
+  memberId            Int
   subscriptionModelId Int
 
   expiresAt               DateTime  @db.Timestamp
@@ -181,11 +190,9 @@ model Subscription {
   createdAt DateTime @default(now()) @db.Timestamp
   updatedAt DateTime @updatedAt
 
-  organization      Organization      @relation(fields: [organizationId], references: [id])
-  user              User              @relation(fields: [userId], references: [id])
+  member            Member            @relation(fields: [memberId], references: [id])
   subscriptionModel SubscriptionModel @relation(fields: [subscriptionModelId], references: [id])
 
-  @@unique([organizationId, userId])
   @@map("subscription")
 }
 
