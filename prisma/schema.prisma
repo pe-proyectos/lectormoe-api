@@ -74,12 +74,12 @@ model Organization {
   createdAt DateTime @default(now()) @db.Timestamp
   updatedAt DateTime @updatedAt
 
-  members            Member[]
-  mangaCustoms       MangaCustom[]
-  genres             Genre[]
-  analytics          Analytics[]
-  invitations        Invitation[]
-  subscriptionModels SubscriptionModel[]
+  members      Member[]
+  mangaCustoms MangaCustom[]
+  genres       Genre[]
+  analytics    Analytics[]
+  invitations  Invitation[]
+  coinPacks    CoinPack[]
 
   @@map("organization")
 }
@@ -89,6 +89,7 @@ model Member {
   organizationId Int
   userId         Int
 
+  coins       Int     @default(0)
   role        String  @db.VarChar(256)
   description String? @db.Text
 
@@ -96,41 +97,37 @@ model Member {
 
   // ## Permissions
   // Organization
-  canSeeAdminPanel           Boolean @default(false)
-  canEditOrganization        Boolean @default(false)
-  canDeleteOrganization      Boolean @default(false)
+  canSeeAdminPanel      Boolean @default(false)
+  canEditOrganization   Boolean @default(false)
+  canDeleteOrganization Boolean @default(false)
   // Organization Members
-  canInviteMember            Boolean @default(false)
-  canEditMember              Boolean @default(false)
-  canDeleteMember            Boolean @default(false)
+  canInviteMember       Boolean @default(false)
+  canEditMember         Boolean @default(false)
+  canDeleteMember       Boolean @default(false)
   // Author
-  canCreateAuthor            Boolean @default(false)
+  canCreateAuthor       Boolean @default(false)
   // Manga Profile
-  canCreateMangaProfile      Boolean @default(false)
+  canCreateMangaProfile Boolean @default(false)
   // Manga Custom
-  canCreateMangaCustom       Boolean @default(false)
-  canEditMangaCustom         Boolean @default(false)
-  canDeleteMangaCustom       Boolean @default(false)
+  canCreateMangaCustom  Boolean @default(false)
+  canEditMangaCustom    Boolean @default(false)
+  canDeleteMangaCustom  Boolean @default(false)
   // Genre
-  canCreateGenre             Boolean @default(false)
-  canEditGenre               Boolean @default(false)
-  canDeleteGenre             Boolean @default(false)
+  canCreateGenre        Boolean @default(false)
+  canEditGenre          Boolean @default(false)
+  canDeleteGenre        Boolean @default(false)
   // Chapter
-  canCreateChapter           Boolean @default(false)
-  canEditChapter             Boolean @default(false)
-  canDeleteChapter           Boolean @default(false)
+  canCreateChapter      Boolean @default(false)
+  canEditChapter        Boolean @default(false)
+  canDeleteChapter      Boolean @default(false)
   // Pages
-  canCreatePage              Boolean @default(false)
-  canEditPage                Boolean @default(false)
-  canDeletePage              Boolean @default(false)
-  // Subscription
-  canCreateSubscription      Boolean @default(false)
-  canEditSubscription        Boolean @default(false)
-  canDeleteSubscription      Boolean @default(false)
-  // Subscription Model
-  canCreateSubscriptionModel Boolean @default(false)
-  canEditSubscriptionModel   Boolean @default(false)
-  canDeleteSubscriptionModel Boolean @default(false)
+  canCreatePage         Boolean @default(false)
+  canEditPage           Boolean @default(false)
+  canDeletePage         Boolean @default(false)
+  // Coin Pack
+  canCreateCoinPack     Boolean @default(false)
+  canEditCoinPack       Boolean @default(false)
+  canDeleteCoinPack     Boolean @default(false)
   // ## / Permissions
 
   createdAt DateTime @default(now()) @db.Timestamp
@@ -139,61 +136,57 @@ model Member {
   organization Organization @relation(fields: [organizationId], references: [id])
   user         User         @relation(fields: [userId], references: [id])
 
-  news          News[]
-  audits        Audit[]
-  subscriptions Subscription[]
+  news            News[]
+  audits          Audit[]
+  coinPackHistory CoinPackHistory[]
 
   @@unique([organizationId, userId])
   @@map("member")
 }
 
-model SubscriptionModel {
+model CoinPack {
   id             Int @id @default(autoincrement())
   organizationId Int
 
-  title                 String  @db.VarChar(256)
-  description           String? @db.Text
-  benefits              String? @db.Text
-  readAnticipationHours Int
-  monthlyPrice          Float
-  yearlyPrice           Float
-  discountMonthlyPrice  Float
-  discountYearlyPrice   Float
-  active                Boolean @default(false)
+  name                 String  @db.VarChar(256)
+  slug                 String  @db.VarChar(256)
+  description          String? @db.Text
+  priceWithoutDiscount Float
+  price                Float
+  coins                Int
+  active               Boolean @default(false)
 
   createdAt DateTime @default(now()) @db.Timestamp
   updatedAt DateTime @updatedAt
 
-  subscriptions Subscription[]
-  organization  Organization   @relation(fields: [organizationId], references: [id])
+  organization Organization @relation(fields: [organizationId], references: [id])
 
-  @@map("subscription_model")
+  @@unique([organizationId, slug])
+  @@map("coin_pack")
 }
 
-model Subscription {
-  id                  Int @id @default(autoincrement())
-  memberId            Int
-  subscriptionModelId Int
+model CoinPackHistory {
+  id       Int @id @default(autoincrement())
+  memberId Int
 
-  expiresAt               DateTime  @db.Timestamp
-  active                  Boolean   @default(false)
-  autoRenew               Boolean   @default(false)
-  autoRenewAt             DateTime? @db.Timestamp
-  autoRenewCanceledReason String?   @db.Text
-  note                    String?
-  paymentMethod           String?   @db.VarChar(256)
-  payingMonthly           Boolean   @default(false)
-  payingYearly            Boolean   @default(false)
-  payingMonthlyAmount     Float
-  payingYearlyAmount      Float
+  boughtAt                     DateTime @default(now()) @db.Timestamp
+  coinPackName                 String?  @db.VarChar(256)
+  coinPackSlug                 String?  @db.VarChar(256)
+  coinPackDescription          String?  @db.Text
+  coinPackPriceWithoutDiscount Float?
+  coinPackPrice                Float?
+  coinPackCoins                Int?
+  coinPackActive               Boolean  @default(false)
+
+  paymentMethod String? @db.VarChar(256)
+  metadata      String? @db.Text
 
   createdAt DateTime @default(now()) @db.Timestamp
   updatedAt DateTime @updatedAt
 
-  member            Member            @relation(fields: [memberId], references: [id])
-  subscriptionModel SubscriptionModel @relation(fields: [subscriptionModelId], references: [id])
+  member Member @relation(fields: [memberId], references: [id])
 
-  @@map("subscription")
+  @@map("coin_pack_history")
 }
 
 model Invitation {
