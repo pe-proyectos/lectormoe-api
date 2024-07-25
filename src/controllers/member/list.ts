@@ -24,6 +24,12 @@ export const listMember = async (organizationId: number, filters: MemberListQuer
 				createdAt: 'desc',
 			},
 		},
+		[OrderEnum.COINS_ASC]: {
+			coins: 'asc',
+		},
+		[OrderEnum.COINS_DESC]: {
+			coins: 'desc',
+		},
 	};
 	const where: Prisma.MemberWhereInput = {};
 	if (filters?.email) {
@@ -50,10 +56,17 @@ export const listMember = async (organizationId: number, filters: MemberListQuer
 		select: {
 			id: true,
 			role: true,
-			subscriptions: {
+			coins: true,
+			coinPackHistory: {
 				select: {
-					id: true,
-					active: true,
+					boughtAt: true,
+					coinPackName: true,
+					coinPackSlug: true,
+					paymentMethod: true,
+					coinPackPrice: true,
+					coinPackCoins: true,
+					coinPackDescription: true,
+					coinPackPriceWithoutDiscount: true,
 				}
 			},
 			user: {
