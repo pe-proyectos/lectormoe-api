@@ -21,27 +21,6 @@ model Token {
   @@map("token")
 }
 
-model User {
-  id Int @id @default(autoincrement())
-
-  username String @unique @db.VarChar(256)
-  slug     String @unique @db.VarChar(256)
-  email    String @unique @db.VarChar(256)
-  password String @db.VarChar(256)
-
-  createdAt DateTime @default(now()) @db.Timestamp
-  updatedAt DateTime @updatedAt
-
-  rankings    Ranking[]
-  tokens      Token[]
-  members     Member[]
-  analytics   Analytics[]
-  history     UserChapterHistory[]
-  invitations Invitation[]
-
-  @@map("user")
-}
-
 model Organization {
   id Int @id @default(autoincrement())
 
@@ -75,6 +54,7 @@ model Organization {
   updatedAt DateTime @updatedAt
 
   members      Member[]
+  users      User[]
   mangaCustoms MangaCustom[]
   genres       Genre[]
   analytics    Analytics[]
@@ -82,6 +62,34 @@ model Organization {
   coinPacks    CoinPack[]
 
   @@map("organization")
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  organizationId Int
+
+  username String @db.VarChar(256)
+  slug     String @db.VarChar(256)
+  email    String @db.VarChar(256)
+  password String @db.VarChar(256)
+
+  createdAt DateTime @default(now()) @db.Timestamp
+  updatedAt DateTime @updatedAt
+
+  rankings    Ranking[]
+  tokens      Token[]
+  members     Member[]
+  analytics   Analytics[]
+  history     UserChapterHistory[]
+  invitations Invitation[]
+
+  organization Organization @relation(fields: [organizationId], references: [id])
+
+  @@unique([organizationId, username])
+  @@unique([organizationId, slug])
+  @@unique([organizationId, email])
+
+  @@map("user")
 }
 
 model Member {

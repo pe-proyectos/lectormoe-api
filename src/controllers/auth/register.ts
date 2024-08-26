@@ -4,16 +4,16 @@ import { prisma } from "../../models/prisma";
 
 
 export const register = async (organizationId: number, email: string, username: string, password: string) => {
-	const userEmailExists = await prisma.user.findFirst({ where: { email } });
+	const userEmailExists = await prisma.user.findFirst({ where: { email, organizationId } });
 	if (userEmailExists) {
 		throw new Error("El correo ya está en uso.");
     }
-    const userUsernameExists = await prisma.user.findFirst({ where: { username } });
+    const userUsernameExists = await prisma.user.findFirst({ where: { username, organizationId } });
     if (userUsernameExists) {
         throw new Error("El nombre de usuario ya está en uso.");
     }
     const userSlug = slug(username);
-    const userSlugExists = await prisma.user.findFirst({ where: { slug: userSlug } });
+    const userSlugExists = await prisma.user.findFirst({ where: { slug: userSlug, organizationId } });
     if (userSlugExists) {
         throw new Error("El nombre de usuario ya está en uso.");
     }
@@ -24,6 +24,7 @@ export const register = async (organizationId: number, email: string, username: 
             username,
             slug: userSlug,
             password: hashedPassword,
+            organizationId,
         },
         select: {
             id: true,
