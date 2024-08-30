@@ -22,6 +22,7 @@ export const editMangaCustom = async (organizationId: number, mangaSlug: string,
 			id: mangaCustom.id,
 		},
 		data: {
+			status: params.status,
 			title: params.title,
 			shortDescription: params.shortDescription,
 			description: params.description,

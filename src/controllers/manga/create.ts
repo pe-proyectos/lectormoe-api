@@ -44,6 +44,7 @@ export const createManga = async (params: CreateMangaRequest) => {
 		data: {
 			title: params.title,
 			slug,
+			bookTypeId: params.bookTypeId,
 			shortDescription: params.shortDescription,
 			description: params.description,
 			demographyId: params.demographyId,

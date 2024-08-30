@@ -31,6 +31,12 @@ export const router = () => new Elysia()
                 data: t.Any(),
             }),
             transform({ body }) {
+                if (typeof body.enableMangaSection === 'string')
+                    body.enableMangaSection = body.enableMangaSection === 'true';
+                if (typeof body.enableManhuaSection === 'string')
+                    body.enableManhuaSection = body.enableManhuaSection === 'true';
+                if (typeof body.enableManhwaSection === 'string')
+                    body.enableManhwaSection = body.enableManhwaSection === 'true';
                 if (typeof body.enableGoogleAds === 'string')
                     body.enableGoogleAds = body.enableGoogleAds === 'true';
                 if (typeof body.enableDisqusIntegration === 'string')
