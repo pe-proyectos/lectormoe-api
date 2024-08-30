@@ -34,6 +34,12 @@ model Organization {
   bannerUrl   String? @db.Text
   faviconUrl  String? @db.Text
 
+  language String @default("es") @db.VarChar(2)
+
+  enableMangaSection  Boolean @default(true)
+  enableManhuaSection Boolean @default(false)
+  enableManhwaSection Boolean @default(false)
+
   enableGoogleAds        Boolean @default(false)
   googleAdsMetaContent   String? @db.Text
   googleAdsAdsTxtContent String? @db.Text
@@ -54,7 +60,7 @@ model Organization {
   updatedAt DateTime @updatedAt
 
   members      Member[]
-  users      User[]
+  users        User[]
   mangaCustoms MangaCustom[]
   genres       Genre[]
   analytics    Analytics[]
@@ -65,7 +71,7 @@ model Organization {
 }
 
 model User {
-  id Int @id @default(autoincrement())
+  id             Int @id @default(autoincrement())
   organizationId Int
 
   username String @db.VarChar(256)
@@ -88,7 +94,6 @@ model User {
   @@unique([organizationId, username])
   @@unique([organizationId, slug])
   @@unique([organizationId, email])
-
   @@map("user")
 }
 
@@ -232,9 +237,20 @@ model Author {
   @@map("author")
 }
 
+model BookType {
+  id Int @id @default(autoincrement())
+
+  name              String  @unique @db.VarChar(256)
+  default_read_type String?
+  Manga             Manga[]
+
+  @@map("book_type")
+}
+
 model Manga {
   id           Int @id @default(autoincrement())
   demographyId Int
+  bookTypeId   Int
 
   title            String    @unique @db.VarChar(256)
   slug             String    @unique @db.VarChar(256)
@@ -251,6 +267,7 @@ model Manga {
   authors Author[]
   custom  MangaCustom[]
 
+  bookType   BookType   @relation(fields: [bookTypeId], references: [id])
   demography Demography @relation(fields: [demographyId], references: [id])
 
   @@map("manga")

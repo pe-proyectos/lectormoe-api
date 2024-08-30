@@ -5,6 +5,10 @@ export const EditOrganizationRequest = t.Object({
     name: t.Optional(t.String()),
     title: t.Optional(t.String()),
     description: t.Optional(t.String()),
+    language: t.Optional(t.String()),
+    enableMangaSection: t.Optional(t.Boolean()),
+    enableManhuaSection: t.Optional(t.Boolean()),
+    enableManhwaSection: t.Optional(t.Boolean()),
     // Integrations
     enableGoogleAds: t.Optional(t.Boolean()),
     enableDisqusIntegration: t.Optional(t.Boolean()),
