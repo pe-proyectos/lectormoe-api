@@ -84,8 +84,19 @@ export const listMangaCustom = async (organizationId: number, filters: MangaCust
 		};
 	}
 
+	if (filters.type) {
+		order
+	}
+
 	const mangasCustoms = await prisma.mangaCustom.findMany({
 		where: {
+			...(filters.type ? {
+				manga: {
+					bookType: {
+						code: filters.type
+					}
+				}
+			} : {}),
 			organization: {
 				id: organizationId,
 			},
