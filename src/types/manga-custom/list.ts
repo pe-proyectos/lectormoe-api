@@ -7,11 +7,18 @@ export enum OrderEnum {
     LATEST = 'latest',
 }
 
+export enum BookTypeCodeEnum {
+    MANGA = 'manga',
+    MANHUA = 'manhua',
+    MANHWA = 'manhwa',
+}
+
 export const MangaCustomListQuery = t.Object({
     title: t.Optional(t.String()),
     shortDescription: t.Optional(t.String()),
     description: t.Optional(t.String()),
     order: t.Optional(t.Enum(OrderEnum)),
+    type: t.Optional(t.Enum(BookTypeCodeEnum)),
     ...PaginationQuery.properties,
 });
 

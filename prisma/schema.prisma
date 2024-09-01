@@ -240,7 +240,8 @@ model Author {
 model BookType {
   id Int @id @default(autoincrement())
 
-  name              String  @unique @db.VarChar(256)
+  code              String  @unique @db.VarChar(256)
+  name              String  @db.VarChar(256)
   default_read_type String?
   Manga             Manga[]
 
