@@ -15,6 +15,7 @@ export const getMangaCustomBySlug = async (organizationId: number, mangaSlug: st
 				include: {
 					authors: true,
 					demography: true,
+					bookType: true,
 				}
 			},
 			chapters: {
