@@ -24,8 +24,8 @@ model Token {
 model Organization {
   id Int @id @default(autoincrement())
 
-  name        String  @unique @db.VarChar(256)
-  title       String  @unique @db.VarChar(256)
+  name        String  @db.VarChar(256)
+  title       String  @db.VarChar(256)
   domain      String  @unique @db.VarChar(256)
   slug        String  @unique @db.VarChar(256)
   description String? @db.Text
