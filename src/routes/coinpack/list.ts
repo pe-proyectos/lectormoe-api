@@ -22,18 +22,7 @@ export const router = () => new Elysia()
             response: t.Object({
                 status: t.Boolean(),
                 data: t.Object({
-                    data: t.Array(t.Object({
-                        id: t.Number(),
-                        name: t.String(),
-                        slug: t.String(),
-                        description: t.Optional(t.String()),
-                        priceWithoutDiscount: t.Number(),
-                        price: t.Number(),
-                        coins: t.Number(),
-                        active: t.Boolean(),
-                        createdAt: t.String(),
-                        updatedAt: t.String(),
-                    })),
+                    data: t.Array(t.Any()),
                     maxPage: t.Number(),
                     total: t.Number(),
                 }),
