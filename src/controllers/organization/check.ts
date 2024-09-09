@@ -4,6 +4,9 @@ export const checkOrganization = async (domain: string) => {
     return await prisma.organization.findFirst({
         where: {
             domain,
+        },
+        include: {
+            countryOptions: true,
         }
     });
 }

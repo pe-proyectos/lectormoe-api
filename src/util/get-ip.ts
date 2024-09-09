@@ -30,5 +30,5 @@ export const getIP = (headers: Headers, checkHeaders: IPHeaders[] = headersToChe
         clientIP = headers.get(header);
         if (clientIP) break;
     }
-    return clientIP;
+    return clientIP || "0.0.0.0";
 }

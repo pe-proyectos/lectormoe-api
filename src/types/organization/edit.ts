@@ -9,10 +9,20 @@ export const EditOrganizationRequest = t.Object({
     enableMangaSection: t.Optional(t.Boolean()),
     enableManhuaSection: t.Optional(t.Boolean()),
     enableManhwaSection: t.Optional(t.Boolean()),
+    useBlockedCountries: t.Optional(t.Boolean()),
+    useAllowedCountries: t.Optional(t.Boolean()),
+    countryOptions: t.Array(t.Object({
+        countryCode: t.String(),
+        language: t.String(),
+        countryName: t.String(),
+        allowed: t.Boolean(),
+        blocked: t.Boolean(),
+    })),
     // Integrations
     enableGoogleAds: t.Optional(t.Boolean()),
     enableDisqusIntegration: t.Optional(t.Boolean()),
     disqusEmbedUrl: t.Optional(t.String()),
+    monitorWebsiteId: t.Optional(t.String()),
     // Social
     facebookUrl: t.Optional(t.String()),
     twitterUrl: t.Optional(t.String()),

@@ -41,6 +41,12 @@ export const router = () => new Elysia()
                     body.enableGoogleAds = body.enableGoogleAds === 'true';
                 if (typeof body.enableDisqusIntegration === 'string')
                     body.enableDisqusIntegration = body.enableDisqusIntegration === 'true';
+                if (typeof body.useBlockedCountries === 'string')
+                    body.useBlockedCountries = body.useBlockedCountries === 'true';
+                if (typeof body.useAllowedCountries === 'string')
+                    body.useAllowedCountries = body.useAllowedCountries === 'true';
+                if (body.countryOptions)
+                    body.countryOptions = JSON.parse(body.countryOptions as unknown as string);
             },
         }
     );

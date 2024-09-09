@@ -63,20 +63,18 @@ export const editMangaCustom = async (organizationId: number, mangaSlug: string,
 		});
 	}
 
-	if (params.genreIds) {
-		await prisma.mangaCustom.update({
-			where: {
-				id: mangaCustom.id,
+	await prisma.mangaCustom.update({
+		where: {
+			id: mangaCustom.id,
+		},
+		data: {
+			genres: {
+				set: params?.genreIds?.map(genreId => ({
+					id: genreId,
+				})) || [],
 			},
-			data: {
-				genres: {
-					connect: params.genreIds.map(genreId => ({
-						id: genreId,
-					})),
-				},
-			},
-		});
-	}
+		},
+	});
 
 	return await prisma.mangaCustom.findFirst({ where: { id: mangaCustom.id } });
 };
