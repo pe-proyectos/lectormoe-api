@@ -26,6 +26,9 @@ export const editOrganization = async (organizationId: number, params: EditOrgan
 			tiktokUrl: params.tiktokUrl,
 			discordUrl: params.discordUrl,
 			twitchUrl: params.twitchUrl,
+			useBlockedCountries: params.useBlockedCountries,
+			useAllowedCountries: params.useAllowedCountries,
+			monitorWebsiteId: params.monitorWebsiteId,
 			...params.logo && params.logo instanceof File ? {} : {
 				logoUrl: params.logo === "null" ? null : params.logo,
 			},
@@ -91,6 +94,26 @@ export const editOrganization = async (organizationId: number, params: EditOrgan
 				faviconUrl,
 			},
 		});
+	}
+
+	if (params.countryOptions) {
+		await prisma.countryOptions.deleteMany({
+			where: {
+				organizationId,
+			},
+		});
+		for (const countryOption of params.countryOptions) {
+			await prisma.countryOptions.create({
+				data: {
+					organizationId,
+					countryCode: countryOption.countryCode,
+					language: countryOption.language,
+					countryName: countryOption.countryName,
+					allowed: countryOption.allowed,
+					blocked: countryOption.blocked,
+				},
+			});
+		}
 	}
 
 	return await prisma.organization.findUnique({

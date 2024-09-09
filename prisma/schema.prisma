@@ -24,15 +24,17 @@ model Token {
 model Organization {
   id Int @id @default(autoincrement())
 
-  name        String  @db.VarChar(256)
-  title       String  @db.VarChar(256)
-  domain      String  @unique @db.VarChar(256)
-  slug        String  @unique @db.VarChar(256)
-  description String? @db.Text
-  logoUrl     String? @db.Text
-  imageUrl    String? @db.Text
-  bannerUrl   String? @db.Text
-  faviconUrl  String? @db.Text
+  name                String  @db.VarChar(256)
+  title               String  @db.VarChar(256)
+  domain              String  @unique @db.VarChar(256)
+  slug                String  @unique @db.VarChar(256)
+  description         String? @db.Text
+  logoUrl             String? @db.Text
+  imageUrl            String? @db.Text
+  bannerUrl           String? @db.Text
+  faviconUrl          String? @db.Text
+  useBlockedCountries Boolean @default(false)
+  useAllowedCountries Boolean @default(false)
 
   language String @default("es") @db.VarChar(2)
 
@@ -56,16 +58,19 @@ model Organization {
   discordUrl   String? @db.Text
   twitchUrl    String? @db.Text
 
+  monitorWebsiteId String? @db.Text
+
   createdAt DateTime @default(now()) @db.Timestamp
   updatedAt DateTime @updatedAt
 
-  members      Member[]
-  users        User[]
-  mangaCustoms MangaCustom[]
-  genres       Genre[]
-  analytics    Analytics[]
-  invitations  Invitation[]
-  coinPacks    CoinPack[]
+  members        Member[]
+  users          User[]
+  mangaCustoms   MangaCustom[]
+  genres         Genre[]
+  analytics      Analytics[]
+  invitations    Invitation[]
+  coinPacks      CoinPack[]
+  countryOptions CountryOptions[]
 
   @@map("organization")
 }
@@ -155,6 +160,27 @@ model Member {
 
   @@unique([organizationId, userId])
   @@map("member")
+}
+
+model CountryOptions {
+  id Int @id @default(autoincrement())
+
+  organizationId Int
+
+  countryCode String @db.VarChar(2)
+  language    String @db.VarChar(2)
+  countryName String @db.VarChar(256)
+
+  allowed Boolean @default(true)
+  blocked Boolean @default(false)
+
+  createdAt DateTime @default(now()) @db.Timestamp
+  updatedAt DateTime @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id])
+
+  @@unique([organizationId, countryCode])
+  @@map("country_options")
 }
 
 model CoinPack {
