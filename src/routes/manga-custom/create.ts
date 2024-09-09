@@ -38,6 +38,9 @@ export const router = () => new Elysia()
                 if (body.releasedAt) {
                     body.releasedAt = new Date(body.releasedAt);
                 }
+                if(body.genreIds) {
+                    body.genreIds = (body.genreIds as unknown as string).split(',').map(genreId => Number.parseInt(genreId.trim()));
+                }
             },
         }
     );

@@ -59,6 +59,13 @@ export const listMangaCustom = async (organizationId: number, filters: MangaCust
 					},
 					take: 2,
 				},
+				genres: {
+					select: {
+						id: true,
+						slug: true,
+						name: true,
+					}
+				},
 				viewsHistory: {
 					select: {
 						id: true,
@@ -124,6 +131,13 @@ export const listMangaCustom = async (organizationId: number, filters: MangaCust
 					number: 'desc',
 				},
 				take: 2,
+			},
+			genres: {
+				select: {
+					id: true,
+					slug: true,
+					name: true,
+				}
 			},
 		},
 		...(order || {}),

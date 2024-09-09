@@ -77,5 +77,20 @@ export const createMangaCustom = async (organizationId: number, params: CreateMa
 		});
 	}
 
+	if (params.genreIds) {
+		await prisma.mangaCustom.update({
+			where: {
+				id: mangaCustom.id,
+			},
+			data: {
+				genres: {
+					connect: params.genreIds.map(genreId => ({
+						id: genreId,
+					})),
+				},
+			},
+		});
+	}
+
 	return mangaCustom;
 };
