@@ -29,6 +29,7 @@
     "@types/ua-parser-js": "^0.7.39",
     "buffer-image-size": "^0.6.4",
     "canvas": "^2.11.2",
+    "cheerio": "^1.0.0",
     "elysia": "^1.0.0",
     "linkedom": "^0.16.10",
     "prisma": "5.11.0",

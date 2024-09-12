@@ -9,6 +9,7 @@ const prepareCustomManga = (mangaCustom: any) => {
 		lastChapters: mangaCustom.chapters,
 		manga: undefined,
 		chapters: undefined,
+		views: mangaCustom.chapters.reduce((acc: any, chapter: any) => acc + chapter.views, 0),
 	};
 	result.manga = undefined;
 	return result;
@@ -126,6 +127,7 @@ export const listMangaCustom = async (organizationId: number, filters: MangaCust
 				select: {
 					number: true,
 					releasedAt: true,
+					views: true,
 				},
 				orderBy: {
 					number: 'desc',
