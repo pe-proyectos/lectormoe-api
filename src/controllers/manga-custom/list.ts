@@ -9,7 +9,7 @@ const prepareCustomManga = (mangaCustom: any) => {
 		lastChapters: mangaCustom.chapters,
 		manga: undefined,
 		chapters: undefined,
-		views: mangaCustom.chapters.reduce((acc: any, chapter: any) => acc + chapter.views, 0),
+		views: mangaCustom.views + mangaCustom.chapters.reduce((acc: any, chapter: any) => acc + chapter.views, 0),
 	};
 	result.manga = undefined;
 	return result;
