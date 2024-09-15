@@ -53,10 +53,7 @@ export const listMember = async (organizationId: number, filters: MemberListQuer
 			...where,
 			organizationId,
 		},
-		select: {
-			id: true,
-			role: true,
-			coins: true,
+		include: {
 			coinPackHistory: {
 				select: {
 					boughtAt: true,
