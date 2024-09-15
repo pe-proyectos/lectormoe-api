@@ -876,8 +876,13 @@ const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 async function main() {
   console.log("starting...");
-
+  
   for (const project of projects) {
+    let file = await (await Bun.file("data.json")).json();
+    if ((file[project.title]?.chapters || []).every((_chapter: any) => _chapter?.pages?.length > 0)) {
+      console.log('already done', project.title);
+      continue;
+    }
     console.log(project);
     
     const html: string = await fetch(project.link, {
@@ -924,6 +929,11 @@ async function main() {
     let i = 0;
     for (const chapter of chapters) {
       i++;
+      file = await (await Bun.file("data.json")).json();
+      if ((file[project.title]?.chapters || []).find((_chapter: any) => _chapter.link === chapter.link)?.pages?.length > 0) {
+        console.log('already done', project.title, chapter.link);
+        continue;
+      }
       let uniqid;
       while (true) {
         console.log("attemping to get chapter...", chapter);
@@ -941,7 +951,7 @@ async function main() {
           break;
         }
 
-        // await wait(5000); // 30 seconds
+        await wait(5000); // 5 seconds
       }
 
       console.log({ uniqid });
@@ -964,7 +974,7 @@ async function main() {
       });
 
       console.log(pages);
-      const file = await (await Bun.file("data.json")).json();
+      file = await (await Bun.file("data.json")).json();
 
       if (!file[project.title]) {
         file[project.title] = {
@@ -987,6 +997,13 @@ async function main() {
           pages,
         });
       }
+
+      file[project.title].chapters = file[project.title].chapters.map((_chapter: any) => {
+        if (chapter.link === _chapter.link) {
+          _chapter.pages = pages;
+        }
+        return _chapter;
+      });
 
       await Bun.write("data.json", JSON.stringify(file, null, 2));
     }

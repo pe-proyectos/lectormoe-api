@@ -110,6 +110,7 @@ model Member {
   coins       Int     @default(0)
   role        String  @db.VarChar(256)
   description String? @db.Text
+  imageUrl    String? @db.Text
 
   hierarchyLevel Int @default(0)
 
