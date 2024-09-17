@@ -39,6 +39,8 @@ export const router = () => new Elysia()
                     body.enableManhwaSection = body.enableManhwaSection === 'true';
                 if (typeof body.enableGoogleAds === 'string')
                     body.enableGoogleAds = body.enableGoogleAds === 'true';
+                if (typeof body.enableAdsterraAds === 'string')
+                    body.enableAdsterraAds = body.enableAdsterraAds === 'true';
                 if (typeof body.enableDisqusIntegration === 'string')
                     body.enableDisqusIntegration = body.enableDisqusIntegration === 'true';
                 if (typeof body.useBlockedCountries === 'string')

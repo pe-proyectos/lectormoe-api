@@ -16,6 +16,7 @@ export const editOrganization = async (organizationId: number, params: EditOrgan
 			enableManhuaSection: params.enableManhuaSection,
 			enableManhwaSection: params.enableManhwaSection,
 			enableGoogleAds: params.enableGoogleAds,
+			enableAdsterraAds: params.enableAdsterraAds,
 			enableDisqusIntegration: params.enableDisqusIntegration,
 			disqusEmbedUrl: params.disqusEmbedUrl,
 			facebookUrl: params.facebookUrl,

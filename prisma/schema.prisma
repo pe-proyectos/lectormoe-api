@@ -46,6 +46,9 @@ model Organization {
   googleAdsMetaContent   String? @db.Text
   googleAdsAdsTxtContent String? @db.Text
 
+  enableAdsterraAds Boolean @default(false)
+  adsterraAdSource  String? @db.Text
+
   enableDisqusIntegration Boolean @default(false)
   disqusEmbedUrl          String? @db.Text
 
