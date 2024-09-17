@@ -20,6 +20,7 @@ export const EditOrganizationRequest = t.Object({
     })),
     // Integrations
     enableGoogleAds: t.Optional(t.Boolean()),
+    enableAdsterraAds: t.Optional(t.Boolean()),
     enableDisqusIntegration: t.Optional(t.Boolean()),
     disqusEmbedUrl: t.Optional(t.String()),
     monitorWebsiteId: t.Optional(t.String()),
