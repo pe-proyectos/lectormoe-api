@@ -20,9 +20,11 @@ export const listUserChapterHistory = async (organizationId: number, userId: num
 				select: {
 					title: true,
 					number: true,
+					imageUrl: true,
 					mangaCustom: {
 						select: {
 							title: true,
+							imageUrl: true,
 							manga: {
 								select: {
 									slug: true,
