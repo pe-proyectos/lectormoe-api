@@ -9,6 +9,8 @@ export const EditOrganizationRequest = t.Object({
     enableMangaSection: t.Optional(t.Boolean()),
     enableManhuaSection: t.Optional(t.Boolean()),
     enableManhwaSection: t.Optional(t.Boolean()),
+    enableMainSlider: t.Optional(t.Boolean()),
+    enableMainBanner: t.Optional(t.Boolean()),
     useBlockedCountries: t.Optional(t.Boolean()),
     useAllowedCountries: t.Optional(t.Boolean()),
     countryOptions: t.Array(t.Object({
