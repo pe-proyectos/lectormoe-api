@@ -41,6 +41,8 @@ model Organization {
   enableMangaSection  Boolean @default(true)
   enableManhuaSection Boolean @default(false)
   enableManhwaSection Boolean @default(false)
+  enableMainSlider    Boolean @default(false)
+  enableMainBanner    Boolean @default(false)
 
   enableGoogleAds        Boolean @default(false)
   googleAdsMetaContent   String? @db.Text
