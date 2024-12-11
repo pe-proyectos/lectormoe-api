@@ -1,18 +1,31 @@
 import { Elysia, t } from 'elysia';
 
-import { listUsers } from '../../controllers/user/list';
+import { listUser } from '../../controllers/user/list';
+import { UserListQuery } from '../../types/user/list';
+import { loggedUserOnly } from '../../plugins/auth';
 
 export const router = () => new Elysia()
+    .use(loggedUserOnly())
     .get(
-        '/api/users',
-        async () => {
-            const data = await listAuthor();
-            return { status: true, data };
+        '/api/user',
+        async ({ organizationId, user, query }) => {
+            if (!user.canSeeAdminPanel) {
+                throw new Error("No tiene permisos para ver los usuarios.");
+            }
+
+            const { data, maxPage, total } = await listUser(organizationId, query);
+            
+            return { status: true, data: {
+                data,
+                maxPage,
+                total,
+            } };
         },
         {
+            query: UserListQuery,
             response: t.Object({
                 status: t.Boolean(),
-                data: t.Array(t.Any()),
+                data: t.Any(),
             }),
         }
     );

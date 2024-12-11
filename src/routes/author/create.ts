@@ -2,14 +2,14 @@ import { Elysia, t } from 'elysia';
 
 import { CreateAuthorRequest } from '../../types/author/create';
 import { createAuthor } from '../../controllers/author/create';
-import { loggedMemberOnly } from '../../plugins/auth';
+import { loggedUserOnly } from '../../plugins/auth';
 
 export const router = () => new Elysia()
-    .use(loggedMemberOnly())
+    .use(loggedUserOnly())
     .post(
         '/api/author',
-        async ({ member, body }) => {
-            if (!member.canCreateAuthor) {
+        async ({ user, body }) => {
+            if (!user.canCreateAuthor) {
                 throw new Error("No tiene permisos para crear autores.");
             }
 

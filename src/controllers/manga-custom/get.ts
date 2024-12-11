@@ -37,7 +37,7 @@ export const getMangaCustomBySlug = async (organizationId: number, mangaSlug: st
 					rank: true,
 					comment: true,
 					createdAt: true,
-					user: {
+					User: {
 						select: {
 							username: true,
 						},

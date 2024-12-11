@@ -1,15 +1,15 @@
 import { Elysia, t } from 'elysia';
 
 import { editMangaCustom } from '../../controllers/manga-custom/edit';
-import { loggedMemberOnly } from '../../plugins/auth';
+import { loggedUserOnly } from '../../plugins/auth';
 import { EditMangaCustomRequest } from '../../types/manga-custom/edit';
 
 export const router = () => new Elysia()
-    .use(loggedMemberOnly())
+    .use(loggedUserOnly())
     .patch(
         '/api/manga-custom/:mangaSlug',
-        async ({ organizationId, member, body, params: { mangaSlug } }) => {
-            if (!member.canEditMangaCustom) {
+        async ({ organizationId, user, body, params: { mangaSlug } }) => {
+            if (!user.canEditMangaCustom) {
                 throw new Error("No tiene permisos para editar mangas custom.");
             }
 

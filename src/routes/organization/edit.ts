@@ -1,15 +1,15 @@
 import { Elysia, t } from 'elysia';
 
-import { loggedMemberOnly } from '../../plugins/auth';
+import { loggedUserOnly } from '../../plugins/auth';
 import { EditOrganizationRequest } from '../../types/organization/edit';
 import { editOrganization } from '../../controllers/organization/edit';
 
 export const router = () => new Elysia()
-    .use(loggedMemberOnly())
+    .use(loggedUserOnly())
     .patch(
         '/api/organization',
-        async ({ organizationId, member, body }) => {
-            if (!member.canEditOrganization) {
+        async ({ organizationId,user, body }) => {
+            if (!user.canEditOrganization) {
                 throw new Error("No tiene permisos para editar la organización.");
             }
 

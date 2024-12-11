@@ -1,15 +1,15 @@
 import { Elysia, t } from 'elysia';
 
-import { loggedMemberOnly } from '../../plugins/auth';
+import { loggedUserOnly } from '../../plugins/auth';
 import { listPages } from '../../controllers/pages/list';
 import { deletePage } from '../../controllers/pages/delete';
 
 export const router = () => new Elysia()
-    .use(loggedMemberOnly())
+    .use(loggedUserOnly())
     .delete(
         '/api/manga-custom/:mangaSlug/chapter/:chapterNumber/pages/:pageId',
-        async ({ organizationId, member, params: { mangaSlug, chapterNumber, pageId } }) => {
-            if (!member.canDeletePage) {
+        async ({ organizationId, user, params: { mangaSlug, chapterNumber, pageId } }) => {
+            if (!user.canDeletePage) {
                 throw new Error("No tiene permisos para eliminar páginas.");
             }
 

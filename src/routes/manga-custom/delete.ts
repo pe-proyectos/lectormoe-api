@@ -1,16 +1,16 @@
 import { Elysia, t } from 'elysia';
 
-import { loggedMemberOnly } from '../../plugins/auth';
+import { loggedUserOnly } from '../../plugins/auth';
 import { deleteMangaCustom } from '../../controllers/manga-custom/delete';
 
 export const router = () => new Elysia()
-    .use(loggedMemberOnly())
+    .use(loggedUserOnly())
     .delete(
         '/api/manga-custom/:mangaSlug',
-        async ({ organizationId, member, params: { mangaSlug } }) => {
+        async ({ organizationId, user, params: { mangaSlug } }) => {
             throw new Error('TBA');
 
-            if (!member.canDeleteMangaCustom) {
+            if (!user.canDeleteMangaCustom) {
                 throw new Error("No tiene permisos para eliminar mangas custom.");
             }
 

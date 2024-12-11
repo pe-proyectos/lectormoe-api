@@ -2,14 +2,14 @@ import { Elysia, t } from 'elysia';
 
 import { CreateMangaRequest } from '../../types/manga/create';
 import { createManga } from '../../controllers/manga/create';
-import { loggedMemberOnly } from '../../plugins/auth';
+import { loggedUserOnly } from '../../plugins/auth';
 
 export const router = () => new Elysia()
-    .use(loggedMemberOnly())
+    .use(loggedUserOnly())
     .post(
         '/api/manga',
-        async ({ member, body }) => {
-            if (!member.canCreateMangaProfile) {
+        async ({ user, body }) => {
+            if (!user.canCreateMangaProfile) {
                 throw new Error("No tiene permisos para crear mangas.");
             }
 

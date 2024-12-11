@@ -1,26 +1,26 @@
 import { prisma } from "../../models/prisma";
-import type { EditMemberRequest } from "../../types/member/edit";
+import type { EditUserRequest } from "../../types/user/edit";
 import { uploadFile } from "../../util/upload-file";
 
-export const editMember = async (
+export const editUser = async (
   organizationId: number,
-  memberId: number,
-  params: EditMemberRequest
+  userId: number,
+  params: EditUserRequest
 ) => {
-  const member = await prisma.member.findFirst({
+  const user = await prisma.user.findFirst({
     where: {
-      id: memberId,
+      id: userId,
       organizationId,
     },
   });
 
-  if (!member) {
-    throw new Error("Member not found for this organization");
+  if (!user) {
+    throw new Error("User not found for this organization");
   }
 
-  await prisma.member.update({
+  await prisma.user.update({
     where: {
-      id: member.id,
+      id: user.id,
     },
     data: {
       role: params.role,
@@ -29,9 +29,8 @@ export const editMember = async (
       canSeeAdminPanel: params.canSeeAdminPanel,
       canEditOrganization: params.canEditOrganization,
       canDeleteOrganization: params.canDeleteOrganization,
-      canInviteMember: params.canInviteMember,
-      canEditMember: params.canEditMember,
-      canDeleteMember: params.canDeleteMember,
+      canEditUser: params.canEditUser,
+      canDeleteUser: params.canDeleteUser,
       canCreateAuthor: params.canCreateAuthor,
       canCreateMangaProfile: params.canCreateMangaProfile,
       canCreateMangaCustom: params.canCreateMangaCustom,
@@ -40,6 +39,7 @@ export const editMember = async (
       canCreateGenre: params.canCreateGenre,
       canEditGenre: params.canEditGenre,
       canDeleteGenre: params.canDeleteGenre,
+      canReadUnreleasedChapter: params.canReadUnreleasedChapter,
       canCreateChapter: params.canCreateChapter,
       canEditChapter: params.canEditChapter,
       canDeleteChapter: params.canDeleteChapter,
@@ -55,9 +55,9 @@ export const editMember = async (
   if (params.image && params.image instanceof File) {
     const imageBuffer = await params.image.arrayBuffer();
     const imageUrl = await uploadFile(imageBuffer, params.image.name);
-    await prisma.member.update({
+    await prisma.user.update({
       where: {
-        id: member.id,
+        id: user.id,
       },
       data: {
         imageUrl,
@@ -65,5 +65,5 @@ export const editMember = async (
     });
   }
 
-  return await prisma.member.findFirst({ where: { id: member.id } });
+  return await prisma.user.findFirst({ where: { id: user.id } });
 };

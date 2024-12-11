@@ -1,16 +1,16 @@
 import { Elysia, t } from 'elysia';
 
-import { loggedMemberOnly } from '../../plugins/auth';
+import { loggedUserOnly } from '../../plugins/auth';
 import { listPages } from '../../controllers/pages/list';
 import { OrderPagesRequest } from '../../types/pages/order';
 import { orderPages } from '../../controllers/pages/order';
 
 export const router = () => new Elysia()
-    .use(loggedMemberOnly())
+    .use(loggedUserOnly())
     .post(
         '/api/manga-custom/:mangaSlug/chapter/:chapterNumber/pages/order',
-        async ({ organizationId, member, body, params: { mangaSlug, chapterNumber } }) => {
-            if (!member.canEditPage) {
+        async ({ organizationId, user, body, params: { mangaSlug, chapterNumber } }) => {
+            if (!user.canEditPage) {
                 throw new Error("No tiene permisos para ordenar páginas.");
             }
 

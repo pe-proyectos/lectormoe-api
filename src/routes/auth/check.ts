@@ -19,9 +19,7 @@ export const router = () => new Elysia()
                 status: true,
                 data: {
                     token,
-                    username: user.username,
-                    userSlug: user.slug,
-                    member: user?.members?.[0],
+                    user,
                 }
             };
         },
@@ -30,9 +28,7 @@ export const router = () => new Elysia()
                 status: t.Boolean(),
                 data: t.Object({
                     token: t.String(),
-                    username: t.String(),
-                    userSlug: t.String(),
-                    member: t.Any(),
+                    user: t.Any(),
                 }),
             }),
         }

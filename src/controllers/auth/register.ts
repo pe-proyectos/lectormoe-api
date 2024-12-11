@@ -18,7 +18,7 @@ export const register = async (organizationId: number, email: string, username: 
         throw new Error("El nombre de usuario ya está en uso.");
     }
     const hashedPassword = await Bun.password.hash(password);
-    const user = await prisma.user.create({
+    await prisma.user.create({
         data: {
             email,
             username,
@@ -29,13 +29,6 @@ export const register = async (organizationId: number, email: string, username: 
         select: {
             id: true,
             username: true,
-        }
-    });
-    await prisma.member.create({
-        data: {
-            organizationId,
-            userId: user.id,
-            role: "user",
         }
     });
 	return true;

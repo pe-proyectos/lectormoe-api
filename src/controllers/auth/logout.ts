@@ -6,11 +6,7 @@ export const deleteToken = async (organizationId: number, token: string) => {
         where: {
             token,
             user: {
-                members: {
-                    some: {
-                        organizationId,
-                    }
-                }
+                organizationId,
             }
         },
     });

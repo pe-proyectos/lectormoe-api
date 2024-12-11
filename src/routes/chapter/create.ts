@@ -2,14 +2,14 @@ import { Elysia, t } from 'elysia';
 
 import { CreateChapterRequest } from '../../types/chapter/create';
 import { createChapter } from '../../controllers/chapter/create';
-import { loggedMemberOnly } from '../../plugins/auth';
+import { loggedUserOnly } from '../../plugins/auth';
 
 export const router = () => new Elysia()
-    .use(loggedMemberOnly())
+    .use(loggedUserOnly())
     .post(
         '/api/manga-custom/:mangaSlug/chapter',
-        async ({ organizationId, member, body, params: { mangaSlug } }) => {
-            if (!member.canCreateChapter) {
+        async ({ organizationId, user, body, params: { mangaSlug } }) => {
+            if (!user.canCreateChapter) {
                 throw new Error("No tiene permisos para crear capítulos.");
             }
 

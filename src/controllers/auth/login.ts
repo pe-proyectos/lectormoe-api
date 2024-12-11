@@ -6,11 +6,6 @@ export const login = async (organizationId: number, email: string, password: str
         where: {
             organizationId,
             OR: [{ email: email }, { username: email }],
-            members: {
-                some: {
-                    organizationId,
-                }
-            },
         },
         select: {
             id: true,

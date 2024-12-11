@@ -10,11 +10,11 @@ export enum OrderEnum {
     COINS_DESC = 'coins_desc',
 }
 
-export const MemberListQuery = t.Object({
+export const UserListQuery = t.Object({
     username: t.Optional(t.String()),
     email: t.Optional(t.String()),
     order: t.Optional(t.Enum(OrderEnum)),
     ...PaginationQuery.properties,
 });
 
-export type MemberListQuery = Static<typeof MemberListQuery>;
+export type UserListQuery = Static<typeof UserListQuery>;

@@ -68,12 +68,10 @@ model Organization {
   createdAt DateTime @default(now()) @db.Timestamp
   updatedAt DateTime @updatedAt
 
-  members        Member[]
   users          User[]
   mangaCustoms   MangaCustom[]
   genres         Genre[]
   analytics      Analytics[]
-  invitations    Invitation[]
   coinPacks      CoinPack[]
   countryOptions CountryOptions[]
 
@@ -89,31 +87,8 @@ model User {
   email    String @db.VarChar(256)
   password String @db.VarChar(256)
 
-  createdAt DateTime @default(now()) @db.Timestamp
-  updatedAt DateTime @updatedAt
-
-  rankings    Ranking[]
-  tokens      Token[]
-  members     Member[]
-  analytics   Analytics[]
-  history     UserChapterHistory[]
-  invitations Invitation[]
-
-  organization Organization @relation(fields: [organizationId], references: [id])
-
-  @@unique([organizationId, username])
-  @@unique([organizationId, slug])
-  @@unique([organizationId, email])
-  @@map("user")
-}
-
-model Member {
-  id             Int @id @default(autoincrement())
-  organizationId Int
-  userId         Int
-
   coins       Int     @default(0)
-  role        String  @db.VarChar(256)
+  role        String  @default("user") @db.VarChar(256)
   description String? @db.Text
   imageUrl    String? @db.Text
 
@@ -121,51 +96,56 @@ model Member {
 
   // ## Permissions
   // Organization
-  canSeeAdminPanel      Boolean @default(false)
-  canEditOrganization   Boolean @default(false)
-  canDeleteOrganization Boolean @default(false)
+  canSeeAdminPanel         Boolean @default(false)
+  canEditOrganization      Boolean @default(false)
+  canDeleteOrganization    Boolean @default(false)
   // Organization Members
-  canInviteMember       Boolean @default(false)
-  canEditMember         Boolean @default(false)
-  canDeleteMember       Boolean @default(false)
+  canEditUser            Boolean @default(false)
+  canDeleteUser          Boolean @default(false)
   // Author
-  canCreateAuthor       Boolean @default(false)
+  canCreateAuthor          Boolean @default(false)
   // Manga Profile
-  canCreateMangaProfile Boolean @default(false)
+  canCreateMangaProfile    Boolean @default(false)
   // Manga Custom
-  canCreateMangaCustom  Boolean @default(false)
-  canEditMangaCustom    Boolean @default(false)
-  canDeleteMangaCustom  Boolean @default(false)
+  canCreateMangaCustom     Boolean @default(false)
+  canEditMangaCustom       Boolean @default(false)
+  canDeleteMangaCustom     Boolean @default(false)
   // Genre
-  canCreateGenre        Boolean @default(false)
-  canEditGenre          Boolean @default(false)
-  canDeleteGenre        Boolean @default(false)
+  canCreateGenre           Boolean @default(false)
+  canEditGenre             Boolean @default(false)
+  canDeleteGenre           Boolean @default(false)
   // Chapter
-  canCreateChapter      Boolean @default(false)
-  canEditChapter        Boolean @default(false)
-  canDeleteChapter      Boolean @default(false)
+  canReadUnreleasedChapter Boolean @default(false)
+  canCreateChapter         Boolean @default(false)
+  canEditChapter           Boolean @default(false)
+  canDeleteChapter         Boolean @default(false)
   // Pages
-  canCreatePage         Boolean @default(false)
-  canEditPage           Boolean @default(false)
-  canDeletePage         Boolean @default(false)
+  canCreatePage            Boolean @default(false)
+  canEditPage              Boolean @default(false)
+  canDeletePage            Boolean @default(false)
   // Coin Pack
-  canCreateCoinPack     Boolean @default(false)
-  canEditCoinPack       Boolean @default(false)
-  canDeleteCoinPack     Boolean @default(false)
+  canCreateCoinPack        Boolean @default(false)
+  canEditCoinPack          Boolean @default(false)
+  canDeleteCoinPack        Boolean @default(false)
   // ## / Permissions
 
   createdAt DateTime @default(now()) @db.Timestamp
   updatedAt DateTime @updatedAt
 
+  rankings Ranking[]
+  audits   Audit[]
+  payments Payment[]
+
+  tokens    Token[]
+  analytics Analytics[]
+  history   UserChapterHistory[]
+
   organization Organization @relation(fields: [organizationId], references: [id])
-  user         User         @relation(fields: [userId], references: [id])
 
-  news            News[]
-  audits          Audit[]
-  coinPackHistory CoinPackHistory[]
-
-  @@unique([organizationId, userId])
-  @@map("member")
+  @@unique([organizationId, username])
+  @@unique([organizationId, slug])
+  @@unique([organizationId, email])
+  @@map("user")
 }
 
 model CountryOptions {
@@ -190,9 +170,8 @@ model CountryOptions {
 }
 
 model CoinPack {
-  id             Int @id @default(autoincrement())
-  organizationId Int
-
+  id                   Int     @id @default(autoincrement())
+  organizationId       Int
   name                 String  @db.VarChar(256)
   slug                 String  @db.VarChar(256)
   description          String? @db.Text
@@ -200,56 +179,16 @@ model CoinPack {
   price                Float
   coins                Int
   active               Boolean @default(false)
+  externalProductId    String? @db.VarChar(256)
 
   createdAt DateTime @default(now()) @db.Timestamp
   updatedAt DateTime @updatedAt
 
   organization Organization @relation(fields: [organizationId], references: [id])
+  payments     Payment[]
 
   @@unique([organizationId, slug])
   @@map("coin_pack")
-}
-
-model CoinPackHistory {
-  id       Int @id @default(autoincrement())
-  memberId Int
-
-  boughtAt                     DateTime @default(now()) @db.Timestamp
-  coinPackName                 String?  @db.VarChar(256)
-  coinPackSlug                 String?  @db.VarChar(256)
-  coinPackDescription          String?  @db.Text
-  coinPackPriceWithoutDiscount Float?
-  coinPackPrice                Float?
-  coinPackCoins                Int?
-  coinPackActive               Boolean  @default(false)
-
-  paymentMethod String? @db.VarChar(256)
-  metadata      String? @db.Text
-
-  createdAt DateTime @default(now()) @db.Timestamp
-  updatedAt DateTime @updatedAt
-
-  member Member @relation(fields: [memberId], references: [id])
-
-  @@map("coin_pack_history")
-}
-
-model Invitation {
-  id             Int @id @default(autoincrement())
-  organizationId Int
-  userId         Int
-
-  message   String?  @db.Text
-  expiresAt DateTime @db.Timestamp
-  status    String
-
-  createdAt DateTime @default(now()) @db.Timestamp
-  updatedAt DateTime @updatedAt
-
-  organization Organization @relation(fields: [organizationId], references: [id])
-  user         User         @relation(fields: [userId], references: [id])
-
-  @@map("invitation")
 }
 
 model Author {
@@ -380,9 +319,8 @@ model Page {
 }
 
 model Ranking {
-  id            Int  @id @default(autoincrement())
+  id            Int @id @default(autoincrement())
   mangaCustomId Int
-  userId        Int?
 
   rank      String   @db.Char(1)
   comment   String?  @db.Text
@@ -390,7 +328,8 @@ model Ranking {
   updatedAt DateTime @updatedAt
 
   mangaCustom MangaCustom @relation(fields: [mangaCustomId], references: [id])
-  user        User?       @relation(fields: [userId], references: [id])
+  User        User?       @relation(fields: [userId], references: [id])
+  userId      Int?
 
   @@map("ranking")
 }
@@ -478,31 +417,8 @@ model UserChapterHistory {
   @@map("user_chapter_history")
 }
 
-model News {
-  id Int @id @default(autoincrement())
-
-  memberId Int
-
-  title       String  @db.VarChar(256)
-  slug        String  @db.VarChar(256)
-  description String? @db.Text
-  imageUrl    String? @db.Text
-  content     String? @db.Text
-  views       Int     @default(0)
-
-  createdAt DateTime @default(now()) @db.Timestamp
-  updatedAt DateTime @updatedAt
-
-  member Member @relation(fields: [memberId], references: [id])
-
-  @@unique([memberId, slug])
-  @@map("news")
-}
-
 model Audit {
   id Int @id @default(autoincrement())
-
-  memberId Int
 
   action   String  @db.VarChar(256)
   payload  Json?
@@ -514,7 +430,8 @@ model Audit {
   createdAt DateTime @default(now()) @db.Timestamp
   updatedAt DateTime @updatedAt
 
-  member Member @relation(fields: [memberId], references: [id])
+  User   User? @relation(fields: [userId], references: [id])
+  userId Int?
 
   @@map("audit")
 }
@@ -535,4 +452,26 @@ model ViewsHistory {
   chapter     Chapter?     @relation(fields: [chapterId], references: [id])
 
   @@map("views")
+}
+
+model Payment {
+  id Int @id @default(autoincrement())
+
+  coinPackId Int
+
+  paymentMethod  String   @db.VarChar(256) // Ejemplo: "Stripe", "PayPal", etc.
+  paymentStatus  String   @db.VarChar(256) // Ejemplo: "pending", "completed", "failed"
+  transactionId  String?  @unique @db.VarChar(256) // ID de la transacción generada por la pasarela
+  amount         Float // Monto total pagado
+  currency       String   @db.VarChar(10) // Ejemplo: "USD", "EUR"
+  coinsPurchased Int // Cantidad de monedas compradas
+  metadata       Json? // Información adicional sobre el pago
+  createdAt      DateTime @default(now()) @db.Timestamp
+  updatedAt      DateTime @updatedAt
+
+  coinPack CoinPack @relation(fields: [coinPackId], references: [id])
+  User     User?    @relation(fields: [userId], references: [id])
+  userId   Int?
+
+  @@map("payment")
 }

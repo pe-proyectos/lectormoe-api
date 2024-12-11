@@ -1,15 +1,15 @@
 import { Elysia, t } from 'elysia';
 
 import { editCoinPack } from '../../controllers/coinpack/edit';
-import { loggedMemberOnly } from '../../plugins/auth';
+import { loggedUserOnly } from '../../plugins/auth';
 import { EditCoinPackRequest } from '../../types/coinpack/edit';
 
 export const router = () => new Elysia()
-    .use(loggedMemberOnly())
+    .use(loggedUserOnly())
     .patch(
         '/api/coinpack/:coinPackId',
-        async ({ organizationId, member, body, params: { coinPackId } }) => {
-            if (!member.canEditCoinPack) {
+        async ({ organizationId, user, body, params: { coinPackId } }) => {
+            if (!user.canEditCoinPack) {
                 throw new Error("No tiene permisos para editar paquetes de monedas.");
             }
 

@@ -1,63 +1,63 @@
 import { Elysia, t } from "elysia";
 
-import { editMember } from "../../controllers/member/edit";
-import { loggedMemberOnly } from "../../plugins/auth";
-import { EditMemberRequest } from "../../types/member/edit";
-import { getMemberById } from "../../controllers/member/get";
+import { editUser } from "../../controllers/user/edit";
+import { loggedUserOnly } from "../../plugins/auth";
+import { EditUserRequest } from "../../types/user/edit";
+import { getUserById } from "../../controllers/user/get";
 
 export const router = () => new Elysia()
-  .use(loggedMemberOnly())
+  .use(loggedUserOnly())
   .patch(
-    "/api/member/:memberId",
-    async ({ organizationId, member, body, params: { memberId } }) => {
-      console.log({canEditMember: member.canEditMember, requestMember: member.id, memberId});
-      
-    // If the request member is not the same as the member to edit and does not have the permission to edit members
-    if (member.id !== memberId && !member.canEditMember) {
-      throw new Error("No tiene permisos para editar otros miembros.");
+    "/api/user/:userId",
+    async ({ organizationId, user, body, params: { userId } }) => {
+      console.log({canEditUser: user.canEditUser, requestUser: user.id, userId});
+        
+    // If the request user is not the same as the user to edit and does not have the permission to edit users
+    if (user.id !== userId && !user.canEditUser) {
+      throw new Error("No tiene permisos para editar otros usuarios.");
     }
-    // Get member to edit
-    const memberToEdit = await getMemberById(organizationId, memberId);
-    if (!memberToEdit) {
-      throw new Error("No se pudo obtener el miembro a editar.");
+    // Get user to edit
+    const userToEdit = await getUserById(organizationId, userId);
+    if (!userToEdit) {
+      throw new Error("No se pudo obtener el usuario a editar.");
     }
     // If editing self, allow to change role and description only
-    if (member.id === memberToEdit.id) {
+    if (user.id === userToEdit.id) {
       body = {
         description: body.description,
         image: body.image,
       };
-    } else if (member.hierarchyLevel < memberToEdit.hierarchyLevel) {
-      throw new Error("No tienes permisos para editar este miembro.");
+    } else if (user.hierarchyLevel < userToEdit.hierarchyLevel) {
+      throw new Error("No tienes permisos para editar este usuario.");
     }
 
-    if (member.id !== memberToEdit.id && body.hierarchyLevel && member.hierarchyLevel < body.hierarchyLevel) {
+    if (user.id !== userToEdit.id && body.hierarchyLevel && user.hierarchyLevel < body.hierarchyLevel) {
       throw new Error("No tienes permisos para asignar un nivel de jerarquía mayor al tuyo.");
     }
 
-    const updatedMember = await editMember(organizationId, memberToEdit.id, body);
+    const updatedUser = await editUser(organizationId, userToEdit.id, body);
 
-    if (!updatedMember) {
+    if (!updatedUser) {
       throw new Error("No se pudo editar el miembro.");
     }
 
     return {
       status: true,
-      data: updatedMember,
+      data: updatedUser,
     };
   },
   {
     params: t.Object({
-      memberId: t.Number(),
+      userId: t.Number(),
     }),
-    body: EditMemberRequest,
+    body: EditUserRequest,
     response: t.Object({
       status: t.Boolean(),
       data: t.Any(),
     }),
     transform({ params, body }) {
-      if (params.memberId) {
-        params.memberId = Number.parseInt(params.memberId.toString());
+      if (params.userId) {
+        params.userId = Number.parseInt(params.userId.toString());
       }
       if (body.hierarchyLevel) {
         body.hierarchyLevel = Number.parseInt(body.hierarchyLevel.toString());
@@ -73,14 +73,11 @@ export const router = () => new Elysia()
         body.canDeleteOrganization =
           body.canDeleteOrganization.toString() === "true";
       }
-      if (body.canInviteMember) {
-        body.canInviteMember = body.canInviteMember.toString() === "true";
+      if (body.canEditUser) {
+        body.canEditUser = body.canEditUser.toString() === "true";
       }
-      if (body.canEditMember) {
-        body.canEditMember = body.canEditMember.toString() === "true";
-      }
-      if (body.canDeleteMember) {
-        body.canDeleteMember = body.canDeleteMember.toString() === "true";
+      if (body.canDeleteUser) {
+        body.canDeleteUser = body.canDeleteUser.toString() === "true";
       }
       if (body.canCreateAuthor) {
         body.canCreateAuthor = body.canCreateAuthor.toString() === "true";
@@ -109,6 +106,9 @@ export const router = () => new Elysia()
       }
       if (body.canDeleteGenre) {
         body.canDeleteGenre = body.canDeleteGenre.toString() === "true";
+      }
+      if (body.canReadUnreleasedChapter) {
+        body.canReadUnreleasedChapter = body.canReadUnreleasedChapter.toString() === "true";
       }
       if (body.canCreateChapter) {
         body.canCreateChapter = body.canCreateChapter.toString() === "true";

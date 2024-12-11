@@ -1,16 +1,16 @@
 import { Elysia, t } from 'elysia';
 
 import { createPages } from '../../controllers/pages/create';
-import { loggedMemberOnly } from '../../plugins/auth';
+import { loggedUserOnly } from '../../plugins/auth';
 import { CreatePagesRequest } from '../../types/pages/create';
 import { listPages } from '../../controllers/pages/list';
 
 export const router = () => new Elysia()
-    .use(loggedMemberOnly())
+    .use(loggedUserOnly())
     .post(
         '/api/manga-custom/:mangaSlug/chapter/:chapterNumber/pages',
-        async ({ organizationId, member, body, params: { mangaSlug, chapterNumber } }) => {
-            if (!member.canCreatePage) {
+        async ({ organizationId, user, body, params: { mangaSlug, chapterNumber } }) => {
+            if (!user.canCreatePage) {
                 throw new Error("No tiene permisos para crear páginas.");
             }
 

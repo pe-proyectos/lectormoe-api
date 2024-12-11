@@ -20,7 +20,7 @@ export const router = () => new Elysia()
             const isReady = new Date(chapter.releasedAt).getTime() < new Date().getTime();
             
             if (!isReady) {
-                if (!user || user.members.length == 0 || !user.members.some(member => member.canCreateChapter)) { // todo: change this to canReadUnreleasedChapter
+                if (!user || !user.canReadUnreleasedChapter) {
                     throw new Error("No tiene permisos para leer capítulos sin publicar.");
                 }
             }

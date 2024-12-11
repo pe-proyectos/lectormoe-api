@@ -2,14 +2,14 @@ import { Elysia, t } from 'elysia';
 
 import { CreateCoinPackRequest } from '../../types/coinpack/create';
 import { createCoinPack } from '../../controllers/coinpack/create';
-import { loggedMemberOnly } from '../../plugins/auth';
+import { loggedUserOnly } from '../../plugins/auth';
 
 export const router = () => new Elysia()
-    .use(loggedMemberOnly())
+    .use(loggedUserOnly())
     .post(
         '/api/coinpack',
-        async ({ organizationId, member, body }) => {
-            if (!member.canCreateCoinPack) {
+        async ({ organizationId, user, body }) => {
+            if (!user.canCreateCoinPack) {
                 throw new Error("No tiene permisos para crear paquetes de monedas.");
             }
 

@@ -2,14 +2,14 @@ import { Elysia, t } from 'elysia';
 
 import { EditChapterRequest } from '../../types/chapter/edit';
 import { editChapter } from '../../controllers/chapter/edit';
-import { loggedMemberOnly } from '../../plugins/auth';
+import { loggedUserOnly } from '../../plugins/auth';
 
 export const router = () => new Elysia()
-    .use(loggedMemberOnly())
+    .use(loggedUserOnly())
     .patch(
         '/api/manga-custom/:mangaSlug/chapter/:chapterNumber',
-        async ({ organizationId, member, body, params: { mangaSlug, chapterNumber } }) => {
-            if (!member.canEditChapter) {
+        async ({ organizationId, user, body, params: { mangaSlug, chapterNumber } }) => {
+            if (!user.canEditChapter) {
                 throw new Error("No tiene permisos para editar capítulos.");
             }
 

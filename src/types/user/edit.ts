@@ -1,6 +1,6 @@
 import { type Static, t } from "elysia";
 
-export const EditMemberRequest = t.Object({
+export const EditUserRequest = t.Object({
   role: t.Optional(t.String()),
   description: t.Optional(t.String()),
   hierarchyLevel: t.Optional(t.Number()),
@@ -17,10 +17,9 @@ export const EditMemberRequest = t.Object({
   canSeeAdminPanel: t.Optional(t.Boolean()),
   canEditOrganization: t.Optional(t.Boolean()),
   canDeleteOrganization: t.Optional(t.Boolean()),
-  // Organization Members
-  canInviteMember: t.Optional(t.Boolean()),
-  canEditMember: t.Optional(t.Boolean()),
-  canDeleteMember: t.Optional(t.Boolean()),
+  // Organization User
+  canEditUser: t.Optional(t.Boolean()),
+  canDeleteUser: t.Optional(t.Boolean()),
   // Author
   canCreateAuthor: t.Optional(t.Boolean()),
   // Manga Profile
@@ -34,6 +33,7 @@ export const EditMemberRequest = t.Object({
   canEditGenre: t.Optional(t.Boolean()),
   canDeleteGenre: t.Optional(t.Boolean()),
   // Chapter
+  canReadUnreleasedChapter: t.Optional(t.Boolean()),
   canCreateChapter: t.Optional(t.Boolean()),
   canEditChapter: t.Optional(t.Boolean()),
   canDeleteChapter: t.Optional(t.Boolean()),
@@ -47,4 +47,4 @@ export const EditMemberRequest = t.Object({
   canDeleteCoinPack: t.Optional(t.Boolean()),
 });
 
-export type EditMemberRequest = Static<typeof EditMemberRequest>;
+export type EditUserRequest = Static<typeof EditUserRequest>;
