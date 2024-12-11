@@ -33,6 +33,7 @@ export const router = () => new Elysia()
                     token: tokenCreated.token,
                     username: user.username,
                     userSlug: user.slug,
+                    user,
                 }
             };
         },
@@ -51,6 +52,7 @@ export const router = () => new Elysia()
                     token: t.String(),
                     username: t.String(),
                     userSlug: t.String(),
+                    user: t.Any(),
                 }),
             }),
         }

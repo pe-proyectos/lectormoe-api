@@ -9,9 +9,7 @@ export const login = async (organizationId: number, email: string, password: str
         },
         select: {
             id: true,
-            username: true,
             password: true,
-            slug: true,
         }
     });
 
@@ -25,5 +23,13 @@ export const login = async (organizationId: number, email: string, password: str
         throw new Error("El usuario/email/contraseña son incorrectos.");
     }
 
-    return userEmailExists;
+    const user = await prisma.user.findUnique({
+        where: {
+            id: userEmailExists.id,
+        },
+    });
+
+    delete user?.password;
+
+    return user;
 };
