@@ -1,15 +1,15 @@
 import { Elysia, t } from 'elysia';
 
-import { listCoinPacks } from '../../controllers/coinpack/list';
+import { listSubscriptionPlans } from '../../controllers/subscription_plan/list';
 import { useOrganization } from '../../plugins/organization';
-import { CoinPackListQuery } from '../../types/coinpack/list';
+import { SubscriptionPlanListQuery } from '../../types/subscription_plan/list';
 
 export const router = () => new Elysia()
     .use(useOrganization())
     .get(
-        '/api/coinpack',
+        '/api/subscription-plan',
         async ({ organizationId, query }) => {
-            const { data, maxPage, total } = await listCoinPacks(organizationId, query);
+            const { data, maxPage, total } = await listSubscriptionPlans(organizationId, query);
             
             return { status: true, data: {
                 data,
@@ -18,7 +18,7 @@ export const router = () => new Elysia()
             } };
         },
         {
-            query: CoinPackListQuery,
+            query: SubscriptionPlanListQuery,
             response: t.Object({
                 status: t.Boolean(),
                 data: t.Object({

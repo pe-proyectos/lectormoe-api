@@ -68,12 +68,12 @@ model Organization {
   createdAt DateTime @default(now()) @db.Timestamp
   updatedAt DateTime @updatedAt
 
-  users          User[]
-  mangaCustoms   MangaCustom[]
-  genres         Genre[]
-  analytics      Analytics[]
-  coinPacks      CoinPack[]
-  countryOptions CountryOptions[]
+  users             User[]
+  mangaCustoms      MangaCustom[]
+  genres            Genre[]
+  analytics         Analytics[]
+  countryOptions    CountryOptions[]
+  subscriptionPlans SubscriptionPlan[]
 
   @@map("organization")
 }
@@ -87,7 +87,6 @@ model User {
   email    String @db.VarChar(256)
   password String @db.VarChar(256)
 
-  coins       Int     @default(0)
   role        String  @default("user") @db.VarChar(256)
   description String? @db.Text
   imageUrl    String? @db.Text
@@ -96,45 +95,46 @@ model User {
 
   // ## Permissions
   // Organization
-  canSeeAdminPanel         Boolean @default(false)
-  canEditOrganization      Boolean @default(false)
-  canDeleteOrganization    Boolean @default(false)
+  canSeeAdminPanel          Boolean @default(false)
+  canEditOrganization       Boolean @default(false)
+  canDeleteOrganization     Boolean @default(false)
   // Organization Members
-  canEditUser            Boolean @default(false)
-  canDeleteUser          Boolean @default(false)
+  canEditUser               Boolean @default(false)
+  canDeleteUser             Boolean @default(false)
   // Author
-  canCreateAuthor          Boolean @default(false)
+  canCreateAuthor           Boolean @default(false)
   // Manga Profile
-  canCreateMangaProfile    Boolean @default(false)
+  canCreateMangaProfile     Boolean @default(false)
   // Manga Custom
-  canCreateMangaCustom     Boolean @default(false)
-  canEditMangaCustom       Boolean @default(false)
-  canDeleteMangaCustom     Boolean @default(false)
+  canCreateMangaCustom      Boolean @default(false)
+  canEditMangaCustom        Boolean @default(false)
+  canDeleteMangaCustom      Boolean @default(false)
   // Genre
-  canCreateGenre           Boolean @default(false)
-  canEditGenre             Boolean @default(false)
-  canDeleteGenre           Boolean @default(false)
+  canCreateGenre            Boolean @default(false)
+  canEditGenre              Boolean @default(false)
+  canDeleteGenre            Boolean @default(false)
   // Chapter
-  canReadUnreleasedChapter Boolean @default(false)
-  canCreateChapter         Boolean @default(false)
-  canEditChapter           Boolean @default(false)
-  canDeleteChapter         Boolean @default(false)
+  canReadUnreleasedChapter  Boolean @default(false)
+  canCreateChapter          Boolean @default(false)
+  canEditChapter            Boolean @default(false)
+  canDeleteChapter          Boolean @default(false)
   // Pages
-  canCreatePage            Boolean @default(false)
-  canEditPage              Boolean @default(false)
-  canDeletePage            Boolean @default(false)
-  // Coin Pack
-  canCreateCoinPack        Boolean @default(false)
-  canEditCoinPack          Boolean @default(false)
-  canDeleteCoinPack        Boolean @default(false)
+  canCreatePage             Boolean @default(false)
+  canEditPage               Boolean @default(false)
+  canDeletePage             Boolean @default(false)
+  // Subscription Plan
+  canCreateSubscriptionPlan Boolean @default(false)
+  canEditSubscriptionPlan   Boolean @default(false)
+  canDeleteSubscriptionPlan Boolean @default(false)
   // ## / Permissions
 
   createdAt DateTime @default(now()) @db.Timestamp
   updatedAt DateTime @updatedAt
 
+  subscriptions Subscription[]
+
   rankings Ranking[]
   audits   Audit[]
-  payments Payment[]
 
   tokens    Token[]
   analytics Analytics[]
@@ -167,28 +167,6 @@ model CountryOptions {
 
   @@unique([organizationId, countryCode])
   @@map("country_options")
-}
-
-model CoinPack {
-  id                   Int     @id @default(autoincrement())
-  organizationId       Int
-  name                 String  @db.VarChar(256)
-  slug                 String  @db.VarChar(256)
-  description          String? @db.Text
-  priceWithoutDiscount Float
-  price                Float
-  coins                Int
-  active               Boolean @default(false)
-  externalProductId    String? @db.VarChar(256)
-
-  createdAt DateTime @default(now()) @db.Timestamp
-  updatedAt DateTime @updatedAt
-
-  organization Organization @relation(fields: [organizationId], references: [id])
-  payments     Payment[]
-
-  @@unique([organizationId, slug])
-  @@map("coin_pack")
 }
 
 model Author {
@@ -454,24 +432,44 @@ model ViewsHistory {
   @@map("views")
 }
 
-model Payment {
+model SubscriptionPlan {
   id Int @id @default(autoincrement())
 
-  coinPackId Int
+  organizationId Int
 
-  paymentMethod  String   @db.VarChar(256) // Ejemplo: "Stripe", "PayPal", etc.
-  paymentStatus  String   @db.VarChar(256) // Ejemplo: "pending", "completed", "failed"
-  transactionId  String?  @unique @db.VarChar(256) // ID de la transacción generada por la pasarela
-  amount         Float // Monto total pagado
-  currency       String   @db.VarChar(10) // Ejemplo: "USD", "EUR"
-  coinsPurchased Int // Cantidad de monedas compradas
-  metadata       Json? // Información adicional sobre el pago
-  createdAt      DateTime @default(now()) @db.Timestamp
-  updatedAt      DateTime @updatedAt
+  name        String   @db.VarChar(256)
+  slug        String   @unique @db.VarChar(256)
+  description String?  @db.Text
+  price       Float
+  interval    String   @default("MONTH") @db.VarChar(256)
+  currency    String   @default("USD") @db.VarChar(10)
+  planId      String   @unique @db.VarChar(256)
+  createdAt   DateTime @default(now()) @db.Timestamp
+  updatedAt   DateTime @updatedAt
 
-  coinPack CoinPack @relation(fields: [coinPackId], references: [id])
-  User     User?    @relation(fields: [userId], references: [id])
-  userId   Int?
+  subscriptions Subscription[]
 
-  @@map("payment")
+  organization Organization @relation(fields: [organizationId], references: [id])
+
+  @@unique([organizationId, slug])
+  @@map("subscription_plan")
+}
+
+model Subscription {
+  id                 Int @id @default(autoincrement())
+  userId             Int
+  subscriptionPlanId Int
+
+  paypalPlanId String    @db.VarChar(256)
+  status       String    @default("PENDING") @db.VarChar(256)
+  startDate    DateTime
+  endDate      DateTime?
+  lastPayment  DateTime?
+  createdAt    DateTime  @default(now()) @db.Timestamp
+  updatedAt    DateTime  @updatedAt
+
+  user             User             @relation(fields: [userId], references: [id])
+  subscriptionPlan SubscriptionPlan @relation(fields: [subscriptionPlanId], references: [id])
+
+  @@map("subscription")
 }

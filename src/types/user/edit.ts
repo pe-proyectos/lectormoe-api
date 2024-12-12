@@ -41,10 +41,10 @@ export const EditUserRequest = t.Object({
   canCreatePage: t.Optional(t.Boolean()),
   canEditPage: t.Optional(t.Boolean()),
   canDeletePage: t.Optional(t.Boolean()),
-  // Coin Pack
-  canCreateCoinPack: t.Optional(t.Boolean()),
-  canEditCoinPack: t.Optional(t.Boolean()),
-  canDeleteCoinPack: t.Optional(t.Boolean()),
+  // Subscription Plan
+  canCreateSubscriptionPlan: t.Optional(t.Boolean()),
+  canEditSubscriptionPlan: t.Optional(t.Boolean()),
+  canDeleteSubscriptionPlan: t.Optional(t.Boolean()),
 });
 
 export type EditUserRequest = Static<typeof EditUserRequest>;

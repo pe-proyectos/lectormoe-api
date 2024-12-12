@@ -128,14 +128,14 @@ export const router = () => new Elysia()
       if (body.canDeletePage) {
         body.canDeletePage = body.canDeletePage.toString() === "true";
       }
-      if (body.canCreateCoinPack) {
-        body.canCreateCoinPack = body.canCreateCoinPack.toString() === "true";
+      if (body.canCreateSubscriptionPlan) {
+        body.canCreateSubscriptionPlan = body.canCreateSubscriptionPlan.toString() === "true";
       }
-      if (body.canEditCoinPack) {
-        body.canEditCoinPack = body.canEditCoinPack.toString() === "true";
+      if (body.canEditSubscriptionPlan) {
+        body.canEditSubscriptionPlan = body.canEditSubscriptionPlan.toString() === "true";
       }
-      if (body.canDeleteCoinPack) {
-        body.canDeleteCoinPack = body.canDeleteCoinPack.toString() === "true";
+      if (body.canDeleteSubscriptionPlan) {
+        body.canDeleteSubscriptionPlan = body.canDeleteSubscriptionPlan.toString() === "true";
       }
     },
   }

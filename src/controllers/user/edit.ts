@@ -46,9 +46,9 @@ export const editUser = async (
       canCreatePage: params.canCreatePage,
       canEditPage: params.canEditPage,
       canDeletePage: params.canDeletePage,
-      canCreateCoinPack: params.canCreateCoinPack,
-      canEditCoinPack: params.canEditCoinPack,
-      canDeleteCoinPack: params.canDeleteCoinPack,
+      canCreateSubscriptionPlan: params.canCreateSubscriptionPlan,
+      canEditSubscriptionPlan: params.canEditSubscriptionPlan,
+      canDeleteSubscriptionPlan: params.canDeleteSubscriptionPlan,
     },
   });
 

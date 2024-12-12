@@ -16,12 +16,6 @@ export const listUser = async (organizationId: number, filters: UserListQuery) =
 		[OrderEnum.CREATED_AT_DESC]: {
 			createdAt: 'desc',
 		},
-		[OrderEnum.COINS_ASC]: {
-			coins: 'asc',
-		},
-		[OrderEnum.COINS_DESC]: {
-			coins: 'desc',
-		},
 	};
 	const where: Prisma.UserWhereInput = {};
 	if (filters?.email) {

@@ -6,8 +6,6 @@ export enum OrderEnum {
     USERNAME_DESC = 'username_desc',
     CREATED_AT_ASC = 'createdAt_asc',
     CREATED_AT_DESC = 'createdAt_desc',
-    COINS_ASC = 'coins_asc',
-    COINS_DESC = 'coins_desc',
 }
 
 export const UserListQuery = t.Object({

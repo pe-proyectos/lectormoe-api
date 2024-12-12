@@ -1,14 +1,14 @@
 import { prisma } from "../../models/prisma";
-import { type CoinPackListQuery } from "../../types/coinpack/list";
+import { type SubscriptionPlanListQuery } from "../../types/subscription_plan/list";
 
-const prepareCoinPack = (coinPack: any) => {
+const prepareSubscriptionPlan = (subscriptionPlan: any) => {
 	return {
-		...coinPack,
+		...subscriptionPlan,
 	};
 }
 
-export const listCoinPacks = async (organizationId: number, filters: CoinPackListQuery) => {
-	const coinPacks = await prisma.coinPack.findMany({
+export const listSubscriptionPlans = async (organizationId: number, filters: SubscriptionPlanListQuery) => {
+	const subscriptionPlans = await prisma.subscriptionPlan.findMany({
 		where: {
 			organizationId: organizationId,
 			name: {
@@ -19,7 +19,6 @@ export const listCoinPacks = async (organizationId: number, filters: CoinPackLis
 				contains: filters.description,
 				mode: "insensitive"
 			},
-			active: filters.active,
 		},
 		orderBy: {
 			createdAt: "desc",
@@ -28,7 +27,7 @@ export const listCoinPacks = async (organizationId: number, filters: CoinPackLis
 		take: Number.parseInt(filters?.limit || "10"),
 	});
 
-	const total = await prisma.coinPack.count({
+	const total = await prisma.subscriptionPlan.count({
 		where: {
 			organizationId: organizationId,
 			name: {
@@ -39,12 +38,11 @@ export const listCoinPacks = async (organizationId: number, filters: CoinPackLis
 				contains: filters.description,
 				mode: "insensitive"
 			},
-			active: filters.active,
 		},
 	});
 
 	return {
-		data: coinPacks.map(prepareCoinPack),
+		data: subscriptionPlans.map(prepareSubscriptionPlan),
 		maxPage: Math.ceil(total / Number.parseInt(filters?.limit || "10")),
 		total,
 	};
