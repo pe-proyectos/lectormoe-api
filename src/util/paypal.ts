@@ -10,18 +10,10 @@ const environment =
         clientSecret: process.env.PAYPAL_CLIENT_SECRET,
         url: "https://api-m.sandbox.paypal.com/v1",
       };
-console.log(environment);
 
 async function getAccessToken(): Promise<string> {
-  console.log("PAYPAL_ENV:", process.env.PAYPAL_ENV);
-  console.log("Client ID:", environment.clientId);
-  console.log("Client Secret:", environment.clientSecret);
-
   const authString = `${environment.clientId}:${environment.clientSecret}`;
   const encodedAuth = btoa(authString);
-
-  console.log("Auth String:", authString);
-  console.log("Encoded Auth:", encodedAuth);
 
   const response = await fetch(`${environment.url}/oauth2/token`, {
     method: "POST",
@@ -32,8 +24,6 @@ async function getAccessToken(): Promise<string> {
     body: "grant_type=client_credentials",
   });
 
-  console.log("getAccessTokenResponse:", JSON.stringify(response));
-
   if (!response.ok) {
     const error = await response.json();
     console.error("Error al obtener el token de acceso:", error);
@@ -41,7 +31,6 @@ async function getAccessToken(): Promise<string> {
   }
 
   const data = await response.json();
-  console.log("Access Token:", data.access_token);
   return data.access_token;
 }
 

@@ -27,12 +27,12 @@ export const createSubscriptionPlan = async (organizationId: number, params: Cre
 		throw new Error(`Your organization already has a subscription plan titled '${params.name}'`);
 	}
 
-	const paypalProduct = await createProduct(params.name, params.description);
+	const paypalProduct = await createProduct(params.name, params.name);
 
 	const paypalPlan = await createPlan({
 		productId: paypalProduct.id,
 		name: params.name,
-		description: params.description,
+		description: params.name,
 		price: params.price,
 		currency: params.currency,
 		interval: params.interval as "DAY" | "WEEK" | "MONTH" | "YEAR",
@@ -50,6 +50,9 @@ export const createSubscriptionPlan = async (organizationId: number, params: Cre
 			productId: paypalProduct.id,
 			active: params.active,
 			planId: paypalPlan.id,
+			showAds: params.showAds,
+			canDownload: params.canDownload,
+			canReadUnreleased: params.canReadUnreleased,
 		}
 	});
 

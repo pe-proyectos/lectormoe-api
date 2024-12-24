@@ -7,6 +7,9 @@ export const CreateSubscriptionPlanRequest = t.Object({
     interval: t.String({ pattern: "^(DAY|WEEK|MONTH|YEAR)$" }),
     currency: t.String({ pattern: "^(USD)$" }),
     active: t.Boolean(),
+    showAds: t.Boolean(),
+    canDownload: t.Boolean(),
+    canReadUnreleased: t.Boolean(),
 });
 
 export type CreateSubscriptionPlanRequest = Static<typeof CreateSubscriptionPlanRequest>;

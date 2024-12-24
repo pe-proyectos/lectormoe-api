@@ -22,15 +22,18 @@ export const editSubscriptionPlan = async (organizationId: number, subscriptionP
             name: params.name,
             description: params.description,
             active: params.active,
+            showAds: params.showAds,
+            canDownload: params.canDownload,
+            canReadUnreleased: params.canReadUnreleased,
         }
     });
 
     const shouldUpdatePaypalDetails = params.name !== subscriptionPlan.name || params.description !== subscriptionPlan.description;
 
     if (shouldUpdatePaypalDetails) {
-        await updateProduct(subscriptionPlan.productId, updatedSubscriptionPlan.name, updatedSubscriptionPlan.description);
+        await updateProduct(subscriptionPlan.productId, updatedSubscriptionPlan.name, updatedSubscriptionPlan.name);
 
-        await updatePlan(subscriptionPlan.planId, updatedSubscriptionPlan.name, updatedSubscriptionPlan.description);
+        await updatePlan(subscriptionPlan.planId, updatedSubscriptionPlan.name, updatedSubscriptionPlan.name);
     }
 
     return await prisma.subscriptionPlan.findFirst({ where: { id: subscriptionPlan.id } });

@@ -60,13 +60,8 @@ export const createSubscription = async (organizationId: number, userId: number,
 
 	console.log("subscription");
 	console.log(subscription);
-	
 
-	if (subscription.status !== "ACTIVE") {
-		throw new Error("The subscription is not active");
-	}
-
-	const subscriptionPlan = await prisma.subscription.create({
+	const createdSubscription = await prisma.subscription.create({
 		data: {
 			userId: user.id,
 			subscriptionPlanId: subscriptionPlanExists.id,
@@ -74,9 +69,9 @@ export const createSubscription = async (organizationId: number, userId: number,
 			status: subscription.status,
 			startDate: subscription.start_time,
 			lastPayment: subscription.billing_info.last_payment.time,
-			active: true,
+			active: subscription.status === "ACTIVE",
 		}
 	});
 
-	return subscriptionPlan;
+	return createdSubscription;
 };

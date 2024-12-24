@@ -35,6 +35,9 @@ export const router = () => new Elysia()
                 body.interval = body.interval.toString();
                 body.currency = body.currency.toString();
                 body.active = body.active.toString() === "true";
+                body.showAds = body.showAds.toString() === "true";
+                body.canDownload = body.canDownload.toString() === "true";
+                body.canReadUnreleased = body.canReadUnreleased.toString() === "true";
             },
         }
     );
