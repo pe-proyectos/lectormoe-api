@@ -20,13 +20,6 @@ export const listSubscriptionPlans = async (organizationId: number, filters: Sub
 				mode: "insensitive"
 			},
 		},
-		include: {
-			subscriptions: {
-				select: {
-					active: true,
-				},
-			},
-		},
 		orderBy: {
 			createdAt: "desc",
 		},

@@ -8,7 +8,7 @@ export const SubscriptionPlanListQuery = t.Object({
     price: t.Optional(t.Number()),
     interval: t.Optional(t.String()),
     currency: t.Optional(t.String()),
-    planId: t.Optional(t.String()),
+    active: t.Optional(t.Boolean()),
     ...PaginationQuery.properties,
 });
 

@@ -9,7 +9,33 @@ export const checkToken = async (organizationId: number, token: string) => {
                     token,
                 }
             }
-        }
+        },
+        include: {
+            subscriptions: {
+                where: {
+                    active: true,
+                },
+                select: {
+                    id: true,
+                    startDate: true,
+                    lastPayment: true,
+                    nextPayment: true,
+                    subscriptionPlan: {
+                        select: {
+                            id: true,
+                            name: true,
+                            slug: true,
+                            interval: true,
+                            currency: true,
+                            showAds: true,
+                            canDownload: true,
+                            canReadUnreleased: true,
+                            active: true,
+                        },
+                    },
+                },
+            },
+        },
     });
 
     return user;

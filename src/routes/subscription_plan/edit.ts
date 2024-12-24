@@ -31,17 +31,8 @@ export const router = () => new Elysia()
                 data: t.Any(),
             }),
             transform({ body }) {
-                if (body.price) {
-                    body.price = Number.parseFloat(body.price.toString());
-                }
-                if (body.interval) {
-                    body.interval = body.interval.toString();
-                }
-                if (body.currency) {
-                    body.currency = body.currency.toString();
-                }
-                if (body.planId) {
-                    body.planId = body.planId.toString();
+                if (body.active) {
+                    body.active = body.active.toString() === "true";
                 }
             },
         }

@@ -34,7 +34,7 @@ export const router = () => new Elysia()
                 body.price = Number.parseFloat(body.price.toString());
                 body.interval = body.interval.toString();
                 body.currency = body.currency.toString();
-                body.planId = body.planId.toString();
+                body.active = body.active.toString() === "true";
             },
         }
     );

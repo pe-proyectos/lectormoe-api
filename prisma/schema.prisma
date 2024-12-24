@@ -439,13 +439,20 @@ model SubscriptionPlan {
 
   name        String   @db.VarChar(256)
   slug        String   @unique @db.VarChar(256)
-  description String?  @db.Text
+  description String   @db.Text
   price       Float
   interval    String   @default("MONTH") @db.VarChar(256)
   currency    String   @default("USD") @db.VarChar(10)
   planId      String   @unique @db.VarChar(256)
+  productId   String   @unique @db.VarChar(256)
   createdAt   DateTime @default(now()) @db.Timestamp
   updatedAt   DateTime @updatedAt
+
+  // perks
+  showAds           Boolean @default(false)
+  canDownload       Boolean @default(false)
+  canReadUnreleased Boolean @default(false)
+  active            Boolean @default(true)
 
   subscriptions Subscription[]
 
@@ -460,13 +467,16 @@ model Subscription {
   userId             Int
   subscriptionPlanId Int
 
-  paypalPlanId String    @db.VarChar(256)
-  status       String    @default("PENDING") @db.VarChar(256)
-  startDate    DateTime
-  endDate      DateTime?
-  lastPayment  DateTime?
-  createdAt    DateTime  @default(now()) @db.Timestamp
-  updatedAt    DateTime  @updatedAt
+  paypalSubscriptionId String    @db.VarChar(256)
+  status               String    @default("PENDING") @db.VarChar(256)
+  startDate            DateTime
+  endDate              DateTime?
+  lastPayment          DateTime?
+  nextPayment          DateTime?
+  createdAt            DateTime  @default(now()) @db.Timestamp
+  updatedAt            DateTime  @updatedAt
+
+  active Boolean @default(true)
 
   user             User             @relation(fields: [userId], references: [id])
   subscriptionPlan SubscriptionPlan @relation(fields: [subscriptionPlanId], references: [id])
