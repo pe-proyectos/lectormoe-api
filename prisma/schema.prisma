@@ -38,11 +38,12 @@ model Organization {
 
   language String @default("es") @db.VarChar(2)
 
-  enableMangaSection  Boolean @default(true)
-  enableManhuaSection Boolean @default(false)
-  enableManhwaSection Boolean @default(false)
-  enableMainSlider    Boolean @default(false)
-  enableMainBanner    Boolean @default(false)
+  enableMangaSection        Boolean @default(true)
+  enableManhuaSection       Boolean @default(false)
+  enableManhwaSection       Boolean @default(false)
+  enableMainSlider          Boolean @default(false)
+  enableMainBanner          Boolean @default(false)
+  enableSubscriptionSection Boolean @default(false)
 
   enableGoogleAds        Boolean @default(false)
   googleAdsMetaContent   String? @db.Text

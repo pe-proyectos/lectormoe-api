@@ -37,6 +37,8 @@ export const router = () => new Elysia()
                     body.enableManhuaSection = body.enableManhuaSection === 'true';
                 if (typeof body.enableManhwaSection === 'string')
                     body.enableManhwaSection = body.enableManhwaSection === 'true';
+                if (typeof body.enableSubscriptionSection === 'string')
+                    body.enableSubscriptionSection = body.enableSubscriptionSection === 'true';
                 if (typeof body.enableMainSlider === 'string')
                     body.enableMainSlider = body.enableMainSlider === 'true';
                 if (typeof body.enableMainBanner === 'string')

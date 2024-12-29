@@ -58,9 +58,6 @@ export const createSubscription = async (organizationId: number, userId: number,
 	// validate if subscription is active
 	const subscription = await getSubscriptionByPaypalId(params.paypalSubscriptionId);
 
-	console.log("subscription");
-	console.log(subscription);
-
 	const createdSubscription = await prisma.subscription.create({
 		data: {
 			userId: user.id,
