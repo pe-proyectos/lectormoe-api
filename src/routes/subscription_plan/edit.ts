@@ -34,8 +34,8 @@ export const router = () => new Elysia()
                 if (body.active) {
                     body.active = body.active.toString() === "true";
                 }
-                if (body.showAds) {
-                    body.showAds = body.showAds.toString() === "true";
+                if (body.hideAds) {
+                    body.hideAds = body.hideAds.toString() === "true";
                 }
                 if (body.canDownload) {
                     body.canDownload = body.canDownload.toString() === "true";

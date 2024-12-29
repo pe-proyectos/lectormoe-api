@@ -246,3 +246,47 @@ export async function getSubscriptionByPaypalId(paypalSubscriptionId: string) {
   console.log("Suscripción obtenida:", subscription);
   return subscription;
 }
+
+export async function suspendSubscriptionByPaypalId(paypalSubscriptionId: string) {
+  const token = await getAccessToken();
+
+  const response = await fetch(`${environment.url}/billing/subscriptions/${paypalSubscriptionId}/suspend`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    console.error("Error al suspender la suscripción:", error);
+    throw new Error("Failed to suspend PayPal subscription.");
+  }
+
+  const updatedSubscription = await response.json();
+  console.log("Suscripción actualizada:", updatedSubscription);
+  return updatedSubscription;
+}
+
+export async function resumeSubscriptionByPaypalId(paypalSubscriptionId: string) {
+  const token = await getAccessToken();
+
+  const response = await fetch(`${environment.url}/billing/subscriptions/${paypalSubscriptionId}/activate`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    console.error("Error al activar la suscripción:", error);
+    throw new Error("Failed to resume PayPal subscription.");
+  }
+
+  const updatedSubscription = await response.json();
+  console.log("Suscripción actualizada:", updatedSubscription);
+  return updatedSubscription;
+}

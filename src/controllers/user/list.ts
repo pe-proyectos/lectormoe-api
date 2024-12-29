@@ -30,21 +30,37 @@ export const listUser = async (organizationId: number, filters: UserListQuery) =
 			mode: "insensitive",
 		};
 	}
-	const users = await prisma.user.findMany({
+	let users = await prisma.user.findMany({
 		where: {
 			...where,
 			organizationId,
 		},
-		select: {
-			id: true,
-			slug: true,
-			email: true,
-			username: true,
-			createdAt: true,
+		include: {
+			subscriptions: {
+				select: {
+					id: true,
+					subscriptionPlanId: true,
+					active: true,
+					createdAt: true,
+					updatedAt: true,
+					endDate: true,
+					lastPayment: true,
+					nextPayment: true,
+					paypalSubscriptionId: true,
+					startDate: true,
+					status: true,
+					subscriptionPlan: true,
+				}
+			},
 		},
 		orderBy: (filters?.order && orders[filters.order]) || undefined,
 		skip: filters?.page ? (Number.parseInt(filters?.page || "1") - 1) * Number.parseInt(filters?.limit || "10") : 0,
 		take: Number.parseInt(filters?.limit || "10"),
+	});
+
+	users = users.map(user => {
+		user.password = "********";
+		return user;
 	});
 
 	const total = await prisma.user.count({

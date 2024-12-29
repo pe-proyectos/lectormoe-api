@@ -50,7 +50,7 @@ export const createSubscriptionPlan = async (organizationId: number, params: Cre
 			productId: paypalProduct.id,
 			active: params.active,
 			planId: paypalPlan.id,
-			showAds: params.showAds,
+			hideAds: params.hideAds,
 			canDownload: params.canDownload,
 			canReadUnreleased: params.canReadUnreleased,
 		}

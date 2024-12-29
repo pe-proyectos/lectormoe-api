@@ -27,7 +27,7 @@ export const checkToken = async (organizationId: number, token: string) => {
                             slug: true,
                             interval: true,
                             currency: true,
-                            showAds: true,
+                            hideAds: true,
                             canDownload: true,
                             canReadUnreleased: true,
                             active: true,

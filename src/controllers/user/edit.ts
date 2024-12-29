@@ -49,6 +49,9 @@ export const editUser = async (
       canCreateSubscriptionPlan: params.canCreateSubscriptionPlan,
       canEditSubscriptionPlan: params.canEditSubscriptionPlan,
       canDeleteSubscriptionPlan: params.canDeleteSubscriptionPlan,
+      hideAds: params.hideAds,
+      canDownload: params.canDownload,
+      canReadUnreleased: params.canReadUnreleased,
     },
   });
 

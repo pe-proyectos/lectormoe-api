@@ -10,7 +10,7 @@ export const router = () => new Elysia()
   .patch(
     "/api/user/:userId",
     async ({ organizationId, user, body, params: { userId } }) => {
-      console.log({canEditUser: user.canEditUser, requestUser: user.id, userId});
+      console.log({ body });
         
     // If the request user is not the same as the user to edit and does not have the permission to edit users
     if (user.id !== userId && !user.canEditUser) {
@@ -23,10 +23,10 @@ export const router = () => new Elysia()
     }
     // If editing self, allow to change role and description only
     if (user.id === userToEdit.id) {
-      body = {
-        description: body.description,
-        image: body.image,
-      };
+      // body = {
+      //   description: body.description,
+      //   image: body.image,
+      // };
     } else if (user.hierarchyLevel < userToEdit.hierarchyLevel) {
       throw new Error("No tienes permisos para editar este usuario.");
     }
@@ -136,6 +136,15 @@ export const router = () => new Elysia()
       }
       if (body.canDeleteSubscriptionPlan) {
         body.canDeleteSubscriptionPlan = body.canDeleteSubscriptionPlan.toString() === "true";
+      }
+      if (body.hideAds) {
+        body.hideAds = body.hideAds.toString() === "true";
+      }
+      if (body.canDownload) {
+        body.canDownload = body.canDownload.toString() === "true";
+      }
+      if (body.canReadUnreleased) {
+        body.canReadUnreleased = body.canReadUnreleased.toString() === "true";
       }
     },
   }

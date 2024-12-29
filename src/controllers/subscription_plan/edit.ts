@@ -22,7 +22,7 @@ export const editSubscriptionPlan = async (organizationId: number, subscriptionP
             name: params.name,
             description: params.description,
             active: params.active,
-            showAds: params.showAds,
+            hideAds: params.hideAds,
             canDownload: params.canDownload,
             canReadUnreleased: params.canReadUnreleased,
         }

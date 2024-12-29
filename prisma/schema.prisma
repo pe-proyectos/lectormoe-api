@@ -129,6 +129,12 @@ model User {
   canDeleteSubscriptionPlan Boolean @default(false)
   // ## / Permissions
 
+  // ## Perks
+  hideAds           Boolean @default(false)
+  canDownload       Boolean @default(false)
+  canReadUnreleased Boolean @default(false)
+  // ## / Perks
+
   createdAt DateTime @default(now()) @db.Timestamp
   updatedAt DateTime @updatedAt
 
@@ -469,7 +475,7 @@ model SubscriptionPlan {
   updatedAt   DateTime @updatedAt
 
   // perks
-  showAds           Boolean @default(false)
+  hideAds           Boolean @default(false)
   canDownload       Boolean @default(false)
   canReadUnreleased Boolean @default(false)
   active            Boolean @default(true)
