@@ -38,5 +38,10 @@ export const checkToken = async (organizationId: number, token: string) => {
         },
     });
 
+    if (user) {
+        user.password = "********";
+    }
+
     return user;
 }
+

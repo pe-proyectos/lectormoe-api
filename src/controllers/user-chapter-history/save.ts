@@ -28,7 +28,7 @@ export const saveUserChapterHistory = async (organizationId: number, userId: num
     });
 
     if (!chapter) {
-        return null;
+        return false;
     }
 
     const existingHistory = await prisma.userChapterHistory.findFirst({
@@ -43,7 +43,7 @@ export const saveUserChapterHistory = async (organizationId: number, userId: num
 
     if (existingHistory) {
         // we don't update the history if the user has already finished the chapter
-        return null;
+        return false;
     }
 
     const isLastPage = chapter.pages.length > 0 && (pageNumber === chapter.pages[0].number);
