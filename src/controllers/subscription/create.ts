@@ -35,7 +35,7 @@ export const createSubscription = async (organizationId: number, userId: number,
 	});
 
 	if (!subscriptionPlanExists) {
-		throw new Error(`Your organization does not have a subscription plan '${params.subscriptionPlanId}'`);
+		throw new Error(`Subscription plan '${params.subscriptionPlanId}' not found`);
 	}
 
 	const alreadySubscribed = await prisma.subscription.findFirst({
