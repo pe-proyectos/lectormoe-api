@@ -4,6 +4,7 @@ import { listPages } from '../../controllers/pages/list';
 import { useOrganization } from '../../plugins/organization';
 import { getChapter } from '../../controllers/chapter/get';
 import { loggedOptional } from '../../plugins/auth';
+import { getMangaCustomBySlug } from '../../controllers/manga-custom/get';
 
 export const router = () => new Elysia()
     .use(useOrganization())
@@ -11,18 +12,32 @@ export const router = () => new Elysia()
     .get(
         '/api/manga-custom/:mangaSlug/chapter/:chapterNumber/pages',
         async ({ organizationId, user, params: { mangaSlug, chapterNumber } }) => {
-            const chapter = await getChapter(organizationId, mangaSlug, chapterNumber);
+            const [manga, chapter] = await Promise.all([
+                getMangaCustomBySlug(organizationId, mangaSlug),
+                getChapter(organizationId, mangaSlug, chapterNumber)
+            ]);
 
             if (!chapter) {
                 throw new Error("Capitulo no encontrado.");
             }
-            
-            const isReady = new Date(chapter.releasedAt).getTime() < new Date().getTime();
-            
-            if (!isReady) {
-                if (!user || !user.canReadUnreleasedChapter) {
-                    throw new Error("No tiene permisos para leer capítulos sin publicar.");
+
+            const userHasAccessToChapter = () => {
+                if (new Date(chapter.releasedAt).getTime() < new Date().getTime()) return true;
+                if (!user) return false;
+                if (user?.canReadUnreleased === true) return true;
+                for (const subscription of user?.subscriptions || []) {
+                    if (subscription?.subscriptionPlan?.canReadUnreleased === true) {
+                        return true;
+                    }
+                    if (manga?.subscriptionPlans?.find((plan) => plan.id === subscription?.subscriptionPlan?.id)) {
+                        return true;
+                    }
                 }
+                return false;
+            }
+
+            if (!userHasAccessToChapter()) {
+                throw new Error("No tiene permisos para leer capítulos sin publicar.");
             }
 
             const pages = await listPages(organizationId, mangaSlug, chapterNumber);

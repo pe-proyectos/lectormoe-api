@@ -33,7 +33,6 @@ export const EditUserRequest = t.Object({
   canEditGenre: t.Optional(t.Boolean()),
   canDeleteGenre: t.Optional(t.Boolean()),
   // Chapter
-  canReadUnreleasedChapter: t.Optional(t.Boolean()),
   canCreateChapter: t.Optional(t.Boolean()),
   canEditChapter: t.Optional(t.Boolean()),
   canDeleteChapter: t.Optional(t.Boolean()),

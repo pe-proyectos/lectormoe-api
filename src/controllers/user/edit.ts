@@ -39,7 +39,6 @@ export const editUser = async (
       canCreateGenre: params.canCreateGenre,
       canEditGenre: params.canEditGenre,
       canDeleteGenre: params.canDeleteGenre,
-      canReadUnreleasedChapter: params.canReadUnreleasedChapter,
       canCreateChapter: params.canCreateChapter,
       canEditChapter: params.canEditChapter,
       canDeleteChapter: params.canDeleteChapter,
