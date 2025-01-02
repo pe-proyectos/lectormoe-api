@@ -22,6 +22,11 @@ export const deleteChapter = async (organizationId: number, mangaSlug: string, n
 			chapterId: chapter.id
 		}
 	});
+	await prisma.userChapterHistory.deleteMany({
+		where: {
+			chapterId: chapter.id
+		}
+	});
 	await prisma.chapter.delete({
 		where: {
 			id: chapter.id
