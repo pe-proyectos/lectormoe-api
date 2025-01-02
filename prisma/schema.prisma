@@ -343,7 +343,6 @@ model Genre {
   organizationId Int
 
   name        String  @db.VarChar(256)
-  nameEs      String  @db.VarChar(256)
   slug        String  @db.VarChar(256)
   description String  @db.Text
   display     Boolean @default(true)
