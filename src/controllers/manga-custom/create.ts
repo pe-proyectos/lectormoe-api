@@ -87,6 +87,11 @@ export const createMangaCustom = async (organizationId: number, params: CreateMa
 					id: genreId,
 				})) || [],
 			},
+			subscriptionPlans: {
+				set: params?.subscriptionPlanIds?.map(subscriptionPlanId => ({
+					id: subscriptionPlanId,
+				})) || [],
+			},
 		},
 	});
 

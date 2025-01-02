@@ -33,7 +33,6 @@ export const editChapter = async (organizationId: number, mangaSlug: string, cha
 			number: params.number || chapterExists.number,
 			title: params.title || chapterExists.title,
 			releasedAt: params?.releasedAt,
-			isSubscription: params?.isSubscription,
 			...params.image && params.image instanceof File ? {} : {
 				imageUrl: params.image === "null" ? null : params.image,
 			},

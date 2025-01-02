@@ -31,6 +31,12 @@ export const getMangaCustomBySlug = async (organizationId: number, mangaSlug: st
 					slug: true,
 				},
 			},
+			subscriptionPlans: {
+				select: {
+					id: true,
+					name: true,
+				},
+			},
 			rankings: {
 				take: 4,
 				select: {

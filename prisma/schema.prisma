@@ -248,18 +248,19 @@ model MangaCustom {
   views            Int       @default(0)
   status           String    @default("ongoing") @db.VarChar(256)
   visibility       String    @default("public") @db.VarChar(256)
-  isSubscription   Boolean   @default(false)
 
   createdAt DateTime @default(now()) @db.Timestamp
   updatedAt DateTime @updatedAt
 
-  chapters     Chapter[]
-  rankings     Ranking[]
-  genres       Genre[]
-  viewsHistory ViewsHistory[]
-  favorites    Favorite[]
-  manga        Manga          @relation(fields: [mangaId], references: [id])
-  organization Organization   @relation(fields: [organizationId], references: [id])
+  chapters          Chapter[]
+  rankings          Ranking[]
+  genres            Genre[]
+  viewsHistory      ViewsHistory[]
+  favorites         Favorite[]
+  subscriptionPlans SubscriptionPlan[]
+
+  manga        Manga        @relation(fields: [mangaId], references: [id])
+  organization Organization @relation(fields: [organizationId], references: [id])
 
   @@unique([mangaId, organizationId])
   @@map("manga_custom")
@@ -269,12 +270,11 @@ model Chapter {
   id            Int @id @default(autoincrement())
   mangaCustomId Int
 
-  number         Float
-  title          String   @db.VarChar(256)
-  imageUrl       String?  @db.VarChar(256)
-  views          Int      @default(0)
-  isSubscription Boolean  @default(false)
-  releasedAt     DateTime @default(now()) @db.Timestamp
+  number     Float
+  title      String   @db.VarChar(256)
+  imageUrl   String?  @db.VarChar(256)
+  views      Int      @default(0)
+  releasedAt DateTime @default(now()) @db.Timestamp
 
   createdAt DateTime @default(now()) @db.Timestamp
   updatedAt DateTime @updatedAt
@@ -480,6 +480,7 @@ model SubscriptionPlan {
   active            Boolean @default(true)
 
   subscriptions Subscription[]
+  mangasCustom  MangaCustom[]
 
   organization Organization @relation(fields: [organizationId], references: [id])
 

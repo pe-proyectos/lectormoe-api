@@ -41,6 +41,9 @@ export const router = () => new Elysia()
                 if(body.genreIds) {
                     body.genreIds = (body.genreIds as unknown as string).split(',').map(genreId => Number.parseInt(genreId.trim()));
                 }
+                if (body.subscriptionPlanIds) {
+                    body.subscriptionPlanIds = (body.subscriptionPlanIds as unknown as string).split(',').map(subscriptionPlanId => Number.parseInt(subscriptionPlanId.trim()));
+                }
             },
         }
     );

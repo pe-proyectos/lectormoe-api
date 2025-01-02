@@ -7,6 +7,7 @@ export const CreateMangaCustomRequest = t.Object({
     shortDescription: t.Optional(t.String()),
     description: t.Optional(t.String()),
     genreIds: t.Optional(t.Array(t.Number())),
+    subscriptionPlanIds: t.Optional(t.Array(t.Number())),
     image: t.Optional(
         t.Union([
             t.File({
