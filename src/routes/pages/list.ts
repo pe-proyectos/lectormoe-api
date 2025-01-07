@@ -25,6 +25,8 @@ export const router = () => new Elysia()
                 if (new Date(chapter.releasedAt).getTime() < new Date().getTime()) return true;
                 if (!user) return false;
                 if (user?.canReadUnreleased === true) return true;
+                if (user?.canEditChapter === true) return true;
+                if (user?.canEditPage === true) return true;
                 for (const subscription of user?.subscriptions || []) {
                     if (subscription?.subscriptionPlan?.canReadUnreleased === true) {
                         return true;
