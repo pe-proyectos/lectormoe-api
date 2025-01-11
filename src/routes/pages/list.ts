@@ -22,7 +22,7 @@ export const router = () => new Elysia()
             }
 
             const userHasAccessToChapter = () => {
-                if (new Date(chapter.releasedAt).getTime() < new Date().getTime()) return true;
+                if (new Date(chapter.releasedAt).getTime() < new Date().getTime() && chapter?.subscribersOnly !== true) return true;
                 if (!user) return false;
                 if (user?.canReadUnreleased === true) return true;
                 if (user?.canEditChapter === true) return true;

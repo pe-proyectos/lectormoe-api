@@ -28,6 +28,7 @@ export const getChapter = async (organizationId: number, mangaSlug: string, numb
 			number: true,
 			title: true,
 			releasedAt: true,
+			subscribersOnly: true,
 		},
 		orderBy: {
 			number: 'asc'
@@ -45,6 +46,7 @@ export const getChapter = async (organizationId: number, mangaSlug: string, numb
 			number: true,
 			title: true,
 			releasedAt: true,
+			subscribersOnly: true,
 		},
 		orderBy: {
 			number: 'desc'

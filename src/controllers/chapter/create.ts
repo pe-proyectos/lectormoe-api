@@ -36,6 +36,7 @@ export const createChapter = async (organizationId: number, mangaSlug: string, p
 			number: params.number,
 			title: params.title,
 			releasedAt: params?.releasedAt,
+			subscribersOnly: params?.subscribersOnly,
 		},
 	});
 

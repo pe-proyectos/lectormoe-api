@@ -38,6 +38,7 @@ export const router = () => new Elysia()
                 if (body.number) body.number = Number.parseFloat(body.number.toString());
                 params.chapterNumber = Number.parseFloat(params.chapterNumber.toString());
                 if (body.releasedAt !== undefined) body.releasedAt = body.releasedAt && new Date(body.releasedAt);
+                if (body.subscribersOnly !== undefined) body.subscribersOnly = body?.subscribersOnly?.toString() === "true";
                 if (body.pages instanceof File || typeof body.pages === 'string')
                     body.pages = [body.pages];
             },

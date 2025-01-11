@@ -54,6 +54,7 @@ export const listMangaCustom = async (organizationId: number, filters: MangaCust
 					select: {
 						number: true,
 						releasedAt: true,
+						subscribersOnly: true,
 					},
 					orderBy: {
 						number: 'desc',
@@ -133,6 +134,7 @@ export const listMangaCustom = async (organizationId: number, filters: MangaCust
 				select: {
 					number: true,
 					releasedAt: true,
+					subscribersOnly: true,
 					views: true,
 				},
 				orderBy: {
