@@ -48,6 +48,7 @@ export const createMangaCustom = async (organizationId: number, params: CreateMa
 			description: params.description,
 			releasedAt: params.releasedAt,
 			nextChapterAt: params.nextChapterAt,
+			requireLogin: params.requireLogin,
 		}
 	});
 

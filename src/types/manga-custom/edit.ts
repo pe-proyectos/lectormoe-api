@@ -26,6 +26,7 @@ export const EditMangaCustomRequest = t.Object({
     ),
     releasedAt: t.Optional(t.Date()),
     nextChapterAt: t.Optional(t.Date()),
+    requireLogin: t.Optional(t.Boolean()),
 });
 
 export type EditMangaCustomRequest = Static<typeof EditMangaCustomRequest>;

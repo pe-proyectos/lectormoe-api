@@ -28,6 +28,7 @@ export const editMangaCustom = async (organizationId: number, mangaSlug: string,
 			description: params.description,
 			releasedAt: params.releasedAt,
 			nextChapterAt: params.nextChapterAt,
+			requireLogin: params.requireLogin,
 			...params.image && params.image instanceof File ? {} : {
 				imageUrl: params.image === "null" ? null : params.image,
 			},
