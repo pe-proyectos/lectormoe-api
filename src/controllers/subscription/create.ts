@@ -1,6 +1,6 @@
 import { prisma } from "../../models/prisma";
 import type { CreateSubscriptionRequest } from "../../types/subscription/create";
-import { getPlanById, getSubscriptionByPaypalId } from '../../util/paypal';
+import { getPlanById, getSubscriptionByPaypalId, suspendSubscriptionByPaypalId } from '../../util/paypal';
 
 export const createSubscription = async (organizationId: number, userId: number, params: CreateSubscriptionRequest) => {
 	const organization = await prisma.organization.findFirst({
@@ -38,17 +38,6 @@ export const createSubscription = async (organizationId: number, userId: number,
 		throw new Error(`Subscription plan '${params.subscriptionPlanId}' not found`);
 	}
 
-	const alreadySubscribed = await prisma.subscription.findFirst({
-		where: {
-			userId: user.id,
-			active: true,
-		},
-	});
-
-	if (alreadySubscribed) {
-		throw new Error("You are already subscribed to a plan");
-	}
-
 	const paypalPlan = await getPlanById(subscriptionPlanExists.planId);
 
 	if (!paypalPlan) {
@@ -57,6 +46,32 @@ export const createSubscription = async (organizationId: number, userId: number,
 
 	// validate if subscription is active
 	const subscription = await getSubscriptionByPaypalId(params.paypalSubscriptionId);
+	// if active disactive previous subscriptions
+
+	if (subscription.status === "ACTIVE") {
+		const previousSubscriptions = await prisma.subscription.findMany({
+			where: {
+				userId: user.id,
+				active: true,
+			},
+		});
+		for (const previousSubscription of previousSubscriptions) {
+			try {
+				await suspendSubscriptionByPaypalId(previousSubscription.paypalSubscriptionId);
+				const disabledPaypalSubscription = await getSubscriptionByPaypalId(previousSubscription.paypalSubscriptionId);
+				await prisma.subscription.update({
+					where: { id: previousSubscription.id },
+					data: {
+						active: disabledPaypalSubscription?.status === "ACTIVE",
+						status: disabledPaypalSubscription?.status,
+						endDate: new Date(),
+					},
+				});
+			} catch (error) {
+				console.error(error);
+			}
+		}
+	}
 
 	const createdSubscription = await prisma.subscription.create({
 		data: {
