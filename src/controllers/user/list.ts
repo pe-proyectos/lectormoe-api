@@ -30,6 +30,15 @@ export const listUser = async (organizationId: number, filters: UserListQuery) =
 			mode: "insensitive",
 		};
 	}
+	if (filters?.subscriptionPlanIds) {
+		where.subscriptions = {
+			some: {
+				subscriptionPlanId: {
+					in: filters.subscriptionPlanIds,
+				},
+			},
+		};
+	}
 	let users = await prisma.user.findMany({
 		where: {
 			...where,

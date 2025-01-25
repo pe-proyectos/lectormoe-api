@@ -23,8 +23,16 @@ export const listSubscriptionPlans = async (organizationId: number, filters: Sub
 		include: {
 			subscriptions: {
 				select: {
-					active: true,
+					startDate: true,
+					user: {
+						select: {
+							username: true,
+						}
+					},
 				},
+				where: {
+					active: true,
+				}
 			},
 		},
 		orderBy: {

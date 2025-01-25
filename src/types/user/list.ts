@@ -12,6 +12,7 @@ export const UserListQuery = t.Object({
     username: t.Optional(t.String()),
     email: t.Optional(t.String()),
     order: t.Optional(t.Enum(OrderEnum)),
+    subscriptionPlanIds: t.Optional(t.Array(t.Number())),
     ...PaginationQuery.properties,
 });
 

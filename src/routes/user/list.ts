@@ -27,5 +27,10 @@ export const router = () => new Elysia()
                 status: t.Boolean(),
                 data: t.Any(),
             }),
+            transform({ query }) {
+              if (query.subscriptionPlanIds) {
+                query.subscriptionPlanIds = query.subscriptionPlanIds.toString().split(',').map(Number);
+              }
+            }
         }
     );
