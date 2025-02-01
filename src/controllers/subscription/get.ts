@@ -14,16 +14,3 @@ export const getSubscriptionPlanBySlug = async (organizationId: number, slug: st
 
 	return subscriptionPlan;
 };
-
-export const getAllSubscriptionPlans = async (organizationId: number) => {
-	const subscriptionPlans = await prisma.subscriptionPlan.findMany({
-		where: {
-			organizationId: organizationId,
-		},
-		orderBy: {
-			createdAt: "desc",
-		},
-	});
-
-	return subscriptionPlans;
-};

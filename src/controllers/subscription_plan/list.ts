@@ -30,9 +30,13 @@ export const listSubscriptionPlans = async (organizationId: number, filters: Sub
 						}
 					},
 				},
+				orderBy: {
+					startDate: "asc",
+				},
 				where: {
 					active: true,
 				}
+
 			},
 		},
 		orderBy: {
