@@ -52,9 +52,6 @@ model Organization {
   enableAdsterraAds Boolean @default(false)
   adsterraAdSource  String? @db.Text
 
-  enableDisqusIntegration Boolean @default(false)
-  disqusEmbedUrl          String? @db.Text
-
   facebookUrl  String? @db.Text
   twitterUrl   String? @db.Text
   instagramUrl String? @db.Text
@@ -75,6 +72,7 @@ model Organization {
   analytics         Analytics[]
   countryOptions    CountryOptions[]
   subscriptionPlans SubscriptionPlan[]
+  comments          Comment[]
 
   @@map("organization")
 }
@@ -145,6 +143,7 @@ model User {
   tokens    Token[]
   analytics Analytics[]
   history   UserChapterHistory[]
+  comments  Comment[]
 
   favorites Favorite[]
 
@@ -305,6 +304,34 @@ model Page {
 
   @@unique([number, chapterId])
   @@map("page")
+}
+
+model Comment {
+  id             Int  @id @default(autoincrement())
+  organizationId Int
+  userId         Int
+  parentId       Int?
+
+  mangaCustomId Int?
+  chapterId     Int?
+  pageNumber    Int?
+
+  identifier String   @db.VarChar(512)
+  comment    String   @db.Text
+  createdAt  DateTime @default(now()) @db.Timestamp
+  updatedAt  DateTime @updatedAt
+
+  // Relations
+  organization Organization @relation(fields: [organizationId], references: [id])
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  parent       Comment?     @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies      Comment[]    @relation("CommentReplies")
+
+  // Indexes
+  @@index([organizationId])
+  @@index([userId])
+  @@index([mangaCustomId, chapterId, pageNumber])
+  @@map("comment")
 }
 
 model Ranking {

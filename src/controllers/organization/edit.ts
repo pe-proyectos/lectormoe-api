@@ -20,8 +20,6 @@ export const editOrganization = async (organizationId: number, params: EditOrgan
 			enableSubscriptionSection: params.enableSubscriptionSection,
 			enableGoogleAds: params.enableGoogleAds,
 			enableAdsterraAds: params.enableAdsterraAds,
-			enableDisqusIntegration: params.enableDisqusIntegration,
-			disqusEmbedUrl: params.disqusEmbedUrl,
 			facebookUrl: params.facebookUrl,
 			twitterUrl: params.twitterUrl,
 			instagramUrl: params.instagramUrl,
