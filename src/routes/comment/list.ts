@@ -7,8 +7,8 @@ export const router = () => new Elysia()
     .use(useOrganization())
     .get(
         '/api/comment',
-        async ({ organizationId, query: { identifier, mangaCustomId, chapterId } }) => {
-            const data = await listComments(organizationId, identifier, mangaCustomId ? parseInt(mangaCustomId) : undefined, chapterId ? parseInt(chapterId) : undefined);
+        async ({ organizationId, query: { identifier } }) => {
+            const data = await listComments(organizationId, identifier);
             return { status: true, data };
         },
         {

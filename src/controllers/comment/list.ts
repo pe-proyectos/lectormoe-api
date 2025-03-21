@@ -10,9 +10,6 @@ export const listComments = async (
     where: {
       organizationId,
       identifier,
-      mangaCustomId,
-      chapterId,
-      parentId: null // Only get top-level comments
     },
     orderBy: {
       createdAt: 'desc'
