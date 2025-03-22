@@ -4,7 +4,9 @@ export const CreateCommentRequest = t.Object({
     identifier: t.String(),
     comment: t.String(),
     parentId: t.Optional(t.Number()),
-    imageUrl: t.Optional(t.String()),
+    image: t.Optional(t.File({
+        maxSize: '25m',
+    })),
 });
 
 export type CreateCommentRequest = Static<typeof CreateCommentRequest>;

@@ -20,7 +20,19 @@ export const listComments = async (
         select: {
           id: true,
           username: true,
-          imageUrl: true
+          imageUrl: true,
+          subscriptions: {
+            where: {
+              active: true,
+            },
+            select: {
+              subscriptionPlan: {
+                select: {
+                  name: true,
+                }
+              }
+            }
+          }
         }
       },
       likes: {
