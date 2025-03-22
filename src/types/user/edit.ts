@@ -44,6 +44,8 @@ export const EditUserRequest = t.Object({
   canCreateSubscriptionPlan: t.Optional(t.Boolean()),
   canEditSubscriptionPlan: t.Optional(t.Boolean()),
   canDeleteSubscriptionPlan: t.Optional(t.Boolean()),
+  // Comment
+  canDeleteComment: t.Optional(t.Boolean()),
   // Perks
   hideAds: t.Optional(t.Boolean()),
   canDownload: t.Optional(t.Boolean()),

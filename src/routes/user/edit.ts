@@ -140,6 +140,9 @@ export const router = () =>
           body.canDeleteSubscriptionPlan =
             body.canDeleteSubscriptionPlan.toString() === "true";
         }
+        if (body.canDeleteComment) {
+          body.canDeleteComment = body.canDeleteComment.toString() === "true";
+        }
         if (body.hideAds) {
           body.hideAds = body.hideAds.toString() === "true";
         }

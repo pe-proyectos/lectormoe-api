@@ -3,16 +3,17 @@ import { prisma } from "../../models/prisma";
 export const listComments = async (
   organizationId: number,
   identifier: string,
-  mangaCustomId?: number,
-  chapterId?: number,
+  userId?: number
 ) => {
   return await prisma.comment.findMany({
     where: {
       organizationId,
       identifier,
+      parentId: null,
+      deletedAt: null
     },
     orderBy: {
-      createdAt: 'desc'
+      createdAt: 'asc'
     },
     include: {
       user: {
@@ -22,6 +23,11 @@ export const listComments = async (
           imageUrl: true
         }
       },
+      likes: {
+        where: {
+          userId
+        }
+      }
     }
   });
 };

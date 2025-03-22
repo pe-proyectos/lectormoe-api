@@ -73,6 +73,7 @@ model Organization {
   countryOptions    CountryOptions[]
   subscriptionPlans SubscriptionPlan[]
   comments          Comment[]
+  commentLikes      CommentLike[]
 
   @@map("organization")
 }
@@ -124,6 +125,8 @@ model User {
   canCreateSubscriptionPlan Boolean @default(false)
   canEditSubscriptionPlan   Boolean @default(false)
   canDeleteSubscriptionPlan Boolean @default(false)
+  // Comment
+  canDeleteComment          Boolean @default(false)
   // ## / Permissions
 
   // ## Perks
@@ -312,26 +315,44 @@ model Comment {
   userId         Int
   parentId       Int?
 
-  mangaCustomId Int?
-  chapterId     Int?
-  pageNumber    Int?
-
-  identifier String   @db.VarChar(512)
-  comment    String   @db.Text
-  createdAt  DateTime @default(now()) @db.Timestamp
-  updatedAt  DateTime @updatedAt
+  identifier    String    @db.VarChar(512)
+  comment       String    @db.Text
+  imageUrl      String?   @db.Text
+  likesCount    Int       @default(0)
+  dislikesCount Int       @default(0)
+  createdAt     DateTime  @default(now()) @db.Timestamp
+  updatedAt     DateTime  @updatedAt
+  deletedAt     DateTime?
 
   // Relations
-  organization Organization @relation(fields: [organizationId], references: [id])
-  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-  parent       Comment?     @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
-  replies      Comment[]    @relation("CommentReplies")
+  organization Organization  @relation(fields: [organizationId], references: [id])
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  parent       Comment?      @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies      Comment[]     @relation("CommentReplies")
+  likes        CommentLike[]
 
   // Indexes
   @@index([organizationId])
   @@index([userId])
-  @@index([mangaCustomId, chapterId, pageNumber])
+  @@index([identifier])
   @@map("comment")
+}
+
+model CommentLike {
+  id             Int     @id @default(autoincrement())
+  commentId      Int
+  userId         Int
+  organizationId Int
+  like           Boolean @default(true)
+
+  createdAt DateTime @default(now()) @db.Timestamp
+  updatedAt DateTime @updatedAt
+
+  comment      Comment      @relation(fields: [commentId], references: [id])
+  organization Organization @relation(fields: [organizationId], references: [id])
+
+  @@unique([commentId, userId, organizationId])
+  @@map("comment_like")
 }
 
 model Ranking {

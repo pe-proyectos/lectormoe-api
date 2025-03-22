@@ -9,10 +9,6 @@ export const router = () => new Elysia()
     .post(
         '/api/comment',
         async ({ organizationId, user, body }) => {
-            if (!user.canCreateGenre) {
-                throw new Error("No tiene permisos para crear géneros.");
-            }
-
             const commentCreated = await createComment(organizationId, user.id, body);
 
             if (!commentCreated) {

@@ -7,11 +7,9 @@ export const createComment = async (organizationId: number, userId: number, para
       userId,
       organizationId,
       comment: params.comment,
-      mangaCustomId: params.mangaCustomId,
-      chapterId: params.chapterId,
-      pageNumber: params.pageNumber,
-      // parentId: params.parentId,
-      identifier: params.identifier
+      parentId: params.parentId,
+      identifier: params.identifier,
+      imageUrl: params.imageUrl
     }
   });
 
