@@ -23,6 +23,7 @@
   "dependencies": {
     "@elysiajs/bearer": "^1.2.0",
     "@elysiajs/cors": "^1.2.0",
+    "@elysiajs/cron": "^1.2.0",
     "@elysiajs/jwt": "^1.2.0",
     "@grotto/logysia": "^0.1.6",
     "@paypal/checkout-server-sdk": "^1.0.3",

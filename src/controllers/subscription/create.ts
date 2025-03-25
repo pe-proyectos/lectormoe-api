@@ -65,6 +65,11 @@ export const createSubscription = async (organizationId: number, userId: number,
 						active: disabledPaypalSubscription?.status === "ACTIVE",
 						status: disabledPaypalSubscription?.status,
 						endDate: new Date(),
+						cycleExecutions: disabledPaypalSubscription?.billing_info.cycle_executions.reduce((acc: number, curr: any) => acc + curr.cycles_completed, 0),
+						failedPaymentsCount: disabledPaypalSubscription?.billing_info.failed_payments_count,
+						nextPayment: disabledPaypalSubscription?.billing_info.next_billing_time,
+						lastPayment: disabledPaypalSubscription?.billing_info.last_payment.time,
+						lastAmount: parseFloat(disabledPaypalSubscription?.billing_info.last_payment.amount.value),
 					},
 				});
 			} catch (error) {
@@ -80,8 +85,12 @@ export const createSubscription = async (organizationId: number, userId: number,
 			paypalSubscriptionId: subscription.id,
 			status: subscription.status,
 			startDate: subscription.start_time,
-			lastPayment: subscription.billing_info.last_payment.time,
 			active: subscription.status === "ACTIVE",
+			cycleExecutions: subscription?.billing_info.cycle_executions.reduce((acc: number, curr: any) => acc + curr.cycles_completed, 0),
+			failedPaymentsCount: subscription?.billing_info.failed_payments_count,
+			nextPayment: subscription?.billing_info.next_billing_time,
+			lastPayment: subscription?.billing_info.last_payment.time,
+			lastAmount: parseFloat(subscription?.billing_info.last_payment.amount.value),
 		}
 	});
 

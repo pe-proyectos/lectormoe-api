@@ -247,6 +247,35 @@ export async function getSubscriptionByPaypalId(paypalSubscriptionId: string) {
   return subscription;
 }
 
+export async function getTransactionsOfSubscription(paypalSubscriptionId: string) {
+  const token = await getAccessToken();
+
+  const startTime = new Date('2024-08-26').toISOString();
+  const endTime = new Date().toISOString();
+
+  const response = await fetch(
+    `${environment.url}/billing/subscriptions/${paypalSubscriptionId}/transactions?start_time=${startTime}&end_time=${endTime}`,
+    {
+      method: "GET", 
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  if (!response.ok) {
+    const error = await response.json();
+    console.error("Error al obtener las transacciones:", error);
+    throw new Error("Failed to get PayPal subscription transactions.");
+  }
+
+  const { transactions } = await response.json();
+  console.log("Transacciones obtenidas:", transactions);
+  return transactions;
+}
+
 export async function suspendSubscriptionByPaypalId(paypalSubscriptionId: string) {
   const token = await getAccessToken();
 

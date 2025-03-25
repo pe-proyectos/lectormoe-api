@@ -52,6 +52,11 @@ export const handlePaypalWebhook = async (webhookEvent: PaypalWebhookEvent) => {
             ...updateData,
             status: paypalSubscription?.status,
             active: paypalSubscription?.status === "ACTIVE",
+            cycleExecutions: paypalSubscription?.billing_info.cycle_executions.reduce((acc: number, curr: any) => acc + curr.cycles_completed, 0),
+            failedPaymentsCount: paypalSubscription?.billing_info.failed_payments_count,
+            nextPayment: paypalSubscription?.billing_info.next_billing_time,
+            lastPayment: paypalSubscription?.billing_info.last_payment.time,
+            lastAmount: parseFloat(paypalSubscription?.billing_info.last_payment.amount.value),
         },
     });
 
