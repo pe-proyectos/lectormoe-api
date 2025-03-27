@@ -143,6 +143,12 @@ export const router = () =>
         if (body.canDeleteComment) {
           body.canDeleteComment = body.canDeleteComment.toString() === "true";
         }
+        if (body.canEditComment) {
+          body.canEditComment = body.canEditComment.toString() === "true";
+        }
+        if (body.canHideComment) {
+          body.canHideComment = body.canHideComment.toString() === "true";
+        }
         if (body.hideAds) {
           body.hideAds = body.hideAds.toString() === "true";
         }

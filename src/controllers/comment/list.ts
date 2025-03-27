@@ -3,6 +3,7 @@ import { prisma } from "../../models/prisma";
 export const listComments = async (
   organizationId: number,
   identifier: string,
+  admin: boolean,
   userId?: number
 ) => {
   return await prisma.comment.findMany({
@@ -10,7 +11,8 @@ export const listComments = async (
       organizationId,
       identifier,
       parentId: null,
-      deletedAt: null
+      deletedAt: admin ? undefined : null,
+      hiddenAt: admin ? undefined : null,
     },
     orderBy: {
       createdAt: 'asc'

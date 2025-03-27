@@ -9,8 +9,8 @@ export const router = () => new Elysia()
     .use(loggedOptional())
     .get(
         '/api/comment',
-        async ({ organizationId, user, query: { identifier } }) => {
-            const data = await listComments(organizationId, identifier, user?.id);
+        async ({ organizationId, user, query: { identifier, admin } }) => {
+            const data = await listComments(organizationId, identifier, admin?.toString() === 'true', user?.id);
             return { status: true, data };
         },
         {
