@@ -33,54 +33,64 @@ async function calculateTransactions() {
         console.log(
           `--- Uploading transaction ${transaction.id} ${transaction.status} ${transaction.amount_with_breakdown.net_amount.value}`
         );
-        const total = parseFloat(transaction.amount_with_breakdown.gross_amount.value);
-        const paypalFee = parseFloat(transaction.amount_with_breakdown.fee_amount.value);
-        const capibaraFee = Math.max(0, (total * 0.5) - paypalFee);
+        const total = parseFloat(
+          transaction.amount_with_breakdown.gross_amount.value
+        );
+        const paypalFee = parseFloat(
+          transaction.amount_with_breakdown.fee_amount.value
+        );
+        const capibaraFee = Math.max(0, total * 0.5 - paypalFee);
         const finalAmount = total - capibaraFee - paypalFee;
-        const transactionExists = await prisma.organizationTransaction.findFirst({
-          where: {
-            transactionId: transaction.id,
-          },
-        });
-        await prisma.organizationTransaction.upsert({
-          where: {
-            id: transactionExists?.id || undefined,
-          },
-          update: {
-            organizationId: organization.id,
-            origin: "PAYPAL",
-            description: `Plan ${subscription.subscriptionPlan.name} | Subscripcion ${subscription.paypalSubscriptionId} | Status ${transaction.status} | Monto Total USD ${total} | Comision Paypal USD ${paypalFee} | Comision capibara + Comision Paypal USD ${capibaraFee} | Monto final USD ${finalAmount} | Fecha UTC ${transaction.time} | Pagado desde el email ${transaction.payer_email}`,
-            beforeFeesAmount: total,
-            amount: finalAmount,
-            currency:
-              transaction.amount_with_breakdown.net_amount.currency_code,
-            type: "EARNING",
-            status: transaction.status,
-            paymentMethod: "PAYPAL",
-            paymentDetails: JSON.stringify(transaction),
-            transactionId: transaction.id,
-            capibaraFee: capibaraFee,
-            paypalFee: paypalFee,
-            transactionDate: new Date(transaction.time),
-          },
-          create: {
-            organizationId: organization.id,
-            origin: "PAYPAL",
-            description: `Plan ${subscription.subscriptionPlan.name} | Subscripcion ${subscription.paypalSubscriptionId} | Status ${transaction.status} | Monto Total USD ${total} | Comision Paypal USD ${paypalFee} | Comision capibara + Comision Paypal USD ${capibaraFee} | Monto final USD ${finalAmount} | Fecha UTC ${transaction.time} | Pagado desde el email ${transaction.payer_email}`,
-            beforeFeesAmount: total,
-            amount: finalAmount,
-            currency:
-              transaction.amount_with_breakdown.net_amount.currency_code,
-            type: "EARNING",
-            status: transaction.status,
-            paymentMethod: "PAYPAL",
-            paymentDetails: JSON.stringify(transaction),
-            transactionId: transaction.id,
-            capibaraFee: capibaraFee,
-            paypalFee: paypalFee,
-            transactionDate: new Date(transaction.time),
-          },
-        });
+        const transactionExists =
+          await prisma.organizationTransaction.findFirst({
+            where: {
+              transactionId: transaction.id,
+            },
+          });
+        if (transactionExists) {
+          await prisma.organizationTransaction.update({
+            where: {
+              id: transactionExists.id,
+            },
+            data: {
+              organizationId: organization.id,
+              origin: "PAYPAL",
+              description: `Plan ${subscription.subscriptionPlan.name} | Subscripcion ${subscription.paypalSubscriptionId} | Status ${transaction.status} | Monto Total USD ${total} | Comision Paypal USD ${paypalFee} | Comision capibara + Comision Paypal USD ${capibaraFee} | Monto final USD ${finalAmount} | Fecha UTC ${transaction.time} | Pagado desde el email ${transaction.payer_email}`,
+              beforeFeesAmount: total,
+              amount: finalAmount,
+              currency:
+                transaction.amount_with_breakdown.net_amount.currency_code,
+              type: "EARNING",
+              status: transaction.status,
+              paymentMethod: "PAYPAL",
+              paymentDetails: JSON.stringify(transaction),
+              transactionId: transaction.id,
+              capibaraFee: capibaraFee,
+              paypalFee: paypalFee,
+              transactionDate: new Date(transaction.time),
+            },
+          });
+        } else {
+          await prisma.organizationTransaction.create({
+            data: {
+              organizationId: organization.id,
+              origin: "PAYPAL",
+              description: `Plan ${subscription.subscriptionPlan.name} | Subscripcion ${subscription.paypalSubscriptionId} | Status ${transaction.status} | Monto Total USD ${total} | Comision Paypal USD ${paypalFee} | Comision capibara + Comision Paypal USD ${capibaraFee} | Monto final USD ${finalAmount} | Fecha UTC ${transaction.time} | Pagado desde el email ${transaction.payer_email}`,
+              beforeFeesAmount: total,
+              amount: finalAmount,
+              currency:
+                transaction.amount_with_breakdown.net_amount.currency_code,
+              type: "EARNING",
+              status: transaction.status,
+              paymentMethod: "PAYPAL",
+              paymentDetails: JSON.stringify(transaction),
+              transactionId: transaction.id,
+              capibaraFee: capibaraFee,
+              paypalFee: paypalFee,
+              transactionDate: new Date(transaction.time),
+            },
+          });
+        }
       }
     }
     console.log(
@@ -93,7 +103,7 @@ export const router = () =>
   new Elysia().use(
     cron({
       name: "heartbeat",
-      pattern: Patterns.everyHours(12),
+      pattern: Patterns.everyMinutes(59),
       run: calculateTransactions,
     })
   );
