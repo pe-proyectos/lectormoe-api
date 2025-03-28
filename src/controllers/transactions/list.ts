@@ -6,7 +6,7 @@ export const listTransactions = async (organizationId: number) => {
 			organizationId: organizationId,
 		},
 		orderBy: {
-			createdAt: "desc",
+			transactionDate: "desc",
 		},
 	});
 

@@ -55,7 +55,7 @@ async function calculateTransactions() {
             data: {
               organizationId: organization.id,
               origin: "PAYPAL",
-              description: `Plan ${subscription.subscriptionPlan.name} | Subscripcion ${subscription.paypalSubscriptionId} | Status ${transaction.status} | Monto Total USD ${total} | Comision Paypal USD ${paypalFee} | Comision capibara + Comision Paypal USD ${capibaraFee} | Monto final USD ${finalAmount} | Fecha UTC ${transaction.time} | Pagado desde el email ${transaction.payer_email}`,
+              description: `Plan ${subscription.subscriptionPlan.name} | Subscripcion ${subscription.paypalSubscriptionId} | Status ${transaction.status} | Monto Total USD ${total} | Comision Paypal USD ${paypalFee} | Comision capibara USD ${capibaraFee} | Monto final USD ${finalAmount} | Fecha UTC ${transaction.time} | Pagado desde el email ${transaction.payer_email}`,
               beforeFeesAmount: total,
               amount: finalAmount,
               currency:
@@ -75,7 +75,7 @@ async function calculateTransactions() {
             data: {
               organizationId: organization.id,
               origin: "PAYPAL",
-              description: `Plan ${subscription.subscriptionPlan.name} | Subscripcion ${subscription.paypalSubscriptionId} | Status ${transaction.status} | Monto Total USD ${total} | Comision Paypal USD ${paypalFee} | Comision capibara + Comision Paypal USD ${capibaraFee} | Monto final USD ${finalAmount} | Fecha UTC ${transaction.time} | Pagado desde el email ${transaction.payer_email}`,
+              description: `Plan ${subscription.subscriptionPlan.name} | Subscripcion ${subscription.paypalSubscriptionId} | Status ${transaction.status} | Monto Total USD ${total} | Comision Paypal USD ${paypalFee} | Comision capibara USD ${capibaraFee} | Monto final USD ${finalAmount} | Fecha UTC ${transaction.time} | Pagado desde el email ${transaction.payer_email}`,
               beforeFeesAmount: total,
               amount: finalAmount,
               currency:

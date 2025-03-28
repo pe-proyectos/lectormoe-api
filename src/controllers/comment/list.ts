@@ -15,7 +15,7 @@ export const listComments = async (
       hiddenAt: admin ? undefined : null,
     },
     orderBy: {
-      createdAt: 'asc'
+      createdAt: admin ? 'desc' : 'asc'
     },
     include: {
       user: {
