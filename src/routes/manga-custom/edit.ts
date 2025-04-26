@@ -41,6 +41,9 @@ export const router = () => new Elysia()
                 if (body.requireLogin) {
                     body.requireLogin = body.requireLogin.toString() === "true";
                 }
+                if (body.isSimulRelease) {
+                    body.isSimulRelease = body.isSimulRelease.toString() === "true";
+                }
                 if(body.genreIds) {
                     body.genreIds = (body.genreIds as unknown as string).split(',').map(genreId => Number.parseInt(genreId.trim()));
                 }

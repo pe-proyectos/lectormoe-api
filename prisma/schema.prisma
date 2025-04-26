@@ -253,6 +253,7 @@ model MangaCustom {
   status           String    @default("ongoing") @db.VarChar(256)
   visibility       String    @default("public") @db.VarChar(256)
   requireLogin     Boolean   @default(false)
+  isSimulRelease   Boolean   @default(false)
 
   createdAt DateTime @default(now()) @db.Timestamp
   updatedAt DateTime @updatedAt
