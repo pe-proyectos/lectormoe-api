@@ -67,6 +67,7 @@ export const createChapter = async (organizationId: number, mangaSlug: string, p
 						imageWidth: pageSize.width,
 						imageHeight: pageSize.height,
 						imageType: pageSize.type,
+						isSinglePage: params.singlePages?.includes(index) ?? false,
 					},
 				})
 			}

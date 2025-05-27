@@ -18,5 +18,5 @@ export const useOrganization = () => new Elysia()
         if (!organization) {
             throw new Error('No autorizado, organización no encontrada.');
         }
-        return { organizationId: organization.id };
+        return { organizationId: organization.id, organization };
     });

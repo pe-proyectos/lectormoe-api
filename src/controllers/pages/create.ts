@@ -43,6 +43,7 @@ export const createPages = async (organizationId: number, mangaSlug: string, cha
                 imageWidth: pageSize.width,
                 imageHeight: pageSize.height,
                 imageType: pageSize.type,
+                isSinglePage: params.singlePages?.includes(index) ?? false,
             },
         });
 

@@ -36,6 +36,16 @@ export const router = () => new Elysia()
                 body.subscribersOnly = body?.subscribersOnly?.toString() === "true";
                 if (body.pages instanceof File || typeof body.pages === 'string')
                     body.pages = [body.pages];
+                try {
+                  body.singlePages = (
+                    body.singlePages
+                      ? JSON.parse(body?.singlePages?.toString() || "[]")
+                      : []
+                  ).map(Number) as number[];
+                } catch (error) {
+                  console.error(error);
+                  body.singlePages = [];
+                }
             },
         }
     );

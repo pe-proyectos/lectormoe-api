@@ -147,10 +147,11 @@ model User {
   rankings Ranking[]
   audits   Audit[]
 
-  tokens    Token[]
-  analytics Analytics[]
-  history   UserChapterHistory[]
-  comments  Comment[]
+  tokens              Token[]
+  analytics           Analytics[]
+  history             UserChapterHistory[]
+  comments            Comment[]
+  passwordResetTokens PasswordResetToken[]
 
   favorites Favorite[]
 
@@ -160,6 +161,19 @@ model User {
   @@unique([organizationId, slug])
   @@unique([organizationId, email])
   @@map("user")
+}
+
+model PasswordResetToken {
+  id     Int @id @default(autoincrement())
+  userId Int
+
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("password_reset_token")
 }
 
 model CountryOptions {
@@ -300,13 +314,14 @@ model Page {
   id        Int @id @default(autoincrement())
   chapterId Int
 
-  number      Int
-  imageWidth  Int
-  imageHeight Int
-  imageType   String   @db.VarChar(256)
-  imageUrl    String   @db.Text
-  createdAt   DateTime @default(now()) @db.Timestamp
-  updatedAt   DateTime @updatedAt
+  number       Int
+  imageWidth   Int
+  imageHeight  Int
+  imageType    String   @db.VarChar(256)
+  imageUrl     String   @db.Text
+  isSinglePage Boolean  @default(false)
+  createdAt    DateTime @default(now()) @db.Timestamp
+  updatedAt    DateTime @updatedAt
 
   chapter Chapter @relation(fields: [chapterId], references: [id])
 

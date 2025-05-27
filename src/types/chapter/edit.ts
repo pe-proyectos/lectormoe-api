@@ -23,6 +23,10 @@ export const EditChapterRequest = t.Object({
             ])
         )
     ),
+    singlePages: t.Optional(t.Union([
+        t.Array(t.Number()),
+        t.String(),
+    ])),
 });
 
 export type EditChapterRequest = Static<typeof EditChapterRequest>;

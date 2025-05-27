@@ -72,6 +72,7 @@ export const editChapter = async (organizationId: number, mangaSlug: string, cha
 						imageWidth: pageSize.width,
 						imageHeight: pageSize.height,
 						imageType: pageSize.type,
+						isSinglePage: params.singlePages?.includes(index) ?? false,
 					},
 				})
 			} else if (typeof page === "string") {
@@ -85,6 +86,7 @@ export const editChapter = async (organizationId: number, mangaSlug: string, cha
 							imageHeight: existingPage.imageHeight,
 							imageWidth: existingPage.imageWidth,
 							imageType: existingPage.imageType,
+							isSinglePage: params.singlePages?.includes(index) ?? false,
 						},
 					});
 				} else {
@@ -96,6 +98,7 @@ export const editChapter = async (organizationId: number, mangaSlug: string, cha
 							imageHeight: 100,
 							imageWidth: 100,
 							imageType: "any",
+							isSinglePage: params.singlePages?.includes(index) ?? false,
 						},
 					});
 				}

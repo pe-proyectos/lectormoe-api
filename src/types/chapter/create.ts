@@ -21,6 +21,10 @@ export const CreateChapterRequest = t.Object({
             t.String(),
         ])
     )),
+    singlePages: t.Optional(t.Union([
+        t.Array(t.Number()),
+        t.String(),
+    ])),
 });
 
 export type CreateChapterRequest = Static<typeof CreateChapterRequest>;

@@ -37,8 +37,18 @@ export const router = () => new Elysia()
                 status: t.Boolean(),
                 data: t.Any(),
             }),
-            transform({ params }) {
+            transform({ params, body }) {
                 params.chapterNumber = parseFloat(params.chapterNumber.toString());
+                try {
+                  body.singlePages = (
+                    body.singlePages
+                      ? JSON.parse(body?.singlePages?.toString() || "[]")
+                      : []
+                  ).map(Number) as number[];
+                } catch (error) {
+                  console.error(error);
+                  body.singlePages = [];
+                }
             },
         }
     );
