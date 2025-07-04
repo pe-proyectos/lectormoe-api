@@ -18,6 +18,16 @@ const prepareCustomManga = (mangaCustom: any) => {
 export const listMangaCustom = async (organizationId: number, filters: MangaCustomListQuery) => {
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	const order: any = {};
+	
+	// Handle search parameter
+	const searchConditions = filters.search ? {
+		OR: [
+			{ title: { contains: filters.search, mode: "insensitive" } },
+			{ shortDescription: { contains: filters.search, mode: "insensitive" } },
+			{ description: { contains: filters.search, mode: "insensitive" } },
+		]
+	} : {};
+	
 	if (filters.order === OrderEnum.FEATURED) {
 		order.orderBy = {
 			views: "desc",
@@ -35,18 +45,20 @@ export const listMangaCustom = async (organizationId: number, filters: MangaCust
 				organization: {
 					id: organizationId,
 				},
-				title: {
-					contains: filters.title,
-					mode: "insensitive"
-				},
-				shortDescription: {
-					contains: filters.shortDescription,
-					mode: "insensitive"
-				},
-				description: {
-					contains: filters.description,
-					mode: "insensitive"
-				},
+				...(filters.search ? searchConditions : {
+					title: {
+						contains: filters.title,
+						mode: "insensitive"
+					},
+					shortDescription: {
+						contains: filters.shortDescription,
+						mode: "insensitive"
+					},
+					description: {
+						contains: filters.description,
+						mode: "insensitive"
+					},
+				}),
 			},
 			include: {
 				manga: true,
@@ -115,18 +127,20 @@ export const listMangaCustom = async (organizationId: number, filters: MangaCust
 			organization: {
 				id: organizationId,
 			},
-			title: {
-				contains: filters.title,
-				mode: "insensitive"
-			},
-			shortDescription: {
-				contains: filters.shortDescription,
-				mode: "insensitive"
-			},
-			description: {
-				contains: filters.description,
-				mode: "insensitive"
-			},
+			...(filters.search ? searchConditions : {
+				title: {
+					contains: filters.title,
+					mode: "insensitive"
+				},
+				shortDescription: {
+					contains: filters.shortDescription,
+					mode: "insensitive"
+				},
+				description: {
+					contains: filters.description,
+					mode: "insensitive"
+				},
+			}),
 		},
 		include: {
 			manga: true,
@@ -166,18 +180,20 @@ export const listMangaCustom = async (organizationId: number, filters: MangaCust
 			organization: {
 				id: organizationId,
 			},
-			title: {
-				contains: filters.title,
-				mode: "insensitive"
-			},
-			shortDescription: {
-				contains: filters.shortDescription,
-				mode: "insensitive"
-			},
-			description: {
-				contains: filters.description,
-				mode: "insensitive"
-			},
+			...(filters.search ? searchConditions : {
+				title: {
+					contains: filters.title,
+					mode: "insensitive"
+				},
+				shortDescription: {
+					contains: filters.shortDescription,
+					mode: "insensitive"
+				},
+				description: {
+					contains: filters.description,
+					mode: "insensitive"
+				},
+			}),
 		},
 	});
 
