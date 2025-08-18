@@ -2,41 +2,38 @@ import { Elysia, t } from 'elysia';
 
 import { loggedUserOnly } from '../../plugins/auth';
 import { getComment } from '../../controllers/comment/get';
-import { hideComment } from '../../controllers/comment/hide';
+import { restoreComment } from '../../controllers/comment/restore';
 
 export const router = () => new Elysia()
     .use(loggedUserOnly())
     .post(
-        '/api/comment/:id/hide',
-        async ({ params, organizationId, user, body }) => {
+        '/api/comment/:id/restore',
+        async ({ params, organizationId, user }) => {
             const comment = await getComment(Number(params.id));
             if (!comment) {
                 throw new Error("Comentario no encontrado.");
             }
             if (comment.organizationId !== organizationId) {
-                throw new Error("No tiene permisos para ocultar este comentario.");
+                throw new Error("No tiene permisos para restaurar este comentario.");
             }
             if (!user.canHideComment) {
-                throw new Error("No tiene permisos para ocultar este comentario.");
+                throw new Error("No tiene permisos para restaurar este comentario.");
             }
 
-            const commentHidden = await hideComment(parseInt(params.id), body.reason, user.id);
+            const commentRestored = await restoreComment(parseInt(params.id));
 
-            if (!commentHidden) {
-                throw new Error("No se pudo ocultar el comentario.");
+            if (!commentRestored) {
+                throw new Error("No se pudo restaurar el comentario.");
             }
 
             return {
                 status: true,
-                data: commentHidden,
+                data: commentRestored,
             };
         },
         {
             params: t.Object({
                 id: t.String(),
-            }),
-            body: t.Object({
-                reason: t.Optional(t.String()),
             }),
             response: t.Object({
                 status: t.Boolean(),

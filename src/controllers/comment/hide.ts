@@ -1,6 +1,6 @@
 import { prisma } from "../../models/prisma";
 
-export const hideComment = async (commentId: number, hiddenReason?: string) => {
+export const hideComment = async (commentId: number, hiddenReason?: string, hiddenByUserId?: number) => {
   const comment = await prisma.comment.findUnique({
     where: {
       id: commentId,
@@ -19,6 +19,7 @@ export const hideComment = async (commentId: number, hiddenReason?: string) => {
       data: {
         hiddenAt: null,
         hiddenReason: null,
+        hiddenByUserId: null,
       }
     });
   } else {
@@ -29,6 +30,7 @@ export const hideComment = async (commentId: number, hiddenReason?: string) => {
       data: {
         hiddenAt: new Date(),
         hiddenReason,
+        hiddenByUserId,
       }
     });
   }

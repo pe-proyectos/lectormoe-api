@@ -15,11 +15,9 @@ export const router = () => new Elysia()
             if (comment.organizationId !== organizationId) {
                 throw new Error("No tiene permisos para eliminar este comentario.");
             }
-            const isMyComment = comment.userId === user.id;
-            const canDeleteComments = user.canDeleteComment || isMyComment;
-
-            if (!canDeleteComments) {
-                throw new Error("No tiene permisos para eliminar este comentario.");
+            // Solo el autor del comentario puede eliminarlo
+            if (comment.userId !== user.id) {
+                throw new Error("Solo el autor del comentario puede eliminarlo.");
             }
 
             const commentDeleted = await deleteComment(Number(params.id));

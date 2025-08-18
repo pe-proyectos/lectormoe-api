@@ -156,6 +156,7 @@ model User {
   favorites Favorite[]
 
   organization Organization @relation(fields: [organizationId], references: [id])
+  Comment      Comment[]    @relation("HiddenByUser")
 
   @@unique([organizationId, username])
   @@unique([organizationId, slug])
@@ -344,12 +345,14 @@ model Comment {
   updatedAt     DateTime  @updatedAt
   deletedAt     DateTime?
 
-  hiddenAt     DateTime?
-  hiddenReason String?   @db.Text
+  hiddenAt       DateTime?
+  hiddenReason   String?   @db.Text
+  hiddenByUserId Int?
 
   // Relations
   organization Organization  @relation(fields: [organizationId], references: [id])
   user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  hiddenByUser User?         @relation("HiddenByUser", fields: [hiddenByUserId], references: [id])
   parent       Comment?      @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
   replies      Comment[]     @relation("CommentReplies")
   likes        CommentLike[]

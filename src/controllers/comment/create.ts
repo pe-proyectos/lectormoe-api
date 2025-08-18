@@ -8,7 +8,7 @@ export const createComment = async (organizationId: number, userId: number, para
       userId,
       organizationId,
       comment: params.comment,
-      parentId: params.parentId,
+      parentId: params.parentId ? parseInt(params.parentId.toString()) : null,
       identifier: params.identifier,
     }
   });
