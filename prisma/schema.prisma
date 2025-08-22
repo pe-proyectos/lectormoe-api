@@ -584,6 +584,7 @@ model Subscription {
 
   user             User             @relation(fields: [userId], references: [id])
   subscriptionPlan SubscriptionPlan @relation(fields: [subscriptionPlanId], references: [id])
+  transactions     OrganizationTransaction[]
 
   @@map("subscription")
 }
@@ -592,6 +593,7 @@ model OrganizationTransaction {
   id Int @id @default(autoincrement())
 
   organizationId   Int
+  subscriptionId   Int? // Optional: not all transactions are from subscriptions
   origin           String
   description      String?   @db.Text
   beforeFeesAmount Float
@@ -610,6 +612,7 @@ model OrganizationTransaction {
   updatedAt DateTime @updatedAt
 
   organization Organization @relation(fields: [organizationId], references: [id])
+  subscription   Subscription? @relation(fields: [subscriptionId], references: [id])
 
   @@map("organization_transaction")
 }

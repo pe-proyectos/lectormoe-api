@@ -21,6 +21,58 @@ export const handlePaypalWebhook = async (webhookEvent: PaypalWebhookEvent) => {
     switch (webhookEvent.event_type) {
         case "PAYMENT.SALE.COMPLETED":
             updateData = { endDate: null, lastPayment: new Date() };
+            
+            // Create transaction record for successful payment
+            try {
+                const paymentAmount = parseFloat(webhookEvent.resource.amount.total);
+                const paymentCurrency = webhookEvent.resource.amount.currency;
+                
+                // Get subscription plan details
+                const subscriptionWithPlan = await prisma.subscription.findFirst({
+                    where: { id: subscription.id },
+                    include: {
+                        subscriptionPlan: true,
+                        user: {
+                            include: {
+                                organization: true
+                            }
+                        }
+                    }
+                });
+
+                if (subscriptionWithPlan) {
+                    // Calculate fees (PayPal typically charges 2.9% + $0.30)
+                    const paypalFee = Math.max(0.30, paymentAmount * 0.029);
+                    const capibaraFee = paymentAmount * 0.05; // Assuming 5% for Capibara
+                    const netAmount = paymentAmount - paypalFee - capibaraFee;
+
+                                         // Create organization transaction
+                     await prisma.organizationTransaction.create({
+                         data: {
+                             organizationId: subscriptionWithPlan.user.organizationId,
+                             subscriptionId: subscription.id,
+                             origin: 'SUBSCRIPTION',
+                             description: `Pago de suscripción - ${subscriptionWithPlan.subscriptionPlan.name}`,
+                             beforeFeesAmount: paymentAmount,
+                             amount: netAmount,
+                             currency: paymentCurrency,
+                             type: 'EARNING',
+                             status: 'COMPLETED',
+                             paymentMethod: 'PAYPAL',
+                             paymentDetails: JSON.stringify(webhookEvent.resource),
+                             transactionId: webhookEvent.resource.id,
+                             paypalFee: paypalFee,
+                             capibaraFee: capibaraFee,
+                             transactionDate: new Date(webhookEvent.resource.create_time)
+                         }
+                     });
+
+                    console.log(`Created transaction for subscription ${subscription.id}: $${paymentAmount} -> $${netAmount} (net after fees)`);
+                }
+            } catch (error) {
+                console.error('Error creating transaction record:', error);
+                // Don't fail the webhook if transaction creation fails
+            }
             break;
         case "BILLING.SUBSCRIPTION.CREATED":
         case "BILLING.SUBSCRIPTION.ACTIVATED":

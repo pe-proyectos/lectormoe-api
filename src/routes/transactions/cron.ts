@@ -30,9 +30,9 @@ async function calculateTransactions() {
         subscription.paypalSubscriptionId
       );
       for (const transaction of transactions) {
-        console.log(
-          `--- Uploading transaction ${transaction.id} ${transaction.status} ${transaction.amount_with_breakdown.net_amount.value}`
-        );
+              console.log(
+        `--- Uploading transaction ${transaction.id} ${transaction.status} ${transaction.amount_with_breakdown.net_amount.value} for subscription ${subscription.id}`
+      );
         const total = parseFloat(
           transaction.amount_with_breakdown.gross_amount.value
         );
@@ -54,8 +54,9 @@ async function calculateTransactions() {
             },
             data: {
               organizationId: organization.id,
-              origin: "PAYPAL",
-              description: `Plan ${subscription.subscriptionPlan.name} | Subscripcion ${subscription.paypalSubscriptionId} | Status ${transaction.status} | Monto Total USD ${total} | Comision Paypal USD ${paypalFee} | Comision capibara USD ${capibaraFee} | Monto final USD ${finalAmount} | Fecha UTC ${transaction.time} | Pagado desde el email ${transaction.payer_email}`,
+              subscriptionId: subscription.id,
+              origin: "SUBSCRIPTION",
+              description: `Pago de suscripción - ${subscription.subscriptionPlan.name}`,
               beforeFeesAmount: total,
               amount: finalAmount,
               currency:
@@ -74,8 +75,9 @@ async function calculateTransactions() {
           await prisma.organizationTransaction.create({
             data: {
               organizationId: organization.id,
-              origin: "PAYPAL",
-              description: `Plan ${subscription.subscriptionPlan.name} | Subscripcion ${subscription.paypalSubscriptionId} | Status ${transaction.status} | Monto Total USD ${total} | Comision Paypal USD ${paypalFee} | Comision capibara USD ${capibaraFee} | Monto final USD ${finalAmount} | Fecha UTC ${transaction.time} | Pagado desde el email ${transaction.payer_email}`,
+              subscriptionId: subscription.id,
+              origin: "SUBSCRIPTION",
+              description: `Pago de suscripción - ${subscription.subscriptionPlan.name}`,
               beforeFeesAmount: total,
               amount: finalAmount,
               currency:
@@ -90,6 +92,7 @@ async function calculateTransactions() {
               transactionDate: new Date(transaction.time),
             },
           });
+          console.log(`--- Transaction ${transaction.id} linked to subscription ${subscription.id}`);
         }
       }
     }
