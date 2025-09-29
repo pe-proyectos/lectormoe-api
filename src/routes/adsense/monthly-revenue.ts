@@ -15,8 +15,8 @@ export const router = () =>
   new Elysia().use(
     cron({
       name: "monthly-adsense-revenue",
-      // Run on the 1st of every month at 2:00 AM
-      pattern: "0 2 1 * *",
+      // Run on the 2nd of every month at 2:00 AM
+      pattern: "0 2 2 * *",
       run: fetchMonthlyAdSenseRevenue,
     })
   );
