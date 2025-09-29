@@ -4,7 +4,7 @@ WORKDIR /usr/src/app
 FROM base AS install
 ARG NODE_VERSION=20
 RUN apt update \
-    && apt install -y curl
+    && apt install -y curl openssl
 RUN curl -L https://raw.githubusercontent.com/tj/n/master/bin/n -o n \
     && bash n $NODE_VERSION \
     && rm n \
