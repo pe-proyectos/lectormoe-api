@@ -34,6 +34,9 @@ async function updateCronTransactions() {
                     const subscription = await prisma.subscription.findFirst({
                         where: {
                             paypalSubscriptionId: paypalSubscriptionId
+                        },
+                        include: {
+                            subscriptionPlan: true
                         }
                     });
 
