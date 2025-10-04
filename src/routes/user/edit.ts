@@ -65,6 +65,9 @@ export const router = () =>
         if (body.hierarchyLevel) {
           body.hierarchyLevel = Number.parseInt(body.hierarchyLevel.toString());
         }
+        if(body.birthdate){
+          body.birthdate = new Date(body.birthdate);
+        }
         if (body.canSeeAdminPanel) {
           body.canSeeAdminPanel = body.canSeeAdminPanel.toString() === "true";
         }

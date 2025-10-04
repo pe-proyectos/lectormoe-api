@@ -28,6 +28,7 @@ export const CreateMangaCustomRequest = t.Object({
     nextChapterAt: t.Optional(t.Date()),
     requireLogin: t.Optional(t.Boolean()),
     isSimulRelease: t.Optional(t.Boolean()),
+    isNSFW: t.Optional(t.Boolean()),
 });
 
 export type CreateMangaCustomRequest = Static<typeof CreateMangaCustomRequest>;

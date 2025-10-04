@@ -7,7 +7,7 @@ export async function uploadFile(fileBuffer: ArrayBuffer | Buffer, filename: str
     const formData = new FormData();
 
     const url = `${Bun.env.FILE_UPLOAD_ENDPOINT}?filename=${generatedFileName}`;
-
+    //@ts-ignore
     formData.append('file', new Blob([fileBuffer]), generatedFileName);
 
     const response = await fetch(url, {

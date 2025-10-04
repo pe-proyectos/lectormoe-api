@@ -50,6 +50,7 @@ export const createMangaCustom = async (organizationId: number, params: CreateMa
 			nextChapterAt: params.nextChapterAt,
 			requireLogin: params.requireLogin,
 			isSimulRelease: params.isSimulRelease,
+			isNSFW: params.isNSFW,
 		}
 	});
 

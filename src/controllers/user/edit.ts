@@ -25,6 +25,9 @@ export const editUser = async (
     data: {
       role: params.role,
       description: params.description,
+
+      birthdate:params.birthdate,
+      
       hierarchyLevel: params.hierarchyLevel,
       canSeeAdminPanel: params.canSeeAdminPanel,
       canEditOrganization: params.canEditOrganization,

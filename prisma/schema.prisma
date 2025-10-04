@@ -1,6 +1,6 @@
 generator client {
   provider      = "prisma-client-js"
-  binaryTargets = ["debian-openssl-3.0.x", "debian-openssl-1.1.x"]
+  binaryTargets = ["debian-openssl-3.0.x", "debian-openssl-1.1.x", "windows"]
 }
 
 datasource db {
@@ -89,9 +89,10 @@ model User {
   email    String @db.VarChar(256)
   password String @db.VarChar(256)
 
-  role        String  @default("user") @db.VarChar(256)
-  description String? @db.Text
-  imageUrl    String? @db.Text
+  birthdate   DateTime?
+  role        String    @default("user") @db.VarChar(256)
+  description String?   @db.Text
+  imageUrl    String?   @db.Text
 
   hierarchyLevel Int @default(0)
 
@@ -270,6 +271,8 @@ model MangaCustom {
   visibility       String    @default("public") @db.VarChar(256)
   requireLogin     Boolean   @default(false)
   isSimulRelease   Boolean   @default(false)
+
+  isNSFW Boolean @default(false)
 
   createdAt DateTime @default(now()) @db.Timestamp
   updatedAt DateTime @updatedAt
@@ -582,8 +585,8 @@ model Subscription {
 
   active Boolean @default(true)
 
-  user             User             @relation(fields: [userId], references: [id])
-  subscriptionPlan SubscriptionPlan @relation(fields: [subscriptionPlanId], references: [id])
+  user             User                      @relation(fields: [userId], references: [id])
+  subscriptionPlan SubscriptionPlan          @relation(fields: [subscriptionPlanId], references: [id])
   transactions     OrganizationTransaction[]
 
   @@map("subscription")
@@ -611,8 +614,8 @@ model OrganizationTransaction {
   createdAt DateTime @default(now()) @db.Timestamp
   updatedAt DateTime @updatedAt
 
-  organization Organization @relation(fields: [organizationId], references: [id])
-  subscription   Subscription? @relation(fields: [subscriptionId], references: [id])
+  organization Organization  @relation(fields: [organizationId], references: [id])
+  subscription Subscription? @relation(fields: [subscriptionId], references: [id])
 
   @@map("organization_transaction")
 }

@@ -2,6 +2,9 @@ import { type Static, t } from "elysia";
 
 export const EditUserRequest = t.Object({
   role: t.Optional(t.String()),
+
+  birthdate: t.Optional(t.Date()),
+  
   description: t.Optional(t.String()),
   hierarchyLevel: t.Optional(t.Number()),
   image: t.Optional(

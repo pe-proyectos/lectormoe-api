@@ -30,6 +30,7 @@ export const editMangaCustom = async (organizationId: number, mangaSlug: string,
 			nextChapterAt: params.nextChapterAt,
 			requireLogin: params.requireLogin,
 			isSimulRelease: params.isSimulRelease,
+			isNSFW: params.isNSFW,
 			...params.image && params.image instanceof File ? {} : {
 				imageUrl: params.image === "null" ? null : params.image,
 			},

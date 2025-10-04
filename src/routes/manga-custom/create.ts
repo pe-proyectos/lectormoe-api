@@ -44,6 +44,9 @@ export const router = () => new Elysia()
                 if (body.isSimulRelease) {
                     body.isSimulRelease = body.isSimulRelease.toString() === "true";
                 }
+                if(body.isNSFW){
+                    body.isNSFW = body.isNSFW.toString() === "true";
+                }
                 if(body.genreIds) {
                     body.genreIds = (body.genreIds as unknown as string).split(',').map(genreId => Number.parseInt(genreId.trim()));
                 }
