@@ -34,6 +34,10 @@ model Organization {
   imageUrl            String? @db.Text
   bannerUrl           String? @db.Text
   faviconUrl          String? @db.Text
+
+  discordWebhookUrlNewChapter       String? @db.Text
+  discordWebhookUrlNewSubscription  String? @db.Text
+
   useBlockedCountries Boolean @default(false)
   useAllowedCountries Boolean @default(false)
 
@@ -45,6 +49,9 @@ model Organization {
   enableMainSlider          Boolean @default(false)
   enableMainBanner          Boolean @default(false)
   enableSubscriptionSection Boolean @default(false)
+
+  enableDiscordWebhookNewChapter       Boolean @default(false)
+  enableDiscordWebhookNewSubscription  Boolean @default(false)
 
   enableGoogleAds        Boolean @default(false)
   googleAdsMetaContent   String? @db.Text
@@ -79,6 +86,7 @@ model Organization {
 
   @@map("organization")
 }
+
 
 model User {
   id             Int @id @default(autoincrement())
