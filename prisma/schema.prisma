@@ -9,163 +9,124 @@ datasource db {
 }
 
 model Token {
-  id     Int @id @default(autoincrement())
-  userId Int
-
-  token String @db.Text
-
-  createdAt DateTime @default(now()) @db.Timestamp
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  token     String
+  createdAt DateTime @default(now()) @db.Timestamp(6)
   updatedAt DateTime @updatedAt
-
-  user User @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
 
   @@map("token")
 }
 
 model Organization {
-  id Int @id @default(autoincrement())
+  id                                  Int                       @id @default(autoincrement())
+  name                                String                    @db.VarChar(256)
+  title                               String                    @db.VarChar(256)
+  domain                              String                    @unique @db.VarChar(256)
+  slug                                String                    @unique @db.VarChar(256)
+  description                         String?
+  imageUrl                            String?
+  createdAt                           DateTime                  @default(now()) @db.Timestamp(6)
+  updatedAt                           DateTime                  @updatedAt
+  googleAdsMetaContent                String?
+  googleAdsAdsTxtContent              String?
+  bannerUrl                           String?
+  discordUrl                          String?
+  facebookUrl                         String?
+  instagramUrl                        String?
+  logoUrl                             String?
+  patreonUrl                          String?
+  tiktokUrl                           String?
+  twitchUrl                           String?
+  twitterUrl                          String?
+  youtubeUrl                          String?
+  enableGoogleAds                     Boolean                   @default(false)
+  faviconUrl                          String?
+  enableMangaSection                  Boolean                   @default(true)
+  enableManhuaSection                 Boolean                   @default(false)
+  enableManhwaSection                 Boolean                   @default(false)
+  language                            String                    @default("es") @db.VarChar(2)
+  monitorWebsiteId                    String?
+  useAllowedCountries                 Boolean                   @default(false)
+  useBlockedCountries                 Boolean                   @default(false)
+  adsterraAdSource                    String?
+  enableAdsterraAds                   Boolean                   @default(false)
+  enableMainBanner                    Boolean                   @default(false)
+  enableMainSlider                    Boolean                   @default(false)
+  enableSubscriptionSection           Boolean                   @default(false)
+  discordWebhookUrlNewChapter         String?
+  discordWebhookUrlNewSubscription    String?
 
-  name                String  @db.VarChar(256)
-  title               String  @db.VarChar(256)
-  domain              String  @unique @db.VarChar(256)
-  slug                String  @unique @db.VarChar(256)
-  description         String? @db.Text
-  logoUrl             String? @db.Text
-  imageUrl            String? @db.Text
-  bannerUrl           String? @db.Text
-  faviconUrl          String? @db.Text
-
-  discordWebhookUrlNewChapter       String? @db.Text
-  discordWebhookUrlNewSubscription  String? @db.Text
-
-  useBlockedCountries Boolean @default(false)
-  useAllowedCountries Boolean @default(false)
-
-  language String @default("es") @db.VarChar(2)
-
-  enableMangaSection        Boolean @default(true)
-  enableManhuaSection       Boolean @default(false)
-  enableManhwaSection       Boolean @default(false)
-  enableMainSlider          Boolean @default(false)
-  enableMainBanner          Boolean @default(false)
-  enableSubscriptionSection Boolean @default(false)
-
-  enableDiscordWebhookNewChapter       Boolean @default(false)
-  enableDiscordWebhookNewSubscription  Boolean @default(false)
-
-  enableGoogleAds        Boolean @default(false)
-  googleAdsMetaContent   String? @db.Text
-  googleAdsAdsTxtContent String? @db.Text
-
-  enableAdsterraAds Boolean @default(false)
-  adsterraAdSource  String? @db.Text
-
-  facebookUrl  String? @db.Text
-  twitterUrl   String? @db.Text
-  instagramUrl String? @db.Text
-  youtubeUrl   String? @db.Text
-  patreonUrl   String? @db.Text
-  tiktokUrl    String? @db.Text
-  discordUrl   String? @db.Text
-  twitchUrl    String? @db.Text
-
-  monitorWebsiteId String? @db.Text
-
-  createdAt DateTime @default(now()) @db.Timestamp
-  updatedAt DateTime @updatedAt
-
-  users                   User[]
-  mangaCustoms            MangaCustom[]
-  genres                  Genre[]
-  analytics               Analytics[]
-  countryOptions          CountryOptions[]
-  subscriptionPlans       SubscriptionPlan[]
-  comments                Comment[]
-  commentLikes            CommentLike[]
-  OrganizationTransaction OrganizationTransaction[]
+  enableDiscordWebhookNewChapter      Boolean                   @default(false)
+  enableDiscordWebhookNewSubscription Boolean                   @default(false)
+  
+  analytics                           Analytics[]
+  comments                            Comment[]
+  commentLikes                        CommentLike[]
+  countryOptions                      CountryOptions[]
+  genres                              Genre[]
+  mangaCustoms                        MangaCustom[]
+  OrganizationTransaction             OrganizationTransaction[]
+  subscriptionPlans                   SubscriptionPlan[]
+  users                               User[]
 
   @@map("organization")
 }
 
-
 model User {
-  id             Int @id @default(autoincrement())
-  organizationId Int
-
-  username String @db.VarChar(256)
-  slug     String @db.VarChar(256)
-  email    String @db.VarChar(256)
-  password String @db.VarChar(256)
-
-  birthdate   DateTime?
-  role        String    @default("user") @db.VarChar(256)
-  description String?   @db.Text
-  imageUrl    String?   @db.Text
-
-  hierarchyLevel Int @default(0)
-
-  // ## Permissions
-  // Organization
-  canSeeAdminPanel          Boolean @default(false)
-  canEditOrganization       Boolean @default(false)
-  canDeleteOrganization     Boolean @default(false)
-  // Organization Members
-  canEditUser               Boolean @default(false)
-  canDeleteUser             Boolean @default(false)
-  // Author
-  canCreateAuthor           Boolean @default(false)
-  // Manga Profile
-  canCreateMangaProfile     Boolean @default(false)
-  // Manga Custom
-  canCreateMangaCustom      Boolean @default(false)
-  canEditMangaCustom        Boolean @default(false)
-  canDeleteMangaCustom      Boolean @default(false)
-  // Genre
-  canCreateGenre            Boolean @default(false)
-  canEditGenre              Boolean @default(false)
-  canDeleteGenre            Boolean @default(false)
-  // Chapter
-  canCreateChapter          Boolean @default(false)
-  canEditChapter            Boolean @default(false)
-  canDeleteChapter          Boolean @default(false)
-  // Pages
-  canCreatePage             Boolean @default(false)
-  canEditPage               Boolean @default(false)
-  canDeletePage             Boolean @default(false)
-  // Subscription Plan
-  canCreateSubscriptionPlan Boolean @default(false)
-  canEditSubscriptionPlan   Boolean @default(false)
-  canDeleteSubscriptionPlan Boolean @default(false)
-  // Comment
-  canDeleteComment          Boolean @default(false)
-  canEditComment            Boolean @default(false)
-  canHideComment            Boolean @default(false)
-  // ## / Permissions
-
-  // ## Perks
-  hideAds           Boolean @default(false)
-  canDownload       Boolean @default(false)
-  canReadUnreleased Boolean @default(false)
-  // ## / Perks
-
-  createdAt DateTime @default(now()) @db.Timestamp
-  updatedAt DateTime @updatedAt
-
-  subscriptions Subscription[]
-
-  rankings Ranking[]
-  audits   Audit[]
-
-  tokens              Token[]
-  analytics           Analytics[]
-  history             UserChapterHistory[]
-  comments            Comment[]
-  passwordResetTokens PasswordResetToken[]
-
-  favorites Favorite[]
-
-  organization Organization @relation(fields: [organizationId], references: [id])
-  Comment      Comment[]    @relation("HiddenByUser")
+  id                        Int                  @id @default(autoincrement())
+  username                  String               @db.VarChar(256)
+  slug                      String               @db.VarChar(256)
+  email                     String               @db.VarChar(256)
+  password                  String               @db.VarChar(256)
+  createdAt                 DateTime             @default(now()) @db.Timestamp(6)
+  updatedAt                 DateTime             @updatedAt
+  organizationId            Int
+  canCreateAuthor           Boolean              @default(false)
+  canCreateChapter          Boolean              @default(false)
+  canCreateGenre            Boolean              @default(false)
+  canCreateMangaCustom      Boolean              @default(false)
+  canCreateMangaProfile     Boolean              @default(false)
+  canCreatePage             Boolean              @default(false)
+  canDeleteChapter          Boolean              @default(false)
+  canDeleteGenre            Boolean              @default(false)
+  canDeleteMangaCustom      Boolean              @default(false)
+  canDeleteOrganization     Boolean              @default(false)
+  canDeletePage             Boolean              @default(false)
+  canEditChapter            Boolean              @default(false)
+  canEditGenre              Boolean              @default(false)
+  canEditMangaCustom        Boolean              @default(false)
+  canEditOrganization       Boolean              @default(false)
+  canEditPage               Boolean              @default(false)
+  canSeeAdminPanel          Boolean              @default(false)
+  description               String?
+  hierarchyLevel            Int                  @default(0)
+  imageUrl                  String?
+  role                      String               @default("user") @db.VarChar(256)
+  canDeleteUser             Boolean              @default(false)
+  canEditUser               Boolean              @default(false)
+  canCreateSubscriptionPlan Boolean              @default(false)
+  canDeleteSubscriptionPlan Boolean              @default(false)
+  canEditSubscriptionPlan   Boolean              @default(false)
+  canDownload               Boolean              @default(false)
+  canReadUnreleased         Boolean              @default(false)
+  hideAds                   Boolean              @default(false)
+  canDeleteComment          Boolean              @default(false)
+  canEditComment            Boolean              @default(false)
+  canHideComment            Boolean              @default(false)
+  birthdate                 DateTime?
+  analytics                 Analytics[]
+  audits                    Audit[]
+  Comment                   Comment[]            @relation("HiddenByUser")
+  comments                  Comment[]
+  favorites                 Favorite[]
+  passwordResetTokens       PasswordResetToken[]
+  rankings                  Ranking[]
+  subscriptions             Subscription[]
+  tokens                    Token[]
+  organization              Organization         @relation(fields: [organizationId], references: [id])
+  history                   UserChapterHistory[]
 
   @@unique([organizationId, username])
   @@unique([organizationId, slug])
@@ -174,201 +135,171 @@ model User {
 }
 
 model PasswordResetToken {
-  id     Int @id @default(autoincrement())
-  userId Int
-
+  id        Int      @id @default(autoincrement())
+  userId    Int
   token     String   @unique
   expiresAt DateTime
   createdAt DateTime @default(now())
-
-  user User @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
 
   @@map("password_reset_token")
 }
 
 model CountryOptions {
-  id Int @id @default(autoincrement())
-
+  id             Int          @id @default(autoincrement())
   organizationId Int
-
-  countryCode String @db.VarChar(2)
-  language    String @db.VarChar(2)
-  countryName String @db.VarChar(256)
-
-  allowed Boolean @default(true)
-  blocked Boolean @default(false)
-
-  createdAt DateTime @default(now()) @db.Timestamp
-  updatedAt DateTime @updatedAt
-
-  organization Organization @relation(fields: [organizationId], references: [id])
+  countryCode    String       @db.VarChar(2)
+  language       String       @db.VarChar(2)
+  countryName    String       @db.VarChar(256)
+  allowed        Boolean      @default(true)
+  blocked        Boolean      @default(false)
+  createdAt      DateTime     @default(now()) @db.Timestamp(6)
+  updatedAt      DateTime     @updatedAt
+  organization   Organization @relation(fields: [organizationId], references: [id])
 
   @@unique([organizationId, countryCode])
   @@map("country_options")
 }
 
 model Author {
-  id Int @id @default(autoincrement())
-
-  name             String  @unique @db.VarChar(256)
-  slug             String  @unique @db.VarChar(256)
-  shortDescription String? @db.VarChar(300)
-  description      String? @db.Text
-  imageUrl         String? @db.Text
-
-  createdAt DateTime @default(now()) @db.Timestamp
-  updatedAt DateTime @updatedAt
-
-  mangas Manga[]
+  id               Int      @id @default(autoincrement())
+  name             String   @unique @db.VarChar(256)
+  slug             String   @unique @db.VarChar(256)
+  shortDescription String?  @db.VarChar(300)
+  description      String?
+  imageUrl         String?
+  createdAt        DateTime @default(now()) @db.Timestamp(6)
+  updatedAt        DateTime @updatedAt
+  mangas           Manga[]  @relation("AuthorToManga")
 
   @@map("author")
 }
 
 model BookType {
-  id Int @id @default(autoincrement())
-
-  code              String  @unique @db.VarChar(256)
+  id                Int     @id @default(autoincrement())
   name              String  @db.VarChar(256)
   default_read_type String?
+  code              String  @unique @db.VarChar(256)
   Manga             Manga[]
 
   @@map("book_type")
 }
 
 model Manga {
-  id           Int @id @default(autoincrement())
-  demographyId Int
-  bookTypeId   Int
-
-  title            String    @unique @db.VarChar(256)
-  slug             String    @unique @db.VarChar(256)
-  shortDescription String?   @db.VarChar(300)
-  description      String?   @db.Text
-  imageUrl         String?   @db.Text
-  bannerUrl        String?   @db.Text
+  id               Int           @id @default(autoincrement())
+  demographyId     Int
+  title            String        @unique @db.VarChar(256)
+  slug             String        @unique @db.VarChar(256)
+  shortDescription String?       @db.VarChar(300)
+  description      String?
+  imageUrl         String?
   releasedAt       DateTime?
   nextChapterAt    DateTime?
-
-  createdAt DateTime @default(now()) @db.Timestamp
-  updatedAt DateTime @updatedAt
-
-  authors Author[]
-  custom  MangaCustom[]
-
-  bookType   BookType   @relation(fields: [bookTypeId], references: [id])
-  demography Demography @relation(fields: [demographyId], references: [id])
+  createdAt        DateTime      @default(now()) @db.Timestamp(6)
+  updatedAt        DateTime      @updatedAt
+  bannerUrl        String?
+  bookTypeId       Int
+  bookType         BookType      @relation(fields: [bookTypeId], references: [id])
+  demography       Demography    @relation(fields: [demographyId], references: [id])
+  custom           MangaCustom[]
+  authors          Author[]      @relation("AuthorToManga")
 
   @@map("manga")
 }
 
 model MangaCustom {
-  id             Int @id @default(autoincrement())
-  mangaId        Int
-  organizationId Int
-
-  title            String    @db.VarChar(256)
-  shortDescription String?   @db.VarChar(300)
-  description      String?   @db.Text
-  imageUrl         String?   @db.Text
-  bannerUrl        String?   @db.Text
-  releasedAt       DateTime?
-  nextChapterAt    DateTime?
-  lastChapterAt    DateTime?
-  views            Int       @default(0)
-  status           String    @default("ongoing") @db.VarChar(256)
-  visibility       String    @default("public") @db.VarChar(256)
-  requireLogin     Boolean   @default(false)
-  isSimulRelease   Boolean   @default(false)
-
-  isNSFW Boolean @default(false)
-
-  createdAt DateTime @default(now()) @db.Timestamp
-  updatedAt DateTime @updatedAt
-
+  id                Int                @id @default(autoincrement())
+  mangaId           Int
+  organizationId    Int
+  title             String             @db.VarChar(256)
+  shortDescription  String?            @db.VarChar(300)
+  description       String?
+  imageUrl          String?
+  releasedAt        DateTime?
+  nextChapterAt     DateTime?
+  createdAt         DateTime           @default(now()) @db.Timestamp(6)
+  updatedAt         DateTime           @updatedAt
+  views             Int                @default(0)
+  lastChapterAt     DateTime?
+  status            String             @default("ongoing") @db.VarChar(256)
+  visibility        String             @default("public") @db.VarChar(256)
+  bannerUrl         String?
+  requireLogin      Boolean            @default(false)
+  isSimulRelease    Boolean            @default(false)
+  isNSFW            Boolean            @default(false)
   chapters          Chapter[]
-  rankings          Ranking[]
-  genres            Genre[]
-  viewsHistory      ViewsHistory[]
   favorites         Favorite[]
-  subscriptionPlans SubscriptionPlan[]
-
-  manga        Manga        @relation(fields: [mangaId], references: [id])
-  organization Organization @relation(fields: [organizationId], references: [id])
+  manga             Manga              @relation(fields: [mangaId], references: [id])
+  organization      Organization       @relation(fields: [organizationId], references: [id])
+  rankings          Ranking[]
+  viewsHistory      ViewsHistory[]
+  genres            Genre[]            @relation("GenreToMangaCustom")
+  subscriptionPlans SubscriptionPlan[] @relation("MangaCustomToSubscriptionPlan")
 
   @@unique([mangaId, organizationId])
   @@map("manga_custom")
 }
 
 model Chapter {
-  id            Int @id @default(autoincrement())
-  mangaCustomId Int
-
+  id              Int                  @id @default(autoincrement())
   number          Float
-  title           String   @db.VarChar(256)
-  imageUrl        String?  @db.VarChar(256)
-  views           Int      @default(0)
-  subscribersOnly Boolean  @default(false)
-  releasedAt      DateTime @default(now()) @db.Timestamp
-
-  createdAt DateTime @default(now()) @db.Timestamp
-  updatedAt DateTime @updatedAt
-
-  mangaCustom  MangaCustom          @relation(fields: [mangaCustomId], references: [id])
-  pages        Page[]
-  userHistory  UserChapterHistory[]
-  viewsHistory ViewsHistory[]
+  title           String               @db.VarChar(256)
+  imageUrl        String?              @db.VarChar(256)
+  createdAt       DateTime             @default(now()) @db.Timestamp(6)
+  updatedAt       DateTime             @updatedAt
+  mangaCustomId   Int
+  views           Int                  @default(0)
+  releasedAt      DateTime             @default(now()) @db.Timestamp(6)
+  subscribersOnly Boolean              @default(false)
+  mangaCustom     MangaCustom          @relation(fields: [mangaCustomId], references: [id])
+  pages           Page[]
+  userHistory     UserChapterHistory[]
+  viewsHistory    ViewsHistory[]
 
   @@unique([number, mangaCustomId])
   @@map("chapter")
 }
 
 model Page {
-  id        Int @id @default(autoincrement())
-  chapterId Int
-
+  id           Int      @id @default(autoincrement())
+  chapterId    Int
   number       Int
-  imageWidth   Int
+  imageUrl     String
+  createdAt    DateTime @default(now()) @db.Timestamp(6)
+  updatedAt    DateTime @updatedAt
   imageHeight  Int
   imageType    String   @db.VarChar(256)
-  imageUrl     String   @db.Text
+  imageWidth   Int
   isSinglePage Boolean  @default(false)
-  createdAt    DateTime @default(now()) @db.Timestamp
-  updatedAt    DateTime @updatedAt
-
-  chapter Chapter @relation(fields: [chapterId], references: [id])
+  chapter      Chapter  @relation(fields: [chapterId], references: [id])
 
   @@unique([number, chapterId])
   @@map("page")
 }
 
 model Comment {
-  id             Int  @id @default(autoincrement())
+  id             Int           @id @default(autoincrement())
   organizationId Int
   userId         Int
   parentId       Int?
-
-  identifier    String    @db.VarChar(512)
-  comment       String    @db.Text
-  imageUrl      String?   @db.Text
-  likesCount    Int       @default(0)
-  dislikesCount Int       @default(0)
-  createdAt     DateTime  @default(now()) @db.Timestamp
-  updatedAt     DateTime  @updatedAt
-  deletedAt     DateTime?
-
+  identifier     String        @db.VarChar(512)
+  comment        String
+  createdAt      DateTime      @default(now()) @db.Timestamp(6)
+  updatedAt      DateTime      @updatedAt
+  imageUrl       String?
+  likesCount     Int           @default(0)
+  dislikesCount  Int           @default(0)
+  deletedAt      DateTime?
   hiddenAt       DateTime?
-  hiddenReason   String?   @db.Text
+  hiddenReason   String?
   hiddenByUserId Int?
+  hiddenByUser   User?         @relation("HiddenByUser", fields: [hiddenByUserId], references: [id])
+  organization   Organization  @relation(fields: [organizationId], references: [id])
+  parent         Comment?      @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies        Comment[]     @relation("CommentReplies")
+  user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  likes          CommentLike[]
 
-  // Relations
-  organization Organization  @relation(fields: [organizationId], references: [id])
-  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  hiddenByUser User?         @relation("HiddenByUser", fields: [hiddenByUserId], references: [id])
-  parent       Comment?      @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
-  replies      Comment[]     @relation("CommentReplies")
-  likes        CommentLike[]
-
-  // Indexes
   @@index([organizationId])
   @@index([userId])
   @@index([identifier])
@@ -376,254 +307,213 @@ model Comment {
 }
 
 model CommentLike {
-  id             Int     @id @default(autoincrement())
+  id             Int          @id @default(autoincrement())
   commentId      Int
   userId         Int
   organizationId Int
-  like           Boolean @default(true)
-
-  createdAt DateTime @default(now()) @db.Timestamp
-  updatedAt DateTime @updatedAt
-
-  comment      Comment      @relation(fields: [commentId], references: [id])
-  organization Organization @relation(fields: [organizationId], references: [id])
+  like           Boolean      @default(true)
+  createdAt      DateTime     @default(now()) @db.Timestamp(6)
+  updatedAt      DateTime     @updatedAt
+  comment        Comment      @relation(fields: [commentId], references: [id])
+  organization   Organization @relation(fields: [organizationId], references: [id])
 
   @@unique([commentId, userId, organizationId])
   @@map("comment_like")
 }
 
 model Ranking {
-  id            Int @id @default(autoincrement())
+  id            Int         @id @default(autoincrement())
+  userId        Int?
+  rank          String      @db.Char(1)
+  comment       String?
+  createdAt     DateTime    @default(now()) @db.Timestamp(6)
+  updatedAt     DateTime    @updatedAt
   mangaCustomId Int
-
-  rank      String   @db.Char(1)
-  comment   String?  @db.Text
-  createdAt DateTime @default(now()) @db.Timestamp
-  updatedAt DateTime @updatedAt
-
-  mangaCustom MangaCustom @relation(fields: [mangaCustomId], references: [id])
-  User        User?       @relation(fields: [userId], references: [id])
-  userId      Int?
+  mangaCustom   MangaCustom @relation(fields: [mangaCustomId], references: [id])
+  User          User?       @relation(fields: [userId], references: [id])
 
   @@map("ranking")
 }
 
 model Demography {
-  id Int @id @default(autoincrement())
-
-  name        String @unique @db.VarChar(256)
-  slug        String @unique @db.VarChar(256)
-  description String @db.Text
-
-  createdAt DateTime @default(now()) @db.Timestamp
-  updatedAt DateTime @updatedAt
-
-  mangas Manga[]
+  id          Int      @id @default(autoincrement())
+  name        String   @unique @db.VarChar(256)
+  slug        String   @unique @db.VarChar(256)
+  description String
+  createdAt   DateTime @default(now()) @db.Timestamp(6)
+  updatedAt   DateTime @updatedAt
+  mangas      Manga[]
 
   @@map("demography")
 }
 
 model Genre {
-  id Int @id @default(autoincrement())
-
+  id             Int           @id @default(autoincrement())
+  name           String        @db.VarChar(256)
+  slug           String        @db.VarChar(256)
+  description    String
+  display        Boolean       @default(true)
+  createdAt      DateTime      @default(now()) @db.Timestamp(6)
+  updatedAt      DateTime      @updatedAt
   organizationId Int
-
-  name        String  @db.VarChar(256)
-  slug        String  @db.VarChar(256)
-  description String  @db.Text
-  display     Boolean @default(true)
-
-  createdAt DateTime @default(now()) @db.Timestamp
-  updatedAt DateTime @updatedAt
-
-  mangasCustom MangaCustom[]
-  organization Organization  @relation(fields: [organizationId], references: [id])
+  organization   Organization  @relation(fields: [organizationId], references: [id])
+  mangasCustom   MangaCustom[] @relation("GenreToMangaCustom")
 
   @@unique([organizationId, slug])
   @@map("genre")
 }
 
 model Analytics {
-  id Int @id @default(autoincrement())
-
+  id             Int           @id @default(autoincrement())
   organizationId Int?
   userId         Int?
-
-  ip           String?
-  event        String?
-  path         String?
-  userAgent    String?
-  screenWidth  Int?
-  screenHeight Int?
-  browser      String?
-  deviceType   String?
-  capturedAt   DateTime @default(now()) @db.Timestamp
-  payload      Json?
-
-  createdAt DateTime @default(now()) @db.Timestamp
-  updatedAt DateTime @updatedAt
-
-  organization Organization? @relation(fields: [organizationId], references: [id])
-  user         User?         @relation(fields: [userId], references: [id])
+  path           String?
+  ip             String?
+  browser        String?
+  deviceType     String?
+  payload        Json?
+  createdAt      DateTime      @default(now()) @db.Timestamp(6)
+  updatedAt      DateTime      @updatedAt
+  capturedAt     DateTime      @default(now()) @db.Timestamp(6)
+  event          String?
+  screenHeight   Int?
+  screenWidth    Int?
+  userAgent      String?
+  organization   Organization? @relation(fields: [organizationId], references: [id])
+  user           User?         @relation(fields: [userId], references: [id])
 
   @@map("analytics")
 }
 
 model UserChapterHistory {
-  id Int @id @default(autoincrement())
-
-  userId    Int
-  chapterId Int
-
-  pageNumber Int?
+  id         Int       @id @default(autoincrement())
+  userId     Int
+  chapterId  Int
   startedAt  DateTime?
   lastReadAt DateTime?
   finishedAt DateTime?
-
-  createdAt DateTime @default(now()) @db.Timestamp
-  updatedAt DateTime @updatedAt
-
-  chapter Chapter @relation(fields: [chapterId], references: [id])
-  user    User    @relation(fields: [userId], references: [id])
+  createdAt  DateTime  @default(now()) @db.Timestamp(6)
+  updatedAt  DateTime  @updatedAt
+  pageNumber Int?
+  chapter    Chapter   @relation(fields: [chapterId], references: [id])
+  user       User      @relation(fields: [userId], references: [id])
 
   @@unique([chapterId, userId])
   @@map("user_chapter_history")
 }
 
 model Favorite {
-  id Int @id @default(autoincrement())
-
+  id            Int         @id @default(autoincrement())
   userId        Int
   mangaCustomId Int
-
-  createdAt DateTime @default(now()) @db.Timestamp
-  updatedAt DateTime @updatedAt
-
-  user        User        @relation(fields: [userId], references: [id])
-  mangaCustom MangaCustom @relation(fields: [mangaCustomId], references: [id])
+  createdAt     DateTime    @default(now()) @db.Timestamp(6)
+  updatedAt     DateTime    @updatedAt
+  mangaCustom   MangaCustom @relation(fields: [mangaCustomId], references: [id])
+  user          User        @relation(fields: [userId], references: [id])
 
   @@unique([userId, mangaCustomId])
   @@map("favorite")
 }
 
 model Audit {
-  id Int @id @default(autoincrement())
-
-  action   String  @db.VarChar(256)
-  payload  Json?
-  ip       String
-  browser  String?
-  language String?
-  device   String?
-
-  createdAt DateTime @default(now()) @db.Timestamp
+  id        Int      @id @default(autoincrement())
+  action    String   @db.VarChar(256)
+  payload   Json?
+  ip        String
+  browser   String?
+  language  String?
+  device    String?
+  createdAt DateTime @default(now()) @db.Timestamp(6)
   updatedAt DateTime @updatedAt
-
-  User   User? @relation(fields: [userId], references: [id])
-  userId Int?
+  userId    Int?
+  User      User?    @relation(fields: [userId], references: [id])
 
   @@map("audit")
 }
 
 model ViewsHistory {
-  id Int @id @default(autoincrement())
-
+  id            Int          @id @default(autoincrement())
   mangaCustomId Int?
   chapterId     Int?
-
-  ip       String
-  viewedAt DateTime
-
-  createdAt DateTime @default(now()) @db.Timestamp
-  updatedAt DateTime @updatedAt
-
-  mangaCustom MangaCustom? @relation(fields: [mangaCustomId], references: [id])
-  chapter     Chapter?     @relation(fields: [chapterId], references: [id])
+  ip            String
+  viewedAt      DateTime
+  createdAt     DateTime     @default(now()) @db.Timestamp(6)
+  updatedAt     DateTime     @updatedAt
+  chapter       Chapter?     @relation(fields: [chapterId], references: [id])
+  mangaCustom   MangaCustom? @relation(fields: [mangaCustomId], references: [id])
 
   @@map("views")
 }
 
 model SubscriptionPlan {
-  id Int @id @default(autoincrement())
-
-  organizationId Int
-
-  name        String   @db.VarChar(256)
-  slug        String   @unique @db.VarChar(256)
-  description String   @db.Text
-  price       Float
-  interval    String   @default("MONTH") @db.VarChar(256)
-  currency    String   @default("USD") @db.VarChar(10)
-  planId      String   @unique @db.VarChar(256)
-  productId   String   @unique @db.VarChar(256)
-  createdAt   DateTime @default(now()) @db.Timestamp
-  updatedAt   DateTime @updatedAt
-
-  // perks
-  hideAds           Boolean @default(false)
-  canDownload       Boolean @default(false)
-  canReadUnreleased Boolean @default(false)
-  active            Boolean @default(true)
-
-  subscriptions Subscription[]
-  mangasCustom  MangaCustom[]
-
-  organization Organization @relation(fields: [organizationId], references: [id])
+  id                Int            @id @default(autoincrement())
+  name              String         @db.VarChar(256)
+  description       String
+  price             Float
+  interval          String         @default("MONTH") @db.VarChar(256)
+  currency          String         @default("USD") @db.VarChar(10)
+  planId            String         @unique @db.VarChar(256)
+  createdAt         DateTime       @default(now()) @db.Timestamp(6)
+  updatedAt         DateTime       @updatedAt
+  organizationId    Int
+  slug              String         @unique @db.VarChar(256)
+  productId         String         @unique @db.VarChar(256)
+  active            Boolean        @default(true)
+  canDownload       Boolean        @default(false)
+  canReadUnreleased Boolean        @default(false)
+  hideAds           Boolean        @default(false)
+  subscriptions     Subscription[]
+  organization      Organization   @relation(fields: [organizationId], references: [id])
+  mangasCustom      MangaCustom[]  @relation("MangaCustomToSubscriptionPlan")
 
   @@unique([organizationId, slug])
   @@map("subscription_plan")
 }
 
 model Subscription {
-  id                 Int @id @default(autoincrement())
-  userId             Int
-  subscriptionPlanId Int
-
-  paypalSubscriptionId String    @db.VarChar(256)
-  status               String    @default("PENDING") @db.VarChar(256)
+  id                   Int                       @id @default(autoincrement())
+  userId               Int
+  subscriptionPlanId   Int
+  status               String                    @default("PENDING") @db.VarChar(256)
   startDate            DateTime
   endDate              DateTime?
   lastPayment          DateTime?
-  lastAmount           Float?
+  createdAt            DateTime                  @default(now()) @db.Timestamp(6)
+  updatedAt            DateTime                  @updatedAt
+  paypalSubscriptionId String                    @db.VarChar(256)
+  active               Boolean                   @default(true)
   nextPayment          DateTime?
-  createdAt            DateTime  @default(now()) @db.Timestamp
-  updatedAt            DateTime  @updatedAt
-  cycleExecutions      Int       @default(0)
-  failedPaymentsCount  Int       @default(0)
-
-  active Boolean @default(true)
-
-  user             User                      @relation(fields: [userId], references: [id])
-  subscriptionPlan SubscriptionPlan          @relation(fields: [subscriptionPlanId], references: [id])
-  transactions     OrganizationTransaction[]
+  cycleExecutions      Int                       @default(0)
+  failedPaymentsCount  Int                       @default(0)
+  lastAmount           Float?
+  transactions         OrganizationTransaction[]
+  subscriptionPlan     SubscriptionPlan          @relation(fields: [subscriptionPlanId], references: [id])
+  user                 User                      @relation(fields: [userId], references: [id])
 
   @@map("subscription")
 }
 
 model OrganizationTransaction {
-  id Int @id @default(autoincrement())
-
+  id               Int           @id @default(autoincrement())
   organizationId   Int
-  subscriptionId   Int? // Optional: not all transactions are from subscriptions
   origin           String
-  description      String?   @db.Text
-  beforeFeesAmount Float
   amount           Float
-  currency         String    @default("USD") @db.VarChar(10)
-  type             String    @default("EARNING") @db.VarChar(256) // EARNING or WITHDRAWAL
-  status           String    @default("PENDING") @db.VarChar(256)
-  paymentMethod    String?   @db.VarChar(256)
-  paymentDetails   String?   @db.Text
-  transactionId    String?   @db.VarChar(256)
+  currency         String        @default("USD") @db.VarChar(10)
+  type             String        @default("EARNING") @db.VarChar(256)
+  status           String        @default("PENDING") @db.VarChar(256)
+  paymentMethod    String?       @db.VarChar(256)
+  paymentDetails   String?
+  createdAt        DateTime      @default(now()) @db.Timestamp(6)
+  updatedAt        DateTime      @updatedAt
+  transactionId    String?       @db.VarChar(256)
+  description      String?
+  beforeFeesAmount Float
   capibaraFee      Float?
   paypalFee        Float?
   transactionDate  DateTime?
-
-  createdAt DateTime @default(now()) @db.Timestamp
-  updatedAt DateTime @updatedAt
-
-  organization Organization  @relation(fields: [organizationId], references: [id])
-  subscription Subscription? @relation(fields: [subscriptionId], references: [id])
+  subscriptionId   Int?
+  organization     Organization  @relation(fields: [organizationId], references: [id])
+  subscription     Subscription? @relation(fields: [subscriptionId], references: [id])
 
   @@map("organization_transaction")
 }

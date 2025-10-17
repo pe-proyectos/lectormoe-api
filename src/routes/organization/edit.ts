@@ -33,24 +33,40 @@ export const router = () => new Elysia()
             transform({ body }) {
                 if (typeof body.enableMangaSection === 'string')
                     body.enableMangaSection = body.enableMangaSection === 'true';
+
                 if (typeof body.enableManhuaSection === 'string')
                     body.enableManhuaSection = body.enableManhuaSection === 'true';
+
                 if (typeof body.enableManhwaSection === 'string')
                     body.enableManhwaSection = body.enableManhwaSection === 'true';
+
                 if (typeof body.enableSubscriptionSection === 'string')
                     body.enableSubscriptionSection = body.enableSubscriptionSection === 'true';
+
+                if (typeof body.enableDiscordWebhookNewChapter === 'string')
+                    body.enableDiscordWebhookNewChapter = body.enableDiscordWebhookNewChapter === 'true';
+
+                if (typeof body.enableDiscordWebhookNewSubscription === 'string')
+                    body.enableDiscordWebhookNewSubscription = body.enableDiscordWebhookNewSubscription === 'true';
+                
                 if (typeof body.enableMainSlider === 'string')
                     body.enableMainSlider = body.enableMainSlider === 'true';
+
                 if (typeof body.enableMainBanner === 'string')
                     body.enableMainBanner = body.enableMainBanner === 'true';
+
                 if (typeof body.enableGoogleAds === 'string')
                     body.enableGoogleAds = body.enableGoogleAds === 'true';
+
                 if (typeof body.enableAdsterraAds === 'string')
                     body.enableAdsterraAds = body.enableAdsterraAds === 'true';
+
                 if (typeof body.useBlockedCountries === 'string')
                     body.useBlockedCountries = body.useBlockedCountries === 'true';
+
                 if (typeof body.useAllowedCountries === 'string')
                     body.useAllowedCountries = body.useAllowedCountries === 'true';
+                
                 if (body.countryOptions)
                     body.countryOptions = JSON.parse(body.countryOptions as unknown as string);
             },

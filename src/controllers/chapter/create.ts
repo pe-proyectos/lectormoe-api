@@ -6,14 +6,26 @@ import sizeOf from "buffer-image-size";
 export const createChapter = async (organizationId: number, mangaSlug: string, params: CreateChapterRequest) => {
 	const mangaCustom = await prisma.mangaCustom.findFirst({
 		where: {
+			manga: { slug: mangaSlug },
+			organization: { id: organizationId },
+		},
+		include: {
 			manga: {
-				slug: mangaSlug,
+				select: {
+					title: true,
+					slug: true,
+				},
 			},
 			organization: {
-				id: organizationId,
-			}
+				select: {
+					enableDiscordWebhookNewChapter: true,
+					discordWebhookUrlNewChapter: true,
+					name: true,
+				},
+			},
 		},
 	});
+
 
 	if (!mangaCustom) {
 		throw new Error("No se encontró el manga");
@@ -67,6 +79,7 @@ export const createChapter = async (organizationId: number, mangaSlug: string, p
 						imageWidth: pageSize.width,
 						imageHeight: pageSize.height,
 						imageType: pageSize.type,
+						//@ts-ignore
 						isSinglePage: params.singlePages?.includes(index) ?? false,
 					},
 				})
@@ -82,6 +95,30 @@ export const createChapter = async (organizationId: number, mangaSlug: string, p
 			lastChapterAt: new Date(),
 		},
 	});
+
+	if (mangaCustom.organization.enableDiscordWebhookNewChapter && mangaCustom.organization.discordWebhookUrlNewChapter) {
+		try {
+			const message = {
+				username:`${mangaCustom.organization.name}`,
+				embeds: [
+					{
+						title: "📖 ¡Nuevo capítulo publicado!",
+						description: `Se ha creado el capítulo **${chapter.title || chapter.number}** del manga **${mangaCustom.manga?.title || mangaSlug}**.`,
+						color: 0x00b0f4,
+						timestamp: new Date().toISOString(),
+					},
+				],
+			};
+
+			await fetch(mangaCustom.organization.discordWebhookUrlNewChapter, {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(message),
+			});
+		} catch (error) {
+			console.error("Error al enviar el mensaje a Discord:", error);
+		}
+	}
 
 	return chapter;
 };

@@ -15,6 +15,13 @@ export const editOrganization = async (organizationId: number, params: EditOrgan
 			enableMangaSection: params.enableMangaSection,
 			enableManhuaSection: params.enableManhuaSection,
 			enableManhwaSection: params.enableManhwaSection,
+
+			enableDiscordWebhookNewChapter: params.enableDiscordWebhookNewChapter,
+			discordWebhookUrlNewChapter: params.discordWebhookUrlNewChapter,
+
+			enableDiscordWebhookNewSubscription: params.enableDiscordWebhookNewSubscription,
+			discordWebhookUrlNewSubscription: params.discordWebhookUrlNewSubscription,
+
 			enableMainSlider: params.enableMainSlider,
 			enableMainBanner: params.enableMainBanner,
 			enableSubscriptionSection: params.enableSubscriptionSection,
