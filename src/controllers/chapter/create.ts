@@ -99,13 +99,29 @@ export const createChapter = async (organizationId: number, mangaSlug: string, p
 	if (mangaCustom.organization.enableDiscordWebhookNewChapter && mangaCustom.organization.discordWebhookUrlNewChapter) {
 		try {
 			const message = {
-				username:`${mangaCustom.organization.name}`,
+				username: "📢 Botcito - Nuevos Capítulos",
 				embeds: [
 					{
-						title: "📖 ¡Nuevo capítulo publicado!",
-						description: `Se ha creado el capítulo **${chapter.title || chapter.number}** del manga **${mangaCustom.manga?.title || mangaSlug}**.`,
-						color: 0x00b0f4,
+						title: `📖 Nuevo Capítulo Disponible:`,
+						description: `El manga **${mangaCustom.manga?.title || mangaSlug}** acaba de estrenar un nuevo capítulo.`,
+						color: 0x5865f2,
+						fields: [
+							{
+								name: "📚 Capítulo:",
+								value: `${chapter.title || `Capítulo ${chapter.number}`}`,
+								inline: true,
+							},
+							{
+								name: "🕒 Fecha de publicación:",
+								value: `<t:${Math.floor(Date.now() / 1000)}:R>`,
+								inline: true,
+							},
+						],
+						footer: {
+							text: `🔥 Leído en ${mangaCustom.organization.name}`,
+						},
 						timestamp: new Date().toISOString(),
+						url: `${process.env.FRONTEND_URL}`,
 					},
 				],
 			};
