@@ -102,8 +102,8 @@ export const createChapter = async (organizationId: number, mangaSlug: string, p
 				username:`${mangaCustom.organization.name}`,
 				embeds: [
 					{
-						title: "📖 ¡Nuevo capítulo publicado!",
-						description: `Se ha creado el capítulo **${chapter.title || chapter.number}** del manga **${mangaCustom.manga?.title || mangaSlug}**.`,
+						title: "¡Nuevo capítulo publicado!",
+						description: `Se ha publicado el capítulo **${chapter.title || chapter.number}** del manga **${mangaCustom.manga?.title || mangaSlug}**.`,
 						color: 0x00b0f4,
 						timestamp: new Date().toISOString(),
 					},

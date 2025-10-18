@@ -18,9 +18,11 @@ export const editOrganization = async (organizationId: number, params: EditOrgan
 
 			enableDiscordWebhookNewChapter: params.enableDiscordWebhookNewChapter,
 			discordWebhookUrlNewChapter: params.discordWebhookUrlNewChapter,
+			discordWebhookMessageTemplateNewChapter: params.discordWebhookMessageTemplateNewChapter,
 
 			enableDiscordWebhookNewSubscription: params.enableDiscordWebhookNewSubscription,
 			discordWebhookUrlNewSubscription: params.discordWebhookUrlNewSubscription,
+			discordWebhookMessageTemplateNewSubscription: params.discordWebhookMessageTemplateNewSubscription,
 
 			enableMainSlider: params.enableMainSlider,
 			enableMainBanner: params.enableMainBanner,

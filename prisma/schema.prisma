@@ -55,10 +55,13 @@ model Organization {
   enableMainBanner                    Boolean                   @default(false)
   enableMainSlider                    Boolean                   @default(false)
   enableSubscriptionSection           Boolean                   @default(false)
-  discordWebhookUrlNewChapter         String?
-  discordWebhookUrlNewSubscription    String?
 
+  discordWebhookUrlNewChapter         String?
+  discordWebhookMessageTemplateNewChapter String?
   enableDiscordWebhookNewChapter      Boolean                   @default(false)
+  
+  discordWebhookUrlNewSubscription    String?
+  discordWebhookMessageTemplateNewSubscription String? 
   enableDiscordWebhookNewSubscription Boolean                   @default(false)
   
   analytics                           Analytics[]

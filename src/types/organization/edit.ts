@@ -11,14 +11,18 @@ export const EditOrganizationRequest = t.Object({
     enableManhwaSection: t.Optional(t.Boolean()),
     enableSubscriptionSection: t.Optional(t.Boolean()),
     enableMainSlider: t.Optional(t.Boolean()),
-
     enableMainBanner: t.Optional(t.Boolean()),
+
 
     enableDiscordWebhookNewChapter: t.Optional(t.Boolean()),
     discordWebhookUrlNewChapter:t.Optional(t.String()),
+    discordWebhookMessageTemplateNewChapter:t.Optional(t.String()),
+    
 
     enableDiscordWebhookNewSubscription: t.Optional(t.Boolean()),
     discordWebhookUrlNewSubscription:t.Optional(t.String()),
+    discordWebhookMessageTemplateNewSubscription:t.Optional(t.String()),
+
     
     useBlockedCountries: t.Optional(t.Boolean()),
     useAllowedCountries: t.Optional(t.Boolean()),
