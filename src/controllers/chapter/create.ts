@@ -9,7 +9,7 @@ export const createChapter = async (organizationId: number, mangaSlug: string, p
 			manga: { slug: mangaSlug },
 			organization: { id: organizationId },
 		},
-		include: {
+		include: {	
 			manga: {
 				select: {
 					title: true,
@@ -18,9 +18,10 @@ export const createChapter = async (organizationId: number, mangaSlug: string, p
 			},
 			organization: {
 				select: {
+					name: true,
 					enableDiscordWebhookNewChapter: true,
 					discordWebhookUrlNewChapter: true,
-					name: true,
+					discordWebhookMessageTemplateNewChapter: true,
 				},
 			},
 		},
@@ -42,7 +43,7 @@ export const createChapter = async (organizationId: number, mangaSlug: string, p
 		throw new Error(`El capítulo ${params.number} ya existe`);
 	}
 
-	const chapter = await prisma.chapter.create({
+	let chapter = await prisma.chapter.create({
 		data: {
 			mangaCustomId: mangaCustom.id,
 			number: params.number,
@@ -55,7 +56,7 @@ export const createChapter = async (organizationId: number, mangaSlug: string, p
 	if (params.image && params.image instanceof File) {
 		const imageBuffer = await params.image.arrayBuffer();
 		const imageUrl = await uploadFile(imageBuffer, params.image.name);
-		await prisma.chapter.update({
+		chapter = await prisma.chapter.update({
 			where: {
 				id: chapter.id,
 			},
@@ -98,13 +99,20 @@ export const createChapter = async (organizationId: number, mangaSlug: string, p
 
 	if (mangaCustom.organization.enableDiscordWebhookNewChapter && mangaCustom.organization.discordWebhookUrlNewChapter) {
 		try {
+			const description = (mangaCustom.organization.discordWebhookMessageTemplateNewChapter)
+			?.replaceAll("%manga%", `${mangaCustom.manga?.title || mangaSlug || 'manga no encontrado'}`)
+			.replaceAll("%chapter%", `${chapter.title || chapter.number}`)
+			.replaceAll("%link%", `https://${mangaCustom.organization.name}.capibaratraductor.com/manga/${mangaSlug}/chapters/${chapter.number}`)
 			const message = {
-				username:`${mangaCustom.organization.name}`,
+				username: `${mangaCustom.organization.name}`,
 				embeds: [
 					{
-						title: "¡Nuevo capítulo publicado!",
-						description: `Se ha publicado el capítulo **${chapter.title || chapter.number}** del manga **${mangaCustom.manga?.title || mangaSlug}**.`,
+						title: "📣 - Nuevo capítulo publicado",
+						description: description,
 						color: 0x00b0f4,
+						image: {
+							url:chapter?.imageUrl|| mangaCustom?.imageUrl,
+						},
 						timestamp: new Date().toISOString(),
 					},
 				],

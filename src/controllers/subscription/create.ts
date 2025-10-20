@@ -6,6 +6,7 @@ export const createSubscription = async (organizationId: number, userId: number,
 	const organization = await prisma.organization.findFirst({
 		where: {
 			id: organizationId,
+			
 		},
 	});
 
@@ -94,5 +95,37 @@ export const createSubscription = async (organizationId: number, userId: number,
 		}
 	});
 
+	if (
+		organization.enableDiscordWebhookNewSubscription &&
+		organization.discordWebhookUrlNewSubscription
+	) {
+		try {
+			const description =
+				organization.discordWebhookMessageTemplateNewSubscription
+					?.replaceAll("%user%", user.username || user.email || "Usuario desconocido")
+					.replaceAll("%plan%", subscriptionPlanExists.name || paypalPlan?.name || "Plan sin nombre")
+					.replaceAll("%amount%", `${subscription?.billing_info?.last_payment?.amount?.value || "0"} USD`);
+
+			const message = {
+				username: organization.name,
+				embeds: [
+					{
+						title: "💎 - Nueva suscripción activada",
+						description: description,
+						color: 0x00b0f4,
+						timestamp: new Date().toISOString(),
+					},
+				],
+			};
+
+			await fetch(organization.discordWebhookUrlNewSubscription, {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(message),
+			});
+		} catch (error) {
+			console.error("Error al enviar el webhook de suscripción a Discord:", error);
+		}
+	}
 	return createdSubscription;
 };

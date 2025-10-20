@@ -20,59 +20,56 @@ model Token {
 }
 
 model Organization {
-  id                                  Int                       @id @default(autoincrement())
-  name                                String                    @db.VarChar(256)
-  title                               String                    @db.VarChar(256)
-  domain                              String                    @unique @db.VarChar(256)
-  slug                                String                    @unique @db.VarChar(256)
-  description                         String?
-  imageUrl                            String?
-  createdAt                           DateTime                  @default(now()) @db.Timestamp(6)
-  updatedAt                           DateTime                  @updatedAt
-  googleAdsMetaContent                String?
-  googleAdsAdsTxtContent              String?
-  bannerUrl                           String?
-  discordUrl                          String?
-  facebookUrl                         String?
-  instagramUrl                        String?
-  logoUrl                             String?
-  patreonUrl                          String?
-  tiktokUrl                           String?
-  twitchUrl                           String?
-  twitterUrl                          String?
-  youtubeUrl                          String?
-  enableGoogleAds                     Boolean                   @default(false)
-  faviconUrl                          String?
-  enableMangaSection                  Boolean                   @default(true)
-  enableManhuaSection                 Boolean                   @default(false)
-  enableManhwaSection                 Boolean                   @default(false)
-  language                            String                    @default("es") @db.VarChar(2)
-  monitorWebsiteId                    String?
-  useAllowedCountries                 Boolean                   @default(false)
-  useBlockedCountries                 Boolean                   @default(false)
-  adsterraAdSource                    String?
-  enableAdsterraAds                   Boolean                   @default(false)
-  enableMainBanner                    Boolean                   @default(false)
-  enableMainSlider                    Boolean                   @default(false)
-  enableSubscriptionSection           Boolean                   @default(false)
-
-  discordWebhookUrlNewChapter         String?
-  discordWebhookMessageTemplateNewChapter String?
-  enableDiscordWebhookNewChapter      Boolean                   @default(false)
-  
-  discordWebhookUrlNewSubscription    String?
-  discordWebhookMessageTemplateNewSubscription String? 
-  enableDiscordWebhookNewSubscription Boolean                   @default(false)
-  
-  analytics                           Analytics[]
-  comments                            Comment[]
-  commentLikes                        CommentLike[]
-  countryOptions                      CountryOptions[]
-  genres                              Genre[]
-  mangaCustoms                        MangaCustom[]
-  OrganizationTransaction             OrganizationTransaction[]
-  subscriptionPlans                   SubscriptionPlan[]
-  users                               User[]
+  id                                           Int                       @id @default(autoincrement())
+  name                                         String                    @db.VarChar(256)
+  title                                        String                    @db.VarChar(256)
+  domain                                       String                    @unique @db.VarChar(256)
+  slug                                         String                    @unique @db.VarChar(256)
+  description                                  String?
+  imageUrl                                     String?
+  createdAt                                    DateTime                  @default(now()) @db.Timestamp(6)
+  updatedAt                                    DateTime                  @updatedAt
+  googleAdsMetaContent                         String?
+  googleAdsAdsTxtContent                       String?
+  bannerUrl                                    String?
+  discordUrl                                   String?
+  facebookUrl                                  String?
+  instagramUrl                                 String?
+  logoUrl                                      String?
+  patreonUrl                                   String?
+  tiktokUrl                                    String?
+  twitchUrl                                    String?
+  twitterUrl                                   String?
+  youtubeUrl                                   String?
+  enableGoogleAds                              Boolean                   @default(false)
+  faviconUrl                                   String?
+  enableMangaSection                           Boolean                   @default(true)
+  enableManhuaSection                          Boolean                   @default(false)
+  enableManhwaSection                          Boolean                   @default(false)
+  language                                     String                    @default("es") @db.VarChar(2)
+  monitorWebsiteId                             String?
+  useAllowedCountries                          Boolean                   @default(false)
+  useBlockedCountries                          Boolean                   @default(false)
+  adsterraAdSource                             String?
+  enableAdsterraAds                            Boolean                   @default(false)
+  enableMainBanner                             Boolean                   @default(false)
+  enableMainSlider                             Boolean                   @default(false)
+  enableSubscriptionSection                    Boolean                   @default(false)
+  discordWebhookUrlNewChapter                  String?
+  discordWebhookUrlNewSubscription             String?
+  enableDiscordWebhookNewChapter               Boolean                   @default(false)
+  enableDiscordWebhookNewSubscription          Boolean                   @default(false)
+  discordWebhookMessageTemplateNewChapter      String?
+  discordWebhookMessageTemplateNewSubscription String?
+  analytics                                    Analytics[]
+  comments                                     Comment[]
+  commentLikes                                 CommentLike[]
+  countryOptions                               CountryOptions[]
+  genres                                       Genre[]
+  mangaCustoms                                 MangaCustom[]
+  OrganizationTransaction                      OrganizationTransaction[]
+  subscriptionPlans                            SubscriptionPlan[]
+  users                                        User[]
 
   @@map("organization")
 }
