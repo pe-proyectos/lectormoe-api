@@ -31,6 +31,7 @@ export const saveUserChapterHistoryChapter = async (organizationId: number, user
         return false;
     }
 
+
     const existingHistory = await prisma.userChapterHistory.findFirst({
         where: {
             chapterId: chapter.id,

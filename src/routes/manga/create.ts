@@ -8,8 +8,8 @@ export const router = () => new Elysia()
     .use(loggedUserOnly())
     .post(
         '/api/manga',
-        async ({ user, body }) => {
-            if (!user.canCreateMangaProfile) {
+        async ({ permissions, body }) => {
+            if (!permissions?.canCreateMangaProfile) {
                 throw new Error("No tiene permisos para crear mangas.");
             }
 

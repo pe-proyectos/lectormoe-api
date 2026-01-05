@@ -16,7 +16,7 @@ export const router = () => new Elysia()
             if (comment.organizationId !== organizationId) {
                 throw new Error("No tiene permisos para restaurar este comentario.");
             }
-            if (!user.canHideComment) {
+            if (!permissions?.canHideComment) {
                 throw new Error("No tiene permisos para restaurar este comentario.");
             }
 

@@ -1,23 +1,47 @@
 import { prisma } from "../../models/prisma";
 import type { FavoritesListQuery } from "../../types/favorites/list";
 
-export const listFavorites = async (organizationId: number, userId: number, filters: FavoritesListQuery) => {
-	const favoriteData = await prisma.favorite.findMany({
-		where: {
-			userId,
-			mangaCustom: {
-				organizationId,
-			},
+export const listFavorites = async (organizationId: number | null, userId: number, filters: FavoritesListQuery) => {
+	const whereClause: any = {
+		userId,
+		mangaCustom: {
+			...(organizationId !== null ? { organizationId } : {}),
 		},
+	};
+
+	const favoriteData = await prisma.favorite.findMany({
+		where: whereClause,
 		include: {
 			mangaCustom: {
 				select: {
+					id: true,
 					title: true,
 					imageUrl: true,
+					status: true,
+					organization: {
+						select: {
+							id: true,
+							name: true,
+							slug: true,
+						}
+					},
 					manga: {
 						select: {
 							slug: true,
 						}
+					},
+					chapters: {
+						select: {
+							id: true,
+							number: true,
+							title: true,
+							releasedAt: true,
+							subscribersOnly: true,
+						},
+						orderBy: {
+							releasedAt: 'desc',
+						},
+						take: 2,
 					}
 				}
 			}
@@ -30,9 +54,7 @@ export const listFavorites = async (organizationId: number, userId: number, filt
 	});
 
 	const total = await prisma.favorite.count({
-		where: {
-			userId,
-		},
+		where: whereClause,
 	});
 
 	return {

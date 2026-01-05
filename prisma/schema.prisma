@@ -20,15 +20,17 @@ model Token {
 }
 
 model Organization {
-  id                                           Int                       @id @default(autoincrement())
-  name                                         String                    @db.VarChar(256)
-  title                                        String                    @db.VarChar(256)
-  domain                                       String                    @unique @db.VarChar(256)
-  slug                                         String                    @unique @db.VarChar(256)
+  id                                           Int      @id @default(autoincrement())
+  name                                         String   @db.VarChar(256)
+  title                                        String   @db.VarChar(256)
+  domain                                       String   @unique @db.VarChar(256)
+  slug                                         String   @unique @db.VarChar(256)
   description                                  String?
   imageUrl                                     String?
-  createdAt                                    DateTime                  @default(now()) @db.Timestamp(6)
-  updatedAt                                    DateTime                  @updatedAt
+  isPublic                                     Boolean  @default(true)
+  isNSFW                                       Boolean  @default(true)
+  createdAt                                    DateTime @default(now()) @db.Timestamp(6)
+  updatedAt                                    DateTime @updatedAt
   googleAdsMetaContent                         String?
   googleAdsAdsTxtContent                       String?
   bannerUrl                                    String?
@@ -41,106 +43,145 @@ model Organization {
   twitchUrl                                    String?
   twitterUrl                                   String?
   youtubeUrl                                   String?
-  enableGoogleAds                              Boolean                   @default(false)
+  enableGoogleAds                              Boolean  @default(false)
   faviconUrl                                   String?
-  enableMangaSection                           Boolean                   @default(true)
-  enableManhuaSection                          Boolean                   @default(false)
-  enableManhwaSection                          Boolean                   @default(false)
-  language                                     String                    @default("es") @db.VarChar(2)
+  enableMangaSection                           Boolean  @default(true)
+  enableManhuaSection                          Boolean  @default(false)
+  enableManhwaSection                          Boolean  @default(false)
+  language                                     String   @default("es") @db.VarChar(2)
   monitorWebsiteId                             String?
-  useAllowedCountries                          Boolean                   @default(false)
-  useBlockedCountries                          Boolean                   @default(false)
+  useAllowedCountries                          Boolean  @default(false)
+  useBlockedCountries                          Boolean  @default(false)
   adsterraAdSource                             String?
-  enableAdsterraAds                            Boolean                   @default(false)
-  enableMainBanner                             Boolean                   @default(false)
-  enableMainSlider                             Boolean                   @default(false)
-  enableSubscriptionSection                    Boolean                   @default(false)
+  enableAdsterraAds                            Boolean  @default(false)
+  enableMainBanner                             Boolean  @default(false)
+  enableMainSlider                             Boolean  @default(false)
+  enableSubscriptionSection                    Boolean  @default(false)
   discordWebhookUrlNewChapter                  String?
   discordWebhookUrlNewSubscription             String?
-  enableDiscordWebhookNewChapter               Boolean                   @default(false)
-  enableDiscordWebhookNewSubscription          Boolean                   @default(false)
+  enableDiscordWebhookNewChapter               Boolean  @default(false)
+  enableDiscordWebhookNewSubscription          Boolean  @default(false)
   discordWebhookMessageTemplateNewChapter      String?
   discordWebhookMessageTemplateNewSubscription String?
-  analytics                                    Analytics[]
-  comments                                     Comment[]
-  commentLikes                                 CommentLike[]
-  countryOptions                               CountryOptions[]
-  genres                                       Genre[]
-  mangaCustoms                                 MangaCustom[]
-  OrganizationTransaction                      OrganizationTransaction[]
-  subscriptionPlans                            SubscriptionPlan[]
-  users                                        User[]
+
+  analytics               Analytics[]
+  comments                Comment[]
+  commentLikes            CommentLike[]
+  countryOptions          CountryOptions[]
+  genres                  Genre[]
+  mangaCustoms            MangaCustom[]
+  OrganizationTransaction OrganizationTransaction[]
+  subscriptionPlans       SubscriptionPlan[]
+  permissions             Permission[]
+  passwordResetTokens     PasswordResetToken[]
+  audits                  Audit[]
+  rankings                Ranking[]
+  subscriptions           Subscription[]
+  followers               OrganizationFollower[]
 
   @@map("organization")
 }
 
 model User {
-  id                        Int                  @id @default(autoincrement())
-  username                  String               @db.VarChar(256)
-  slug                      String               @db.VarChar(256)
-  email                     String               @db.VarChar(256)
-  password                  String               @db.VarChar(256)
-  createdAt                 DateTime             @default(now()) @db.Timestamp(6)
-  updatedAt                 DateTime             @updatedAt
-  organizationId            Int
-  canCreateAuthor           Boolean              @default(false)
-  canCreateChapter          Boolean              @default(false)
-  canCreateGenre            Boolean              @default(false)
-  canCreateMangaCustom      Boolean              @default(false)
-  canCreateMangaProfile     Boolean              @default(false)
-  canCreatePage             Boolean              @default(false)
-  canDeleteChapter          Boolean              @default(false)
-  canDeleteGenre            Boolean              @default(false)
-  canDeleteMangaCustom      Boolean              @default(false)
-  canDeleteOrganization     Boolean              @default(false)
-  canDeletePage             Boolean              @default(false)
-  canEditChapter            Boolean              @default(false)
-  canEditGenre              Boolean              @default(false)
-  canEditMangaCustom        Boolean              @default(false)
-  canEditOrganization       Boolean              @default(false)
-  canEditPage               Boolean              @default(false)
-  canSeeAdminPanel          Boolean              @default(false)
-  description               String?
-  hierarchyLevel            Int                  @default(0)
-  imageUrl                  String?
-  role                      String               @default("user") @db.VarChar(256)
-  canDeleteUser             Boolean              @default(false)
-  canEditUser               Boolean              @default(false)
-  canCreateSubscriptionPlan Boolean              @default(false)
-  canDeleteSubscriptionPlan Boolean              @default(false)
-  canEditSubscriptionPlan   Boolean              @default(false)
-  canDownload               Boolean              @default(false)
-  canReadUnreleased         Boolean              @default(false)
-  hideAds                   Boolean              @default(false)
-  canDeleteComment          Boolean              @default(false)
-  canEditComment            Boolean              @default(false)
-  canHideComment            Boolean              @default(false)
-  birthdate                 DateTime?
-  analytics                 Analytics[]
-  audits                    Audit[]
-  Comment                   Comment[]            @relation("HiddenByUser")
-  comments                  Comment[]
-  favorites                 Favorite[]
-  passwordResetTokens       PasswordResetToken[]
-  rankings                  Ranking[]
-  subscriptions             Subscription[]
-  tokens                    Token[]
-  organization              Organization         @relation(fields: [organizationId], references: [id])
-  history                   UserChapterHistory[]
+  id        Int      @id @default(autoincrement())
+  username  String   @db.VarChar(256)
+  slug      String   @db.VarChar(256)
+  email     String   @db.VarChar(256)
+  password  String   @db.VarChar(256)
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  updatedAt DateTime @updatedAt
 
-  @@unique([organizationId, username])
-  @@unique([organizationId, slug])
-  @@unique([organizationId, email])
+  description        String?
+  imageUrl           String?
+  bannerUrl          String?
+  birthdate          DateTime?
+  usernameChangedAt  DateTime?
+  imageUrlChangedAt  DateTime?
+  bannerUrlChangedAt DateTime?
+
+  // Settings fields
+  emailVerified      Boolean @default(false)
+  isPublicProfile    Boolean @default(true)
+  isPrivateHistory   Boolean @default(false)
+  emailNotifications Boolean @default(true)
+  pushNotifications  Boolean @default(true)
+  theme              String  @default("dark") @db.VarChar(20)
+
+  analytics           Analytics[]
+  audits              Audit[]
+  Comment             Comment[]              @relation("HiddenByUser")
+  comments            Comment[]
+  favorites           Favorite[]
+  passwordResetTokens PasswordResetToken[]
+  rankings            Ranking[]
+  subscriptions       Subscription[]
+  tokens              Token[]
+  history             UserChapterHistory[]
+  permissions         Permission[]
+  organizationFollows OrganizationFollower[]
+
+  @@unique([username])
+  @@unique([slug])
+  @@unique([email])
   @@map("user")
 }
 
+model Permission {
+  id             Int @id @default(autoincrement())
+  userId         Int
+  organizationId Int
+
+  // Todos los permisos can*
+  canCreateAuthor           Boolean @default(false)
+  canCreateChapter          Boolean @default(false)
+  canCreateGenre            Boolean @default(false)
+  canCreateMangaCustom      Boolean @default(false)
+  canCreateMangaProfile     Boolean @default(false)
+  canCreatePage             Boolean @default(false)
+  canDeleteChapter          Boolean @default(false)
+  canDeleteGenre            Boolean @default(false)
+  canDeleteMangaCustom      Boolean @default(false)
+  canDeleteOrganization     Boolean @default(false)
+  canDeletePage             Boolean @default(false)
+  canEditChapter            Boolean @default(false)
+  canEditGenre              Boolean @default(false)
+  canEditMangaCustom        Boolean @default(false)
+  canEditOrganization       Boolean @default(false)
+  canEditPage               Boolean @default(false)
+  canSeeAdminPanel          Boolean @default(false)
+  hierarchyLevel            Int     @default(0)
+  role                      String  @default("user") @db.VarChar(256)
+  canDeleteUser             Boolean @default(false)
+  canEditUser               Boolean @default(false)
+  canCreateSubscriptionPlan Boolean @default(false)
+  canDeleteSubscriptionPlan Boolean @default(false)
+  canEditSubscriptionPlan   Boolean @default(false)
+  canDownload               Boolean @default(false)
+  canReadUnreleased         Boolean @default(false)
+  hideAds                   Boolean @default(false)
+  canDeleteComment          Boolean @default(false)
+  canEditComment            Boolean @default(false)
+  canHideComment            Boolean @default(false)
+
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  updatedAt DateTime @updatedAt
+
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, organizationId])
+  @@map("permission")
+}
+
 model PasswordResetToken {
-  id        Int      @id @default(autoincrement())
-  userId    Int
-  token     String   @unique
-  expiresAt DateTime
-  createdAt DateTime @default(now())
-  user      User     @relation(fields: [userId], references: [id])
+  id             Int           @id @default(autoincrement())
+  userId         Int
+  token          String        @unique
+  expiresAt      DateTime
+  createdAt      DateTime      @default(now())
+  organizationId Int?
+  user           User          @relation(fields: [userId], references: [id])
+  organization   Organization? @relation(fields: [organizationId], references: [id])
 
   @@map("password_reset_token")
 }
@@ -322,15 +363,17 @@ model CommentLike {
 }
 
 model Ranking {
-  id            Int         @id @default(autoincrement())
-  userId        Int?
-  rank          String      @db.Char(1)
-  comment       String?
-  createdAt     DateTime    @default(now()) @db.Timestamp(6)
-  updatedAt     DateTime    @updatedAt
-  mangaCustomId Int
-  mangaCustom   MangaCustom @relation(fields: [mangaCustomId], references: [id])
-  User          User?       @relation(fields: [userId], references: [id])
+  id             Int           @id @default(autoincrement())
+  userId         Int?
+  rank           String        @db.Char(1)
+  comment        String?
+  createdAt      DateTime      @default(now()) @db.Timestamp(6)
+  updatedAt      DateTime      @updatedAt
+  mangaCustomId  Int
+  mangaCustom    MangaCustom   @relation(fields: [mangaCustomId], references: [id])
+  User           User?         @relation(fields: [userId], references: [id])
+  Organization   Organization? @relation(fields: [organizationId], references: [id])
+  organizationId Int?
 
   @@map("ranking")
 }
@@ -365,7 +408,6 @@ model Genre {
 
 model Analytics {
   id             Int           @id @default(autoincrement())
-  organizationId Int?
   userId         Int?
   path           String?
   ip             String?
@@ -379,6 +421,7 @@ model Analytics {
   screenHeight   Int?
   screenWidth    Int?
   userAgent      String?
+  organizationId Int?
   organization   Organization? @relation(fields: [organizationId], references: [id])
   user           User?         @relation(fields: [userId], references: [id])
 
@@ -416,17 +459,19 @@ model Favorite {
 }
 
 model Audit {
-  id        Int      @id @default(autoincrement())
-  action    String   @db.VarChar(256)
-  payload   Json?
-  ip        String
-  browser   String?
-  language  String?
-  device    String?
-  createdAt DateTime @default(now()) @db.Timestamp(6)
-  updatedAt DateTime @updatedAt
-  userId    Int?
-  User      User?    @relation(fields: [userId], references: [id])
+  id             Int           @id @default(autoincrement())
+  action         String        @db.VarChar(256)
+  payload        Json?
+  ip             String
+  browser        String?
+  language       String?
+  device         String?
+  createdAt      DateTime      @default(now()) @db.Timestamp(6)
+  updatedAt      DateTime      @updatedAt
+  userId         Int?
+  organizationId Int?
+  User           User?         @relation(fields: [userId], references: [id])
+  organization   Organization? @relation(fields: [organizationId], references: [id])
 
   @@map("audit")
 }
@@ -486,9 +531,11 @@ model Subscription {
   cycleExecutions      Int                       @default(0)
   failedPaymentsCount  Int                       @default(0)
   lastAmount           Float?
+  organizationId       Int?
   transactions         OrganizationTransaction[]
   subscriptionPlan     SubscriptionPlan          @relation(fields: [subscriptionPlanId], references: [id])
   user                 User                      @relation(fields: [userId], references: [id])
+  organization         Organization?             @relation(fields: [organizationId], references: [id])
 
   @@map("subscription")
 }
@@ -516,4 +563,34 @@ model OrganizationTransaction {
   subscription     Subscription? @relation(fields: [subscriptionId], references: [id])
 
   @@map("organization_transaction")
+}
+
+model OrganizationFollower {
+  id             Int      @id @default(autoincrement())
+  userId         Int
+  organizationId Int
+  createdAt      DateTime @default(now()) @db.Timestamp(6)
+  updatedAt      DateTime @updatedAt
+
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, organizationId])
+  @@map("organization_follower")
+}
+
+model OrganizationRequest {
+  id                      Int      @id @default(autoincrement())
+  applicantName           String   @db.VarChar(256)
+  applicantEmail          String   @db.VarChar(256)
+  scanName                String   @db.VarChar(256)
+  references              String   @db.Text
+  previousWorks           String   @db.Text
+  estimatedMonthlyReaders String   @db.VarChar(50)
+  status                  String   @default("pending") @db.VarChar(50) // pending, approved, rejected
+  reviewNotes             String?  @db.Text
+  createdAt               DateTime @default(now()) @db.Timestamp(6)
+  updatedAt               DateTime @updatedAt
+
+  @@map("organization_request")
 }

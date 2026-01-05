@@ -2,34 +2,42 @@ import { Elysia, t } from 'elysia';
 
 import { checkToken } from '../../controllers/auth/check';
 import { loggedOptional } from '../../plugins/auth';
+import { checkOrganization, checkOrganizationBySlug } from '../../controllers/organization/check';
 
 export const router = () => new Elysia()
     .use(loggedOptional())
     .get(
         '/api/auth/check',
-        async ({ organizationId, token }) => {
-            const user = await checkToken(organizationId as number, token as string);
-            if (!token) {
-                throw new Error('No se pudo verificar la sesión.');
+        async ({ logged, user, token, request: { headers } }) => {
+            // Si no hay token o el usuario no está logueado, retornar status: false
+            if (!token || !user || !logged) {
+                return {
+                    status: false,
+                    message: 'Sesión no válida',
+                };
             }
-            if (!user) {
-                throw new Error('No se pudo verificar la sesión.');
-            }
+
             return {
                 status: true,
                 data: {
-                    token,
-                    user,
+                    token: token as string,
+                    user: user,
                 }
             };
         },
         {
-            response: t.Object({
-                status: t.Boolean(),
-                data: t.Object({
-                    token: t.String(),
-                    user: t.Any(),
+            response: t.Union([
+                t.Object({
+                    status: t.Boolean(),
+                    data: t.Object({
+                        token: t.String(),
+                        user: t.Any(),
+                    }),
                 }),
-            }),
+                t.Object({
+                    status: t.Boolean(),
+                    message: t.String(),
+                }),
+            ]),
         }
     );

@@ -8,8 +8,8 @@ export const router = () => new Elysia()
     .use(loggedUserOnly())
     .patch(
         '/api/subscription-plan/:subscriptionPlanId',
-        async ({ organizationId, user, body, params: { subscriptionPlanId } }) => {
-            if (!user.canEditSubscriptionPlan) {
+        async ({ organizationId, permissions, body, params: { subscriptionPlanId } }) => {
+            if (!permissions?.canEditSubscriptionPlan) {
                 throw new Error("No tiene permisos para editar planes de suscripción.");
             }
 

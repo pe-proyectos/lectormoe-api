@@ -32,7 +32,7 @@ export const createPages = async (organizationId: number, mangaSlug: string, cha
 
     const images = await Promise.all(params.images.map(async (image, index) => {
         const imageBuffer = await image.arrayBuffer();
-        const imageUrl = await uploadFile(imageBuffer, image.name);
+        const imageUrl = await uploadFile(imageBuffer, image.name, undefined, organizationId, 'chapters');
         const pageSize = sizeOf(Buffer.from(imageBuffer));
 
         const page = await prisma.page.create({

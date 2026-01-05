@@ -8,8 +8,8 @@ export const router = () => new Elysia()
     .use(loggedUserOnly())
     .patch(
         '/api/organization',
-        async ({ organizationId,user, body }) => {
-            if (!user.canEditOrganization) {
+        async ({ organizationId, permissions, body }) => {
+            if (!permissions?.canEditOrganization) {
                 throw new Error("No tiene permisos para editar la organización.");
             }
 

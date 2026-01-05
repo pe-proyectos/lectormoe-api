@@ -9,9 +9,9 @@ export const router = () => new Elysia()
     .use(loggedUserOnly())
     .get(
         '/api/comment/admin',
-        async ({ organizationId, user }) => {
+        async ({ organizationId, permissions }) => {
             // Verificar permisos de admin
-            if (!user.canHideComment) {
+            if (!permissions?.canHideComment) {
                 throw new Error("No tiene permisos para acceder a esta información.");
             }
             

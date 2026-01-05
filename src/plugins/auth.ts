@@ -2,7 +2,9 @@ import jwt from '@elysiajs/jwt';
 import { Elysia } from 'elysia';
 
 import { checkToken } from '../controllers/auth/check';
-import { checkOrganization } from '../controllers/organization/check';
+import { checkOrganization, checkOrganizationBySlug } from '../controllers/organization/check';
+import { getUserPermissions } from '../util/permissions';
+import { prisma } from '../models/prisma';
 
 export const loggedOptional = () => new Elysia()
     .use(
@@ -12,27 +14,111 @@ export const loggedOptional = () => new Elysia()
         })
     )
     .derive({ as: 'global' }, async ({ jwt, request: { headers } }) => {
-        const token = headers.get('Authorization')?.split('Bearer ')[1];
-        const organizationDomain = headers.get('organization-domain');
-        if (!organizationDomain) {
-            throw new Error('No autorizado, dominio de organización no encontrado.');
-        }
+        const authHeader = headers.get('Authorization');
+        const token = authHeader?.split('Bearer ')[1];
+        const organizationIdentifier = headers.get('organization-domain');
+        
         if (!token) {
-            return { logged: false };
+            return { logged: false, user: null };
         }
         const tokenPayload = await jwt.verify(token);
         if (!tokenPayload) {
-            return { logged: false };
+            return { logged: false, user: null };
         }
-        const organization = await checkOrganization(organizationDomain);
-        if (!organization) {
-            return { logged: false };
+        
+        let organizationId: number | null = null;
+        let organization = null;
+        
+        if (organizationIdentifier) {
+            // Si el organizationIdentifier es localhost o parece ser un hostname de desarrollo,
+            // no intentar buscar organización (es válido para endpoints globales)
+            const isLocalhost = organizationIdentifier === 'localhost' || 
+                               organizationIdentifier === '127.0.0.1' ||
+                               organizationIdentifier.startsWith('localhost:');
+            
+            if (!isLocalhost) {
+                // Si contiene un punto, es un domain; si no, es un slug
+                const isDomain = organizationIdentifier.includes('.');
+                organization = isDomain 
+                    ? await checkOrganization(organizationIdentifier)
+                    : await checkOrganizationBySlug(organizationIdentifier);
+                    
+                if (organization) {
+                    organizationId = organization.id;
+                }
+            }
         }
-        const user = await checkToken(organization.id, token);
+        
+        // Si el JWT es válido pero el token no existe en la BD, crear el token automáticamente
+        let user = await checkToken(organizationId, token);
+        if (!user && tokenPayload && typeof tokenPayload === 'object' && 'userId' in tokenPayload) {
+            // El JWT es válido pero el token no existe en la BD, crear el token
+            const { createToken } = await import('../controllers/auth/token');
+            try {
+                await createToken(token, tokenPayload.userId as number);
+                // Intentar obtener el usuario nuevamente
+                user = await checkToken(organizationId, token);
+            } catch (error) {
+                // Si falla la creación del token, continuar sin usuario
+                console.error('Error creating token:', error);
+            }
+        }
+        
         if (!user) {
-            return { logged: false };
+            return { logged: false, user: null };
         }
-        return { logged: true, organizationId: organization.id, token, user };
+        
+        // Si hay organización, obtener permisos del usuario para esta organización
+        let permissions = null;
+        if (organizationId !== null) {
+            permissions = await getUserPermissions(user.id, organizationId);
+        }
+        
+        return { 
+            logged: true, 
+            organizationId: organizationId, 
+            token, 
+            user,
+            permissions: permissions || undefined,
+        };
+    });
+
+export const logged = () => new Elysia()
+    .use(
+        jwt({
+            name: 'jwt',
+            secret: Bun.env.JWT_SECRET as string,
+        })
+    )
+    .derive({ as: 'global' }, async ({ jwt, request: { headers } }) => {
+        const token = headers.get('Authorization')?.split('Bearer ')[1];
+        if (!token) {
+            throw new Error('No autorizado, token no encontrado.');
+        }
+        const tokenPayload = await jwt.verify(token);
+        if (!tokenPayload) {
+            throw new Error('No autorizado, token incorrecto.');
+        }
+        
+        if (typeof tokenPayload !== 'object' || !('userId' in tokenPayload)) {
+            throw new Error('No autorizado, token inválido.');
+        }
+        
+        const user = await prisma.user.findUnique({
+            where: {
+                id: tokenPayload.userId as number,
+            },
+        });
+        
+        if (!user) {
+            throw new Error('No autorizado, usuario no encontrado.');
+        }
+        
+        return { 
+            logged: true, 
+            token, 
+            user,
+        };
     });
 
 export const loggedUserOnly = () => new Elysia()
@@ -43,8 +129,8 @@ export const loggedUserOnly = () => new Elysia()
         })
     )
     .derive({ as: 'global' }, async ({ jwt, request: { headers } }) => {
-        const organizationDomain = headers.get('organization-domain');
-        if (!organizationDomain) {
+        const organizationIdentifier = headers.get('organization-domain');
+        if (!organizationIdentifier) {
             throw new Error('No autorizado, dominio de organización no encontrado.');
         }
         const token = headers.get('Authorization')?.split('Bearer ')[1];
@@ -55,7 +141,13 @@ export const loggedUserOnly = () => new Elysia()
         if (!tokenPayload) {
             throw new Error('No autorizado, token incorrecto.');
         }
-        const organization = await checkOrganization(organizationDomain);
+        
+        // Si contiene un punto, es un domain; si no, es un slug
+        const isDomain = organizationIdentifier.includes('.');
+        const organization = isDomain 
+            ? await checkOrganization(organizationIdentifier)
+            : await checkOrganizationBySlug(organizationIdentifier);
+            
         if (!organization) {
             throw new Error('No autorizado, organización no encontrada.');
         }
@@ -63,5 +155,18 @@ export const loggedUserOnly = () => new Elysia()
         if (!user) {
             throw new Error('No autorizado, usuario no encontrado.');
         }
-        return { logged: true, token, organizationId: organization.id, user };
+        
+        // Obtener permisos del usuario para esta organización
+        const permissions = await getUserPermissions(user.id, organization.id);
+        if (!permissions) {
+            throw new Error('No autorizado, usuario no tiene permisos para esta organización.');
+        }
+        
+        return { 
+            logged: true, 
+            token, 
+            organizationId: organization.id, 
+            user,
+            permissions,
+        };
     });

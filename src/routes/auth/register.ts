@@ -2,11 +2,11 @@ import jwt from '@elysiajs/jwt';
 import { Elysia, t } from 'elysia';
 
 import { register } from '../../controllers/auth/register';
-import { useOrganization } from '../../plugins/organization';
+import { checkOrganization, checkOrganizationBySlug } from '../../controllers/organization/check';
+import { prisma } from '../../models/prisma';
 
 
 export const router = () => new Elysia()
-    .use(useOrganization())
     .use(
         jwt({
             name: 'jwt',
@@ -15,7 +15,35 @@ export const router = () => new Elysia()
     )
     .post(
         '/api/auth/register',
-        async ({ organizationId, body: { email, username, password } }) => {
+        async ({ request: { headers }, body: { email, username, password } }) => {
+            // Obtener organizationId si se proporciona organization-domain
+            let organizationId: number | null = null;
+            const organizationIdentifier = headers.get('organization-domain');
+            
+            if (organizationIdentifier) {
+                const isDomain = organizationIdentifier.includes('.');
+                const organization = isDomain 
+                    ? await checkOrganization(organizationIdentifier)
+                    : await checkOrganizationBySlug(organizationIdentifier);
+                
+                if (organization) {
+                    organizationId = organization.id;
+                }
+            }
+
+            // Si no hay organizationId, usar la primera organización pública como predeterminada
+            if (!organizationId) {
+                const defaultOrg = await prisma.organization.findFirst({
+                    where: { isPublic: true },
+                    orderBy: { id: 'asc' },
+                });
+                if (defaultOrg) {
+                    organizationId = defaultOrg.id;
+                } else {
+                    throw new Error('No se pudo determinar la organización para el registro.');
+                }
+            }
+
             const registered = await register(organizationId, email, username, password);
 
             if (!registered) {

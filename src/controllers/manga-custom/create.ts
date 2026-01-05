@@ -56,7 +56,7 @@ export const createMangaCustom = async (organizationId: number, params: CreateMa
 
 	if (params.image && params.image instanceof File) {
 		const imageBuffer = await params.image.arrayBuffer();
-		const imageUrl = await uploadFile(imageBuffer, params.image.name);
+		const imageUrl = await uploadFile(imageBuffer, params.image.name, undefined, organizationId, 'mangas');
 		await prisma.mangaCustom.update({
 			where: {
 				id: mangaCustom.id,
@@ -69,7 +69,7 @@ export const createMangaCustom = async (organizationId: number, params: CreateMa
 
 	if (params.banner && params.banner instanceof File) {
 		const bannerBuffer = await params.banner.arrayBuffer();
-		const bannerUrl = await uploadFile(bannerBuffer, params.banner.name);
+		const bannerUrl = await uploadFile(bannerBuffer, params.banner.name, undefined, organizationId, 'mangas');
 		await prisma.mangaCustom.update({
 			where: {
 				id: mangaCustom.id,

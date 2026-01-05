@@ -26,17 +26,38 @@ export const forgotPassword = async (
   organizationName: string,
   email: string
 ) => {
-  const user = await prisma.user.findUnique({
+  // Buscar usuario por email (sin filtrar por organización)
+  const user = await prisma.user.findFirst({
     where: {
-      organizationId_email: {
-        organizationId,
-        email,
-      },
+      email,
     },
   });
 
   if (!user) {
     throw new Error("User not found");
+  }
+
+  // Verificar que el usuario tenga permisos para esta organización
+  // Si no tiene permisos, crearlos automáticamente (usuarios globales)
+  let permission = await prisma.permission.findUnique({
+    where: {
+      userId_organizationId: {
+        userId: user.id,
+        organizationId,
+      },
+    },
+  });
+
+  if (!permission) {
+    // Crear permisos automáticamente para usuarios globales
+    permission = await prisma.permission.create({
+      data: {
+        userId: user.id,
+        organizationId,
+        role: "user",
+        hierarchyLevel: 0,
+      },
+    });
   }
 
   let existingToken = await prisma.passwordResetToken.findFirst({

@@ -83,6 +83,7 @@ export const createSubscription = async (organizationId: number, userId: number,
 		data: {
 			userId: user.id,
 			subscriptionPlanId: subscriptionPlanExists.id,
+			organizationId: subscriptionPlanExists.organizationId,
 			paypalSubscriptionId: subscription.id,
 			status: subscription.status,
 			startDate: subscription.start_time,

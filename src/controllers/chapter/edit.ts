@@ -42,7 +42,21 @@ export const editChapter = async (organizationId: number, mangaSlug: string, cha
 
 	if (params.image && params.image instanceof File) {
 		const imageBuffer = await params.image.arrayBuffer();
-		const imageUrl = await uploadFile(imageBuffer, params.image.name);
+		const imageUrl = await uploadFile(imageBuffer, params.image.name, undefined, organizationId, 'chapters');
+		await prisma.chapter.update({
+			where: {
+				id: chapter.id,
+			},
+			data: {
+				imageUrl,
+			},
+		});
+	} else if (params.image && typeof params.image === 'string' && params.image !== 'null') {
+		const publicEndpoint = Bun.env.FILE_DOWNLOAD_ENDPOINT 
+			|| `https://pub-${Bun.env.R2_ACCOUNT_ID}.r2.dev`;
+		const imageUrl = params.image.startsWith('http') 
+			? params.image 
+			: `${publicEndpoint}/${params.image}`;
 		await prisma.chapter.update({
 			where: {
 				id: chapter.id,
@@ -63,7 +77,7 @@ export const editChapter = async (organizationId: number, mangaSlug: string, cha
 			if (page instanceof File) {
 				const pageBuffer = await page.arrayBuffer();
 				const pageSize = sizeOf(Buffer.from(pageBuffer));
-				const pageUrl = await uploadFile(pageBuffer, page.name);
+				const pageUrl = await uploadFile(pageBuffer, page.name, undefined, organizationId, 'chapters');
 				await prisma.page.create({
 					data: {
 						imageUrl: pageUrl,
@@ -76,7 +90,18 @@ export const editChapter = async (organizationId: number, mangaSlug: string, cha
 					},
 				})
 			} else if (typeof page === "string") {
-				const existingPage = chapterExists.pages.find(p => p.imageUrl === page);
+				// Check if it's a fileKey (just filename) or a full URL
+				const publicEndpoint = Bun.env.FILE_DOWNLOAD_ENDPOINT 
+					|| `https://pub-${Bun.env.R2_ACCOUNT_ID}.r2.dev`;
+				const pageUrl = page.startsWith('http') 
+					? page 
+					: `${publicEndpoint}/${page}`;
+				
+				const existingPage = chapterExists.pages.find(p => {
+					const existingUrl = p.imageUrl?.includes(page) || p.imageUrl === pageUrl;
+					return existingUrl;
+				});
+				
 				if (existingPage) {
 					await prisma.page.create({
 						data: {
@@ -90,9 +115,11 @@ export const editChapter = async (organizationId: number, mangaSlug: string, cha
 						},
 					});
 				} else {
+					// If it's a new fileKey, we need to download it to get dimensions
+					// For now, use default dimensions
 					await prisma.page.create({
 						data: {
-							imageUrl: page,
+							imageUrl: pageUrl,
 							number: index + 1,
 							chapterId: chapter.id,
 							imageHeight: 100,

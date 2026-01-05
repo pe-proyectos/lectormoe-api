@@ -6,8 +6,25 @@ export const EditUserRequest = t.Object({
   birthdate: t.Optional(t.Date()),
   
   description: t.Optional(t.String()),
+  username: t.Optional(t.String()),
+  
+  // Settings fields
+  emailVerified: t.Optional(t.Boolean()),
+  isPublicProfile: t.Optional(t.Boolean()),
+  isPrivateHistory: t.Optional(t.Boolean()),
+  emailNotifications: t.Optional(t.Boolean()),
+  pushNotifications: t.Optional(t.Boolean()),
+  theme: t.Optional(t.String()),
   hierarchyLevel: t.Optional(t.Number()),
   image: t.Optional(
+      t.Union([
+          t.File({
+              maxSize: '25m',
+          }),
+          t.String(),
+      ])
+  ),
+  banner: t.Optional(
       t.Union([
           t.File({
               maxSize: '25m',

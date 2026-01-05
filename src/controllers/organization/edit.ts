@@ -57,7 +57,22 @@ export const editOrganization = async (organizationId: number, params: EditOrgan
 
 	if (params.logo && params.logo instanceof File) {
 		const logoBuffer = await params.logo.arrayBuffer();
-		const logoUrl = await uploadFile(logoBuffer, params.logo.name);
+		const logoUrl = await uploadFile(logoBuffer, params.logo.name, undefined, organizationId, 'organizations');
+		await prisma.organization.update({
+			where: {
+				id: organizationId,
+			},
+			data: {
+				logoUrl,
+			},
+		});
+	} else if (params.logo && typeof params.logo === 'string' && params.logo !== 'null') {
+		// If it's a fileKey (just the filename), construct the full URL
+		const publicEndpoint = Bun.env.FILE_DOWNLOAD_ENDPOINT 
+			|| `https://pub-${Bun.env.R2_ACCOUNT_ID}.r2.dev`;
+		const logoUrl = params.logo.startsWith('http') 
+			? params.logo 
+			: `${publicEndpoint}/${params.logo}`;
 		await prisma.organization.update({
 			where: {
 				id: organizationId,
@@ -70,7 +85,21 @@ export const editOrganization = async (organizationId: number, params: EditOrgan
 
 	if (params.image && params.image instanceof File) {
 		const imageBuffer = await params.image.arrayBuffer();
-		const imageUrl = await uploadFile(imageBuffer, params.image.name);
+		const imageUrl = await uploadFile(imageBuffer, params.image.name, undefined, organizationId, 'organizations');
+		await prisma.organization.update({
+			where: {
+				id: organizationId,
+			},
+			data: {
+				imageUrl,
+			},
+		});
+	} else if (params.image && typeof params.image === 'string' && params.image !== 'null') {
+		const publicEndpoint = Bun.env.FILE_DOWNLOAD_ENDPOINT 
+			|| `https://pub-${Bun.env.R2_ACCOUNT_ID}.r2.dev`;
+		const imageUrl = params.image.startsWith('http') 
+			? params.image 
+			: `${publicEndpoint}/${params.image}`;
 		await prisma.organization.update({
 			where: {
 				id: organizationId,
@@ -83,7 +112,21 @@ export const editOrganization = async (organizationId: number, params: EditOrgan
 
 	if (params.banner && params.banner instanceof File) {
 		const bannerBuffer = await params.banner.arrayBuffer();
-		const bannerUrl = await uploadFile(bannerBuffer, params.banner.name);
+		const bannerUrl = await uploadFile(bannerBuffer, params.banner.name, undefined, organizationId, 'organizations');
+		await prisma.organization.update({
+			where: {
+				id: organizationId,
+			},
+			data: {
+				bannerUrl,
+			},
+		});
+	} else if (params.banner && typeof params.banner === 'string' && params.banner !== 'null') {
+		const publicEndpoint = Bun.env.FILE_DOWNLOAD_ENDPOINT 
+			|| `https://pub-${Bun.env.R2_ACCOUNT_ID}.r2.dev`;
+		const bannerUrl = params.banner.startsWith('http') 
+			? params.banner 
+			: `${publicEndpoint}/${params.banner}`;
 		await prisma.organization.update({
 			where: {
 				id: organizationId,
@@ -96,7 +139,21 @@ export const editOrganization = async (organizationId: number, params: EditOrgan
 
 	if (params.favicon && params.favicon instanceof File) {
 		const faviconBuffer = await params.favicon.arrayBuffer();
-		const faviconUrl = await uploadFile(faviconBuffer, params.favicon.name);
+		const faviconUrl = await uploadFile(faviconBuffer, params.favicon.name, undefined, organizationId, 'organizations');
+		await prisma.organization.update({
+			where: {
+				id: organizationId,
+			},
+			data: {
+				faviconUrl,
+			},
+		});
+	} else if (params.favicon && typeof params.favicon === 'string' && params.favicon !== 'null') {
+		const publicEndpoint = Bun.env.FILE_DOWNLOAD_ENDPOINT 
+			|| `https://pub-${Bun.env.R2_ACCOUNT_ID}.r2.dev`;
+		const faviconUrl = params.favicon.startsWith('http') 
+			? params.favicon 
+			: `${publicEndpoint}/${params.favicon}`;
 		await prisma.organization.update({
 			where: {
 				id: organizationId,

@@ -1,15 +1,20 @@
 import { prisma } from "../../models/prisma";
 
 
-export const createRanking = async (mangaSlug: string, rank: string, comment: string, userId: number) => {
+export const createRanking = async (mangaSlug: string, rank: string, comment: string, userId: number, organizationId: number) => {
 	if (["C", "B", "A", "S"].indexOf(rank) === -1) {
 		throw new Error("La calificación no es válida. (C, B, A, S)");
 	}
 	const mangaCustomId = await prisma.mangaCustom.findFirst({
 		where: {
+			organizationId,
 			manga: {
 				slug: mangaSlug
 			}
+		},
+		select: {
+			id: true,
+			organizationId: true,
 		}
 	});
 	if (!mangaCustomId) {

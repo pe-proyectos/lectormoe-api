@@ -1,11 +1,11 @@
 import { Elysia, t } from 'elysia';
 
 import { listMangaCustom } from '../../controllers/manga-custom/list';
-import { useOrganization } from '../../plugins/organization';
+import { useOrganizationOptional } from '../../plugins/organization';
 import { MangaCustomListQuery } from '../../types/manga-custom/list';
 
 export const router = () => new Elysia()
-    .use(useOrganization())
+    .use(useOrganizationOptional())
     .get(
         '/api/manga-custom',
         async ({ organizationId, query }) => {

@@ -3,7 +3,7 @@ import { toSlug } from "../../util/slug";
 import { uploadFile } from "../../util/upload-file";
 import type { CreateAuthorRequest } from "../../types/author/create";
 
-export const createAuthor = async (params: CreateAuthorRequest) => {
+export const createAuthor = async (params: CreateAuthorRequest, organizationId?: number) => {
 	const slug = toSlug(params.name);
 
 	const [authorExists] = await Promise.all([
@@ -28,16 +28,32 @@ export const createAuthor = async (params: CreateAuthorRequest) => {
 	});
 
 	if (params.image) {
-		const imageBuffer = await params.image.arrayBuffer();
-		const imageUrl = await uploadFile(imageBuffer, params.image.name);
-		await prisma.author.update({
-			where: {
-				id: manga.id,
-			},
-			data: {
-				imageUrl,
-			},
-		});
+		if (params.image instanceof File) {
+			const imageBuffer = await params.image.arrayBuffer();
+			const imageUrl = await uploadFile(imageBuffer, params.image.name, undefined, organizationId, 'authors');
+			await prisma.author.update({
+				where: {
+					id: manga.id,
+				},
+				data: {
+					imageUrl,
+				},
+			});
+		} else if (typeof params.image === 'string') {
+			const publicEndpoint = Bun.env.FILE_DOWNLOAD_ENDPOINT 
+				|| `https://pub-${Bun.env.R2_ACCOUNT_ID}.r2.dev`;
+			const imageUrl = params.image.startsWith('http') 
+				? params.image 
+				: `${publicEndpoint}/${params.image}`;
+			await prisma.author.update({
+				where: {
+					id: manga.id,
+				},
+				data: {
+					imageUrl,
+				},
+			});
+		}
 	}
 
 	return manga;

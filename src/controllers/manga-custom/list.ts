@@ -15,7 +15,7 @@ const prepareCustomManga = (mangaCustom: any) => {
 	return result;
 }
 
-export const listMangaCustom = async (organizationId: number, filters: MangaCustomListQuery) => {
+export const listMangaCustom = async (organizationId: number | null, filters: MangaCustomListQuery) => {
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	const order: any = {};
 	
@@ -42,9 +42,11 @@ export const listMangaCustom = async (organizationId: number, filters: MangaCust
 	} else if (filters.order === OrderEnum.POPULAR) {
 		const popularMangasCustoms = await prisma.mangaCustom.findMany({
 			where: {
-				organization: {
-					id: organizationId,
-				},
+				...(organizationId ? {
+					organization: {
+						id: organizationId,
+					},
+				} : {}),
 				...(filters.search ? searchConditions : {
 					title: {
 						contains: filters.title,
@@ -61,10 +63,29 @@ export const listMangaCustom = async (organizationId: number, filters: MangaCust
 				}),
 			},
 			include: {
-				manga: true,
+				manga: {
+					include: {
+						demography: {
+							select: {
+								name: true,
+								slug: true,
+							},
+						},
+					},
+				},
+				organization: {
+					select: {
+						id: true,
+						name: true,
+						slug: true,
+						title: true,
+					},
+				},
 				chapters: {
 					select: {
+						id: true,
 						number: true,
+						title: true,
 						releasedAt: true,
 						subscribersOnly: true,
 					},
@@ -124,9 +145,11 @@ export const listMangaCustom = async (organizationId: number, filters: MangaCust
 					}
 				}
 			} : {}),
-			organization: {
-				id: organizationId,
-			},
+			...(organizationId ? {
+				organization: {
+					id: organizationId,
+				},
+			} : {}),
 			...(filters.search ? searchConditions : {
 				title: {
 					contains: filters.title,
@@ -143,10 +166,29 @@ export const listMangaCustom = async (organizationId: number, filters: MangaCust
 			}),
 		},
 		include: {
-			manga: true,
+			manga: {
+				include: {
+					demography: {
+						select: {
+							name: true,
+							slug: true,
+						},
+					},
+				},
+			},
+			organization: {
+				select: {
+					id: true,
+					name: true,
+					slug: true,
+					title: true,
+				},
+			},
 			chapters: {
 				select: {
+					id: true,
 					number: true,
+					title: true,
 					releasedAt: true,
 					subscribersOnly: true,
 					views: true,
@@ -177,9 +219,11 @@ export const listMangaCustom = async (organizationId: number, filters: MangaCust
 
 	const total = await prisma.mangaCustom.count({
 		where: {
-			organization: {
-				id: organizationId,
-			},
+			...(organizationId ? {
+				organization: {
+					id: organizationId,
+				},
+			} : {}),
 			...(filters.search ? searchConditions : {
 				title: {
 					contains: filters.title,

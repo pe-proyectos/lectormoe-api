@@ -1,20 +1,22 @@
 import { prisma } from "../../models/prisma";
 import type { UserChapterHistoryListQuery } from "../../types/user-chapter-history/list";
 
-export const listUserChapterHistory = async (organizationId: number, userId: number, filters: UserChapterHistoryListQuery) => {
-	const historyData = await prisma.userChapterHistory.findMany({
-		where: {
-			userId,
-			chapter: {
-				mangaCustom: {
-					organizationId,
-					manga: {
-						slug: filters?.manga_slug,
-					}
+export const listUserChapterHistory = async (organizationId: number | null, userId: number, filters: UserChapterHistoryListQuery) => {
+	const whereClause: any = {
+		userId,
+		chapter: {
+			mangaCustom: {
+				...(organizationId !== null ? { organizationId } : {}),
+				manga: {
+					slug: filters?.manga_slug,
 				}
-			},
-			finishedAt: filters?.include_finished ? undefined : null,
+			}
 		},
+		finishedAt: filters?.include_finished ? undefined : null,
+	};
+
+	const historyData = await prisma.userChapterHistory.findMany({
+		where: whereClause,
 		include: {
 			chapter: {
 				select: {
@@ -25,6 +27,13 @@ export const listUserChapterHistory = async (organizationId: number, userId: num
 						select: {
 							title: true,
 							imageUrl: true,
+							organization: {
+								select: {
+									id: true,
+									name: true,
+									slug: true,
+								}
+							},
 							manga: {
 								select: {
 									slug: true,
@@ -43,18 +52,7 @@ export const listUserChapterHistory = async (organizationId: number, userId: num
 	});
 
 	const total = await prisma.userChapterHistory.count({
-		where: {
-			userId,
-			chapter: {
-				mangaCustom: {
-					organizationId,
-					manga: {
-						slug: filters?.manga_slug,
-					}
-				}
-			},
-			finishedAt: filters?.include_finished ? undefined : null,
-		},
+		where: whereClause,
 	});
 
 	return {

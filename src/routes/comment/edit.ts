@@ -18,7 +18,7 @@ export const router = () => new Elysia()
                 throw new Error("No tiene permisos para eliminar este comentario.");
             }
             const isMyComment = comment.userId === user.id;
-            const canEditComments = user.canEditComment || isMyComment;
+            const canEditComments = permissions?.canEditComment || isMyComment;
 
             if (!canEditComments) {
                 throw new Error("No tiene permisos para editar este comentario.");

@@ -1,0 +1,68 @@
+import { prisma } from "../../models/prisma";
+
+export const getTopDonors = async (organizationId: number) => {
+	const now = new Date();
+	
+	// Solo considerar suscripciones que están activas:
+	// 1. active = true (campo booleano que indica si está activa) - OBLIGATORIO
+	// 2. status = 'ACTIVE' (estado de la suscripción debe ser ACTIVE)
+	// 3. endDate es null (sin fecha de fin) O endDate es mayor que ahora (aún no ha expirado)
+	// Esto asegura que solo se incluyan suscripciones realmente activas y vigentes
+	const subscriptions = await prisma.subscription.findMany({
+		where: {
+			AND: [
+				{ organizationId: organizationId },
+				{ active: true }, // CRÍTICO: Solo suscripciones con active = true
+				{ status: 'ACTIVE' }, // Solo suscripciones con status = 'ACTIVE'
+				{
+					OR: [
+						{ endDate: null }, // Sin fecha de fin (suscripción permanente)
+						{ endDate: { gt: now } } // Fecha de fin mayor que ahora (aún vigente)
+					]
+				}
+			]
+		},
+		select: {
+			id: true,
+			startDate: true,
+			user: {
+				select: {
+					id: true,
+					username: true,
+					slug: true,
+					imageUrl: true,
+				}
+			},
+			subscriptionPlan: {
+				select: {
+					id: true,
+					name: true,
+				}
+			}
+		}
+	});
+
+	const donorsWithDays = subscriptions.map((sub) => {
+		// Calcular días desde el inicio de la suscripción
+		const startDate = new Date(sub.startDate);
+		const now = new Date();
+		const diffTime = Math.abs(now.getTime() - startDate.getTime());
+		const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+		return {
+			id: sub.user.id,
+			username: sub.user.username,
+			slug: sub.user.slug,
+			imageUrl: sub.user.imageUrl,
+			days: diffDays,
+			subscriptionPlan: {
+				name: sub.subscriptionPlan.name,
+			},
+			subscriptionId: sub.id,
+		};
+	});
+
+	// Ordenar por días (descendente)
+	return donorsWithDays.sort((a, b) => b.days - a.days);
+};
+

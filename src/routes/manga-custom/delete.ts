@@ -7,10 +7,10 @@ export const router = () => new Elysia()
     .use(loggedUserOnly())
     .delete(
         '/api/manga-custom/:mangaSlug',
-        async ({ organizationId, user, params: { mangaSlug } }) => {
+        async ({ organizationId, permissions, params: { mangaSlug } }) => {
             throw new Error('TBA');
 
-            if (!user.canDeleteMangaCustom) {
+            if (!permissions?.canDeleteMangaCustom) {
                 throw new Error("No tiene permisos para eliminar mangas custom.");
             }
 

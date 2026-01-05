@@ -39,13 +39,44 @@ export const listUser = async (organizationId: number, filters: UserListQuery) =
 			},
 		};
 	}
-	let users = await prisma.user.findMany({
+	// Obtener IDs de usuarios que tienen permisos para esta organización
+	const permissions = await prisma.permission.findMany({
 		where: {
-			...where,
 			organizationId,
 		},
+		select: {
+			userId: true,
+		},
+	});
+	
+	const userIds = permissions.map(p => p.userId);
+	
+	if (userIds.length === 0) {
+		return {
+			data: [],
+			maxPage: 0,
+			total: 0,
+		};
+	}
+	
+	// Agregar filtro de userIds
+	const whereWithOrganization: Prisma.UserWhereInput = {
+		...where,
+		id: {
+			in: userIds,
+		},
+	};
+	
+	let users = await prisma.user.findMany({
+		where: whereWithOrganization,
 		include: {
 			subscriptions: {
+				where: {
+					organizationId,
+					subscriptionPlan: {
+						organizationId,
+					},
+				},
 				select: {
 					id: true,
 					subscriptionPlanId: true,
@@ -67,20 +98,64 @@ export const listUser = async (organizationId: number, filters: UserListQuery) =
 		take: Number.parseInt(filters?.limit || "10"),
 	});
 
-	users = users.map(user => {
-		user.password = "********";
-		return user;
-	});
+	// Obtener permisos para cada usuario y agregarlos al objeto
+	const usersWithPermissions = await Promise.all(
+		users.map(async (user) => {
+			user.password = "********";
+			const permission = await prisma.permission.findUnique({
+				where: {
+					userId_organizationId: {
+						userId: user.id,
+						organizationId,
+					},
+				},
+			});
+			
+			if (permission) {
+				(user as any).permissions = {
+					canCreateAuthor: permission.canCreateAuthor,
+					canCreateChapter: permission.canCreateChapter,
+					canCreateGenre: permission.canCreateGenre,
+					canCreateMangaCustom: permission.canCreateMangaCustom,
+					canCreateMangaProfile: permission.canCreateMangaProfile,
+					canCreatePage: permission.canCreatePage,
+					canDeleteChapter: permission.canDeleteChapter,
+					canDeleteGenre: permission.canDeleteGenre,
+					canDeleteMangaCustom: permission.canDeleteMangaCustom,
+					canDeleteOrganization: permission.canDeleteOrganization,
+					canDeletePage: permission.canDeletePage,
+					canEditChapter: permission.canEditChapter,
+					canEditGenre: permission.canEditGenre,
+					canEditMangaCustom: permission.canEditMangaCustom,
+					canEditOrganization: permission.canEditOrganization,
+					canEditPage: permission.canEditPage,
+					canSeeAdminPanel: permission.canSeeAdminPanel,
+					canDeleteUser: permission.canDeleteUser,
+					canEditUser: permission.canEditUser,
+					canCreateSubscriptionPlan: permission.canCreateSubscriptionPlan,
+					canDeleteSubscriptionPlan: permission.canDeleteSubscriptionPlan,
+					canEditSubscriptionPlan: permission.canEditSubscriptionPlan,
+					canDownload: permission.canDownload,
+					canReadUnreleased: permission.canReadUnreleased,
+					canDeleteComment: permission.canDeleteComment,
+					canEditComment: permission.canEditComment,
+					canHideComment: permission.canHideComment,
+					role: permission.role,
+					hierarchyLevel: permission.hierarchyLevel,
+					hideAds: permission.hideAds,
+				};
+			}
+			
+			return user;
+		})
+	);
 
 	const total = await prisma.user.count({
-		where: {
-			...where,
-			organizationId,
-		},
+		where: whereWithOrganization,
 	});
 
 	return {
-		data: users,
+		data: usersWithPermissions,
 		maxPage: Math.ceil(total / Number.parseInt(filters?.limit || "10")),
 		total,
 	};

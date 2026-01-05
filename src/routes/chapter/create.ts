@@ -8,8 +8,8 @@ export const router = () => new Elysia()
     .use(loggedUserOnly())
     .post(
         '/api/manga-custom/:mangaSlug/chapter',
-        async ({ organizationId, user, body, params: { mangaSlug } }) => {
-            if (!user.canCreateChapter) {
+        async ({ organizationId, permissions, body, params: { mangaSlug } }) => {
+            if (!permissions?.canCreateChapter) {
                 throw new Error("No tiene permisos para crear capítulos.");
             }
 

@@ -10,3 +10,19 @@ export const checkOrganization = async (domain: string) => {
         }
     });
 }
+
+export const checkOrganizationBySlug = async (slug: string) => {
+    return await prisma.organization.findFirst({
+        where: {
+            slug,
+        },
+        include: {
+            countryOptions: true,
+            _count: {
+                select: {
+                    followers: true,
+                },
+            },
+        }
+    });
+}

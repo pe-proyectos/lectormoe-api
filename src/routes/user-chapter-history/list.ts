@@ -1,14 +1,18 @@
 import { Elysia, t } from 'elysia';
 
-import { loggedUserOnly } from '../../plugins/auth';
+import { loggedOptional } from '../../plugins/auth';
 import { UserChapterHistoryListQuery } from '../../types/user-chapter-history/list';
 import { listUserChapterHistory } from '../../controllers/user-chapter-history/list';
 
 export const router = () => new Elysia()
-    .use(loggedUserOnly())
+    .use(loggedOptional())
     .get(
         '/api/user-chapter-history',
-        async ({ organizationId, user, query }) => {
+        async ({ logged, user, organizationId, query }) => {
+            if (!logged || !user) {
+                throw new Error('No autorizado');
+            }
+            // organizationId puede ser null si no se envió el header
             const { data, maxPage, total } = await listUserChapterHistory(organizationId, user.id, query);
             
             return { status: true, data: {

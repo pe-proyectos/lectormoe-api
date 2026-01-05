@@ -7,9 +7,9 @@ import { loggedUserOnly } from "../../plugins/auth";
 export const router = () =>
   new Elysia().use(loggedUserOnly()).patch(
     "/api/subscription/:subscriptionId",
-    async ({ organizationId, user, body, params: { subscriptionId } }) => {
+    async ({ organizationId, user, permissions, body, params: { subscriptionId } }) => {
       if (user.id !== body.userId) {
-        if (!user.canEditSubscriptionPlan) {
+        if (!permissions?.canEditSubscriptionPlan) {
           throw new Error(
             "No tiene permisos para editar suscripciones de otros usuarios."
           );

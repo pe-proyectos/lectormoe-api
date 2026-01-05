@@ -1,41 +1,56 @@
 import { Elysia, t } from "elysia";
 
 import { editUser } from "../../controllers/user/edit";
-import { loggedUserOnly } from "../../plugins/auth";
+import { logged } from "../../plugins/auth";
+import { useOrganizationOptional } from "../../plugins/organization";
 import { EditUserRequest } from "../../types/user/edit";
 import { getUserById } from "../../controllers/user/get";
+import { getUserPermissions } from "../../util/permissions";
 
 export const router = () =>
-  new Elysia().use(loggedUserOnly()).patch(
+  new Elysia()
+    .use(useOrganizationOptional())
+    .use(logged())
+    .patch(
     "/api/user/:userId",
     async ({ organizationId, user, body, params: { userId } }) => {
+      // Get permissions if organizationId is provided
+      let permissions = null;
+      if (organizationId !== null) {
+        permissions = await getUserPermissions(user.id, organizationId);
+      }
       // If the request user is not the same as the user to edit and does not have the permission to edit users
-      if (user.id !== userId && !user.canEditUser) {
+      if (user.id !== userId && !permissions?.canEditUser) {
         throw new Error("No tiene permisos para editar otros usuarios.");
       }
-      // Get user to edit
+      // Get user to edit (organizationId can be null for global profile edits)
       const userToEdit = await getUserById(organizationId, userId);
       if (!userToEdit) {
         throw new Error("No se pudo obtener el usuario a editar.");
       }
-      // If editing self, allow to change role and description only
-      if (user.id === userToEdit.id) {
-        // body = {
-        //   description: body.description,
-        //   image: body.image,
-        // };
-      } else if (user.hierarchyLevel < userToEdit.hierarchyLevel) {
-        throw new Error("No tienes permisos para editar este usuario.");
+      
+      // Obtener permisos del usuario a editar para comparar hierarchyLevel (solo si hay organizationId)
+      let userToEditHierarchyLevel: number | null = null;
+      let currentUserHierarchyLevel = 0;
+      
+      if (organizationId !== null && permissions) {
+        const { getUserHierarchyLevel } = await import('../../util/permissions');
+        userToEditHierarchyLevel = await getUserHierarchyLevel(userToEdit.id, organizationId);
+        currentUserHierarchyLevel = permissions.hierarchyLevel ?? 0;
       }
+      
+      // If editing self, allow to change profile fields (description, image, banner, username)
+      // If editing others, check hierarchy level (solo si hay organizationId)
+      if (user.id !== userToEdit.id) {
+        if (organizationId !== null && userToEditHierarchyLevel !== null && currentUserHierarchyLevel < userToEditHierarchyLevel) {
+          throw new Error("No tienes permisos para editar este usuario.");
+        }
 
-      if (
-        user.id !== userToEdit.id &&
-        body.hierarchyLevel &&
-        user.hierarchyLevel < body.hierarchyLevel
-      ) {
-        throw new Error(
-          "No tienes permisos para asignar un nivel de jerarquía mayor al tuyo."
-        );
+        if (organizationId !== null && body.hierarchyLevel && currentUserHierarchyLevel < body.hierarchyLevel) {
+          throw new Error(
+            "No tienes permisos para asignar un nivel de jerarquía mayor al tuyo."
+          );
+        }
       }
 
       const updatedUser = await editUser(organizationId, userToEdit.id, body);

@@ -4,9 +4,14 @@ export const CreateAuthorRequest = t.Object({
     name: t.String(),
     shortDescription: t.Optional(t.String()),
     description: t.Optional(t.String()),
-    image: t.Optional(t.File({
-        maxSize: '25m',
-    })),
+    image: t.Optional(
+        t.Union([
+            t.File({
+                maxSize: '25m',
+            }),
+            t.String(),
+        ])
+    ),
 });
 
 export type CreateAuthorRequest = Static<typeof CreateAuthorRequest>;

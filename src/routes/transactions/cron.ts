@@ -102,11 +102,14 @@ async function calculateTransactions() {
   }
 }
 
-export const router = () =>
-  new Elysia().use(
-    cron({
-      name: "heartbeat",
-      pattern: Patterns.everyMinutes(59),
-      run: calculateTransactions,
-    })
-  );
+// Cron desactivado - las transacciones se manejan mediante webhooks de PayPal
+// export const router = () =>
+//   new Elysia().use(
+//     cron({
+//       name: "heartbeat",
+//       pattern: Patterns.everyMinutes(59),
+//       run: calculateTransactions,
+//     })
+//   );
+
+export const router = () => new Elysia(); // Cron desactivado

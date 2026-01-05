@@ -55,7 +55,7 @@ export const createChapter = async (organizationId: number, mangaSlug: string, p
 
 	if (params.image && params.image instanceof File) {
 		const imageBuffer = await params.image.arrayBuffer();
-		const imageUrl = await uploadFile(imageBuffer, params.image.name);
+		const imageUrl = await uploadFile(imageBuffer, params.image.name, undefined, organizationId, 'chapters');
 		chapter = await prisma.chapter.update({
 			where: {
 				id: chapter.id,
@@ -71,7 +71,7 @@ export const createChapter = async (organizationId: number, mangaSlug: string, p
 			if (page instanceof File) {
 				const pageBuffer = await page.arrayBuffer();
 				const pageSize = sizeOf(Buffer.from(pageBuffer));
-				const pageUrl = await uploadFile(pageBuffer, page.name);
+				const pageUrl = await uploadFile(pageBuffer, page.name, undefined, organizationId, 'chapters');
 				await prisma.page.create({
 					data: {
 						imageUrl: pageUrl,

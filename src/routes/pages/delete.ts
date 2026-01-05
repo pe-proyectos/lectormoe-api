@@ -8,8 +8,8 @@ export const router = () => new Elysia()
     .use(loggedUserOnly())
     .delete(
         '/api/manga-custom/:mangaSlug/chapter/:chapterNumber/pages/:pageId',
-        async ({ organizationId, user, params: { mangaSlug, chapterNumber, pageId } }) => {
-            if (!user.canDeletePage) {
+        async ({ organizationId, permissions, params: { mangaSlug, chapterNumber, pageId } }) => {
+            if (!permissions?.canDeletePage) {
                 throw new Error("No tiene permisos para eliminar páginas.");
             }
 

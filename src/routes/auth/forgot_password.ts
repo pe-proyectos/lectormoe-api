@@ -1,22 +1,53 @@
 import { Elysia, t } from 'elysia';
 
 import { forgotPassword } from '../../controllers/auth/forgot_password';
-import { useOrganization } from '../../plugins/organization';
+import { checkOrganization, checkOrganizationBySlug } from '../../controllers/organization/check';
+import { prisma } from '../../models/prisma';
 
 export const router = () => new Elysia()
-    .use(useOrganization())
     .post(
         '/api/auth/forgot-password',
-        async ({ body, organization }) => {
+        async ({ request: { headers }, body }) => {
             const { email } = body;
             
             if (!email) {
                 throw new Error('El correo electrónico es requerido.');
             }
 
+            // Obtener organizationId si se proporciona organization-domain
+            let organizationId: number | null = null;
+            let organizationName = 'Capibara Traductor';
+            const organizationIdentifier = headers.get('organization-domain');
+            
+            if (organizationIdentifier) {
+                const isDomain = organizationIdentifier.includes('.');
+                const organization = isDomain 
+                    ? await checkOrganization(organizationIdentifier)
+                    : await checkOrganizationBySlug(organizationIdentifier);
+                
+                if (organization) {
+                    organizationId = organization.id;
+                    organizationName = organization.name;
+                }
+            }
+
+            // Si no hay organizationId, usar la primera organización pública como predeterminada
+            if (!organizationId) {
+                const defaultOrg = await prisma.organization.findFirst({
+                    where: { isPublic: true },
+                    orderBy: { id: 'asc' },
+                });
+                if (defaultOrg) {
+                    organizationId = defaultOrg.id;
+                    organizationName = defaultOrg.name;
+                } else {
+                    throw new Error('No se pudo determinar la organización para el restablecimiento de contraseña.');
+                }
+            }
+
             await forgotPassword(
-                organization.id,
-                organization.name, 
+                organizationId,
+                organizationName, 
                 email as string
             );
 

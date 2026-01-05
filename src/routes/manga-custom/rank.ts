@@ -8,8 +8,8 @@ export const router = () => new Elysia()
     .use(loggedUserOnly())
     .post(
         '/api/manga-custom/:mangaSlug/rank',
-        async ({ user, params: { mangaSlug }, body: { rank, comment } }) => {
-            const ranking = await createRanking(mangaSlug, rank, comment, user.id);
+        async ({ organizationId, user, params: { mangaSlug }, body: { rank, comment } }) => {
+            const ranking = await createRanking(mangaSlug, rank, comment, user.id, organizationId);
             return { status: true, data: ranking };
         },
         {

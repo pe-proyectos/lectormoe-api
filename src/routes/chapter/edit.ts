@@ -8,8 +8,8 @@ export const router = () => new Elysia()
     .use(loggedUserOnly())
     .patch(
         '/api/manga-custom/:mangaSlug/chapter/:chapterNumber',
-        async ({ organizationId, user, body, params: { mangaSlug, chapterNumber } }) => {
-            if (!user.canEditChapter) {
+        async ({ organizationId, permissions, body, params: { mangaSlug, chapterNumber } }) => {
+            if (!permissions?.canEditChapter) {
                 throw new Error("No tiene permisos para editar capítulos.");
             }
 

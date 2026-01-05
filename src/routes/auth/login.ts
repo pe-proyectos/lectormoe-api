@@ -3,11 +3,10 @@ import { Elysia, t } from 'elysia';
 
 import { login } from '../../controllers/auth/login';
 import { createToken } from '../../controllers/auth/token';
-import { useOrganization } from '../../plugins/organization';
+import { checkOrganization, checkOrganizationBySlug } from '../../controllers/organization/check';
 
 
 export const router = () => new Elysia()
-    .use(useOrganization())
     .use(
         jwt({
             name: 'jwt',
@@ -16,7 +15,22 @@ export const router = () => new Elysia()
     )
     .post(
         '/api/auth/login',
-        async ({ organizationId, jwt, body: { email, password } }) => {
+        async ({ jwt, request: { headers }, body: { email, password } }) => {
+            // Obtener organizationId si se proporciona organization-domain
+            let organizationId: number | null = null;
+            const organizationIdentifier = headers.get('organization-domain');
+            
+            if (organizationIdentifier) {
+                const isDomain = organizationIdentifier.includes('.');
+                const organization = isDomain 
+                    ? await checkOrganization(organizationIdentifier)
+                    : await checkOrganizationBySlug(organizationIdentifier);
+                
+                if (organization) {
+                    organizationId = organization.id;
+                }
+            }
+
             const user = await login(organizationId, email, password);
 
             if (!user) {

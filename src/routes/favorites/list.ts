@@ -1,13 +1,17 @@
 import { Elysia, t } from "elysia";
 
-import { loggedUserOnly } from "../../plugins/auth";
+import { loggedOptional } from "../../plugins/auth";
 import { FavoritesListQuery } from "../../types/favorites/list";
 import { listFavorites } from "../../controllers/favorites/list";
 
 export const router = () =>
-  new Elysia().use(loggedUserOnly()).get(
+  new Elysia().use(loggedOptional()).get(
     "/api/favorites",
-    async ({ organizationId, user, query }) => {
+    async ({ logged, user, organizationId, query }) => {
+      if (!logged || !user) {
+        throw new Error('No autorizado');
+      }
+      // organizationId puede ser null si no se envió el header
       const { data, maxPage, total } = await listFavorites(
         organizationId,
         user.id,

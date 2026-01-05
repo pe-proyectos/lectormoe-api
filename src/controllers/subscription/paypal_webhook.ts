@@ -31,16 +31,16 @@ export const handlePaypalWebhook = async (webhookEvent: PaypalWebhookEvent) => {
                 const subscriptionWithPlan = await prisma.subscription.findFirst({
                     where: { id: subscription.id },
                     include: {
-                        subscriptionPlan: true,
-                        user: {
+                        subscriptionPlan: {
                             include: {
                                 organization: true
                             }
-                        }
+                        },
+                        user: true
                     }
                 });
 
-                if (subscriptionWithPlan) {
+                if (subscriptionWithPlan && subscriptionWithPlan.subscriptionPlan.organization) {
                     // Calculate fees (PayPal typically charges 2.9% + $0.30)
                     const paypalFee = Math.max(0.30, paymentAmount * 0.029);
                     const capibaraFee = paymentAmount * 0.05; // Assuming 5% for Capibara
@@ -49,7 +49,7 @@ export const handlePaypalWebhook = async (webhookEvent: PaypalWebhookEvent) => {
                                          // Create organization transaction
                      await prisma.organizationTransaction.create({
                          data: {
-                             organizationId: subscriptionWithPlan.user.organizationId,
+                             organizationId: subscriptionWithPlan.subscriptionPlan.organization.id,
                              subscriptionId: subscription.id,
                              origin: 'SUBSCRIPTION',
                              description: `Pago de suscripción - ${subscriptionWithPlan.subscriptionPlan.name}`,

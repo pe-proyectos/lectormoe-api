@@ -8,8 +8,8 @@ export const router = () => new Elysia()
     .use(loggedUserOnly())
     .post(
         '/api/genre',
-        async ({ organizationId, user, body }) => {
-            if (!user.canCreateGenre) {
+        async ({ organizationId, permissions, body }) => {
+            if (!permissions?.canCreateGenre) {
                 throw new Error("No tiene permisos para crear géneros.");
             }
 
