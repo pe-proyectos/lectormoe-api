@@ -26,13 +26,13 @@ export const EditOrganizationRequest = t.Object({
     
     useBlockedCountries: t.Optional(t.Boolean()),
     useAllowedCountries: t.Optional(t.Boolean()),
-    countryOptions: t.Array(t.Object({
+    countryOptions: t.Optional(t.Array(t.Object({
         countryCode: t.String(),
         language: t.String(),
         countryName: t.String(),
         allowed: t.Boolean(),
         blocked: t.Boolean(),
-    })),
+    }))),
     // Integrations
     enableGoogleAds: t.Optional(t.Boolean()),
     enableAdsterraAds: t.Optional(t.Boolean()),
@@ -46,39 +46,11 @@ export const EditOrganizationRequest = t.Object({
     tiktokUrl: t.Optional(t.String()),
     discordUrl: t.Optional(t.String()),
     twitchUrl: t.Optional(t.String()),
-    // Images
-    logo: t.Optional(
-        t.Union([
-            t.File({
-                maxSize: '25m',
-            }),
-            t.String(),
-        ])
-    ),
-    image: t.Optional(
-        t.Union([
-            t.File({
-                maxSize: '25m',
-            }),
-            t.String(),
-        ])
-    ),
-    banner: t.Optional(
-        t.Union([
-            t.File({
-                maxSize: '25m',
-            }),
-            t.String(),
-        ])
-    ),
-    favicon: t.Optional(
-        t.Union([
-            t.File({
-                maxSize: '25m',
-            }),
-            t.String(),
-        ])
-    ),
+    // Images - Solo recibimos fileKeys (strings) o null, no Files
+    logo: t.Optional(t.Union([t.String(), t.Null()])),
+    image: t.Optional(t.Union([t.String(), t.Null()])),
+    banner: t.Optional(t.Union([t.String(), t.Null()])),
+    favicon: t.Optional(t.Union([t.String(), t.Null()])),
 });
 
 export type EditOrganizationRequest = Static<typeof EditOrganizationRequest>;

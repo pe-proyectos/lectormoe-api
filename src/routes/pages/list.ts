@@ -5,6 +5,7 @@ import { useOrganization } from "../../plugins/organization";
 import { getChapter } from "../../controllers/chapter/get";
 import { loggedOptional } from "../../plugins/auth";
 import { getMangaCustomBySlug } from "../../controllers/manga-custom/get";
+import { checkChapterAccess } from "../../util/access-control";
 
 export const router = () =>
   new Elysia()
@@ -15,6 +16,7 @@ export const router = () =>
       async ({
         organizationId,
         user,
+        permissions,
         params: { mangaSlug, chapterNumber },
       }) => {
         const [manga, chapter] = await Promise.all([
@@ -26,36 +28,16 @@ export const router = () =>
           throw new Error("Capitulo no encontrado.");
         }
 
-        const userHasAccessToChapter = () => {
-          if (!user && manga?.requireLogin === true) return false;
-          if (
-            new Date(chapter.releasedAt).getTime() < new Date().getTime() &&
-            chapter?.subscribersOnly !== true
-          )
-            return true;
-          if (!user) return false;
-          if (user?.canReadUnreleased === true) return true;
-          if (user?.canEditChapter === true) return true;
-          if (user?.canEditPage === true) return true;
-          for (const subscription of user?.subscriptions || []) {
-            if (subscription?.subscriptionPlan?.canReadUnreleased === true) {
-              return true;
-            }
-            if (
-              manga?.subscriptionPlans?.find(
-                (plan) => plan.id === subscription?.subscriptionPlan?.id
-              )
-            ) {
-              return true;
-            }
-          }
-          return false;
-        };
+        // Verificar acceso usando la función centralizada
+        const accessCheck = checkChapterAccess(user, permissions, chapter, manga);
 
-        if (!userHasAccessToChapter()) {
-          throw new Error(
-            "No tiene permisos para leer capítulos sin publicar."
-          );
+        // Si no tiene acceso, devolver error apropiado
+        if (!accessCheck.hasAccess) {
+          return {
+            status: false,
+            message: accessCheck.message,
+            errorType: accessCheck.errorType
+          };
         }
 
         const pages = await listPages(organizationId, mangaSlug, chapterNumber);
@@ -72,7 +54,9 @@ export const router = () =>
         }),
         response: t.Object({
           status: t.Boolean(),
-          data: t.Any(),
+          data: t.Optional(t.Any()),
+          message: t.Optional(t.String()),
+          errorType: t.Optional(t.String()),
         }),
         transform({ params }) {
           params.chapterNumber = parseFloat(params.chapterNumber.toString());

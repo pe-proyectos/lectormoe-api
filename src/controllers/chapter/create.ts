@@ -1,7 +1,5 @@
 import { prisma } from "../../models/prisma";
 import type { CreateChapterRequest } from "../../types/chapter/create";
-import { uploadFile } from "../../util/upload-file";
-import sizeOf from "buffer-image-size";
 
 export const createChapter = async (organizationId: number, mangaSlug: string, params: CreateChapterRequest) => {
 	const mangaCustom = await prisma.mangaCustom.findFirst({
@@ -43,6 +41,16 @@ export const createChapter = async (organizationId: number, mangaSlug: string, p
 		throw new Error(`El capítulo ${params.number} ya existe`);
 	}
 
+	// Construir imageUrl desde fileKey
+	let imageUrl: string | null = null;
+	const r2PublicUrl = Bun.env.R2_PUBLIC_URL || 'https://r2.capibaratraductor.com';
+
+	if (params.image && typeof params.image === 'string') {
+		imageUrl = params.image.startsWith('http') 
+			? params.image 
+			: `${r2PublicUrl}/${params.image}`;
+	}
+
 	let chapter = await prisma.chapter.create({
 		data: {
 			mangaCustomId: mangaCustom.id,
@@ -50,41 +58,30 @@ export const createChapter = async (organizationId: number, mangaSlug: string, p
 			title: params.title,
 			releasedAt: params?.releasedAt,
 			subscribersOnly: params?.subscribersOnly,
+			imageUrl,
 		},
 	});
 
-	if (params.image && params.image instanceof File) {
-		const imageBuffer = await params.image.arrayBuffer();
-		const imageUrl = await uploadFile(imageBuffer, params.image.name, undefined, organizationId, 'chapters');
-		chapter = await prisma.chapter.update({
-			where: {
-				id: chapter.id,
-			},
-			data: {
-				imageUrl,
-			},
-		});
-	}
-
 	if (params.pages) {
 		await Promise.all(params.pages.map(async (page, index) => {
-			if (page instanceof File) {
-				const pageBuffer = await page.arrayBuffer();
-				const pageSize = sizeOf(Buffer.from(pageBuffer));
-				const pageUrl = await uploadFile(pageBuffer, page.name, undefined, organizationId, 'chapters');
-				await prisma.page.create({
-					data: {
-						imageUrl: pageUrl,
-						number: index + 1,
-						chapterId: chapter.id,
-						imageWidth: pageSize.width,
-						imageHeight: pageSize.height,
-						imageType: pageSize.type,
-						//@ts-ignore
-						isSinglePage: params.singlePages?.includes(index) ?? false,
-					},
-				})
-			}
+			// Las páginas son fileKeys o URLs que vienen del frontend
+			const pageUrl = page.startsWith('http') 
+				? page 
+				: `${r2PublicUrl}/${page}`;
+			
+			// Crear página con URL - dimensiones por defecto
+			await prisma.page.create({
+				data: {
+					imageUrl: pageUrl,
+					number: index + 1,
+					chapterId: chapter.id,
+					imageHeight: 100, // Dimensiones por defecto
+					imageWidth: 100,
+					imageType: "any",
+					//@ts-ignore
+					isSinglePage: params.singlePages?.includes(index) ?? false,
+				},
+			})
 		}));
 	}
 

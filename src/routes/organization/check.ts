@@ -11,14 +11,14 @@ export const router = () => new Elysia()
         async ({ query, headers }) => {
             const { domain, slug } = query as { domain?: string; slug?: string };
             
-            // Priorizar query params sobre header organization-domain
-            // Si hay slug o domain en el query, usarlos; si no, usar el header
+            // Priorizar query params sobre header x-organization
+            // Si hay slug o x-organization en el query, usarlos; si no, usar el header
             let finalSlug = slug;
             let finalDomain = domain;
             
             if (!finalSlug && !finalDomain) {
                 // Si no hay query params, intentar usar el header
-                const organizationIdentifier = headers.get('organization-domain');
+                const organizationIdentifier = headers.get('x-organization');
                 if (organizationIdentifier) {
                     // Si contiene un punto, es un domain; si no, es un slug
                     if (organizationIdentifier.includes('.')) {
@@ -29,16 +29,11 @@ export const router = () => new Elysia()
                 }
             }
             
-            if (!finalDomain && !finalSlug) {
-                throw new Error('No se recibió el dominio ni el slug.');
+            if (!finalSlug) {
+                throw new Error('No se recibió el domain slug.');
             }
             
-            let organization;
-            if (finalSlug) {
-                organization = await checkOrganizationBySlug(finalSlug);
-            } else if (finalDomain) {
-                organization = await checkOrganization(finalDomain);
-            }
+            let organization = await checkOrganizationBySlug(finalSlug);
             
             if (!organization) {
                 throw new Error(`No se encontró la organización '${finalSlug || finalDomain}'.`);

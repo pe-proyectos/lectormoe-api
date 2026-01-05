@@ -16,7 +16,7 @@ export const loggedOptional = () => new Elysia()
     .derive({ as: 'global' }, async ({ jwt, request: { headers } }) => {
         const authHeader = headers.get('Authorization');
         const token = authHeader?.split('Bearer ')[1];
-        const organizationIdentifier = headers.get('organization-domain');
+        const organizationIdentifier = headers.get('x-organization');
         
         if (!token) {
             return { logged: false, user: null };
@@ -37,11 +37,7 @@ export const loggedOptional = () => new Elysia()
                                organizationIdentifier.startsWith('localhost:');
             
             if (!isLocalhost) {
-                // Si contiene un punto, es un domain; si no, es un slug
-                const isDomain = organizationIdentifier.includes('.');
-                organization = isDomain 
-                    ? await checkOrganization(organizationIdentifier)
-                    : await checkOrganizationBySlug(organizationIdentifier);
+                organization = await checkOrganizationBySlug(organizationIdentifier);
                     
                 if (organization) {
                     organizationId = organization.id;
@@ -129,7 +125,7 @@ export const loggedUserOnly = () => new Elysia()
         })
     )
     .derive({ as: 'global' }, async ({ jwt, request: { headers } }) => {
-        const organizationIdentifier = headers.get('organization-domain');
+        const organizationIdentifier = headers.get('x-organization');
         if (!organizationIdentifier) {
             throw new Error('No autorizado, dominio de organización no encontrado.');
         }
@@ -144,9 +140,7 @@ export const loggedUserOnly = () => new Elysia()
         
         // Si contiene un punto, es un domain; si no, es un slug
         const isDomain = organizationIdentifier.includes('.');
-        const organization = isDomain 
-            ? await checkOrganization(organizationIdentifier)
-            : await checkOrganizationBySlug(organizationIdentifier);
+        const organization = await checkOrganizationBySlug(organizationIdentifier);
             
         if (!organization) {
             throw new Error('No autorizado, organización no encontrada.');

@@ -1,13 +1,16 @@
 import { Elysia, t } from 'elysia';
 
-import { loggedUserOnly } from '../../plugins/auth';
+import { loggedOptional } from '../../plugins/auth';
 import { getFavorite } from '../../controllers/favorites/get';
 
 export const router = () => new Elysia()
-    .use(loggedUserOnly())
+    .use(loggedOptional())
     .get(
         '/api/favorites/manga-custom/:mangaSlug',
-        async ({ organizationId, user, params: { mangaSlug } }) => {
+        async ({ logged, user, organizationId, params: { mangaSlug } }) => {
+            if (!logged || !user) {
+                throw new Error('No autorizado');
+            }
             const isFavorite = await getFavorite(organizationId, user.id, mangaSlug);
             
             return { status: true, data: isFavorite };

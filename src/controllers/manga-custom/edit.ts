@@ -1,6 +1,5 @@
 import { prisma } from "../../models/prisma";
 import type { EditMangaCustomRequest } from "../../types/manga-custom/edit";
-import { uploadFile } from "../../util/upload-file";
 
 export const editMangaCustom = async (organizationId: number, mangaSlug: string, params: EditMangaCustomRequest) => {
 	const mangaCustom = await prisma.mangaCustom.findFirst({
@@ -16,83 +15,49 @@ export const editMangaCustom = async (organizationId: number, mangaSlug: string,
 	if (!mangaCustom) {
 		throw new Error("Tu organización no tiene este manga");
 	}
+
+	// Construir URLs desde fileKeys
+	const r2PublicUrl = Bun.env.R2_PUBLIC_URL || 'https://r2.capibaratraductor.com';
+	const updateData: any = {
+		status: params.status,
+		title: params.title,
+		shortDescription: params.shortDescription,
+		description: params.description,
+		releasedAt: params.releasedAt,
+		nextChapterAt: params.nextChapterAt,
+		requireLogin: params.requireLogin,
+		isSimulRelease: params.isSimulRelease,
+		isNSFW: params.isNSFW,
+	};
+
+	// Manejar image
+	if (params.image !== undefined) {
+		if (params.image === null) {
+			updateData.imageUrl = null;
+		} else if (typeof params.image === 'string') {
+			updateData.imageUrl = params.image.startsWith('http') 
+				? params.image 
+				: `${r2PublicUrl}/${params.image}`;
+		}
+	}
+
+	// Manejar banner
+	if (params.banner !== undefined) {
+		if (params.banner === null) {
+			updateData.bannerUrl = null;
+		} else if (typeof params.banner === 'string') {
+			updateData.bannerUrl = params.banner.startsWith('http') 
+				? params.banner 
+				: `${r2PublicUrl}/${params.banner}`;
+		}
+	}
 	
 	await prisma.mangaCustom.update({
 		where: {
 			id: mangaCustom.id,
 		},
-		data: {
-			status: params.status,
-			title: params.title,
-			shortDescription: params.shortDescription,
-			description: params.description,
-			releasedAt: params.releasedAt,
-			nextChapterAt: params.nextChapterAt,
-			requireLogin: params.requireLogin,
-			isSimulRelease: params.isSimulRelease,
-			isNSFW: params.isNSFW,
-			...params.image && params.image instanceof File ? {} : {
-				imageUrl: params.image === "null" ? null : params.image,
-			},
-			...params.banner && params.banner instanceof File ? {} : {
-				bannerUrl: params.banner === "null" ? null : params.banner,
-			},
-		}
+		data: updateData
 	});
-
-	if (params.image && params.image instanceof File) {
-		const imageBuffer = await params.image.arrayBuffer();
-		const imageUrl = await uploadFile(imageBuffer, params.image.name, undefined, organizationId, 'mangas');
-		await prisma.mangaCustom.update({
-			where: {
-				id: mangaCustom.id,
-			},
-			data: {
-				imageUrl,
-			},
-		});
-	} else if (params.image && typeof params.image === 'string' && params.image !== 'null') {
-		const publicEndpoint = Bun.env.FILE_DOWNLOAD_ENDPOINT 
-			|| `https://pub-${Bun.env.R2_ACCOUNT_ID}.r2.dev`;
-		const imageUrl = params.image.startsWith('http') 
-			? params.image 
-			: `${publicEndpoint}/${params.image}`;
-		await prisma.mangaCustom.update({
-			where: {
-				id: mangaCustom.id,
-			},
-			data: {
-				imageUrl,
-			},
-		});
-	}
-
-	if (params.banner && params.banner instanceof File) {
-		const bannerBuffer = await params.banner.arrayBuffer();
-		const bannerUrl = await uploadFile(bannerBuffer, params.banner.name, undefined, organizationId, 'mangas');
-		await prisma.mangaCustom.update({
-			where: {
-				id: mangaCustom.id,
-			},
-			data: {
-				bannerUrl,
-			},
-		});
-	} else if (params.banner && typeof params.banner === 'string' && params.banner !== 'null') {
-		const publicEndpoint = Bun.env.FILE_DOWNLOAD_ENDPOINT 
-			|| `https://pub-${Bun.env.R2_ACCOUNT_ID}.r2.dev`;
-		const bannerUrl = params.banner.startsWith('http') 
-			? params.banner 
-			: `${publicEndpoint}/${params.banner}`;
-		await prisma.mangaCustom.update({
-			where: {
-				id: mangaCustom.id,
-			},
-			data: {
-				bannerUrl,
-			},
-		});
-	}
 
 	await prisma.mangaCustom.update({
 		where: {

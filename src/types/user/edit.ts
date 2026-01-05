@@ -16,22 +16,8 @@ export const EditUserRequest = t.Object({
   pushNotifications: t.Optional(t.Boolean()),
   theme: t.Optional(t.String()),
   hierarchyLevel: t.Optional(t.Number()),
-  image: t.Optional(
-      t.Union([
-          t.File({
-              maxSize: '25m',
-          }),
-          t.String(),
-      ])
-  ),
-  banner: t.Optional(
-      t.Union([
-          t.File({
-              maxSize: '25m',
-          }),
-          t.String(),
-      ])
-  ),
+  image: t.Optional(t.Union([t.String(), t.Null()])),
+  banner: t.Optional(t.Union([t.String(), t.Null()])),
   // ## Permissions
   // Organization
   canSeeAdminPanel: t.Optional(t.Boolean()),

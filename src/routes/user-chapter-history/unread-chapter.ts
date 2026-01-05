@@ -1,13 +1,16 @@
 import { Elysia, t } from 'elysia';
 
 import { unreadUserChapterHistoryChapter } from '../../controllers/user-chapter-history/unread-chapter';
-import { loggedUserOnly } from '../../plugins/auth';
+import { loggedOptional } from '../../plugins/auth';
 
 export const router = () => new Elysia()
-    .use(loggedUserOnly())
+    .use(loggedOptional())
     .delete(
         '/api/user-chapter-history/manga-custom/:mangaSlug/chapter/:chapterNumber',
-        async ({ organizationId, user, params: { mangaSlug, chapterNumber } }) => {
+        async ({ logged, user, organizationId, params: { mangaSlug, chapterNumber } }) => {
+            if (!logged || !user) {
+                throw new Error('No autorizado');
+            }
             const view = await unreadUserChapterHistoryChapter(organizationId, user.id, mangaSlug, chapterNumber);
 
             return {

@@ -31,16 +31,16 @@ export const router = () => new Elysia()
                 data: t.Any(),
             }),
             transform({ body }) {
-                if (body.active) {
+                if (body.active !== undefined) {
                     body.active = body.active.toString() === "true";
                 }
-                if (body.hideAds) {
+                if (body.hideAds !== undefined) {
                     body.hideAds = body.hideAds.toString() === "true";
                 }
-                if (body.canDownload) {
+                if (body.canDownload !== undefined) {
                     body.canDownload = body.canDownload.toString() === "true";
                 }
-                if (body.canReadUnreleased) {
+                if (body.canReadUnreleased !== undefined) {
                     body.canReadUnreleased = body.canReadUnreleased.toString() === "true";
                 }
             },

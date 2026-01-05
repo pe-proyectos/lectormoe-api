@@ -16,15 +16,12 @@ export const router = () => new Elysia()
     .post(
         '/api/auth/login',
         async ({ jwt, request: { headers }, body: { email, password } }) => {
-            // Obtener organizationId si se proporciona organization-domain
+            // Obtener organizationId si se proporciona x-organization
             let organizationId: number | null = null;
-            const organizationIdentifier = headers.get('organization-domain');
+            const organizationIdentifier = headers.get('x-organization');
             
             if (organizationIdentifier) {
-                const isDomain = organizationIdentifier.includes('.');
-                const organization = isDomain 
-                    ? await checkOrganization(organizationIdentifier)
-                    : await checkOrganizationBySlug(organizationIdentifier);
+                const organization = await checkOrganizationBySlug(organizationIdentifier);
                 
                 if (organization) {
                     organizationId = organization.id;

@@ -99,17 +99,22 @@ export async function generatePresignedUploadUrl(
     const random = Math.floor(Math.random() * 1000000) + 1;
     const extension = filename.split('.').pop();
     
-    // Get organization domain if not provided but organizationId is
+    // Sanitize content folder name
+    const sanitizedContentFolder = contentFolder ? contentFolder.replace(/[^a-zA-Z0-9-_]/g, '_').toLowerCase() : 'general';
+    
+    // Some content types are global and should never be tenant-specific
+    // User profiles and comments are global across all organizations
+    const globalContentFolders = ['profile_pictures', 'avatars', 'comments'];
+    const isGlobalContent = globalContentFolders.includes(sanitizedContentFolder);
+    
+    // Get organization domain if not provided but organizationId is (only for non-global content)
     let finalOrganizationDomain = organizationDomain;
-    if (!finalOrganizationDomain && organizationId) {
+    if (!isGlobalContent && !finalOrganizationDomain && organizationId) {
         finalOrganizationDomain = await getOrganizationDomain(organizationId) || undefined;
     }
     
-    // Get tenant name from domain if provided
-    const tenantName = finalOrganizationDomain ? getTenantNameFromDomain(finalOrganizationDomain) : null;
-    
-    // Sanitize content folder name
-    const sanitizedContentFolder = contentFolder ? contentFolder.replace(/[^a-zA-Z0-9-_]/g, '_').toLowerCase() : 'general';
+    // Get tenant name from domain if provided (only for non-global content)
+    const tenantName = !isGlobalContent && finalOrganizationDomain ? getTenantNameFromDomain(finalOrganizationDomain) : null;
     
     // Build file key with tenant and content folder structure
     const fileKey = tenantName 
@@ -154,17 +159,22 @@ export async function uploadFile(
     const random = Math.floor(Math.random() * 1000000) + 1;
     const extension = filename.split('.').pop();
     
-    // Get organization domain if not provided but organizationId is
+    // Sanitize content folder name
+    const sanitizedContentFolder = contentFolder ? contentFolder.replace(/[^a-zA-Z0-9-_]/g, '_').toLowerCase() : 'general';
+    
+    // Some content types are global and should never be tenant-specific
+    // User profiles and comments are global across all organizations
+    const globalContentFolders = ['profile_pictures', 'avatars', 'comments'];
+    const isGlobalContent = globalContentFolders.includes(sanitizedContentFolder);
+    
+    // Get organization domain if not provided but organizationId is (only for non-global content)
     let finalOrganizationDomain = organizationDomain;
-    if (!finalOrganizationDomain && organizationId) {
+    if (!isGlobalContent && !finalOrganizationDomain && organizationId) {
         finalOrganizationDomain = await getOrganizationDomain(organizationId) || undefined;
     }
     
-    // Get tenant name from domain if provided
-    const tenantName = finalOrganizationDomain ? getTenantNameFromDomain(finalOrganizationDomain) : null;
-    
-    // Sanitize content folder name
-    const sanitizedContentFolder = contentFolder ? contentFolder.replace(/[^a-zA-Z0-9-_]/g, '_').toLowerCase() : 'general';
+    // Get tenant name from domain if provided (only for non-global content)
+    const tenantName = !isGlobalContent && finalOrganizationDomain ? getTenantNameFromDomain(finalOrganizationDomain) : null;
     
     // Build file key with tenant and content folder structure
     const fileKey = tenantName 

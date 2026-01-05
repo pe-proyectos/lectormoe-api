@@ -1,13 +1,21 @@
 import { Elysia, t } from 'elysia';
-import { loggedUserOnly } from '../../plugins/auth';
+import { loggedOptional } from '../../plugins/auth';
+import { useOrganizationOptional } from '../../plugins/organization';
 import { deleteComment } from '../../controllers/comment/delete';
 import { getComment } from '../../controllers/comment/get';
 
 export const router = () => new Elysia()
-    .use(loggedUserOnly())
+    .use(useOrganizationOptional())
+    .use(loggedOptional())
     .delete(
         '/api/comment/:id',
-        async ({ organizationId, user, params }) => {
+        async ({ logged, user, organizationId, params }) => {
+            if (!logged || !user) {
+                throw new Error('No autorizado');
+            }
+            if (!organizationId) {
+                throw new Error('Se requiere una organización');
+            }
             const comment = await getComment(Number(params.id));
             if (!comment) {
                 throw new Error("Comentario no encontrado.");

@@ -67,8 +67,9 @@ export const router = () => new Elysia()
                 if (typeof body.useAllowedCountries === 'string')
                     body.useAllowedCountries = body.useAllowedCountries === 'true';
                 
-                if (body.countryOptions)
-                    body.countryOptions = JSON.parse(body.countryOptions as unknown as string);
+                // Solo parsear countryOptions si es una string (no si ya es un array)
+                if (body.countryOptions && typeof body.countryOptions === 'string')
+                    body.countryOptions = JSON.parse(body.countryOptions);
             },
         }
     );

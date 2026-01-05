@@ -4,22 +4,35 @@ import { getChapter } from '../../controllers/chapter/get';
 import { useOrganization } from '../../plugins/organization';
 import { loggedOptional } from '../../plugins/auth';
 import { getMangaCustomBySlug } from '../../controllers/manga-custom/get';
+import { checkChapterAccess } from '../../util/access-control';
 
 export const router = () => new Elysia()
     .use(useOrganization())
     .use(loggedOptional())
     .get(
         '/api/manga-custom/:mangaSlug/chapter/:chapterNumber',
-        async ({ organizationId, params: { mangaSlug, chapterNumber } }) => {
-            const chapter = await getChapter(organizationId, mangaSlug, chapterNumber);
+        async ({ organizationId, user, permissions, params: { mangaSlug, chapterNumber } }) => {
+            const [manga, chapter] = await Promise.all([
+                getMangaCustomBySlug(organizationId, mangaSlug),
+                getChapter(organizationId, mangaSlug, chapterNumber)
+            ]);
 
             if (!chapter) {
                 throw new Error("Capitulo no encontrado.");
             }
 
+            // Verificar acceso usando la función centralizada
+            const accessCheck = checkChapterAccess(user, permissions, chapter, manga);
+
+            // Return chapter data with access information
+            // Don't block here, just add metadata
             return {
                 status: true,
-                data: chapter
+                data: {
+                    ...chapter,
+                    hasAccess: accessCheck.hasAccess,
+                    accessDeniedReason: accessCheck.errorType
+                }
             };
         },
         {

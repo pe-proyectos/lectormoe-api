@@ -38,13 +38,13 @@ export const router = () => new Elysia()
                 if (body.releasedAt) {
                     body.releasedAt = new Date(body.releasedAt);
                 }
-                if (body.requireLogin) {
+                if (body.requireLogin !== undefined) {
                     body.requireLogin = body.requireLogin.toString() === "true";
                 }
-                if (body.isSimulRelease) {
+                if (body.isSimulRelease !== undefined) {
                     body.isSimulRelease = body.isSimulRelease.toString() === "true";
                 }
-                if(body.isNSFW){
+                if(body.isNSFW !== undefined){
                     body.isNSFW = body.isNSFW.toString() === "true";
                 }
                 if(body.genreIds) {

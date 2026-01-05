@@ -1,12 +1,12 @@
 import { Elysia, t } from "elysia";
 import { loggedUserOnly } from "../../plugins/auth";
-import { useOrganization } from "../../plugins/organization";
+import { useOrganizationOptional } from "../../plugins/organization";
 import { generatePresignedUploadUrl, getContentType } from "../../services/files";
 
 export const router = () =>
   new Elysia()
     .use(loggedUserOnly())
-    .use(useOrganization())
+    .use(useOrganizationOptional())
     .post(
       "/api/files/presigned-url",
       async ({ body: { filename, contentType, expiresIn, contentFolder }, request: { headers }, organizationId }) => {
@@ -23,7 +23,7 @@ export const router = () =>
         const finalContentType = contentType || getContentType(filename);
 
         // Get organization domain from headers
-        const organizationDomain = headers.get('organization-domain') || undefined;
+        const organizationDomain = headers.get('x-organization') || undefined;
 
         try {
           const { uploadUrl, fileKey } = await generatePresignedUploadUrl(

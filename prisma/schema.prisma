@@ -425,6 +425,8 @@ model Analytics {
   organization   Organization? @relation(fields: [organizationId], references: [id])
   user           User?         @relation(fields: [userId], references: [id])
 
+  @@index([organizationId, capturedAt, event])
+  @@index([capturedAt])
   @@map("analytics")
 }
 
@@ -487,6 +489,8 @@ model ViewsHistory {
   chapter       Chapter?     @relation(fields: [chapterId], references: [id])
   mangaCustom   MangaCustom? @relation(fields: [mangaCustomId], references: [id])
 
+  @@index([mangaCustomId, viewedAt])
+  @@index([viewedAt])
   @@map("views")
 }
 

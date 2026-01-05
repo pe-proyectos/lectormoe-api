@@ -8,22 +8,8 @@ export const EditMangaCustomRequest = t.Object({
     description: t.Optional(t.String()),
     genreIds: t.Optional(t.Array(t.Number())),
     subscriptionPlanIds: t.Optional(t.Array(t.Number())),
-    image: t.Optional(
-        t.Union([
-            t.File({
-                maxSize: '25m',
-            }),
-            t.String(),
-        ])
-    ),
-    banner: t.Optional(
-        t.Union([
-            t.File({
-                maxSize: '25m',
-            }),
-            t.String(),
-        ])
-    ),
+    image: t.Optional(t.Union([t.String(), t.Null()])),
+    banner: t.Optional(t.Union([t.String(), t.Null()])),
     releasedAt: t.Optional(t.Date()),
     nextChapterAt: t.Optional(t.Date()),
     requireLogin: t.Optional(t.Boolean()),

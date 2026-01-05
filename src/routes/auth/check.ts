@@ -8,7 +8,7 @@ export const router = () => new Elysia()
     .use(loggedOptional())
     .get(
         '/api/auth/check',
-        async ({ logged, user, token, request: { headers } }) => {
+        async ({ logged, user, token, permissions, request: { headers } }) => {
             // Si no hay token o el usuario no está logueado, retornar status: false
             if (!token || !user || !logged) {
                 return {
@@ -22,6 +22,7 @@ export const router = () => new Elysia()
                 data: {
                     token: token as string,
                     user: user,
+                    permissions: permissions || null,
                 }
             };
         },
@@ -32,6 +33,7 @@ export const router = () => new Elysia()
                     data: t.Object({
                         token: t.String(),
                         user: t.Any(),
+                        permissions: t.Nullable(t.Any()),
                     }),
                 }),
                 t.Object({

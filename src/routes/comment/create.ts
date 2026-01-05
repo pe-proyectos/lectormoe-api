@@ -2,13 +2,21 @@ import { Elysia, t } from 'elysia';
 
 import { CreateCommentRequest } from '../../types/comment/create';
 import { createComment } from '../../controllers/comment/create';
-import { loggedUserOnly } from '../../plugins/auth';
+import { loggedOptional } from '../../plugins/auth';
+import { useOrganizationOptional } from '../../plugins/organization';
 
 export const router = () => new Elysia()
-    .use(loggedUserOnly())
+    .use(useOrganizationOptional())
+    .use(loggedOptional())
     .post(
         '/api/comment',
-        async ({ organizationId, user, body }) => {
+        async ({ logged, user, organizationId, body }) => {
+            if (!logged || !user) {
+                throw new Error('No autorizado');
+            }
+            if (!organizationId) {
+                throw new Error('Se requiere una organización para crear comentarios');
+            }
             const commentCreated = await createComment(organizationId, user.id, body);
 
             if (!commentCreated) {

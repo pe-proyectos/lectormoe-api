@@ -1,6 +1,5 @@
 import { prisma } from "../../models/prisma";
 import { EditOrganizationRequest } from "../../types/organization/edit";
-import { uploadFile } from "../../util/upload-file";
 
 export const editOrganization = async (organizationId: number, params: EditOrganizationRequest) => {
 	await prisma.organization.update({
@@ -40,39 +39,22 @@ export const editOrganization = async (organizationId: number, params: EditOrgan
 			useBlockedCountries: params.useBlockedCountries,
 			useAllowedCountries: params.useAllowedCountries,
 			monitorWebsiteId: params.monitorWebsiteId,
-			...params.logo && params.logo instanceof File ? {} : {
-				logoUrl: params.logo === "null" ? null : params.logo,
-			},
-			...params.image && params.image instanceof File ? {} : {
-				imageUrl: params.image === "null" ? null : params.image,
-			},
-			...params.banner && params.banner instanceof File ? {} : {
-				bannerUrl: params.banner === "null" ? null : params.banner,
-			},
-			...params.favicon && params.favicon instanceof File ? {} : {
-				faviconUrl: params.favicon === "null" ? null : params.favicon,
-			},
+			// No actualizar URLs de imágenes aquí si viene un fileKey válido, se manejan abajo
+			// Solo actualizar si viene null explícito (para limpiar)
+			...((params.logo === null) ? { logoUrl: null } : {}),
+			...((params.image === null) ? { imageUrl: null } : {}),
+			...((params.banner === null) ? { bannerUrl: null } : {}),
+			...((params.favicon === null) ? { faviconUrl: null } : {}),
 		},
 	});
 
-	if (params.logo && params.logo instanceof File) {
-		const logoBuffer = await params.logo.arrayBuffer();
-		const logoUrl = await uploadFile(logoBuffer, params.logo.name, undefined, organizationId, 'organizations');
-		await prisma.organization.update({
-			where: {
-				id: organizationId,
-			},
-			data: {
-				logoUrl,
-			},
-		});
-	} else if (params.logo && typeof params.logo === 'string' && params.logo !== 'null') {
-		// If it's a fileKey (just the filename), construct the full URL
-		const publicEndpoint = Bun.env.FILE_DOWNLOAD_ENDPOINT 
-			|| `https://pub-${Bun.env.R2_ACCOUNT_ID}.r2.dev`;
+	// Si viene un logo, procesarlo
+	if (params.logo && typeof params.logo === 'string') {
+		// Si ya es una URL completa, mantenerla como está (archivo existente)
+		// Si es un fileKey, construir la URL completa
 		const logoUrl = params.logo.startsWith('http') 
 			? params.logo 
-			: `${publicEndpoint}/${params.logo}`;
+			: `${Bun.env.R2_PUBLIC_URL || 'https://r2.capibaratraductor.com'}/${params.logo}`;
 		await prisma.organization.update({
 			where: {
 				id: organizationId,
@@ -83,23 +65,13 @@ export const editOrganization = async (organizationId: number, params: EditOrgan
 		});
 	}
 
-	if (params.image && params.image instanceof File) {
-		const imageBuffer = await params.image.arrayBuffer();
-		const imageUrl = await uploadFile(imageBuffer, params.image.name, undefined, organizationId, 'organizations');
-		await prisma.organization.update({
-			where: {
-				id: organizationId,
-			},
-			data: {
-				imageUrl,
-			},
-		});
-	} else if (params.image && typeof params.image === 'string' && params.image !== 'null') {
-		const publicEndpoint = Bun.env.FILE_DOWNLOAD_ENDPOINT 
-			|| `https://pub-${Bun.env.R2_ACCOUNT_ID}.r2.dev`;
+	// Si viene un image, procesarlo
+	if (params.image && typeof params.image === 'string') {
+		// Si ya es una URL completa, mantenerla como está (archivo existente)
+		// Si es un fileKey, construir la URL completa
 		const imageUrl = params.image.startsWith('http') 
 			? params.image 
-			: `${publicEndpoint}/${params.image}`;
+			: `${Bun.env.R2_PUBLIC_URL || 'https://r2.capibaratraductor.com'}/${params.image}`;
 		await prisma.organization.update({
 			where: {
 				id: organizationId,
@@ -110,23 +82,13 @@ export const editOrganization = async (organizationId: number, params: EditOrgan
 		});
 	}
 
-	if (params.banner && params.banner instanceof File) {
-		const bannerBuffer = await params.banner.arrayBuffer();
-		const bannerUrl = await uploadFile(bannerBuffer, params.banner.name, undefined, organizationId, 'organizations');
-		await prisma.organization.update({
-			where: {
-				id: organizationId,
-			},
-			data: {
-				bannerUrl,
-			},
-		});
-	} else if (params.banner && typeof params.banner === 'string' && params.banner !== 'null') {
-		const publicEndpoint = Bun.env.FILE_DOWNLOAD_ENDPOINT 
-			|| `https://pub-${Bun.env.R2_ACCOUNT_ID}.r2.dev`;
+	// Si viene un banner, procesarlo
+	if (params.banner && typeof params.banner === 'string') {
+		// Si ya es una URL completa, mantenerla como está (archivo existente)
+		// Si es un fileKey, construir la URL completa
 		const bannerUrl = params.banner.startsWith('http') 
 			? params.banner 
-			: `${publicEndpoint}/${params.banner}`;
+			: `${Bun.env.R2_PUBLIC_URL || 'https://r2.capibaratraductor.com'}/${params.banner}`;
 		await prisma.organization.update({
 			where: {
 				id: organizationId,
@@ -137,23 +99,13 @@ export const editOrganization = async (organizationId: number, params: EditOrgan
 		});
 	}
 
-	if (params.favicon && params.favicon instanceof File) {
-		const faviconBuffer = await params.favicon.arrayBuffer();
-		const faviconUrl = await uploadFile(faviconBuffer, params.favicon.name, undefined, organizationId, 'organizations');
-		await prisma.organization.update({
-			where: {
-				id: organizationId,
-			},
-			data: {
-				faviconUrl,
-			},
-		});
-	} else if (params.favicon && typeof params.favicon === 'string' && params.favicon !== 'null') {
-		const publicEndpoint = Bun.env.FILE_DOWNLOAD_ENDPOINT 
-			|| `https://pub-${Bun.env.R2_ACCOUNT_ID}.r2.dev`;
+	// Si viene un favicon, procesarlo
+	if (params.favicon && typeof params.favicon === 'string') {
+		// Si ya es una URL completa, mantenerla como está (archivo existente)
+		// Si es un fileKey, construir la URL completa
 		const faviconUrl = params.favicon.startsWith('http') 
 			? params.favicon 
-			: `${publicEndpoint}/${params.favicon}`;
+			: `${Bun.env.R2_PUBLIC_URL || 'https://r2.capibaratraductor.com'}/${params.favicon}`;
 		await prisma.organization.update({
 			where: {
 				id: organizationId,

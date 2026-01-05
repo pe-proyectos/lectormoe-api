@@ -10,16 +10,12 @@ export const useOrganization = () => new Elysia()
         })
     )
     .derive({ as: 'global' }, async ({ request: { headers } }) => {
-        const organizationIdentifier = headers.get('organization-domain');
+        const organizationIdentifier = headers.get('x-organization');
         if (!organizationIdentifier) {
             throw new Error('No autorizado, dominio de organización no encontrado.');
         }
         
-        // Si contiene un punto, es un domain; si no, es un slug
-        const isDomain = organizationIdentifier.includes('.');
-        const organization = isDomain 
-            ? await checkOrganization(organizationIdentifier)
-            : await checkOrganizationBySlug(organizationIdentifier);
+        const organization = await checkOrganizationBySlug(organizationIdentifier);
             
         if (!organization) {
             throw new Error('No autorizado, organización no encontrada.');
@@ -27,7 +23,7 @@ export const useOrganization = () => new Elysia()
         return { organizationId: organization.id, organization };
     });
 
-// Plugin opcional que permite que organizationId sea null cuando no hay organization-domain
+// Plugin opcional que permite que organizationId sea null cuando no hay x-organization
 export const useOrganizationOptional = () => new Elysia()
     .use(
         jwt({
@@ -36,16 +32,12 @@ export const useOrganizationOptional = () => new Elysia()
         })
     )
     .derive({ as: 'global' }, async ({ request: { headers } }) => {
-        const organizationIdentifier = headers.get('organization-domain');
+        const organizationIdentifier = headers.get('x-organization');
         if (!organizationIdentifier) {
             return { organizationId: null, organization: null };
         }
         
-        // Si contiene un punto, es un domain; si no, es un slug
-        const isDomain = organizationIdentifier.includes('.');
-        const organization = isDomain 
-            ? await checkOrganization(organizationIdentifier)
-            : await checkOrganizationBySlug(organizationIdentifier);
+        const organization = await checkOrganizationBySlug(organizationIdentifier);
             
         if (!organization) {
             return { organizationId: null, organization: null };

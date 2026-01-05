@@ -1,6 +1,5 @@
 import { prisma } from "../../models/prisma";
 import type { EditUserRequest } from "../../types/user/edit";
-import { uploadFile } from "../../util/upload-file";
 
 export const editUser = async (
   organizationId: number | null,
@@ -123,15 +122,15 @@ export const editUser = async (
     });
   }
 
-  // Actualizar permisos en la tabla Permission
-  await prisma.permission.update({
+  // Actualizar o crear permisos en la tabla Permission (upsert para manejar usuarios sin permisos previos)
+  await prisma.permission.upsert({
     where: {
       userId_organizationId: {
         userId,
         organizationId: finalOrganizationId,
       },
     },
-    data: {
+    update: {
       role: params.role,
       hierarchyLevel: params.hierarchyLevel,
       canSeeAdminPanel: params.canSeeAdminPanel,
@@ -163,102 +162,108 @@ export const editUser = async (
       canDownload: params.canDownload,
       canReadUnreleased: params.canReadUnreleased,
     },
+    create: {
+      userId,
+      organizationId: finalOrganizationId,
+      role: params.role || "user",
+      hierarchyLevel: params.hierarchyLevel || 0,
+      canSeeAdminPanel: params.canSeeAdminPanel || false,
+      canEditOrganization: params.canEditOrganization || false,
+      canDeleteOrganization: params.canDeleteOrganization || false,
+      canEditUser: params.canEditUser || false,
+      canDeleteUser: params.canDeleteUser || false,
+      canCreateAuthor: params.canCreateAuthor || false,
+      canCreateMangaProfile: params.canCreateMangaProfile || false,
+      canCreateMangaCustom: params.canCreateMangaCustom || false,
+      canEditMangaCustom: params.canEditMangaCustom || false,
+      canDeleteMangaCustom: params.canDeleteMangaCustom || false,
+      canCreateGenre: params.canCreateGenre || false,
+      canEditGenre: params.canEditGenre || false,
+      canDeleteGenre: params.canDeleteGenre || false,
+      canCreateChapter: params.canCreateChapter || false,
+      canEditChapter: params.canEditChapter || false,
+      canDeleteChapter: params.canDeleteChapter || false,
+      canCreatePage: params.canCreatePage || false,
+      canEditPage: params.canEditPage || false,
+      canDeletePage: params.canDeletePage || false,
+      canCreateSubscriptionPlan: params.canCreateSubscriptionPlan || false,
+      canEditSubscriptionPlan: params.canEditSubscriptionPlan || false,
+      canDeleteSubscriptionPlan: params.canDeleteSubscriptionPlan || false,
+      canDeleteComment: params.canDeleteComment || false,
+      canEditComment: params.canEditComment || false,
+      canHideComment: params.canHideComment || false,
+      hideAds: params.hideAds || false,
+      canDownload: params.canDownload || false,
+      canReadUnreleased: params.canReadUnreleased || false,
+    },
   });
 
   // Handle avatar image
-  if (params.image && params.image instanceof File) {
-    // Check if imageUrl was changed recently (within 2 days)
-    if (user.imageUrlChangedAt) {
-      const daysSinceLastChange = (Date.now() - user.imageUrlChangedAt.getTime()) / (1000 * 60 * 60 * 24);
-      if (daysSinceLastChange < 2) {
-        const daysRemaining = Math.ceil(2 - daysSinceLastChange);
-        throw new Error(`No puedes cambiar tu foto de perfil. Debes esperar ${daysRemaining} día(s) más.`);
-      }
+  if (params.image !== undefined) {
+    const r2PublicUrl = Bun.env.R2_PUBLIC_URL || 'https://r2.capibaratraductor.com';
+    let newImageUrl: string | null = null;
+
+    if (params.image !== null && typeof params.image === 'string') {
+      newImageUrl = params.image.startsWith('http') 
+        ? params.image 
+        : `${r2PublicUrl}/${params.image}`;
     }
-    
-    const imageBuffer = await params.image.arrayBuffer();
-    const imageUrl = await uploadFile(imageBuffer, params.image.name, undefined, finalOrganizationId, 'profile_pictures');
-    await prisma.user.update({
-      where: {
-        id: user.id,
-      },
-      data: {
-        imageUrl,
-        imageUrlChangedAt: new Date(),
-      },
-    });
-  } else if (params.image && typeof params.image === 'string' && params.image !== 'null' && params.image !== user.imageUrl) {
-    // Check if imageUrl was changed recently (within 2 days)
-    if (user.imageUrlChangedAt) {
-      const daysSinceLastChange = (Date.now() - user.imageUrlChangedAt.getTime()) / (1000 * 60 * 60 * 24);
-      if (daysSinceLastChange < 2) {
-        const daysRemaining = Math.ceil(2 - daysSinceLastChange);
-        throw new Error(`No puedes cambiar tu foto de perfil. Debes esperar ${daysRemaining} día(s) más.`);
+
+    // Solo verificar tiempo de cambio si está cambiando la URL
+    if (newImageUrl !== user.imageUrl) {
+      // Check if imageUrl was changed recently (within 2 days)
+      if (user.imageUrlChangedAt) {
+        const daysSinceLastChange = (Date.now() - user.imageUrlChangedAt.getTime()) / (1000 * 60 * 60 * 24);
+        if (daysSinceLastChange < 2) {
+          const daysRemaining = Math.ceil(2 - daysSinceLastChange);
+          throw new Error(`No puedes cambiar tu foto de perfil. Debes esperar ${daysRemaining} día(s) más.`);
+        }
       }
+
+      await prisma.user.update({
+        where: {
+          id: user.id,
+        },
+        data: {
+          imageUrl: newImageUrl,
+          imageUrlChangedAt: new Date(),
+        },
+      });
     }
-    
-    const publicEndpoint = Bun.env.FILE_DOWNLOAD_ENDPOINT 
-      || `https://pub-${Bun.env.R2_ACCOUNT_ID}.r2.dev`;
-    const imageUrl = params.image.startsWith('http') 
-      ? params.image 
-      : `${publicEndpoint}/${params.image}`;
-    await prisma.user.update({
-      where: {
-        id: user.id,
-      },
-      data: {
-        imageUrl,
-        imageUrlChangedAt: new Date(),
-      },
-    });
   }
 
   // Handle banner image
-  if (params.banner && params.banner instanceof File) {
-    // Check if bannerUrl was changed recently (within 2 days)
-    if (user.bannerUrlChangedAt) {
-      const daysSinceLastChange = (Date.now() - user.bannerUrlChangedAt.getTime()) / (1000 * 60 * 60 * 24);
-      if (daysSinceLastChange < 2) {
-        const daysRemaining = Math.ceil(2 - daysSinceLastChange);
-        throw new Error(`No puedes cambiar tu banner. Debes esperar ${daysRemaining} día(s) más.`);
-      }
+  if (params.banner !== undefined) {
+    const r2PublicUrl = Bun.env.R2_PUBLIC_URL || 'https://r2.capibaratraductor.com';
+    let newBannerUrl: string | null = null;
+
+    if (params.banner !== null && typeof params.banner === 'string') {
+      newBannerUrl = params.banner.startsWith('http') 
+        ? params.banner 
+        : `${r2PublicUrl}/${params.banner}`;
     }
-    
-    const bannerBuffer = await params.banner.arrayBuffer();
-    const bannerUrl = await uploadFile(bannerBuffer, params.banner.name, undefined, finalOrganizationId, 'profile_pictures');
-    await prisma.user.update({
-      where: {
-        id: user.id,
-      },
-      data: {
-        bannerUrl,
-        bannerUrlChangedAt: new Date(),
-      },
-    });
-  } else if (params.banner && typeof params.banner === 'string' && params.banner !== 'null' && params.banner !== user.bannerUrl) {
-    // Check if bannerUrl was changed recently (within 2 days)
-    if (user.bannerUrlChangedAt) {
-      const daysSinceLastChange = (Date.now() - user.bannerUrlChangedAt.getTime()) / (1000 * 60 * 60 * 24);
-      if (daysSinceLastChange < 2) {
-        const daysRemaining = Math.ceil(2 - daysSinceLastChange);
-        throw new Error(`No puedes cambiar tu banner. Debes esperar ${daysRemaining} día(s) más.`);
+
+    // Solo verificar tiempo de cambio si está cambiando la URL
+    if (newBannerUrl !== user.bannerUrl) {
+      // Check if bannerUrl was changed recently (within 2 days)
+      if (user.bannerUrlChangedAt) {
+        const daysSinceLastChange = (Date.now() - user.bannerUrlChangedAt.getTime()) / (1000 * 60 * 60 * 24);
+        if (daysSinceLastChange < 2) {
+          const daysRemaining = Math.ceil(2 - daysSinceLastChange);
+          throw new Error(`No puedes cambiar tu banner. Debes esperar ${daysRemaining} día(s) más.`);
+        }
       }
+
+      await prisma.user.update({
+        where: {
+          id: user.id,
+        },
+        data: {
+          bannerUrl: newBannerUrl,
+          bannerUrlChangedAt: new Date(),
+        },
+      });
     }
-    
-    const publicEndpoint = Bun.env.FILE_DOWNLOAD_ENDPOINT 
-      || `https://pub-${Bun.env.R2_ACCOUNT_ID}.r2.dev`;
-    const bannerUrl = params.banner.startsWith('http') 
-      ? params.banner 
-      : `${publicEndpoint}/${params.banner}`;
-    await prisma.user.update({
-      where: {
-        id: user.id,
-      },
-      data: {
-        bannerUrl,
-        bannerUrlChangedAt: new Date(),
-      },
-    });
   }
 
   const updatedUser = await prisma.user.findUnique({ 

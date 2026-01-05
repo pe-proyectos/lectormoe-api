@@ -5,22 +5,8 @@ export const CreateChapterRequest = t.Object({
     releasedAt: t.Date(),
     subscribersOnly: t.Boolean(),
     number: t.Number(),
-    image: t.Optional(
-        t.Union([
-            t.File({
-                maxSize: '25m',
-            }),
-            t.String(),
-        ])
-    ),
-    pages: t.Optional(t.Array(
-        t.Union([
-            t.File({
-                maxSize: '25m',
-            }),
-            t.String(),
-        ])
-    )),
+    image: t.Optional(t.Union([t.String(), t.Null()])),
+    pages: t.Optional(t.Array(t.String())),
     singlePages: t.Optional(t.Union([
         t.Array(t.Number()),
         t.String(),

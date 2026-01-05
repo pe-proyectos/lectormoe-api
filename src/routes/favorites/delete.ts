@@ -1,13 +1,16 @@
 import { Elysia, t } from 'elysia';
 
 import { deleteFavorite } from '../../controllers/favorites/delete';
-import { loggedUserOnly } from '../../plugins/auth';
+import { loggedOptional } from '../../plugins/auth';
 
 export const router = () => new Elysia()
-    .use(loggedUserOnly())
+    .use(loggedOptional())
     .delete(
         '/api/favorites/manga-custom/:mangaSlug',
-        async ({ organizationId, user, params: { mangaSlug } }) => {
+        async ({ logged, user, organizationId, params: { mangaSlug } }) => {
+            if (!logged || !user) {
+                throw new Error('No autorizado');
+            }
             const view = await deleteFavorite(organizationId, user.id, mangaSlug);
 
             return {

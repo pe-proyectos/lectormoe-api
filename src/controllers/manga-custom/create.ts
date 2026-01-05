@@ -1,6 +1,5 @@
 import { prisma } from "../../models/prisma";
 import type { CreateMangaCustomRequest } from "../../types/manga-custom/create";
-import { uploadFile } from "../../util/upload-file";
 
 export const createMangaCustom = async (organizationId: number, params: CreateMangaCustomRequest) => {
 	const [organization, manga] = await Promise.all([
@@ -38,6 +37,23 @@ export const createMangaCustom = async (organizationId: number, params: CreateMa
 		throw new Error(`Tu organización ya tiene un manga basado en '${manga.title}'`);
 	}
 
+	// Construir URLs desde fileKeys
+	let imageUrl: string | null = null;
+	let bannerUrl: string | null = null;
+	const r2PublicUrl = Bun.env.R2_PUBLIC_URL || 'https://r2.capibaratraductor.com';
+
+	if (params.image && typeof params.image === 'string') {
+		imageUrl = params.image.startsWith('http') 
+			? params.image 
+			: `${r2PublicUrl}/${params.image}`;
+	}
+
+	if (params.banner && typeof params.banner === 'string') {
+		bannerUrl = params.banner.startsWith('http') 
+			? params.banner 
+			: `${r2PublicUrl}/${params.banner}`;
+	}
+
 	const mangaCustom = await prisma.mangaCustom.create({
 		data: {
 			mangaId: manga.id,
@@ -46,6 +62,8 @@ export const createMangaCustom = async (organizationId: number, params: CreateMa
 			title: params.title,
 			shortDescription: params.shortDescription,
 			description: params.description,
+			imageUrl,
+			bannerUrl,
 			releasedAt: params.releasedAt,
 			nextChapterAt: params.nextChapterAt,
 			requireLogin: params.requireLogin,
@@ -53,32 +71,6 @@ export const createMangaCustom = async (organizationId: number, params: CreateMa
 			isNSFW: params.isNSFW,
 		}
 	});
-
-	if (params.image && params.image instanceof File) {
-		const imageBuffer = await params.image.arrayBuffer();
-		const imageUrl = await uploadFile(imageBuffer, params.image.name, undefined, organizationId, 'mangas');
-		await prisma.mangaCustom.update({
-			where: {
-				id: mangaCustom.id,
-			},
-			data: {
-				imageUrl,
-			},
-		});
-	}
-
-	if (params.banner && params.banner instanceof File) {
-		const bannerBuffer = await params.banner.arrayBuffer();
-		const bannerUrl = await uploadFile(bannerBuffer, params.banner.name, undefined, organizationId, 'mangas');
-		await prisma.mangaCustom.update({
-			where: {
-				id: mangaCustom.id,
-			},
-			data: {
-				bannerUrl,
-			},
-		});
-	}
 
 	await prisma.mangaCustom.update({
 		where: {

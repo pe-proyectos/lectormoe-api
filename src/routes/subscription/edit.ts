@@ -46,7 +46,7 @@ export const router = () =>
         if (body.userId) {
           body.userId = Number.parseInt(body.userId.toString());
         }
-        if (body.active) {
+        if (body.active !== undefined) {
           body.active = body.active.toString() === "true";
         }
       },

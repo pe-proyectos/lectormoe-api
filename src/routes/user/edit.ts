@@ -83,97 +83,99 @@ export const router = () =>
         if(body.birthdate){
           body.birthdate = new Date(body.birthdate);
         }
-        if (body.canSeeAdminPanel) {
+        // Convertir todos los permisos booleanos de string a boolean
+        // Nota: FormData convierte todo a string, así que "true" -> true, "false" -> false
+        if (body.canSeeAdminPanel !== undefined) {
           body.canSeeAdminPanel = body.canSeeAdminPanel.toString() === "true";
         }
-        if (body.canEditOrganization) {
+        if (body.canEditOrganization !== undefined) {
           body.canEditOrganization =
             body.canEditOrganization.toString() === "true";
         }
-        if (body.canDeleteOrganization) {
+        if (body.canDeleteOrganization !== undefined) {
           body.canDeleteOrganization =
             body.canDeleteOrganization.toString() === "true";
         }
-        if (body.canEditUser) {
+        if (body.canEditUser !== undefined) {
           body.canEditUser = body.canEditUser.toString() === "true";
         }
-        if (body.canDeleteUser) {
+        if (body.canDeleteUser !== undefined) {
           body.canDeleteUser = body.canDeleteUser.toString() === "true";
         }
-        if (body.canCreateAuthor) {
+        if (body.canCreateAuthor !== undefined) {
           body.canCreateAuthor = body.canCreateAuthor.toString() === "true";
         }
-        if (body.canCreateMangaProfile) {
+        if (body.canCreateMangaProfile !== undefined) {
           body.canCreateMangaProfile =
             body.canCreateMangaProfile.toString() === "true";
         }
-        if (body.canCreateMangaCustom) {
+        if (body.canCreateMangaCustom !== undefined) {
           body.canCreateMangaCustom =
             body.canCreateMangaCustom.toString() === "true";
         }
-        if (body.canEditMangaCustom) {
+        if (body.canEditMangaCustom !== undefined) {
           body.canEditMangaCustom =
             body.canEditMangaCustom.toString() === "true";
         }
-        if (body.canDeleteMangaCustom) {
+        if (body.canDeleteMangaCustom !== undefined) {
           body.canDeleteMangaCustom =
             body.canDeleteMangaCustom.toString() === "true";
         }
-        if (body.canCreateGenre) {
+        if (body.canCreateGenre !== undefined) {
           body.canCreateGenre = body.canCreateGenre.toString() === "true";
         }
-        if (body.canEditGenre) {
+        if (body.canEditGenre !== undefined) {
           body.canEditGenre = body.canEditGenre.toString() === "true";
         }
-        if (body.canDeleteGenre) {
+        if (body.canDeleteGenre !== undefined) {
           body.canDeleteGenre = body.canDeleteGenre.toString() === "true";
         }
-        if (body.canCreateChapter) {
+        if (body.canCreateChapter !== undefined) {
           body.canCreateChapter = body.canCreateChapter.toString() === "true";
         }
-        if (body.canEditChapter) {
+        if (body.canEditChapter !== undefined) {
           body.canEditChapter = body.canEditChapter.toString() === "true";
         }
-        if (body.canDeleteChapter) {
+        if (body.canDeleteChapter !== undefined) {
           body.canDeleteChapter = body.canDeleteChapter.toString() === "true";
         }
-        if (body.canCreatePage) {
+        if (body.canCreatePage !== undefined) {
           body.canCreatePage = body.canCreatePage.toString() === "true";
         }
-        if (body.canEditPage) {
+        if (body.canEditPage !== undefined) {
           body.canEditPage = body.canEditPage.toString() === "true";
         }
-        if (body.canDeletePage) {
+        if (body.canDeletePage !== undefined) {
           body.canDeletePage = body.canDeletePage.toString() === "true";
         }
-        if (body.canCreateSubscriptionPlan) {
+        if (body.canCreateSubscriptionPlan !== undefined) {
           body.canCreateSubscriptionPlan =
             body.canCreateSubscriptionPlan.toString() === "true";
         }
-        if (body.canEditSubscriptionPlan) {
+        if (body.canEditSubscriptionPlan !== undefined) {
           body.canEditSubscriptionPlan =
             body.canEditSubscriptionPlan.toString() === "true";
         }
-        if (body.canDeleteSubscriptionPlan) {
+        if (body.canDeleteSubscriptionPlan !== undefined) {
           body.canDeleteSubscriptionPlan =
             body.canDeleteSubscriptionPlan.toString() === "true";
         }
-        if (body.canDeleteComment) {
+        if (body.canDeleteComment !== undefined) {
           body.canDeleteComment = body.canDeleteComment.toString() === "true";
         }
-        if (body.canEditComment) {
+        if (body.canEditComment !== undefined) {
           body.canEditComment = body.canEditComment.toString() === "true";
         }
-        if (body.canHideComment) {
+        if (body.canHideComment !== undefined) {
           body.canHideComment = body.canHideComment.toString() === "true";
         }
-        if (body.hideAds) {
+        if (body.hideAds !== undefined) {
           body.hideAds = body.hideAds.toString() === "true";
         }
-        if (body.canDownload) {
+        if (body.canDownload !== undefined) {
           body.canDownload = body.canDownload.toString() === "true";
         }
-        if (body.canReadUnreleased) {
+        if (body.canReadUnreleased !== undefined) {
           body.canReadUnreleased = body.canReadUnreleased.toString() === "true";
         }
       },
