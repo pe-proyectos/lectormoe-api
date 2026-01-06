@@ -58,7 +58,7 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 		};
 
 		// Get aggregated view counts per manga
-		const viewCounts = await prisma.viewHistory.groupBy({
+		const viewCounts = await prisma.viewsHistory.groupBy({
 			by: ['mangaCustomId'],
 			where: whereCondition,
 			_count: {
@@ -83,20 +83,25 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 				id: {
 					in: paginatedIds,
 				},
-				...(filters.search ? searchConditions : {
+				...(filters.search ? searchConditions : {}),
+				...(filters.title ? {
 					title: {
 						contains: filters.title,
 						mode: "insensitive"
-					},
+					}
+				} : {}),
+				...(filters.shortDescription ? {
 					shortDescription: {
 						contains: filters.shortDescription,
 						mode: "insensitive"
-					},
+					}
+				} : {}),
+				...(filters.description ? {
 					description: {
 						contains: filters.description,
 						mode: "insensitive"
-					},
-				}),
+					}
+				} : {}),
 			},
 			include: {
 				manga: {
@@ -178,47 +183,40 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 				id: organizationId,
 			},
 		} : {}),
-		...(filters.search ? searchConditions : {
+		...(filters.search ? searchConditions : {}),
+		...(filters.title ? {
 			title: {
 				contains: filters.title,
 				mode: "insensitive"
-			},
+			}
+		} : {}),
+		...(filters.shortDescription ? {
 			shortDescription: {
 				contains: filters.shortDescription,
 				mode: "insensitive"
-			},
+			}
+		} : {}),
+		...(filters.description ? {
 			description: {
 				contains: filters.description,
 				mode: "insensitive"
-			},
-		}),
+			}
+		} : {}),
 	};
 
 	// Use Promise.all to run queries in parallel
 	const [mangasCustoms, total] = await Promise.all([
 		prisma.mangaCustom.findMany({
 			where: whereClause,
-			select: {
-				id: true,
-				slug: true,
-				title: true,
-				shortDescription: true,
-				description: true,
-				imageUrl: true,
-				bannerUrl: true,
-				views: true,
-				lastChapterAt: true,
+			include: {
 				manga: {
-					select: {
-						slug: true,
-						title: true,
+					include: {
 						demography: {
 							select: {
 								name: true,
 								slug: true,
 							},
 						},
-						status: true,
 					},
 				},
 				organization: {
