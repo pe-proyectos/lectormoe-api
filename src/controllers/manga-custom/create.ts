@@ -66,6 +66,7 @@ export const createMangaCustom = async (organizationId: number, params: CreateMa
 			bannerUrl,
 			releasedAt: params.releasedAt,
 			nextChapterAt: params.nextChapterAt,
+			nextChapterAtMessage: params.nextChapterAtMessage,
 			requireLogin: params.requireLogin,
 			isSimulRelease: params.isSimulRelease,
 			isNSFW: params.isNSFW,

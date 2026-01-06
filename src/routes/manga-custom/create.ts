@@ -32,11 +32,15 @@ export const router = () => new Elysia()
             }),
             transform({ body }) {
                 body.mangaId = Number.parseInt(body.mangaId.toString());
-                if (body.nextChapterAt) {
+                if (body.nextChapterAt && body.nextChapterAt !== null) {
                     body.nextChapterAt = new Date(body.nextChapterAt);
+                } else if (body.nextChapterAt === null) {
+                    body.nextChapterAt = null;
                 }
-                if (body.releasedAt) {
+                if (body.releasedAt && body.releasedAt !== null) {
                     body.releasedAt = new Date(body.releasedAt);
+                } else if (body.releasedAt === null) {
+                    body.releasedAt = null;
                 }
                 if (body.requireLogin !== undefined) {
                     body.requireLogin = body.requireLogin.toString() === "true";
@@ -48,10 +52,18 @@ export const router = () => new Elysia()
                     body.isNSFW = body.isNSFW.toString() === "true";
                 }
                 if(body.genreIds) {
-                    body.genreIds = (body.genreIds as unknown as string).split(',').map(genreId => Number.parseInt(genreId.trim()));
+                    if (Array.isArray(body.genreIds)) {
+                        body.genreIds = body.genreIds.map(genreId => Number.parseInt(genreId.toString()));
+                    } else {
+                        body.genreIds = (body.genreIds as unknown as string).split(',').map(genreId => Number.parseInt(genreId.trim()));
+                    }
                 }
                 if (body.subscriptionPlanIds) {
-                    body.subscriptionPlanIds = (body.subscriptionPlanIds as unknown as string).split(',').map(subscriptionPlanId => Number.parseInt(subscriptionPlanId.trim()));
+                    if (Array.isArray(body.subscriptionPlanIds)) {
+                        body.subscriptionPlanIds = body.subscriptionPlanIds.map(subscriptionPlanId => Number.parseInt(subscriptionPlanId.toString()));
+                    } else {
+                        body.subscriptionPlanIds = (body.subscriptionPlanIds as unknown as string).split(',').map(subscriptionPlanId => Number.parseInt(subscriptionPlanId.trim()));
+                    }
                 }
             },
         }

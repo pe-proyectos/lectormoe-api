@@ -61,6 +61,9 @@ export const getMangaCustomBySlug = async (organizationId: number, mangaSlug: st
 	const result = {
 		...mangaCustom.manga,
 		...mangaCustom,
+		// Asegurar que nextChapterAt y nextChapterAtMessage estén incluidos
+		nextChapterAt: mangaCustom.nextChapterAt,
+		nextChapterAtMessage: mangaCustom.nextChapterAtMessage,
 		manga: undefined,
 	}
 	delete result.manga;

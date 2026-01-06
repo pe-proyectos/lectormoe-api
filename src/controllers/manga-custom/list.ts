@@ -77,6 +77,15 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 		const take = Number.parseInt(filters?.limit || "10");
 		const paginatedIds = viewCounts.slice(skip, skip + take).map(v => v.mangaCustomId);
 
+		// Parse IDs filter if provided
+		const idsFilter = filters.ids 
+			? {
+				id: {
+					in: filters.ids.split(',').map(id => Number.parseInt(id.trim(), 10)).filter(id => !Number.isNaN(id))
+				}
+			}
+			: {};
+
 		// Fetch only the paginated mangas with their relations
 		const popularMangasCustoms = await prisma.mangaCustom.findMany({
 			where: {
@@ -102,6 +111,7 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 						mode: "insensitive"
 					}
 				} : {}),
+				...idsFilter,
 			},
 			include: {
 				manga: {
@@ -169,6 +179,15 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 		order
 	}
 
+	// Parse IDs filter if provided
+	const idsFilter = filters.ids 
+		? {
+			id: {
+				in: filters.ids.split(',').map(id => Number.parseInt(id.trim(), 10)).filter(id => !Number.isNaN(id))
+			}
+		}
+		: {};
+
 	// Build common where clause
 	const whereClause = {
 		...(filters.type ? {
@@ -202,6 +221,7 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 				mode: "insensitive"
 			}
 		} : {}),
+		...idsFilter,
 	};
 
 	// Use Promise.all to run queries in parallel

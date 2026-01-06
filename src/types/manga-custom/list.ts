@@ -20,6 +20,7 @@ export const MangaCustomListQuery = t.Object({
     search: t.Optional(t.String()),
     order: t.Optional(t.Enum(OrderEnum)),
     type: t.Optional(t.Enum(BookTypeCodeEnum)),
+    ids: t.Optional(t.String()), // Comma-separated IDs
     ...PaginationQuery.properties,
 });
 
