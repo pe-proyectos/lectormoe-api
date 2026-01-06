@@ -6,7 +6,10 @@ const prepareCustomManga = (mangaCustom: any) => {
 	const result = {
 		...mangaCustom.manga,
 		...mangaCustom,
-		lastChapters: mangaCustom.chapters,
+		lastChapters: mangaCustom.chapters.map((chapter: any) => ({
+			...chapter,
+			chapterUrl: `/${mangaCustom.organization.slug}/manga/${mangaCustom.manga.slug}/chapters/${chapter.number}`,
+		})),
 		manga: undefined,
 		chapters: undefined,
 		views: mangaCustom.views + mangaCustom.chapters.reduce((acc: any, chapter: any) => acc + chapter.views, 0),
