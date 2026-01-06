@@ -43,13 +43,46 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 			}
 		};
 	} else if (filters.order === OrderEnum.POPULAR) {
-		const popularMangasCustoms = await prisma.mangaCustom.findMany({
-			where: {
-				...(organizationId ? {
+		// Optimized popular query: Get manga IDs with view counts first, then fetch only needed mangas
+		const whereCondition = {
+			...(organizationId ? {
+				mangaCustom: {
 					organization: {
 						id: organizationId,
 					},
-				} : {}),
+				}
+			} : {}),
+			createdAt: {
+				gte: new Date(Date.now() - 24 * 60 * 60 * 1000), // Last 24 hours
+			}
+		};
+
+		// Get aggregated view counts per manga
+		const viewCounts = await prisma.viewHistory.groupBy({
+			by: ['mangaCustomId'],
+			where: whereCondition,
+			_count: {
+				ip: true,
+			},
+			orderBy: {
+				_count: {
+					ip: 'desc',
+				}
+			},
+			take: 100, // Limit to top 100 to avoid loading all data
+		});
+
+		// Apply pagination to the view counts
+		const skip = filters?.page ? (Number.parseInt(filters?.page || "1") - 1) * Number.parseInt(filters?.limit || "10") : 0;
+		const take = Number.parseInt(filters?.limit || "10");
+		const paginatedIds = viewCounts.slice(skip, skip + take).map(v => v.mangaCustomId);
+
+		// Fetch only the paginated mangas with their relations
+		const popularMangasCustoms = await prisma.mangaCustom.findMany({
+			where: {
+				id: {
+					in: paginatedIds,
+				},
 				...(filters.search ? searchConditions : {
 					title: {
 						contains: filters.title,
@@ -110,28 +143,20 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 						name: true,
 					}
 				},
-				viewsHistory: {
-					select: {
-						id: true,
-					},
-					distinct: ['ip'],
-					where: {
-						createdAt: {
-							gte: new Date(Date.now() - 24 * 60 * 60 * 1000), // Last 24 hours
-						}
-					}
-				},
 			},
 		});
-		const result = popularMangasCustoms.sort((a, b) => b.viewsHistory.length - a.viewsHistory.length).slice(
-			filters?.page ? (Number.parseInt(filters?.page || "1") - 1) * Number.parseInt(filters?.limit || "10") : 0,
-			Number.parseInt(filters?.limit || "10"),
+
+		// Sort by view count order
+		const viewCountMap = new Map(viewCounts.map(v => [v.mangaCustomId, v._count.ip]));
+		const sortedMangas = popularMangasCustoms.sort((a, b) => 
+			(viewCountMap.get(b.id) || 0) - (viewCountMap.get(a.id) || 0)
 		);
-		const data = result.map(prepareCustomManga);
+
+		const data = sortedMangas.map(prepareCustomManga);
 		return {
 			data,
-			maxPage: Math.ceil(popularMangasCustoms.length / Number.parseInt(filters?.limit || "10")),
-			total: popularMangasCustoms.length,
+			maxPage: Math.ceil(viewCounts.length / Number.parseInt(filters?.limit || "10")),
+			total: viewCounts.length,
 		};
 	}
 
@@ -139,110 +164,107 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 		order
 	}
 
-	const mangasCustoms = await prisma.mangaCustom.findMany({
-		where: {
-			...(filters.type ? {
-				manga: {
-					bookType: {
-						code: filters.type
-					}
-				}
-			} : {}),
-			...(organizationId ? {
-				organization: {
-					id: organizationId,
-				},
-			} : {}),
-			...(filters.search ? searchConditions : {
-				title: {
-					contains: filters.title,
-					mode: "insensitive"
-				},
-				shortDescription: {
-					contains: filters.shortDescription,
-					mode: "insensitive"
-				},
-				description: {
-					contains: filters.description,
-					mode: "insensitive"
-				},
-			}),
-		},
-		include: {
+	// Build common where clause
+	const whereClause = {
+		...(filters.type ? {
 			manga: {
-				include: {
-					demography: {
-						select: {
-							name: true,
-							slug: true,
+				bookType: {
+					code: filters.type
+				}
+			}
+		} : {}),
+		...(organizationId ? {
+			organization: {
+				id: organizationId,
+			},
+		} : {}),
+		...(filters.search ? searchConditions : {
+			title: {
+				contains: filters.title,
+				mode: "insensitive"
+			},
+			shortDescription: {
+				contains: filters.shortDescription,
+				mode: "insensitive"
+			},
+			description: {
+				contains: filters.description,
+				mode: "insensitive"
+			},
+		}),
+	};
+
+	// Use Promise.all to run queries in parallel
+	const [mangasCustoms, total] = await Promise.all([
+		prisma.mangaCustom.findMany({
+			where: whereClause,
+			select: {
+				id: true,
+				slug: true,
+				title: true,
+				shortDescription: true,
+				description: true,
+				imageUrl: true,
+				bannerUrl: true,
+				views: true,
+				lastChapterAt: true,
+				manga: {
+					select: {
+						slug: true,
+						title: true,
+						demography: {
+							select: {
+								name: true,
+								slug: true,
+							},
 						},
+						status: true,
 					},
 				},
-			},
-			organization: {
-				select: {
-					id: true,
-					name: true,
-					slug: true,
-					title: true,
-				},
-			},
-			chapters: {
-				select: {
-					id: true,
-					number: true,
-					title: true,
-					releasedAt: true,
-					subscribersOnly: true,
-					views: true,
-				},
-				orderBy: {
-					number: 'desc',
-				},
-				take: 2,
-			},
-			genres: {
-				select: {
-					id: true,
-					slug: true,
-					name: true,
-				}
-			},
-			subscriptionPlans: {
-				select: {
-					id: true,
-					name: true,
-				}
-			},
-		},
-		...(order || {}),
-		skip: filters?.page ? (Number.parseInt(filters?.page || "1") - 1) * Number.parseInt(filters?.limit || "10") : 0,
-		take: Number.parseInt(filters?.limit || "10"),
-	});
-
-	const total = await prisma.mangaCustom.count({
-		where: {
-			...(organizationId ? {
 				organization: {
-					id: organizationId,
+					select: {
+						id: true,
+						name: true,
+						slug: true,
+						title: true,
+					},
 				},
-			} : {}),
-			...(filters.search ? searchConditions : {
-				title: {
-					contains: filters.title,
-					mode: "insensitive"
+				chapters: {
+					select: {
+						id: true,
+						number: true,
+						title: true,
+						releasedAt: true,
+						subscribersOnly: true,
+						views: true,
+					},
+					orderBy: {
+						number: 'desc',
+					},
+					take: 2,
 				},
-				shortDescription: {
-					contains: filters.shortDescription,
-					mode: "insensitive"
+				genres: {
+					select: {
+						id: true,
+						slug: true,
+						name: true,
+					}
 				},
-				description: {
-					contains: filters.description,
-					mode: "insensitive"
+				subscriptionPlans: {
+					select: {
+						id: true,
+						name: true,
+					}
 				},
-			}),
-		},
-	});
+			},
+			...(order || {}),
+			skip: filters?.page ? (Number.parseInt(filters?.page || "1") - 1) * Number.parseInt(filters?.limit || "10") : 0,
+			take: Number.parseInt(filters?.limit || "10"),
+		}),
+		prisma.mangaCustom.count({
+			where: whereClause,
+		})
+	]);
 
 	return {
 		data: mangasCustoms.map(prepareCustomManga),

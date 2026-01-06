@@ -278,6 +278,11 @@ model MangaCustom {
   subscriptionPlans SubscriptionPlan[] @relation("MangaCustomToSubscriptionPlan")
 
   @@unique([mangaId, organizationId])
+  @@index([organizationId])
+  @@index([organizationId, lastChapterAt])
+  @@index([organizationId, views])
+  @@index([lastChapterAt])
+  @@index([views])
   @@map("manga_custom")
 }
 
@@ -490,7 +495,9 @@ model ViewsHistory {
   mangaCustom   MangaCustom? @relation(fields: [mangaCustomId], references: [id])
 
   @@index([mangaCustomId, viewedAt])
+  @@index([mangaCustomId, createdAt])
   @@index([viewedAt])
+  @@index([createdAt])
   @@map("views")
 }
 

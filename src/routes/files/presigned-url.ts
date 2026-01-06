@@ -1,11 +1,11 @@
 import { Elysia, t } from "elysia";
-import { loggedUserOnly } from "../../plugins/auth";
+import { logged } from "../../plugins/auth";
 import { useOrganizationOptional } from "../../plugins/organization";
 import { generatePresignedUploadUrl, getContentType } from "../../services/files";
 
 export const router = () =>
   new Elysia()
-    .use(loggedUserOnly())
+    .use(logged())
     .use(useOrganizationOptional())
     .post(
       "/api/files/presigned-url",
