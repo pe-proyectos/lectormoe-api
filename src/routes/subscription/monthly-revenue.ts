@@ -34,6 +34,13 @@ export const router = () => new Elysia()
                         }
                     });
 
+                    // Group transactions by origin and calculate revenue
+                    const revenueByOrigin: Record<string, number> = {};
+                    transactions.forEach(transaction => {
+                        const origin = transaction.origin || 'Otros';
+                        revenueByOrigin[origin] = (revenueByOrigin[origin] || 0) + transaction.amount;
+                    });
+
                     // Get subscription payments for this month (transactions linked to subscriptions)
                     const subscriptionPayments = await prisma.organizationTransaction.findMany({
                         where: {
@@ -64,7 +71,8 @@ export const router = () => new Elysia()
                         year: targetYear,
                         revenue: totalRevenue,
                         transactionCount: transactions.length,
-                        subscriptionPayments: subscriptionPayments.length
+                        subscriptionPayments: subscriptionPayments.length,
+                        revenueByOrigin
                     });
                 }
 
@@ -83,7 +91,8 @@ export const router = () => new Elysia()
                         year: t.Number(),
                         revenue: t.Number(),
                         transactionCount: t.Number(),
-                        subscriptionPayments: t.Number()
+                        subscriptionPayments: t.Number(),
+                        revenueByOrigin: t.Record(t.String(), t.Number())
                     }))
                 }),
                 t.Object({
