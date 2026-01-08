@@ -37,6 +37,7 @@ export const getTopDonors = async (organizationId: number) => {
 				select: {
 					id: true,
 					name: true,
+					price: true,
 				}
 			}
 		}
@@ -56,7 +57,9 @@ export const getTopDonors = async (organizationId: number) => {
 			imageUrl: sub.user.imageUrl,
 			days: diffDays,
 			subscriptionPlan: {
+				id: sub.subscriptionPlan.id,
 				name: sub.subscriptionPlan.name,
+				price: sub.subscriptionPlan.price,
 			},
 			subscriptionId: sub.id,
 		};

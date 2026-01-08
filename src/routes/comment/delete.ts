@@ -16,6 +16,7 @@ export const router = () => new Elysia()
             if (!organizationId) {
                 throw new Error('Se requiere una organización');
             }
+            const permissions = user.permissions.find((p: any) => p.organizationId === organizationId);
             const comment = await getComment(Number(params.id));
             if (!comment) {
                 throw new Error("Comentario no encontrado.");
@@ -23,9 +24,11 @@ export const router = () => new Elysia()
             if (comment.organizationId !== organizationId) {
                 throw new Error("No tiene permisos para eliminar este comentario.");
             }
-            // Solo el autor del comentario puede eliminarlo
-            if (comment.userId !== user.id) {
-                throw new Error("Solo el autor del comentario puede eliminarlo.");
+            // El autor del comentario o staff con canDeleteComment pueden eliminarlo
+            const isMyComment = comment.userId === user.id;
+            const canDeleteComments = permissions?.canDeleteComment || isMyComment;
+            if (!canDeleteComments) {
+                throw new Error("No tiene permisos para eliminar este comentario.");
             }
 
             const commentDeleted = await deleteComment(Number(params.id));
