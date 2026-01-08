@@ -5,7 +5,6 @@ import { logged } from "../../plugins/auth";
 import { useOrganizationOptional } from "../../plugins/organization";
 import { EditUserRequest } from "../../types/user/edit";
 import { getUserById } from "../../controllers/user/get";
-import { getUserPermissions } from "../../util/permissions";
 
 export const router = () =>
   new Elysia()
@@ -15,10 +14,7 @@ export const router = () =>
     "/api/user/:userId",
     async ({ organizationId, user, body, params: { userId } }) => {
       // Get permissions if organizationId is provided
-      let permissions = null;
-      if (organizationId !== null) {
-        permissions = await getUserPermissions(user.id, organizationId);
-      }
+      let permissions = user.permissions.find((permission: any) => permission.organizationId === organizationId);
       // If the request user is not the same as the user to edit and does not have the permission to edit users
       if (user.id !== userId && !permissions?.canEditUser) {
         throw new Error("No tiene permisos para editar otros usuarios.");

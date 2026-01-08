@@ -2,8 +2,7 @@ import jwt from '@elysiajs/jwt';
 import { Elysia } from 'elysia';
 
 import { checkToken } from '../controllers/auth/check';
-import { checkOrganization, checkOrganizationBySlug } from '../controllers/organization/check';
-import { getUserPermissions } from '../util/permissions';
+import { checkOrganizationBySlug } from '../controllers/organization/check';
 import { prisma } from '../models/prisma';
 
 export const loggedOptional = () => new Elysia()
@@ -64,18 +63,11 @@ export const loggedOptional = () => new Elysia()
             return { logged: false, user: null };
         }
         
-        // Si hay organización, obtener permisos del usuario para esta organización
-        let permissions = null;
-        if (organizationId !== null) {
-            permissions = await getUserPermissions(user.id, organizationId);
-        }
-        
         return { 
             logged: true, 
             organizationId: organizationId, 
             token, 
             user,
-            permissions: permissions || undefined,
         };
     });
 
@@ -103,6 +95,9 @@ export const logged = () => new Elysia()
         const user = await prisma.user.findUnique({
             where: {
                 id: tokenPayload.userId as number,
+            },
+            include: {
+                permissions: true,
             },
         });
         
@@ -151,8 +146,8 @@ export const loggedUserOnly = () => new Elysia()
         }
         
         // Obtener permisos del usuario para esta organización
-        const permissions = await getUserPermissions(user.id, organization.id);
-        if (!permissions) {
+        const organizationPermissions = user.permissions.find((permission: any) => permission.organizationId === organization.id);
+        if (!organizationPermissions) {
             throw new Error('No autorizado, usuario no tiene permisos para esta organización.');
         }
         
@@ -161,6 +156,5 @@ export const loggedUserOnly = () => new Elysia()
             token, 
             organizationId: organization.id, 
             user,
-            permissions,
         };
     });
