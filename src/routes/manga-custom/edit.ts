@@ -8,7 +8,8 @@ export const router = () => new Elysia()
     .use(loggedUserOnly())
     .patch(
         '/api/manga-custom/:mangaSlug',
-        async ({ organizationId, permissions, body, params: { mangaSlug } }) => {
+        async ({ organizationId, user, body, params: { mangaSlug } }) => {
+            const permissions = user.permissions.find((p: any) => p.organizationId === organizationId);
             if (!permissions?.canEditMangaCustom) {
                 throw new Error("No tiene permisos para editar mangas custom.");
             }

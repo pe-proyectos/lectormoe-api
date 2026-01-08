@@ -1,13 +1,17 @@
 import { Elysia, t } from 'elysia';
 
 import { deleteChapter } from '../../controllers/chapter/delete';
-import { useOrganization } from '../../plugins/organization';
+import { loggedUserOnly } from '../../plugins/auth';
 
 export const router = () => new Elysia()
-    .use(useOrganization())
+    .use(loggedUserOnly())
     .delete(
         '/api/manga-custom/:mangaSlug/chapter/:chapterNumber',
-        async ({ organizationId, params: { mangaSlug, chapterNumber } }) => {
+        async ({ organizationId, user, params: { mangaSlug, chapterNumber } }) => {
+            const permissions = user.permissions.find((p: any) => p.organizationId === organizationId);
+            if (!permissions?.canDeleteChapter) {
+                throw new Error("No tiene permisos para eliminar capítulos.");
+            }
             const chapter = await deleteChapter(organizationId, mangaSlug, chapterNumber);
 
             if (!chapter) {

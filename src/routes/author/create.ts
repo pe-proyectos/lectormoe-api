@@ -10,7 +10,8 @@ export const router = () => new Elysia()
     .use(useOrganization())
     .post(
         '/api/author',
-        async ({ permissions, body, organizationId }) => {
+        async ({ user, body, organizationId }) => {
+            const permissions = user.permissions.find((p: any) => p.organizationId === organizationId);
             if (!permissions?.canCreateAuthor) {
                 throw new Error("No tiene permisos para crear autores.");
             }

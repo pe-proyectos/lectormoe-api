@@ -7,7 +7,8 @@ export const router = () => new Elysia()
     .use(loggedUserOnly())
     .delete(
         '/api/genre/:genreSlug',
-        async ({ organizationId, permissions, params: { genreSlug } }) => {
+        async ({ organizationId, user, params: { genreSlug } }) => {
+            const permissions = user.permissions.find((p: any) => p.organizationId === organizationId);
             if (!permissions?.canDeleteGenre) {
                 throw new Error("No tiene permisos para eliminar géneros.");
             }

@@ -11,13 +11,14 @@ export const router = () => new Elysia()
     .use(loggedOptional())
     .put(
         '/api/comment/:id',
-        async ({ logged, user, params, organizationId, permissions, body }) => {
+        async ({ logged, user, params, organizationId, body }) => {
             if (!logged || !user) {
                 throw new Error('No autorizado');
             }
             if (!organizationId) {
                 throw new Error('Se requiere una organización');
             }
+            const permissions = user.permissions.find((p: any) => p.organizationId === organizationId);
             const comment = await getComment(Number(params.id));
             if (!comment) {
                 throw new Error("Comentario no encontrado.");

@@ -8,7 +8,8 @@ export const router = () => new Elysia()
     .use(loggedUserOnly())
     .get(
         '/api/user',
-        async ({ organizationId, permissions, query }) => {
+        async ({ organizationId, user, query }) => {
+            const permissions = user.permissions.find((p: any) => p.organizationId === organizationId);
             if (!permissions?.canSeeAdminPanel) {
                 throw new Error("No tiene permisos para ver los usuarios.");
             }

@@ -133,8 +133,6 @@ export const loggedUserOnly = () => new Elysia()
             throw new Error('No autorizado, token incorrecto.');
         }
         
-        // Si contiene un punto, es un domain; si no, es un slug
-        const isDomain = organizationIdentifier.includes('.');
         const organization = await checkOrganizationBySlug(organizationIdentifier);
             
         if (!organization) {
@@ -145,7 +143,7 @@ export const loggedUserOnly = () => new Elysia()
             throw new Error('No autorizado, usuario no encontrado.');
         }
         
-        // Obtener permisos del usuario para esta organización
+        // Verificar que el usuario tenga permisos para esta organización
         const organizationPermissions = user.permissions.find((permission: any) => permission.organizationId === organization.id);
         if (!organizationPermissions) {
             throw new Error('No autorizado, usuario no tiene permisos para esta organización.');

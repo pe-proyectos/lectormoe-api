@@ -8,7 +8,8 @@ export const router = () => new Elysia()
     .use(loggedUserOnly())
     .patch(
         '/api/genre/:genreSlug',
-        async ({ organizationId, permissions, params, body }) => {
+        async ({ organizationId, user, params, body }) => {
+            const permissions = user.permissions.find((p: any) => p.organizationId === organizationId);
             if (!permissions?.canEditGenre) {
                 throw new Error("No tiene permisos para editar géneros.");
             }

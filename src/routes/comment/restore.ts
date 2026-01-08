@@ -8,7 +8,8 @@ export const router = () => new Elysia()
     .use(loggedUserOnly())
     .post(
         '/api/comment/:id/restore',
-        async ({ params, organizationId, user, permissions }) => {
+        async ({ params, organizationId, user }) => {
+            const permissions = user.permissions.find((p: any) => p.organizationId === organizationId);
             const comment = await getComment(Number(params.id));
             if (!comment) {
                 throw new Error("Comentario no encontrado.");

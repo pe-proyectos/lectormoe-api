@@ -8,7 +8,8 @@ export const router = () => new Elysia()
     .use(loggedUserOnly())
     .post(
         '/api/subscription-plan',
-        async ({ organizationId, permissions, body }) => {
+        async ({ organizationId, user, body }) => {
+            const permissions = user.permissions.find((p: any) => p.organizationId === organizationId);
             if (!permissions?.canCreateSubscriptionPlan) {
                 throw new Error("No tiene permisos para crear planes de suscripción.");
             }

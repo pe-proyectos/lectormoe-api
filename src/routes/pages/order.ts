@@ -9,7 +9,8 @@ export const router = () => new Elysia()
     .use(loggedUserOnly())
     .post(
         '/api/manga-custom/:mangaSlug/chapter/:chapterNumber/pages/order',
-        async ({ organizationId, permissions, body, params: { mangaSlug, chapterNumber } }) => {
+        async ({ organizationId, user, body, params: { mangaSlug, chapterNumber } }) => {
+            const permissions = user.permissions.find((p: any) => p.organizationId === organizationId);
             if (!permissions?.canEditPage) {
                 throw new Error("No tiene permisos para ordenar páginas.");
             }

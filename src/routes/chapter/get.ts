@@ -11,7 +11,8 @@ export const router = () => new Elysia()
     .use(loggedOptional())
     .get(
         '/api/manga-custom/:mangaSlug/chapter/:chapterNumber',
-        async ({ organizationId, user, permissions, params: { mangaSlug, chapterNumber } }) => {
+        async ({ organizationId, user, params: { mangaSlug, chapterNumber } }) => {
+            const permissions = user ? user.permissions.find((p: any) => p.organizationId === organizationId) : null;
             const [manga, chapter] = await Promise.all([
                 getMangaCustomBySlug(organizationId, mangaSlug),
                 getChapter(organizationId, mangaSlug, chapterNumber)
