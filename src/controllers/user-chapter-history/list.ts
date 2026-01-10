@@ -1,4 +1,4 @@
-import { prisma } from "../../models/prisma";
+import { prisma, Prisma } from "../../models/prisma";
 import type { UserChapterHistoryListQuery } from "../../types/user-chapter-history/list";
 
 export const listUserChapterHistory = async (organizationId: number | null, userId: number, filters: UserChapterHistoryListQuery) => {
@@ -45,7 +45,7 @@ export const listUserChapterHistory = async (organizationId: number | null, user
 			}
 		},
 		orderBy: {
-			lastReadAt: 'desc',
+			lastReadAt: Prisma.SortOrder.desc,
 		},
 		skip: filters?.page ? (Number.parseInt(filters?.page || "1") - 1) * Number.parseInt(filters?.limit || "10") : 0,
 		take: Number.parseInt(filters?.limit || "10"),

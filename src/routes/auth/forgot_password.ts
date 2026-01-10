@@ -1,17 +1,35 @@
 import { Elysia, t } from 'elysia';
 
 import { forgotPassword } from '../../controllers/auth/forgot_password';
-import { checkOrganization, checkOrganizationBySlug } from '../../controllers/organization/check';
-import { prisma } from '../../models/prisma';
+import { checkOrganizationBySlug } from '../../controllers/organization/check';
+import { prisma, Prisma } from '../../models/prisma';
+import { rateLimiter, RATE_LIMITS } from '../../util/rate-limiter';
 
 export const router = () => new Elysia()
     .post(
         '/api/auth/forgot-password',
-        async ({ request: { headers }, body }) => {
+        async ({ request: { headers }, body, set }) => {
             const { email } = body;
-            
+
             if (!email) {
                 throw new Error('El correo electrónico es requerido.');
+            }
+
+            // SECURITY: Rate limiting - Prevent password reset abuse
+            const rateLimitKey = `forgot-password:${email}`;
+            const rateLimit = rateLimiter.checkLimit(
+                rateLimitKey,
+                RATE_LIMITS.PASSWORD_RESET.maxRequests,
+                RATE_LIMITS.PASSWORD_RESET.windowMs
+            );
+
+            if (!rateLimit.allowed) {
+                set.status = 429;
+                const resetInMinutes = Math.ceil((rateLimit.resetAt - Date.now()) / 60000);
+                return {
+                    status: false,
+                    message: `Demasiados intentos de restablecimiento. Por favor intenta de nuevo en ${resetInMinutes} minutos.`
+                };
             }
 
             // Obtener organizationId si se proporciona x-organization
@@ -32,7 +50,7 @@ export const router = () => new Elysia()
             if (!organizationId) {
                 const defaultOrg = await prisma.organization.findFirst({
                     where: { isPublic: true },
-                    orderBy: { id: 'asc' },
+                    orderBy: { id: Prisma.SortOrder.asc },
                 });
                 if (defaultOrg) {
                     organizationId = defaultOrg.id;

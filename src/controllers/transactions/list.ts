@@ -1,4 +1,4 @@
-import { prisma } from "../../models/prisma";
+import { prisma, Prisma } from "../../models/prisma";
 
 export const listTransactions = async (organizationId: number) => {
 	const transactions = await prisma.organizationTransaction.findMany({
@@ -6,7 +6,7 @@ export const listTransactions = async (organizationId: number) => {
 			organizationId: organizationId,
 		},
 		orderBy: {
-			transactionDate: "desc",
+			transactionDate: Prisma.SortOrder.desc,
 		},
 	});
 

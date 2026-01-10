@@ -1,4 +1,4 @@
-import { prisma } from "../../models/prisma";
+import { prisma, Prisma } from "../../models/prisma";
 
 // Generate a consistent color based on organization name
 const getBadgeColor = (orgName: string): string => {
@@ -72,7 +72,7 @@ export const getFeaturedManga = async (limit: number = 8) => {
 			},
 		},
 		orderBy: {
-			views: 'desc',
+			views: Prisma.SortOrder.desc,
 		},
 		take: limit * 3, // Get more to filter out ones without covers
 	});

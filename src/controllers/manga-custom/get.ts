@@ -1,4 +1,4 @@
-import { prisma } from "../../models/prisma";
+import { prisma, Prisma } from "../../models/prisma";
 
 export const getMangaCustomBySlug = async (organizationId: number, mangaSlug: string) => {
 	const mangaCustom = await prisma.mangaCustom.findFirst({
@@ -20,7 +20,7 @@ export const getMangaCustomBySlug = async (organizationId: number, mangaSlug: st
 			},
 			chapters: {
 				orderBy: {
-					number: "desc",
+					number: Prisma.SortOrder.desc,
 				},
 			},
 			genres: {
@@ -35,6 +35,8 @@ export const getMangaCustomBySlug = async (organizationId: number, mangaSlug: st
 				select: {
 					id: true,
 					name: true,
+					canDownload: true,
+					canReadUnreleased: true,
 				},
 			},
 			rankings: {
@@ -50,7 +52,7 @@ export const getMangaCustomBySlug = async (organizationId: number, mangaSlug: st
 					},
 				},
 				orderBy: {
-					createdAt: "desc",
+					createdAt: Prisma.SortOrder.desc,
 				},
 			},
 		},
@@ -58,14 +60,5 @@ export const getMangaCustomBySlug = async (organizationId: number, mangaSlug: st
 	if (!mangaCustom) {
 		return null;
 	}
-	const result = {
-		...mangaCustom.manga,
-		...mangaCustom,
-		// Asegurar que nextChapterAt y nextChapterAtMessage estén incluidos
-		nextChapterAt: mangaCustom.nextChapterAt,
-		nextChapterAtMessage: mangaCustom.nextChapterAtMessage,
-		manga: undefined,
-	}
-	delete result.manga;
-	return result;
+	return mangaCustom;
 };

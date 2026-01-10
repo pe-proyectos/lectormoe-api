@@ -1,4 +1,4 @@
-import { prisma } from "../../models/prisma";
+import { prisma, Prisma } from "../../models/prisma";
 
 // Generate a consistent color based on organization name
 const getBadgeColor = (orgName: string): string => {
@@ -46,11 +46,9 @@ export const getScans = async (includeNSFW: boolean = false) => {
 			},
 		},
 		orderBy: {
-			name: 'asc',
+			name: Prisma.SortOrder.asc,
 		},
 	});
-
-	console.log(`[getScans] Found ${organizations.length} public organizations`);
 
 	// For each organization, get metadata
 	const scansWithMangas = await Promise.all(
@@ -103,16 +101,10 @@ export const getScans = async (includeNSFW: boolean = false) => {
 				totalMangas: totalMangas,
 			};
 			
-			console.log(`[getScans] ${org.name}: processed`);
-			
 			return result;
 		})
 	);
 
-	console.log(`[getScans] Returning ${scansWithMangas.length} scans`);
-	
-	// Return all scans, even if they don't have mangas yet
-	// This allows showing organizations that are registered but haven't added content
 	return scansWithMangas;
 };
 

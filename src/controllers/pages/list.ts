@@ -1,9 +1,9 @@
-import { prisma } from "../../models/prisma";
+import { prisma, Prisma } from "../../models/prisma";
 
 export const listPages = async (organizationId: number, mangaSlug: string, chapterNumber: number) => {
 	const pages = await prisma.page.findMany({
 		orderBy: {
-			number: 'asc',
+			number: Prisma.SortOrder.asc,
 		},
 		where: {
 			chapter: {

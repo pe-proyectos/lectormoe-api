@@ -1,4 +1,4 @@
-import { prisma } from "../../models/prisma";
+import { prisma, Prisma } from "../../models/prisma";
 
 export const listComments = async (
   organizationId: number,
@@ -15,7 +15,7 @@ export const listComments = async (
       hiddenAt: admin ? undefined : null,
     },
     orderBy: {
-      createdAt: admin ? 'desc' : 'asc'
+      createdAt: admin ? Prisma.SortOrder.desc : Prisma.SortOrder.asc,
     },
     include: {
       user: {
@@ -49,7 +49,7 @@ export const listComments = async (
           hiddenAt: admin ? undefined : null,
         },
         orderBy: {
-          createdAt: 'asc'
+          createdAt: Prisma.SortOrder.asc,
         },
         include: {
           user: {

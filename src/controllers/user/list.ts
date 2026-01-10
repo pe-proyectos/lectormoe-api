@@ -1,33 +1,32 @@
-import type { Prisma } from "@prisma/client";
-import { prisma } from "../../models/prisma";
+import { prisma, Prisma } from "../../models/prisma";
 import { type UserListQuery, OrderEnum } from "../../types/user/list";
 
 export const listUser = async (organizationId: number, filters: UserListQuery) => {
 	const orders: Record<OrderEnum, Prisma.UserOrderByWithRelationInput> = {
 		[OrderEnum.USERNAME_ASC]: {
-			username: 'asc',
+			username: Prisma.SortOrder.asc,
 		},
 		[OrderEnum.USERNAME_DESC]: {
-			username: 'desc',
+			username: Prisma.SortOrder.desc,
 		},
 		[OrderEnum.CREATED_AT_ASC]: {
-			createdAt: 'asc',
+			createdAt: Prisma.SortOrder.asc,
 		},
 		[OrderEnum.CREATED_AT_DESC]: {
-			createdAt: 'desc',
+			createdAt: Prisma.SortOrder.desc,
 		},
 	};
 	const where: Prisma.UserWhereInput = {};
 	if (filters?.email) {
 		where.email = {
 			contains: filters.email,
-			mode: "insensitive",
+			mode: Prisma.QueryMode.insensitive,
 		};
 	}
 	if (filters?.username) {
 		where.username = {
 			contains: filters.username,
-			mode: "insensitive",
+			mode: Prisma.QueryMode.insensitive,
 		};
 	}
 	if (filters?.subscriptionPlanIds) {

@@ -1,22 +1,5 @@
-import { prisma } from "../../models/prisma";
 import { type MangaCustomListQuery, OrderEnum } from "../../types/manga-custom/list";
-
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-const prepareCustomManga = (mangaCustom: any) => {
-	const result = {
-		...mangaCustom.manga,
-		...mangaCustom,
-		lastChapters: mangaCustom.chapters.map((chapter: any) => ({
-			...chapter,
-			chapterUrl: `/${mangaCustom.organization.slug}/manga/${mangaCustom.manga.slug}/chapters/${chapter.number}`,
-		})),
-		manga: undefined,
-		chapters: undefined,
-		views: mangaCustom.views + mangaCustom.chapters.reduce((acc: any, chapter: any) => acc + chapter.views, 0),
-	};
-	result.manga = undefined;
-	return result;
-}
+import { prisma, Prisma } from "../../models/prisma";
 
 export const listMangaCustom = async (organizationId: number | null, filters: MangaCustomListQuery) => {
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
@@ -25,21 +8,21 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 	// Handle search parameter
 	const searchConditions = filters.search ? {
 		OR: [
-			{ title: { contains: filters.search, mode: "insensitive" } },
-			{ shortDescription: { contains: filters.search, mode: "insensitive" } },
-			{ description: { contains: filters.search, mode: "insensitive" } },
+			{ title: { contains: filters.search, mode: Prisma.QueryMode.insensitive } },
+			{ shortDescription: { contains: filters.search, mode: Prisma.QueryMode.insensitive } },
+			{ description: { contains: filters.search, mode: Prisma.QueryMode.insensitive } },
 		]
 	} : {};
 	
 	if (filters.order === OrderEnum.FEATURED) {
 		order.orderBy = {
-			views: "desc",
+			views: Prisma.SortOrder.desc,
 		};
 	} else if (filters.order === OrderEnum.LATEST) {
 		order.orderBy = {
 			lastChapterAt: {
-				sort: 'desc',
-				nulls: 'last',
+				sort: Prisma.SortOrder.desc,
+				nulls: Prisma.NullsOrder.last,
 			}
 		};
 	} else if (filters.order === OrderEnum.POPULAR) {
@@ -66,7 +49,7 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 			},
 			orderBy: {
 				_count: {
-					ip: 'desc',
+					ip: Prisma.SortOrder.desc,
 				}
 			},
 			take: 100, // Limit to top 100 to avoid loading all data
@@ -75,7 +58,7 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 		// Apply pagination to the view counts
 		const skip = filters?.page ? (Number.parseInt(filters?.page || "1") - 1) * Number.parseInt(filters?.limit || "10") : 0;
 		const take = Number.parseInt(filters?.limit || "10");
-		const paginatedIds = viewCounts.slice(skip, skip + take).map(v => v.mangaCustomId);
+		const paginatedIds = viewCounts.slice(skip, skip + take).map(v => v.mangaCustomId).filter(v => v !== null);
 
 		// Parse IDs filter if provided
 		const idsFilter = filters.ids 
@@ -96,19 +79,19 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 				...(filters.title ? {
 					title: {
 						contains: filters.title,
-						mode: "insensitive"
+						mode: Prisma.QueryMode.insensitive
 					}
 				} : {}),
 				...(filters.shortDescription ? {
 					shortDescription: {
 						contains: filters.shortDescription,
-						mode: "insensitive"
+						mode: Prisma.QueryMode.insensitive
 					}
 				} : {}),
 				...(filters.description ? {
 					description: {
 						contains: filters.description,
-						mode: "insensitive"
+						mode: Prisma.QueryMode.insensitive
 					}
 				} : {}),
 				...idsFilter,
@@ -141,7 +124,7 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 						subscribersOnly: true,
 					},
 					orderBy: {
-						number: 'desc',
+						number: Prisma.SortOrder.desc,
 					},
 					take: 2,
 				},
@@ -167,9 +150,8 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 			(viewCountMap.get(b.id) || 0) - (viewCountMap.get(a.id) || 0)
 		);
 
-		const data = sortedMangas.map(prepareCustomManga);
 		return {
-			data,
+			data: sortedMangas,
 			maxPage: Math.ceil(viewCounts.length / Number.parseInt(filters?.limit || "10")),
 			total: viewCounts.length,
 		};
@@ -206,19 +188,19 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 		...(filters.title ? {
 			title: {
 				contains: filters.title,
-				mode: "insensitive"
+				mode: Prisma.QueryMode.insensitive
 			}
 		} : {}),
 		...(filters.shortDescription ? {
 			shortDescription: {
 				contains: filters.shortDescription,
-				mode: "insensitive"
+				mode: Prisma.QueryMode.insensitive
 			}
 		} : {}),
 		...(filters.description ? {
 			description: {
 				contains: filters.description,
-				mode: "insensitive"
+				mode: Prisma.QueryMode.insensitive
 			}
 		} : {}),
 		...idsFilter,
@@ -257,7 +239,7 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 						views: true,
 					},
 					orderBy: {
-						number: 'desc',
+						number: Prisma.SortOrder.desc,
 					},
 					take: 2,
 				},
@@ -285,7 +267,7 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 	]);
 
 	return {
-		data: mangasCustoms.map(prepareCustomManga),
+		data: mangasCustoms,
 		maxPage: Math.ceil(total / Number.parseInt(filters?.limit || "10")),
 		total,
 	};

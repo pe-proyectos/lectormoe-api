@@ -13,20 +13,22 @@ export const router = () => new Elysia()
         '/api/manga-custom/:mangaSlug/chapter/:chapterNumber',
         async ({ organizationId, user, params: { mangaSlug, chapterNumber } }) => {
             const permissions = user ? user.permissions.find((p: any) => p.organizationId === organizationId) : null;
-            const [manga, chapter] = await Promise.all([
+            const [mangaCustom, chapter] = await Promise.all([
                 getMangaCustomBySlug(organizationId, mangaSlug),
                 getChapter(organizationId, mangaSlug, chapterNumber)
             ]);
+
+            if (!mangaCustom) {
+                throw new Error("Manga no encontrado.");
+            }
 
             if (!chapter) {
                 throw new Error("Capitulo no encontrado.");
             }
 
             // Verificar acceso usando la función centralizada
-            const accessCheck = checkChapterAccess(user, permissions, chapter, manga);
+            const accessCheck = await checkChapterAccess(user, permissions, chapter, mangaCustom);
 
-            // Return chapter data with access information
-            // Don't block here, just add metadata
             return {
                 status: true,
                 data: {

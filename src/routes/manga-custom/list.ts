@@ -12,7 +12,7 @@ export const router = () => new Elysia()
             const { data, maxPage, total } = await listMangaCustom(organizationId, query);
             
             return { status: true, data: {
-                data,
+                items: data,
                 maxPage,
                 total,
             } };

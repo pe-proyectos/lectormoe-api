@@ -1,4 +1,4 @@
-import { prisma } from "../../models/prisma";
+import { prisma, Prisma } from "../../models/prisma";
 
 export const listFollowedOrganizations = async (userId: number) => {
     const followedOrganizations = await prisma.organizationFollower.findMany({
@@ -21,7 +21,7 @@ export const listFollowedOrganizations = async (userId: number) => {
             },
         },
         orderBy: {
-            createdAt: 'desc',
+            createdAt: Prisma.SortOrder.desc,
         },
     });
 

@@ -1,7 +1,5 @@
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../models/prisma';
 import { getSubscriptionByPaypalId } from '../util/paypal';
-
-const prisma = new PrismaClient();
 
 // Sincroniza el estado de todas las suscripciones desde PayPal
 // Esto es útil como respaldo en caso de que algún webhook no llegue

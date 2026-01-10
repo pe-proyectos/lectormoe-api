@@ -1,8 +1,6 @@
 import { Elysia, t } from 'elysia';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../../models/prisma';
 import { useOrganization } from '../../plugins/organization';
-
-const prisma = new PrismaClient();
 
 export const router = () => new Elysia()
     .use(useOrganization())

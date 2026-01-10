@@ -16,27 +16,31 @@ export const router = () =>
       async ({
         organizationId,
         user,
-        permissions,
         params: { mangaSlug, chapterNumber },
       }) => {
-        const [manga, chapter] = await Promise.all([
+        const permissions = user ? user.permissions.find((p: any) => p.organizationId === organizationId) : null;
+        const [mangaCustom, chapter] = await Promise.all([
           getMangaCustomBySlug(organizationId, mangaSlug),
           getChapter(organizationId, mangaSlug, chapterNumber),
         ]);
+
+        if (!mangaCustom) {
+          throw new Error("Manga no encontrado.");
+        }
 
         if (!chapter) {
           throw new Error("Capitulo no encontrado.");
         }
 
         // Verificar acceso usando la función centralizada
-        const accessCheck = checkChapterAccess(user, permissions, chapter, manga);
+        const accessCheck = await checkChapterAccess(user, permissions, chapter, mangaCustom);
 
         // Si no tiene acceso, devolver error apropiado
         if (!accessCheck.hasAccess) {
           return {
             status: false,
-            message: accessCheck.message,
-            errorType: accessCheck.errorType
+            message: accessCheck.message ?? "No tienes acceso a este capítulo.",
+            errorType: accessCheck.errorType ?? "login_required",
           };
         }
 

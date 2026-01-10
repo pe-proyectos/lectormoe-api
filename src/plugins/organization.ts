@@ -9,7 +9,7 @@ export const useOrganization = () => new Elysia()
             secret: Bun.env.JWT_SECRET as string,
         })
     )
-    .derive({ as: 'global' }, async ({ request: { headers } }) => {
+    .derive({ as: 'scoped' }, async ({ request: { headers } }) => {
         const organizationIdentifier = headers.get('x-organization');
         if (!organizationIdentifier) {
             throw new Error('No autorizado, dominio de organización no encontrado.');
@@ -31,7 +31,7 @@ export const useOrganizationOptional = () => new Elysia()
             secret: Bun.env.JWT_SECRET as string,
         })
     )
-    .derive({ as: 'global' }, async ({ request: { headers } }) => {
+    .derive({ as: 'scoped' }, async ({ request: { headers } }) => {
         const organizationIdentifier = headers.get('x-organization');
         if (!organizationIdentifier) {
             return { organizationId: null, organization: null };

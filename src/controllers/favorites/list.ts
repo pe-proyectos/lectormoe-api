@@ -1,4 +1,4 @@
-import { prisma } from "../../models/prisma";
+import { prisma, Prisma } from "../../models/prisma";
 import type { FavoritesListQuery } from "../../types/favorites/list";
 
 export const listFavorites = async (organizationId: number | null, userId: number, filters: FavoritesListQuery) => {
@@ -39,7 +39,7 @@ export const listFavorites = async (organizationId: number | null, userId: numbe
 							subscribersOnly: true,
 						},
 						orderBy: {
-							releasedAt: 'desc',
+							releasedAt: Prisma.SortOrder.desc,
 						},
 						take: 2,
 					}
@@ -47,7 +47,7 @@ export const listFavorites = async (organizationId: number | null, userId: numbe
 			}
 		},
 		orderBy: {
-			createdAt: 'desc',
+			createdAt: Prisma.SortOrder.desc,
 		},
 		skip: filters?.page ? (Number.parseInt(filters?.page || "1") - 1) * Number.parseInt(filters?.limit || "10") : 0,
 		take: Number.parseInt(filters?.limit || "10"),

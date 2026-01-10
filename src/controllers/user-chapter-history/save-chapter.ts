@@ -1,4 +1,4 @@
-import { prisma } from "../../models/prisma";
+import { prisma, Prisma } from "../../models/prisma";
 
 export const saveUserChapterHistoryChapter = async (organizationId: number, userId: number, mangaSlug: string, chapterNumber: number) => {
     const chapter = await prisma.chapter.findFirst({
@@ -6,7 +6,7 @@ export const saveUserChapterHistoryChapter = async (organizationId: number, user
             id: true,
             pages: {
                 orderBy: {
-                    number: 'desc',
+                    number: Prisma.SortOrder.desc,
                 },
                 take: 1,
                 select: {

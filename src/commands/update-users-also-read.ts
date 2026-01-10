@@ -1,4 +1,4 @@
-import { prisma } from '../models/prisma';
+import { prisma, Prisma } from '../models/prisma';
 
 async function updateUsersAlsoRead() {
     try {
@@ -52,7 +52,7 @@ async function updateUsersAlsoRead() {
                     },
                     orderBy: {
                         _count: {
-                            chapterId: 'desc',
+                            chapterId: Prisma.SortOrder.desc,
                         },
                     },
                     take: 10,

@@ -6,73 +6,114 @@ import { getSubscriptionByPaypalId } from "../../util/paypal";
 // Sincroniza el estado de todas las suscripciones desde PayPal
 // Esto es útil como respaldo en caso de que algún webhook no llegue
 async function syncSubscriptionStatuses() {
-  const organizations = await prisma.organization.findMany();
+  const startTime = new Date();
+  console.log(`🔄 [CRON] Starting subscription status sync at ${startTime.toISOString()}`);
+  
+  try {
+    const organizations = await prisma.organization.findMany();
+    console.log(`📋 Found ${organizations.length} organizations to sync`);
 
-  for (const organization of organizations) {
-    console.log(
-      `- Syncing subscription statuses for ${organization.id} organization ${organization.slug}`
-    );
-    
-    // Obtener todas las suscripciones de esta organización que tengan paypalSubscriptionId
-    const subscriptions = await prisma.subscription.findMany({
-      where: {
-        subscriptionPlan: {
-          organizationId: organization.id,
+    let totalSynced = 0;
+    let totalErrors = 0;
+    let totalSkipped = 0;
+
+    for (const organization of organizations) {
+      console.log(
+        `\n🏢 Syncing subscriptions for organization: ${organization.slug} (ID: ${organization.id})`
+      );
+      
+      // Obtener todas las suscripciones de esta organización que tengan paypalSubscriptionId
+      const subscriptions = await prisma.subscription.findMany({
+        where: {
+          subscriptionPlan: {
+            organizationId: organization.id,
+          },
         },
-        paypalSubscriptionId: {
-          not: "",
+        include: {
+          subscriptionPlan: true,
         },
-      },
-      include: {
-        subscriptionPlan: true,
-      },
-    });
+      });
 
-    let syncedCount = 0;
-    let errorCount = 0;
+      console.log(`   Found ${subscriptions.length} subscriptions with PayPal ID`);
 
-    for (const subscription of subscriptions) {
-      try {
-        console.log(
-          `-- Syncing subscription ${subscription.id} (PayPal ID: ${subscription.paypalSubscriptionId})`
-        );
-        
-        // Obtener el estado actual desde PayPal
-        const paypalSubscription = await getSubscriptionByPaypalId(subscription.paypalSubscriptionId);
-        
-        if (!paypalSubscription) {
-          console.log(`--- PayPal subscription not found for ${subscription.paypalSubscriptionId}`);
+      let syncedCount = 0;
+      let errorCount = 0;
+      let skippedCount = 0;
+
+      for (const subscription of subscriptions) {
+        try {
+          if (!subscription.paypalSubscriptionId) {
+            skippedCount++;
+            continue;
+          }
+          
+          // Obtener el estado actual desde PayPal
+          const paypalSubscription = await getSubscriptionByPaypalId(subscription.paypalSubscriptionId);
+          
+          if (!paypalSubscription) {
+            console.log(`   ⚠️  PayPal subscription not found: ${subscription.paypalSubscriptionId}`);
+            errorCount++;
+            totalErrors++;
+            continue;
+          }
+
+          // Calcular cycles_completed
+          const cyclesCompleted = paypalSubscription?.billing_info?.cycle_executions?.reduce(
+            (acc: number, curr: any) => acc + (curr.cycles_completed || 0), 
+            0
+          ) || 0;
+
+          // Actualizar el estado de la suscripción
+          await prisma.subscription.update({
+            where: {
+              id: subscription.id,
+            },
+            data: {
+              status: paypalSubscription?.status || subscription.status,
+              active: paypalSubscription?.status === "ACTIVE",
+              cycleExecutions: cyclesCompleted,
+              failedPaymentsCount: paypalSubscription?.billing_info?.failed_payments_count || 0,
+              nextPayment: paypalSubscription?.billing_info?.next_billing_time 
+                ? new Date(paypalSubscription.billing_info.next_billing_time) 
+                : null,
+              lastPayment: paypalSubscription?.billing_info?.last_payment?.time 
+                ? new Date(paypalSubscription.billing_info.last_payment.time) 
+                : null,
+              lastAmount: paypalSubscription?.billing_info?.last_payment?.amount?.value 
+                ? parseFloat(paypalSubscription.billing_info.last_payment.amount.value) 
+                : null,
+            },
+          });
+
+          syncedCount++;
+          totalSynced++;
+          
+          // Log solo si el estado cambió
+          if (subscription.status !== paypalSubscription?.status) {
+            console.log(
+              `   ✅ Subscription ${subscription.id} updated: ${subscription.status} → ${paypalSubscription?.status}`
+            );
+          }
+        } catch (error) {
+          console.error(`   ❌ Error syncing subscription ${subscription.id}:`, error);
           errorCount++;
-          continue;
+          totalErrors++;
         }
-
-        // Actualizar el estado de la suscripción
-        await prisma.subscription.update({
-          where: {
-            id: subscription.id,
-          },
-          data: {
-            status: paypalSubscription?.status,
-            active: paypalSubscription?.status === "ACTIVE",
-            cycleExecutions: paypalSubscription?.billing_info?.cycle_executions?.reduce((acc: number, curr: any) => acc + curr.cycles_completed, 0) || 0,
-            failedPaymentsCount: paypalSubscription?.billing_info?.failed_payments_count || 0,
-            nextPayment: paypalSubscription?.billing_info?.next_billing_time ? new Date(paypalSubscription.billing_info.next_billing_time) : null,
-            lastPayment: paypalSubscription?.billing_info?.last_payment?.time ? new Date(paypalSubscription.billing_info.last_payment.time) : null,
-            lastAmount: paypalSubscription?.billing_info?.last_payment?.amount?.value ? parseFloat(paypalSubscription.billing_info.last_payment.amount.value) : null,
-          },
-        });
-
-        syncedCount++;
-        console.log(`--- Subscription ${subscription.id} synced: status=${paypalSubscription?.status}, active=${paypalSubscription?.status === "ACTIVE"}`);
-      } catch (error) {
-        console.error(`--- Error syncing subscription ${subscription.id}:`, error);
-        errorCount++;
       }
+
+      console.log(
+        `   📊 Organization ${organization.slug}: ${syncedCount} synced, ${errorCount} errors, ${skippedCount} skipped`
+      );
     }
 
-    console.log(
-      `- Finished syncing for ${organization.id} organization ${organization.slug}: ${syncedCount} synced, ${errorCount} errors`
-    );
+    const endTime = new Date();
+    const duration = Math.round((endTime.getTime() - startTime.getTime()) / 1000);
+    
+    console.log(`\n✅ [CRON] Subscription sync completed in ${duration}s`);
+    console.log(`   📈 Total: ${totalSynced} synced, ${totalErrors} errors, ${totalSkipped} skipped`);
+  } catch (error) {
+    console.error(`❌ [CRON] Fatal error in subscription sync:`, error);
+    throw error;
   }
 }
 
@@ -80,8 +121,14 @@ export const router = () =>
   new Elysia().use(
     cron({
       name: "sync-subscription-statuses",
-      pattern: Patterns.everyHours(6), // Sincronizar cada 6 horas como respaldo
-      run: syncSubscriptionStatuses,
+      pattern: Patterns.everyHours(3), // Sincronizar cada 3 horas como respaldo de los webhooks
+      run: async () => {
+        try {
+          await syncSubscriptionStatuses();
+        } catch (error) {
+          console.error("❌ [CRON] Error in sync-subscription-statuses:", error);
+        }
+      },
     })
   );
 

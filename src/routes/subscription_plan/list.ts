@@ -12,7 +12,7 @@ export const router = () => new Elysia()
             const { data, maxPage, total } = await listSubscriptionPlans(organizationId, query);
             
             return { status: true, data: {
-                data,
+                items: data,
                 maxPage,
                 total,
             } };
@@ -22,7 +22,7 @@ export const router = () => new Elysia()
             response: t.Object({
                 status: t.Boolean(),
                 data: t.Object({
-                    data: t.Array(t.Any()),
+                    items: t.Array(t.Any()),
                     maxPage: t.Number(),
                     total: t.Number(),
                 }),

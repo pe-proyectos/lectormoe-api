@@ -12,7 +12,7 @@ export const loggedOptional = () => new Elysia()
             secret: Bun.env.JWT_SECRET as string,
         })
     )
-    .derive({ as: 'global' }, async ({ jwt, request: { headers } }) => {
+    .derive({ as: 'scoped' }, async ({ jwt, request: { headers } }) => {
         const authHeader = headers.get('Authorization');
         const token = authHeader?.split('Bearer ')[1];
         const organizationIdentifier = headers.get('x-organization');
@@ -78,7 +78,7 @@ export const logged = () => new Elysia()
             secret: Bun.env.JWT_SECRET as string,
         })
     )
-    .derive({ as: 'global' }, async ({ jwt, request: { headers } }) => {
+    .derive({ as: 'scoped' }, async ({ jwt, request: { headers } }) => {
         const token = headers.get('Authorization')?.split('Bearer ')[1];
         if (!token) {
             throw new Error('No autorizado, token no encontrado.');
@@ -119,7 +119,7 @@ export const loggedUserOnly = () => new Elysia()
             secret: Bun.env.JWT_SECRET as string,
         })
     )
-    .derive({ as: 'global' }, async ({ jwt, request: { headers } }) => {
+    .derive({ as: 'scoped' }, async ({ jwt, request: { headers } }) => {
         const organizationIdentifier = headers.get('x-organization');
         if (!organizationIdentifier) {
             throw new Error('No autorizado, dominio de organización no encontrado.');

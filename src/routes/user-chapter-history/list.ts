@@ -16,7 +16,7 @@ export const router = () => new Elysia()
             const { data, maxPage, total } = await listUserChapterHistory(organizationId, user.id, query);
             
             return { status: true, data: {
-                data,
+                items: data,
                 maxPage,
                 total,
             } };

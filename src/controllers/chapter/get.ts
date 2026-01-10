@@ -1,4 +1,4 @@
-import { prisma } from "../../models/prisma";
+import { prisma, Prisma } from "../../models/prisma";
 
 export const getChapter = async (organizationId: number, mangaSlug: string, number: number) => {
 	const chapter = await prisma.chapter.findFirst({
@@ -31,7 +31,7 @@ export const getChapter = async (organizationId: number, mangaSlug: string, numb
 			subscribersOnly: true,
 		},
 		orderBy: {
-			number: 'asc'
+			number: Prisma.SortOrder.asc,
 		},
 		take: 1,
 	}))?.[0];
@@ -49,7 +49,7 @@ export const getChapter = async (organizationId: number, mangaSlug: string, numb
 			subscribersOnly: true,
 		},
 		orderBy: {
-			number: 'desc'
+			number: Prisma.SortOrder.desc,
 		},
 		take: 1
 	}))?.[0];

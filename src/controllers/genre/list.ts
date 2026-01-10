@@ -1,4 +1,4 @@
-import { prisma } from "../../models/prisma";
+import { prisma, Prisma } from "../../models/prisma";
 
 export const listGenre = async (organizationId: number) => {
 	return await prisma.genre.findMany({
@@ -7,7 +7,7 @@ export const listGenre = async (organizationId: number) => {
 			display: true
 		},
 		orderBy: {
-			name: 'asc'
+			name: Prisma.SortOrder.asc,
 		},
 		select: {
 			id: true,

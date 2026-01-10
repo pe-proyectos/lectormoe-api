@@ -226,25 +226,36 @@ export async function getPlanById(planId: string) {
 }
 
 export async function getSubscriptionByPaypalId(paypalSubscriptionId: string) {
-  const token = await getAccessToken();
+  try {
+    const token = await getAccessToken();
 
-  const response = await fetch(`${environment.url}/billing/subscriptions/${paypalSubscriptionId}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  });
+    const response = await fetch(`${environment.url}/billing/subscriptions/${paypalSubscriptionId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
-  if (!response.ok) {
-    const error = await response.json();
-    console.error("Error al obtener la suscripción:", error);
-    throw new Error("Failed to get PayPal subscription.");
+    if (!response.ok) {
+      // Si la suscripción no existe (404), retornar null en lugar de lanzar error
+      if (response.status === 404) {
+        return null;
+      }
+      const error = await response.json();
+      console.error("Error al obtener la suscripción:", error);
+      throw new Error("Failed to get PayPal subscription.");
+    }
+
+    const subscription = await response.json();
+    return subscription;
+  } catch (error) {
+    // Re-lanzar errores que no sean 404
+    if (error instanceof Error && error.message.includes("404")) {
+      return null;
+    }
+    throw error;
   }
-
-  const subscription = await response.json();
-  console.log("Suscripción obtenida:", subscription);
-  return subscription;
 }
 
 export async function getTransactionsOfSubscription(paypalSubscriptionId: string) {

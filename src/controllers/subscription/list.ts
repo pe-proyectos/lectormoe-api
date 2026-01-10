@@ -1,4 +1,4 @@
-import { prisma } from "../../models/prisma";
+import { prisma, Prisma } from "../../models/prisma";
 import { type SubscriptionPlanListQuery } from "../../types/subscription_plan/list";
 
 const prepareSubscriptionPlan = (subscriptionPlan: any) => {
@@ -13,15 +13,15 @@ export const listSubscriptionPlans = async (organizationId: number, filters: Sub
 			organizationId: organizationId,
 			name: {
 				contains: filters.name,
-				mode: "insensitive"
+				mode: Prisma.QueryMode.insensitive,
 			},
 			description: {
 				contains: filters.description,
-				mode: "insensitive"
+				mode: Prisma.QueryMode.insensitive,
 			},
 		},
 		orderBy: {
-			createdAt: "desc",
+			createdAt: Prisma.SortOrder.desc,
 		},
 		skip: filters?.page ? (Number.parseInt(filters?.page || "1") - 1) * Number.parseInt(filters?.limit || "10") : 0,
 		take: Number.parseInt(filters?.limit || "10"),
@@ -32,11 +32,11 @@ export const listSubscriptionPlans = async (organizationId: number, filters: Sub
 			organizationId: organizationId,
 			name: {
 				contains: filters.name,
-				mode: "insensitive"
+				mode: Prisma.QueryMode.insensitive,
 			},
 			description: {
 				contains: filters.description,
-				mode: "insensitive"
+				mode: Prisma.QueryMode.insensitive,
 			},
 		},
 	});
