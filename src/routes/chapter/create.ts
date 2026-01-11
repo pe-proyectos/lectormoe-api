@@ -42,13 +42,19 @@ export const router = () => new Elysia()
                     body.pages = [body.pages];
 
                 try {
-
-                  body.singlePages = (
-                    body.singlePages
-                      ? JSON.parse(body?.singlePages?.toString() || "[]")
-                      : []
-                  ).map(Number) as number[];
-                  
+                  // Handle singlePages: it can be an array, a string, or undefined
+                  if (body.singlePages === undefined || body.singlePages === null) {
+                    body.singlePages = [];
+                  } else if (Array.isArray(body.singlePages)) {
+                    // Already an array, just convert to numbers
+                    body.singlePages = body.singlePages.map(Number) as number[];
+                  } else if (typeof body.singlePages === 'string') {
+                    // It's a string, try to parse it
+                    body.singlePages = JSON.parse(body.singlePages).map(Number) as number[];
+                  } else {
+                    // Fallback: try to convert to array
+                    body.singlePages = [Number(body.singlePages)];
+                  }
                 } catch (error) {
                   console.error(error);
                   body.singlePages = [];
