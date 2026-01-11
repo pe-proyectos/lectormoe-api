@@ -2,7 +2,7 @@ import { Elysia } from "elysia";
 import { cron, Patterns } from "@elysiajs/cron";
 import { prisma } from "../../models/prisma";
 import { getTransactionsOfSubscription } from "../../util/paypal";
-calculateTransactions()
+
 async function calculateTransactions() {
   try {
     console.log('🔄 Iniciando sincronización de transacciones de suscripciones...');
