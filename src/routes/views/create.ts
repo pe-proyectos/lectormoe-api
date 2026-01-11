@@ -6,7 +6,7 @@ import { getIP } from '../../util/get-ip';
 
 export const router = () => new Elysia()
     .use(useOrganization())
-    .get(
+    .post(
         '/api/views/manga-custom/:mangaSlug',
         async ({ organizationId, request, params: { mangaSlug } }) => {
             const ip = request.headers.get('ip') || getIP(request.headers) || "0.0.0.0";
@@ -14,7 +14,11 @@ export const router = () => new Elysia()
             const view = await createViewHistoryMangaCustom(organizationId, mangaSlug, ip);
 
             if (!view) {
-                throw new Error("No se pudo crear la vista.");
+                return {
+                    status: false,
+                    error: 'NOT_FOUND',
+                    message: 'No se encontró el recurso.',
+                };
             }
 
             return {
@@ -32,7 +36,7 @@ export const router = () => new Elysia()
             }),
         }
     )
-    .get(
+    .post(
         '/api/views/manga-custom/:mangaSlug/chapter/:chapterNumber',
         async ({ organizationId, request, params: { mangaSlug, chapterNumber } }) => {
             const ip = request.headers.get('ip') || getIP(request.headers) || "0.0.0.0";
@@ -40,7 +44,11 @@ export const router = () => new Elysia()
             const view = await createViewHistoryChapter(organizationId, mangaSlug, chapterNumber, ip);
 
             if (!view) {
-                throw new Error("No se pudo crear la vista.");
+                return {
+                    status: false,
+                    error: 'NOT_FOUND',
+                    message: 'No se encontró el recurso.',
+                };
             }
 
             return {

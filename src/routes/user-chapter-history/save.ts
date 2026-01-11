@@ -5,14 +5,22 @@ import { loggedUserOnly } from '../../plugins/auth';
 
 export const router = () => new Elysia()
     .use(loggedUserOnly())
-    .get(
+    .post(
         '/api/user-chapter-history/manga-custom/:mangaSlug/chapter/:chapterNumber/pages/:pageNumber',
         async ({ organizationId, user, params: { mangaSlug, chapterNumber, pageNumber } }) => {
             const view = await saveUserChapterHistory(organizationId, user.id, mangaSlug, chapterNumber, pageNumber);
 
+            if (!view) {
+                return {
+                    status: false,
+                    error: 'NOT_FOUND',
+                    message: 'No se encontró el recurso.',
+                };
+            }
+
             return {
                 status: true,
-                data: !!view,
+                data: true,
             };
         },
         {
