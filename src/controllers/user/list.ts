@@ -38,11 +38,27 @@ export const listUser = async (organizationId: number, filters: UserListQuery) =
 			},
 		};
 	}
+	
+	// Construir filtro de permisos si se proporciona
+	let permissionWhere: Prisma.PermissionWhereInput = {
+		organizationId,
+	};
+	
+	if (filters?.permissionKeys && filters.permissionKeys.length > 0) {
+		// Crear un objeto dinámico con los permisos a filtrar
+		const permissionFilters: any = {};
+		for (const key of filters.permissionKeys) {
+			permissionFilters[key] = true;
+		}
+		permissionWhere = {
+			...permissionWhere,
+			...permissionFilters,
+		};
+	}
+	
 	// Obtener IDs de usuarios que tienen permisos para esta organización
 	const permissions = await prisma.permission.findMany({
-		where: {
-			organizationId,
-		},
+		where: permissionWhere,
 		select: {
 			userId: true,
 		},
@@ -65,6 +81,10 @@ export const listUser = async (organizationId: number, filters: UserListQuery) =
 			in: userIds,
 		},
 	};
+	
+	const page = filters?.page ? Number.parseInt(filters?.page || "1") : 1;
+	const limit = Number.parseInt(filters?.limit || "10");
+	const skip = (page - 1) * limit;
 	
 	let users = await prisma.user.findMany({
 		where: whereWithOrganization,
@@ -93,8 +113,8 @@ export const listUser = async (organizationId: number, filters: UserListQuery) =
 			},
 		},
 		orderBy: (filters?.order && orders[filters.order]) || undefined,
-		skip: filters?.page ? (Number.parseInt(filters?.page || "1") - 1) * Number.parseInt(filters?.limit || "10") : 0,
-		take: Number.parseInt(filters?.limit || "10"),
+		skip: skip,
+		take: limit,
 	});
 
 	// Obtener permisos para cada usuario y agregarlos al objeto
@@ -110,71 +130,46 @@ export const listUser = async (organizationId: number, filters: UserListQuery) =
 				},
 			});
 			
-			// Siempre incluir permissions, con valores por defecto si no existen
-			(user as any).permissions = permission ? {
-				canCreateAuthor: permission.canCreateAuthor,
-				canCreateChapter: permission.canCreateChapter,
-				canCreateGenre: permission.canCreateGenre,
-				canCreateMangaCustom: permission.canCreateMangaCustom,
-				canCreateMangaProfile: permission.canCreateMangaProfile,
-				canCreatePage: permission.canCreatePage,
-				canDeleteChapter: permission.canDeleteChapter,
-				canDeleteGenre: permission.canDeleteGenre,
-				canDeleteMangaCustom: permission.canDeleteMangaCustom,
-				canDeleteOrganization: permission.canDeleteOrganization,
-				canDeletePage: permission.canDeletePage,
-				canEditChapter: permission.canEditChapter,
-				canEditGenre: permission.canEditGenre,
-				canEditMangaCustom: permission.canEditMangaCustom,
-				canEditOrganization: permission.canEditOrganization,
-				canEditPage: permission.canEditPage,
-				canSeeAdminPanel: permission.canSeeAdminPanel,
-				canDeleteUser: permission.canDeleteUser,
-				canEditUser: permission.canEditUser,
-				canCreateSubscriptionPlan: permission.canCreateSubscriptionPlan,
-				canDeleteSubscriptionPlan: permission.canDeleteSubscriptionPlan,
-				canEditSubscriptionPlan: permission.canEditSubscriptionPlan,
-				canDownload: permission.canDownload,
-				canReadUnreleased: permission.canReadUnreleased,
-				canDeleteComment: permission.canDeleteComment,
-				canEditComment: permission.canEditComment,
-				canHideComment: permission.canHideComment,
-				role: permission.role,
-				hierarchyLevel: permission.hierarchyLevel,
-				hideAds: permission.hideAds,
-			} : {
-				// Valores por defecto para usuarios sin permisos
-				canCreateAuthor: false,
-				canCreateChapter: false,
-				canCreateGenre: false,
-				canCreateMangaCustom: false,
-				canCreateMangaProfile: false,
-				canCreatePage: false,
-				canDeleteChapter: false,
-				canDeleteGenre: false,
-				canDeleteMangaCustom: false,
-				canDeleteOrganization: false,
-				canDeletePage: false,
-				canEditChapter: false,
-				canEditGenre: false,
-				canEditMangaCustom: false,
-				canEditOrganization: false,
-				canEditPage: false,
-				canSeeAdminPanel: false,
-				canDeleteUser: false,
-				canEditUser: false,
-				canCreateSubscriptionPlan: false,
-				canDeleteSubscriptionPlan: false,
-				canEditSubscriptionPlan: false,
-				canDownload: false,
-				canReadUnreleased: false,
-				canDeleteComment: false,
-				canEditComment: false,
-				canHideComment: false,
-				role: "user",
-				hierarchyLevel: 0,
-				hideAds: false,
-			};
+			// Siempre incluir permissions como array, con valores por defecto si no existen
+			// Esto es consistente con lo que espera el frontend
+			if (permission) {
+				(user as any).permissions = [{
+					organizationId,
+					canCreateAuthor: permission.canCreateAuthor,
+					canCreateChapter: permission.canCreateChapter,
+					canCreateGenre: permission.canCreateGenre,
+					canCreateMangaCustom: permission.canCreateMangaCustom,
+					canCreateMangaProfile: permission.canCreateMangaProfile,
+					canCreatePage: permission.canCreatePage,
+					canDeleteChapter: permission.canDeleteChapter,
+					canDeleteGenre: permission.canDeleteGenre,
+					canDeleteMangaCustom: permission.canDeleteMangaCustom,
+					canDeleteOrganization: permission.canDeleteOrganization,
+					canDeletePage: permission.canDeletePage,
+					canEditChapter: permission.canEditChapter,
+					canEditGenre: permission.canEditGenre,
+					canEditMangaCustom: permission.canEditMangaCustom,
+					canEditOrganization: permission.canEditOrganization,
+					canEditPage: permission.canEditPage,
+					canSeeAdminPanel: permission.canSeeAdminPanel,
+					canDeleteUser: permission.canDeleteUser,
+					canEditUser: permission.canEditUser,
+					canCreateSubscriptionPlan: permission.canCreateSubscriptionPlan,
+					canDeleteSubscriptionPlan: permission.canDeleteSubscriptionPlan,
+					canEditSubscriptionPlan: permission.canEditSubscriptionPlan,
+					canDownload: permission.canDownload,
+					canReadUnreleased: permission.canReadUnreleased,
+					canDeleteComment: permission.canDeleteComment,
+					canEditComment: permission.canEditComment,
+					canHideComment: permission.canHideComment,
+					role: permission.role,
+					hierarchyLevel: permission.hierarchyLevel,
+					hideAds: permission.hideAds,
+				}];
+			} else {
+				// Valores por defecto para usuarios sin permisos - devolver array vacío
+				(user as any).permissions = [];
+			}
 			
 			return user;
 		})
@@ -184,9 +179,10 @@ export const listUser = async (organizationId: number, filters: UserListQuery) =
 		where: whereWithOrganization,
 	});
 
+	const limitForMaxPage = Number.parseInt(filters?.limit || "10");
 	return {
 		data: usersWithPermissions,
-		maxPage: Math.ceil(total / Number.parseInt(filters?.limit || "10")),
+		maxPage: Math.ceil(total / limitForMaxPage),
 		total,
 	};
 };

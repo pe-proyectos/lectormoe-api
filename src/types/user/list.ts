@@ -13,6 +13,7 @@ export const UserListQuery = t.Object({
     email: t.Optional(t.String()),
     order: t.Optional(t.Enum(OrderEnum)),
     subscriptionPlanIds: t.Optional(t.Array(t.Number())),
+    permissionKeys: t.Optional(t.Array(t.String())), // Filtros de permisos
     ...PaginationQuery.properties,
 });
 

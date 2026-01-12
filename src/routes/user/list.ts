@@ -32,6 +32,9 @@ export const router = () => new Elysia()
               if (query.subscriptionPlanIds) {
                 query.subscriptionPlanIds = query.subscriptionPlanIds.toString().split(',').map(Number);
               }
+              if (query.permissionKeys) {
+                query.permissionKeys = query.permissionKeys.toString().split(',').filter(Boolean);
+              }
             }
         }
     );
