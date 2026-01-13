@@ -51,8 +51,8 @@ export const listFollowedOrganizations = async (userId: number) => {
 
     // Map subscriptions by organizationId
     const subscriptionsByOrg = subscriptions.reduce((acc, sub) => {
-        if (sub.organizationId !== null) {
-            acc[sub.organizationId] = {
+        if (sub.subscriptionPlan?.organizationId !== null) {
+            acc[sub.subscriptionPlan?.organizationId] = {
                 rank: sub.subscriptionPlan.name,
                 price: sub.subscriptionPlan.price,
                 currency: sub.subscriptionPlan.currency,

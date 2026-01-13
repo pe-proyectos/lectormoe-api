@@ -132,6 +132,7 @@ export const getFeaturedManga = async (limit: number = 8) => {
 			mangaUrl: `/${organization.slug}/manga/${manga.slug}`,
 			badgeColor: getBadgeColor(organization.name),
 			chapters: lastChapters,
+			organizationId: organization.id, // Include organizationId for subscription checks
 		};
 	});
 };

@@ -285,6 +285,8 @@ export const editUser = async (
               slug: true,
               interval: true,
               currency: true,
+              price: true,
+              organizationId: true,
               hideAds: true,
               canDownload: true,
               canReadUnreleased: true,
