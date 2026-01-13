@@ -58,7 +58,7 @@ export const createMangaCustom = async (organizationId: number, params: CreateMa
 		data: {
 			mangaId: manga.id,
 			organizationId: organization.id,
-			status: params.status,
+			status: params.status || 'ongoing',
 			title: params.title,
 			shortDescription: params.shortDescription,
 			description: params.description,
