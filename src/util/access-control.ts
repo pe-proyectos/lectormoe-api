@@ -13,9 +13,7 @@ import type {
  */
 type UserWithSubscriptions = Pick<User, "id"> & {
   subscriptions?: Array<{
-    subscriptionPlanId: number;
     active?: boolean;
-    status?: string;
     endDate?: Date | null;
     subscriptionPlan?: Pick<SubscriptionPlan, "id" | "canReadUnreleased" | "active">;
   }>;
@@ -77,13 +75,12 @@ const userHasAccessToChapter = async (
   for (const subscription of user?.subscriptions || []) {
     // SECURITY: Validar que la suscripción esté activa y no haya expirado
     if (subscription.active === false) continue;
-    if (subscription.status !== "ACTIVE") continue;
     if (subscription.endDate && new Date(subscription.endDate) < new Date()) continue;
 
     // 5a. Si la suscripción tiene el permiso global canReadUnreleased
     const subscriptionPlan = await prisma.subscriptionPlan.findUnique({
       where: {
-        id: subscription?.subscriptionPlanId,
+        id: subscription?.subscriptionPlan?.id,
       },
     });
 
@@ -98,7 +95,7 @@ const userHasAccessToChapter = async (
     const mangaWithPlans = manga as MangaCustomWithPlans;
     const hasPlanForThisManga = mangaWithPlans?.subscriptionPlans?.find(
       (plan: { id: number; canReadUnreleased?: boolean; active?: boolean }) =>
-        plan.id === subscription?.subscriptionPlanId && plan.active !== false
+        plan.id === subscription?.subscriptionPlan?.id && plan.active !== false
     );
 
     if (hasPlanForThisManga) {
