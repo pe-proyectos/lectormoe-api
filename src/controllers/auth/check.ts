@@ -4,39 +4,44 @@ export const checkToken = async (
   organizationId: number | null,
   token: string
 ) => {
-  // Primero encontrar el usuario por token (sin filtrar por organización)
-  const includeSubscriptions =
-    organizationId !== null
-      ? {
-          subscriptions: {
-            where: {
-              active: true,
-              organizationId,
-            },
-            select: {
-              id: true,
-              startDate: true,
-              lastPayment: true,
-              nextPayment: true,
-              subscriptionPlan: {
-                select: {
-                  id: true,
-                  name: true,
-                  slug: true,
-                  interval: true,
-                  currency: true,
-                  price: true,
-                  organizationId: true,
-                  hideAds: true,
-                  canDownload: true,
-                  canReadUnreleased: true,
-                  active: true,
-                },
-              },
-            },
+  // Incluir suscripciones activas
+  // Si hay organizationId, filtrar por esa organización
+  // Si no hay organizationId (landing page), devolver todas las suscripciones activas
+  const includeSubscriptions = {
+    subscriptions: {
+      where: organizationId !== null
+        ? {
+            active: true,
+            organizationId,
+          }
+        : {
+            active: true,
           },
-        }
-      : {};
+      select: {
+        id: true,
+        startDate: true,
+        lastPayment: true,
+        nextPayment: true,
+        active: true,
+        organizationId: true,
+        subscriptionPlan: {
+          select: {
+            id: true,
+            name: true,
+            slug: true,
+            interval: true,
+            currency: true,
+            price: true,
+            organizationId: true,
+            hideAds: true,
+            canDownload: true,
+            canReadUnreleased: true,
+            active: true,
+          },
+        },
+      },
+    },
+  };
 
   const user = await prisma.user.findFirst({
     where: {

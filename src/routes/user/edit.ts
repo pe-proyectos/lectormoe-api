@@ -174,6 +174,18 @@ export const router = () =>
         if (body.canReadUnreleased !== undefined) {
           body.canReadUnreleased = body.canReadUnreleased.toString() === "true";
         }
+        // Handle banner: convert "null" string to null, or keep as string
+        if (body.banner !== undefined) {
+          if (body.banner === "null" || body.banner === null || body.banner === "") {
+            body.banner = null;
+          }
+        }
+        // Handle image: convert "null" string to null, or keep as string
+        if (body.image !== undefined) {
+          if (body.image === "null" || body.image === null || body.image === "") {
+            body.image = null;
+          }
+        }
       },
     }
   );

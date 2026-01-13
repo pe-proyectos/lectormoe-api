@@ -7,19 +7,25 @@ const prepareSubscriptionPlan = (subscriptionPlan: any) => {
 	};
 }
 
-export const listSubscriptionPlans = async (organizationId: number, filters: SubscriptionPlanListQuery) => {
-	const subscriptionPlans = await prisma.subscriptionPlan.findMany({
-		where: {
-			organizationId: organizationId,
-			name: {
-				contains: filters.name,
-				mode: Prisma.QueryMode.insensitive,
-			},
-			description: {
-				contains: filters.description,
-				mode: Prisma.QueryMode.insensitive,
-			},
+export const listSubscriptionPlans = async (organizationId: number | null, filters: SubscriptionPlanListQuery) => {
+	const whereClause: any = {
+		name: {
+			contains: filters.name,
+			mode: Prisma.QueryMode.insensitive,
 		},
+		description: {
+			contains: filters.description,
+			mode: Prisma.QueryMode.insensitive,
+		},
+	};
+
+	// If organizationId is provided, filter by it. Otherwise, return all plans
+	if (organizationId !== null) {
+		whereClause.organizationId = organizationId;
+	}
+
+	const subscriptionPlans = await prisma.subscriptionPlan.findMany({
+		where: whereClause,
 		include: {
 			subscriptions: {
 				select: {
@@ -46,18 +52,24 @@ export const listSubscriptionPlans = async (organizationId: number, filters: Sub
 		take: Number.parseInt(filters?.limit || "10"),
 	});
 
-	const total = await prisma.subscriptionPlan.count({
-		where: {
-			organizationId: organizationId,
-			name: {
-				contains: filters.name,
-				mode: Prisma.QueryMode.insensitive,
-			},
-			description: {
-				contains: filters.description,
-				mode: Prisma.QueryMode.insensitive,
-			},
+	const countWhereClause: any = {
+		name: {
+			contains: filters.name,
+			mode: Prisma.QueryMode.insensitive,
 		},
+		description: {
+			contains: filters.description,
+			mode: Prisma.QueryMode.insensitive,
+		},
+	};
+
+	// If organizationId is provided, filter by it. Otherwise, count all plans
+	if (organizationId !== null) {
+		countWhereClause.organizationId = organizationId;
+	}
+
+	const total = await prisma.subscriptionPlan.count({
+		where: countWhereClause,
 	});
 
 	return {

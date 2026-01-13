@@ -1,11 +1,11 @@
 import { Elysia, t } from 'elysia';
 
 import { listSubscriptionPlans } from '../../controllers/subscription_plan/list';
-import { useOrganization } from '../../plugins/organization';
+import { useOrganizationOptional } from '../../plugins/organization';
 import { SubscriptionPlanListQuery } from '../../types/subscription_plan/list';
 
 export const router = () => new Elysia()
-    .use(useOrganization())
+    .use(useOrganizationOptional())
     .get(
         '/api/subscription-plan',
         async ({ organizationId, query }) => {
