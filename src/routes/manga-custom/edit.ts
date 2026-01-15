@@ -43,27 +43,34 @@ export const router = () => new Elysia()
                 } else if (body.releasedAt === null) {
                     body.releasedAt = null;
                 }
-                if (body.requireLogin !== undefined) {
+                if (body.requireLogin !== undefined && body.requireLogin !== null) {
                     body.requireLogin = body.requireLogin.toString() === "true";
                 }
-                if (body.isSimulRelease !== undefined) {
+                if (body.isSimulRelease !== undefined && body.isSimulRelease !== null) {
                     body.isSimulRelease = body.isSimulRelease.toString() === "true";
                 }
-                if(body.isNSFW !== undefined){
+                if(body.isNSFW !== undefined && body.isNSFW !== null){
                     body.isNSFW = body.isNSFW.toString() === "true";
                 }
-                if(body.genreIds) {
+                if(body.genreIds !== undefined) {
                     if (Array.isArray(body.genreIds)) {
                         body.genreIds = body.genreIds.map(genreId => Number.parseInt(genreId.toString()));
-                    } else {
+                    } else if (body.genreIds !== null) {
                         body.genreIds = (body.genreIds as unknown as string).split(',').map(genreId => Number.parseInt(genreId.trim()));
                     }
                 }
-                if (body.subscriptionPlanIds) {
-                    if (Array.isArray(body.subscriptionPlanIds)) {
-                        body.subscriptionPlanIds = body.subscriptionPlanIds.map(subscriptionPlanId => Number.parseInt(subscriptionPlanId.toString()));
-                    } else {
-                        body.subscriptionPlanIds = (body.subscriptionPlanIds as unknown as string).split(',').map(subscriptionPlanId => Number.parseInt(subscriptionPlanId.trim()));
+                if (body.subscriptionPlanIdsCanReadUnreleased !== undefined) {
+                    if (Array.isArray(body.subscriptionPlanIdsCanReadUnreleased)) {
+                        body.subscriptionPlanIdsCanReadUnreleased = body.subscriptionPlanIdsCanReadUnreleased.map(subscriptionPlanId => Number.parseInt(subscriptionPlanId.toString()));
+                    } else if (body.subscriptionPlanIdsCanReadUnreleased !== null) {
+                        body.subscriptionPlanIdsCanReadUnreleased = (body.subscriptionPlanIdsCanReadUnreleased as unknown as string).split(',').map(subscriptionPlanId => Number.parseInt(subscriptionPlanId.trim()));
+                    }
+                }
+                if (body.subscriptionPlanIdsCanReadReleased !== undefined) {
+                    if (Array.isArray(body.subscriptionPlanIdsCanReadReleased)) {
+                        body.subscriptionPlanIdsCanReadReleased = body.subscriptionPlanIdsCanReadReleased.map(subscriptionPlanId => Number.parseInt(subscriptionPlanId.toString()));
+                    } else if (body.subscriptionPlanIdsCanReadReleased !== null) {
+                        body.subscriptionPlanIdsCanReadReleased = (body.subscriptionPlanIdsCanReadReleased as unknown as string).split(',').map(subscriptionPlanId => Number.parseInt(subscriptionPlanId.trim()));
                     }
                 }
             },
