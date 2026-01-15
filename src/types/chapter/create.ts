@@ -10,6 +10,7 @@ export const CreateChapterRequest = t.Object({
         t.Array(t.Number()),
         t.String(),
     ])),
+    isUnreleased: t.Optional(t.Boolean()),
 });
 
 export type CreateChapterRequest = Static<typeof CreateChapterRequest>;

@@ -300,7 +300,8 @@ model Chapter {
   updatedAt     DateTime @updatedAt
   mangaCustomId Int
   views         Int      @default(0)
-  releasedAt    DateTime @default(now()) @db.Timestamp(6)
+  releasedAt    DateTime? @db.Timestamp(6)
+  isUnreleased  Boolean  @default(false)
 
   mangaCustom  MangaCustom          @relation(fields: [mangaCustomId], references: [id])
   pages        Page[]

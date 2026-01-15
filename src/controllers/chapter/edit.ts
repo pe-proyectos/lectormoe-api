@@ -29,8 +29,36 @@ export const editChapter = async (organizationId: number, mangaSlug: string, cha
 	const updateData: any = {
 		number: params.number || chapterExists.number,
 		title: params.title || chapterExists.title,
-		releasedAt: params?.releasedAt,
 	};
+
+	if (params.isUnreleased !== undefined) {
+		updateData.isUnreleased = params.isUnreleased;
+		// Si isUnreleased es true, releasedAt debe ser null
+		// Nota: Si el schema aún no permite null (migración no ejecutada),
+		// simplemente no incluimos releasedAt en la actualización
+		if (params.isUnreleased === true) {
+			// Intentar establecer releasedAt a null
+			// Si el schema lo permite, funcionará; si no, Prisma lanzará un error
+			// pero podemos manejarlo omitiendo el campo
+			updateData.releasedAt = null;
+		} else {
+			// Si isUnreleased es false
+			if (params.releasedAt !== undefined && params.releasedAt !== null) {
+				// Si hay releasedAt en el request, usar ese valor
+				updateData.releasedAt = params.releasedAt;
+			} else if (chapterExists.isUnreleased === true) {
+				// Si se cambia de true a false y no hay releasedAt, usar fecha actual
+				updateData.releasedAt = new Date();
+			}
+			// Si isUnreleased ya era false y no se envía releasedAt, mantener el valor existente
+		}
+	} else if (params?.releasedAt !== undefined && params.releasedAt !== null) {
+		// Si solo se actualiza releasedAt sin cambiar isUnreleased
+		// Solo actualizar si isUnreleased no es true (verificar el valor existente)
+		if (!chapterExists.isUnreleased) {
+			updateData.releasedAt = params.releasedAt;
+		}
+	}
 
 	if (params.image !== undefined) {
 		if (params.image === null) {
@@ -42,12 +70,31 @@ export const editChapter = async (organizationId: number, mangaSlug: string, cha
 		}
 	}
 
-	const chapter = await prisma.chapter.update({
-		where: {
-			id: chapterExists.id,
-		},
-		data: updateData,
-	});
+	// Si isUnreleased es true y releasedAt está en updateData como null,
+	// intentar la actualización. Si falla porque el schema no permite null,
+	// reintentar sin incluir releasedAt
+	let chapter;
+	try {
+		chapter = await prisma.chapter.update({
+			where: {
+				id: chapterExists.id,
+			},
+			data: updateData,
+		});
+	} catch (error: any) {
+		// Si el error es porque releasedAt no puede ser null, reintentar sin ese campo
+		if (error?.message?.includes('releasedAt') && error?.message?.includes('must not be null')) {
+			const { releasedAt, ...updateDataWithoutReleasedAt } = updateData;
+			chapter = await prisma.chapter.update({
+				where: {
+					id: chapterExists.id,
+				},
+				data: updateDataWithoutReleasedAt,
+			});
+		} else {
+			throw error;
+		}
+	}
 
 	if (params.pages) {
 		await prisma.page.deleteMany({
