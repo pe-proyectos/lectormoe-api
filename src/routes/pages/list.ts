@@ -41,6 +41,7 @@ export const router = () =>
             status: false,
             message: accessCheck.message ?? "No tienes acceso a este capítulo.",
             errorType: accessCheck.errorType ?? "login_required",
+            requiredPlans: accessCheck.requiredPlans,
           };
         }
 

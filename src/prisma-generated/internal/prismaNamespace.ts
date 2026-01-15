@@ -2700,8 +2700,7 @@ export const ChapterScalarFieldEnum = {
   updatedAt: 'updatedAt',
   mangaCustomId: 'mangaCustomId',
   views: 'views',
-  releasedAt: 'releasedAt',
-  subscribersOnly: 'subscribersOnly'
+  releasedAt: 'releasedAt'
 } as const
 
 export type ChapterScalarFieldEnum = (typeof ChapterScalarFieldEnum)[keyof typeof ChapterScalarFieldEnum]

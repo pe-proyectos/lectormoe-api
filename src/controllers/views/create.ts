@@ -20,32 +20,48 @@ export const createViewHistoryMangaCustom = async (
     return null;
   }
 
-  await prisma.viewsHistory.create({
-    data: {
-      ip,
-      viewedAt: new Date(),
-      mangaCustomId: mangaCustom.id,
-    },
-  });
-  const ips = await prisma.viewsHistory.findMany({
-    where: {
-      ip,
-      mangaCustomId: mangaCustom.id,
-    },
-    take: 2,
-  });
-  if (ips.length === 1) {
-    await prisma.mangaCustom.update({
+  // Verificar si ya existe una lectura reciente (última hora) para esta IP y manga
+  // Usar transacción para evitar race conditions y permitir contar más lecturas
+  const oneHourAgo = new Date();
+  oneHourAgo.setHours(oneHourAgo.getHours() - 1);
+
+  await prisma.$transaction(async (tx) => {
+    const existingView = await tx.viewsHistory.findFirst({
       where: {
-        id: mangaCustom.id,
-      },
-      data: {
-        views: {
-          increment: 1,
+        ip,
+        mangaCustomId: mangaCustom.id,
+        viewedAt: {
+          gte: oneHourAgo,
         },
       },
     });
-  }
+
+    // Solo contar si no hay una lectura reciente
+    const shouldCount = !existingView;
+
+    await tx.viewsHistory.create({
+      data: {
+        ip,
+        viewedAt: new Date(),
+        mangaCustomId: mangaCustom.id,
+      },
+    });
+
+    if (shouldCount) {
+      await tx.mangaCustom.update({
+        where: {
+          id: mangaCustom.id,
+        },
+        data: {
+          views: {
+            increment: 1,
+          },
+        },
+      });
+    }
+
+    return shouldCount;
+  });
 
   return true;
 };
@@ -77,46 +93,60 @@ export const createViewHistoryChapter = async (
     return null;
   }
 
-  await prisma.viewsHistory.create({
-    data: {
-      ip,
-      viewedAt: new Date(),
-      chapterId: chapter.id,
-      mangaCustomId: chapter.mangaCustom.id,
-    },
-  });
-  const ips = await prisma.viewsHistory.findMany({
-    where: {
-      ip,
-      chapterId: chapter.id,
-      mangaCustomId: chapter.mangaCustom.id,
-    },
-    take: 2,
-  });
-  if (ips.length === 1) {
-    await Promise.all([
-      prisma.mangaCustom.update({
-        where: {
-          id: chapter.mangaCustom.id,
+  // Verificar si ya existe una lectura reciente (última hora) para esta IP y capítulo
+  // Usar transacción para evitar race conditions y permitir contar más lecturas
+  const oneHourAgo = new Date();
+  oneHourAgo.setHours(oneHourAgo.getHours() - 1);
+
+  await prisma.$transaction(async (tx) => {
+    const existingView = await tx.viewsHistory.findFirst({
+      where: {
+        ip,
+        chapterId: chapter.id,
+        mangaCustomId: chapter.mangaCustom.id,
+        viewedAt: {
+          gte: oneHourAgo,
         },
-        data: {
-          views: {
-            increment: 1,
+      },
+    });
+
+    // Solo contar si no hay una lectura reciente
+    const shouldCount = !existingView;
+
+    await tx.viewsHistory.create({
+      data: {
+        ip,
+        viewedAt: new Date(),
+        chapterId: chapter.id,
+        mangaCustomId: chapter.mangaCustom.id,
+      },
+    });
+
+    if (shouldCount) {
+      await Promise.all([
+        tx.mangaCustom.update({
+          where: {
+            id: chapter.mangaCustom.id,
           },
-        },
-      }),
-      prisma.chapter.update({
-        where: {
-          id: chapter.id,
-        },
-        data: {
-          views: {
-            increment: 1,
+          data: {
+            views: {
+              increment: 1,
+            },
           },
-        },
-      }),
-    ]);
-  }
+        }),
+        tx.chapter.update({
+          where: {
+            id: chapter.id,
+          },
+          data: {
+            views: {
+              increment: 1,
+            },
+          },
+        }),
+      ]);
+    }
+  });
 
   return true;
 };

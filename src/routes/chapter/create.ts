@@ -36,8 +36,6 @@ export const router = () => new Elysia()
 
                 body.releasedAt = body?.releasedAt && new Date(body.releasedAt);
 
-                body.subscribersOnly = body?.subscribersOnly?.toString() === "true";
-
                 if (body.pages instanceof File || typeof body.pages === 'string')
                     body.pages = [body.pages];
 

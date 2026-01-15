@@ -31,7 +31,15 @@ export const getMangaCustomBySlug = async (organizationId: number, mangaSlug: st
 					slug: true,
 				},
 			},
-			subscriptionPlans: {
+			subscriptionPlansCanReadUnreleased: {
+				select: {
+					id: true,
+					name: true,
+					canDownload: true,
+					canReadUnreleased: true,
+				},
+			},
+			subscriptionPlansCanReadReleased: {
 				select: {
 					id: true,
 					name: true,

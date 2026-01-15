@@ -51,13 +51,12 @@ export const createChapter = async (organizationId: number, mangaSlug: string, p
 			: `${r2PublicUrl}/${params.image}`;
 	}
 
-	let chapter = await prisma.chapter.create({
+		let chapter = await prisma.chapter.create({
 		data: {
 			mangaCustomId: mangaCustom.id,
 			number: params.number,
 			title: params.title,
 			releasedAt: params?.releasedAt,
-			subscribersOnly: params?.subscribersOnly,
 			imageUrl,
 		},
 	});

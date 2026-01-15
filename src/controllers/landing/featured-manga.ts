@@ -66,7 +66,6 @@ export const getFeaturedManga = async (limit: number = 8) => {
 					number: true,
 					title: true,
 					releasedAt: true,
-					subscribersOnly: true,
 					views: true,
 				},
 			},
@@ -117,7 +116,6 @@ export const getFeaturedManga = async (limit: number = 8) => {
 				number: chapter.number,
 				title: chapter.title,
 				releasedAt: chapter.releasedAt,
-				subscribersOnly: chapter.subscribersOnly,
 				chapterUrl: `/${organization.slug}/manga/${manga.slug}/chapters/${chapter.number}`,
 			}));
 		

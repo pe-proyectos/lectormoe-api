@@ -251,35 +251,36 @@ model Manga {
 }
 
 model MangaCustom {
-  id                          Int                @id @default(autoincrement())
-  mangaId                     Int
-  organizationId              Int
-  title                       String             @db.VarChar(256)
-  shortDescription            String?            @db.VarChar(300)
-  description                 String?
-  imageUrl                    String?
-  releasedAt                  DateTime?
-  nextChapterAt               DateTime?
-  nextChapterAtMessage        String?
-  usersAlsoReadMangaCustomIds String?
-  createdAt                   DateTime           @default(now()) @db.Timestamp(6)
-  updatedAt                   DateTime           @updatedAt
-  views                       Int                @default(0)
-  lastChapterAt               DateTime?
-  status                      String             @default("ongoing") @db.VarChar(256)
-  visibility                  String             @default("public") @db.VarChar(256)
-  bannerUrl                   String?
-  requireLogin                Boolean            @default(false)
-  isSimulRelease              Boolean            @default(false)
-  isNSFW                      Boolean            @default(false)
-  chapters                    Chapter[]
-  favorites                   Favorite[]
-  manga                       Manga              @relation(fields: [mangaId], references: [id])
-  organization                Organization       @relation(fields: [organizationId], references: [id])
-  rankings                    Ranking[]
-  viewsHistory                ViewsHistory[]
-  genres                      Genre[]            @relation("GenreToMangaCustom")
-  subscriptionPlans           SubscriptionPlan[] @relation("MangaCustomToSubscriptionPlan")
+  id                                 Int                @id @default(autoincrement())
+  mangaId                            Int
+  organizationId                     Int
+  title                              String             @db.VarChar(256)
+  shortDescription                   String?            @db.VarChar(300)
+  description                        String?
+  imageUrl                           String?
+  releasedAt                         DateTime?
+  nextChapterAt                      DateTime?
+  nextChapterAtMessage               String?
+  usersAlsoReadMangaCustomIds        String?
+  createdAt                          DateTime           @default(now()) @db.Timestamp(6)
+  updatedAt                          DateTime           @updatedAt
+  views                              Int                @default(0)
+  lastChapterAt                      DateTime?
+  status                             String             @default("ongoing") @db.VarChar(256)
+  visibility                         String             @default("public") @db.VarChar(256)
+  bannerUrl                          String?
+  requireLogin                       Boolean            @default(false)
+  isSimulRelease                     Boolean            @default(false)
+  isNSFW                             Boolean            @default(false)
+  chapters                           Chapter[]
+  favorites                          Favorite[]
+  manga                              Manga              @relation(fields: [mangaId], references: [id])
+  organization                       Organization       @relation(fields: [organizationId], references: [id])
+  rankings                           Ranking[]
+  viewsHistory                       ViewsHistory[]
+  genres                             Genre[]            @relation("GenreToMangaCustom")
+  subscriptionPlansCanReadUnreleased SubscriptionPlan[] @relation("MangaCustomToSubscriptionPlanCanReadUnreleased")
+  subscriptionPlansCanReadReleased   SubscriptionPlan[] @relation("MangaCustomToSubscriptionPlanCanReadReleased")
 
   @@unique([mangaId, organizationId])
   @@index([organizationId])
@@ -291,20 +292,20 @@ model MangaCustom {
 }
 
 model Chapter {
-  id              Int                  @id @default(autoincrement())
-  number          Float
-  title           String               @db.VarChar(256)
-  imageUrl        String?              @db.VarChar(256)
-  createdAt       DateTime             @default(now()) @db.Timestamp(6)
-  updatedAt       DateTime             @updatedAt
-  mangaCustomId   Int
-  views           Int                  @default(0)
-  releasedAt      DateTime             @default(now()) @db.Timestamp(6)
-  subscribersOnly Boolean              @default(false)
-  mangaCustom     MangaCustom          @relation(fields: [mangaCustomId], references: [id])
-  pages           Page[]
-  userHistory     UserChapterHistory[]
-  viewsHistory    ViewsHistory[]
+  id            Int      @id @default(autoincrement())
+  number        Float
+  title         String   @db.VarChar(256)
+  imageUrl      String?  @db.VarChar(256)
+  createdAt     DateTime @default(now()) @db.Timestamp(6)
+  updatedAt     DateTime @updatedAt
+  mangaCustomId Int
+  views         Int      @default(0)
+  releasedAt    DateTime @default(now()) @db.Timestamp(6)
+
+  mangaCustom  MangaCustom          @relation(fields: [mangaCustomId], references: [id])
+  pages        Page[]
+  userHistory  UserChapterHistory[]
+  viewsHistory ViewsHistory[]
 
   @@unique([number, mangaCustomId])
   @@map("chapter")
@@ -506,25 +507,27 @@ model ViewsHistory {
 }
 
 model SubscriptionPlan {
-  id                Int            @id @default(autoincrement())
-  name              String         @db.VarChar(256)
+  id                Int      @id @default(autoincrement())
+  name              String   @db.VarChar(256)
   description       String
   price             Float
-  interval          String         @default("MONTH") @db.VarChar(256)
-  currency          String         @default("USD") @db.VarChar(10)
-  planId            String         @unique @db.VarChar(256)
-  createdAt         DateTime       @default(now()) @db.Timestamp(6)
-  updatedAt         DateTime       @updatedAt
+  interval          String   @default("MONTH") @db.VarChar(256)
+  currency          String   @default("USD") @db.VarChar(10)
+  planId            String   @unique @db.VarChar(256)
+  createdAt         DateTime @default(now()) @db.Timestamp(6)
+  updatedAt         DateTime @updatedAt
   organizationId    Int
-  slug              String         @unique @db.VarChar(256)
-  productId         String         @unique @db.VarChar(256)
-  active            Boolean        @default(true)
-  canDownload       Boolean        @default(false)
-  canReadUnreleased Boolean        @default(false)
-  hideAds           Boolean        @default(false)
-  subscriptions     Subscription[]
-  organization      Organization   @relation(fields: [organizationId], references: [id])
-  mangasCustom      MangaCustom[]  @relation("MangaCustomToSubscriptionPlan")
+  slug              String   @unique @db.VarChar(256)
+  productId         String   @unique @db.VarChar(256)
+  active            Boolean  @default(true)
+  canDownload       Boolean  @default(false)
+  canReadUnreleased Boolean  @default(false)
+  hideAds           Boolean  @default(false)
+
+  subscriptions                 Subscription[]
+  organization                  Organization   @relation(fields: [organizationId], references: [id])
+  mangaCustomsCanReadUnreleased MangaCustom[]  @relation("MangaCustomToSubscriptionPlanCanReadUnreleased")
+  mangaCustomsCanReadReleased   MangaCustom[]  @relation("MangaCustomToSubscriptionPlanCanReadReleased")
 
   @@unique([organizationId, slug])
   @@map("subscription_plan")

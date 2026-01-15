@@ -30,7 +30,6 @@ export const editChapter = async (organizationId: number, mangaSlug: string, cha
 		number: params.number || chapterExists.number,
 		title: params.title || chapterExists.title,
 		releasedAt: params?.releasedAt,
-		subscribersOnly: params?.subscribersOnly,
 	};
 
 	if (params.image !== undefined) {

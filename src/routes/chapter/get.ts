@@ -34,7 +34,9 @@ export const router = () => new Elysia()
                 data: {
                     ...chapter,
                     hasAccess: accessCheck.hasAccess,
-                    accessDeniedReason: accessCheck.errorType
+                    accessDeniedReason: accessCheck.errorType,
+                    accessDeniedMessage: accessCheck.message,
+                    requiredPlans: accessCheck.requiredPlans
                 }
             };
         },

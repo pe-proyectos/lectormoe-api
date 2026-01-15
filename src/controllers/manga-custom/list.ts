@@ -121,7 +121,6 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 						number: true,
 						title: true,
 						releasedAt: true,
-						subscribersOnly: true,
 					},
 					orderBy: {
 						number: Prisma.SortOrder.desc,
@@ -135,7 +134,13 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 						name: true,
 					}
 				},
-				subscriptionPlans: {
+				subscriptionPlansCanReadUnreleased: {
+					select: {
+						id: true,
+						name: true,
+					}
+				},
+				subscriptionPlansCanReadReleased: {
 					select: {
 						id: true,
 						name: true,
@@ -235,7 +240,6 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 						number: true,
 						title: true,
 						releasedAt: true,
-						subscribersOnly: true,
 						views: true,
 					},
 					orderBy: {
@@ -250,7 +254,7 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 						name: true,
 					}
 				},
-				subscriptionPlans: {
+				subscriptionPlansCanReadUnreleased: {
 					select: {
 						id: true,
 						name: true,

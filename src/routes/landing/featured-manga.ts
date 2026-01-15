@@ -34,7 +34,6 @@ export const router = () => new Elysia()
 							number: t.Number(),
 							title: t.String(),
 							releasedAt: t.Date(),
-							subscribersOnly: t.Boolean(),
 							chapterUrl: t.String(),
 						})
 					),

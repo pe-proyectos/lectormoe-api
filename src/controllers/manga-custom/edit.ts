@@ -70,8 +70,13 @@ export const editMangaCustom = async (organizationId: number, mangaSlug: string,
 					id: genreId,
 				})) || [],
 			},
-			subscriptionPlans: {
-				set: params?.subscriptionPlanIds?.map(subscriptionPlanId => ({
+			subscriptionPlansCanReadUnreleased: {
+				set: params?.subscriptionPlanIdsCanReadUnreleased?.map(subscriptionPlanId => ({
+					id: subscriptionPlanId,
+				})) || [],
+			},
+			subscriptionPlansCanReadReleased: {
+				set: params?.subscriptionPlanIdsCanReadReleased?.map(subscriptionPlanId => ({
 					id: subscriptionPlanId,
 				})) || [],
 			},

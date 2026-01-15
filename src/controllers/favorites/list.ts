@@ -36,7 +36,6 @@ export const listFavorites = async (organizationId: number | null, userId: numbe
 							number: true,
 							title: true,
 							releasedAt: true,
-							subscribersOnly: true,
 						},
 						orderBy: {
 							releasedAt: Prisma.SortOrder.desc,

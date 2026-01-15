@@ -20,7 +20,8 @@ type UserWithSubscriptions = Pick<User, "id"> & {
 };
 
 type MangaCustomWithPlans = Pick<MangaCustom, "id" | "requireLogin"> & {
-  subscriptionPlans?: Array<Pick<SubscriptionPlan, "id" | "canReadUnreleased" | "active">>;
+  subscriptionPlansCanReadUnreleased?: Array<Pick<SubscriptionPlan, "id" | "canReadUnreleased" | "active" | "name">>;
+  subscriptionPlansCanReadReleased?: Array<Pick<SubscriptionPlan, "id" | "canReadUnreleased" | "active" | "name">>;
 };
 
 /**
@@ -32,79 +33,105 @@ type MangaCustomWithPlans = Pick<MangaCustom, "id" | "requireLogin"> & {
  * @param manga - Manga al que pertenece el capítulo
  * @returns true si el usuario tiene acceso, false en caso contrario
  *
- * Orden de verificación:
+ * Lógica:
  * 1. Si el manga requiere login y no hay usuario → DENEGAR
- * 2. Si el capítulo ya fue lanzado y NO es solo para suscriptores → PERMITIR
- * 3. Si no hay usuario logueado → DENEGAR
- * 4. Si el usuario tiene permisos especiales (staff) → PERMITIR
- * 5. Si el usuario tiene suscripción activa válida → PERMITIR
- * 6. De lo contrario → DENEGAR
+ * 2. Si el usuario tiene permisos especiales (staff) → PERMITIR
+ * 3. Verificar si el capítulo ya fue lanzado:
+ *    - Si SÍ fue lanzado:
+ *      - Si subscriptionPlansCanReadReleased está configurado → Solo esos planes pueden leer (no usuarios gratuitos)
+ *      - Si subscriptionPlansCanReadReleased está vacío → Todos pueden leer (gratuitos y suscriptores)
+ *    - Si NO fue lanzado:
+ *      - Si subscriptionPlansCanReadUnreleased está configurado → Solo esos planes pueden leer
+ *      - Si subscriptionPlansCanReadUnreleased está vacío → Nadie puede leer
  */
 const userHasAccessToChapter = async (
   user: Partial<UserWithSubscriptions>,
   permissions: Pick<Permission, "canReadUnreleased" | "canEditChapter" | "canEditPage"> | null | undefined,
-  chapter: Pick<Chapter, "releasedAt" | "subscribersOnly">,
-  manga: Pick<MangaCustomWithPlans, "requireLogin" | "subscriptionPlans">
+  chapter: Pick<Chapter, "releasedAt">,
+  manga: Pick<MangaCustomWithPlans, "requireLogin" | "subscriptionPlansCanReadUnreleased" | "subscriptionPlansCanReadReleased">
 ): Promise<boolean> => {
   // 1. Si el manga requiere login y no hay usuario, denegar acceso
   if (!user && manga?.requireLogin === true) {
     return false;
   }
 
-  // 2. Si el capítulo ya fue lanzado y NO es solo para suscriptores, permitir acceso público
-  const isChapterReleased =
-    new Date(chapter.releasedAt).getTime() < new Date().getTime();
-  const isPublicChapter = chapter?.subscribersOnly !== true;
-
-  if (isChapterReleased && isPublicChapter) {
-    return true;
-  }
-
-  // 3. Si no hay usuario logueado, denegar acceso a capítulos protegidos
-  if (!user) {
-    return false;
-  }
-
-  // 4. Verificar permisos especiales del usuario en la organización (staff)
+  // 2. Verificar permisos especiales del usuario en la organización (staff)
   // Estos permisos permiten acceso total sin necesidad de suscripción
   if (permissions?.canReadUnreleased === true) return true;
   if (permissions?.canEditChapter === true) return true;
   if (permissions?.canEditPage === true) return true;
 
-  // 5. Verificar suscripciones activas del usuario
-  for (const subscription of user?.subscriptions || []) {
-    // SECURITY: Validar que la suscripción esté activa y no haya expirado
-    if (subscription.active === false) continue;
-    if (subscription.endDate && new Date(subscription.endDate) < new Date()) continue;
+  const mangaWithPlans = manga as MangaCustomWithPlans;
+  const isChapterReleased = new Date(chapter.releasedAt).getTime() < new Date().getTime();
 
-    // 5a. Si la suscripción tiene el permiso global canReadUnreleased
-    const subscriptionPlan = await prisma.subscriptionPlan.findUnique({
-      where: {
-        id: subscription?.subscriptionPlan?.id,
-      },
-    });
+  // 3. Verificar acceso según si el capítulo fue lanzado o no
+  if (isChapterReleased) {
+    // Capítulo ya fue lanzado
+    const hasCanReadReleasedPlans = (mangaWithPlans?.subscriptionPlansCanReadReleased?.length ?? 0) > 0;
 
-    // SECURITY: Validar que el plan esté activo
-    if (!subscriptionPlan?.active) continue;
+    if (hasCanReadReleasedPlans) {
+      // Solo usuarios con planes en subscriptionPlansCanReadReleased pueden leer
+      if (!user) return false;
 
-    if (subscriptionPlan?.canReadUnreleased === true) {
+      for (const subscription of user?.subscriptions || []) {
+        if (subscription.active === false) continue;
+        if (subscription.endDate && new Date(subscription.endDate) < new Date()) continue;
+
+        const subscriptionPlan = await prisma.subscriptionPlan.findUnique({
+          where: { id: subscription?.subscriptionPlan?.id },
+        });
+
+        if (!subscriptionPlan?.active) continue;
+
+        const hasPlan = mangaWithPlans?.subscriptionPlansCanReadReleased?.find(
+          (plan: { id: number; active?: boolean }) =>
+            plan.id === subscription?.subscriptionPlan?.id && plan.active !== false
+        );
+
+        if (hasPlan) {
+          return true;
+        }
+      }
+
+      return false; // Usuario no tiene un plan permitido
+    } else {
+      // subscriptionPlansCanReadReleased está vacío → Todos pueden leer (gratuitos y suscriptores)
       return true;
     }
+  } else {
+    // Capítulo NO ha sido lanzado
+    const hasCanReadUnreleasedPlans = (mangaWithPlans?.subscriptionPlansCanReadUnreleased?.length ?? 0) > 0;
 
-    // 5b. Si el manga está asociado a alguno de los planes de suscripción del usuario
-    const mangaWithPlans = manga as MangaCustomWithPlans;
-    const hasPlanForThisManga = mangaWithPlans?.subscriptionPlans?.find(
-      (plan: { id: number; canReadUnreleased?: boolean; active?: boolean }) =>
-        plan.id === subscription?.subscriptionPlan?.id && plan.active !== false
-    );
+    if (hasCanReadUnreleasedPlans) {
+      // Solo usuarios con planes en subscriptionPlansCanReadUnreleased pueden leer
+      if (!user) return false;
 
-    if (hasPlanForThisManga) {
-      return true;
+      for (const subscription of user?.subscriptions || []) {
+        if (subscription.active === false) continue;
+        if (subscription.endDate && new Date(subscription.endDate) < new Date()) continue;
+
+        const subscriptionPlan = await prisma.subscriptionPlan.findUnique({
+          where: { id: subscription?.subscriptionPlan?.id },
+        });
+
+        if (!subscriptionPlan?.active) continue;
+
+        const hasPlan = mangaWithPlans?.subscriptionPlansCanReadUnreleased?.find(
+          (plan: { id: number; active?: boolean }) =>
+            plan.id === subscription?.subscriptionPlan?.id && plan.active !== false
+        );
+
+        if (hasPlan) {
+          return true;
+        }
+      }
+
+      return false; // Usuario no tiene un plan permitido
+    } else {
+      // subscriptionPlansCanReadUnreleased está vacío → Nadie puede leer antes de la fecha
+      return false;
     }
   }
-
-  // 6. Si llegamos aquí, el usuario no tiene acceso
-  return false;
 };
 
 /**
@@ -113,42 +140,47 @@ const userHasAccessToChapter = async (
  * @param user - Usuario (puede ser null si no está logueado)
  * @param chapter - Capítulo al que se intenta acceder
  * @param manga - Manga al que pertenece el capítulo
- * @returns Tipo de error: "login_required" | "subscription_required" | "not_released"
+ * @returns Tipo de error: "login_required" | "subscription_required" | "not_released" | "subscription_plan_required"
  */
 export function getAccessDeniedReason(
   user: Partial<UserWithSubscriptions>,
-  chapter: Pick<Chapter, "releasedAt" | "subscribersOnly">,
+  chapter: Pick<Chapter, "releasedAt">,
   manga: MangaCustomWithPlans
-): "login_required" | "subscription_required" | "not_released" {
+): "login_required" | "subscription_required" | "not_released" | "subscription_plan_required" {
   // Si el manga requiere login y no hay usuario
   if (!user && manga?.requireLogin === true) {
     return "login_required";
   }
 
-  // Si el capítulo es solo para suscriptores
-  if (chapter?.subscribersOnly === true) {
-    return "subscription_required";
-  }
+  const isChapterReleased = new Date(chapter.releasedAt).getTime() < new Date().getTime();
 
-  // Si el capítulo aún no ha sido lanzado
-  const isChapterReleased =
-    new Date(chapter.releasedAt).getTime() < new Date().getTime();
-  if (!isChapterReleased) {
+  if (isChapterReleased) {
+    const hasCanReadReleasedPlans = (manga?.subscriptionPlansCanReadReleased?.length ?? 0) > 0;
+    if (hasCanReadReleasedPlans) {
+      return "subscription_plan_required";
+    }
+    return "subscription_required";
+  } else {
+    const hasCanReadUnreleasedPlans = (manga?.subscriptionPlansCanReadUnreleased?.length ?? 0) > 0;
+    if (hasCanReadUnreleasedPlans) {
+      return "subscription_plan_required";
+    }
     return "not_released";
   }
-
-  // Por defecto, asumir que se requiere suscripción
-  return "subscription_required";
 }
 
 /**
  * Obtiene el mensaje de error apropiado según el tipo de error de acceso
  *
  * @param errorType - Tipo de error de acceso
+ * @param manga - Manga al que pertenece el capítulo (para obtener nombres de planes)
+ * @param isReleased - Si el capítulo ya fue lanzado
  * @returns Mensaje de error localizado
  */
 export function getAccessDeniedMessage(
-  errorType: "login_required" | "subscription_required" | "not_released"
+  errorType: "login_required" | "subscription_required" | "not_released" | "subscription_plan_required",
+  manga?: MangaCustomWithPlans,
+  isReleased?: boolean
 ): string {
   switch (errorType) {
     case "login_required":
@@ -156,7 +188,20 @@ export function getAccessDeniedMessage(
     case "subscription_required":
       return "Este capítulo es exclusivo para suscriptores. Suscríbete para acceder a contenido premium.";
     case "not_released":
-      return "Este capítulo aún no ha sido publicado. Solo los suscriptores pueden acceder a capítulos anticipados.";
+      return "Este capítulo aún no ha sido publicado.";
+    case "subscription_plan_required": {
+      if (!manga) {
+        return "No tienes acceso a este capítulo. Se requiere una suscripción específica.";
+      }
+      const plans = isReleased 
+        ? manga.subscriptionPlansCanReadReleased 
+        : manga.subscriptionPlansCanReadUnreleased;
+      if (plans && plans.length > 0) {
+        const planNames = plans.map((p: any) => p.name || `Plan ${p.id}`).join(", ");
+        return `Este capítulo requiere uno de los siguientes planes: ${planNames}.`;
+      }
+      return "No tienes acceso a este capítulo. Se requiere una suscripción específica.";
+    }
     default:
       return "No tienes acceso a este capítulo.";
   }
@@ -184,15 +229,34 @@ export async function checkChapterAccess(
       hasAccess: true,
       errorType: null,
       message: null,
+      requiredPlans: null,
     };
   }
 
+  const isChapterReleased = new Date(chapter.releasedAt).getTime() < new Date().getTime();
   const errorType = getAccessDeniedReason(user, chapter, manga);
-  const message = getAccessDeniedMessage(errorType);
+  const message = getAccessDeniedMessage(errorType, manga, isChapterReleased);
+  
+  // Obtener planes requeridos para el mensaje
+  let requiredPlans: Array<{ id: number; name: string }> | null = null;
+  if (errorType === "subscription_plan_required") {
+    if (isChapterReleased) {
+      requiredPlans = (manga.subscriptionPlansCanReadReleased || []).map((p: any) => ({
+        id: p.id,
+        name: p.name || `Plan ${p.id}`
+      }));
+    } else {
+      requiredPlans = (manga.subscriptionPlansCanReadUnreleased || []).map((p: any) => ({
+        id: p.id,
+        name: p.name || `Plan ${p.id}`
+      }));
+    }
+  }
 
   return {
     hasAccess: false,
     errorType,
     message,
+    requiredPlans,
   };
 }
