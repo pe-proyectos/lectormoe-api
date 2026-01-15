@@ -20,10 +20,10 @@ export const createViewHistoryMangaCustom = async (
     return null;
   }
 
-  // Verificar si ya existe una lectura reciente (última hora) para esta IP y manga
+  // Verificar si ya existe una lectura reciente (últimos 20 minutos) para esta IP y manga
   // Usar transacción para evitar race conditions y permitir contar más lecturas
-  const oneHourAgo = new Date();
-  oneHourAgo.setHours(oneHourAgo.getHours() - 1);
+  const twentyMinutesAgo = new Date();
+  twentyMinutesAgo.setMinutes(twentyMinutesAgo.getMinutes() - 20);
 
   await prisma.$transaction(async (tx) => {
     const existingView = await tx.viewsHistory.findFirst({
@@ -31,7 +31,7 @@ export const createViewHistoryMangaCustom = async (
         ip,
         mangaCustomId: mangaCustom.id,
         viewedAt: {
-          gte: oneHourAgo,
+          gte: twentyMinutesAgo,
         },
       },
     });
@@ -93,10 +93,10 @@ export const createViewHistoryChapter = async (
     return null;
   }
 
-  // Verificar si ya existe una lectura reciente (última hora) para esta IP y capítulo
+  // Verificar si ya existe una lectura reciente (últimos 20 minutos) para esta IP y capítulo
   // Usar transacción para evitar race conditions y permitir contar más lecturas
-  const oneHourAgo = new Date();
-  oneHourAgo.setHours(oneHourAgo.getHours() - 1);
+  const twentyMinutesAgo = new Date();
+  twentyMinutesAgo.setMinutes(twentyMinutesAgo.getMinutes() - 20);
 
   await prisma.$transaction(async (tx) => {
     const existingView = await tx.viewsHistory.findFirst({
@@ -105,7 +105,7 @@ export const createViewHistoryChapter = async (
         chapterId: chapter.id,
         mangaCustomId: chapter.mangaCustom.id,
         viewedAt: {
-          gte: oneHourAgo,
+          gte: twentyMinutesAgo,
         },
       },
     });
