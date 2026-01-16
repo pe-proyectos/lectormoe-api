@@ -26,11 +26,10 @@ export const createComment = async (organizationId: number, userId: number, para
 				},
 			});
 		} else if (typeof params.image === 'string') {
-			const publicEndpoint = Bun.env.FILE_DOWNLOAD_ENDPOINT 
-				|| `https://pub-${Bun.env.R2_ACCOUNT_ID}.r2.dev`;
+			const r2PublicUrl = Bun.env.R2_PUBLIC_URL || 'https://r2.capibaratraductor.com';
 			const imageUrl = params.image.startsWith('http') 
 				? params.image 
-				: `${publicEndpoint}/${params.image}`;
+				: `${r2PublicUrl}/${params.image}`;
 			await prisma.comment.update({
 				where: {
 					id: comment.id,

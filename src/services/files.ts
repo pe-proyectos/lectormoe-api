@@ -191,8 +191,8 @@ export async function uploadFile(
 
         await s3Client.send(command);
         
-        // Return the public URL - use custom domain if configured, otherwise use R2 public endpoint
-        const publicEndpoint = Bun.env.FILE_DOWNLOAD_ENDPOINT 
+        // Return the public URL - use R2_PUBLIC_URL if configured, otherwise use R2 public endpoint
+        const publicEndpoint = Bun.env.R2_PUBLIC_URL 
           || `https://pub-${Bun.env.R2_ACCOUNT_ID}.r2.dev`;
         return `${publicEndpoint}/${fileKey}`;
     } catch (error) {
