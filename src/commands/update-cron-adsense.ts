@@ -1,5 +1,5 @@
 import { prisma } from '../models/prisma';
-import { testAdSenseConnection, getMonthlyAdSenseRevenue } from '../util/adsense';
+import { testAdSenseConnection, getMonthlyAdSenseRevenueCombined } from '../util/adsense';
 
 // Helper function to create transaction ID and format dates
 function createTransactionId(domain: string, year: number, month: number): { transactionId: string; startDateStr: string; endDateStr: string } {
@@ -52,8 +52,8 @@ export async function updateCronAdSense(targetMonth?: number, targetYear?: numbe
     
     console.log(`📅 Processing AdSense revenue for: ${year}-${(month + 1).toString().padStart(2, '0')}`);
 
-    // Get revenue data for the specified month
-    const revenueData = await getMonthlyAdSenseRevenue(year, month + 1);
+    // Get revenue data for the specified month (combines subdomain + path-based URLs)
+    const revenueData = await getMonthlyAdSenseRevenueCombined(year, month + 1);
     console.log(revenueData);
     
     if (revenueData.length === 0) {
@@ -150,9 +150,9 @@ export async function updateCronAdSense(targetMonth?: number, targetYear?: numbe
     // Process revenue data for each organization
     for (const org of organizations) {
       try {
-        // Find revenue data for this organization's domain
-        const orgRevenue = revenueData.find(data => 
-          data.domain === org.domain
+        // Find revenue data for this organization's slug (now using URL paths instead of subdomains)
+        const orgRevenue = revenueData.find(data =>
+          data.slug === org.slug
         );
 
         // Create unique transaction ID for this organization
@@ -178,7 +178,8 @@ export async function updateCronAdSense(targetMonth?: number, targetYear?: numbe
             status: 'COMPLETED',
             paymentMethod: 'ADSENSE',
             paymentDetails: JSON.stringify({
-              domain: orgRevenue.domain,
+              domain: org.domain,
+              slug: org.slug,
               date: orgRevenue.date,
               source: 'Google AdSense API'
             }),
@@ -268,18 +269,22 @@ export async function updateCronAdSense(targetMonth?: number, targetYear?: numbe
     console.log(`📊 Processed ${processedCount} organizations`);
     console.log(`💰 Total revenue processed: $${totalRevenue.toFixed(2)}`);
 
-    // Log any domains with revenue that don't match any organization
-    const unmatchedDomains = revenueData.filter(data => 
-      !organizations.some(org => 
-        data.domain === org.domain
+    // Log platform revenue (slugs without matching organization)
+    const platformRevenue = revenueData.filter(data =>
+      !organizations.some(org =>
+        data.slug === org.slug
       )
     );
 
-    if (unmatchedDomains.length > 0) {
-      console.log(`⚠️  Found ${unmatchedDomains.length} domains with revenue that don't match any organization:`);
-      unmatchedDomains.forEach(domain => {
-        console.log(`   - ${domain.domain}: $${domain.revenue}`);
+    if (platformRevenue.length > 0) {
+      const platformTotal = platformRevenue.reduce((sum, item) => sum + item.revenue, 0);
+      console.log(`\n💰 Platform Revenue (Capibara)`);
+      console.log(`   Found ${platformRevenue.length} slug(s) with revenue for the platform:`);
+      platformRevenue.forEach(item => {
+        console.log(`   - ${item.slug}: $${item.revenue.toFixed(2)}`);
       });
+      console.log(`   📊 Total platform revenue: $${platformTotal.toFixed(2)}`);
+      console.log(`   ℹ️  This revenue belongs to Capibara and is not stored in organization transactions`);
     }
 
   } catch (error) {

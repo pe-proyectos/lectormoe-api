@@ -2,7 +2,7 @@ import { google } from 'googleapis';
 import { OAuth2Client } from 'google-auth-library';
 
 interface AdSenseRevenueData {
-  domain: string;
+  slug: string; // Organization slug extracted from URL path
   revenue: number;
   currency: string;
   date: string;
@@ -101,7 +101,114 @@ export async function getMonthlyAdSenseRevenue(year: number, month: number): Pro
     console.log(`📋 Using AdSense account: ${accountId}`);
 
     // Generate report for the specified date range using direct query parameters
+    // Using PAGE_URL instead of DOMAIN_NAME to get URL paths for organization matching
     const report = await adsense.accounts.reports.generate({
+      account: accountId,
+      dateRange: 'CUSTOM',
+      'startDate.year': year,
+      'startDate.month': month,
+      'startDate.day': 1,
+      'endDate.year': year,
+      'endDate.month': month,
+      'endDate.day': endDate.getDate(),
+      dimensions: ['PAGE_URL'],
+      metrics: ['ESTIMATED_EARNINGS'],
+      currencyCode: 'USD'
+    } as any);
+
+    const reportData = report.data as any;
+    
+    if (!reportData.rows || reportData.rows.length === 0) {
+      console.log('📊 No revenue data found for the specified period');
+      return [];
+    }
+
+    // Group revenue by organization slug
+    const revenueBySlug = new Map<string, number>();
+
+    for (const row of reportData.rows) {
+      if (row.cells && row.cells.length >= 2) {
+        const pageUrl = row.cells[0]?.value || '';
+        const earnings = parseFloat(row.cells[1]?.value || '0');
+
+        if (pageUrl && earnings > 0) {
+          try {
+            // Parse URL to extract organization slug
+            // Expected format: capibaratraductor.com/senshimanga/... or https://capibaratraductor.com/senshimanga/...
+            const url = new URL(pageUrl.startsWith('http') ? pageUrl : `https://${pageUrl}`);
+            const pathSegments = url.pathname.split('/').filter(segment => segment.length > 0);
+
+            if (pathSegments.length > 0) {
+              const slug = pathSegments[0]; // First segment is the organization slug
+
+              // Aggregate earnings for this slug
+              const currentEarnings = revenueBySlug.get(slug) || 0;
+              revenueBySlug.set(slug, currentEarnings + earnings);
+            }
+          } catch (error) {
+            console.warn(`⚠️  Failed to parse URL: ${pageUrl}`, error);
+          }
+        }
+      }
+    }
+
+    // Convert map to array of revenue data
+    const revenueData: AdSenseRevenueData[] = Array.from(revenueBySlug.entries()).map(([slug, revenue]) => ({
+      slug: slug,
+      revenue: revenue,
+      currency: 'USD',
+      date: `${year}-${month.toString().padStart(2, '0')}`
+    }));
+
+    console.log(`📊 Found revenue data for ${revenueData.length} organizations`);
+    revenueData.forEach(data => {
+      console.log(`   - ${data.slug}: $${data.revenue.toFixed(2)}`);
+    });
+    return revenueData;
+
+  } catch (error) {
+    console.error('❌ Error fetching AdSense revenue data:', error);
+    throw error;
+  }
+}
+
+/**
+ * Get revenue data for a specific month combining both subdomain and path-based data
+ * This is useful during the transition period from subdomain.capibaratraductor.com to capibaratraductor.com/subdomain
+ * @param year - Year (e.g., 2026)
+ * @param month - Month (1-12)
+ * @returns Promise<AdSenseRevenueData[]>
+ */
+export async function getMonthlyAdSenseRevenueCombined(year: number, month: number): Promise<AdSenseRevenueData[]> {
+  try {
+    await authorizeAdSense();
+    const adsense = getAdSenseAPI();
+
+    const startDate = new Date(year, month - 1, 1);
+    const endDate = new Date(year, month, 0);
+
+    const startDateStr = startDate.toISOString().split('T')[0];
+    const endDateStr = endDate.toISOString().split('T')[0];
+
+    console.log(`📊 Fetching COMBINED AdSense revenue data for ${startDateStr} to ${endDateStr}`);
+    console.log('   This includes both subdomain and path-based URLs\n');
+
+    const accounts = await adsense.accounts.list();
+    console.log(accounts?.data);
+
+    if (!accounts.data.accounts || accounts.data.accounts.length === 0) {
+      console.log('⚠️  No AdSense accounts found.');
+      return [];
+    }
+
+    const accountId = accounts.data.accounts[0].name;
+    console.log(`📋 Using AdSense account: ${accountId}\n`);
+
+    const revenueBySlug = new Map<string, number>();
+
+    // 1. Get data by DOMAIN_NAME (for subdomain-based URLs like senshimanga.capibaratraductor.com)
+    console.log('🔍 Fetching subdomain-based revenue (DOMAIN_NAME)...');
+    const domainReport = await adsense.accounts.reports.generate({
       account: accountId,
       dateRange: 'CUSTOM',
       'startDate.year': year,
@@ -115,36 +222,115 @@ export async function getMonthlyAdSenseRevenue(year: number, month: number): Pro
       currencyCode: 'USD'
     } as any);
 
-    const reportData = report.data as any;
-    
-    if (!reportData.rows || reportData.rows.length === 0) {
-      console.log('📊 No revenue data found for the specified period');
-      return [];
-    }
+    const domainData = domainReport.data as any;
 
-    const revenueData: AdSenseRevenueData[] = [];
+    if (domainData.rows && domainData.rows.length > 0) {
+      console.log(`   Found ${domainData.rows.length} domain entries`);
+      for (const row of domainData.rows) {
+        if (row.cells && row.cells.length >= 2) {
+          const domain = row.cells[0]?.value || '';
+          const earnings = parseFloat(row.cells[1]?.value || '0');
 
-    for (const row of reportData.rows) {
-      if (row.cells && row.cells.length >= 2) {
-        const domain = row.cells[0]?.value || '';
-        const earnings = parseFloat(row.cells[1]?.value || '0');
-
-        if (domain && earnings > 0) {
-          revenueData.push({
-            domain: domain,
-            revenue: earnings,
-            currency: 'USD',
-            date: `${year}-${month.toString().padStart(2, '0')}`
-          });
+          if (domain && earnings > 0) {
+            // Only process capibaratraductor.com domains
+            if (domain.includes('capibaratraductor.com')) {
+              // Extract slug from subdomain (e.g., senshimanga.capibaratraductor.com -> senshimanga)
+              const parts = domain.split('.');
+              if (parts.length >= 3 && parts[1] === 'capibaratraductor' && parts[2] === 'com') {
+                const slug = parts[0];
+                const currentEarnings = revenueBySlug.get(slug) || 0;
+                revenueBySlug.set(slug, currentEarnings + earnings);
+                console.log(`   - ${domain} → slug: "${slug}" → $${earnings.toFixed(2)}`);
+              } else if (domain === 'capibaratraductor.com') {
+                // Main domain revenue (platform)
+                const currentEarnings = revenueBySlug.get('capibaratraductor.com') || 0;
+                revenueBySlug.set('capibaratraductor.com', currentEarnings + earnings);
+                console.log(`   - ${domain} (main domain) → $${earnings.toFixed(2)}`);
+              }
+            } else {
+              console.log(`   - ${domain} (skipped - not capibaratraductor.com) → $${earnings.toFixed(2)}`);
+            }
+          }
         }
       }
+    } else {
+      console.log('   No subdomain-based revenue found');
     }
 
-    console.log(`📊 Found revenue data for ${revenueData.length} domains`);
+    // 2. Get data by PAGE_URL (for path-based URLs like capibaratraductor.com/senshimanga/...)
+    console.log('\n🔍 Fetching path-based revenue (PAGE_URL)...');
+    const pageReport = await adsense.accounts.reports.generate({
+      account: accountId,
+      dateRange: 'CUSTOM',
+      'startDate.year': year,
+      'startDate.month': month,
+      'startDate.day': 1,
+      'endDate.year': year,
+      'endDate.month': month,
+      'endDate.day': endDate.getDate(),
+      dimensions: ['PAGE_URL'],
+      metrics: ['ESTIMATED_EARNINGS'],
+      currencyCode: 'USD'
+    } as any);
+
+    const pageData = pageReport.data as any;
+
+    if (pageData.rows && pageData.rows.length > 0) {
+      console.log(`   Found ${pageData.rows.length} page URL entries`);
+      for (const row of pageData.rows) {
+        if (row.cells && row.cells.length >= 2) {
+          const pageUrl = row.cells[0]?.value || '';
+          const earnings = parseFloat(row.cells[1]?.value || '0');
+
+          if (pageUrl && earnings > 0) {
+            try {
+              const url = new URL(pageUrl.startsWith('http') ? pageUrl : `https://${pageUrl}`);
+
+              // Only process capibaratraductor.com URLs
+              if (url.hostname === 'capibaratraductor.com' || url.hostname.endsWith('.capibaratraductor.com')) {
+                const pathSegments = url.pathname.split('/').filter(segment => segment.length > 0);
+
+                if (pathSegments.length > 0) {
+                  const slug = pathSegments[0];
+                  const currentEarnings = revenueBySlug.get(slug) || 0;
+                  revenueBySlug.set(slug, currentEarnings + earnings);
+                  console.log(`   - ${pageUrl.substring(0, 60)}... → slug: "${slug}" → $${earnings.toFixed(2)}`);
+                } else {
+                  // Main domain without path (platform revenue)
+                  const currentEarnings = revenueBySlug.get('capibaratraductor.com') || 0;
+                  revenueBySlug.set('capibaratraductor.com', currentEarnings + earnings);
+                  console.log(`   - ${pageUrl} (main domain) → $${earnings.toFixed(2)}`);
+                }
+              } else {
+                console.log(`   - ${pageUrl.substring(0, 60)}... (skipped - not capibaratraductor.com) → $${earnings.toFixed(2)}`);
+              }
+            } catch (error) {
+              console.warn(`   ⚠️  Failed to parse URL: ${pageUrl}`);
+            }
+          }
+        }
+      }
+    } else {
+      console.log('   No path-based revenue found');
+    }
+
+    // Convert map to array
+    const revenueData: AdSenseRevenueData[] = Array.from(revenueBySlug.entries()).map(([slug, revenue]) => ({
+      slug: slug,
+      revenue: revenue,
+      currency: 'USD',
+      date: `${year}-${month.toString().padStart(2, '0')}`
+    }));
+
+    console.log(`\n📊 Combined revenue data for ${revenueData.length} slugs/domains`);
+    revenueData.forEach(data => {
+      console.log(`   - ${data.slug}: $${data.revenue.toFixed(2)}`);
+    });
+
     return revenueData;
 
   } catch (error) {
-    console.error('❌ Error fetching AdSense revenue data:', error);
+    console.error('❌ Error fetching combined AdSense revenue data:', error);
     throw error;
   }
 }
