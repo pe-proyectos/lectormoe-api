@@ -16,9 +16,7 @@ export const router = () => new Elysia()
                 // Get all subscriptions for this organization
                 const subscriptions = await prisma.subscription.findMany({
                     where: {
-                        user: {
-                            organizationId: organizationId
-                        }
+                        organizationId: organizationId
                     },
                     include: {
                         subscriptionPlan: true,
@@ -170,9 +168,7 @@ export const router = () => new Elysia()
                 const planDistribution = await prisma.subscription.groupBy({
                     by: ['subscriptionPlanId'],
                     where: {
-                        user: {
-                            organizationId: organizationId
-                        },
+                        organizationId: organizationId,
                         active: true,
                         status: 'ACTIVE'
                     },

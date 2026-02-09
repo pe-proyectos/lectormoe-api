@@ -2,6 +2,11 @@ import { Elysia, t } from 'elysia';
 import { prisma } from '../../models/prisma';
 import { useOrganization } from '../../plugins/organization';
 
+const monthNames = [
+    'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+    'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+];
+
 export const router = () => new Elysia()
     .use(useOrganization())
     .get(
@@ -9,68 +14,79 @@ export const router = () => new Elysia()
         async ({ organizationId }) => {
             try {
                 const now = new Date();
-                const currentMonth = now.getMonth(); // 0-11
+                const currentMonth = now.getMonth();
                 const currentYear = now.getFullYear();
 
+                // Rango: ultimos 12 meses
+                const startDate = new Date(currentYear, currentMonth - 11, 1);
+                const endDate = new Date(currentYear, currentMonth + 1, 1);
+
+                // Una sola consulta para todas las transacciones del ultimo año
+                const transactions = await prisma.organizationTransaction.findMany({
+                    where: {
+                        organizationId: organizationId,
+                        type: 'EARNING',
+                        status: 'COMPLETED',
+                        transactionDate: {
+                            gte: startDate,
+                            lt: endDate
+                        }
+                    }
+                });
+
+                // Agrupar por mes
+                const monthlyMap = new Map<string, {
+                    revenue: number;
+                    transactionCount: number;
+                    subscriptionPayments: number;
+                    revenueByOrigin: Record<string, number>;
+                }>();
+
+                // Inicializar los 12 meses
+                for (let i = 11; i >= 0; i--) {
+                    const m = (currentMonth - i + 12) % 12;
+                    const y = currentMonth - i < 0 ? currentYear - 1 : currentYear;
+                    const key = `${y}-${m}`;
+                    monthlyMap.set(key, {
+                        revenue: 0,
+                        transactionCount: 0,
+                        subscriptionPayments: 0,
+                        revenueByOrigin: {},
+                    });
+                }
+
+                // Poblar con datos reales
+                for (const tx of transactions) {
+                    if (!tx.transactionDate) continue;
+                    const m = tx.transactionDate.getMonth();
+                    const y = tx.transactionDate.getFullYear();
+                    const key = `${y}-${m}`;
+                    const entry = monthlyMap.get(key);
+                    if (!entry) continue;
+
+                    entry.revenue += tx.amount;
+                    entry.transactionCount++;
+                    if (tx.subscriptionId) entry.subscriptionPayments++;
+
+                    const origin = tx.origin || 'Otros';
+                    entry.revenueByOrigin[origin] = (entry.revenueByOrigin[origin] || 0) + tx.amount;
+                }
+
+                // Convertir a array ordenado
                 const monthlyData = [];
-
-                // Get data for last 3 months
-                for (let i = 2; i >= 0; i--) {
-                    const targetMonth = (currentMonth - i + 12) % 12;
-                    const targetYear = currentMonth - i < 0 ? currentYear - 1 : currentYear;
-
-                    // Get transactions for this month
-                    const transactions = await prisma.organizationTransaction.findMany({
-                        where: {
-                            organizationId: organizationId,
-                            type: 'EARNING',
-                            status: 'COMPLETED',
-                            transactionDate: {
-                                gte: new Date(targetYear, targetMonth, 1),
-                                lt: new Date(targetYear, targetMonth + 1, 1)
-                            }
-                        }
-                    });
-
-                    // Group transactions by origin and calculate revenue
-                    const revenueByOrigin: Record<string, number> = {};
-                    transactions.forEach(transaction => {
-                        const origin = transaction.origin || 'Otros';
-                        revenueByOrigin[origin] = (revenueByOrigin[origin] || 0) + transaction.amount;
-                    });
-
-                    // Get subscription payments for this month (transactions linked to subscriptions)
-                    const subscriptionPayments = await prisma.organizationTransaction.findMany({
-                        where: {
-                            organizationId: organizationId,
-                            type: 'EARNING',
-                            status: 'COMPLETED',
-                            subscriptionId: {
-                                not: null
-                            },
-                            transactionDate: {
-                                gte: new Date(targetYear, targetMonth, 1),
-                                lt: new Date(targetYear, targetMonth + 1, 1)
-                            }
-                        }
-                    });
-
-                    // Calculate total revenue for this month
-                    const totalRevenue = transactions.reduce((sum, transaction) => sum + transaction.amount, 0);
-
-                    // Get month name
-                    const monthNames = [
-                        'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-                        'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
-                    ];
+                for (let i = 11; i >= 0; i--) {
+                    const m = (currentMonth - i + 12) % 12;
+                    const y = currentMonth - i < 0 ? currentYear - 1 : currentYear;
+                    const key = `${y}-${m}`;
+                    const entry = monthlyMap.get(key)!;
 
                     monthlyData.push({
-                        month: monthNames[targetMonth],
-                        year: targetYear,
-                        revenue: totalRevenue,
-                        transactionCount: transactions.length,
-                        subscriptionPayments: subscriptionPayments.length,
-                        revenueByOrigin
+                        month: monthNames[m],
+                        year: y,
+                        revenue: entry.revenue,
+                        transactionCount: entry.transactionCount,
+                        subscriptionPayments: entry.subscriptionPayments,
+                        revenueByOrigin: entry.revenueByOrigin,
                     });
                 }
 
