@@ -109,22 +109,22 @@ model User {
   pushNotifications  Boolean @default(true)
   theme              String  @default("dark") @db.VarChar(20)
 
-  analytics                Analytics[]
-  audits                   Audit[]
-  Comment                  Comment[]              @relation("HiddenByUser")
-  comments                 Comment[]
-  favorites                Favorite[]
-  passwordResetTokens      PasswordResetToken[]
-  rankings                 Ranking[]
-  subscriptions            Subscription[]
-  tokens                   Token[]
-  history                  UserChapterHistory[]
-  permissions              Permission[]
-  organizationFollows      OrganizationFollower[]
-  emailPreference          EmailPreference?
-  emailLogs                EmailLog[]
-  unsubscribeTokens        UnsubscribeToken[]
-  emailVerificationTokens  EmailVerificationToken[]
+  analytics               Analytics[]
+  audits                  Audit[]
+  Comment                 Comment[]                @relation("HiddenByUser")
+  comments                Comment[]
+  favorites               Favorite[]
+  passwordResetTokens     PasswordResetToken[]
+  rankings                Ranking[]
+  subscriptions           Subscription[]
+  tokens                  Token[]
+  history                 UserChapterHistory[]
+  permissions             Permission[]
+  organizationFollows     OrganizationFollower[]
+  emailPreference         EmailPreference?
+  emailLogs               EmailLog[]
+  unsubscribeTokens       UnsubscribeToken[]
+  emailVerificationTokens EmailVerificationToken[]
 
   @@unique([username])
   @@unique([slug])
@@ -296,16 +296,16 @@ model MangaCustom {
 }
 
 model Chapter {
-  id            Int      @id @default(autoincrement())
+  id            Int       @id @default(autoincrement())
   number        Float
-  title         String   @db.VarChar(256)
-  imageUrl      String?  @db.VarChar(256)
-  createdAt     DateTime @default(now()) @db.Timestamp(6)
-  updatedAt     DateTime @updatedAt
+  title         String    @db.VarChar(256)
+  imageUrl      String?   @db.VarChar(256)
+  createdAt     DateTime  @default(now()) @db.Timestamp(6)
+  updatedAt     DateTime  @updatedAt
   mangaCustomId Int
-  views         Int      @default(0)
+  views         Int       @default(0)
   releasedAt    DateTime? @db.Timestamp(6)
-  isUnreleased  Boolean  @default(false)
+  isUnreleased  Boolean   @default(false)
 
   mangaCustom  MangaCustom          @relation(fields: [mangaCustomId], references: [id])
   pages        Page[]
@@ -623,18 +623,18 @@ model EmailPreference {
   userId Int @unique
 
   // Reader notifications
-  newChapterAlert        Boolean @default(true)
-  newMangaRelease        Boolean @default(true)
-  dailyDigest            Boolean @default(true)
-  weeklyReadingSummary   Boolean @default(true)
+  newChapterAlert      Boolean @default(true)
+  newMangaRelease      Boolean @default(true)
+  dailyDigest          Boolean @default(true)
+  weeklyReadingSummary Boolean @default(true)
 
   // Subscription notifications
   subscriptionReminders Boolean @default(true)
 
   // Engagement
   readingStreakMilestones Boolean @default(true)
-  reEngagement           Boolean @default(true)
-  recommendations        Boolean @default(true)
+  reEngagement            Boolean @default(true)
+  recommendations         Boolean @default(true)
 
   // Staff/Admin (only relevant for users with canSeeAdminPanel)
   weeklyOrgReport    Boolean @default(true)
