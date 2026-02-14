@@ -13,6 +13,7 @@ const EMAIL_TYPE_TO_PREFERENCE: Record<string, string> = {
   achievement: 'readingStreakMilestones',
   top_reader: 'readingStreakMilestones',
   re_engagement: 'reEngagement',
+  comment_reply: 'commentReplyAlert',
   recommendations: 'recommendations',
   weekly_org_report: 'weeklyOrgReport',
   new_subscriber_alert: 'newSubscriberAlert',

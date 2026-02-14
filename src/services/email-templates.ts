@@ -466,6 +466,36 @@ export function topReaderTemplate(
   `, unsubscribeUrl);
 }
 
+export function commentReplyTemplate(
+  username: string,
+  replierUsername: string,
+  originalComment: string,
+  replyText: string,
+  threadUrl: string,
+  unsubscribeUrl?: string
+): string {
+  const truncatedOriginal = originalComment.length > 150 ? originalComment.slice(0, 150) + '...' : originalComment;
+  const truncatedReply = replyText.length > 200 ? replyText.slice(0, 200) + '...' : replyText;
+
+  return baseTemplate(`
+    <h2 style="color:#ffffff;font-size:22px;font-weight:900;margin:0 0 16px 0;text-transform:uppercase;letter-spacing:-0.5px;">
+      Nueva Respuesta a tu Comentario
+    </h2>
+    <p>Hola <strong style="color:#ffffff;">${username}</strong>,</p>
+    <p><strong style="color:#06b6d4;">${replierUsername}</strong> ha respondido a tu comentario:</p>
+    <div style="background:#09090b;border:1px solid #27272a;border-radius:12px;padding:16px;margin:16px 0;">
+      <p style="color:#52525b;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;margin:0 0 8px 0;">Tu comentario</p>
+      <p style="color:#71717a;font-size:13px;margin:0;font-style:italic;">"${truncatedOriginal}"</p>
+    </div>
+    <div style="background:#09090b;border:1px solid rgba(6,182,212,0.2);border-radius:12px;padding:16px;margin:16px 0;">
+      <p style="color:#06b6d4;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;margin:0 0 8px 0;">${replierUsername} respondio</p>
+      <p style="color:#ffffff;font-size:14px;margin:0;">"${truncatedReply}"</p>
+    </div>
+    ${ctaButton('Ver Conversacion', threadUrl)}
+    <p style="font-size:12px;color:#52525b;">Recibes este correo porque alguien respondio a tu comentario.</p>
+  `, unsubscribeUrl);
+}
+
 export function achievementTemplate(
   username: string,
   achievementTitle: string,

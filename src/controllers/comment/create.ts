@@ -1,6 +1,7 @@
 import { prisma } from "../../models/prisma";
 import { CreateCommentRequest } from "../../types/comment/create";
 import { uploadFile } from "../../util/upload-file";
+import { sendCommentReplyNotification } from "../../services/email-notifications";
 
 export const createComment = async (organizationId: number, userId: number, params: CreateCommentRequest) => {
   const comment = await prisma.comment.create({
@@ -40,6 +41,11 @@ export const createComment = async (organizationId: number, userId: number, para
 			});
 		}
 	}
+
+  // Fire-and-forget: notify parent comment author if this is a reply
+  if (comment.parentId) {
+    sendCommentReplyNotification(comment.id, comment.parentId).catch(console.error);
+  }
 
   return !!comment;
 };

@@ -375,3 +375,62 @@ export async function sendFailedPaymentAlert(
     });
   }
 }
+
+// ──────────── Community Notifications ────────────
+
+/**
+ * Sends comment reply notification to the parent comment author.
+ * Called after a reply comment is created.
+ */
+export async function sendCommentReplyNotification(
+  commentId: number,
+  parentCommentId: number
+): Promise<void> {
+  const [reply, parentComment] = await Promise.all([
+    prisma.comment.findUnique({
+      where: { id: commentId },
+      include: {
+        user: { select: { id: true, username: true } },
+        organization: { select: { slug: true } },
+      },
+    }),
+    prisma.comment.findUnique({
+      where: { id: parentCommentId },
+      include: {
+        user: { select: { id: true, email: true, username: true, emailNotifications: true } },
+      },
+    }),
+  ]);
+
+  if (!reply || !parentComment) return;
+
+  // Skip if self-reply
+  if (reply.user.id === parentComment.user.id) return;
+
+  // Check preferences
+  if (!parentComment.user.emailNotifications) return;
+  const allowed = await canSendEmail(parentComment.user.id, 'comment_reply');
+  if (!allowed) return;
+
+  const threadUrl = `${BASE_URL}/${reply.organization.slug}`;
+  const unsubscribeUrl = await getUnsubscribeUrl(parentComment.user.id, 'comment_reply');
+
+  const html = templates.commentReplyTemplate(
+    parentComment.user.username,
+    reply.user.username,
+    parentComment.comment,
+    reply.comment,
+    threadUrl,
+    unsubscribeUrl
+  );
+
+  await sendEmail({
+    userId: parentComment.user.id,
+    to: parentComment.user.email,
+    subject: `${reply.user.username} respondio a tu comentario - Capibara Traductor`,
+    html,
+    emailType: 'comment_reply',
+    metadata: { commentId, parentCommentId },
+    dedupWindowMinutes: 1,
+  });
+}

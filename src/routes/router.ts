@@ -3,6 +3,8 @@ import { Elysia } from "elysia";
 import { router as adsenseMonthlyRevenueRouter } from "./adsense/monthly-revenue";
 import { router as analyticsCreateRouter } from "./analytics/create";
 import { router as analyticsGetRouter } from "./analytics/get";
+import { router as analyticsEmailStatisticsRouter } from "./analytics/email-statistics";
+import { router as analyticsEngagementStatisticsRouter } from "./analytics/engagement-statistics";
 import { router as authCheckRouter } from "./auth/check";
 import { router as authForgotPasswordRouter } from "./auth/forgot_password";
 import { router as authLoginRouter } from "./auth/login";
@@ -40,6 +42,7 @@ import { router as genreEditRouter } from "./genre/edit";
 import { router as genreListRouter } from "./genre/list";
 import { router as landingFeaturedMangaRouter } from "./landing/featured-manga";
 import { router as landingScansRouter } from "./landing/scans";
+import { router as landingTopReadersRouter } from "./landing/top-readers";
 import { router as mangaAutocompleteRouter } from "./manga/autocomplete";
 import { router as mangaCreateRouter } from "./manga/create";
 import { router as mangaGetRouter } from "./manga/get";
@@ -57,6 +60,7 @@ import { router as organizationFollowRouter } from "./organization/follow";
 import { router as organizationListFollowedRouter } from "./organization/list-followed";
 import { router as organizationRequestRegistrationRouter } from "./organization/request-registration";
 import { router as organizationTopDonorsRouter } from "./organization/top-donors";
+import { router as organizationTopReadersRouter } from "./organization/top-readers";
 import { router as pagesCreateRouter } from "./pages/create";
 import { router as pagesDeleteRouter } from "./pages/delete";
 import { router as pagesListRouter } from "./pages/list";
@@ -89,6 +93,8 @@ export const router = () => async (app: Elysia) => {
 	// Analytics
 	app.use(analyticsCreateRouter());
 	app.use(analyticsGetRouter());
+	app.use(analyticsEmailStatisticsRouter());
+	app.use(analyticsEngagementStatisticsRouter());
 
 	// Auth
 	app.use(authCheckRouter());
@@ -148,6 +154,7 @@ export const router = () => async (app: Elysia) => {
 	// Landing
 	app.use(landingFeaturedMangaRouter());
 	app.use(landingScansRouter());
+	app.use(landingTopReadersRouter());
 
 	// Manga
 	app.use(mangaAutocompleteRouter());
@@ -171,6 +178,7 @@ export const router = () => async (app: Elysia) => {
 	app.use(organizationListFollowedRouter());
 	app.use(organizationRequestRegistrationRouter());
 	app.use(organizationTopDonorsRouter());
+	app.use(organizationTopReadersRouter());
 
 	// Pages
 	app.use(pagesCreateRouter());

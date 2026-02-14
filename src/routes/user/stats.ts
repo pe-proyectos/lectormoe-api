@@ -21,6 +21,10 @@ export const router = () => new Elysia()
                     activeDays: t.Number(),
                     toRead: t.Number(),
                     read: t.Number(),
+                    streak: t.Number(),
+                    favoriteGenre: t.Union([t.String(), t.Null()]),
+                    hoursEstimated: t.Number(),
+                    weekChaptersRead: t.Number(),
                 }),
             }),
         }

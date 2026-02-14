@@ -636,6 +636,9 @@ model EmailPreference {
   reEngagement            Boolean @default(true)
   recommendations         Boolean @default(true)
 
+  // Community
+  commentReplyAlert Boolean @default(true)
+
   // Staff/Admin (only relevant for users with canSeeAdminPanel)
   weeklyOrgReport    Boolean @default(true)
   newSubscriberAlert Boolean @default(true)
