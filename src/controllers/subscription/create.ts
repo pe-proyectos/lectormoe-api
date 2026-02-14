@@ -1,6 +1,7 @@
 import { prisma } from "../../models/prisma";
 import type { CreateSubscriptionRequest } from "../../types/subscription/create";
 import { getPlanById, getSubscriptionByPaypalId, suspendSubscriptionByPaypalId } from '../../util/paypal';
+import { sendNewSubscriberNotification } from "../../services/email-notifications";
 
 export const createSubscription = async (organizationId: number, userId: number, params: CreateSubscriptionRequest) => {
 	const organization = await prisma.organization.findFirst({
@@ -128,5 +129,14 @@ export const createSubscription = async (organizationId: number, userId: number,
 			console.error("Error al enviar el webhook de suscripción a Discord:", error);
 		}
 	}
+	// Send email notification to organization staff (fire-and-forget)
+	const amount = `${subscription?.billing_info?.last_payment?.amount?.value || "0"} USD`;
+	sendNewSubscriberNotification(
+		organizationId,
+		user.id,
+		subscriptionPlanExists.name || paypalPlan?.name || "Plan sin nombre",
+		amount
+	).catch(console.error);
+
 	return createdSubscription;
 };

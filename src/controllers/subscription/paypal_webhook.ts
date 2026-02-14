@@ -1,6 +1,7 @@
 import { prisma } from "../../models/prisma";
 import { PaypalWebhookEvent } from "../../types/subscription/paypal_webhook";
 import { getSubscriptionByPaypalId } from "../../util/paypal";
+import { sendFailedPaymentAlert } from "../../services/email-notifications";
 
 export const handlePaypalWebhook = async (webhookEvent: PaypalWebhookEvent) => {
     console.log("webhookEvent");
@@ -83,8 +84,16 @@ export const handlePaypalWebhook = async (webhookEvent: PaypalWebhookEvent) => {
         case "BILLING.SUBSCRIPTION.EXPIRED":
         case "BILLING.SUBSCRIPTION.CANCELLED":
         case "BILLING.SUBSCRIPTION.SUSPENDED":
+            updateData = { endDate: new Date() };
+            break;
         case "BILLING.SUBSCRIPTION.PAYMENT.FAILED":
         case "PAYMENT.SALE.DENIED":
+            updateData = { endDate: new Date() };
+            // Send email alert to staff and user about the failed payment
+            if (subscription.organizationId) {
+                sendFailedPaymentAlert(subscription.organizationId, subscription.id).catch(console.error);
+            }
+            break;
         case "PAYMENT.SALE.REFUNDED":
         case "PAYMENT.SALE.REVERSED":
             updateData = { endDate: new Date() };

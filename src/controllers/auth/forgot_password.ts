@@ -1,44 +1,22 @@
-import nodemailer from "nodemailer";
-import { prisma } from "../../models/prisma";
-
-console.log({
-    host: "smtp.office365.com",
-    port: 587,
-    secure: false,
-    auth: {
-      user: Bun.env.SMTP_USER,
-      pass: Bun.env.SMTP_PASSWORD,
-    },
-  });
-
-const transporter = nodemailer.createTransport({
-  host: "smtp.office365.com",
-  port: 587,
-  secure: false,
-  auth: {
-    user: Bun.env.SMTP_USER,
-    pass: Bun.env.SMTP_PASSWORD,
-  },
-});
+import { prisma } from '../../models/prisma';
+import { sendPasswordResetEmail } from '../../services/email-notifications';
 
 export const forgotPassword = async (
   organizationId: number,
   organizationName: string,
   email: string
 ) => {
-  // Buscar usuario por email (sin filtrar por organización)
+  // Find user by email (global, not org-scoped)
   const user = await prisma.user.findFirst({
-    where: {
-      email,
-    },
+    where: { email },
   });
 
   if (!user) {
-    throw new Error("User not found");
+    // Never reveal whether user exists - silently succeed
+    return true;
   }
 
-  // Verificar que el usuario tenga permisos para esta organización
-  // Si no tiene permisos, crearlos automáticamente (usuarios globales)
+  // Ensure user has permission record for this organization
   let permission = await prisma.permission.findUnique({
     where: {
       userId_organizationId: {
@@ -49,54 +27,35 @@ export const forgotPassword = async (
   });
 
   if (!permission) {
-    // Crear permisos automáticamente para usuarios globales
     permission = await prisma.permission.create({
       data: {
         userId: user.id,
         organizationId,
-        role: "user",
+        role: 'user',
         hierarchyLevel: 0,
       },
     });
   }
 
-  let existingToken = await prisma.passwordResetToken.findFirst({
-    where: {
-      userId: user.id,
-    },
+  // Delete any existing token for this user (expired or not)
+  await prisma.passwordResetToken.deleteMany({
+    where: { userId: user.id },
   });
 
-  if (existingToken?.expiresAt && existingToken.expiresAt > new Date()) {
-    await prisma.passwordResetToken.delete({
-      where: { id: existingToken.id },
-    });
-    existingToken = null;
-  }
-
-  if (existingToken) {
-    throw new Error("Try again in 1 hour");
-  }
-
-  const timestamp = Date.now();
-  const token = crypto.randomUUID() + timestamp;
+  // Generate new token
+  const token = crypto.randomUUID() + '-' + Date.now();
 
   await prisma.passwordResetToken.create({
     data: {
       token,
       userId: user.id,
+      organizationId,
       expiresAt: new Date(Date.now() + 1000 * 60 * 60), // 1 hour
-      createdAt: new Date(),
     },
   });
 
-  await transporter.sendMail({
-    from: `"${organizationName}" <${Bun.env.SMTP_USER}>`,
-    to: email,
-    subject: `Restablece tu contraseña - ${organizationName}`,
-    html: `
-      <p>Codigo de restablecimiento: ${token}</p>
-    `,
-  });
+  // Send email via Resend
+  await sendPasswordResetEmail(user.id, user.email, user.username, token);
 
   return true;
 };

@@ -152,3 +152,23 @@ export type OrganizationFollower = Prisma.OrganizationFollowerModel
  * 
  */
 export type OrganizationRequest = Prisma.OrganizationRequestModel
+/**
+ * Model EmailPreference
+ * 
+ */
+export type EmailPreference = Prisma.EmailPreferenceModel
+/**
+ * Model EmailLog
+ * 
+ */
+export type EmailLog = Prisma.EmailLogModel
+/**
+ * Model UnsubscribeToken
+ * 
+ */
+export type UnsubscribeToken = Prisma.UnsubscribeTokenModel
+/**
+ * Model EmailVerificationToken
+ * 
+ */
+export type EmailVerificationToken = Prisma.EmailVerificationTokenModel

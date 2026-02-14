@@ -8,6 +8,11 @@ import { router as authForgotPasswordRouter } from "./auth/forgot_password";
 import { router as authLoginRouter } from "./auth/login";
 import { router as authLogoutRouter } from "./auth/logout";
 import { router as authRegisterRouter } from "./auth/register";
+import { router as authResetPasswordRouter } from "./auth/reset_password";
+import { router as authVerifyEmailRouter } from "./auth/verify_email";
+import { router as emailPreferencesRouter } from "./email/preferences";
+import { router as emailUnsubscribeRouter } from "./email/unsubscribe";
+import { router as emailCronRouter } from "./email/cron";
 import { router as authorCreateRouter } from "./author/create";
 import { router as authorListRouter } from "./author/list";
 import { router as bookTypeListRouter } from "./book_type/list";
@@ -88,9 +93,16 @@ export const router = () => async (app: Elysia) => {
 	// Auth
 	app.use(authCheckRouter());
 	app.use(authForgotPasswordRouter());
+	app.use(authResetPasswordRouter());
+	app.use(authVerifyEmailRouter());
 	app.use(authLoginRouter());
 	app.use(authLogoutRouter());
 	app.use(authRegisterRouter());
+
+	// Email
+	app.use(emailPreferencesRouter());
+	app.use(emailUnsubscribeRouter());
+	app.use(emailCronRouter());
 
 	// Author
 	app.use(authorCreateRouter());

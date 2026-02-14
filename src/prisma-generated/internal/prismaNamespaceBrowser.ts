@@ -77,7 +77,11 @@ export const ModelName = {
   Subscription: 'Subscription',
   OrganizationTransaction: 'OrganizationTransaction',
   OrganizationFollower: 'OrganizationFollower',
-  OrganizationRequest: 'OrganizationRequest'
+  OrganizationRequest: 'OrganizationRequest',
+  EmailPreference: 'EmailPreference',
+  EmailLog: 'EmailLog',
+  UnsubscribeToken: 'UnsubscribeToken',
+  EmailVerificationToken: 'EmailVerificationToken'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -597,6 +601,64 @@ export const OrganizationRequestScalarFieldEnum = {
 } as const
 
 export type OrganizationRequestScalarFieldEnum = (typeof OrganizationRequestScalarFieldEnum)[keyof typeof OrganizationRequestScalarFieldEnum]
+
+
+export const EmailPreferenceScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  newChapterAlert: 'newChapterAlert',
+  newMangaRelease: 'newMangaRelease',
+  dailyDigest: 'dailyDigest',
+  weeklyReadingSummary: 'weeklyReadingSummary',
+  subscriptionReminders: 'subscriptionReminders',
+  readingStreakMilestones: 'readingStreakMilestones',
+  reEngagement: 'reEngagement',
+  recommendations: 'recommendations',
+  weeklyOrgReport: 'weeklyOrgReport',
+  newSubscriberAlert: 'newSubscriberAlert',
+  revenueAlert: 'revenueAlert',
+  contentPerformance: 'contentPerformance',
+  failedPaymentAlert: 'failedPaymentAlert',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EmailPreferenceScalarFieldEnum = (typeof EmailPreferenceScalarFieldEnum)[keyof typeof EmailPreferenceScalarFieldEnum]
+
+
+export const EmailLogScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  emailType: 'emailType',
+  subject: 'subject',
+  resendId: 'resendId',
+  status: 'status',
+  metadata: 'metadata',
+  createdAt: 'createdAt'
+} as const
+
+export type EmailLogScalarFieldEnum = (typeof EmailLogScalarFieldEnum)[keyof typeof EmailLogScalarFieldEnum]
+
+
+export const UnsubscribeTokenScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  token: 'token',
+  createdAt: 'createdAt'
+} as const
+
+export type UnsubscribeTokenScalarFieldEnum = (typeof UnsubscribeTokenScalarFieldEnum)[keyof typeof UnsubscribeTokenScalarFieldEnum]
+
+
+export const EmailVerificationTokenScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  token: 'token',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
+} as const
+
+export type EmailVerificationTokenScalarFieldEnum = (typeof EmailVerificationTokenScalarFieldEnum)[keyof typeof EmailVerificationTokenScalarFieldEnum]
 
 
 export const SortOrder = {

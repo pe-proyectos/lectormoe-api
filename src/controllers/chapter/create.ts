@@ -1,5 +1,6 @@
 import { prisma } from "../../models/prisma";
 import type { CreateChapterRequest } from "../../types/chapter/create";
+import { sendNewChapterAlert } from "../../services/email-notifications";
 
 export const createChapter = async (organizationId: number, mangaSlug: string, params: CreateChapterRequest) => {
 	const mangaCustom = await prisma.mangaCustom.findFirst({
@@ -123,6 +124,11 @@ export const createChapter = async (organizationId: number, mangaSlug: string, p
 		} catch (error) {
 			console.error("Error al enviar el mensaje a Discord:", error);
 		}
+	}
+
+	// Send email notification to users who favorited this manga (fire-and-forget)
+	if (!params.isUnreleased) {
+		sendNewChapterAlert(mangaCustom.id, chapter.id, organizationId).catch(console.error);
 	}
 
 	return chapter;

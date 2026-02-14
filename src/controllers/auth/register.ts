@@ -1,6 +1,7 @@
 import slug from "slug";
 
 import { prisma } from "../../models/prisma";
+import { sendWelcomeEmail, sendEmailVerificationEmail } from "../../services/email-notifications";
 
 
 export const register = async (organizationId: number, email: string, username: string, password: string) => {
@@ -45,5 +46,20 @@ export const register = async (organizationId: number, email: string, username: 
         },
     });
     
+	// Send welcome and verification emails (fire-and-forget)
+	sendWelcomeEmail(newUser.id, email, username).catch(console.error);
+
+	// Create verification token and send
+	const verificationToken = crypto.randomUUID();
+	prisma.emailVerificationToken.create({
+		data: {
+			userId: newUser.id,
+			token: verificationToken,
+			expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24 hours
+		},
+	}).then(() => {
+		sendEmailVerificationEmail(newUser.id, email, username, verificationToken).catch(console.error);
+	}).catch(console.error);
+
 	return true;
 };

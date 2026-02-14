@@ -109,18 +109,22 @@ model User {
   pushNotifications  Boolean @default(true)
   theme              String  @default("dark") @db.VarChar(20)
 
-  analytics           Analytics[]
-  audits              Audit[]
-  Comment             Comment[]              @relation("HiddenByUser")
-  comments            Comment[]
-  favorites           Favorite[]
-  passwordResetTokens PasswordResetToken[]
-  rankings            Ranking[]
-  subscriptions       Subscription[]
-  tokens              Token[]
-  history             UserChapterHistory[]
-  permissions         Permission[]
-  organizationFollows OrganizationFollower[]
+  analytics                Analytics[]
+  audits                   Audit[]
+  Comment                  Comment[]              @relation("HiddenByUser")
+  comments                 Comment[]
+  favorites                Favorite[]
+  passwordResetTokens      PasswordResetToken[]
+  rankings                 Ranking[]
+  subscriptions            Subscription[]
+  tokens                   Token[]
+  history                  UserChapterHistory[]
+  permissions              Permission[]
+  organizationFollows      OrganizationFollower[]
+  emailPreference          EmailPreference?
+  emailLogs                EmailLog[]
+  unsubscribeTokens        UnsubscribeToken[]
+  emailVerificationTokens  EmailVerificationToken[]
 
   @@unique([username])
   @@unique([slug])
@@ -612,4 +616,78 @@ model OrganizationRequest {
   updatedAt               DateTime @updatedAt
 
   @@map("organization_request")
+}
+
+model EmailPreference {
+  id     Int @id @default(autoincrement())
+  userId Int @unique
+
+  // Reader notifications
+  newChapterAlert        Boolean @default(true)
+  newMangaRelease        Boolean @default(true)
+  dailyDigest            Boolean @default(true)
+  weeklyReadingSummary   Boolean @default(true)
+
+  // Subscription notifications
+  subscriptionReminders Boolean @default(true)
+
+  // Engagement
+  readingStreakMilestones Boolean @default(true)
+  reEngagement           Boolean @default(true)
+  recommendations        Boolean @default(true)
+
+  // Staff/Admin (only relevant for users with canSeeAdminPanel)
+  weeklyOrgReport    Boolean @default(true)
+  newSubscriberAlert Boolean @default(true)
+  revenueAlert       Boolean @default(true)
+  contentPerformance Boolean @default(true)
+  failedPaymentAlert Boolean @default(true)
+
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("email_preference")
+}
+
+model EmailLog {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  emailType String   @db.VarChar(100)
+  subject   String   @db.VarChar(500)
+  resendId  String?  @db.VarChar(256)
+  status    String   @default("sent") @db.VarChar(50)
+  metadata  Json?
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, emailType, createdAt])
+  @@index([createdAt])
+  @@map("email_log")
+}
+
+model UnsubscribeToken {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  token     String   @unique @db.VarChar(256)
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([token])
+  @@map("unsubscribe_token")
+}
+
+model EmailVerificationToken {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  token     String   @unique @db.VarChar(256)
+  expiresAt DateTime
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("email_verification_token")
 }
