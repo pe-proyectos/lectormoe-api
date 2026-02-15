@@ -58,6 +58,7 @@ export const getFeaturedManga = async (limit: number = 8) => {
 					name: true,
 					domain: true,
 					slug: true,
+					isNSFW: true,
 				},
 			},
 			chapters: {
@@ -130,7 +131,8 @@ export const getFeaturedManga = async (limit: number = 8) => {
 			mangaUrl: `/${organization.slug}/manga/${manga.slug}`,
 			badgeColor: getBadgeColor(organization.name),
 			chapters: lastChapters,
-			organizationId: organization.id, // Include organizationId for subscription checks
+			organizationId: organization.id,
+			isNSFW: mangaCustom.isNSFW || organization.isNSFW,
 		};
 	});
 };

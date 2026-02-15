@@ -113,6 +113,7 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 						name: true,
 						slug: true,
 						title: true,
+						isNSFW: true,
 					},
 				},
 				chapters: {
@@ -232,6 +233,7 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 						name: true,
 						slug: true,
 						title: true,
+						isNSFW: true,
 					},
 				},
 				chapters: {

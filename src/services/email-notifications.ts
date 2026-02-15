@@ -412,7 +412,20 @@ export async function sendCommentReplyNotification(
   const allowed = await canSendEmail(parentComment.user.id, 'comment_reply');
   if (!allowed) return;
 
-  const threadUrl = `${BASE_URL}/${reply.organization.slug}`;
+  // Build thread URL from comment identifier
+  // Format: {mangaSlug}_{chapterNumber} or just {mangaSlug}
+  const identifier = reply.identifier;
+  const lastUnderscore = identifier.lastIndexOf('_');
+  let threadUrl: string;
+
+  if (lastUnderscore > 0 && /^\d+$/.test(identifier.slice(lastUnderscore + 1))) {
+    const mangaSlug = identifier.slice(0, lastUnderscore);
+    const chapterNumber = identifier.slice(lastUnderscore + 1);
+    threadUrl = `${BASE_URL}/${reply.organization.slug}/manga/${mangaSlug}/chapters/${chapterNumber}`;
+  } else {
+    threadUrl = `${BASE_URL}/${reply.organization.slug}/manga/${identifier}`;
+  }
+
   const unsubscribeUrl = await getUnsubscribeUrl(parentComment.user.id, 'comment_reply');
 
   const html = templates.commentReplyTemplate(

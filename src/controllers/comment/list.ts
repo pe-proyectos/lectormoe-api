@@ -9,6 +9,7 @@ export const listComments = async (
   const userSelect = {
     id: true,
     username: true,
+    slug: true,
     imageUrl: true,
     subscriptions: {
       where: { active: true },

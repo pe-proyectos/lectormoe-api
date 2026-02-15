@@ -516,3 +516,54 @@ export function achievementTemplate(
     </div>
   `, unsubscribeUrl);
 }
+
+export function achievementsBatchTemplate(
+  username: string,
+  achievements: Array<{ key: string; title: string; emoji: string; description: string }>,
+  unsubscribeUrl?: string
+): string {
+  if (achievements.length === 1) {
+    return achievementTemplate(username, achievements[0].title, achievements[0].description, achievements[0].emoji, unsubscribeUrl);
+  }
+
+  const achievementsHtml = achievements.map((a) => `
+    <div style="background:#09090b;border:1px solid #27272a;border-radius:12px;padding:20px;margin:12px 0;text-align:center;">
+      <div style="font-size:40px;margin:0 0 8px 0;">${a.emoji}</div>
+      <p style="color:#ffffff;font-size:16px;font-weight:800;margin:0 0 4px 0;">${a.title}</p>
+      <p style="color:#71717a;font-size:12px;margin:0;">${a.description}</p>
+    </div>
+  `).join('');
+
+  return baseTemplate(`
+    <div style="text-align:center;">
+      <div style="font-size:64px;margin:0 0 16px 0;">🏆</div>
+      <h2 style="color:#ffffff;font-size:28px;font-weight:900;margin:0 0 8px 0;text-transform:uppercase;letter-spacing:-0.5px;">
+        ${achievements.length} Logros Desbloqueados!
+      </h2>
+      <p>Hola <strong style="color:#ffffff;">${username}</strong>, has desbloqueado nuevos logros!</p>
+    </div>
+    ${achievementsHtml}
+    <p style="color:#71717a;font-size:13px;margin-top:20px;text-align:center;">Sigue explorando para desbloquear mas logros!</p>
+  `, unsubscribeUrl);
+}
+
+export function organizationRegistrationTemplate(
+  orgName: string,
+  contactEmail: string,
+  description: string
+): string {
+  return baseTemplate(`
+    <h2 style="color:#ffffff;font-size:22px;font-weight:900;margin:0 0 16px 0;text-transform:uppercase;letter-spacing:-0.5px;">
+      Nueva Solicitud de Registro
+    </h2>
+    <p>Se ha recibido una nueva solicitud de registro de organizacion:</p>
+    <div style="background:#09090b;border:1px solid #27272a;border-radius:12px;padding:20px;margin:16px 0;">
+      <p style="color:#71717a;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;margin:0 0 8px 0;">Organizacion</p>
+      <p style="color:#ffffff;font-weight:700;font-size:18px;margin:0 0 16px 0;">${orgName}</p>
+      <p style="color:#71717a;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;margin:0 0 8px 0;">Email de Contacto</p>
+      <p style="color:#06b6d4;font-weight:700;margin:0 0 16px 0;">${contactEmail}</p>
+      <p style="color:#71717a;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;margin:0 0 8px 0;">Descripcion</p>
+      <p style="color:#a1a1aa;margin:0;">${description}</p>
+    </div>
+  `);
+}

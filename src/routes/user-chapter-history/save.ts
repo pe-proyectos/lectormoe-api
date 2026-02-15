@@ -1,6 +1,7 @@
 import { Elysia, t } from 'elysia';
 
 import { saveUserChapterHistory } from '../../controllers/user-chapter-history/save';
+import { checkAndUnlockAchievements } from '../../controllers/user/achievements';
 import { loggedUserOnly } from '../../plugins/auth';
 
 export const router = () => new Elysia()
@@ -17,6 +18,10 @@ export const router = () => new Elysia()
                     message: 'No se encontró el recurso.',
                 };
             }
+
+            // Check achievements (fire-and-forget)
+            const hour = new Date().getUTCHours();
+            checkAndUnlockAchievements(user.id, { action: 'read', hour }).catch(() => {});
 
             return {
                 status: true,

@@ -1,6 +1,7 @@
 import { Elysia, t } from 'elysia';
 
 import { saveUserChapterHistoryChapter } from '../../controllers/user-chapter-history/save-chapter';
+import { checkAndUnlockAchievements } from '../../controllers/user/achievements';
 import { loggedOptional } from '../../plugins/auth';
 
 export const router = () => new Elysia()
@@ -12,6 +13,12 @@ export const router = () => new Elysia()
                 throw new Error('No autorizado');
             }
             const view = await saveUserChapterHistoryChapter(organizationId, user.id, mangaSlug, chapterNumber);
+
+            // Check achievements (fire-and-forget)
+            if (view) {
+                const hour = new Date().getUTCHours();
+                checkAndUnlockAchievements(user.id, { action: 'read', hour }).catch(() => {});
+            }
 
             return {
                 status: true,

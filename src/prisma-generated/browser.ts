@@ -172,3 +172,18 @@ export type UnsubscribeToken = Prisma.UnsubscribeTokenModel
  * 
  */
 export type EmailVerificationToken = Prisma.EmailVerificationTokenModel
+/**
+ * Model UserDailyActivity
+ * 
+ */
+export type UserDailyActivity = Prisma.UserDailyActivityModel
+/**
+ * Model Achievement
+ * 
+ */
+export type Achievement = Prisma.AchievementModel
+/**
+ * Model UserAchievement
+ * 
+ */
+export type UserAchievement = Prisma.UserAchievementModel

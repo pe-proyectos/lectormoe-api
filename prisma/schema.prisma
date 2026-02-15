@@ -125,6 +125,8 @@ model User {
   emailLogs               EmailLog[]
   unsubscribeTokens       UnsubscribeToken[]
   emailVerificationTokens EmailVerificationToken[]
+  dailyActivities         UserDailyActivity[]
+  achievements            UserAchievement[]
 
   @@unique([username])
   @@unique([slug])
@@ -693,4 +695,47 @@ model EmailVerificationToken {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("email_verification_token")
+}
+
+model UserDailyActivity {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  date      DateTime @db.Date
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, date])
+  @@index([userId, date])
+  @@map("user_daily_activity")
+}
+
+model Achievement {
+  id          Int      @id @default(autoincrement())
+  key         String   @unique @db.VarChar(100)
+  title       String   @db.VarChar(256)
+  description String
+  emoji       String   @db.VarChar(10)
+  category    String   @db.VarChar(50)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now()) @db.Timestamp(6)
+
+  userAchievements UserAchievement[]
+
+  @@index([category])
+  @@map("achievement")
+}
+
+model UserAchievement {
+  id            Int      @id @default(autoincrement())
+  userId        Int
+  achievementId Int
+  unlockedAt    DateTime @default(now()) @db.Timestamp(6)
+
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  achievement Achievement @relation(fields: [achievementId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, achievementId])
+  @@index([userId])
+  @@map("user_achievement")
 }

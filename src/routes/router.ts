@@ -41,7 +41,9 @@ import { router as genreDeleteRouter } from "./genre/delete";
 import { router as genreEditRouter } from "./genre/edit";
 import { router as genreListRouter } from "./genre/list";
 import { router as landingFeaturedMangaRouter } from "./landing/featured-manga";
+import { router as landingPerOrgPopularRouter } from "./landing/per-org-popular";
 import { router as landingScansRouter } from "./landing/scans";
+import { router as landingTopCommentersRouter } from "./landing/top-commenters";
 import { router as landingTopReadersRouter } from "./landing/top-readers";
 import { router as mangaAutocompleteRouter } from "./manga/autocomplete";
 import { router as mangaCreateRouter } from "./manga/create";
@@ -59,6 +61,7 @@ import { router as organizationEditRouter } from "./organization/edit";
 import { router as organizationFollowRouter } from "./organization/follow";
 import { router as organizationListFollowedRouter } from "./organization/list-followed";
 import { router as organizationRequestRegistrationRouter } from "./organization/request-registration";
+import { router as organizationTopCommentersRouter } from "./organization/top-commenters";
 import { router as organizationTopDonorsRouter } from "./organization/top-donors";
 import { router as organizationTopReadersRouter } from "./organization/top-readers";
 import { router as pagesCreateRouter } from "./pages/create";
@@ -80,6 +83,8 @@ import { router as transactionsCronRouter } from "./transactions/cron";
 import { router as transactionsListRouter } from "./transactions/list";
 import { router as userEditRouter } from "./user/edit";
 import { router as userListRouter } from "./user/list";
+import { router as userPublicProfileRouter } from "./user/public-profile";
+import { router as userAchievementsRouter } from "./user/achievements";
 import { router as userStatsRouter } from "./user/stats";
 import { router as userChapterHistoryListRouter } from "./user-chapter-history/list";
 import { router as userChapterHistorySaveChapterRouter } from "./user-chapter-history/save-chapter";
@@ -153,7 +158,9 @@ export const router = () => async (app: Elysia) => {
 
 	// Landing
 	app.use(landingFeaturedMangaRouter());
+	app.use(landingPerOrgPopularRouter());
 	app.use(landingScansRouter());
+	app.use(landingTopCommentersRouter());
 	app.use(landingTopReadersRouter());
 
 	// Manga
@@ -177,6 +184,7 @@ export const router = () => async (app: Elysia) => {
 	app.use(organizationFollowRouter());
 	app.use(organizationListFollowedRouter());
 	app.use(organizationRequestRegistrationRouter());
+	app.use(organizationTopCommentersRouter());
 	app.use(organizationTopDonorsRouter());
 	app.use(organizationTopReadersRouter());
 
@@ -206,8 +214,10 @@ export const router = () => async (app: Elysia) => {
 	app.use(transactionsListRouter());
 
 	// User
+	app.use(userAchievementsRouter());
 	app.use(userEditRouter());
 	app.use(userListRouter());
+	app.use(userPublicProfileRouter());
 	app.use(userStatsRouter());
 
 	// User Chapter History

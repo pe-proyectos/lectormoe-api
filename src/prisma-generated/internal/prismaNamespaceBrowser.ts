@@ -81,7 +81,10 @@ export const ModelName = {
   EmailPreference: 'EmailPreference',
   EmailLog: 'EmailLog',
   UnsubscribeToken: 'UnsubscribeToken',
-  EmailVerificationToken: 'EmailVerificationToken'
+  EmailVerificationToken: 'EmailVerificationToken',
+  UserDailyActivity: 'UserDailyActivity',
+  Achievement: 'Achievement',
+  UserAchievement: 'UserAchievement'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -614,6 +617,7 @@ export const EmailPreferenceScalarFieldEnum = {
   readingStreakMilestones: 'readingStreakMilestones',
   reEngagement: 'reEngagement',
   recommendations: 'recommendations',
+  commentReplyAlert: 'commentReplyAlert',
   weeklyOrgReport: 'weeklyOrgReport',
   newSubscriberAlert: 'newSubscriberAlert',
   revenueAlert: 'revenueAlert',
@@ -659,6 +663,40 @@ export const EmailVerificationTokenScalarFieldEnum = {
 } as const
 
 export type EmailVerificationTokenScalarFieldEnum = (typeof EmailVerificationTokenScalarFieldEnum)[keyof typeof EmailVerificationTokenScalarFieldEnum]
+
+
+export const UserDailyActivityScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  date: 'date',
+  createdAt: 'createdAt'
+} as const
+
+export type UserDailyActivityScalarFieldEnum = (typeof UserDailyActivityScalarFieldEnum)[keyof typeof UserDailyActivityScalarFieldEnum]
+
+
+export const AchievementScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  title: 'title',
+  description: 'description',
+  emoji: 'emoji',
+  category: 'category',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt'
+} as const
+
+export type AchievementScalarFieldEnum = (typeof AchievementScalarFieldEnum)[keyof typeof AchievementScalarFieldEnum]
+
+
+export const UserAchievementScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  achievementId: 'achievementId',
+  unlockedAt: 'unlockedAt'
+} as const
+
+export type UserAchievementScalarFieldEnum = (typeof UserAchievementScalarFieldEnum)[keyof typeof UserAchievementScalarFieldEnum]
 
 
 export const SortOrder = {

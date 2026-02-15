@@ -18,6 +18,14 @@ export const getMangaCustomBySlug = async (organizationId: number, mangaSlug: st
 					bookType: true,
 				}
 			},
+			organization: {
+				select: {
+					id: true,
+					name: true,
+					slug: true,
+					isNSFW: true,
+				},
+			},
 			chapters: {
 				orderBy: {
 					number: Prisma.SortOrder.desc,

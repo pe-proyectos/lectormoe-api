@@ -1,7 +1,8 @@
 import { prisma } from "../../models/prisma";
+import { getActiveDaysStreak } from "./daily-activity";
 
 export const getUserStats = async (userId: number) => {
-  // Get user to calculate active days
+  // Get user to calculate account age
   const user = await prisma.user.findUnique({
     where: { id: userId },
     select: { createdAt: true },
@@ -11,11 +12,11 @@ export const getUserStats = async (userId: number) => {
     throw new Error("Usuario no encontrado");
   }
 
-  const activeDays = Math.floor(
+  const accountAge = Math.floor(
     (Date.now() - user.createdAt.getTime()) / (1000 * 60 * 60 * 24)
   );
 
-  const [toReadCount, readCount, streakDates, genreResult, weekChaptersRead] = await Promise.all([
+  const [toReadCount, readCount, streakDates, genreResult, weekChaptersRead, activeDaysStreak] = await Promise.all([
     // Chapters not finished (to read)
     prisma.userChapterHistory.count({
       where: { userId, finishedAt: null },
@@ -63,6 +64,9 @@ export const getUserStats = async (userId: number) => {
         },
       });
     })(),
+
+    // Consecutive active days streak
+    getActiveDaysStreak(userId),
   ]);
 
   // Calculate reading streak (consecutive days from today)
@@ -86,7 +90,8 @@ export const getUserStats = async (userId: number) => {
   const favoriteGenre = genreResult[0]?.name || null;
 
   return {
-    activeDays,
+    accountAge,
+    activeDaysStreak,
     toRead: toReadCount,
     read: readCount,
     streak,

@@ -2,6 +2,7 @@ import { Elysia, t } from 'elysia';
 
 import { CreateCommentRequest } from '../../types/comment/create';
 import { createComment } from '../../controllers/comment/create';
+import { checkAndUnlockAchievements } from '../../controllers/user/achievements';
 import { loggedOptional } from '../../plugins/auth';
 import { useOrganizationOptional } from '../../plugins/organization';
 
@@ -22,6 +23,9 @@ export const router = () => new Elysia()
             if (!commentCreated) {
                 throw new Error("No se pudo crear el comentario.");
             }
+
+            // Check achievements (fire-and-forget)
+            checkAndUnlockAchievements(user.id, { action: 'comment' }).catch(() => {});
 
             return {
                 status: true,

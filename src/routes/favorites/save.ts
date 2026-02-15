@@ -1,6 +1,7 @@
 import { Elysia, t } from 'elysia';
 
 import { saveFavorite } from '../../controllers/favorites/save';
+import { checkAndUnlockAchievements } from '../../controllers/user/achievements';
 import { loggedOptional } from '../../plugins/auth';
 
 export const router = () => new Elysia()
@@ -12,6 +13,9 @@ export const router = () => new Elysia()
                 throw new Error('No autorizado');
             }
             const view = await saveFavorite(organizationId, user.id, mangaSlug);
+
+            // Check achievements (fire-and-forget)
+            checkAndUnlockAchievements(user.id, { action: 'favorite' }).catch(() => {});
 
             return {
                 status: true,

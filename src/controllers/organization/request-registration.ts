@@ -1,5 +1,7 @@
 import { prisma } from "../../models/prisma";
 import type { RequestRegistrationRequest } from "../../types/organization/request-registration";
+import { sendAdminEmail } from "../../services/email";
+import { organizationRegistrationTemplate } from "../../services/email-templates";
 
 export async function requestRegistration(body: RequestRegistrationRequest) {
     const { applicantName, applicantEmail, scanName, references, previousWorks, estimatedMonthlyReaders } = body;
@@ -36,6 +38,14 @@ export async function requestRegistration(body: RequestRegistrationRequest) {
             status: "pending",
         },
     });
+
+    // Send notification email (fire-and-forget)
+    const description = `Nombre: ${applicantName}\nEmail: ${applicantEmail}\nReferencias: ${references}\nTrabajos previos: ${previousWorks}\nLectores estimados: ${estimatedMonthlyReaders}`;
+    sendAdminEmail(
+        'luis.choque.castro@outlook.com',
+        `Nueva Solicitud de Registro: ${scanName}`,
+        organizationRegistrationTemplate(scanName, applicantEmail, description.replace(/\n/g, '<br>'))
+    ).catch((err) => console.error('[Org Registration] Error sending notification email:', err));
 
     return {
         status: true,

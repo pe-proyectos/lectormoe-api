@@ -1,6 +1,7 @@
 import { Elysia, t } from 'elysia';
 
 import { loggedOptional } from '../../plugins/auth';
+import { recordDailyActivity } from '../../controllers/user/daily-activity';
 
 export const router = () => new Elysia()
     .use(loggedOptional())
@@ -14,6 +15,9 @@ export const router = () => new Elysia()
                     message: 'Sesión no válida',
                 };
             }
+
+            // Record daily activity (fire-and-forget, don't block response)
+            recordDailyActivity(user.id).catch(() => {});
 
             return {
                 status: true,

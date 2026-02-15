@@ -17,6 +17,7 @@ export const listAllComments = async (
         select: {
           id: true,
           username: true,
+          slug: true,
           imageUrl: true,
           subscriptions: {
             where: {
@@ -53,6 +54,7 @@ export const listAllComments = async (
             select: {
               id: true,
               username: true,
+              slug: true,
               imageUrl: true,
               subscriptions: {
                 where: {

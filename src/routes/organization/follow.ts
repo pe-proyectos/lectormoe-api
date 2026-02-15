@@ -2,6 +2,7 @@ import { Elysia, t } from 'elysia';
 import { logged } from '../../plugins/auth';
 import { toggleFollowOrganization, checkIfUserFollows } from '../../controllers/organization/follow';
 import { checkOrganizationBySlug } from '../../controllers/organization/check';
+import { checkAndUnlockAchievements } from '../../controllers/user/achievements';
 import { prisma } from '../../models/prisma';
 
 export const router = () => new Elysia()
@@ -48,13 +49,18 @@ export const router = () => new Elysia()
             }
 
             const result = await toggleFollowOrganization(user.id, organization.id);
-            
+
             // Get updated follower count
             const followerCount = await prisma.organizationFollower.count({
                 where: {
                     organizationId: organization.id,
                 },
             });
+
+            // Check achievements on follow (fire-and-forget)
+            if (result.followed) {
+                checkAndUnlockAchievements(user.id, { action: 'follow' }).catch(() => {});
+            }
 
             return {
                 status: true,
