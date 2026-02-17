@@ -69,6 +69,26 @@ export async function sendWelcomeEmail(
   });
 }
 
+export async function sendWelcomeAndVerifyEmail(
+  userId: number,
+  email: string,
+  username: string,
+  token: string
+): Promise<string | null> {
+  const verifyUrl = `${BASE_URL}/verify-email?token=${token}`;
+  const html = templates.welcomeAndVerifyTemplate(username, verifyUrl, BASE_URL);
+
+  return sendEmail({
+    userId,
+    to: email,
+    subject: 'Bienvenido a Capibara Traductor - Verifica tu Email',
+    html,
+    emailType: 'welcome_and_verify',
+    skipPreferenceCheck: true,
+    dedupWindowMinutes: 5,
+  });
+}
+
 // ──────────── Reader Notifications ────────────
 
 /**

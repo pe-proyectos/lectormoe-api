@@ -1010,34 +1010,38 @@ async function processReadingAchievements() {
 // Schedules are spread out to avoid collisions and rate limit issues
 export const router = () =>
   new Elysia()
-    .use(
-      cron({
-        name: "email-daily-digest",
-        pattern: "0 14 * * *", // 2:00 PM UTC daily
-        run: processDailyDigest,
-      })
-    )
-    .use(
-      cron({
-        name: "email-weekly-reading-summary",
-        pattern: "0 15 * * 1", // Monday 3:00 PM UTC
-        run: processWeeklyReadingSummary,
-      })
-    )
-    .use(
-      cron({
-        name: "email-weekly-org-report",
-        pattern: "0 16 * * 1", // Monday 4:00 PM UTC (1hr gap from weekly summary)
-        run: processWeeklyOrgReport,
-      })
-    )
-    .use(
-      cron({
-        name: "email-re-engagement",
-        pattern: "0 18 * * *", // 6:00 PM UTC daily
-        run: processReEngagement,
-      })
-    )
+    // DISABLED: Daily digest emails to reduce email consumption
+    // .use(
+    //   cron({
+    //     name: "email-daily-digest",
+    //     pattern: "0 14 * * *", // 2:00 PM UTC daily
+    //     run: processDailyDigest,
+    //   })
+    // )
+    // DISABLED: Weekly reading summary to reduce email consumption
+    // .use(
+    //   cron({
+    //     name: "email-weekly-reading-summary",
+    //     pattern: "0 15 * * 1", // Monday 3:00 PM UTC
+    //     run: processWeeklyReadingSummary,
+    //   })
+    // )
+    // DISABLED: Weekly org report to reduce email consumption
+    // .use(
+    //   cron({
+    //     name: "email-weekly-org-report",
+    //     pattern: "0 16 * * 1", // Monday 4:00 PM UTC (1hr gap from weekly summary)
+    //     run: processWeeklyOrgReport,
+    //   })
+    // )
+    // DISABLED: Re-engagement emails to reduce email consumption
+    // .use(
+    //   cron({
+    //     name: "email-re-engagement",
+    //     pattern: "0 18 * * *", // 6:00 PM UTC daily
+    //     run: processReEngagement,
+    //   })
+    // )
     .use(
       cron({
         name: "email-reading-streaks",
@@ -1052,13 +1056,14 @@ export const router = () =>
         run: processMonthlyRecap,
       })
     )
-    .use(
-      cron({
-        name: "email-top-reader-leaderboard",
-        pattern: "0 17 * * 1", // Monday 5:00 PM UTC (1hr gap from org report)
-        run: processTopReaderLeaderboard,
-      })
-    )
+    // DISABLED: Top reader leaderboard to reduce email consumption
+    // .use(
+    //   cron({
+    //     name: "email-top-reader-leaderboard",
+    //     pattern: "0 17 * * 1", // Monday 5:00 PM UTC (1hr gap from org report)
+    //     run: processTopReaderLeaderboard,
+    //   })
+    // )
     .use(
       cron({
         name: "email-reading-achievements",

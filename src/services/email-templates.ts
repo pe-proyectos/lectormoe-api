@@ -113,6 +113,29 @@ export function welcomeTemplate(username: string, exploreUrl: string, unsubscrib
   `, unsubscribeUrl);
 }
 
+export function welcomeAndVerifyTemplate(username: string, verifyUrl: string, exploreUrl: string): string {
+  return baseTemplate(`
+    <h2 style="color:#ffffff;font-size:22px;font-weight:900;margin:0 0 16px 0;text-transform:uppercase;letter-spacing:-0.5px;">
+      Bienvenido a Capibara Traductor
+    </h2>
+    <p>Hola <strong style="color:#ffffff;">${username}</strong>, nos alegra tenerte aqui!</p>
+    <p><strong style="color:#06b6d4;">Primero, verifica tu email</strong> para completar tu registro:</p>
+    ${ctaButton('Verificar Email', verifyUrl)}
+    <p style="font-size:12px;color:#52525b;margin:16px 0;">Este enlace expira en <strong style="color:#a1a1aa;">24 horas</strong>.</p>
+
+    <div style="border-top:1px solid #27272a;margin:24px 0;padding-top:24px;">
+      <h3 style="color:#ffffff;font-size:18px;font-weight:700;margin:0 0 12px 0;">Que puedes hacer en Capibara Traductor:</h3>
+      <ul style="color:#a1a1aa;padding-left:20px;">
+        <li style="margin-bottom:8px;">Leer miles de capitulos gratis</li>
+        <li style="margin-bottom:8px;">Seguir tus mangas favoritos y recibir alertas</li>
+        <li style="margin-bottom:8px;">Guardar tu progreso de lectura</li>
+        <li style="margin-bottom:8px;">Unirte a comunidades de scanlation</li>
+      </ul>
+    </div>
+    <p style="font-size:12px;color:#52525b;">Configura tus notificaciones en cualquier momento desde tu perfil.</p>
+  `);
+}
+
 export function newChapterAlertTemplate(
   username: string,
   mangaTitle: string,
