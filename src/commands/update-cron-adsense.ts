@@ -170,8 +170,8 @@ export async function updateCronAdSense(targetMonth?: number, targetYear?: numbe
           const transactionData = {
             organizationId: org.id,
             origin: 'ADSENSE',
-            description: `${startDateStr}-${endDateStr} | adsense ${orgRevenue.revenue.toFixed(2)} ${orgRevenue.currency}, comision capibara 50% ${capibaraCommission.toFixed(2)} ${orgRevenue.currency}, ganancias netas ${netAmount.toFixed(2)} ${orgRevenue.currency}`,
-            beforeFeesAmount: orgRevenue.revenue,
+            description: `${startDateStr}-${endDateStr} | adsense ${netAmount.toFixed(2)} ${orgRevenue.currency}`,
+            beforeFeesAmount: netAmount,
             amount: netAmount,
             currency: orgRevenue.currency,
             type: 'EARNING',
@@ -185,7 +185,7 @@ export async function updateCronAdSense(targetMonth?: number, targetYear?: numbe
             }),
             transactionDate: new Date(),
             transactionId: transactionId,
-            capibaraFee: capibaraCommission,
+            capibaraFee: 0,
             paypalFee: 0
           };
 
@@ -269,23 +269,7 @@ export async function updateCronAdSense(targetMonth?: number, targetYear?: numbe
     console.log(`📊 Processed ${processedCount} organizations`);
     console.log(`💰 Total revenue processed: $${totalRevenue.toFixed(2)}`);
 
-    // Log platform revenue (slugs without matching organization)
-    const platformRevenue = revenueData.filter(data =>
-      !organizations.some(org =>
-        data.slug === org.slug
-      )
-    );
-
-    if (platformRevenue.length > 0) {
-      const platformTotal = platformRevenue.reduce((sum, item) => sum + item.revenue, 0);
-      console.log(`\n💰 Platform Revenue (Capibara)`);
-      console.log(`   Found ${platformRevenue.length} slug(s) with revenue for the platform:`);
-      platformRevenue.forEach(item => {
-        console.log(`   - ${item.slug}: $${item.revenue.toFixed(2)}`);
-      });
-      console.log(`   📊 Total platform revenue: $${platformTotal.toFixed(2)}`);
-      console.log(`   ℹ️  This revenue belongs to Capibara and is not stored in organization transactions`);
-    }
+    console.log(`\n   ℹ️  Revenue distributed by page views. Platform earns 50% via Capibara fee.`);
 
   } catch (error) {
     console.error('❌ Error in monthly AdSense revenue fetch:', error);

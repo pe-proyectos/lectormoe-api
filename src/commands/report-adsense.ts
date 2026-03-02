@@ -10,7 +10,7 @@ async function reportAdSense(month: number, year: number) {
   console.log('📊 AdSense Revenue Report (Read-only)\n');
   console.log('='.repeat(80));
   console.log(`📅 Period: ${year}-${month.toString().padStart(2, '0')}`);
-  console.log(`ℹ️  Combining subdomain + path-based revenue (for transition period)`);
+  console.log(`ℹ️  View-based distribution: total domain revenue split by org views`);
   console.log('='.repeat(80));
 
   try {
@@ -93,45 +93,18 @@ async function reportAdSense(month: number, year: number) {
       console.log('');
     }
 
-    // Platform revenue (unmatched slugs)
-    const platformRevenue = revenueData.filter(data =>
-      !organizations.some(org => org.slug === data.slug)
-    );
-
-    console.log('='.repeat(80));
-    console.log('\n🏢 PLATFORM REVENUE (CAPIBARA)\n');
-
-    let totalPlatformRevenue = 0;
-
-    if (platformRevenue.length > 0) {
-      platformRevenue.forEach(item => {
-        console.log(`   - Slug: "${item.slug}"`);
-        console.log(`     Revenue: $${item.revenue.toFixed(2)}`);
-        totalPlatformRevenue += item.revenue;
-      });
-      console.log(`\n   💰 Total Platform Revenue: $${totalPlatformRevenue.toFixed(2)}`);
-      console.log('   ℹ️  This revenue belongs to Capibara (no matching organization)');
-    } else {
-      console.log('   ℹ️  No platform revenue - all revenue matched to organizations');
-    }
-
     // Final summary
-    console.log('\n' + '='.repeat(80));
+    console.log('='.repeat(80));
     console.log('\n📊 SUMMARY\n');
     console.log(`   Organizations processed:       ${organizations.length}`);
     console.log(`   Organizations with revenue:    ${orgsWithRevenue}`);
     console.log(`   Organizations without revenue: ${orgsWithoutRevenue.length}`);
     console.log('');
-    console.log(`   💰 Total Org Gross Revenue:    $${totalOrgRevenue.toFixed(2)}`);
-    console.log(`   🏢 Total Capibara Fees (50%):  $${totalCapibaraFees.toFixed(2)}`);
-    console.log(`   💵 Total Net for Orgs:         $${totalNetRevenue.toFixed(2)}`);
+    console.log(`   💰 Total AdSense Revenue:      $${totalOrgRevenue.toFixed(2)}`);
+    console.log(`   🏢 Capibara Platform (50%):    $${totalCapibaraFees.toFixed(2)}`);
+    console.log(`   💵 Total Net for Orgs (50%):   $${totalNetRevenue.toFixed(2)}`);
     console.log('');
-    console.log(`   🏢 Platform Revenue (Capibara): $${totalPlatformRevenue.toFixed(2)}`);
-    console.log('');
-    console.log(`   📊 TOTAL CAPIBARA EARNINGS:    $${(totalCapibaraFees + totalPlatformRevenue).toFixed(2)}`);
-    console.log(`      (Fees: $${totalCapibaraFees.toFixed(2)} + Platform: $${totalPlatformRevenue.toFixed(2)})`);
-    console.log('');
-    console.log(`   💎 GRAND TOTAL:                $${(totalOrgRevenue + totalPlatformRevenue).toFixed(2)}`);
+    console.log('   ℹ️  Revenue distributed by page views of ads-enabled orgs');
     console.log('');
     console.log('='.repeat(80));
     console.log('\n✅ Report completed (no database changes were made)\n');
