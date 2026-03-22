@@ -52,7 +52,7 @@ export async function updateCronAdSense(targetMonth?: number, targetYear?: numbe
     
     console.log(`📅 Processing AdSense revenue for: ${year}-${(month + 1).toString().padStart(2, '0')}`);
 
-    // Get revenue data for the specified month (combines subdomain + path-based URLs)
+    // Get revenue data for the specified month
     const revenueData = await getMonthlyAdSenseRevenueCombined(year, month + 1);
     console.log(revenueData);
     
@@ -150,7 +150,7 @@ export async function updateCronAdSense(targetMonth?: number, targetYear?: numbe
     // Process revenue data for each organization
     for (const org of organizations) {
       try {
-        // Find revenue data for this organization's slug (now using URL paths instead of subdomains)
+        // Find revenue data for this organization's slug
         const orgRevenue = revenueData.find(data =>
           data.slug === org.slug
         );

@@ -62,7 +62,9 @@ const userHasAccessToChapter = async (
   if (permissions?.canEditPage === true) return true;
 
   const mangaWithPlans = manga as MangaCustomWithPlans;
-  const isChapterReleased = new Date(chapter.releasedAt).getTime() < new Date().getTime();
+  const isChapterReleased = chapter.releasedAt
+    ? new Date(chapter.releasedAt).getTime() < new Date().getTime()
+    : false; // null releasedAt = no lanzado
 
   // 3. Verificar acceso según si el capítulo fue lanzado o no
   if (isChapterReleased) {
@@ -152,7 +154,9 @@ export function getAccessDeniedReason(
     return "login_required";
   }
 
-  const isChapterReleased = new Date(chapter.releasedAt).getTime() < new Date().getTime();
+  const isChapterReleased = chapter.releasedAt
+    ? new Date(chapter.releasedAt).getTime() < new Date().getTime()
+    : false; // null releasedAt = no lanzado
 
   if (isChapterReleased) {
     const hasCanReadReleasedPlans = (manga?.subscriptionPlansCanReadReleased?.length ?? 0) > 0;
@@ -233,7 +237,9 @@ export async function checkChapterAccess(
     };
   }
 
-  const isChapterReleased = new Date(chapter.releasedAt).getTime() < new Date().getTime();
+  const isChapterReleased = chapter.releasedAt
+    ? new Date(chapter.releasedAt).getTime() < new Date().getTime()
+    : false; // null releasedAt = no lanzado
   const errorType = getAccessDeniedReason(user, chapter, manga);
   const message = getAccessDeniedMessage(errorType, manga, isChapterReleased);
   

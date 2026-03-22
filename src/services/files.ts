@@ -27,48 +27,23 @@ if (!bucket) {
 }
 
 /**
- * Extract tenant name from organization domain
- * @param domain - The organization domain (e.g., "senshimanga.capibaratraductor.com")
- * @returns The tenant name or null if it's the base domain
- */
-function getTenantNameFromDomain(domain: string): string | null {
-    const baseDomain = Bun.env.PUBLIC_BASE_DOMAIN || "capibaratraductor.com";
-    const normalizedDomain = domain.startsWith("www.") ? domain.substring(4) : domain;
-    const normalizedBaseDomain = baseDomain.startsWith("www.") ? baseDomain.substring(4) : baseDomain;
-    
-    // If it's the base domain, return null (no tenant)
-    if (normalizedDomain === normalizedBaseDomain) {
-        return null;
-    }
-    
-    // Extract subdomain (tenant name)
-    if (normalizedDomain.endsWith(`.${normalizedBaseDomain}`)) {
-        const tenantName = normalizedDomain.replace(`.${normalizedBaseDomain}`, '');
-        // Sanitize tenant name for use in file paths
-        return tenantName.replace(/[^a-zA-Z0-9-_]/g, '_').toLowerCase();
-    }
-    
-    return null;
-}
-
-/**
- * Get organization domain from organizationId
+ * Get organization slug from organizationId
  * @param organizationId - The organization ID
- * @returns The organization domain or null
+ * @returns The organization slug or null
  */
-async function getOrganizationDomain(organizationId?: number): Promise<string | null> {
+async function getOrganizationSlug(organizationId?: number): Promise<string | null> {
     if (!organizationId) {
         return null;
     }
-    
+
     try {
         const organization = await prisma.organization.findUnique({
             where: { id: organizationId },
-            select: { domain: true }
+            select: { slug: true }
         });
-        return organization?.domain || null;
+        return organization?.slug || null;
     } catch (error) {
-        console.error('Error getting organization domain:', error);
+        console.error('Error getting organization slug:', error);
         return null;
     }
 }
@@ -87,7 +62,7 @@ export async function generatePresignedUploadUrl(
     filename: string,
     contentType: string,
     expiresIn: number = 3600,
-    organizationDomain?: string,
+    organizationSlug?: string,
     organizationId?: number,
     contentFolder?: string
 ): Promise<{ uploadUrl: string; fileKey: string }> {
@@ -98,26 +73,22 @@ export async function generatePresignedUploadUrl(
     const timestamp = new Date().getTime();
     const random = Math.floor(Math.random() * 1000000) + 1;
     const extension = filename.split('.').pop();
-    
+
     // Sanitize content folder name
     const sanitizedContentFolder = contentFolder ? contentFolder.replace(/[^a-zA-Z0-9-_]/g, '_').toLowerCase() : 'general';
-    
+
     // Some content types are global and should never be tenant-specific
-    // User profiles and comments are global across all organizations
     const globalContentFolders = ['profile_pictures', 'avatars', 'comments'];
     const isGlobalContent = globalContentFolders.includes(sanitizedContentFolder);
-    
-    // Get organization domain if not provided but organizationId is (only for non-global content)
-    let finalOrganizationDomain = organizationDomain;
-    if (!isGlobalContent && !finalOrganizationDomain && organizationId) {
-        finalOrganizationDomain = await getOrganizationDomain(organizationId) || undefined;
+
+    // Get organization slug if not provided but organizationId is (only for non-global content)
+    let tenantName = !isGlobalContent ? (organizationSlug || null) : null;
+    if (!isGlobalContent && !tenantName && organizationId) {
+        tenantName = await getOrganizationSlug(organizationId);
     }
-    
-    // Get tenant name from domain if provided (only for non-global content)
-    const tenantName = !isGlobalContent && finalOrganizationDomain ? getTenantNameFromDomain(finalOrganizationDomain) : null;
-    
+
     // Build file key with tenant and content folder structure
-    const fileKey = tenantName 
+    const fileKey = tenantName
         ? `tenants/${tenantName}/${sanitizedContentFolder}/${timestamp}_${random}.${extension}`
         : `${sanitizedContentFolder}/${timestamp}_${random}.${extension}`;
 
@@ -145,9 +116,9 @@ export async function generatePresignedUploadUrl(
  * @returns The file URL
  */
 export async function uploadFile(
-    fileBuffer: ArrayBuffer | Buffer, 
+    fileBuffer: ArrayBuffer | Buffer,
     filename: string,
-    organizationDomain?: string,
+    organizationSlug?: string,
     organizationId?: number,
     contentFolder?: string
 ): Promise<string> {
@@ -158,26 +129,22 @@ export async function uploadFile(
     const timestamp = new Date().getTime();
     const random = Math.floor(Math.random() * 1000000) + 1;
     const extension = filename.split('.').pop();
-    
+
     // Sanitize content folder name
     const sanitizedContentFolder = contentFolder ? contentFolder.replace(/[^a-zA-Z0-9-_]/g, '_').toLowerCase() : 'general';
-    
+
     // Some content types are global and should never be tenant-specific
-    // User profiles and comments are global across all organizations
     const globalContentFolders = ['profile_pictures', 'avatars', 'comments'];
     const isGlobalContent = globalContentFolders.includes(sanitizedContentFolder);
-    
-    // Get organization domain if not provided but organizationId is (only for non-global content)
-    let finalOrganizationDomain = organizationDomain;
-    if (!isGlobalContent && !finalOrganizationDomain && organizationId) {
-        finalOrganizationDomain = await getOrganizationDomain(organizationId) || undefined;
+
+    // Get organization slug if not provided but organizationId is (only for non-global content)
+    let tenantName = !isGlobalContent ? (organizationSlug || null) : null;
+    if (!isGlobalContent && !tenantName && organizationId) {
+        tenantName = await getOrganizationSlug(organizationId);
     }
-    
-    // Get tenant name from domain if provided (only for non-global content)
-    const tenantName = !isGlobalContent && finalOrganizationDomain ? getTenantNameFromDomain(finalOrganizationDomain) : null;
-    
+
     // Build file key with tenant and content folder structure
-    const fileKey = tenantName 
+    const fileKey = tenantName
         ? `tenants/${tenantName}/${sanitizedContentFolder}/${timestamp}_${random}.${extension}`
         : `${sanitizedContentFolder}/${timestamp}_${random}.${extension}`;
 

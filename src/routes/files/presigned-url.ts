@@ -22,15 +22,14 @@ export const router = () =>
         // If contentType is not provided, try to infer it from filename
         const finalContentType = contentType || getContentType(filename);
 
-        // Get organization domain from headers
-        const organizationDomain = headers.get('x-organization') || undefined;
+        const organizationSlug = headers.get('x-organization') || undefined;
 
         try {
           const { uploadUrl, fileKey } = await generatePresignedUploadUrl(
             filename,
             finalContentType,
             expiresIn || 3600,
-            organizationDomain,
+            organizationSlug,
             organizationId,
             contentFolder
           );

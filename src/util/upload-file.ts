@@ -1,11 +1,11 @@
 import { uploadFile as uploadFileToR2 } from "../services/files";
 
 export async function uploadFile(
-    fileBuffer: ArrayBuffer | Buffer, 
+    fileBuffer: ArrayBuffer | Buffer,
     filename: string,
-    organizationDomain?: string,
+    organizationSlug?: string,
     organizationId?: number,
     contentFolder?: string
 ): Promise<string> {
-    return await uploadFileToR2(fileBuffer, filename, organizationDomain, organizationId, contentFolder);
+    return await uploadFileToR2(fileBuffer, filename, organizationSlug, organizationId, contentFolder);
 }

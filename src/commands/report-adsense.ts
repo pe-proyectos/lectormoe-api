@@ -4,7 +4,7 @@ import { getMonthlyAdSenseRevenueCombined } from '../util/adsense';
 /**
  * Generate AdSense revenue report without saving to database
  * This script only displays information
- * Uses combined data (both subdomain and path-based URLs)
+ * Uses view-based revenue distribution
  */
 async function reportAdSense(month: number, year: number) {
   console.log('📊 AdSense Revenue Report (Read-only)\n');
@@ -14,7 +14,7 @@ async function reportAdSense(month: number, year: number) {
   console.log('='.repeat(80));
 
   try {
-    // Get revenue data from AdSense API (both subdomain and path-based)
+    // Get revenue data from AdSense API
     console.log('\n🔄 Fetching data from Google AdSense API...\n');
     const revenueData = await getMonthlyAdSenseRevenueCombined(year, month);
 

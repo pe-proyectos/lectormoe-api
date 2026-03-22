@@ -29,7 +29,7 @@ function getOAuth2Client(): OAuth2Client {
     oauth2Client = new OAuth2Client(
       process.env.GOOGLE_ADSENSE_CLIENT_ID,
       process.env.GOOGLE_ADSENSE_CLIENT_SECRET,
-      process.env.GOOGLE_ADSENSE_REDIRECT_URI || 'https://senshimanga.capibaratraductor.com/oauth2callback'
+      process.env.GOOGLE_ADSENSE_REDIRECT_URI || 'https://capibaratraductor.com/oauth2callback'
     );
     if (process.env.GOOGLE_ADSENSE_REFRESH_TOKEN) {
       oauth2Client.setCredentials({
@@ -226,7 +226,7 @@ export async function getMonthlyAdSenseRevenueCombined(year: number, month: numb
 
     const domainData = domainReport.data as any;
 
-    // Sum all capibaratraductor.com revenue (main domain + subdomains)
+    // Sum all capibaratraductor.com revenue
     let totalDomainRevenue = 0;
     if (domainData.rows && domainData.rows.length > 0) {
       for (const row of domainData.rows) {
