@@ -53,7 +53,13 @@ export const checkToken = async (
     },
     include: {
       ...includeSubscriptions,
-      permissions: true,
+      permissions: {
+        include: {
+          organization: {
+            select: { id: true, name: true, slug: true, logoUrl: true },
+          },
+        },
+      },
     },
   });
 

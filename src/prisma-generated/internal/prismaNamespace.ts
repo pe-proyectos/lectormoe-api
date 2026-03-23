@@ -3027,6 +3027,7 @@ export const OrganizationScalarFieldEnum = {
   twitchUrl: 'twitchUrl',
   twitterUrl: 'twitterUrl',
   youtubeUrl: 'youtubeUrl',
+  enableAds: 'enableAds',
   enableGoogleAds: 'enableGoogleAds',
   faviconUrl: 'faviconUrl',
   enableMangaSection: 'enableMangaSection',

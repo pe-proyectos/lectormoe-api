@@ -58,6 +58,7 @@ export type OrganizationMinAggregateOutputType = {
   twitchUrl: string | null
   twitterUrl: string | null
   youtubeUrl: string | null
+  enableAds: boolean | null
   enableGoogleAds: boolean | null
   faviconUrl: string | null
   enableMangaSection: boolean | null
@@ -104,6 +105,7 @@ export type OrganizationMaxAggregateOutputType = {
   twitchUrl: string | null
   twitterUrl: string | null
   youtubeUrl: string | null
+  enableAds: boolean | null
   enableGoogleAds: boolean | null
   faviconUrl: string | null
   enableMangaSection: boolean | null
@@ -150,6 +152,7 @@ export type OrganizationCountAggregateOutputType = {
   twitchUrl: number
   twitterUrl: number
   youtubeUrl: number
+  enableAds: number
   enableGoogleAds: number
   faviconUrl: number
   enableMangaSection: number
@@ -206,6 +209,7 @@ export type OrganizationMinAggregateInputType = {
   twitchUrl?: true
   twitterUrl?: true
   youtubeUrl?: true
+  enableAds?: true
   enableGoogleAds?: true
   faviconUrl?: true
   enableMangaSection?: true
@@ -252,6 +256,7 @@ export type OrganizationMaxAggregateInputType = {
   twitchUrl?: true
   twitterUrl?: true
   youtubeUrl?: true
+  enableAds?: true
   enableGoogleAds?: true
   faviconUrl?: true
   enableMangaSection?: true
@@ -298,6 +303,7 @@ export type OrganizationCountAggregateInputType = {
   twitchUrl?: true
   twitterUrl?: true
   youtubeUrl?: true
+  enableAds?: true
   enableGoogleAds?: true
   faviconUrl?: true
   enableMangaSection?: true
@@ -431,6 +437,7 @@ export type OrganizationGroupByOutputType = {
   twitchUrl: string | null
   twitterUrl: string | null
   youtubeUrl: string | null
+  enableAds: boolean
   enableGoogleAds: boolean
   faviconUrl: string | null
   enableMangaSection: boolean
@@ -500,6 +507,7 @@ export type OrganizationWhereInput = {
   twitchUrl?: Prisma.StringNullableFilter<"Organization"> | string | null
   twitterUrl?: Prisma.StringNullableFilter<"Organization"> | string | null
   youtubeUrl?: Prisma.StringNullableFilter<"Organization"> | string | null
+  enableAds?: Prisma.BoolFilter<"Organization"> | boolean
   enableGoogleAds?: Prisma.BoolFilter<"Organization"> | boolean
   faviconUrl?: Prisma.StringNullableFilter<"Organization"> | string | null
   enableMangaSection?: Prisma.BoolFilter<"Organization"> | boolean
@@ -560,6 +568,7 @@ export type OrganizationOrderByWithRelationInput = {
   twitchUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   twitterUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   youtubeUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  enableAds?: Prisma.SortOrder
   enableGoogleAds?: Prisma.SortOrder
   faviconUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   enableMangaSection?: Prisma.SortOrder
@@ -623,6 +632,7 @@ export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
   twitchUrl?: Prisma.StringNullableFilter<"Organization"> | string | null
   twitterUrl?: Prisma.StringNullableFilter<"Organization"> | string | null
   youtubeUrl?: Prisma.StringNullableFilter<"Organization"> | string | null
+  enableAds?: Prisma.BoolFilter<"Organization"> | boolean
   enableGoogleAds?: Prisma.BoolFilter<"Organization"> | boolean
   faviconUrl?: Prisma.StringNullableFilter<"Organization"> | string | null
   enableMangaSection?: Prisma.BoolFilter<"Organization"> | boolean
@@ -683,6 +693,7 @@ export type OrganizationOrderByWithAggregationInput = {
   twitchUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   twitterUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   youtubeUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  enableAds?: Prisma.SortOrder
   enableGoogleAds?: Prisma.SortOrder
   faviconUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   enableMangaSection?: Prisma.SortOrder
@@ -737,6 +748,7 @@ export type OrganizationScalarWhereWithAggregatesInput = {
   twitchUrl?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
   twitterUrl?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
   youtubeUrl?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
+  enableAds?: Prisma.BoolWithAggregatesFilter<"Organization"> | boolean
   enableGoogleAds?: Prisma.BoolWithAggregatesFilter<"Organization"> | boolean
   faviconUrl?: Prisma.StringNullableWithAggregatesFilter<"Organization"> | string | null
   enableMangaSection?: Prisma.BoolWithAggregatesFilter<"Organization"> | boolean
@@ -782,6 +794,7 @@ export type OrganizationCreateInput = {
   twitchUrl?: string | null
   twitterUrl?: string | null
   youtubeUrl?: string | null
+  enableAds?: boolean
   enableGoogleAds?: boolean
   faviconUrl?: string | null
   enableMangaSection?: boolean
@@ -842,6 +855,7 @@ export type OrganizationUncheckedCreateInput = {
   twitchUrl?: string | null
   twitterUrl?: string | null
   youtubeUrl?: string | null
+  enableAds?: boolean
   enableGoogleAds?: boolean
   faviconUrl?: string | null
   enableMangaSection?: boolean
@@ -901,6 +915,7 @@ export type OrganizationUpdateInput = {
   twitchUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enableGoogleAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   faviconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enableMangaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -961,6 +976,7 @@ export type OrganizationUncheckedUpdateInput = {
   twitchUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enableGoogleAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   faviconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enableMangaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1021,6 +1037,7 @@ export type OrganizationCreateManyInput = {
   twitchUrl?: string | null
   twitterUrl?: string | null
   youtubeUrl?: string | null
+  enableAds?: boolean
   enableGoogleAds?: boolean
   faviconUrl?: string | null
   enableMangaSection?: boolean
@@ -1066,6 +1083,7 @@ export type OrganizationUpdateManyMutationInput = {
   twitchUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enableGoogleAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   faviconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enableMangaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1112,6 +1130,7 @@ export type OrganizationUncheckedUpdateManyInput = {
   twitchUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enableGoogleAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   faviconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enableMangaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1158,6 +1177,7 @@ export type OrganizationCountOrderByAggregateInput = {
   twitchUrl?: Prisma.SortOrder
   twitterUrl?: Prisma.SortOrder
   youtubeUrl?: Prisma.SortOrder
+  enableAds?: Prisma.SortOrder
   enableGoogleAds?: Prisma.SortOrder
   faviconUrl?: Prisma.SortOrder
   enableMangaSection?: Prisma.SortOrder
@@ -1208,6 +1228,7 @@ export type OrganizationMaxOrderByAggregateInput = {
   twitchUrl?: Prisma.SortOrder
   twitterUrl?: Prisma.SortOrder
   youtubeUrl?: Prisma.SortOrder
+  enableAds?: Prisma.SortOrder
   enableGoogleAds?: Prisma.SortOrder
   faviconUrl?: Prisma.SortOrder
   enableMangaSection?: Prisma.SortOrder
@@ -1254,6 +1275,7 @@ export type OrganizationMinOrderByAggregateInput = {
   twitchUrl?: Prisma.SortOrder
   twitterUrl?: Prisma.SortOrder
   youtubeUrl?: Prisma.SortOrder
+  enableAds?: Prisma.SortOrder
   enableGoogleAds?: Prisma.SortOrder
   faviconUrl?: Prisma.SortOrder
   enableMangaSection?: Prisma.SortOrder
@@ -1527,6 +1549,7 @@ export type OrganizationCreateWithoutPermissionsInput = {
   twitchUrl?: string | null
   twitterUrl?: string | null
   youtubeUrl?: string | null
+  enableAds?: boolean
   enableGoogleAds?: boolean
   faviconUrl?: string | null
   enableMangaSection?: boolean
@@ -1586,6 +1609,7 @@ export type OrganizationUncheckedCreateWithoutPermissionsInput = {
   twitchUrl?: string | null
   twitterUrl?: string | null
   youtubeUrl?: string | null
+  enableAds?: boolean
   enableGoogleAds?: boolean
   faviconUrl?: string | null
   enableMangaSection?: boolean
@@ -1660,6 +1684,7 @@ export type OrganizationUpdateWithoutPermissionsInput = {
   twitchUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enableGoogleAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   faviconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enableMangaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1719,6 +1744,7 @@ export type OrganizationUncheckedUpdateWithoutPermissionsInput = {
   twitchUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enableGoogleAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   faviconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enableMangaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1777,6 +1803,7 @@ export type OrganizationCreateWithoutPasswordResetTokensInput = {
   twitchUrl?: string | null
   twitterUrl?: string | null
   youtubeUrl?: string | null
+  enableAds?: boolean
   enableGoogleAds?: boolean
   faviconUrl?: string | null
   enableMangaSection?: boolean
@@ -1836,6 +1863,7 @@ export type OrganizationUncheckedCreateWithoutPasswordResetTokensInput = {
   twitchUrl?: string | null
   twitterUrl?: string | null
   youtubeUrl?: string | null
+  enableAds?: boolean
   enableGoogleAds?: boolean
   faviconUrl?: string | null
   enableMangaSection?: boolean
@@ -1910,6 +1938,7 @@ export type OrganizationUpdateWithoutPasswordResetTokensInput = {
   twitchUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enableGoogleAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   faviconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enableMangaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1969,6 +1998,7 @@ export type OrganizationUncheckedUpdateWithoutPasswordResetTokensInput = {
   twitchUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enableGoogleAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   faviconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enableMangaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2027,6 +2057,7 @@ export type OrganizationCreateWithoutCountryOptionsInput = {
   twitchUrl?: string | null
   twitterUrl?: string | null
   youtubeUrl?: string | null
+  enableAds?: boolean
   enableGoogleAds?: boolean
   faviconUrl?: string | null
   enableMangaSection?: boolean
@@ -2086,6 +2117,7 @@ export type OrganizationUncheckedCreateWithoutCountryOptionsInput = {
   twitchUrl?: string | null
   twitterUrl?: string | null
   youtubeUrl?: string | null
+  enableAds?: boolean
   enableGoogleAds?: boolean
   faviconUrl?: string | null
   enableMangaSection?: boolean
@@ -2160,6 +2192,7 @@ export type OrganizationUpdateWithoutCountryOptionsInput = {
   twitchUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enableGoogleAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   faviconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enableMangaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2219,6 +2252,7 @@ export type OrganizationUncheckedUpdateWithoutCountryOptionsInput = {
   twitchUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enableGoogleAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   faviconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enableMangaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2277,6 +2311,7 @@ export type OrganizationCreateWithoutMangaCustomsInput = {
   twitchUrl?: string | null
   twitterUrl?: string | null
   youtubeUrl?: string | null
+  enableAds?: boolean
   enableGoogleAds?: boolean
   faviconUrl?: string | null
   enableMangaSection?: boolean
@@ -2336,6 +2371,7 @@ export type OrganizationUncheckedCreateWithoutMangaCustomsInput = {
   twitchUrl?: string | null
   twitterUrl?: string | null
   youtubeUrl?: string | null
+  enableAds?: boolean
   enableGoogleAds?: boolean
   faviconUrl?: string | null
   enableMangaSection?: boolean
@@ -2410,6 +2446,7 @@ export type OrganizationUpdateWithoutMangaCustomsInput = {
   twitchUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enableGoogleAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   faviconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enableMangaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2469,6 +2506,7 @@ export type OrganizationUncheckedUpdateWithoutMangaCustomsInput = {
   twitchUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enableGoogleAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   faviconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enableMangaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2527,6 +2565,7 @@ export type OrganizationCreateWithoutCommentsInput = {
   twitchUrl?: string | null
   twitterUrl?: string | null
   youtubeUrl?: string | null
+  enableAds?: boolean
   enableGoogleAds?: boolean
   faviconUrl?: string | null
   enableMangaSection?: boolean
@@ -2586,6 +2625,7 @@ export type OrganizationUncheckedCreateWithoutCommentsInput = {
   twitchUrl?: string | null
   twitterUrl?: string | null
   youtubeUrl?: string | null
+  enableAds?: boolean
   enableGoogleAds?: boolean
   faviconUrl?: string | null
   enableMangaSection?: boolean
@@ -2660,6 +2700,7 @@ export type OrganizationUpdateWithoutCommentsInput = {
   twitchUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enableGoogleAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   faviconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enableMangaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2719,6 +2760,7 @@ export type OrganizationUncheckedUpdateWithoutCommentsInput = {
   twitchUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enableGoogleAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   faviconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enableMangaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2777,6 +2819,7 @@ export type OrganizationCreateWithoutCommentLikesInput = {
   twitchUrl?: string | null
   twitterUrl?: string | null
   youtubeUrl?: string | null
+  enableAds?: boolean
   enableGoogleAds?: boolean
   faviconUrl?: string | null
   enableMangaSection?: boolean
@@ -2836,6 +2879,7 @@ export type OrganizationUncheckedCreateWithoutCommentLikesInput = {
   twitchUrl?: string | null
   twitterUrl?: string | null
   youtubeUrl?: string | null
+  enableAds?: boolean
   enableGoogleAds?: boolean
   faviconUrl?: string | null
   enableMangaSection?: boolean
@@ -2910,6 +2954,7 @@ export type OrganizationUpdateWithoutCommentLikesInput = {
   twitchUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enableGoogleAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   faviconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enableMangaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2969,6 +3014,7 @@ export type OrganizationUncheckedUpdateWithoutCommentLikesInput = {
   twitchUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enableGoogleAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   faviconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enableMangaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -3027,6 +3073,7 @@ export type OrganizationCreateWithoutRankingsInput = {
   twitchUrl?: string | null
   twitterUrl?: string | null
   youtubeUrl?: string | null
+  enableAds?: boolean
   enableGoogleAds?: boolean
   faviconUrl?: string | null
   enableMangaSection?: boolean
@@ -3086,6 +3133,7 @@ export type OrganizationUncheckedCreateWithoutRankingsInput = {
   twitchUrl?: string | null
   twitterUrl?: string | null
   youtubeUrl?: string | null
+  enableAds?: boolean
   enableGoogleAds?: boolean
   faviconUrl?: string | null
   enableMangaSection?: boolean
@@ -3160,6 +3208,7 @@ export type OrganizationUpdateWithoutRankingsInput = {
   twitchUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enableGoogleAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   faviconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enableMangaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -3219,6 +3268,7 @@ export type OrganizationUncheckedUpdateWithoutRankingsInput = {
   twitchUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enableGoogleAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   faviconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enableMangaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -3277,6 +3327,7 @@ export type OrganizationCreateWithoutGenresInput = {
   twitchUrl?: string | null
   twitterUrl?: string | null
   youtubeUrl?: string | null
+  enableAds?: boolean
   enableGoogleAds?: boolean
   faviconUrl?: string | null
   enableMangaSection?: boolean
@@ -3336,6 +3387,7 @@ export type OrganizationUncheckedCreateWithoutGenresInput = {
   twitchUrl?: string | null
   twitterUrl?: string | null
   youtubeUrl?: string | null
+  enableAds?: boolean
   enableGoogleAds?: boolean
   faviconUrl?: string | null
   enableMangaSection?: boolean
@@ -3410,6 +3462,7 @@ export type OrganizationUpdateWithoutGenresInput = {
   twitchUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enableGoogleAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   faviconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enableMangaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -3469,6 +3522,7 @@ export type OrganizationUncheckedUpdateWithoutGenresInput = {
   twitchUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enableGoogleAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   faviconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enableMangaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -3527,6 +3581,7 @@ export type OrganizationCreateWithoutAnalyticsInput = {
   twitchUrl?: string | null
   twitterUrl?: string | null
   youtubeUrl?: string | null
+  enableAds?: boolean
   enableGoogleAds?: boolean
   faviconUrl?: string | null
   enableMangaSection?: boolean
@@ -3586,6 +3641,7 @@ export type OrganizationUncheckedCreateWithoutAnalyticsInput = {
   twitchUrl?: string | null
   twitterUrl?: string | null
   youtubeUrl?: string | null
+  enableAds?: boolean
   enableGoogleAds?: boolean
   faviconUrl?: string | null
   enableMangaSection?: boolean
@@ -3660,6 +3716,7 @@ export type OrganizationUpdateWithoutAnalyticsInput = {
   twitchUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enableGoogleAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   faviconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enableMangaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -3719,6 +3776,7 @@ export type OrganizationUncheckedUpdateWithoutAnalyticsInput = {
   twitchUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enableGoogleAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   faviconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enableMangaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -3777,6 +3835,7 @@ export type OrganizationCreateWithoutAuditsInput = {
   twitchUrl?: string | null
   twitterUrl?: string | null
   youtubeUrl?: string | null
+  enableAds?: boolean
   enableGoogleAds?: boolean
   faviconUrl?: string | null
   enableMangaSection?: boolean
@@ -3836,6 +3895,7 @@ export type OrganizationUncheckedCreateWithoutAuditsInput = {
   twitchUrl?: string | null
   twitterUrl?: string | null
   youtubeUrl?: string | null
+  enableAds?: boolean
   enableGoogleAds?: boolean
   faviconUrl?: string | null
   enableMangaSection?: boolean
@@ -3910,6 +3970,7 @@ export type OrganizationUpdateWithoutAuditsInput = {
   twitchUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enableGoogleAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   faviconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enableMangaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -3969,6 +4030,7 @@ export type OrganizationUncheckedUpdateWithoutAuditsInput = {
   twitchUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enableGoogleAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   faviconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enableMangaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -4027,6 +4089,7 @@ export type OrganizationCreateWithoutSubscriptionPlansInput = {
   twitchUrl?: string | null
   twitterUrl?: string | null
   youtubeUrl?: string | null
+  enableAds?: boolean
   enableGoogleAds?: boolean
   faviconUrl?: string | null
   enableMangaSection?: boolean
@@ -4086,6 +4149,7 @@ export type OrganizationUncheckedCreateWithoutSubscriptionPlansInput = {
   twitchUrl?: string | null
   twitterUrl?: string | null
   youtubeUrl?: string | null
+  enableAds?: boolean
   enableGoogleAds?: boolean
   faviconUrl?: string | null
   enableMangaSection?: boolean
@@ -4160,6 +4224,7 @@ export type OrganizationUpdateWithoutSubscriptionPlansInput = {
   twitchUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enableGoogleAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   faviconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enableMangaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -4219,6 +4284,7 @@ export type OrganizationUncheckedUpdateWithoutSubscriptionPlansInput = {
   twitchUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enableGoogleAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   faviconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enableMangaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -4277,6 +4343,7 @@ export type OrganizationCreateWithoutSubscriptionsInput = {
   twitchUrl?: string | null
   twitterUrl?: string | null
   youtubeUrl?: string | null
+  enableAds?: boolean
   enableGoogleAds?: boolean
   faviconUrl?: string | null
   enableMangaSection?: boolean
@@ -4336,6 +4403,7 @@ export type OrganizationUncheckedCreateWithoutSubscriptionsInput = {
   twitchUrl?: string | null
   twitterUrl?: string | null
   youtubeUrl?: string | null
+  enableAds?: boolean
   enableGoogleAds?: boolean
   faviconUrl?: string | null
   enableMangaSection?: boolean
@@ -4410,6 +4478,7 @@ export type OrganizationUpdateWithoutSubscriptionsInput = {
   twitchUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enableGoogleAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   faviconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enableMangaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -4469,6 +4538,7 @@ export type OrganizationUncheckedUpdateWithoutSubscriptionsInput = {
   twitchUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enableGoogleAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   faviconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enableMangaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -4527,6 +4597,7 @@ export type OrganizationCreateWithoutOrganizationTransactionInput = {
   twitchUrl?: string | null
   twitterUrl?: string | null
   youtubeUrl?: string | null
+  enableAds?: boolean
   enableGoogleAds?: boolean
   faviconUrl?: string | null
   enableMangaSection?: boolean
@@ -4586,6 +4657,7 @@ export type OrganizationUncheckedCreateWithoutOrganizationTransactionInput = {
   twitchUrl?: string | null
   twitterUrl?: string | null
   youtubeUrl?: string | null
+  enableAds?: boolean
   enableGoogleAds?: boolean
   faviconUrl?: string | null
   enableMangaSection?: boolean
@@ -4660,6 +4732,7 @@ export type OrganizationUpdateWithoutOrganizationTransactionInput = {
   twitchUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enableGoogleAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   faviconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enableMangaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -4719,6 +4792,7 @@ export type OrganizationUncheckedUpdateWithoutOrganizationTransactionInput = {
   twitchUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enableGoogleAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   faviconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enableMangaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -4777,6 +4851,7 @@ export type OrganizationCreateWithoutFollowersInput = {
   twitchUrl?: string | null
   twitterUrl?: string | null
   youtubeUrl?: string | null
+  enableAds?: boolean
   enableGoogleAds?: boolean
   faviconUrl?: string | null
   enableMangaSection?: boolean
@@ -4836,6 +4911,7 @@ export type OrganizationUncheckedCreateWithoutFollowersInput = {
   twitchUrl?: string | null
   twitterUrl?: string | null
   youtubeUrl?: string | null
+  enableAds?: boolean
   enableGoogleAds?: boolean
   faviconUrl?: string | null
   enableMangaSection?: boolean
@@ -4910,6 +4986,7 @@ export type OrganizationUpdateWithoutFollowersInput = {
   twitchUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enableGoogleAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   faviconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enableMangaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -4969,6 +5046,7 @@ export type OrganizationUncheckedUpdateWithoutFollowersInput = {
   twitchUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enableGoogleAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   faviconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   enableMangaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -5176,6 +5254,7 @@ export type OrganizationSelect<ExtArgs extends runtime.Types.Extensions.Internal
   twitchUrl?: boolean
   twitterUrl?: boolean
   youtubeUrl?: boolean
+  enableAds?: boolean
   enableGoogleAds?: boolean
   faviconUrl?: boolean
   enableMangaSection?: boolean
@@ -5237,6 +5316,7 @@ export type OrganizationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   twitchUrl?: boolean
   twitterUrl?: boolean
   youtubeUrl?: boolean
+  enableAds?: boolean
   enableGoogleAds?: boolean
   faviconUrl?: boolean
   enableMangaSection?: boolean
@@ -5283,6 +5363,7 @@ export type OrganizationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   twitchUrl?: boolean
   twitterUrl?: boolean
   youtubeUrl?: boolean
+  enableAds?: boolean
   enableGoogleAds?: boolean
   faviconUrl?: boolean
   enableMangaSection?: boolean
@@ -5329,6 +5410,7 @@ export type OrganizationSelectScalar = {
   twitchUrl?: boolean
   twitterUrl?: boolean
   youtubeUrl?: boolean
+  enableAds?: boolean
   enableGoogleAds?: boolean
   faviconUrl?: boolean
   enableMangaSection?: boolean
@@ -5351,7 +5433,7 @@ export type OrganizationSelectScalar = {
   discordWebhookMessageTemplateNewSubscription?: boolean
 }
 
-export type OrganizationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "title" | "domain" | "slug" | "description" | "imageUrl" | "isPublic" | "isNSFW" | "createdAt" | "updatedAt" | "googleAdsMetaContent" | "googleAdsAdsTxtContent" | "bannerUrl" | "discordUrl" | "facebookUrl" | "instagramUrl" | "logoUrl" | "patreonUrl" | "tiktokUrl" | "twitchUrl" | "twitterUrl" | "youtubeUrl" | "enableGoogleAds" | "faviconUrl" | "enableMangaSection" | "enableManhuaSection" | "enableManhwaSection" | "language" | "monitorWebsiteId" | "useAllowedCountries" | "useBlockedCountries" | "adsterraAdSource" | "enableAdsterraAds" | "enableMainBanner" | "enableMainSlider" | "enableSubscriptionSection" | "discordWebhookUrlNewChapter" | "discordWebhookUrlNewSubscription" | "enableDiscordWebhookNewChapter" | "enableDiscordWebhookNewSubscription" | "discordWebhookMessageTemplateNewChapter" | "discordWebhookMessageTemplateNewSubscription", ExtArgs["result"]["organization"]>
+export type OrganizationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "title" | "domain" | "slug" | "description" | "imageUrl" | "isPublic" | "isNSFW" | "createdAt" | "updatedAt" | "googleAdsMetaContent" | "googleAdsAdsTxtContent" | "bannerUrl" | "discordUrl" | "facebookUrl" | "instagramUrl" | "logoUrl" | "patreonUrl" | "tiktokUrl" | "twitchUrl" | "twitterUrl" | "youtubeUrl" | "enableAds" | "enableGoogleAds" | "faviconUrl" | "enableMangaSection" | "enableManhuaSection" | "enableManhwaSection" | "language" | "monitorWebsiteId" | "useAllowedCountries" | "useBlockedCountries" | "adsterraAdSource" | "enableAdsterraAds" | "enableMainBanner" | "enableMainSlider" | "enableSubscriptionSection" | "discordWebhookUrlNewChapter" | "discordWebhookUrlNewSubscription" | "enableDiscordWebhookNewChapter" | "enableDiscordWebhookNewSubscription" | "discordWebhookMessageTemplateNewChapter" | "discordWebhookMessageTemplateNewSubscription", ExtArgs["result"]["organization"]>
 export type OrganizationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   analytics?: boolean | Prisma.Organization$analyticsArgs<ExtArgs>
   comments?: boolean | Prisma.Organization$commentsArgs<ExtArgs>
@@ -5414,6 +5496,7 @@ export type $OrganizationPayload<ExtArgs extends runtime.Types.Extensions.Intern
     twitchUrl: string | null
     twitterUrl: string | null
     youtubeUrl: string | null
+    enableAds: boolean
     enableGoogleAds: boolean
     faviconUrl: string | null
     enableMangaSection: boolean
@@ -5894,6 +5977,7 @@ export interface OrganizationFieldRefs {
   readonly twitchUrl: Prisma.FieldRef<"Organization", 'String'>
   readonly twitterUrl: Prisma.FieldRef<"Organization", 'String'>
   readonly youtubeUrl: Prisma.FieldRef<"Organization", 'String'>
+  readonly enableAds: Prisma.FieldRef<"Organization", 'Boolean'>
   readonly enableGoogleAds: Prisma.FieldRef<"Organization", 'Boolean'>
   readonly faviconUrl: Prisma.FieldRef<"Organization", 'String'>
   readonly enableMangaSection: Prisma.FieldRef<"Organization", 'Boolean'>

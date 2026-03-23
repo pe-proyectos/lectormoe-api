@@ -34,8 +34,10 @@ export const EditOrganizationRequest = t.Object({
         blocked: t.Boolean(),
     }))),
     // Integrations
+    enableAds: t.Optional(t.Boolean()),
     enableGoogleAds: t.Optional(t.Boolean()),
     enableAdsterraAds: t.Optional(t.Boolean()),
+    isNSFW: t.Optional(t.Boolean()),
     monitorWebsiteId: t.Optional(t.String()),
     // Social
     facebookUrl: t.Optional(t.String()),
