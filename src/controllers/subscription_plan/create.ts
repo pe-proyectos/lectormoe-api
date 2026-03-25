@@ -9,6 +9,7 @@ export const createSubscriptionPlan = async (organizationId: number, params: Cre
 	const organization = await prisma.organization.findFirst({
 		where: {
 			id: organizationId,
+			isDeleted: false,
 		},
 	});
 

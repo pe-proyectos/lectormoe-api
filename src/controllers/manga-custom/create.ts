@@ -7,6 +7,7 @@ export const createMangaCustom = async (organizationId: number, params: CreateMa
 		prisma.organization.findFirst({
 			where: {
 				id: organizationId,
+				isDeleted: false,
 			},
 		}),
 		prisma.manga.findFirst({

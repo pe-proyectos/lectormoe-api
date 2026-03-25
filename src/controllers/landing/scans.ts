@@ -29,6 +29,7 @@ export const getScans = async (includeNSFW: boolean = false) => {
 		where: {
 			isPublic: true,
 			isNSFW: includeNSFW ? true : false,
+			isDeleted: false,
 		},
 		select: {
 			id: true,

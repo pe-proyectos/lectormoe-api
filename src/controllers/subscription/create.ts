@@ -7,7 +7,7 @@ export const createSubscription = async (organizationId: number, userId: number,
 	const organization = await prisma.organization.findFirst({
 		where: {
 			id: organizationId,
-			
+			isDeleted: false,
 		},
 	});
 

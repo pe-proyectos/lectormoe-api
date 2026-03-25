@@ -10,7 +10,7 @@ export const editUser = async (
   let finalOrganizationId = organizationId;
   if (!finalOrganizationId) {
     const defaultOrg = await prisma.organization.findFirst({
-      where: { isPublic: true },
+      where: { isPublic: true, isDeleted: false },
     });
     if (defaultOrg) {
       finalOrganizationId = defaultOrg.id;

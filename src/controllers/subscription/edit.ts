@@ -6,6 +6,7 @@ export const editSubscription = async (organizationId: number, subscriptionId: n
 	const organization = await prisma.organization.findFirst({
 		where: {
 			id: organizationId,
+			isDeleted: false,
 		},
 	});
 

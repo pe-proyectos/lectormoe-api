@@ -3,7 +3,7 @@ import { prisma } from "../../models/prisma";
 export const getPerOrgPopular = async () => {
   // Get all public, non-NSFW organizations
   const organizations = await prisma.organization.findMany({
-    where: { isPublic: true, isNSFW: false },
+    where: { isPublic: true, isNSFW: false, isDeleted: false },
     select: { id: true, name: true, slug: true, logoUrl: true },
     orderBy: { name: 'asc' },
   });
