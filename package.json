@@ -6,7 +6,7 @@
     "scrap": "bun src/commands/scrap.ts",
     "sanitize": "bun src/commands/sanitize.ts",
     "update-users-also-read": "bun src/commands/update-users-also-read.ts",
-    "start": "bun src/index.ts",
+    "start": "bunx prisma generate && bun src/index.ts",
     "dev": "bun --watch src/index.ts",
     "format": "bunx @biomejs/biome format --write ./src",
     "lint": "bunx @biomejs/biome check --write ./src",
