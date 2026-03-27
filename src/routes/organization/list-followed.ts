@@ -27,6 +27,7 @@ export const router = () => new Elysia()
                             rank: t.String(),
                             price: t.Number(),
                             currency: t.String(),
+                            interval: t.String(),
                             status: t.Union([t.Literal('active'), t.Literal('paused')]),
                         }),
                         t.Null(),

@@ -39,6 +39,7 @@ export const listFollowedOrganizations = async (userId: number) => {
                     name: true,
                     price: true,
                     currency: true,
+                    interval: true,
                 },
             },
             organization: {
@@ -56,11 +57,12 @@ export const listFollowedOrganizations = async (userId: number) => {
                 rank: sub.subscriptionPlan.name,
                 price: sub.subscriptionPlan.price,
                 currency: sub.subscriptionPlan.currency,
+                interval: sub.subscriptionPlan.interval,
                 status: sub.active && sub.status === 'ACTIVE' ? 'active' as const : 'paused' as const,
             };
         }
         return acc;
-    }, {} as Record<number, { rank: string; price: number; currency: string; status: 'active' | 'paused' }>);
+    }, {} as Record<number, { rank: string; price: number; currency: string; interval: string; status: 'active' | 'paused' }>);
 
     return followedOrganizations.map((follow) => ({
         id: follow.organization.id,
