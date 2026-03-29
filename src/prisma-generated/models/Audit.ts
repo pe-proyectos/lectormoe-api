@@ -268,8 +268,8 @@ export type AuditWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Audit"> | Date | string
   userId?: Prisma.IntNullableFilter<"Audit"> | number | null
   organizationId?: Prisma.IntNullableFilter<"Audit"> | number | null
-  User?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   organization?: Prisma.XOR<Prisma.OrganizationNullableScalarRelationFilter, Prisma.OrganizationWhereInput> | null
+  User?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
 export type AuditOrderByWithRelationInput = {
@@ -284,8 +284,8 @@ export type AuditOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   userId?: Prisma.SortOrderInput | Prisma.SortOrder
   organizationId?: Prisma.SortOrderInput | Prisma.SortOrder
-  User?: Prisma.UserOrderByWithRelationInput
   organization?: Prisma.OrganizationOrderByWithRelationInput
+  User?: Prisma.UserOrderByWithRelationInput
 }
 
 export type AuditWhereUniqueInput = Prisma.AtLeast<{
@@ -303,8 +303,8 @@ export type AuditWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Audit"> | Date | string
   userId?: Prisma.IntNullableFilter<"Audit"> | number | null
   organizationId?: Prisma.IntNullableFilter<"Audit"> | number | null
-  User?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   organization?: Prisma.XOR<Prisma.OrganizationNullableScalarRelationFilter, Prisma.OrganizationWhereInput> | null
+  User?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }, "id">
 
 export type AuditOrderByWithAggregationInput = {
@@ -352,8 +352,8 @@ export type AuditCreateInput = {
   device?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  User?: Prisma.UserCreateNestedOneWithoutAuditsInput
   organization?: Prisma.OrganizationCreateNestedOneWithoutAuditsInput
+  User?: Prisma.UserCreateNestedOneWithoutAuditsInput
 }
 
 export type AuditUncheckedCreateInput = {
@@ -379,8 +379,8 @@ export type AuditUpdateInput = {
   device?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  User?: Prisma.UserUpdateOneWithoutAuditsNestedInput
   organization?: Prisma.OrganizationUpdateOneWithoutAuditsNestedInput
+  User?: Prisma.UserUpdateOneWithoutAuditsNestedInput
 }
 
 export type AuditUncheckedUpdateInput = {
@@ -817,8 +817,8 @@ export type AuditSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   updatedAt?: boolean
   userId?: boolean
   organizationId?: boolean
-  User?: boolean | Prisma.Audit$UserArgs<ExtArgs>
   organization?: boolean | Prisma.Audit$organizationArgs<ExtArgs>
+  User?: boolean | Prisma.Audit$UserArgs<ExtArgs>
 }, ExtArgs["result"]["audit"]>
 
 export type AuditSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -833,8 +833,8 @@ export type AuditSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   updatedAt?: boolean
   userId?: boolean
   organizationId?: boolean
-  User?: boolean | Prisma.Audit$UserArgs<ExtArgs>
   organization?: boolean | Prisma.Audit$organizationArgs<ExtArgs>
+  User?: boolean | Prisma.Audit$UserArgs<ExtArgs>
 }, ExtArgs["result"]["audit"]>
 
 export type AuditSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -849,8 +849,8 @@ export type AuditSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   updatedAt?: boolean
   userId?: boolean
   organizationId?: boolean
-  User?: boolean | Prisma.Audit$UserArgs<ExtArgs>
   organization?: boolean | Prisma.Audit$organizationArgs<ExtArgs>
+  User?: boolean | Prisma.Audit$UserArgs<ExtArgs>
 }, ExtArgs["result"]["audit"]>
 
 export type AuditSelectScalar = {
@@ -869,23 +869,23 @@ export type AuditSelectScalar = {
 
 export type AuditOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "action" | "payload" | "ip" | "browser" | "language" | "device" | "createdAt" | "updatedAt" | "userId" | "organizationId", ExtArgs["result"]["audit"]>
 export type AuditInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  User?: boolean | Prisma.Audit$UserArgs<ExtArgs>
   organization?: boolean | Prisma.Audit$organizationArgs<ExtArgs>
+  User?: boolean | Prisma.Audit$UserArgs<ExtArgs>
 }
 export type AuditIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  User?: boolean | Prisma.Audit$UserArgs<ExtArgs>
   organization?: boolean | Prisma.Audit$organizationArgs<ExtArgs>
+  User?: boolean | Prisma.Audit$UserArgs<ExtArgs>
 }
 export type AuditIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  User?: boolean | Prisma.Audit$UserArgs<ExtArgs>
   organization?: boolean | Prisma.Audit$organizationArgs<ExtArgs>
+  User?: boolean | Prisma.Audit$UserArgs<ExtArgs>
 }
 
 export type $AuditPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Audit"
   objects: {
-    User: Prisma.$UserPayload<ExtArgs> | null
     organization: Prisma.$OrganizationPayload<ExtArgs> | null
+    User: Prisma.$UserPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1293,8 +1293,8 @@ readonly fields: AuditFieldRefs;
  */
 export interface Prisma__AuditClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  User<T extends Prisma.Audit$UserArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Audit$UserArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   organization<T extends Prisma.Audit$organizationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Audit$organizationArgs<ExtArgs>>): Prisma.Prisma__OrganizationClient<runtime.Types.Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  User<T extends Prisma.Audit$UserArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Audit$UserArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1731,25 +1731,6 @@ export type AuditDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 /**
- * Audit.User
- */
-export type Audit$UserArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the User
-   */
-  select?: Prisma.UserSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the User
-   */
-  omit?: Prisma.UserOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UserInclude<ExtArgs> | null
-  where?: Prisma.UserWhereInput
-}
-
-/**
  * Audit.organization
  */
 export type Audit$organizationArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1766,6 +1747,25 @@ export type Audit$organizationArgs<ExtArgs extends runtime.Types.Extensions.Inte
    */
   include?: Prisma.OrganizationInclude<ExtArgs> | null
   where?: Prisma.OrganizationWhereInput
+}
+
+/**
+ * Audit.User
+ */
+export type Audit$UserArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

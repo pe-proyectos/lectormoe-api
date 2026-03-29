@@ -18,11 +18,13 @@ export const listFavorites = async (organizationId: number | null, userId: numbe
 					title: true,
 					imageUrl: true,
 					status: true,
+					isNSFW: true,
 					organization: {
 						select: {
 							id: true,
 							name: true,
 							slug: true,
+							isNSFW: true,
 						}
 					},
 					manga: {

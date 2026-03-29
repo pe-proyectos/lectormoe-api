@@ -2,6 +2,7 @@ import { Elysia, t } from 'elysia';
 
 import { checkOrganization, checkOrganizationBySlug } from '../../controllers/organization/check';
 import { loggedOptional } from '../../plugins/auth';
+import { prisma } from '../../models/prisma';
 
 
 export const router = () => new Elysia()
@@ -39,10 +40,16 @@ export const router = () => new Elysia()
                 throw new Error(`No se encontró la organización '${finalSlug || finalDomain}'.`);
             }
             
-            // Include followerCount in response
+            const nsfwMangaCount = await prisma.mangaCustom.count({
+                where: { organizationId: organization.id, isNSFW: true },
+            });
+
+            // Include followerCount, mangaCount, nsfwMangaCount in response
             const organizationData = {
                 ...organization,
                 followerCount: organization._count?.followers || 0,
+                mangaCount: organization._count?.mangaCustoms || 0,
+                nsfwMangaCount,
             };
             delete organizationData._count;
             

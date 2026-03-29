@@ -69,12 +69,20 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 			}
 			: {};
 
+		// Build nsfw filter for popular path
+		const popularNsfwFilter = filters.nsfw === 'true'
+			? { OR: [{ isNSFW: true }, { organization: { isNSFW: true } }] }
+			: filters.nsfw === 'false'
+			? { isNSFW: false, organization: { isNSFW: false } }
+			: {};
+
 		// Fetch only the paginated mangas with their relations
 		const popularMangasCustoms = await prisma.mangaCustom.findMany({
 			where: {
 				id: {
 					in: paginatedIds,
 				},
+				...popularNsfwFilter,
 				...(filters.search ? searchConditions : {}),
 				...(filters.title ? {
 					title: {
@@ -176,6 +184,20 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 		}
 		: {};
 
+	// nsfw=false: excluir mangas de orgs NSFW también (solo cuando no hay org específica)
+	// nsfw=true:  incluir mangas NSFW o de orgs NSFW
+	// Cuando organizationId está definido, no filtrar por organization.isNSFW para evitar
+	// que el spread sobreescriba organization: { id: organizationId }
+	const nsfwFilter = filters.nsfw === 'true'
+		? (organizationId
+			? { isNSFW: true }
+			: { OR: [{ isNSFW: true }, { organization: { isNSFW: true } }] })
+		: filters.nsfw === 'false'
+		? (organizationId
+			? { isNSFW: false }
+			: { isNSFW: false, organization: { isNSFW: false } })
+		: {};
+
 	// Build common where clause
 	const whereClause = {
 		...(filters.type ? {
@@ -190,6 +212,7 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 				id: organizationId,
 			},
 		} : {}),
+		...nsfwFilter,
 		...(filters.search ? searchConditions : {}),
 		...(filters.title ? {
 			title: {

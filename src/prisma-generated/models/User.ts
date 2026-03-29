@@ -44,15 +44,15 @@ export type UserMinAggregateOutputType = {
   updatedAt: Date | null
   description: string | null
   imageUrl: string | null
-  bannerUrl: string | null
   birthdate: Date | null
-  usernameChangedAt: Date | null
-  imageUrlChangedAt: Date | null
+  bannerUrl: string | null
   bannerUrlChangedAt: Date | null
-  emailVerified: boolean | null
-  isPublicProfile: boolean | null
-  isPrivateHistory: boolean | null
+  imageUrlChangedAt: Date | null
+  usernameChangedAt: Date | null
   emailNotifications: boolean | null
+  emailVerified: boolean | null
+  isPrivateHistory: boolean | null
+  isPublicProfile: boolean | null
   pushNotifications: boolean | null
   theme: string | null
 }
@@ -67,15 +67,15 @@ export type UserMaxAggregateOutputType = {
   updatedAt: Date | null
   description: string | null
   imageUrl: string | null
-  bannerUrl: string | null
   birthdate: Date | null
-  usernameChangedAt: Date | null
-  imageUrlChangedAt: Date | null
+  bannerUrl: string | null
   bannerUrlChangedAt: Date | null
-  emailVerified: boolean | null
-  isPublicProfile: boolean | null
-  isPrivateHistory: boolean | null
+  imageUrlChangedAt: Date | null
+  usernameChangedAt: Date | null
   emailNotifications: boolean | null
+  emailVerified: boolean | null
+  isPrivateHistory: boolean | null
+  isPublicProfile: boolean | null
   pushNotifications: boolean | null
   theme: string | null
 }
@@ -90,15 +90,15 @@ export type UserCountAggregateOutputType = {
   updatedAt: number
   description: number
   imageUrl: number
-  bannerUrl: number
   birthdate: number
-  usernameChangedAt: number
-  imageUrlChangedAt: number
+  bannerUrl: number
   bannerUrlChangedAt: number
-  emailVerified: number
-  isPublicProfile: number
-  isPrivateHistory: number
+  imageUrlChangedAt: number
+  usernameChangedAt: number
   emailNotifications: number
+  emailVerified: number
+  isPrivateHistory: number
+  isPublicProfile: number
   pushNotifications: number
   theme: number
   _all: number
@@ -123,15 +123,15 @@ export type UserMinAggregateInputType = {
   updatedAt?: true
   description?: true
   imageUrl?: true
-  bannerUrl?: true
   birthdate?: true
-  usernameChangedAt?: true
-  imageUrlChangedAt?: true
+  bannerUrl?: true
   bannerUrlChangedAt?: true
-  emailVerified?: true
-  isPublicProfile?: true
-  isPrivateHistory?: true
+  imageUrlChangedAt?: true
+  usernameChangedAt?: true
   emailNotifications?: true
+  emailVerified?: true
+  isPrivateHistory?: true
+  isPublicProfile?: true
   pushNotifications?: true
   theme?: true
 }
@@ -146,15 +146,15 @@ export type UserMaxAggregateInputType = {
   updatedAt?: true
   description?: true
   imageUrl?: true
-  bannerUrl?: true
   birthdate?: true
-  usernameChangedAt?: true
-  imageUrlChangedAt?: true
+  bannerUrl?: true
   bannerUrlChangedAt?: true
-  emailVerified?: true
-  isPublicProfile?: true
-  isPrivateHistory?: true
+  imageUrlChangedAt?: true
+  usernameChangedAt?: true
   emailNotifications?: true
+  emailVerified?: true
+  isPrivateHistory?: true
+  isPublicProfile?: true
   pushNotifications?: true
   theme?: true
 }
@@ -169,15 +169,15 @@ export type UserCountAggregateInputType = {
   updatedAt?: true
   description?: true
   imageUrl?: true
-  bannerUrl?: true
   birthdate?: true
-  usernameChangedAt?: true
-  imageUrlChangedAt?: true
+  bannerUrl?: true
   bannerUrlChangedAt?: true
-  emailVerified?: true
-  isPublicProfile?: true
-  isPrivateHistory?: true
+  imageUrlChangedAt?: true
+  usernameChangedAt?: true
   emailNotifications?: true
+  emailVerified?: true
+  isPrivateHistory?: true
+  isPublicProfile?: true
   pushNotifications?: true
   theme?: true
   _all?: true
@@ -279,15 +279,15 @@ export type UserGroupByOutputType = {
   updatedAt: Date
   description: string | null
   imageUrl: string | null
-  bannerUrl: string | null
   birthdate: Date | null
-  usernameChangedAt: Date | null
-  imageUrlChangedAt: Date | null
+  bannerUrl: string | null
   bannerUrlChangedAt: Date | null
-  emailVerified: boolean
-  isPublicProfile: boolean
-  isPrivateHistory: boolean
+  imageUrlChangedAt: Date | null
+  usernameChangedAt: Date | null
   emailNotifications: boolean
+  emailVerified: boolean
+  isPrivateHistory: boolean
+  isPublicProfile: boolean
   pushNotifications: boolean
   theme: string
   _count: UserCountAggregateOutputType | null
@@ -325,35 +325,35 @@ export type UserWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   description?: Prisma.StringNullableFilter<"User"> | string | null
   imageUrl?: Prisma.StringNullableFilter<"User"> | string | null
-  bannerUrl?: Prisma.StringNullableFilter<"User"> | string | null
   birthdate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
-  usernameChangedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
-  imageUrlChangedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  bannerUrl?: Prisma.StringNullableFilter<"User"> | string | null
   bannerUrlChangedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
-  emailVerified?: Prisma.BoolFilter<"User"> | boolean
-  isPublicProfile?: Prisma.BoolFilter<"User"> | boolean
-  isPrivateHistory?: Prisma.BoolFilter<"User"> | boolean
+  imageUrlChangedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  usernameChangedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   emailNotifications?: Prisma.BoolFilter<"User"> | boolean
+  emailVerified?: Prisma.BoolFilter<"User"> | boolean
+  isPrivateHistory?: Prisma.BoolFilter<"User"> | boolean
+  isPublicProfile?: Prisma.BoolFilter<"User"> | boolean
   pushNotifications?: Prisma.BoolFilter<"User"> | boolean
   theme?: Prisma.StringFilter<"User"> | string
   analytics?: Prisma.AnalyticsListRelationFilter
   audits?: Prisma.AuditListRelationFilter
   Comment?: Prisma.CommentListRelationFilter
   comments?: Prisma.CommentListRelationFilter
+  emailLogs?: Prisma.EmailLogListRelationFilter
+  emailPreference?: Prisma.XOR<Prisma.EmailPreferenceNullableScalarRelationFilter, Prisma.EmailPreferenceWhereInput> | null
+  emailVerificationTokens?: Prisma.EmailVerificationTokenListRelationFilter
   favorites?: Prisma.FavoriteListRelationFilter
+  organizationFollows?: Prisma.OrganizationFollowerListRelationFilter
   passwordResetTokens?: Prisma.PasswordResetTokenListRelationFilter
+  permissions?: Prisma.PermissionListRelationFilter
   rankings?: Prisma.RankingListRelationFilter
   subscriptions?: Prisma.SubscriptionListRelationFilter
   tokens?: Prisma.TokenListRelationFilter
-  history?: Prisma.UserChapterHistoryListRelationFilter
-  permissions?: Prisma.PermissionListRelationFilter
-  organizationFollows?: Prisma.OrganizationFollowerListRelationFilter
-  emailPreference?: Prisma.XOR<Prisma.EmailPreferenceNullableScalarRelationFilter, Prisma.EmailPreferenceWhereInput> | null
-  emailLogs?: Prisma.EmailLogListRelationFilter
   unsubscribeTokens?: Prisma.UnsubscribeTokenListRelationFilter
-  emailVerificationTokens?: Prisma.EmailVerificationTokenListRelationFilter
-  dailyActivities?: Prisma.UserDailyActivityListRelationFilter
   achievements?: Prisma.UserAchievementListRelationFilter
+  history?: Prisma.UserChapterHistoryListRelationFilter
+  dailyActivities?: Prisma.UserDailyActivityListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -366,35 +366,35 @@ export type UserOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   imageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
-  bannerUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   birthdate?: Prisma.SortOrderInput | Prisma.SortOrder
-  usernameChangedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  imageUrlChangedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  bannerUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   bannerUrlChangedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  emailVerified?: Prisma.SortOrder
-  isPublicProfile?: Prisma.SortOrder
-  isPrivateHistory?: Prisma.SortOrder
+  imageUrlChangedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  usernameChangedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   emailNotifications?: Prisma.SortOrder
+  emailVerified?: Prisma.SortOrder
+  isPrivateHistory?: Prisma.SortOrder
+  isPublicProfile?: Prisma.SortOrder
   pushNotifications?: Prisma.SortOrder
   theme?: Prisma.SortOrder
   analytics?: Prisma.AnalyticsOrderByRelationAggregateInput
   audits?: Prisma.AuditOrderByRelationAggregateInput
   Comment?: Prisma.CommentOrderByRelationAggregateInput
   comments?: Prisma.CommentOrderByRelationAggregateInput
+  emailLogs?: Prisma.EmailLogOrderByRelationAggregateInput
+  emailPreference?: Prisma.EmailPreferenceOrderByWithRelationInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenOrderByRelationAggregateInput
   favorites?: Prisma.FavoriteOrderByRelationAggregateInput
+  organizationFollows?: Prisma.OrganizationFollowerOrderByRelationAggregateInput
   passwordResetTokens?: Prisma.PasswordResetTokenOrderByRelationAggregateInput
+  permissions?: Prisma.PermissionOrderByRelationAggregateInput
   rankings?: Prisma.RankingOrderByRelationAggregateInput
   subscriptions?: Prisma.SubscriptionOrderByRelationAggregateInput
   tokens?: Prisma.TokenOrderByRelationAggregateInput
-  history?: Prisma.UserChapterHistoryOrderByRelationAggregateInput
-  permissions?: Prisma.PermissionOrderByRelationAggregateInput
-  organizationFollows?: Prisma.OrganizationFollowerOrderByRelationAggregateInput
-  emailPreference?: Prisma.EmailPreferenceOrderByWithRelationInput
-  emailLogs?: Prisma.EmailLogOrderByRelationAggregateInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenOrderByRelationAggregateInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenOrderByRelationAggregateInput
-  dailyActivities?: Prisma.UserDailyActivityOrderByRelationAggregateInput
   achievements?: Prisma.UserAchievementOrderByRelationAggregateInput
+  history?: Prisma.UserChapterHistoryOrderByRelationAggregateInput
+  dailyActivities?: Prisma.UserDailyActivityOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -410,35 +410,35 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   description?: Prisma.StringNullableFilter<"User"> | string | null
   imageUrl?: Prisma.StringNullableFilter<"User"> | string | null
-  bannerUrl?: Prisma.StringNullableFilter<"User"> | string | null
   birthdate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
-  usernameChangedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
-  imageUrlChangedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  bannerUrl?: Prisma.StringNullableFilter<"User"> | string | null
   bannerUrlChangedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
-  emailVerified?: Prisma.BoolFilter<"User"> | boolean
-  isPublicProfile?: Prisma.BoolFilter<"User"> | boolean
-  isPrivateHistory?: Prisma.BoolFilter<"User"> | boolean
+  imageUrlChangedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  usernameChangedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   emailNotifications?: Prisma.BoolFilter<"User"> | boolean
+  emailVerified?: Prisma.BoolFilter<"User"> | boolean
+  isPrivateHistory?: Prisma.BoolFilter<"User"> | boolean
+  isPublicProfile?: Prisma.BoolFilter<"User"> | boolean
   pushNotifications?: Prisma.BoolFilter<"User"> | boolean
   theme?: Prisma.StringFilter<"User"> | string
   analytics?: Prisma.AnalyticsListRelationFilter
   audits?: Prisma.AuditListRelationFilter
   Comment?: Prisma.CommentListRelationFilter
   comments?: Prisma.CommentListRelationFilter
+  emailLogs?: Prisma.EmailLogListRelationFilter
+  emailPreference?: Prisma.XOR<Prisma.EmailPreferenceNullableScalarRelationFilter, Prisma.EmailPreferenceWhereInput> | null
+  emailVerificationTokens?: Prisma.EmailVerificationTokenListRelationFilter
   favorites?: Prisma.FavoriteListRelationFilter
+  organizationFollows?: Prisma.OrganizationFollowerListRelationFilter
   passwordResetTokens?: Prisma.PasswordResetTokenListRelationFilter
+  permissions?: Prisma.PermissionListRelationFilter
   rankings?: Prisma.RankingListRelationFilter
   subscriptions?: Prisma.SubscriptionListRelationFilter
   tokens?: Prisma.TokenListRelationFilter
-  history?: Prisma.UserChapterHistoryListRelationFilter
-  permissions?: Prisma.PermissionListRelationFilter
-  organizationFollows?: Prisma.OrganizationFollowerListRelationFilter
-  emailPreference?: Prisma.XOR<Prisma.EmailPreferenceNullableScalarRelationFilter, Prisma.EmailPreferenceWhereInput> | null
-  emailLogs?: Prisma.EmailLogListRelationFilter
   unsubscribeTokens?: Prisma.UnsubscribeTokenListRelationFilter
-  emailVerificationTokens?: Prisma.EmailVerificationTokenListRelationFilter
-  dailyActivities?: Prisma.UserDailyActivityListRelationFilter
   achievements?: Prisma.UserAchievementListRelationFilter
+  history?: Prisma.UserChapterHistoryListRelationFilter
+  dailyActivities?: Prisma.UserDailyActivityListRelationFilter
 }, "id" | "username" | "slug" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -451,15 +451,15 @@ export type UserOrderByWithAggregationInput = {
   updatedAt?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   imageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
-  bannerUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   birthdate?: Prisma.SortOrderInput | Prisma.SortOrder
-  usernameChangedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  imageUrlChangedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  bannerUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   bannerUrlChangedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  emailVerified?: Prisma.SortOrder
-  isPublicProfile?: Prisma.SortOrder
-  isPrivateHistory?: Prisma.SortOrder
+  imageUrlChangedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  usernameChangedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   emailNotifications?: Prisma.SortOrder
+  emailVerified?: Prisma.SortOrder
+  isPrivateHistory?: Prisma.SortOrder
+  isPublicProfile?: Prisma.SortOrder
   pushNotifications?: Prisma.SortOrder
   theme?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
@@ -482,15 +482,15 @@ export type UserScalarWhereWithAggregatesInput = {
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   description?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   imageUrl?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  bannerUrl?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   birthdate?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
-  usernameChangedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
-  imageUrlChangedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  bannerUrl?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   bannerUrlChangedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
-  emailVerified?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
-  isPublicProfile?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
-  isPrivateHistory?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  imageUrlChangedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  usernameChangedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   emailNotifications?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  emailVerified?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  isPrivateHistory?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  isPublicProfile?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   pushNotifications?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   theme?: Prisma.StringWithAggregatesFilter<"User"> | string
 }
@@ -504,35 +504,35 @@ export type UserCreateInput = {
   updatedAt?: Date | string
   description?: string | null
   imageUrl?: string | null
-  bannerUrl?: string | null
   birthdate?: Date | string | null
-  usernameChangedAt?: Date | string | null
-  imageUrlChangedAt?: Date | string | null
+  bannerUrl?: string | null
   bannerUrlChangedAt?: Date | string | null
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
-  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
-  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
-  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
-  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
-  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenCreateNestedManyWithoutUserInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
-  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
   achievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -545,35 +545,35 @@ export type UserUncheckedCreateInput = {
   updatedAt?: Date | string
   description?: string | null
   imageUrl?: string | null
-  bannerUrl?: string | null
   birthdate?: Date | string | null
-  usernameChangedAt?: Date | string | null
-  imageUrlChangedAt?: Date | string | null
+  bannerUrl?: string | null
   bannerUrlChangedAt?: Date | string | null
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
-  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
-  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
-  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
-  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
-  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedCreateNestedManyWithoutUserInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
-  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
   achievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -585,35 +585,35 @@ export type UserUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
-  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
-  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
-  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
-  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
-  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUpdateManyWithoutUserNestedInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
-  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
   achievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -626,35 +626,35 @@ export type UserUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
-  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
-  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
-  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
-  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
-  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedUpdateManyWithoutUserNestedInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
-  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
   achievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -667,15 +667,15 @@ export type UserCreateManyInput = {
   updatedAt?: Date | string
   description?: string | null
   imageUrl?: string | null
-  bannerUrl?: string | null
   birthdate?: Date | string | null
-  usernameChangedAt?: Date | string | null
-  imageUrlChangedAt?: Date | string | null
+  bannerUrl?: string | null
   bannerUrlChangedAt?: Date | string | null
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: string
 }
@@ -689,15 +689,15 @@ export type UserUpdateManyMutationInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
 }
@@ -712,15 +712,15 @@ export type UserUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
 }
@@ -740,15 +740,15 @@ export type UserCountOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   description?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
-  bannerUrl?: Prisma.SortOrder
   birthdate?: Prisma.SortOrder
-  usernameChangedAt?: Prisma.SortOrder
-  imageUrlChangedAt?: Prisma.SortOrder
+  bannerUrl?: Prisma.SortOrder
   bannerUrlChangedAt?: Prisma.SortOrder
-  emailVerified?: Prisma.SortOrder
-  isPublicProfile?: Prisma.SortOrder
-  isPrivateHistory?: Prisma.SortOrder
+  imageUrlChangedAt?: Prisma.SortOrder
+  usernameChangedAt?: Prisma.SortOrder
   emailNotifications?: Prisma.SortOrder
+  emailVerified?: Prisma.SortOrder
+  isPrivateHistory?: Prisma.SortOrder
+  isPublicProfile?: Prisma.SortOrder
   pushNotifications?: Prisma.SortOrder
   theme?: Prisma.SortOrder
 }
@@ -767,15 +767,15 @@ export type UserMaxOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   description?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
-  bannerUrl?: Prisma.SortOrder
   birthdate?: Prisma.SortOrder
-  usernameChangedAt?: Prisma.SortOrder
-  imageUrlChangedAt?: Prisma.SortOrder
+  bannerUrl?: Prisma.SortOrder
   bannerUrlChangedAt?: Prisma.SortOrder
-  emailVerified?: Prisma.SortOrder
-  isPublicProfile?: Prisma.SortOrder
-  isPrivateHistory?: Prisma.SortOrder
+  imageUrlChangedAt?: Prisma.SortOrder
+  usernameChangedAt?: Prisma.SortOrder
   emailNotifications?: Prisma.SortOrder
+  emailVerified?: Prisma.SortOrder
+  isPrivateHistory?: Prisma.SortOrder
+  isPublicProfile?: Prisma.SortOrder
   pushNotifications?: Prisma.SortOrder
   theme?: Prisma.SortOrder
 }
@@ -790,15 +790,15 @@ export type UserMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   description?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
-  bannerUrl?: Prisma.SortOrder
   birthdate?: Prisma.SortOrder
-  usernameChangedAt?: Prisma.SortOrder
-  imageUrlChangedAt?: Prisma.SortOrder
+  bannerUrl?: Prisma.SortOrder
   bannerUrlChangedAt?: Prisma.SortOrder
-  emailVerified?: Prisma.SortOrder
-  isPublicProfile?: Prisma.SortOrder
-  isPrivateHistory?: Prisma.SortOrder
+  imageUrlChangedAt?: Prisma.SortOrder
+  usernameChangedAt?: Prisma.SortOrder
   emailNotifications?: Prisma.SortOrder
+  emailVerified?: Prisma.SortOrder
+  isPrivateHistory?: Prisma.SortOrder
+  isPublicProfile?: Prisma.SortOrder
   pushNotifications?: Prisma.SortOrder
   theme?: Prisma.SortOrder
 }
@@ -1085,34 +1085,34 @@ export type UserCreateWithoutTokensInput = {
   updatedAt?: Date | string
   description?: string | null
   imageUrl?: string | null
-  bannerUrl?: string | null
   birthdate?: Date | string | null
-  usernameChangedAt?: Date | string | null
-  imageUrlChangedAt?: Date | string | null
+  bannerUrl?: string | null
   bannerUrlChangedAt?: Date | string | null
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
-  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
-  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
-  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
-  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
-  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenCreateNestedManyWithoutUserInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
-  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
   achievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutTokensInput = {
@@ -1125,34 +1125,34 @@ export type UserUncheckedCreateWithoutTokensInput = {
   updatedAt?: Date | string
   description?: string | null
   imageUrl?: string | null
-  bannerUrl?: string | null
   birthdate?: Date | string | null
-  usernameChangedAt?: Date | string | null
-  imageUrlChangedAt?: Date | string | null
+  bannerUrl?: string | null
   bannerUrlChangedAt?: Date | string | null
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
-  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
-  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
-  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
-  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
-  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedCreateNestedManyWithoutUserInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
-  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
   achievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutTokensInput = {
@@ -1180,34 +1180,34 @@ export type UserUpdateWithoutTokensInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
-  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
-  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
-  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
-  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
-  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUpdateManyWithoutUserNestedInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
-  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
   achievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTokensInput = {
@@ -1220,34 +1220,34 @@ export type UserUncheckedUpdateWithoutTokensInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
-  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
-  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
-  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
-  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
-  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedUpdateManyWithoutUserNestedInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
-  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
   achievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPermissionsInput = {
@@ -1259,34 +1259,34 @@ export type UserCreateWithoutPermissionsInput = {
   updatedAt?: Date | string
   description?: string | null
   imageUrl?: string | null
-  bannerUrl?: string | null
   birthdate?: Date | string | null
-  usernameChangedAt?: Date | string | null
-  imageUrlChangedAt?: Date | string | null
+  bannerUrl?: string | null
   bannerUrlChangedAt?: Date | string | null
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
-  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
-  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
-  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
-  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenCreateNestedManyWithoutUserInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
-  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
   achievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPermissionsInput = {
@@ -1299,34 +1299,34 @@ export type UserUncheckedCreateWithoutPermissionsInput = {
   updatedAt?: Date | string
   description?: string | null
   imageUrl?: string | null
-  bannerUrl?: string | null
   birthdate?: Date | string | null
-  usernameChangedAt?: Date | string | null
-  imageUrlChangedAt?: Date | string | null
+  bannerUrl?: string | null
   bannerUrlChangedAt?: Date | string | null
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
-  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
-  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
-  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
-  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedCreateNestedManyWithoutUserInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
-  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
   achievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPermissionsInput = {
@@ -1354,34 +1354,34 @@ export type UserUpdateWithoutPermissionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
-  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
-  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
-  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
-  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUpdateManyWithoutUserNestedInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
-  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
   achievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPermissionsInput = {
@@ -1394,34 +1394,34 @@ export type UserUncheckedUpdateWithoutPermissionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
-  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
-  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
-  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
-  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedUpdateManyWithoutUserNestedInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
-  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
   achievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPasswordResetTokensInput = {
@@ -1433,34 +1433,34 @@ export type UserCreateWithoutPasswordResetTokensInput = {
   updatedAt?: Date | string
   description?: string | null
   imageUrl?: string | null
-  bannerUrl?: string | null
   birthdate?: Date | string | null
-  usernameChangedAt?: Date | string | null
-  imageUrlChangedAt?: Date | string | null
+  bannerUrl?: string | null
   bannerUrlChangedAt?: Date | string | null
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
-  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
-  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
-  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
-  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
-  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenCreateNestedManyWithoutUserInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
-  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
   achievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPasswordResetTokensInput = {
@@ -1473,34 +1473,34 @@ export type UserUncheckedCreateWithoutPasswordResetTokensInput = {
   updatedAt?: Date | string
   description?: string | null
   imageUrl?: string | null
-  bannerUrl?: string | null
   birthdate?: Date | string | null
-  usernameChangedAt?: Date | string | null
-  imageUrlChangedAt?: Date | string | null
+  bannerUrl?: string | null
   bannerUrlChangedAt?: Date | string | null
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
-  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
-  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
-  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
-  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
-  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedCreateNestedManyWithoutUserInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
-  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
   achievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPasswordResetTokensInput = {
@@ -1528,34 +1528,34 @@ export type UserUpdateWithoutPasswordResetTokensInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
-  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
-  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
-  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
-  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
-  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUpdateManyWithoutUserNestedInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
-  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
   achievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
@@ -1568,34 +1568,34 @@ export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
-  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
-  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
-  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
-  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
-  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedUpdateManyWithoutUserNestedInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
-  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
   achievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCommentInput = {
@@ -1607,34 +1607,34 @@ export type UserCreateWithoutCommentInput = {
   updatedAt?: Date | string
   description?: string | null
   imageUrl?: string | null
-  bannerUrl?: string | null
   birthdate?: Date | string | null
-  usernameChangedAt?: Date | string | null
-  imageUrlChangedAt?: Date | string | null
+  bannerUrl?: string | null
   bannerUrlChangedAt?: Date | string | null
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
-  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
-  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
-  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
-  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
-  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenCreateNestedManyWithoutUserInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
-  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
   achievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCommentInput = {
@@ -1647,34 +1647,34 @@ export type UserUncheckedCreateWithoutCommentInput = {
   updatedAt?: Date | string
   description?: string | null
   imageUrl?: string | null
-  bannerUrl?: string | null
   birthdate?: Date | string | null
-  usernameChangedAt?: Date | string | null
-  imageUrlChangedAt?: Date | string | null
+  bannerUrl?: string | null
   bannerUrlChangedAt?: Date | string | null
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
-  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
-  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
-  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
-  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
-  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedCreateNestedManyWithoutUserInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
-  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
   achievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCommentInput = {
@@ -1691,34 +1691,34 @@ export type UserCreateWithoutCommentsInput = {
   updatedAt?: Date | string
   description?: string | null
   imageUrl?: string | null
-  bannerUrl?: string | null
   birthdate?: Date | string | null
-  usernameChangedAt?: Date | string | null
-  imageUrlChangedAt?: Date | string | null
+  bannerUrl?: string | null
   bannerUrlChangedAt?: Date | string | null
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
-  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
-  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
-  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
-  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
-  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenCreateNestedManyWithoutUserInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
-  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
   achievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCommentsInput = {
@@ -1731,34 +1731,34 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   updatedAt?: Date | string
   description?: string | null
   imageUrl?: string | null
-  bannerUrl?: string | null
   birthdate?: Date | string | null
-  usernameChangedAt?: Date | string | null
-  imageUrlChangedAt?: Date | string | null
+  bannerUrl?: string | null
   bannerUrlChangedAt?: Date | string | null
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
-  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
-  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
-  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
-  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
-  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedCreateNestedManyWithoutUserInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
-  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
   achievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCommentsInput = {
@@ -1786,34 +1786,34 @@ export type UserUpdateWithoutCommentInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
-  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
-  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
-  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
-  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
-  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUpdateManyWithoutUserNestedInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
-  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
   achievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCommentInput = {
@@ -1826,34 +1826,34 @@ export type UserUncheckedUpdateWithoutCommentInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
-  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
-  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
-  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
-  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
-  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedUpdateManyWithoutUserNestedInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
-  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
   achievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutCommentsInput = {
@@ -1876,34 +1876,34 @@ export type UserUpdateWithoutCommentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
-  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
-  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
-  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
-  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
-  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUpdateManyWithoutUserNestedInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
-  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
   achievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCommentsInput = {
@@ -1916,34 +1916,34 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
-  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
-  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
-  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
-  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
-  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedUpdateManyWithoutUserNestedInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
-  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
   achievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutRankingsInput = {
@@ -1955,34 +1955,34 @@ export type UserCreateWithoutRankingsInput = {
   updatedAt?: Date | string
   description?: string | null
   imageUrl?: string | null
-  bannerUrl?: string | null
   birthdate?: Date | string | null
-  usernameChangedAt?: Date | string | null
-  imageUrlChangedAt?: Date | string | null
+  bannerUrl?: string | null
   bannerUrlChangedAt?: Date | string | null
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
-  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
-  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
-  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
-  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
-  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenCreateNestedManyWithoutUserInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
-  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
   achievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRankingsInput = {
@@ -1995,34 +1995,34 @@ export type UserUncheckedCreateWithoutRankingsInput = {
   updatedAt?: Date | string
   description?: string | null
   imageUrl?: string | null
-  bannerUrl?: string | null
   birthdate?: Date | string | null
-  usernameChangedAt?: Date | string | null
-  imageUrlChangedAt?: Date | string | null
+  bannerUrl?: string | null
   bannerUrlChangedAt?: Date | string | null
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
-  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
-  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
-  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
-  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
-  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedCreateNestedManyWithoutUserInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
-  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
   achievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRankingsInput = {
@@ -2050,34 +2050,34 @@ export type UserUpdateWithoutRankingsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
-  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
-  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
-  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
-  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
-  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUpdateManyWithoutUserNestedInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
-  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
   achievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRankingsInput = {
@@ -2090,34 +2090,34 @@ export type UserUncheckedUpdateWithoutRankingsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
-  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
-  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
-  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
-  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
-  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedUpdateManyWithoutUserNestedInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
-  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
   achievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAnalyticsInput = {
@@ -2129,34 +2129,34 @@ export type UserCreateWithoutAnalyticsInput = {
   updatedAt?: Date | string
   description?: string | null
   imageUrl?: string | null
-  bannerUrl?: string | null
   birthdate?: Date | string | null
-  usernameChangedAt?: Date | string | null
-  imageUrlChangedAt?: Date | string | null
+  bannerUrl?: string | null
   bannerUrlChangedAt?: Date | string | null
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: string
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
-  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
-  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
-  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
-  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
-  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenCreateNestedManyWithoutUserInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
-  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
   achievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAnalyticsInput = {
@@ -2169,34 +2169,34 @@ export type UserUncheckedCreateWithoutAnalyticsInput = {
   updatedAt?: Date | string
   description?: string | null
   imageUrl?: string | null
-  bannerUrl?: string | null
   birthdate?: Date | string | null
-  usernameChangedAt?: Date | string | null
-  imageUrlChangedAt?: Date | string | null
+  bannerUrl?: string | null
   bannerUrlChangedAt?: Date | string | null
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: string
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
-  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
-  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
-  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
-  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
-  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedCreateNestedManyWithoutUserInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
-  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
   achievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAnalyticsInput = {
@@ -2224,34 +2224,34 @@ export type UserUpdateWithoutAnalyticsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
-  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
-  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
-  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
-  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
-  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUpdateManyWithoutUserNestedInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
-  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
   achievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAnalyticsInput = {
@@ -2264,34 +2264,34 @@ export type UserUncheckedUpdateWithoutAnalyticsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
-  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
-  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
-  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
-  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
-  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedUpdateManyWithoutUserNestedInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
-  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
   achievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutHistoryInput = {
@@ -2303,34 +2303,34 @@ export type UserCreateWithoutHistoryInput = {
   updatedAt?: Date | string
   description?: string | null
   imageUrl?: string | null
-  bannerUrl?: string | null
   birthdate?: Date | string | null
-  usernameChangedAt?: Date | string | null
-  imageUrlChangedAt?: Date | string | null
+  bannerUrl?: string | null
   bannerUrlChangedAt?: Date | string | null
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
-  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
-  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
-  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
-  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenCreateNestedManyWithoutUserInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
-  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
   achievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutHistoryInput = {
@@ -2343,34 +2343,34 @@ export type UserUncheckedCreateWithoutHistoryInput = {
   updatedAt?: Date | string
   description?: string | null
   imageUrl?: string | null
-  bannerUrl?: string | null
   birthdate?: Date | string | null
-  usernameChangedAt?: Date | string | null
-  imageUrlChangedAt?: Date | string | null
+  bannerUrl?: string | null
   bannerUrlChangedAt?: Date | string | null
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
-  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
-  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
-  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
-  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedCreateNestedManyWithoutUserInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
-  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
   achievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutHistoryInput = {
@@ -2398,34 +2398,34 @@ export type UserUpdateWithoutHistoryInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
-  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
-  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
-  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
-  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUpdateManyWithoutUserNestedInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
-  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
   achievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutHistoryInput = {
@@ -2438,34 +2438,34 @@ export type UserUncheckedUpdateWithoutHistoryInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
-  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
-  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
-  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
-  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedUpdateManyWithoutUserNestedInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
-  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
   achievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutFavoritesInput = {
@@ -2477,34 +2477,34 @@ export type UserCreateWithoutFavoritesInput = {
   updatedAt?: Date | string
   description?: string | null
   imageUrl?: string | null
-  bannerUrl?: string | null
   birthdate?: Date | string | null
-  usernameChangedAt?: Date | string | null
-  imageUrlChangedAt?: Date | string | null
+  bannerUrl?: string | null
   bannerUrlChangedAt?: Date | string | null
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
-  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
-  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
-  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
-  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
-  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenCreateNestedManyWithoutUserInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
-  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
   achievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutFavoritesInput = {
@@ -2517,34 +2517,34 @@ export type UserUncheckedCreateWithoutFavoritesInput = {
   updatedAt?: Date | string
   description?: string | null
   imageUrl?: string | null
-  bannerUrl?: string | null
   birthdate?: Date | string | null
-  usernameChangedAt?: Date | string | null
-  imageUrlChangedAt?: Date | string | null
+  bannerUrl?: string | null
   bannerUrlChangedAt?: Date | string | null
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
-  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
-  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
-  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
-  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
-  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedCreateNestedManyWithoutUserInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
-  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
   achievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutFavoritesInput = {
@@ -2572,34 +2572,34 @@ export type UserUpdateWithoutFavoritesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
-  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
-  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
-  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
-  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
-  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUpdateManyWithoutUserNestedInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
-  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
   achievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFavoritesInput = {
@@ -2612,34 +2612,34 @@ export type UserUncheckedUpdateWithoutFavoritesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
-  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
-  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
-  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
-  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
-  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedUpdateManyWithoutUserNestedInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
-  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
   achievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAuditsInput = {
@@ -2651,34 +2651,34 @@ export type UserCreateWithoutAuditsInput = {
   updatedAt?: Date | string
   description?: string | null
   imageUrl?: string | null
-  bannerUrl?: string | null
   birthdate?: Date | string | null
-  usernameChangedAt?: Date | string | null
-  imageUrlChangedAt?: Date | string | null
+  bannerUrl?: string | null
   bannerUrlChangedAt?: Date | string | null
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
-  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
-  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
-  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
-  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
-  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenCreateNestedManyWithoutUserInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
-  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
   achievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAuditsInput = {
@@ -2691,34 +2691,34 @@ export type UserUncheckedCreateWithoutAuditsInput = {
   updatedAt?: Date | string
   description?: string | null
   imageUrl?: string | null
-  bannerUrl?: string | null
   birthdate?: Date | string | null
-  usernameChangedAt?: Date | string | null
-  imageUrlChangedAt?: Date | string | null
+  bannerUrl?: string | null
   bannerUrlChangedAt?: Date | string | null
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
-  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
-  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
-  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
-  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
-  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedCreateNestedManyWithoutUserInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
-  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
   achievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAuditsInput = {
@@ -2746,34 +2746,34 @@ export type UserUpdateWithoutAuditsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
-  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
-  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
-  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
-  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
-  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUpdateManyWithoutUserNestedInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
-  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
   achievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuditsInput = {
@@ -2786,34 +2786,34 @@ export type UserUncheckedUpdateWithoutAuditsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
-  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
-  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
-  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
-  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
-  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedUpdateManyWithoutUserNestedInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
-  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
   achievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSubscriptionsInput = {
@@ -2825,34 +2825,34 @@ export type UserCreateWithoutSubscriptionsInput = {
   updatedAt?: Date | string
   description?: string | null
   imageUrl?: string | null
-  bannerUrl?: string | null
   birthdate?: Date | string | null
-  usernameChangedAt?: Date | string | null
-  imageUrlChangedAt?: Date | string | null
+  bannerUrl?: string | null
   bannerUrlChangedAt?: Date | string | null
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
   tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
-  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
-  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
-  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
-  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
-  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenCreateNestedManyWithoutUserInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
-  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
   achievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSubscriptionsInput = {
@@ -2865,34 +2865,34 @@ export type UserUncheckedCreateWithoutSubscriptionsInput = {
   updatedAt?: Date | string
   description?: string | null
   imageUrl?: string | null
-  bannerUrl?: string | null
   birthdate?: Date | string | null
-  usernameChangedAt?: Date | string | null
-  imageUrlChangedAt?: Date | string | null
+  bannerUrl?: string | null
   bannerUrlChangedAt?: Date | string | null
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
-  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
-  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
-  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
-  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
-  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedCreateNestedManyWithoutUserInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
-  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
   achievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSubscriptionsInput = {
@@ -2920,34 +2920,34 @@ export type UserUpdateWithoutSubscriptionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
   tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
-  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
-  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
-  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
-  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
-  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUpdateManyWithoutUserNestedInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
-  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
   achievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSubscriptionsInput = {
@@ -2960,34 +2960,34 @@ export type UserUncheckedUpdateWithoutSubscriptionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
-  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
-  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
-  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
-  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
-  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedUpdateManyWithoutUserNestedInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
-  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
   achievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutOrganizationFollowsInput = {
@@ -2999,34 +2999,34 @@ export type UserCreateWithoutOrganizationFollowsInput = {
   updatedAt?: Date | string
   description?: string | null
   imageUrl?: string | null
-  bannerUrl?: string | null
   birthdate?: Date | string | null
-  usernameChangedAt?: Date | string | null
-  imageUrlChangedAt?: Date | string | null
+  bannerUrl?: string | null
   bannerUrlChangedAt?: Date | string | null
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
-  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
-  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
-  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
-  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenCreateNestedManyWithoutUserInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
-  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
   achievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutOrganizationFollowsInput = {
@@ -3039,34 +3039,34 @@ export type UserUncheckedCreateWithoutOrganizationFollowsInput = {
   updatedAt?: Date | string
   description?: string | null
   imageUrl?: string | null
-  bannerUrl?: string | null
   birthdate?: Date | string | null
-  usernameChangedAt?: Date | string | null
-  imageUrlChangedAt?: Date | string | null
+  bannerUrl?: string | null
   bannerUrlChangedAt?: Date | string | null
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
-  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
-  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
-  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
-  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedCreateNestedManyWithoutUserInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
-  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
   achievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutOrganizationFollowsInput = {
@@ -3094,34 +3094,34 @@ export type UserUpdateWithoutOrganizationFollowsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
-  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
-  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
-  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
-  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUpdateManyWithoutUserNestedInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
-  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
   achievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOrganizationFollowsInput = {
@@ -3134,34 +3134,34 @@ export type UserUncheckedUpdateWithoutOrganizationFollowsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
-  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
-  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
-  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
-  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedUpdateManyWithoutUserNestedInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
-  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
   achievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutEmailPreferenceInput = {
@@ -3173,34 +3173,34 @@ export type UserCreateWithoutEmailPreferenceInput = {
   updatedAt?: Date | string
   description?: string | null
   imageUrl?: string | null
-  bannerUrl?: string | null
   birthdate?: Date | string | null
-  usernameChangedAt?: Date | string | null
-  imageUrlChangedAt?: Date | string | null
+  bannerUrl?: string | null
   bannerUrlChangedAt?: Date | string | null
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
-  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
-  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
-  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
-  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenCreateNestedManyWithoutUserInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
-  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
   achievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutEmailPreferenceInput = {
@@ -3213,34 +3213,34 @@ export type UserUncheckedCreateWithoutEmailPreferenceInput = {
   updatedAt?: Date | string
   description?: string | null
   imageUrl?: string | null
-  bannerUrl?: string | null
   birthdate?: Date | string | null
-  usernameChangedAt?: Date | string | null
-  imageUrlChangedAt?: Date | string | null
+  bannerUrl?: string | null
   bannerUrlChangedAt?: Date | string | null
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
-  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
-  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
-  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
-  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedCreateNestedManyWithoutUserInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
-  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
   achievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutEmailPreferenceInput = {
@@ -3268,34 +3268,34 @@ export type UserUpdateWithoutEmailPreferenceInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
-  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
-  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
-  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
-  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUpdateManyWithoutUserNestedInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
-  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
   achievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEmailPreferenceInput = {
@@ -3308,34 +3308,34 @@ export type UserUncheckedUpdateWithoutEmailPreferenceInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
-  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
-  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
-  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
-  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedUpdateManyWithoutUserNestedInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
-  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
   achievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutEmailLogsInput = {
@@ -3347,34 +3347,34 @@ export type UserCreateWithoutEmailLogsInput = {
   updatedAt?: Date | string
   description?: string | null
   imageUrl?: string | null
-  bannerUrl?: string | null
   birthdate?: Date | string | null
-  usernameChangedAt?: Date | string | null
-  imageUrlChangedAt?: Date | string | null
+  bannerUrl?: string | null
   bannerUrlChangedAt?: Date | string | null
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
-  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
-  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
-  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
-  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenCreateNestedManyWithoutUserInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
-  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
   achievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutEmailLogsInput = {
@@ -3387,34 +3387,34 @@ export type UserUncheckedCreateWithoutEmailLogsInput = {
   updatedAt?: Date | string
   description?: string | null
   imageUrl?: string | null
-  bannerUrl?: string | null
   birthdate?: Date | string | null
-  usernameChangedAt?: Date | string | null
-  imageUrlChangedAt?: Date | string | null
+  bannerUrl?: string | null
   bannerUrlChangedAt?: Date | string | null
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
-  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
-  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
-  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
-  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedCreateNestedManyWithoutUserInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
-  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
   achievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutEmailLogsInput = {
@@ -3442,34 +3442,34 @@ export type UserUpdateWithoutEmailLogsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
-  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
-  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
-  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
-  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUpdateManyWithoutUserNestedInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
-  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
   achievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEmailLogsInput = {
@@ -3482,34 +3482,34 @@ export type UserUncheckedUpdateWithoutEmailLogsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
-  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
-  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
-  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
-  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedUpdateManyWithoutUserNestedInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
-  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
   achievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutUnsubscribeTokensInput = {
@@ -3521,34 +3521,34 @@ export type UserCreateWithoutUnsubscribeTokensInput = {
   updatedAt?: Date | string
   description?: string | null
   imageUrl?: string | null
-  bannerUrl?: string | null
   birthdate?: Date | string | null
-  usernameChangedAt?: Date | string | null
-  imageUrlChangedAt?: Date | string | null
+  bannerUrl?: string | null
   bannerUrlChangedAt?: Date | string | null
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
-  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
-  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
-  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
-  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
-  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
-  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
   achievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutUnsubscribeTokensInput = {
@@ -3561,34 +3561,34 @@ export type UserUncheckedCreateWithoutUnsubscribeTokensInput = {
   updatedAt?: Date | string
   description?: string | null
   imageUrl?: string | null
-  bannerUrl?: string | null
   birthdate?: Date | string | null
-  usernameChangedAt?: Date | string | null
-  imageUrlChangedAt?: Date | string | null
+  bannerUrl?: string | null
   bannerUrlChangedAt?: Date | string | null
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
-  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
-  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
-  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
-  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
-  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
-  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
   achievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutUnsubscribeTokensInput = {
@@ -3616,34 +3616,34 @@ export type UserUpdateWithoutUnsubscribeTokensInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
-  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
-  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
-  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
-  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
-  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
-  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
   achievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUnsubscribeTokensInput = {
@@ -3656,34 +3656,34 @@ export type UserUncheckedUpdateWithoutUnsubscribeTokensInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
-  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
-  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
-  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
-  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
-  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
-  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
   achievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutEmailVerificationTokensInput = {
@@ -3695,34 +3695,34 @@ export type UserCreateWithoutEmailVerificationTokensInput = {
   updatedAt?: Date | string
   description?: string | null
   imageUrl?: string | null
-  bannerUrl?: string | null
   birthdate?: Date | string | null
-  usernameChangedAt?: Date | string | null
-  imageUrlChangedAt?: Date | string | null
+  bannerUrl?: string | null
   bannerUrlChangedAt?: Date | string | null
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
-  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
-  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
-  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
-  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
-  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenCreateNestedManyWithoutUserInput
-  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
   achievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutEmailVerificationTokensInput = {
@@ -3735,34 +3735,34 @@ export type UserUncheckedCreateWithoutEmailVerificationTokensInput = {
   updatedAt?: Date | string
   description?: string | null
   imageUrl?: string | null
-  bannerUrl?: string | null
   birthdate?: Date | string | null
-  usernameChangedAt?: Date | string | null
-  imageUrlChangedAt?: Date | string | null
+  bannerUrl?: string | null
   bannerUrlChangedAt?: Date | string | null
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
-  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
-  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
-  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
-  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
-  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedCreateNestedManyWithoutUserInput
-  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
   achievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutEmailVerificationTokensInput = {
@@ -3790,34 +3790,34 @@ export type UserUpdateWithoutEmailVerificationTokensInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
-  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
-  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
-  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
-  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
-  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUpdateManyWithoutUserNestedInput
-  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
   achievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEmailVerificationTokensInput = {
@@ -3830,34 +3830,34 @@ export type UserUncheckedUpdateWithoutEmailVerificationTokensInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
-  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
-  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
-  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
-  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
-  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedUpdateManyWithoutUserNestedInput
-  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
   achievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutDailyActivitiesInput = {
@@ -3869,34 +3869,34 @@ export type UserCreateWithoutDailyActivitiesInput = {
   updatedAt?: Date | string
   description?: string | null
   imageUrl?: string | null
-  bannerUrl?: string | null
   birthdate?: Date | string | null
-  usernameChangedAt?: Date | string | null
-  imageUrlChangedAt?: Date | string | null
+  bannerUrl?: string | null
   bannerUrlChangedAt?: Date | string | null
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
-  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
-  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
-  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
-  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
-  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenCreateNestedManyWithoutUserInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   achievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutDailyActivitiesInput = {
@@ -3909,34 +3909,34 @@ export type UserUncheckedCreateWithoutDailyActivitiesInput = {
   updatedAt?: Date | string
   description?: string | null
   imageUrl?: string | null
-  bannerUrl?: string | null
   birthdate?: Date | string | null
-  usernameChangedAt?: Date | string | null
-  imageUrlChangedAt?: Date | string | null
+  bannerUrl?: string | null
   bannerUrlChangedAt?: Date | string | null
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
-  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
-  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
-  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
-  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
-  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedCreateNestedManyWithoutUserInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   achievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutDailyActivitiesInput = {
@@ -3964,34 +3964,34 @@ export type UserUpdateWithoutDailyActivitiesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
-  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
-  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
-  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
-  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
-  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUpdateManyWithoutUserNestedInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   achievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDailyActivitiesInput = {
@@ -4004,34 +4004,34 @@ export type UserUncheckedUpdateWithoutDailyActivitiesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
-  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
-  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
-  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
-  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
-  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedUpdateManyWithoutUserNestedInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   achievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAchievementsInput = {
@@ -4043,33 +4043,33 @@ export type UserCreateWithoutAchievementsInput = {
   updatedAt?: Date | string
   description?: string | null
   imageUrl?: string | null
-  bannerUrl?: string | null
   birthdate?: Date | string | null
-  usernameChangedAt?: Date | string | null
-  imageUrlChangedAt?: Date | string | null
+  bannerUrl?: string | null
   bannerUrlChangedAt?: Date | string | null
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
-  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
-  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
-  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
-  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
-  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenCreateNestedManyWithoutUserInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
 }
 
@@ -4083,33 +4083,33 @@ export type UserUncheckedCreateWithoutAchievementsInput = {
   updatedAt?: Date | string
   description?: string | null
   imageUrl?: string | null
-  bannerUrl?: string | null
   birthdate?: Date | string | null
-  usernameChangedAt?: Date | string | null
-  imageUrlChangedAt?: Date | string | null
+  bannerUrl?: string | null
   bannerUrlChangedAt?: Date | string | null
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
-  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
-  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
-  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
-  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
-  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedCreateNestedManyWithoutUserInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
 }
 
@@ -4138,33 +4138,33 @@ export type UserUpdateWithoutAchievementsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
-  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
-  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
-  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
-  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
-  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUpdateManyWithoutUserNestedInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
 }
 
@@ -4178,33 +4178,33 @@ export type UserUncheckedUpdateWithoutAchievementsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
-  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
-  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
-  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
-  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
-  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedUpdateManyWithoutUserNestedInput
-  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
 }
 
@@ -4218,19 +4218,19 @@ export type UserCountOutputType = {
   audits: number
   Comment: number
   comments: number
+  emailLogs: number
+  emailVerificationTokens: number
   favorites: number
+  organizationFollows: number
   passwordResetTokens: number
+  permissions: number
   rankings: number
   subscriptions: number
   tokens: number
-  history: number
-  permissions: number
-  organizationFollows: number
-  emailLogs: number
   unsubscribeTokens: number
-  emailVerificationTokens: number
-  dailyActivities: number
   achievements: number
+  history: number
+  dailyActivities: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -4238,19 +4238,19 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   audits?: boolean | UserCountOutputTypeCountAuditsArgs
   Comment?: boolean | UserCountOutputTypeCountCommentArgs
   comments?: boolean | UserCountOutputTypeCountCommentsArgs
+  emailLogs?: boolean | UserCountOutputTypeCountEmailLogsArgs
+  emailVerificationTokens?: boolean | UserCountOutputTypeCountEmailVerificationTokensArgs
   favorites?: boolean | UserCountOutputTypeCountFavoritesArgs
+  organizationFollows?: boolean | UserCountOutputTypeCountOrganizationFollowsArgs
   passwordResetTokens?: boolean | UserCountOutputTypeCountPasswordResetTokensArgs
+  permissions?: boolean | UserCountOutputTypeCountPermissionsArgs
   rankings?: boolean | UserCountOutputTypeCountRankingsArgs
   subscriptions?: boolean | UserCountOutputTypeCountSubscriptionsArgs
   tokens?: boolean | UserCountOutputTypeCountTokensArgs
-  history?: boolean | UserCountOutputTypeCountHistoryArgs
-  permissions?: boolean | UserCountOutputTypeCountPermissionsArgs
-  organizationFollows?: boolean | UserCountOutputTypeCountOrganizationFollowsArgs
-  emailLogs?: boolean | UserCountOutputTypeCountEmailLogsArgs
   unsubscribeTokens?: boolean | UserCountOutputTypeCountUnsubscribeTokensArgs
-  emailVerificationTokens?: boolean | UserCountOutputTypeCountEmailVerificationTokensArgs
-  dailyActivities?: boolean | UserCountOutputTypeCountDailyActivitiesArgs
   achievements?: boolean | UserCountOutputTypeCountAchievementsArgs
+  history?: boolean | UserCountOutputTypeCountHistoryArgs
+  dailyActivities?: boolean | UserCountOutputTypeCountDailyActivitiesArgs
 }
 
 /**
@@ -4294,6 +4294,20 @@ export type UserCountOutputTypeCountCommentsArgs<ExtArgs extends runtime.Types.E
 /**
  * UserCountOutputType without action
  */
+export type UserCountOutputTypeCountEmailLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EmailLogWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountEmailVerificationTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EmailVerificationTokenWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
 export type UserCountOutputTypeCountFavoritesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.FavoriteWhereInput
 }
@@ -4301,8 +4315,22 @@ export type UserCountOutputTypeCountFavoritesArgs<ExtArgs extends runtime.Types.
 /**
  * UserCountOutputType without action
  */
+export type UserCountOutputTypeCountOrganizationFollowsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OrganizationFollowerWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
 export type UserCountOutputTypeCountPasswordResetTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.PasswordResetTokenWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountPermissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PermissionWhereInput
 }
 
 /**
@@ -4329,34 +4357,6 @@ export type UserCountOutputTypeCountTokensArgs<ExtArgs extends runtime.Types.Ext
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.UserChapterHistoryWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountPermissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.PermissionWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountOrganizationFollowsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.OrganizationFollowerWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountEmailLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.EmailLogWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
 export type UserCountOutputTypeCountUnsubscribeTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.UnsubscribeTokenWhereInput
 }
@@ -4364,8 +4364,15 @@ export type UserCountOutputTypeCountUnsubscribeTokensArgs<ExtArgs extends runtim
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountEmailVerificationTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.EmailVerificationTokenWhereInput
+export type UserCountOutputTypeCountAchievementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserAchievementWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserChapterHistoryWhereInput
 }
 
 /**
@@ -4373,13 +4380,6 @@ export type UserCountOutputTypeCountEmailVerificationTokensArgs<ExtArgs extends 
  */
 export type UserCountOutputTypeCountDailyActivitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.UserDailyActivityWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountAchievementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.UserAchievementWhereInput
 }
 
 
@@ -4393,35 +4393,35 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   updatedAt?: boolean
   description?: boolean
   imageUrl?: boolean
-  bannerUrl?: boolean
   birthdate?: boolean
-  usernameChangedAt?: boolean
-  imageUrlChangedAt?: boolean
+  bannerUrl?: boolean
   bannerUrlChangedAt?: boolean
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: boolean
+  usernameChangedAt?: boolean
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: boolean
   analytics?: boolean | Prisma.User$analyticsArgs<ExtArgs>
   audits?: boolean | Prisma.User$auditsArgs<ExtArgs>
   Comment?: boolean | Prisma.User$CommentArgs<ExtArgs>
   comments?: boolean | Prisma.User$commentsArgs<ExtArgs>
+  emailLogs?: boolean | Prisma.User$emailLogsArgs<ExtArgs>
+  emailPreference?: boolean | Prisma.User$emailPreferenceArgs<ExtArgs>
+  emailVerificationTokens?: boolean | Prisma.User$emailVerificationTokensArgs<ExtArgs>
   favorites?: boolean | Prisma.User$favoritesArgs<ExtArgs>
+  organizationFollows?: boolean | Prisma.User$organizationFollowsArgs<ExtArgs>
   passwordResetTokens?: boolean | Prisma.User$passwordResetTokensArgs<ExtArgs>
+  permissions?: boolean | Prisma.User$permissionsArgs<ExtArgs>
   rankings?: boolean | Prisma.User$rankingsArgs<ExtArgs>
   subscriptions?: boolean | Prisma.User$subscriptionsArgs<ExtArgs>
   tokens?: boolean | Prisma.User$tokensArgs<ExtArgs>
-  history?: boolean | Prisma.User$historyArgs<ExtArgs>
-  permissions?: boolean | Prisma.User$permissionsArgs<ExtArgs>
-  organizationFollows?: boolean | Prisma.User$organizationFollowsArgs<ExtArgs>
-  emailPreference?: boolean | Prisma.User$emailPreferenceArgs<ExtArgs>
-  emailLogs?: boolean | Prisma.User$emailLogsArgs<ExtArgs>
   unsubscribeTokens?: boolean | Prisma.User$unsubscribeTokensArgs<ExtArgs>
-  emailVerificationTokens?: boolean | Prisma.User$emailVerificationTokensArgs<ExtArgs>
-  dailyActivities?: boolean | Prisma.User$dailyActivitiesArgs<ExtArgs>
   achievements?: boolean | Prisma.User$achievementsArgs<ExtArgs>
+  history?: boolean | Prisma.User$historyArgs<ExtArgs>
+  dailyActivities?: boolean | Prisma.User$dailyActivitiesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -4435,15 +4435,15 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   updatedAt?: boolean
   description?: boolean
   imageUrl?: boolean
-  bannerUrl?: boolean
   birthdate?: boolean
-  usernameChangedAt?: boolean
-  imageUrlChangedAt?: boolean
+  bannerUrl?: boolean
   bannerUrlChangedAt?: boolean
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: boolean
+  usernameChangedAt?: boolean
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: boolean
 }, ExtArgs["result"]["user"]>
@@ -4458,15 +4458,15 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   updatedAt?: boolean
   description?: boolean
   imageUrl?: boolean
-  bannerUrl?: boolean
   birthdate?: boolean
-  usernameChangedAt?: boolean
-  imageUrlChangedAt?: boolean
+  bannerUrl?: boolean
   bannerUrlChangedAt?: boolean
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: boolean
+  usernameChangedAt?: boolean
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: boolean
 }, ExtArgs["result"]["user"]>
@@ -4481,39 +4481,39 @@ export type UserSelectScalar = {
   updatedAt?: boolean
   description?: boolean
   imageUrl?: boolean
-  bannerUrl?: boolean
   birthdate?: boolean
-  usernameChangedAt?: boolean
-  imageUrlChangedAt?: boolean
+  bannerUrl?: boolean
   bannerUrlChangedAt?: boolean
-  emailVerified?: boolean
-  isPublicProfile?: boolean
-  isPrivateHistory?: boolean
+  imageUrlChangedAt?: boolean
+  usernameChangedAt?: boolean
   emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
   pushNotifications?: boolean
   theme?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "slug" | "email" | "password" | "createdAt" | "updatedAt" | "description" | "imageUrl" | "bannerUrl" | "birthdate" | "usernameChangedAt" | "imageUrlChangedAt" | "bannerUrlChangedAt" | "emailVerified" | "isPublicProfile" | "isPrivateHistory" | "emailNotifications" | "pushNotifications" | "theme", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "slug" | "email" | "password" | "createdAt" | "updatedAt" | "description" | "imageUrl" | "birthdate" | "bannerUrl" | "bannerUrlChangedAt" | "imageUrlChangedAt" | "usernameChangedAt" | "emailNotifications" | "emailVerified" | "isPrivateHistory" | "isPublicProfile" | "pushNotifications" | "theme", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   analytics?: boolean | Prisma.User$analyticsArgs<ExtArgs>
   audits?: boolean | Prisma.User$auditsArgs<ExtArgs>
   Comment?: boolean | Prisma.User$CommentArgs<ExtArgs>
   comments?: boolean | Prisma.User$commentsArgs<ExtArgs>
+  emailLogs?: boolean | Prisma.User$emailLogsArgs<ExtArgs>
+  emailPreference?: boolean | Prisma.User$emailPreferenceArgs<ExtArgs>
+  emailVerificationTokens?: boolean | Prisma.User$emailVerificationTokensArgs<ExtArgs>
   favorites?: boolean | Prisma.User$favoritesArgs<ExtArgs>
+  organizationFollows?: boolean | Prisma.User$organizationFollowsArgs<ExtArgs>
   passwordResetTokens?: boolean | Prisma.User$passwordResetTokensArgs<ExtArgs>
+  permissions?: boolean | Prisma.User$permissionsArgs<ExtArgs>
   rankings?: boolean | Prisma.User$rankingsArgs<ExtArgs>
   subscriptions?: boolean | Prisma.User$subscriptionsArgs<ExtArgs>
   tokens?: boolean | Prisma.User$tokensArgs<ExtArgs>
-  history?: boolean | Prisma.User$historyArgs<ExtArgs>
-  permissions?: boolean | Prisma.User$permissionsArgs<ExtArgs>
-  organizationFollows?: boolean | Prisma.User$organizationFollowsArgs<ExtArgs>
-  emailPreference?: boolean | Prisma.User$emailPreferenceArgs<ExtArgs>
-  emailLogs?: boolean | Prisma.User$emailLogsArgs<ExtArgs>
   unsubscribeTokens?: boolean | Prisma.User$unsubscribeTokensArgs<ExtArgs>
-  emailVerificationTokens?: boolean | Prisma.User$emailVerificationTokensArgs<ExtArgs>
-  dailyActivities?: boolean | Prisma.User$dailyActivitiesArgs<ExtArgs>
   achievements?: boolean | Prisma.User$achievementsArgs<ExtArgs>
+  history?: boolean | Prisma.User$historyArgs<ExtArgs>
+  dailyActivities?: boolean | Prisma.User$dailyActivitiesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -4526,20 +4526,20 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     audits: Prisma.$AuditPayload<ExtArgs>[]
     Comment: Prisma.$CommentPayload<ExtArgs>[]
     comments: Prisma.$CommentPayload<ExtArgs>[]
+    emailLogs: Prisma.$EmailLogPayload<ExtArgs>[]
+    emailPreference: Prisma.$EmailPreferencePayload<ExtArgs> | null
+    emailVerificationTokens: Prisma.$EmailVerificationTokenPayload<ExtArgs>[]
     favorites: Prisma.$FavoritePayload<ExtArgs>[]
+    organizationFollows: Prisma.$OrganizationFollowerPayload<ExtArgs>[]
     passwordResetTokens: Prisma.$PasswordResetTokenPayload<ExtArgs>[]
+    permissions: Prisma.$PermissionPayload<ExtArgs>[]
     rankings: Prisma.$RankingPayload<ExtArgs>[]
     subscriptions: Prisma.$SubscriptionPayload<ExtArgs>[]
     tokens: Prisma.$TokenPayload<ExtArgs>[]
-    history: Prisma.$UserChapterHistoryPayload<ExtArgs>[]
-    permissions: Prisma.$PermissionPayload<ExtArgs>[]
-    organizationFollows: Prisma.$OrganizationFollowerPayload<ExtArgs>[]
-    emailPreference: Prisma.$EmailPreferencePayload<ExtArgs> | null
-    emailLogs: Prisma.$EmailLogPayload<ExtArgs>[]
     unsubscribeTokens: Prisma.$UnsubscribeTokenPayload<ExtArgs>[]
-    emailVerificationTokens: Prisma.$EmailVerificationTokenPayload<ExtArgs>[]
-    dailyActivities: Prisma.$UserDailyActivityPayload<ExtArgs>[]
     achievements: Prisma.$UserAchievementPayload<ExtArgs>[]
+    history: Prisma.$UserChapterHistoryPayload<ExtArgs>[]
+    dailyActivities: Prisma.$UserDailyActivityPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -4551,15 +4551,15 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     updatedAt: Date
     description: string | null
     imageUrl: string | null
-    bannerUrl: string | null
     birthdate: Date | null
-    usernameChangedAt: Date | null
-    imageUrlChangedAt: Date | null
+    bannerUrl: string | null
     bannerUrlChangedAt: Date | null
-    emailVerified: boolean
-    isPublicProfile: boolean
-    isPrivateHistory: boolean
+    imageUrlChangedAt: Date | null
+    usernameChangedAt: Date | null
     emailNotifications: boolean
+    emailVerified: boolean
+    isPrivateHistory: boolean
+    isPublicProfile: boolean
     pushNotifications: boolean
     theme: string
   }, ExtArgs["result"]["user"]>
@@ -4960,20 +4960,20 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   audits<T extends Prisma.User$auditsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$auditsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuditPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Comment<T extends Prisma.User$CommentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$CommentArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   comments<T extends Prisma.User$commentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  emailLogs<T extends Prisma.User$emailLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$emailLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmailLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  emailPreference<T extends Prisma.User$emailPreferenceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$emailPreferenceArgs<ExtArgs>>): Prisma.Prisma__EmailPreferenceClient<runtime.Types.Result.GetResult<Prisma.$EmailPreferencePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  emailVerificationTokens<T extends Prisma.User$emailVerificationTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$emailVerificationTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmailVerificationTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   favorites<T extends Prisma.User$favoritesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$favoritesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FavoritePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  organizationFollows<T extends Prisma.User$organizationFollowsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$organizationFollowsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrganizationFollowerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   passwordResetTokens<T extends Prisma.User$passwordResetTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$passwordResetTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PasswordResetTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  permissions<T extends Prisma.User$permissionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$permissionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PermissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   rankings<T extends Prisma.User$rankingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$rankingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RankingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   subscriptions<T extends Prisma.User$subscriptionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$subscriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tokens<T extends Prisma.User$tokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$tokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  history<T extends Prisma.User$historyArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$historyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserChapterHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  permissions<T extends Prisma.User$permissionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$permissionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PermissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  organizationFollows<T extends Prisma.User$organizationFollowsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$organizationFollowsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrganizationFollowerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  emailPreference<T extends Prisma.User$emailPreferenceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$emailPreferenceArgs<ExtArgs>>): Prisma.Prisma__EmailPreferenceClient<runtime.Types.Result.GetResult<Prisma.$EmailPreferencePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  emailLogs<T extends Prisma.User$emailLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$emailLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmailLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   unsubscribeTokens<T extends Prisma.User$unsubscribeTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$unsubscribeTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UnsubscribeTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  emailVerificationTokens<T extends Prisma.User$emailVerificationTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$emailVerificationTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmailVerificationTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  dailyActivities<T extends Prisma.User$dailyActivitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$dailyActivitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserDailyActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   achievements<T extends Prisma.User$achievementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$achievementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserAchievementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  history<T extends Prisma.User$historyArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$historyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserChapterHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  dailyActivities<T extends Prisma.User$dailyActivitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$dailyActivitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserDailyActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5012,15 +5012,15 @@ export interface UserFieldRefs {
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly description: Prisma.FieldRef<"User", 'String'>
   readonly imageUrl: Prisma.FieldRef<"User", 'String'>
-  readonly bannerUrl: Prisma.FieldRef<"User", 'String'>
   readonly birthdate: Prisma.FieldRef<"User", 'DateTime'>
-  readonly usernameChangedAt: Prisma.FieldRef<"User", 'DateTime'>
-  readonly imageUrlChangedAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly bannerUrl: Prisma.FieldRef<"User", 'String'>
   readonly bannerUrlChangedAt: Prisma.FieldRef<"User", 'DateTime'>
-  readonly emailVerified: Prisma.FieldRef<"User", 'Boolean'>
-  readonly isPublicProfile: Prisma.FieldRef<"User", 'Boolean'>
-  readonly isPrivateHistory: Prisma.FieldRef<"User", 'Boolean'>
+  readonly imageUrlChangedAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly usernameChangedAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly emailNotifications: Prisma.FieldRef<"User", 'Boolean'>
+  readonly emailVerified: Prisma.FieldRef<"User", 'Boolean'>
+  readonly isPrivateHistory: Prisma.FieldRef<"User", 'Boolean'>
+  readonly isPublicProfile: Prisma.FieldRef<"User", 'Boolean'>
   readonly pushNotifications: Prisma.FieldRef<"User", 'Boolean'>
   readonly theme: Prisma.FieldRef<"User", 'String'>
 }
@@ -5507,6 +5507,73 @@ export type User$commentsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 }
 
 /**
+ * User.emailLogs
+ */
+export type User$emailLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EmailLog
+   */
+  select?: Prisma.EmailLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the EmailLog
+   */
+  omit?: Prisma.EmailLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EmailLogInclude<ExtArgs> | null
+  where?: Prisma.EmailLogWhereInput
+  orderBy?: Prisma.EmailLogOrderByWithRelationInput | Prisma.EmailLogOrderByWithRelationInput[]
+  cursor?: Prisma.EmailLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EmailLogScalarFieldEnum | Prisma.EmailLogScalarFieldEnum[]
+}
+
+/**
+ * User.emailPreference
+ */
+export type User$emailPreferenceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EmailPreference
+   */
+  select?: Prisma.EmailPreferenceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the EmailPreference
+   */
+  omit?: Prisma.EmailPreferenceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EmailPreferenceInclude<ExtArgs> | null
+  where?: Prisma.EmailPreferenceWhereInput
+}
+
+/**
+ * User.emailVerificationTokens
+ */
+export type User$emailVerificationTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EmailVerificationToken
+   */
+  select?: Prisma.EmailVerificationTokenSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the EmailVerificationToken
+   */
+  omit?: Prisma.EmailVerificationTokenOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EmailVerificationTokenInclude<ExtArgs> | null
+  where?: Prisma.EmailVerificationTokenWhereInput
+  orderBy?: Prisma.EmailVerificationTokenOrderByWithRelationInput | Prisma.EmailVerificationTokenOrderByWithRelationInput[]
+  cursor?: Prisma.EmailVerificationTokenWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EmailVerificationTokenScalarFieldEnum | Prisma.EmailVerificationTokenScalarFieldEnum[]
+}
+
+/**
  * User.favorites
  */
 export type User$favoritesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -5531,6 +5598,30 @@ export type User$favoritesArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
+ * User.organizationFollows
+ */
+export type User$organizationFollowsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OrganizationFollower
+   */
+  select?: Prisma.OrganizationFollowerSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OrganizationFollower
+   */
+  omit?: Prisma.OrganizationFollowerOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrganizationFollowerInclude<ExtArgs> | null
+  where?: Prisma.OrganizationFollowerWhereInput
+  orderBy?: Prisma.OrganizationFollowerOrderByWithRelationInput | Prisma.OrganizationFollowerOrderByWithRelationInput[]
+  cursor?: Prisma.OrganizationFollowerWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OrganizationFollowerScalarFieldEnum | Prisma.OrganizationFollowerScalarFieldEnum[]
+}
+
+/**
  * User.passwordResetTokens
  */
 export type User$passwordResetTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -5552,6 +5643,30 @@ export type User$passwordResetTokensArgs<ExtArgs extends runtime.Types.Extension
   take?: number
   skip?: number
   distinct?: Prisma.PasswordResetTokenScalarFieldEnum | Prisma.PasswordResetTokenScalarFieldEnum[]
+}
+
+/**
+ * User.permissions
+ */
+export type User$permissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Permission
+   */
+  select?: Prisma.PermissionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Permission
+   */
+  omit?: Prisma.PermissionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PermissionInclude<ExtArgs> | null
+  where?: Prisma.PermissionWhereInput
+  orderBy?: Prisma.PermissionOrderByWithRelationInput | Prisma.PermissionOrderByWithRelationInput[]
+  cursor?: Prisma.PermissionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PermissionScalarFieldEnum | Prisma.PermissionScalarFieldEnum[]
 }
 
 /**
@@ -5627,121 +5742,6 @@ export type User$tokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 }
 
 /**
- * User.history
- */
-export type User$historyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the UserChapterHistory
-   */
-  select?: Prisma.UserChapterHistorySelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the UserChapterHistory
-   */
-  omit?: Prisma.UserChapterHistoryOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UserChapterHistoryInclude<ExtArgs> | null
-  where?: Prisma.UserChapterHistoryWhereInput
-  orderBy?: Prisma.UserChapterHistoryOrderByWithRelationInput | Prisma.UserChapterHistoryOrderByWithRelationInput[]
-  cursor?: Prisma.UserChapterHistoryWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.UserChapterHistoryScalarFieldEnum | Prisma.UserChapterHistoryScalarFieldEnum[]
-}
-
-/**
- * User.permissions
- */
-export type User$permissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Permission
-   */
-  select?: Prisma.PermissionSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Permission
-   */
-  omit?: Prisma.PermissionOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.PermissionInclude<ExtArgs> | null
-  where?: Prisma.PermissionWhereInput
-  orderBy?: Prisma.PermissionOrderByWithRelationInput | Prisma.PermissionOrderByWithRelationInput[]
-  cursor?: Prisma.PermissionWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.PermissionScalarFieldEnum | Prisma.PermissionScalarFieldEnum[]
-}
-
-/**
- * User.organizationFollows
- */
-export type User$organizationFollowsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the OrganizationFollower
-   */
-  select?: Prisma.OrganizationFollowerSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the OrganizationFollower
-   */
-  omit?: Prisma.OrganizationFollowerOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.OrganizationFollowerInclude<ExtArgs> | null
-  where?: Prisma.OrganizationFollowerWhereInput
-  orderBy?: Prisma.OrganizationFollowerOrderByWithRelationInput | Prisma.OrganizationFollowerOrderByWithRelationInput[]
-  cursor?: Prisma.OrganizationFollowerWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.OrganizationFollowerScalarFieldEnum | Prisma.OrganizationFollowerScalarFieldEnum[]
-}
-
-/**
- * User.emailPreference
- */
-export type User$emailPreferenceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the EmailPreference
-   */
-  select?: Prisma.EmailPreferenceSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the EmailPreference
-   */
-  omit?: Prisma.EmailPreferenceOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.EmailPreferenceInclude<ExtArgs> | null
-  where?: Prisma.EmailPreferenceWhereInput
-}
-
-/**
- * User.emailLogs
- */
-export type User$emailLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the EmailLog
-   */
-  select?: Prisma.EmailLogSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the EmailLog
-   */
-  omit?: Prisma.EmailLogOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.EmailLogInclude<ExtArgs> | null
-  where?: Prisma.EmailLogWhereInput
-  orderBy?: Prisma.EmailLogOrderByWithRelationInput | Prisma.EmailLogOrderByWithRelationInput[]
-  cursor?: Prisma.EmailLogWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.EmailLogScalarFieldEnum | Prisma.EmailLogScalarFieldEnum[]
-}
-
-/**
  * User.unsubscribeTokens
  */
 export type User$unsubscribeTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -5766,27 +5766,51 @@ export type User$unsubscribeTokensArgs<ExtArgs extends runtime.Types.Extensions.
 }
 
 /**
- * User.emailVerificationTokens
+ * User.achievements
  */
-export type User$emailVerificationTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$achievementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the EmailVerificationToken
+   * Select specific fields to fetch from the UserAchievement
    */
-  select?: Prisma.EmailVerificationTokenSelect<ExtArgs> | null
+  select?: Prisma.UserAchievementSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the EmailVerificationToken
+   * Omit specific fields from the UserAchievement
    */
-  omit?: Prisma.EmailVerificationTokenOmit<ExtArgs> | null
+  omit?: Prisma.UserAchievementOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.EmailVerificationTokenInclude<ExtArgs> | null
-  where?: Prisma.EmailVerificationTokenWhereInput
-  orderBy?: Prisma.EmailVerificationTokenOrderByWithRelationInput | Prisma.EmailVerificationTokenOrderByWithRelationInput[]
-  cursor?: Prisma.EmailVerificationTokenWhereUniqueInput
+  include?: Prisma.UserAchievementInclude<ExtArgs> | null
+  where?: Prisma.UserAchievementWhereInput
+  orderBy?: Prisma.UserAchievementOrderByWithRelationInput | Prisma.UserAchievementOrderByWithRelationInput[]
+  cursor?: Prisma.UserAchievementWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.EmailVerificationTokenScalarFieldEnum | Prisma.EmailVerificationTokenScalarFieldEnum[]
+  distinct?: Prisma.UserAchievementScalarFieldEnum | Prisma.UserAchievementScalarFieldEnum[]
+}
+
+/**
+ * User.history
+ */
+export type User$historyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserChapterHistory
+   */
+  select?: Prisma.UserChapterHistorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserChapterHistory
+   */
+  omit?: Prisma.UserChapterHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserChapterHistoryInclude<ExtArgs> | null
+  where?: Prisma.UserChapterHistoryWhereInput
+  orderBy?: Prisma.UserChapterHistoryOrderByWithRelationInput | Prisma.UserChapterHistoryOrderByWithRelationInput[]
+  cursor?: Prisma.UserChapterHistoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserChapterHistoryScalarFieldEnum | Prisma.UserChapterHistoryScalarFieldEnum[]
 }
 
 /**
@@ -5811,30 +5835,6 @@ export type User$dailyActivitiesArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.UserDailyActivityScalarFieldEnum | Prisma.UserDailyActivityScalarFieldEnum[]
-}
-
-/**
- * User.achievements
- */
-export type User$achievementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the UserAchievement
-   */
-  select?: Prisma.UserAchievementSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the UserAchievement
-   */
-  omit?: Prisma.UserAchievementOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UserAchievementInclude<ExtArgs> | null
-  where?: Prisma.UserAchievementWhereInput
-  orderBy?: Prisma.UserAchievementOrderByWithRelationInput | Prisma.UserAchievementOrderByWithRelationInput[]
-  cursor?: Prisma.UserAchievementWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.UserAchievementScalarFieldEnum | Prisma.UserAchievementScalarFieldEnum[]
 }
 
 /**

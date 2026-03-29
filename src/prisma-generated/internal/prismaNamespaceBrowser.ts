@@ -122,8 +122,6 @@ export const OrganizationScalarFieldEnum = {
   slug: 'slug',
   description: 'description',
   imageUrl: 'imageUrl',
-  isPublic: 'isPublic',
-  isNSFW: 'isNSFW',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   googleAdsMetaContent: 'googleAdsMetaContent',
@@ -138,7 +136,6 @@ export const OrganizationScalarFieldEnum = {
   twitchUrl: 'twitchUrl',
   twitterUrl: 'twitterUrl',
   youtubeUrl: 'youtubeUrl',
-  enableAds: 'enableAds',
   enableGoogleAds: 'enableGoogleAds',
   faviconUrl: 'faviconUrl',
   enableMangaSection: 'enableMangaSection',
@@ -158,7 +155,11 @@ export const OrganizationScalarFieldEnum = {
   enableDiscordWebhookNewChapter: 'enableDiscordWebhookNewChapter',
   enableDiscordWebhookNewSubscription: 'enableDiscordWebhookNewSubscription',
   discordWebhookMessageTemplateNewChapter: 'discordWebhookMessageTemplateNewChapter',
-  discordWebhookMessageTemplateNewSubscription: 'discordWebhookMessageTemplateNewSubscription'
+  discordWebhookMessageTemplateNewSubscription: 'discordWebhookMessageTemplateNewSubscription',
+  isPublic: 'isPublic',
+  isNSFW: 'isNSFW',
+  isDeleted: 'isDeleted',
+  enableAds: 'enableAds'
 } as const
 
 export type OrganizationScalarFieldEnum = (typeof OrganizationScalarFieldEnum)[keyof typeof OrganizationScalarFieldEnum]
@@ -174,15 +175,15 @@ export const UserScalarFieldEnum = {
   updatedAt: 'updatedAt',
   description: 'description',
   imageUrl: 'imageUrl',
-  bannerUrl: 'bannerUrl',
   birthdate: 'birthdate',
-  usernameChangedAt: 'usernameChangedAt',
-  imageUrlChangedAt: 'imageUrlChangedAt',
+  bannerUrl: 'bannerUrl',
   bannerUrlChangedAt: 'bannerUrlChangedAt',
-  emailVerified: 'emailVerified',
-  isPublicProfile: 'isPublicProfile',
-  isPrivateHistory: 'isPrivateHistory',
+  imageUrlChangedAt: 'imageUrlChangedAt',
+  usernameChangedAt: 'usernameChangedAt',
   emailNotifications: 'emailNotifications',
+  emailVerified: 'emailVerified',
+  isPrivateHistory: 'isPrivateHistory',
+  isPublicProfile: 'isPublicProfile',
   pushNotifications: 'pushNotifications',
   theme: 'theme'
 } as const
@@ -311,8 +312,6 @@ export const MangaCustomScalarFieldEnum = {
   imageUrl: 'imageUrl',
   releasedAt: 'releasedAt',
   nextChapterAt: 'nextChapterAt',
-  nextChapterAtMessage: 'nextChapterAtMessage',
-  usersAlsoReadMangaCustomIds: 'usersAlsoReadMangaCustomIds',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   views: 'views',
@@ -322,7 +321,9 @@ export const MangaCustomScalarFieldEnum = {
   bannerUrl: 'bannerUrl',
   requireLogin: 'requireLogin',
   isSimulRelease: 'isSimulRelease',
-  isNSFW: 'isNSFW'
+  isNSFW: 'isNSFW',
+  nextChapterAtMessage: 'nextChapterAtMessage',
+  usersAlsoReadMangaCustomIds: 'usersAlsoReadMangaCustomIds'
 } as const
 
 export type MangaCustomScalarFieldEnum = (typeof MangaCustomScalarFieldEnum)[keyof typeof MangaCustomScalarFieldEnum]
@@ -436,6 +437,7 @@ export type GenreScalarFieldEnum = (typeof GenreScalarFieldEnum)[keyof typeof Ge
 
 export const AnalyticsScalarFieldEnum = {
   id: 'id',
+  organizationId: 'organizationId',
   userId: 'userId',
   path: 'path',
   ip: 'ip',
@@ -448,8 +450,7 @@ export const AnalyticsScalarFieldEnum = {
   event: 'event',
   screenHeight: 'screenHeight',
   screenWidth: 'screenWidth',
-  userAgent: 'userAgent',
-  organizationId: 'organizationId'
+  userAgent: 'userAgent'
 } as const
 
 export type AnalyticsScalarFieldEnum = (typeof AnalyticsScalarFieldEnum)[keyof typeof AnalyticsScalarFieldEnum]
@@ -618,14 +619,14 @@ export const EmailPreferenceScalarFieldEnum = {
   readingStreakMilestones: 'readingStreakMilestones',
   reEngagement: 'reEngagement',
   recommendations: 'recommendations',
-  commentReplyAlert: 'commentReplyAlert',
   weeklyOrgReport: 'weeklyOrgReport',
   newSubscriberAlert: 'newSubscriberAlert',
   revenueAlert: 'revenueAlert',
   contentPerformance: 'contentPerformance',
   failedPaymentAlert: 'failedPaymentAlert',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  commentReplyAlert: 'commentReplyAlert'
 } as const
 
 export type EmailPreferenceScalarFieldEnum = (typeof EmailPreferenceScalarFieldEnum)[keyof typeof EmailPreferenceScalarFieldEnum]

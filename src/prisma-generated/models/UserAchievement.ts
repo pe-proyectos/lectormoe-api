@@ -216,8 +216,8 @@ export type UserAchievementWhereInput = {
   userId?: Prisma.IntFilter<"UserAchievement"> | number
   achievementId?: Prisma.IntFilter<"UserAchievement"> | number
   unlockedAt?: Prisma.DateTimeFilter<"UserAchievement"> | Date | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   achievement?: Prisma.XOR<Prisma.AchievementScalarRelationFilter, Prisma.AchievementWhereInput>
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
 export type UserAchievementOrderByWithRelationInput = {
@@ -225,8 +225,8 @@ export type UserAchievementOrderByWithRelationInput = {
   userId?: Prisma.SortOrder
   achievementId?: Prisma.SortOrder
   unlockedAt?: Prisma.SortOrder
-  user?: Prisma.UserOrderByWithRelationInput
   achievement?: Prisma.AchievementOrderByWithRelationInput
+  user?: Prisma.UserOrderByWithRelationInput
 }
 
 export type UserAchievementWhereUniqueInput = Prisma.AtLeast<{
@@ -238,8 +238,8 @@ export type UserAchievementWhereUniqueInput = Prisma.AtLeast<{
   userId?: Prisma.IntFilter<"UserAchievement"> | number
   achievementId?: Prisma.IntFilter<"UserAchievement"> | number
   unlockedAt?: Prisma.DateTimeFilter<"UserAchievement"> | Date | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   achievement?: Prisma.XOR<Prisma.AchievementScalarRelationFilter, Prisma.AchievementWhereInput>
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id" | "userId_achievementId">
 
 export type UserAchievementOrderByWithAggregationInput = {
@@ -266,8 +266,8 @@ export type UserAchievementScalarWhereWithAggregatesInput = {
 
 export type UserAchievementCreateInput = {
   unlockedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutAchievementsInput
   achievement: Prisma.AchievementCreateNestedOneWithoutUserAchievementsInput
+  user: Prisma.UserCreateNestedOneWithoutAchievementsInput
 }
 
 export type UserAchievementUncheckedCreateInput = {
@@ -279,8 +279,8 @@ export type UserAchievementUncheckedCreateInput = {
 
 export type UserAchievementUpdateInput = {
   unlockedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutAchievementsNestedInput
   achievement?: Prisma.AchievementUpdateOneRequiredWithoutUserAchievementsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutAchievementsNestedInput
 }
 
 export type UserAchievementUncheckedUpdateInput = {
@@ -577,8 +577,8 @@ export type UserAchievementSelect<ExtArgs extends runtime.Types.Extensions.Inter
   userId?: boolean
   achievementId?: boolean
   unlockedAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   achievement?: boolean | Prisma.AchievementDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userAchievement"]>
 
 export type UserAchievementSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -586,8 +586,8 @@ export type UserAchievementSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   userId?: boolean
   achievementId?: boolean
   unlockedAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   achievement?: boolean | Prisma.AchievementDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userAchievement"]>
 
 export type UserAchievementSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -595,8 +595,8 @@ export type UserAchievementSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   userId?: boolean
   achievementId?: boolean
   unlockedAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   achievement?: boolean | Prisma.AchievementDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userAchievement"]>
 
 export type UserAchievementSelectScalar = {
@@ -608,23 +608,23 @@ export type UserAchievementSelectScalar = {
 
 export type UserAchievementOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "achievementId" | "unlockedAt", ExtArgs["result"]["userAchievement"]>
 export type UserAchievementInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   achievement?: boolean | Prisma.AchievementDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type UserAchievementIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   achievement?: boolean | Prisma.AchievementDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type UserAchievementIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   achievement?: boolean | Prisma.AchievementDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
 export type $UserAchievementPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "UserAchievement"
   objects: {
-    user: Prisma.$UserPayload<ExtArgs>
     achievement: Prisma.$AchievementPayload<ExtArgs>
+    user: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1025,8 +1025,8 @@ readonly fields: UserAchievementFieldRefs;
  */
 export interface Prisma__UserAchievementClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   achievement<T extends Prisma.AchievementDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AchievementDefaultArgs<ExtArgs>>): Prisma.Prisma__AchievementClient<runtime.Types.Result.GetResult<Prisma.$AchievementPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

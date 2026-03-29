@@ -253,8 +253,8 @@ export type RankingWhereInput = {
   mangaCustomId?: Prisma.IntFilter<"Ranking"> | number
   organizationId?: Prisma.IntNullableFilter<"Ranking"> | number | null
   mangaCustom?: Prisma.XOR<Prisma.MangaCustomScalarRelationFilter, Prisma.MangaCustomWhereInput>
-  User?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   Organization?: Prisma.XOR<Prisma.OrganizationNullableScalarRelationFilter, Prisma.OrganizationWhereInput> | null
+  User?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
 export type RankingOrderByWithRelationInput = {
@@ -267,8 +267,8 @@ export type RankingOrderByWithRelationInput = {
   mangaCustomId?: Prisma.SortOrder
   organizationId?: Prisma.SortOrderInput | Prisma.SortOrder
   mangaCustom?: Prisma.MangaCustomOrderByWithRelationInput
-  User?: Prisma.UserOrderByWithRelationInput
   Organization?: Prisma.OrganizationOrderByWithRelationInput
+  User?: Prisma.UserOrderByWithRelationInput
 }
 
 export type RankingWhereUniqueInput = Prisma.AtLeast<{
@@ -284,8 +284,8 @@ export type RankingWhereUniqueInput = Prisma.AtLeast<{
   mangaCustomId?: Prisma.IntFilter<"Ranking"> | number
   organizationId?: Prisma.IntNullableFilter<"Ranking"> | number | null
   mangaCustom?: Prisma.XOR<Prisma.MangaCustomScalarRelationFilter, Prisma.MangaCustomWhereInput>
-  User?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   Organization?: Prisma.XOR<Prisma.OrganizationNullableScalarRelationFilter, Prisma.OrganizationWhereInput> | null
+  User?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }, "id">
 
 export type RankingOrderByWithAggregationInput = {
@@ -324,8 +324,8 @@ export type RankingCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   mangaCustom: Prisma.MangaCustomCreateNestedOneWithoutRankingsInput
-  User?: Prisma.UserCreateNestedOneWithoutRankingsInput
   Organization?: Prisma.OrganizationCreateNestedOneWithoutRankingsInput
+  User?: Prisma.UserCreateNestedOneWithoutRankingsInput
 }
 
 export type RankingUncheckedCreateInput = {
@@ -345,8 +345,8 @@ export type RankingUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mangaCustom?: Prisma.MangaCustomUpdateOneRequiredWithoutRankingsNestedInput
-  User?: Prisma.UserUpdateOneWithoutRankingsNestedInput
   Organization?: Prisma.OrganizationUpdateOneWithoutRankingsNestedInput
+  User?: Prisma.UserUpdateOneWithoutRankingsNestedInput
 }
 
 export type RankingUncheckedUpdateInput = {
@@ -681,8 +681,8 @@ export type RankingCreateWithoutMangaCustomInput = {
   comment?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  User?: Prisma.UserCreateNestedOneWithoutRankingsInput
   Organization?: Prisma.OrganizationCreateNestedOneWithoutRankingsInput
+  User?: Prisma.UserCreateNestedOneWithoutRankingsInput
 }
 
 export type RankingUncheckedCreateWithoutMangaCustomInput = {
@@ -814,8 +814,8 @@ export type RankingUpdateWithoutMangaCustomInput = {
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  User?: Prisma.UserUpdateOneWithoutRankingsNestedInput
   Organization?: Prisma.OrganizationUpdateOneWithoutRankingsNestedInput
+  User?: Prisma.UserUpdateOneWithoutRankingsNestedInput
 }
 
 export type RankingUncheckedUpdateWithoutMangaCustomInput = {
@@ -850,8 +850,8 @@ export type RankingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   mangaCustomId?: boolean
   organizationId?: boolean
   mangaCustom?: boolean | Prisma.MangaCustomDefaultArgs<ExtArgs>
-  User?: boolean | Prisma.Ranking$UserArgs<ExtArgs>
   Organization?: boolean | Prisma.Ranking$OrganizationArgs<ExtArgs>
+  User?: boolean | Prisma.Ranking$UserArgs<ExtArgs>
 }, ExtArgs["result"]["ranking"]>
 
 export type RankingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -864,8 +864,8 @@ export type RankingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   mangaCustomId?: boolean
   organizationId?: boolean
   mangaCustom?: boolean | Prisma.MangaCustomDefaultArgs<ExtArgs>
-  User?: boolean | Prisma.Ranking$UserArgs<ExtArgs>
   Organization?: boolean | Prisma.Ranking$OrganizationArgs<ExtArgs>
+  User?: boolean | Prisma.Ranking$UserArgs<ExtArgs>
 }, ExtArgs["result"]["ranking"]>
 
 export type RankingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -878,8 +878,8 @@ export type RankingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   mangaCustomId?: boolean
   organizationId?: boolean
   mangaCustom?: boolean | Prisma.MangaCustomDefaultArgs<ExtArgs>
-  User?: boolean | Prisma.Ranking$UserArgs<ExtArgs>
   Organization?: boolean | Prisma.Ranking$OrganizationArgs<ExtArgs>
+  User?: boolean | Prisma.Ranking$UserArgs<ExtArgs>
 }, ExtArgs["result"]["ranking"]>
 
 export type RankingSelectScalar = {
@@ -896,26 +896,26 @@ export type RankingSelectScalar = {
 export type RankingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "rank" | "comment" | "createdAt" | "updatedAt" | "mangaCustomId" | "organizationId", ExtArgs["result"]["ranking"]>
 export type RankingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   mangaCustom?: boolean | Prisma.MangaCustomDefaultArgs<ExtArgs>
-  User?: boolean | Prisma.Ranking$UserArgs<ExtArgs>
   Organization?: boolean | Prisma.Ranking$OrganizationArgs<ExtArgs>
+  User?: boolean | Prisma.Ranking$UserArgs<ExtArgs>
 }
 export type RankingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   mangaCustom?: boolean | Prisma.MangaCustomDefaultArgs<ExtArgs>
-  User?: boolean | Prisma.Ranking$UserArgs<ExtArgs>
   Organization?: boolean | Prisma.Ranking$OrganizationArgs<ExtArgs>
+  User?: boolean | Prisma.Ranking$UserArgs<ExtArgs>
 }
 export type RankingIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   mangaCustom?: boolean | Prisma.MangaCustomDefaultArgs<ExtArgs>
-  User?: boolean | Prisma.Ranking$UserArgs<ExtArgs>
   Organization?: boolean | Prisma.Ranking$OrganizationArgs<ExtArgs>
+  User?: boolean | Prisma.Ranking$UserArgs<ExtArgs>
 }
 
 export type $RankingPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Ranking"
   objects: {
     mangaCustom: Prisma.$MangaCustomPayload<ExtArgs>
-    User: Prisma.$UserPayload<ExtArgs> | null
     Organization: Prisma.$OrganizationPayload<ExtArgs> | null
+    User: Prisma.$UserPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1321,8 +1321,8 @@ readonly fields: RankingFieldRefs;
 export interface Prisma__RankingClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   mangaCustom<T extends Prisma.MangaCustomDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MangaCustomDefaultArgs<ExtArgs>>): Prisma.Prisma__MangaCustomClient<runtime.Types.Result.GetResult<Prisma.$MangaCustomPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  User<T extends Prisma.Ranking$UserArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ranking$UserArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   Organization<T extends Prisma.Ranking$OrganizationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ranking$OrganizationArgs<ExtArgs>>): Prisma.Prisma__OrganizationClient<runtime.Types.Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  User<T extends Prisma.Ranking$UserArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ranking$UserArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1756,25 +1756,6 @@ export type RankingDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 /**
- * Ranking.User
- */
-export type Ranking$UserArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the User
-   */
-  select?: Prisma.UserSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the User
-   */
-  omit?: Prisma.UserOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UserInclude<ExtArgs> | null
-  where?: Prisma.UserWhereInput
-}
-
-/**
  * Ranking.Organization
  */
 export type Ranking$OrganizationArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1791,6 +1772,25 @@ export type Ranking$OrganizationArgs<ExtArgs extends runtime.Types.Extensions.In
    */
   include?: Prisma.OrganizationInclude<ExtArgs> | null
   where?: Prisma.OrganizationWhereInput
+}
+
+/**
+ * Ranking.User
+ */
+export type Ranking$UserArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

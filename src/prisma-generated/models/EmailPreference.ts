@@ -47,7 +47,6 @@ export type EmailPreferenceMinAggregateOutputType = {
   readingStreakMilestones: boolean | null
   reEngagement: boolean | null
   recommendations: boolean | null
-  commentReplyAlert: boolean | null
   weeklyOrgReport: boolean | null
   newSubscriberAlert: boolean | null
   revenueAlert: boolean | null
@@ -55,6 +54,7 @@ export type EmailPreferenceMinAggregateOutputType = {
   failedPaymentAlert: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
+  commentReplyAlert: boolean | null
 }
 
 export type EmailPreferenceMaxAggregateOutputType = {
@@ -68,7 +68,6 @@ export type EmailPreferenceMaxAggregateOutputType = {
   readingStreakMilestones: boolean | null
   reEngagement: boolean | null
   recommendations: boolean | null
-  commentReplyAlert: boolean | null
   weeklyOrgReport: boolean | null
   newSubscriberAlert: boolean | null
   revenueAlert: boolean | null
@@ -76,6 +75,7 @@ export type EmailPreferenceMaxAggregateOutputType = {
   failedPaymentAlert: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
+  commentReplyAlert: boolean | null
 }
 
 export type EmailPreferenceCountAggregateOutputType = {
@@ -89,7 +89,6 @@ export type EmailPreferenceCountAggregateOutputType = {
   readingStreakMilestones: number
   reEngagement: number
   recommendations: number
-  commentReplyAlert: number
   weeklyOrgReport: number
   newSubscriberAlert: number
   revenueAlert: number
@@ -97,6 +96,7 @@ export type EmailPreferenceCountAggregateOutputType = {
   failedPaymentAlert: number
   createdAt: number
   updatedAt: number
+  commentReplyAlert: number
   _all: number
 }
 
@@ -122,7 +122,6 @@ export type EmailPreferenceMinAggregateInputType = {
   readingStreakMilestones?: true
   reEngagement?: true
   recommendations?: true
-  commentReplyAlert?: true
   weeklyOrgReport?: true
   newSubscriberAlert?: true
   revenueAlert?: true
@@ -130,6 +129,7 @@ export type EmailPreferenceMinAggregateInputType = {
   failedPaymentAlert?: true
   createdAt?: true
   updatedAt?: true
+  commentReplyAlert?: true
 }
 
 export type EmailPreferenceMaxAggregateInputType = {
@@ -143,7 +143,6 @@ export type EmailPreferenceMaxAggregateInputType = {
   readingStreakMilestones?: true
   reEngagement?: true
   recommendations?: true
-  commentReplyAlert?: true
   weeklyOrgReport?: true
   newSubscriberAlert?: true
   revenueAlert?: true
@@ -151,6 +150,7 @@ export type EmailPreferenceMaxAggregateInputType = {
   failedPaymentAlert?: true
   createdAt?: true
   updatedAt?: true
+  commentReplyAlert?: true
 }
 
 export type EmailPreferenceCountAggregateInputType = {
@@ -164,7 +164,6 @@ export type EmailPreferenceCountAggregateInputType = {
   readingStreakMilestones?: true
   reEngagement?: true
   recommendations?: true
-  commentReplyAlert?: true
   weeklyOrgReport?: true
   newSubscriberAlert?: true
   revenueAlert?: true
@@ -172,6 +171,7 @@ export type EmailPreferenceCountAggregateInputType = {
   failedPaymentAlert?: true
   createdAt?: true
   updatedAt?: true
+  commentReplyAlert?: true
   _all?: true
 }
 
@@ -272,7 +272,6 @@ export type EmailPreferenceGroupByOutputType = {
   readingStreakMilestones: boolean
   reEngagement: boolean
   recommendations: boolean
-  commentReplyAlert: boolean
   weeklyOrgReport: boolean
   newSubscriberAlert: boolean
   revenueAlert: boolean
@@ -280,6 +279,7 @@ export type EmailPreferenceGroupByOutputType = {
   failedPaymentAlert: boolean
   createdAt: Date
   updatedAt: Date
+  commentReplyAlert: boolean
   _count: EmailPreferenceCountAggregateOutputType | null
   _avg: EmailPreferenceAvgAggregateOutputType | null
   _sum: EmailPreferenceSumAggregateOutputType | null
@@ -316,7 +316,6 @@ export type EmailPreferenceWhereInput = {
   readingStreakMilestones?: Prisma.BoolFilter<"EmailPreference"> | boolean
   reEngagement?: Prisma.BoolFilter<"EmailPreference"> | boolean
   recommendations?: Prisma.BoolFilter<"EmailPreference"> | boolean
-  commentReplyAlert?: Prisma.BoolFilter<"EmailPreference"> | boolean
   weeklyOrgReport?: Prisma.BoolFilter<"EmailPreference"> | boolean
   newSubscriberAlert?: Prisma.BoolFilter<"EmailPreference"> | boolean
   revenueAlert?: Prisma.BoolFilter<"EmailPreference"> | boolean
@@ -324,6 +323,7 @@ export type EmailPreferenceWhereInput = {
   failedPaymentAlert?: Prisma.BoolFilter<"EmailPreference"> | boolean
   createdAt?: Prisma.DateTimeFilter<"EmailPreference"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"EmailPreference"> | Date | string
+  commentReplyAlert?: Prisma.BoolFilter<"EmailPreference"> | boolean
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
@@ -338,7 +338,6 @@ export type EmailPreferenceOrderByWithRelationInput = {
   readingStreakMilestones?: Prisma.SortOrder
   reEngagement?: Prisma.SortOrder
   recommendations?: Prisma.SortOrder
-  commentReplyAlert?: Prisma.SortOrder
   weeklyOrgReport?: Prisma.SortOrder
   newSubscriberAlert?: Prisma.SortOrder
   revenueAlert?: Prisma.SortOrder
@@ -346,6 +345,7 @@ export type EmailPreferenceOrderByWithRelationInput = {
   failedPaymentAlert?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  commentReplyAlert?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
 }
 
@@ -363,7 +363,6 @@ export type EmailPreferenceWhereUniqueInput = Prisma.AtLeast<{
   readingStreakMilestones?: Prisma.BoolFilter<"EmailPreference"> | boolean
   reEngagement?: Prisma.BoolFilter<"EmailPreference"> | boolean
   recommendations?: Prisma.BoolFilter<"EmailPreference"> | boolean
-  commentReplyAlert?: Prisma.BoolFilter<"EmailPreference"> | boolean
   weeklyOrgReport?: Prisma.BoolFilter<"EmailPreference"> | boolean
   newSubscriberAlert?: Prisma.BoolFilter<"EmailPreference"> | boolean
   revenueAlert?: Prisma.BoolFilter<"EmailPreference"> | boolean
@@ -371,6 +370,7 @@ export type EmailPreferenceWhereUniqueInput = Prisma.AtLeast<{
   failedPaymentAlert?: Prisma.BoolFilter<"EmailPreference"> | boolean
   createdAt?: Prisma.DateTimeFilter<"EmailPreference"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"EmailPreference"> | Date | string
+  commentReplyAlert?: Prisma.BoolFilter<"EmailPreference"> | boolean
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id" | "userId">
 
@@ -385,7 +385,6 @@ export type EmailPreferenceOrderByWithAggregationInput = {
   readingStreakMilestones?: Prisma.SortOrder
   reEngagement?: Prisma.SortOrder
   recommendations?: Prisma.SortOrder
-  commentReplyAlert?: Prisma.SortOrder
   weeklyOrgReport?: Prisma.SortOrder
   newSubscriberAlert?: Prisma.SortOrder
   revenueAlert?: Prisma.SortOrder
@@ -393,6 +392,7 @@ export type EmailPreferenceOrderByWithAggregationInput = {
   failedPaymentAlert?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  commentReplyAlert?: Prisma.SortOrder
   _count?: Prisma.EmailPreferenceCountOrderByAggregateInput
   _avg?: Prisma.EmailPreferenceAvgOrderByAggregateInput
   _max?: Prisma.EmailPreferenceMaxOrderByAggregateInput
@@ -414,7 +414,6 @@ export type EmailPreferenceScalarWhereWithAggregatesInput = {
   readingStreakMilestones?: Prisma.BoolWithAggregatesFilter<"EmailPreference"> | boolean
   reEngagement?: Prisma.BoolWithAggregatesFilter<"EmailPreference"> | boolean
   recommendations?: Prisma.BoolWithAggregatesFilter<"EmailPreference"> | boolean
-  commentReplyAlert?: Prisma.BoolWithAggregatesFilter<"EmailPreference"> | boolean
   weeklyOrgReport?: Prisma.BoolWithAggregatesFilter<"EmailPreference"> | boolean
   newSubscriberAlert?: Prisma.BoolWithAggregatesFilter<"EmailPreference"> | boolean
   revenueAlert?: Prisma.BoolWithAggregatesFilter<"EmailPreference"> | boolean
@@ -422,6 +421,7 @@ export type EmailPreferenceScalarWhereWithAggregatesInput = {
   failedPaymentAlert?: Prisma.BoolWithAggregatesFilter<"EmailPreference"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"EmailPreference"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"EmailPreference"> | Date | string
+  commentReplyAlert?: Prisma.BoolWithAggregatesFilter<"EmailPreference"> | boolean
 }
 
 export type EmailPreferenceCreateInput = {
@@ -433,7 +433,6 @@ export type EmailPreferenceCreateInput = {
   readingStreakMilestones?: boolean
   reEngagement?: boolean
   recommendations?: boolean
-  commentReplyAlert?: boolean
   weeklyOrgReport?: boolean
   newSubscriberAlert?: boolean
   revenueAlert?: boolean
@@ -441,6 +440,7 @@ export type EmailPreferenceCreateInput = {
   failedPaymentAlert?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  commentReplyAlert?: boolean
   user: Prisma.UserCreateNestedOneWithoutEmailPreferenceInput
 }
 
@@ -455,7 +455,6 @@ export type EmailPreferenceUncheckedCreateInput = {
   readingStreakMilestones?: boolean
   reEngagement?: boolean
   recommendations?: boolean
-  commentReplyAlert?: boolean
   weeklyOrgReport?: boolean
   newSubscriberAlert?: boolean
   revenueAlert?: boolean
@@ -463,6 +462,7 @@ export type EmailPreferenceUncheckedCreateInput = {
   failedPaymentAlert?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  commentReplyAlert?: boolean
 }
 
 export type EmailPreferenceUpdateInput = {
@@ -474,7 +474,6 @@ export type EmailPreferenceUpdateInput = {
   readingStreakMilestones?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reEngagement?: Prisma.BoolFieldUpdateOperationsInput | boolean
   recommendations?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  commentReplyAlert?: Prisma.BoolFieldUpdateOperationsInput | boolean
   weeklyOrgReport?: Prisma.BoolFieldUpdateOperationsInput | boolean
   newSubscriberAlert?: Prisma.BoolFieldUpdateOperationsInput | boolean
   revenueAlert?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -482,6 +481,7 @@ export type EmailPreferenceUpdateInput = {
   failedPaymentAlert?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  commentReplyAlert?: Prisma.BoolFieldUpdateOperationsInput | boolean
   user?: Prisma.UserUpdateOneRequiredWithoutEmailPreferenceNestedInput
 }
 
@@ -496,7 +496,6 @@ export type EmailPreferenceUncheckedUpdateInput = {
   readingStreakMilestones?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reEngagement?: Prisma.BoolFieldUpdateOperationsInput | boolean
   recommendations?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  commentReplyAlert?: Prisma.BoolFieldUpdateOperationsInput | boolean
   weeklyOrgReport?: Prisma.BoolFieldUpdateOperationsInput | boolean
   newSubscriberAlert?: Prisma.BoolFieldUpdateOperationsInput | boolean
   revenueAlert?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -504,6 +503,7 @@ export type EmailPreferenceUncheckedUpdateInput = {
   failedPaymentAlert?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  commentReplyAlert?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type EmailPreferenceCreateManyInput = {
@@ -517,7 +517,6 @@ export type EmailPreferenceCreateManyInput = {
   readingStreakMilestones?: boolean
   reEngagement?: boolean
   recommendations?: boolean
-  commentReplyAlert?: boolean
   weeklyOrgReport?: boolean
   newSubscriberAlert?: boolean
   revenueAlert?: boolean
@@ -525,6 +524,7 @@ export type EmailPreferenceCreateManyInput = {
   failedPaymentAlert?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  commentReplyAlert?: boolean
 }
 
 export type EmailPreferenceUpdateManyMutationInput = {
@@ -536,7 +536,6 @@ export type EmailPreferenceUpdateManyMutationInput = {
   readingStreakMilestones?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reEngagement?: Prisma.BoolFieldUpdateOperationsInput | boolean
   recommendations?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  commentReplyAlert?: Prisma.BoolFieldUpdateOperationsInput | boolean
   weeklyOrgReport?: Prisma.BoolFieldUpdateOperationsInput | boolean
   newSubscriberAlert?: Prisma.BoolFieldUpdateOperationsInput | boolean
   revenueAlert?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -544,6 +543,7 @@ export type EmailPreferenceUpdateManyMutationInput = {
   failedPaymentAlert?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  commentReplyAlert?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type EmailPreferenceUncheckedUpdateManyInput = {
@@ -557,7 +557,6 @@ export type EmailPreferenceUncheckedUpdateManyInput = {
   readingStreakMilestones?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reEngagement?: Prisma.BoolFieldUpdateOperationsInput | boolean
   recommendations?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  commentReplyAlert?: Prisma.BoolFieldUpdateOperationsInput | boolean
   weeklyOrgReport?: Prisma.BoolFieldUpdateOperationsInput | boolean
   newSubscriberAlert?: Prisma.BoolFieldUpdateOperationsInput | boolean
   revenueAlert?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -565,6 +564,7 @@ export type EmailPreferenceUncheckedUpdateManyInput = {
   failedPaymentAlert?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  commentReplyAlert?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type EmailPreferenceNullableScalarRelationFilter = {
@@ -583,7 +583,6 @@ export type EmailPreferenceCountOrderByAggregateInput = {
   readingStreakMilestones?: Prisma.SortOrder
   reEngagement?: Prisma.SortOrder
   recommendations?: Prisma.SortOrder
-  commentReplyAlert?: Prisma.SortOrder
   weeklyOrgReport?: Prisma.SortOrder
   newSubscriberAlert?: Prisma.SortOrder
   revenueAlert?: Prisma.SortOrder
@@ -591,6 +590,7 @@ export type EmailPreferenceCountOrderByAggregateInput = {
   failedPaymentAlert?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  commentReplyAlert?: Prisma.SortOrder
 }
 
 export type EmailPreferenceAvgOrderByAggregateInput = {
@@ -609,7 +609,6 @@ export type EmailPreferenceMaxOrderByAggregateInput = {
   readingStreakMilestones?: Prisma.SortOrder
   reEngagement?: Prisma.SortOrder
   recommendations?: Prisma.SortOrder
-  commentReplyAlert?: Prisma.SortOrder
   weeklyOrgReport?: Prisma.SortOrder
   newSubscriberAlert?: Prisma.SortOrder
   revenueAlert?: Prisma.SortOrder
@@ -617,6 +616,7 @@ export type EmailPreferenceMaxOrderByAggregateInput = {
   failedPaymentAlert?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  commentReplyAlert?: Prisma.SortOrder
 }
 
 export type EmailPreferenceMinOrderByAggregateInput = {
@@ -630,7 +630,6 @@ export type EmailPreferenceMinOrderByAggregateInput = {
   readingStreakMilestones?: Prisma.SortOrder
   reEngagement?: Prisma.SortOrder
   recommendations?: Prisma.SortOrder
-  commentReplyAlert?: Prisma.SortOrder
   weeklyOrgReport?: Prisma.SortOrder
   newSubscriberAlert?: Prisma.SortOrder
   revenueAlert?: Prisma.SortOrder
@@ -638,6 +637,7 @@ export type EmailPreferenceMinOrderByAggregateInput = {
   failedPaymentAlert?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  commentReplyAlert?: Prisma.SortOrder
 }
 
 export type EmailPreferenceSumOrderByAggregateInput = {
@@ -686,7 +686,6 @@ export type EmailPreferenceCreateWithoutUserInput = {
   readingStreakMilestones?: boolean
   reEngagement?: boolean
   recommendations?: boolean
-  commentReplyAlert?: boolean
   weeklyOrgReport?: boolean
   newSubscriberAlert?: boolean
   revenueAlert?: boolean
@@ -694,6 +693,7 @@ export type EmailPreferenceCreateWithoutUserInput = {
   failedPaymentAlert?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  commentReplyAlert?: boolean
 }
 
 export type EmailPreferenceUncheckedCreateWithoutUserInput = {
@@ -706,7 +706,6 @@ export type EmailPreferenceUncheckedCreateWithoutUserInput = {
   readingStreakMilestones?: boolean
   reEngagement?: boolean
   recommendations?: boolean
-  commentReplyAlert?: boolean
   weeklyOrgReport?: boolean
   newSubscriberAlert?: boolean
   revenueAlert?: boolean
@@ -714,6 +713,7 @@ export type EmailPreferenceUncheckedCreateWithoutUserInput = {
   failedPaymentAlert?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  commentReplyAlert?: boolean
 }
 
 export type EmailPreferenceCreateOrConnectWithoutUserInput = {
@@ -741,7 +741,6 @@ export type EmailPreferenceUpdateWithoutUserInput = {
   readingStreakMilestones?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reEngagement?: Prisma.BoolFieldUpdateOperationsInput | boolean
   recommendations?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  commentReplyAlert?: Prisma.BoolFieldUpdateOperationsInput | boolean
   weeklyOrgReport?: Prisma.BoolFieldUpdateOperationsInput | boolean
   newSubscriberAlert?: Prisma.BoolFieldUpdateOperationsInput | boolean
   revenueAlert?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -749,6 +748,7 @@ export type EmailPreferenceUpdateWithoutUserInput = {
   failedPaymentAlert?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  commentReplyAlert?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type EmailPreferenceUncheckedUpdateWithoutUserInput = {
@@ -761,7 +761,6 @@ export type EmailPreferenceUncheckedUpdateWithoutUserInput = {
   readingStreakMilestones?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reEngagement?: Prisma.BoolFieldUpdateOperationsInput | boolean
   recommendations?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  commentReplyAlert?: Prisma.BoolFieldUpdateOperationsInput | boolean
   weeklyOrgReport?: Prisma.BoolFieldUpdateOperationsInput | boolean
   newSubscriberAlert?: Prisma.BoolFieldUpdateOperationsInput | boolean
   revenueAlert?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -769,6 +768,7 @@ export type EmailPreferenceUncheckedUpdateWithoutUserInput = {
   failedPaymentAlert?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  commentReplyAlert?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 
@@ -784,7 +784,6 @@ export type EmailPreferenceSelect<ExtArgs extends runtime.Types.Extensions.Inter
   readingStreakMilestones?: boolean
   reEngagement?: boolean
   recommendations?: boolean
-  commentReplyAlert?: boolean
   weeklyOrgReport?: boolean
   newSubscriberAlert?: boolean
   revenueAlert?: boolean
@@ -792,6 +791,7 @@ export type EmailPreferenceSelect<ExtArgs extends runtime.Types.Extensions.Inter
   failedPaymentAlert?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  commentReplyAlert?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["emailPreference"]>
 
@@ -806,7 +806,6 @@ export type EmailPreferenceSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   readingStreakMilestones?: boolean
   reEngagement?: boolean
   recommendations?: boolean
-  commentReplyAlert?: boolean
   weeklyOrgReport?: boolean
   newSubscriberAlert?: boolean
   revenueAlert?: boolean
@@ -814,6 +813,7 @@ export type EmailPreferenceSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   failedPaymentAlert?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  commentReplyAlert?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["emailPreference"]>
 
@@ -828,7 +828,6 @@ export type EmailPreferenceSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   readingStreakMilestones?: boolean
   reEngagement?: boolean
   recommendations?: boolean
-  commentReplyAlert?: boolean
   weeklyOrgReport?: boolean
   newSubscriberAlert?: boolean
   revenueAlert?: boolean
@@ -836,6 +835,7 @@ export type EmailPreferenceSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   failedPaymentAlert?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  commentReplyAlert?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["emailPreference"]>
 
@@ -850,7 +850,6 @@ export type EmailPreferenceSelectScalar = {
   readingStreakMilestones?: boolean
   reEngagement?: boolean
   recommendations?: boolean
-  commentReplyAlert?: boolean
   weeklyOrgReport?: boolean
   newSubscriberAlert?: boolean
   revenueAlert?: boolean
@@ -858,9 +857,10 @@ export type EmailPreferenceSelectScalar = {
   failedPaymentAlert?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  commentReplyAlert?: boolean
 }
 
-export type EmailPreferenceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "newChapterAlert" | "newMangaRelease" | "dailyDigest" | "weeklyReadingSummary" | "subscriptionReminders" | "readingStreakMilestones" | "reEngagement" | "recommendations" | "commentReplyAlert" | "weeklyOrgReport" | "newSubscriberAlert" | "revenueAlert" | "contentPerformance" | "failedPaymentAlert" | "createdAt" | "updatedAt", ExtArgs["result"]["emailPreference"]>
+export type EmailPreferenceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "newChapterAlert" | "newMangaRelease" | "dailyDigest" | "weeklyReadingSummary" | "subscriptionReminders" | "readingStreakMilestones" | "reEngagement" | "recommendations" | "weeklyOrgReport" | "newSubscriberAlert" | "revenueAlert" | "contentPerformance" | "failedPaymentAlert" | "createdAt" | "updatedAt" | "commentReplyAlert", ExtArgs["result"]["emailPreference"]>
 export type EmailPreferenceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
@@ -887,7 +887,6 @@ export type $EmailPreferencePayload<ExtArgs extends runtime.Types.Extensions.Int
     readingStreakMilestones: boolean
     reEngagement: boolean
     recommendations: boolean
-    commentReplyAlert: boolean
     weeklyOrgReport: boolean
     newSubscriberAlert: boolean
     revenueAlert: boolean
@@ -895,6 +894,7 @@ export type $EmailPreferencePayload<ExtArgs extends runtime.Types.Extensions.Int
     failedPaymentAlert: boolean
     createdAt: Date
     updatedAt: Date
+    commentReplyAlert: boolean
   }, ExtArgs["result"]["emailPreference"]>
   composites: {}
 }
@@ -1329,7 +1329,6 @@ export interface EmailPreferenceFieldRefs {
   readonly readingStreakMilestones: Prisma.FieldRef<"EmailPreference", 'Boolean'>
   readonly reEngagement: Prisma.FieldRef<"EmailPreference", 'Boolean'>
   readonly recommendations: Prisma.FieldRef<"EmailPreference", 'Boolean'>
-  readonly commentReplyAlert: Prisma.FieldRef<"EmailPreference", 'Boolean'>
   readonly weeklyOrgReport: Prisma.FieldRef<"EmailPreference", 'Boolean'>
   readonly newSubscriberAlert: Prisma.FieldRef<"EmailPreference", 'Boolean'>
   readonly revenueAlert: Prisma.FieldRef<"EmailPreference", 'Boolean'>
@@ -1337,6 +1336,7 @@ export interface EmailPreferenceFieldRefs {
   readonly failedPaymentAlert: Prisma.FieldRef<"EmailPreference", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"EmailPreference", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"EmailPreference", 'DateTime'>
+  readonly commentReplyAlert: Prisma.FieldRef<"EmailPreference", 'Boolean'>
 }
     
 

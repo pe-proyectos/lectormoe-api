@@ -23,23 +23,26 @@ const getBadgeColor = (orgName: string): string => {
 	return colors[Math.abs(hash) % colors.length];
 };
 
-export const getFeaturedManga = async (limit: number = 8) => {
+export const getFeaturedManga = async (limit: number = 8, nsfw?: boolean) => {
+	// nsfw=false: excluir mangas con isNSFW=true o que pertenezcan a una org NSFW
+	// nsfw=true:  solo mangas marcados isNSFW=true o de una org NSFW
+	const nsfwCondition: object[] = nsfw === true
+		? [{ OR: [{ isNSFW: true }, { organization: { isNSFW: true } }] }]
+		: nsfw === false
+		? [{ isNSFW: false }, { organization: { isNSFW: false } }]
+		: [];
+
 	// Get all manga customs with their organization info, ordered by views
 	const mangasCustoms = await prisma.mangaCustom.findMany({
 		where: {
-			// Only include mangas with cover images
-			OR: [
+			AND: [
+				...nsfwCondition,
 				{
-					imageUrl: {
-						not: null,
-					},
-				},
-				{
-					manga: {
-						imageUrl: {
-							not: null,
-						},
-					},
+					// Only include mangas with cover images
+					OR: [
+						{ imageUrl: { not: null } },
+						{ manga: { imageUrl: { not: null } } },
+					],
 				},
 			],
 		},

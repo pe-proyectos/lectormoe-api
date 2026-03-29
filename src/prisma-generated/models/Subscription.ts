@@ -329,9 +329,9 @@ export type SubscriptionWhereInput = {
   lastAmount?: Prisma.FloatNullableFilter<"Subscription"> | number | null
   organizationId?: Prisma.IntNullableFilter<"Subscription"> | number | null
   transactions?: Prisma.OrganizationTransactionListRelationFilter
+  organization?: Prisma.XOR<Prisma.OrganizationNullableScalarRelationFilter, Prisma.OrganizationWhereInput> | null
   subscriptionPlan?: Prisma.XOR<Prisma.SubscriptionPlanScalarRelationFilter, Prisma.SubscriptionPlanWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  organization?: Prisma.XOR<Prisma.OrganizationNullableScalarRelationFilter, Prisma.OrganizationWhereInput> | null
 }
 
 export type SubscriptionOrderByWithRelationInput = {
@@ -352,9 +352,9 @@ export type SubscriptionOrderByWithRelationInput = {
   lastAmount?: Prisma.SortOrderInput | Prisma.SortOrder
   organizationId?: Prisma.SortOrderInput | Prisma.SortOrder
   transactions?: Prisma.OrganizationTransactionOrderByRelationAggregateInput
+  organization?: Prisma.OrganizationOrderByWithRelationInput
   subscriptionPlan?: Prisma.SubscriptionPlanOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
-  organization?: Prisma.OrganizationOrderByWithRelationInput
 }
 
 export type SubscriptionWhereUniqueInput = Prisma.AtLeast<{
@@ -378,9 +378,9 @@ export type SubscriptionWhereUniqueInput = Prisma.AtLeast<{
   lastAmount?: Prisma.FloatNullableFilter<"Subscription"> | number | null
   organizationId?: Prisma.IntNullableFilter<"Subscription"> | number | null
   transactions?: Prisma.OrganizationTransactionListRelationFilter
+  organization?: Prisma.XOR<Prisma.OrganizationNullableScalarRelationFilter, Prisma.OrganizationWhereInput> | null
   subscriptionPlan?: Prisma.XOR<Prisma.SubscriptionPlanScalarRelationFilter, Prisma.SubscriptionPlanWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  organization?: Prisma.XOR<Prisma.OrganizationNullableScalarRelationFilter, Prisma.OrganizationWhereInput> | null
 }, "id">
 
 export type SubscriptionOrderByWithAggregationInput = {
@@ -443,9 +443,9 @@ export type SubscriptionCreateInput = {
   failedPaymentsCount?: number
   lastAmount?: number | null
   transactions?: Prisma.OrganizationTransactionCreateNestedManyWithoutSubscriptionInput
+  organization?: Prisma.OrganizationCreateNestedOneWithoutSubscriptionsInput
   subscriptionPlan: Prisma.SubscriptionPlanCreateNestedOneWithoutSubscriptionsInput
   user: Prisma.UserCreateNestedOneWithoutSubscriptionsInput
-  organization?: Prisma.OrganizationCreateNestedOneWithoutSubscriptionsInput
 }
 
 export type SubscriptionUncheckedCreateInput = {
@@ -482,9 +482,9 @@ export type SubscriptionUpdateInput = {
   failedPaymentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   lastAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   transactions?: Prisma.OrganizationTransactionUpdateManyWithoutSubscriptionNestedInput
+  organization?: Prisma.OrganizationUpdateOneWithoutSubscriptionsNestedInput
   subscriptionPlan?: Prisma.SubscriptionPlanUpdateOneRequiredWithoutSubscriptionsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutSubscriptionsNestedInput
-  organization?: Prisma.OrganizationUpdateOneWithoutSubscriptionsNestedInput
 }
 
 export type SubscriptionUncheckedUpdateInput = {
@@ -901,8 +901,8 @@ export type SubscriptionCreateWithoutUserInput = {
   failedPaymentsCount?: number
   lastAmount?: number | null
   transactions?: Prisma.OrganizationTransactionCreateNestedManyWithoutSubscriptionInput
-  subscriptionPlan: Prisma.SubscriptionPlanCreateNestedOneWithoutSubscriptionsInput
   organization?: Prisma.OrganizationCreateNestedOneWithoutSubscriptionsInput
+  subscriptionPlan: Prisma.SubscriptionPlanCreateNestedOneWithoutSubscriptionsInput
 }
 
 export type SubscriptionUncheckedCreateWithoutUserInput = {
@@ -964,8 +964,8 @@ export type SubscriptionCreateWithoutSubscriptionPlanInput = {
   failedPaymentsCount?: number
   lastAmount?: number | null
   transactions?: Prisma.OrganizationTransactionCreateNestedManyWithoutSubscriptionInput
-  user: Prisma.UserCreateNestedOneWithoutSubscriptionsInput
   organization?: Prisma.OrganizationCreateNestedOneWithoutSubscriptionsInput
+  user: Prisma.UserCreateNestedOneWithoutSubscriptionsInput
 }
 
 export type SubscriptionUncheckedCreateWithoutSubscriptionPlanInput = {
@@ -1026,9 +1026,9 @@ export type SubscriptionCreateWithoutTransactionsInput = {
   cycleExecutions?: number
   failedPaymentsCount?: number
   lastAmount?: number | null
+  organization?: Prisma.OrganizationCreateNestedOneWithoutSubscriptionsInput
   subscriptionPlan: Prisma.SubscriptionPlanCreateNestedOneWithoutSubscriptionsInput
   user: Prisma.UserCreateNestedOneWithoutSubscriptionsInput
-  organization?: Prisma.OrganizationCreateNestedOneWithoutSubscriptionsInput
 }
 
 export type SubscriptionUncheckedCreateWithoutTransactionsInput = {
@@ -1079,9 +1079,9 @@ export type SubscriptionUpdateWithoutTransactionsInput = {
   cycleExecutions?: Prisma.IntFieldUpdateOperationsInput | number
   failedPaymentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   lastAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  organization?: Prisma.OrganizationUpdateOneWithoutSubscriptionsNestedInput
   subscriptionPlan?: Prisma.SubscriptionPlanUpdateOneRequiredWithoutSubscriptionsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutSubscriptionsNestedInput
-  organization?: Prisma.OrganizationUpdateOneWithoutSubscriptionsNestedInput
 }
 
 export type SubscriptionUncheckedUpdateWithoutTransactionsInput = {
@@ -1208,8 +1208,8 @@ export type SubscriptionUpdateWithoutUserInput = {
   failedPaymentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   lastAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   transactions?: Prisma.OrganizationTransactionUpdateManyWithoutSubscriptionNestedInput
-  subscriptionPlan?: Prisma.SubscriptionPlanUpdateOneRequiredWithoutSubscriptionsNestedInput
   organization?: Prisma.OrganizationUpdateOneWithoutSubscriptionsNestedInput
+  subscriptionPlan?: Prisma.SubscriptionPlanUpdateOneRequiredWithoutSubscriptionsNestedInput
 }
 
 export type SubscriptionUncheckedUpdateWithoutUserInput = {
@@ -1281,8 +1281,8 @@ export type SubscriptionUpdateWithoutSubscriptionPlanInput = {
   failedPaymentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   lastAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   transactions?: Prisma.OrganizationTransactionUpdateManyWithoutSubscriptionNestedInput
-  user?: Prisma.UserUpdateOneRequiredWithoutSubscriptionsNestedInput
   organization?: Prisma.OrganizationUpdateOneWithoutSubscriptionsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutSubscriptionsNestedInput
 }
 
 export type SubscriptionUncheckedUpdateWithoutSubscriptionPlanInput = {
@@ -1371,9 +1371,9 @@ export type SubscriptionSelect<ExtArgs extends runtime.Types.Extensions.Internal
   lastAmount?: boolean
   organizationId?: boolean
   transactions?: boolean | Prisma.Subscription$transactionsArgs<ExtArgs>
+  organization?: boolean | Prisma.Subscription$organizationArgs<ExtArgs>
   subscriptionPlan?: boolean | Prisma.SubscriptionPlanDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  organization?: boolean | Prisma.Subscription$organizationArgs<ExtArgs>
   _count?: boolean | Prisma.SubscriptionCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["subscription"]>
 
@@ -1394,9 +1394,9 @@ export type SubscriptionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   failedPaymentsCount?: boolean
   lastAmount?: boolean
   organizationId?: boolean
+  organization?: boolean | Prisma.Subscription$organizationArgs<ExtArgs>
   subscriptionPlan?: boolean | Prisma.SubscriptionPlanDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  organization?: boolean | Prisma.Subscription$organizationArgs<ExtArgs>
 }, ExtArgs["result"]["subscription"]>
 
 export type SubscriptionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1416,9 +1416,9 @@ export type SubscriptionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   failedPaymentsCount?: boolean
   lastAmount?: boolean
   organizationId?: boolean
+  organization?: boolean | Prisma.Subscription$organizationArgs<ExtArgs>
   subscriptionPlan?: boolean | Prisma.SubscriptionPlanDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  organization?: boolean | Prisma.Subscription$organizationArgs<ExtArgs>
 }, ExtArgs["result"]["subscription"]>
 
 export type SubscriptionSelectScalar = {
@@ -1443,29 +1443,29 @@ export type SubscriptionSelectScalar = {
 export type SubscriptionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "subscriptionPlanId" | "status" | "startDate" | "endDate" | "lastPayment" | "createdAt" | "updatedAt" | "paypalSubscriptionId" | "active" | "nextPayment" | "cycleExecutions" | "failedPaymentsCount" | "lastAmount" | "organizationId", ExtArgs["result"]["subscription"]>
 export type SubscriptionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   transactions?: boolean | Prisma.Subscription$transactionsArgs<ExtArgs>
+  organization?: boolean | Prisma.Subscription$organizationArgs<ExtArgs>
   subscriptionPlan?: boolean | Prisma.SubscriptionPlanDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  organization?: boolean | Prisma.Subscription$organizationArgs<ExtArgs>
   _count?: boolean | Prisma.SubscriptionCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SubscriptionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  organization?: boolean | Prisma.Subscription$organizationArgs<ExtArgs>
   subscriptionPlan?: boolean | Prisma.SubscriptionPlanDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  organization?: boolean | Prisma.Subscription$organizationArgs<ExtArgs>
 }
 export type SubscriptionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  organization?: boolean | Prisma.Subscription$organizationArgs<ExtArgs>
   subscriptionPlan?: boolean | Prisma.SubscriptionPlanDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  organization?: boolean | Prisma.Subscription$organizationArgs<ExtArgs>
 }
 
 export type $SubscriptionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Subscription"
   objects: {
     transactions: Prisma.$OrganizationTransactionPayload<ExtArgs>[]
+    organization: Prisma.$OrganizationPayload<ExtArgs> | null
     subscriptionPlan: Prisma.$SubscriptionPlanPayload<ExtArgs>
     user: Prisma.$UserPayload<ExtArgs>
-    organization: Prisma.$OrganizationPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1879,9 +1879,9 @@ readonly fields: SubscriptionFieldRefs;
 export interface Prisma__SubscriptionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   transactions<T extends Prisma.Subscription$transactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Subscription$transactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrganizationTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  organization<T extends Prisma.Subscription$organizationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Subscription$organizationArgs<ExtArgs>>): Prisma.Prisma__OrganizationClient<runtime.Types.Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   subscriptionPlan<T extends Prisma.SubscriptionPlanDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubscriptionPlanDefaultArgs<ExtArgs>>): Prisma.Prisma__SubscriptionPlanClient<runtime.Types.Result.GetResult<Prisma.$SubscriptionPlanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  organization<T extends Prisma.Subscription$organizationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Subscription$organizationArgs<ExtArgs>>): Prisma.Prisma__OrganizationClient<runtime.Types.Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

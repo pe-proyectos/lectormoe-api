@@ -6,13 +6,15 @@ export const router = () => new Elysia()
 		'/api/landing/featured-manga',
 		async ({ query }) => {
 			const limit = query?.limit ? Number.parseInt(query.limit) : 8;
-			const data = await getFeaturedManga(limit);
+			const nsfw = query?.nsfw === 'true' ? true : query?.nsfw === 'false' ? false : undefined;
+			const data = await getFeaturedManga(limit, nsfw);
 			return { status: true, data };
 		},
 		{
 			query: t.Optional(
 				t.Object({
 					limit: t.Optional(t.String()),
+					nsfw: t.Optional(t.String()),
 				})
 			),
 			response: t.Object({

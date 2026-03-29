@@ -12,6 +12,7 @@ export const listFollowedOrganizations = async (userId: number) => {
                     name: true,
                     slug: true,
                     logoUrl: true,
+                    isNSFW: true,
                     _count: {
                         select: {
                             followers: true,
@@ -69,6 +70,7 @@ export const listFollowedOrganizations = async (userId: number) => {
         name: follow.organization.name,
         slug: follow.organization.slug,
         logoUrl: follow.organization.logoUrl,
+        isNSFW: follow.organization.isNSFW,
         subscription: subscriptionsByOrg[follow.organization.id] || null,
         followerCount: follow.organization._count.followers,
     }));

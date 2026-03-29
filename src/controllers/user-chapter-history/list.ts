@@ -27,11 +27,13 @@ export const listUserChapterHistory = async (organizationId: number | null, user
 						select: {
 							title: true,
 							imageUrl: true,
+							isNSFW: true,
 							organization: {
 								select: {
 									id: true,
 									name: true,
 									slug: true,
+									isNSFW: true,
 								}
 							},
 							manga: {

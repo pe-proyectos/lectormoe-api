@@ -28,22 +28,23 @@ export type AggregateAnalytics = {
 
 export type AnalyticsAvgAggregateOutputType = {
   id: number | null
+  organizationId: number | null
   userId: number | null
   screenHeight: number | null
   screenWidth: number | null
-  organizationId: number | null
 }
 
 export type AnalyticsSumAggregateOutputType = {
   id: number | null
+  organizationId: number | null
   userId: number | null
   screenHeight: number | null
   screenWidth: number | null
-  organizationId: number | null
 }
 
 export type AnalyticsMinAggregateOutputType = {
   id: number | null
+  organizationId: number | null
   userId: number | null
   path: string | null
   ip: string | null
@@ -56,11 +57,11 @@ export type AnalyticsMinAggregateOutputType = {
   screenHeight: number | null
   screenWidth: number | null
   userAgent: string | null
-  organizationId: number | null
 }
 
 export type AnalyticsMaxAggregateOutputType = {
   id: number | null
+  organizationId: number | null
   userId: number | null
   path: string | null
   ip: string | null
@@ -73,11 +74,11 @@ export type AnalyticsMaxAggregateOutputType = {
   screenHeight: number | null
   screenWidth: number | null
   userAgent: string | null
-  organizationId: number | null
 }
 
 export type AnalyticsCountAggregateOutputType = {
   id: number
+  organizationId: number
   userId: number
   path: number
   ip: number
@@ -91,29 +92,29 @@ export type AnalyticsCountAggregateOutputType = {
   screenHeight: number
   screenWidth: number
   userAgent: number
-  organizationId: number
   _all: number
 }
 
 
 export type AnalyticsAvgAggregateInputType = {
   id?: true
+  organizationId?: true
   userId?: true
   screenHeight?: true
   screenWidth?: true
-  organizationId?: true
 }
 
 export type AnalyticsSumAggregateInputType = {
   id?: true
+  organizationId?: true
   userId?: true
   screenHeight?: true
   screenWidth?: true
-  organizationId?: true
 }
 
 export type AnalyticsMinAggregateInputType = {
   id?: true
+  organizationId?: true
   userId?: true
   path?: true
   ip?: true
@@ -126,11 +127,11 @@ export type AnalyticsMinAggregateInputType = {
   screenHeight?: true
   screenWidth?: true
   userAgent?: true
-  organizationId?: true
 }
 
 export type AnalyticsMaxAggregateInputType = {
   id?: true
+  organizationId?: true
   userId?: true
   path?: true
   ip?: true
@@ -143,11 +144,11 @@ export type AnalyticsMaxAggregateInputType = {
   screenHeight?: true
   screenWidth?: true
   userAgent?: true
-  organizationId?: true
 }
 
 export type AnalyticsCountAggregateInputType = {
   id?: true
+  organizationId?: true
   userId?: true
   path?: true
   ip?: true
@@ -161,7 +162,6 @@ export type AnalyticsCountAggregateInputType = {
   screenHeight?: true
   screenWidth?: true
   userAgent?: true
-  organizationId?: true
   _all?: true
 }
 
@@ -253,6 +253,7 @@ export type AnalyticsGroupByArgs<ExtArgs extends runtime.Types.Extensions.Intern
 
 export type AnalyticsGroupByOutputType = {
   id: number
+  organizationId: number | null
   userId: number | null
   path: string | null
   ip: string | null
@@ -266,7 +267,6 @@ export type AnalyticsGroupByOutputType = {
   screenHeight: number | null
   screenWidth: number | null
   userAgent: string | null
-  organizationId: number | null
   _count: AnalyticsCountAggregateOutputType | null
   _avg: AnalyticsAvgAggregateOutputType | null
   _sum: AnalyticsSumAggregateOutputType | null
@@ -294,6 +294,7 @@ export type AnalyticsWhereInput = {
   OR?: Prisma.AnalyticsWhereInput[]
   NOT?: Prisma.AnalyticsWhereInput | Prisma.AnalyticsWhereInput[]
   id?: Prisma.IntFilter<"Analytics"> | number
+  organizationId?: Prisma.IntNullableFilter<"Analytics"> | number | null
   userId?: Prisma.IntNullableFilter<"Analytics"> | number | null
   path?: Prisma.StringNullableFilter<"Analytics"> | string | null
   ip?: Prisma.StringNullableFilter<"Analytics"> | string | null
@@ -307,13 +308,13 @@ export type AnalyticsWhereInput = {
   screenHeight?: Prisma.IntNullableFilter<"Analytics"> | number | null
   screenWidth?: Prisma.IntNullableFilter<"Analytics"> | number | null
   userAgent?: Prisma.StringNullableFilter<"Analytics"> | string | null
-  organizationId?: Prisma.IntNullableFilter<"Analytics"> | number | null
   organization?: Prisma.XOR<Prisma.OrganizationNullableScalarRelationFilter, Prisma.OrganizationWhereInput> | null
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
 export type AnalyticsOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  organizationId?: Prisma.SortOrderInput | Prisma.SortOrder
   userId?: Prisma.SortOrderInput | Prisma.SortOrder
   path?: Prisma.SortOrderInput | Prisma.SortOrder
   ip?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -327,7 +328,6 @@ export type AnalyticsOrderByWithRelationInput = {
   screenHeight?: Prisma.SortOrderInput | Prisma.SortOrder
   screenWidth?: Prisma.SortOrderInput | Prisma.SortOrder
   userAgent?: Prisma.SortOrderInput | Prisma.SortOrder
-  organizationId?: Prisma.SortOrderInput | Prisma.SortOrder
   organization?: Prisma.OrganizationOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
 }
@@ -337,6 +337,7 @@ export type AnalyticsWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.AnalyticsWhereInput | Prisma.AnalyticsWhereInput[]
   OR?: Prisma.AnalyticsWhereInput[]
   NOT?: Prisma.AnalyticsWhereInput | Prisma.AnalyticsWhereInput[]
+  organizationId?: Prisma.IntNullableFilter<"Analytics"> | number | null
   userId?: Prisma.IntNullableFilter<"Analytics"> | number | null
   path?: Prisma.StringNullableFilter<"Analytics"> | string | null
   ip?: Prisma.StringNullableFilter<"Analytics"> | string | null
@@ -350,13 +351,13 @@ export type AnalyticsWhereUniqueInput = Prisma.AtLeast<{
   screenHeight?: Prisma.IntNullableFilter<"Analytics"> | number | null
   screenWidth?: Prisma.IntNullableFilter<"Analytics"> | number | null
   userAgent?: Prisma.StringNullableFilter<"Analytics"> | string | null
-  organizationId?: Prisma.IntNullableFilter<"Analytics"> | number | null
   organization?: Prisma.XOR<Prisma.OrganizationNullableScalarRelationFilter, Prisma.OrganizationWhereInput> | null
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }, "id">
 
 export type AnalyticsOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  organizationId?: Prisma.SortOrderInput | Prisma.SortOrder
   userId?: Prisma.SortOrderInput | Prisma.SortOrder
   path?: Prisma.SortOrderInput | Prisma.SortOrder
   ip?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -370,7 +371,6 @@ export type AnalyticsOrderByWithAggregationInput = {
   screenHeight?: Prisma.SortOrderInput | Prisma.SortOrder
   screenWidth?: Prisma.SortOrderInput | Prisma.SortOrder
   userAgent?: Prisma.SortOrderInput | Prisma.SortOrder
-  organizationId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.AnalyticsCountOrderByAggregateInput
   _avg?: Prisma.AnalyticsAvgOrderByAggregateInput
   _max?: Prisma.AnalyticsMaxOrderByAggregateInput
@@ -383,6 +383,7 @@ export type AnalyticsScalarWhereWithAggregatesInput = {
   OR?: Prisma.AnalyticsScalarWhereWithAggregatesInput[]
   NOT?: Prisma.AnalyticsScalarWhereWithAggregatesInput | Prisma.AnalyticsScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Analytics"> | number
+  organizationId?: Prisma.IntNullableWithAggregatesFilter<"Analytics"> | number | null
   userId?: Prisma.IntNullableWithAggregatesFilter<"Analytics"> | number | null
   path?: Prisma.StringNullableWithAggregatesFilter<"Analytics"> | string | null
   ip?: Prisma.StringNullableWithAggregatesFilter<"Analytics"> | string | null
@@ -396,7 +397,6 @@ export type AnalyticsScalarWhereWithAggregatesInput = {
   screenHeight?: Prisma.IntNullableWithAggregatesFilter<"Analytics"> | number | null
   screenWidth?: Prisma.IntNullableWithAggregatesFilter<"Analytics"> | number | null
   userAgent?: Prisma.StringNullableWithAggregatesFilter<"Analytics"> | string | null
-  organizationId?: Prisma.IntNullableWithAggregatesFilter<"Analytics"> | number | null
 }
 
 export type AnalyticsCreateInput = {
@@ -418,6 +418,7 @@ export type AnalyticsCreateInput = {
 
 export type AnalyticsUncheckedCreateInput = {
   id?: number
+  organizationId?: number | null
   userId?: number | null
   path?: string | null
   ip?: string | null
@@ -431,7 +432,6 @@ export type AnalyticsUncheckedCreateInput = {
   screenHeight?: number | null
   screenWidth?: number | null
   userAgent?: string | null
-  organizationId?: number | null
 }
 
 export type AnalyticsUpdateInput = {
@@ -453,6 +453,7 @@ export type AnalyticsUpdateInput = {
 
 export type AnalyticsUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   userId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ip?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -466,11 +467,11 @@ export type AnalyticsUncheckedUpdateInput = {
   screenHeight?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   screenWidth?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type AnalyticsCreateManyInput = {
   id?: number
+  organizationId?: number | null
   userId?: number | null
   path?: string | null
   ip?: string | null
@@ -484,7 +485,6 @@ export type AnalyticsCreateManyInput = {
   screenHeight?: number | null
   screenWidth?: number | null
   userAgent?: string | null
-  organizationId?: number | null
 }
 
 export type AnalyticsUpdateManyMutationInput = {
@@ -504,6 +504,7 @@ export type AnalyticsUpdateManyMutationInput = {
 
 export type AnalyticsUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   userId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ip?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -517,7 +518,6 @@ export type AnalyticsUncheckedUpdateManyInput = {
   screenHeight?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   screenWidth?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type AnalyticsListRelationFilter = {
@@ -532,6 +532,7 @@ export type AnalyticsOrderByRelationAggregateInput = {
 
 export type AnalyticsCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  organizationId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   path?: Prisma.SortOrder
   ip?: Prisma.SortOrder
@@ -545,19 +546,19 @@ export type AnalyticsCountOrderByAggregateInput = {
   screenHeight?: Prisma.SortOrder
   screenWidth?: Prisma.SortOrder
   userAgent?: Prisma.SortOrder
-  organizationId?: Prisma.SortOrder
 }
 
 export type AnalyticsAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  organizationId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   screenHeight?: Prisma.SortOrder
   screenWidth?: Prisma.SortOrder
-  organizationId?: Prisma.SortOrder
 }
 
 export type AnalyticsMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  organizationId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   path?: Prisma.SortOrder
   ip?: Prisma.SortOrder
@@ -570,11 +571,11 @@ export type AnalyticsMaxOrderByAggregateInput = {
   screenHeight?: Prisma.SortOrder
   screenWidth?: Prisma.SortOrder
   userAgent?: Prisma.SortOrder
-  organizationId?: Prisma.SortOrder
 }
 
 export type AnalyticsMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  organizationId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   path?: Prisma.SortOrder
   ip?: Prisma.SortOrder
@@ -587,15 +588,14 @@ export type AnalyticsMinOrderByAggregateInput = {
   screenHeight?: Prisma.SortOrder
   screenWidth?: Prisma.SortOrder
   userAgent?: Prisma.SortOrder
-  organizationId?: Prisma.SortOrder
 }
 
 export type AnalyticsSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  organizationId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   screenHeight?: Prisma.SortOrder
   screenWidth?: Prisma.SortOrder
-  organizationId?: Prisma.SortOrder
 }
 
 export type AnalyticsCreateNestedManyWithoutOrganizationInput = {
@@ -746,6 +746,7 @@ export type AnalyticsScalarWhereInput = {
   OR?: Prisma.AnalyticsScalarWhereInput[]
   NOT?: Prisma.AnalyticsScalarWhereInput | Prisma.AnalyticsScalarWhereInput[]
   id?: Prisma.IntFilter<"Analytics"> | number
+  organizationId?: Prisma.IntNullableFilter<"Analytics"> | number | null
   userId?: Prisma.IntNullableFilter<"Analytics"> | number | null
   path?: Prisma.StringNullableFilter<"Analytics"> | string | null
   ip?: Prisma.StringNullableFilter<"Analytics"> | string | null
@@ -759,7 +760,6 @@ export type AnalyticsScalarWhereInput = {
   screenHeight?: Prisma.IntNullableFilter<"Analytics"> | number | null
   screenWidth?: Prisma.IntNullableFilter<"Analytics"> | number | null
   userAgent?: Prisma.StringNullableFilter<"Analytics"> | string | null
-  organizationId?: Prisma.IntNullableFilter<"Analytics"> | number | null
 }
 
 export type AnalyticsCreateWithoutUserInput = {
@@ -780,6 +780,7 @@ export type AnalyticsCreateWithoutUserInput = {
 
 export type AnalyticsUncheckedCreateWithoutUserInput = {
   id?: number
+  organizationId?: number | null
   path?: string | null
   ip?: string | null
   browser?: string | null
@@ -792,7 +793,6 @@ export type AnalyticsUncheckedCreateWithoutUserInput = {
   screenHeight?: number | null
   screenWidth?: number | null
   userAgent?: string | null
-  organizationId?: number | null
 }
 
 export type AnalyticsCreateOrConnectWithoutUserInput = {
@@ -890,6 +890,7 @@ export type AnalyticsUncheckedUpdateManyWithoutOrganizationInput = {
 
 export type AnalyticsCreateManyUserInput = {
   id?: number
+  organizationId?: number | null
   path?: string | null
   ip?: string | null
   browser?: string | null
@@ -902,7 +903,6 @@ export type AnalyticsCreateManyUserInput = {
   screenHeight?: number | null
   screenWidth?: number | null
   userAgent?: string | null
-  organizationId?: number | null
 }
 
 export type AnalyticsUpdateWithoutUserInput = {
@@ -923,6 +923,7 @@ export type AnalyticsUpdateWithoutUserInput = {
 
 export type AnalyticsUncheckedUpdateWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ip?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   browser?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -935,11 +936,11 @@ export type AnalyticsUncheckedUpdateWithoutUserInput = {
   screenHeight?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   screenWidth?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type AnalyticsUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ip?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   browser?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -952,13 +953,13 @@ export type AnalyticsUncheckedUpdateManyWithoutUserInput = {
   screenHeight?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   screenWidth?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 
 
 export type AnalyticsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  organizationId?: boolean
   userId?: boolean
   path?: boolean
   ip?: boolean
@@ -972,13 +973,13 @@ export type AnalyticsSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   screenHeight?: boolean
   screenWidth?: boolean
   userAgent?: boolean
-  organizationId?: boolean
   organization?: boolean | Prisma.Analytics$organizationArgs<ExtArgs>
   user?: boolean | Prisma.Analytics$userArgs<ExtArgs>
 }, ExtArgs["result"]["analytics"]>
 
 export type AnalyticsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  organizationId?: boolean
   userId?: boolean
   path?: boolean
   ip?: boolean
@@ -992,13 +993,13 @@ export type AnalyticsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   screenHeight?: boolean
   screenWidth?: boolean
   userAgent?: boolean
-  organizationId?: boolean
   organization?: boolean | Prisma.Analytics$organizationArgs<ExtArgs>
   user?: boolean | Prisma.Analytics$userArgs<ExtArgs>
 }, ExtArgs["result"]["analytics"]>
 
 export type AnalyticsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  organizationId?: boolean
   userId?: boolean
   path?: boolean
   ip?: boolean
@@ -1012,13 +1013,13 @@ export type AnalyticsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   screenHeight?: boolean
   screenWidth?: boolean
   userAgent?: boolean
-  organizationId?: boolean
   organization?: boolean | Prisma.Analytics$organizationArgs<ExtArgs>
   user?: boolean | Prisma.Analytics$userArgs<ExtArgs>
 }, ExtArgs["result"]["analytics"]>
 
 export type AnalyticsSelectScalar = {
   id?: boolean
+  organizationId?: boolean
   userId?: boolean
   path?: boolean
   ip?: boolean
@@ -1032,10 +1033,9 @@ export type AnalyticsSelectScalar = {
   screenHeight?: boolean
   screenWidth?: boolean
   userAgent?: boolean
-  organizationId?: boolean
 }
 
-export type AnalyticsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "path" | "ip" | "browser" | "deviceType" | "payload" | "createdAt" | "updatedAt" | "capturedAt" | "event" | "screenHeight" | "screenWidth" | "userAgent" | "organizationId", ExtArgs["result"]["analytics"]>
+export type AnalyticsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "userId" | "path" | "ip" | "browser" | "deviceType" | "payload" | "createdAt" | "updatedAt" | "capturedAt" | "event" | "screenHeight" | "screenWidth" | "userAgent", ExtArgs["result"]["analytics"]>
 export type AnalyticsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   organization?: boolean | Prisma.Analytics$organizationArgs<ExtArgs>
   user?: boolean | Prisma.Analytics$userArgs<ExtArgs>
@@ -1057,6 +1057,7 @@ export type $AnalyticsPayload<ExtArgs extends runtime.Types.Extensions.InternalA
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
+    organizationId: number | null
     userId: number | null
     path: string | null
     ip: string | null
@@ -1070,7 +1071,6 @@ export type $AnalyticsPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     screenHeight: number | null
     screenWidth: number | null
     userAgent: string | null
-    organizationId: number | null
   }, ExtArgs["result"]["analytics"]>
   composites: {}
 }
@@ -1497,6 +1497,7 @@ export interface Prisma__AnalyticsClient<T, Null = never, ExtArgs extends runtim
  */
 export interface AnalyticsFieldRefs {
   readonly id: Prisma.FieldRef<"Analytics", 'Int'>
+  readonly organizationId: Prisma.FieldRef<"Analytics", 'Int'>
   readonly userId: Prisma.FieldRef<"Analytics", 'Int'>
   readonly path: Prisma.FieldRef<"Analytics", 'String'>
   readonly ip: Prisma.FieldRef<"Analytics", 'String'>
@@ -1510,7 +1511,6 @@ export interface AnalyticsFieldRefs {
   readonly screenHeight: Prisma.FieldRef<"Analytics", 'Int'>
   readonly screenWidth: Prisma.FieldRef<"Analytics", 'Int'>
   readonly userAgent: Prisma.FieldRef<"Analytics", 'String'>
-  readonly organizationId: Prisma.FieldRef<"Analytics", 'Int'>
 }
     
 

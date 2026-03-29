@@ -118,6 +118,7 @@ export const getPublicFollowedScans = async (slug: string) => {
           name: true,
           slug: true,
           logoUrl: true,
+          isNSFW: true,
           _count: {
             select: {
               followers: true,
@@ -136,6 +137,7 @@ export const getPublicFollowedScans = async (slug: string) => {
     name: follow.organization.name,
     slug: follow.organization.slug,
     logoUrl: follow.organization.logoUrl,
+    isNSFW: follow.organization.isNSFW,
     followerCount: follow.organization._count.followers,
   }));
 };

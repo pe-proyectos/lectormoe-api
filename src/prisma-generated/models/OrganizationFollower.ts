@@ -224,8 +224,8 @@ export type OrganizationFollowerWhereInput = {
   organizationId?: Prisma.IntFilter<"OrganizationFollower"> | number
   createdAt?: Prisma.DateTimeFilter<"OrganizationFollower"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"OrganizationFollower"> | Date | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
 export type OrganizationFollowerOrderByWithRelationInput = {
@@ -234,8 +234,8 @@ export type OrganizationFollowerOrderByWithRelationInput = {
   organizationId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  user?: Prisma.UserOrderByWithRelationInput
   organization?: Prisma.OrganizationOrderByWithRelationInput
+  user?: Prisma.UserOrderByWithRelationInput
 }
 
 export type OrganizationFollowerWhereUniqueInput = Prisma.AtLeast<{
@@ -248,8 +248,8 @@ export type OrganizationFollowerWhereUniqueInput = Prisma.AtLeast<{
   organizationId?: Prisma.IntFilter<"OrganizationFollower"> | number
   createdAt?: Prisma.DateTimeFilter<"OrganizationFollower"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"OrganizationFollower"> | Date | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id" | "userId_organizationId">
 
 export type OrganizationFollowerOrderByWithAggregationInput = {
@@ -279,8 +279,8 @@ export type OrganizationFollowerScalarWhereWithAggregatesInput = {
 export type OrganizationFollowerCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutOrganizationFollowsInput
   organization: Prisma.OrganizationCreateNestedOneWithoutFollowersInput
+  user: Prisma.UserCreateNestedOneWithoutOrganizationFollowsInput
 }
 
 export type OrganizationFollowerUncheckedCreateInput = {
@@ -294,8 +294,8 @@ export type OrganizationFollowerUncheckedCreateInput = {
 export type OrganizationFollowerUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutOrganizationFollowsNestedInput
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutFollowersNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutOrganizationFollowsNestedInput
 }
 
 export type OrganizationFollowerUncheckedUpdateInput = {
@@ -613,8 +613,8 @@ export type OrganizationFollowerSelect<ExtArgs extends runtime.Types.Extensions.
   organizationId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["organizationFollower"]>
 
 export type OrganizationFollowerSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -623,8 +623,8 @@ export type OrganizationFollowerSelectCreateManyAndReturn<ExtArgs extends runtim
   organizationId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["organizationFollower"]>
 
 export type OrganizationFollowerSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -633,8 +633,8 @@ export type OrganizationFollowerSelectUpdateManyAndReturn<ExtArgs extends runtim
   organizationId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["organizationFollower"]>
 
 export type OrganizationFollowerSelectScalar = {
@@ -647,23 +647,23 @@ export type OrganizationFollowerSelectScalar = {
 
 export type OrganizationFollowerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "organizationId" | "createdAt" | "updatedAt", ExtArgs["result"]["organizationFollower"]>
 export type OrganizationFollowerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type OrganizationFollowerIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type OrganizationFollowerIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
 export type $OrganizationFollowerPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "OrganizationFollower"
   objects: {
-    user: Prisma.$UserPayload<ExtArgs>
     organization: Prisma.$OrganizationPayload<ExtArgs>
+    user: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1065,8 +1065,8 @@ readonly fields: OrganizationFollowerFieldRefs;
  */
 export interface Prisma__OrganizationFollowerClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   organization<T extends Prisma.OrganizationDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationDefaultArgs<ExtArgs>>): Prisma.Prisma__OrganizationClient<runtime.Types.Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

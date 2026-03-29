@@ -23,6 +23,7 @@ export const checkOrganizationBySlug = async (slug: string) => {
             _count: {
                 select: {
                     followers: true,
+                    mangaCustoms: true,
                 },
             },
         }

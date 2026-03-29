@@ -314,8 +314,8 @@ export type SubscriptionPlanWhereInput = {
   hideAds?: Prisma.BoolFilter<"SubscriptionPlan"> | boolean
   subscriptions?: Prisma.SubscriptionListRelationFilter
   organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
-  mangaCustomsCanReadUnreleased?: Prisma.MangaCustomListRelationFilter
   mangaCustomsCanReadReleased?: Prisma.MangaCustomListRelationFilter
+  mangaCustomsCanReadUnreleased?: Prisma.MangaCustomListRelationFilter
 }
 
 export type SubscriptionPlanOrderByWithRelationInput = {
@@ -337,8 +337,8 @@ export type SubscriptionPlanOrderByWithRelationInput = {
   hideAds?: Prisma.SortOrder
   subscriptions?: Prisma.SubscriptionOrderByRelationAggregateInput
   organization?: Prisma.OrganizationOrderByWithRelationInput
-  mangaCustomsCanReadUnreleased?: Prisma.MangaCustomOrderByRelationAggregateInput
   mangaCustomsCanReadReleased?: Prisma.MangaCustomOrderByRelationAggregateInput
+  mangaCustomsCanReadUnreleased?: Prisma.MangaCustomOrderByRelationAggregateInput
 }
 
 export type SubscriptionPlanWhereUniqueInput = Prisma.AtLeast<{
@@ -364,8 +364,8 @@ export type SubscriptionPlanWhereUniqueInput = Prisma.AtLeast<{
   hideAds?: Prisma.BoolFilter<"SubscriptionPlan"> | boolean
   subscriptions?: Prisma.SubscriptionListRelationFilter
   organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
-  mangaCustomsCanReadUnreleased?: Prisma.MangaCustomListRelationFilter
   mangaCustomsCanReadReleased?: Prisma.MangaCustomListRelationFilter
+  mangaCustomsCanReadUnreleased?: Prisma.MangaCustomListRelationFilter
 }, "id" | "planId" | "slug" | "productId" | "organizationId_slug">
 
 export type SubscriptionPlanOrderByWithAggregationInput = {
@@ -431,8 +431,8 @@ export type SubscriptionPlanCreateInput = {
   hideAds?: boolean
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutSubscriptionPlanInput
   organization: Prisma.OrganizationCreateNestedOneWithoutSubscriptionPlansInput
-  mangaCustomsCanReadUnreleased?: Prisma.MangaCustomCreateNestedManyWithoutSubscriptionPlansCanReadUnreleasedInput
   mangaCustomsCanReadReleased?: Prisma.MangaCustomCreateNestedManyWithoutSubscriptionPlansCanReadReleasedInput
+  mangaCustomsCanReadUnreleased?: Prisma.MangaCustomCreateNestedManyWithoutSubscriptionPlansCanReadUnreleasedInput
 }
 
 export type SubscriptionPlanUncheckedCreateInput = {
@@ -453,8 +453,8 @@ export type SubscriptionPlanUncheckedCreateInput = {
   canReadUnreleased?: boolean
   hideAds?: boolean
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutSubscriptionPlanInput
-  mangaCustomsCanReadUnreleased?: Prisma.MangaCustomUncheckedCreateNestedManyWithoutSubscriptionPlansCanReadUnreleasedInput
   mangaCustomsCanReadReleased?: Prisma.MangaCustomUncheckedCreateNestedManyWithoutSubscriptionPlansCanReadReleasedInput
+  mangaCustomsCanReadUnreleased?: Prisma.MangaCustomUncheckedCreateNestedManyWithoutSubscriptionPlansCanReadUnreleasedInput
 }
 
 export type SubscriptionPlanUpdateInput = {
@@ -474,8 +474,8 @@ export type SubscriptionPlanUpdateInput = {
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutSubscriptionPlanNestedInput
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutSubscriptionPlansNestedInput
-  mangaCustomsCanReadUnreleased?: Prisma.MangaCustomUpdateManyWithoutSubscriptionPlansCanReadUnreleasedNestedInput
   mangaCustomsCanReadReleased?: Prisma.MangaCustomUpdateManyWithoutSubscriptionPlansCanReadReleasedNestedInput
+  mangaCustomsCanReadUnreleased?: Prisma.MangaCustomUpdateManyWithoutSubscriptionPlansCanReadUnreleasedNestedInput
 }
 
 export type SubscriptionPlanUncheckedUpdateInput = {
@@ -496,8 +496,8 @@ export type SubscriptionPlanUncheckedUpdateInput = {
   canReadUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutSubscriptionPlanNestedInput
-  mangaCustomsCanReadUnreleased?: Prisma.MangaCustomUncheckedUpdateManyWithoutSubscriptionPlansCanReadUnreleasedNestedInput
   mangaCustomsCanReadReleased?: Prisma.MangaCustomUncheckedUpdateManyWithoutSubscriptionPlansCanReadReleasedNestedInput
+  mangaCustomsCanReadUnreleased?: Prisma.MangaCustomUncheckedUpdateManyWithoutSubscriptionPlansCanReadUnreleasedNestedInput
 }
 
 export type SubscriptionPlanCreateManyInput = {
@@ -686,19 +686,13 @@ export type SubscriptionPlanUncheckedUpdateManyWithoutOrganizationNestedInput = 
   deleteMany?: Prisma.SubscriptionPlanScalarWhereInput | Prisma.SubscriptionPlanScalarWhereInput[]
 }
 
-export type SubscriptionPlanCreateNestedManyWithoutMangaCustomsCanReadUnreleasedInput = {
-  create?: Prisma.XOR<Prisma.SubscriptionPlanCreateWithoutMangaCustomsCanReadUnreleasedInput, Prisma.SubscriptionPlanUncheckedCreateWithoutMangaCustomsCanReadUnreleasedInput> | Prisma.SubscriptionPlanCreateWithoutMangaCustomsCanReadUnreleasedInput[] | Prisma.SubscriptionPlanUncheckedCreateWithoutMangaCustomsCanReadUnreleasedInput[]
-  connectOrCreate?: Prisma.SubscriptionPlanCreateOrConnectWithoutMangaCustomsCanReadUnreleasedInput | Prisma.SubscriptionPlanCreateOrConnectWithoutMangaCustomsCanReadUnreleasedInput[]
-  connect?: Prisma.SubscriptionPlanWhereUniqueInput | Prisma.SubscriptionPlanWhereUniqueInput[]
-}
-
 export type SubscriptionPlanCreateNestedManyWithoutMangaCustomsCanReadReleasedInput = {
   create?: Prisma.XOR<Prisma.SubscriptionPlanCreateWithoutMangaCustomsCanReadReleasedInput, Prisma.SubscriptionPlanUncheckedCreateWithoutMangaCustomsCanReadReleasedInput> | Prisma.SubscriptionPlanCreateWithoutMangaCustomsCanReadReleasedInput[] | Prisma.SubscriptionPlanUncheckedCreateWithoutMangaCustomsCanReadReleasedInput[]
   connectOrCreate?: Prisma.SubscriptionPlanCreateOrConnectWithoutMangaCustomsCanReadReleasedInput | Prisma.SubscriptionPlanCreateOrConnectWithoutMangaCustomsCanReadReleasedInput[]
   connect?: Prisma.SubscriptionPlanWhereUniqueInput | Prisma.SubscriptionPlanWhereUniqueInput[]
 }
 
-export type SubscriptionPlanUncheckedCreateNestedManyWithoutMangaCustomsCanReadUnreleasedInput = {
+export type SubscriptionPlanCreateNestedManyWithoutMangaCustomsCanReadUnreleasedInput = {
   create?: Prisma.XOR<Prisma.SubscriptionPlanCreateWithoutMangaCustomsCanReadUnreleasedInput, Prisma.SubscriptionPlanUncheckedCreateWithoutMangaCustomsCanReadUnreleasedInput> | Prisma.SubscriptionPlanCreateWithoutMangaCustomsCanReadUnreleasedInput[] | Prisma.SubscriptionPlanUncheckedCreateWithoutMangaCustomsCanReadUnreleasedInput[]
   connectOrCreate?: Prisma.SubscriptionPlanCreateOrConnectWithoutMangaCustomsCanReadUnreleasedInput | Prisma.SubscriptionPlanCreateOrConnectWithoutMangaCustomsCanReadUnreleasedInput[]
   connect?: Prisma.SubscriptionPlanWhereUniqueInput | Prisma.SubscriptionPlanWhereUniqueInput[]
@@ -710,17 +704,10 @@ export type SubscriptionPlanUncheckedCreateNestedManyWithoutMangaCustomsCanReadR
   connect?: Prisma.SubscriptionPlanWhereUniqueInput | Prisma.SubscriptionPlanWhereUniqueInput[]
 }
 
-export type SubscriptionPlanUpdateManyWithoutMangaCustomsCanReadUnreleasedNestedInput = {
+export type SubscriptionPlanUncheckedCreateNestedManyWithoutMangaCustomsCanReadUnreleasedInput = {
   create?: Prisma.XOR<Prisma.SubscriptionPlanCreateWithoutMangaCustomsCanReadUnreleasedInput, Prisma.SubscriptionPlanUncheckedCreateWithoutMangaCustomsCanReadUnreleasedInput> | Prisma.SubscriptionPlanCreateWithoutMangaCustomsCanReadUnreleasedInput[] | Prisma.SubscriptionPlanUncheckedCreateWithoutMangaCustomsCanReadUnreleasedInput[]
   connectOrCreate?: Prisma.SubscriptionPlanCreateOrConnectWithoutMangaCustomsCanReadUnreleasedInput | Prisma.SubscriptionPlanCreateOrConnectWithoutMangaCustomsCanReadUnreleasedInput[]
-  upsert?: Prisma.SubscriptionPlanUpsertWithWhereUniqueWithoutMangaCustomsCanReadUnreleasedInput | Prisma.SubscriptionPlanUpsertWithWhereUniqueWithoutMangaCustomsCanReadUnreleasedInput[]
-  set?: Prisma.SubscriptionPlanWhereUniqueInput | Prisma.SubscriptionPlanWhereUniqueInput[]
-  disconnect?: Prisma.SubscriptionPlanWhereUniqueInput | Prisma.SubscriptionPlanWhereUniqueInput[]
-  delete?: Prisma.SubscriptionPlanWhereUniqueInput | Prisma.SubscriptionPlanWhereUniqueInput[]
   connect?: Prisma.SubscriptionPlanWhereUniqueInput | Prisma.SubscriptionPlanWhereUniqueInput[]
-  update?: Prisma.SubscriptionPlanUpdateWithWhereUniqueWithoutMangaCustomsCanReadUnreleasedInput | Prisma.SubscriptionPlanUpdateWithWhereUniqueWithoutMangaCustomsCanReadUnreleasedInput[]
-  updateMany?: Prisma.SubscriptionPlanUpdateManyWithWhereWithoutMangaCustomsCanReadUnreleasedInput | Prisma.SubscriptionPlanUpdateManyWithWhereWithoutMangaCustomsCanReadUnreleasedInput[]
-  deleteMany?: Prisma.SubscriptionPlanScalarWhereInput | Prisma.SubscriptionPlanScalarWhereInput[]
 }
 
 export type SubscriptionPlanUpdateManyWithoutMangaCustomsCanReadReleasedNestedInput = {
@@ -736,7 +723,7 @@ export type SubscriptionPlanUpdateManyWithoutMangaCustomsCanReadReleasedNestedIn
   deleteMany?: Prisma.SubscriptionPlanScalarWhereInput | Prisma.SubscriptionPlanScalarWhereInput[]
 }
 
-export type SubscriptionPlanUncheckedUpdateManyWithoutMangaCustomsCanReadUnreleasedNestedInput = {
+export type SubscriptionPlanUpdateManyWithoutMangaCustomsCanReadUnreleasedNestedInput = {
   create?: Prisma.XOR<Prisma.SubscriptionPlanCreateWithoutMangaCustomsCanReadUnreleasedInput, Prisma.SubscriptionPlanUncheckedCreateWithoutMangaCustomsCanReadUnreleasedInput> | Prisma.SubscriptionPlanCreateWithoutMangaCustomsCanReadUnreleasedInput[] | Prisma.SubscriptionPlanUncheckedCreateWithoutMangaCustomsCanReadUnreleasedInput[]
   connectOrCreate?: Prisma.SubscriptionPlanCreateOrConnectWithoutMangaCustomsCanReadUnreleasedInput | Prisma.SubscriptionPlanCreateOrConnectWithoutMangaCustomsCanReadUnreleasedInput[]
   upsert?: Prisma.SubscriptionPlanUpsertWithWhereUniqueWithoutMangaCustomsCanReadUnreleasedInput | Prisma.SubscriptionPlanUpsertWithWhereUniqueWithoutMangaCustomsCanReadUnreleasedInput[]
@@ -759,6 +746,19 @@ export type SubscriptionPlanUncheckedUpdateManyWithoutMangaCustomsCanReadRelease
   connect?: Prisma.SubscriptionPlanWhereUniqueInput | Prisma.SubscriptionPlanWhereUniqueInput[]
   update?: Prisma.SubscriptionPlanUpdateWithWhereUniqueWithoutMangaCustomsCanReadReleasedInput | Prisma.SubscriptionPlanUpdateWithWhereUniqueWithoutMangaCustomsCanReadReleasedInput[]
   updateMany?: Prisma.SubscriptionPlanUpdateManyWithWhereWithoutMangaCustomsCanReadReleasedInput | Prisma.SubscriptionPlanUpdateManyWithWhereWithoutMangaCustomsCanReadReleasedInput[]
+  deleteMany?: Prisma.SubscriptionPlanScalarWhereInput | Prisma.SubscriptionPlanScalarWhereInput[]
+}
+
+export type SubscriptionPlanUncheckedUpdateManyWithoutMangaCustomsCanReadUnreleasedNestedInput = {
+  create?: Prisma.XOR<Prisma.SubscriptionPlanCreateWithoutMangaCustomsCanReadUnreleasedInput, Prisma.SubscriptionPlanUncheckedCreateWithoutMangaCustomsCanReadUnreleasedInput> | Prisma.SubscriptionPlanCreateWithoutMangaCustomsCanReadUnreleasedInput[] | Prisma.SubscriptionPlanUncheckedCreateWithoutMangaCustomsCanReadUnreleasedInput[]
+  connectOrCreate?: Prisma.SubscriptionPlanCreateOrConnectWithoutMangaCustomsCanReadUnreleasedInput | Prisma.SubscriptionPlanCreateOrConnectWithoutMangaCustomsCanReadUnreleasedInput[]
+  upsert?: Prisma.SubscriptionPlanUpsertWithWhereUniqueWithoutMangaCustomsCanReadUnreleasedInput | Prisma.SubscriptionPlanUpsertWithWhereUniqueWithoutMangaCustomsCanReadUnreleasedInput[]
+  set?: Prisma.SubscriptionPlanWhereUniqueInput | Prisma.SubscriptionPlanWhereUniqueInput[]
+  disconnect?: Prisma.SubscriptionPlanWhereUniqueInput | Prisma.SubscriptionPlanWhereUniqueInput[]
+  delete?: Prisma.SubscriptionPlanWhereUniqueInput | Prisma.SubscriptionPlanWhereUniqueInput[]
+  connect?: Prisma.SubscriptionPlanWhereUniqueInput | Prisma.SubscriptionPlanWhereUniqueInput[]
+  update?: Prisma.SubscriptionPlanUpdateWithWhereUniqueWithoutMangaCustomsCanReadUnreleasedInput | Prisma.SubscriptionPlanUpdateWithWhereUniqueWithoutMangaCustomsCanReadUnreleasedInput[]
+  updateMany?: Prisma.SubscriptionPlanUpdateManyWithWhereWithoutMangaCustomsCanReadUnreleasedInput | Prisma.SubscriptionPlanUpdateManyWithWhereWithoutMangaCustomsCanReadUnreleasedInput[]
   deleteMany?: Prisma.SubscriptionPlanScalarWhereInput | Prisma.SubscriptionPlanScalarWhereInput[]
 }
 
@@ -792,8 +792,8 @@ export type SubscriptionPlanCreateWithoutOrganizationInput = {
   canReadUnreleased?: boolean
   hideAds?: boolean
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutSubscriptionPlanInput
-  mangaCustomsCanReadUnreleased?: Prisma.MangaCustomCreateNestedManyWithoutSubscriptionPlansCanReadUnreleasedInput
   mangaCustomsCanReadReleased?: Prisma.MangaCustomCreateNestedManyWithoutSubscriptionPlansCanReadReleasedInput
+  mangaCustomsCanReadUnreleased?: Prisma.MangaCustomCreateNestedManyWithoutSubscriptionPlansCanReadUnreleasedInput
 }
 
 export type SubscriptionPlanUncheckedCreateWithoutOrganizationInput = {
@@ -813,8 +813,8 @@ export type SubscriptionPlanUncheckedCreateWithoutOrganizationInput = {
   canReadUnreleased?: boolean
   hideAds?: boolean
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutSubscriptionPlanInput
-  mangaCustomsCanReadUnreleased?: Prisma.MangaCustomUncheckedCreateNestedManyWithoutSubscriptionPlansCanReadUnreleasedInput
   mangaCustomsCanReadReleased?: Prisma.MangaCustomUncheckedCreateNestedManyWithoutSubscriptionPlansCanReadReleasedInput
+  mangaCustomsCanReadUnreleased?: Prisma.MangaCustomUncheckedCreateNestedManyWithoutSubscriptionPlansCanReadUnreleasedInput
 }
 
 export type SubscriptionPlanCreateOrConnectWithoutOrganizationInput = {
@@ -865,52 +865,6 @@ export type SubscriptionPlanScalarWhereInput = {
   hideAds?: Prisma.BoolFilter<"SubscriptionPlan"> | boolean
 }
 
-export type SubscriptionPlanCreateWithoutMangaCustomsCanReadUnreleasedInput = {
-  name: string
-  description: string
-  price: number
-  interval?: string
-  currency?: string
-  planId: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  slug: string
-  productId: string
-  active?: boolean
-  canDownload?: boolean
-  canReadUnreleased?: boolean
-  hideAds?: boolean
-  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutSubscriptionPlanInput
-  organization: Prisma.OrganizationCreateNestedOneWithoutSubscriptionPlansInput
-  mangaCustomsCanReadReleased?: Prisma.MangaCustomCreateNestedManyWithoutSubscriptionPlansCanReadReleasedInput
-}
-
-export type SubscriptionPlanUncheckedCreateWithoutMangaCustomsCanReadUnreleasedInput = {
-  id?: number
-  name: string
-  description: string
-  price: number
-  interval?: string
-  currency?: string
-  planId: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  organizationId: number
-  slug: string
-  productId: string
-  active?: boolean
-  canDownload?: boolean
-  canReadUnreleased?: boolean
-  hideAds?: boolean
-  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutSubscriptionPlanInput
-  mangaCustomsCanReadReleased?: Prisma.MangaCustomUncheckedCreateNestedManyWithoutSubscriptionPlansCanReadReleasedInput
-}
-
-export type SubscriptionPlanCreateOrConnectWithoutMangaCustomsCanReadUnreleasedInput = {
-  where: Prisma.SubscriptionPlanWhereUniqueInput
-  create: Prisma.XOR<Prisma.SubscriptionPlanCreateWithoutMangaCustomsCanReadUnreleasedInput, Prisma.SubscriptionPlanUncheckedCreateWithoutMangaCustomsCanReadUnreleasedInput>
-}
-
 export type SubscriptionPlanCreateWithoutMangaCustomsCanReadReleasedInput = {
   name: string
   description: string
@@ -957,20 +911,50 @@ export type SubscriptionPlanCreateOrConnectWithoutMangaCustomsCanReadReleasedInp
   create: Prisma.XOR<Prisma.SubscriptionPlanCreateWithoutMangaCustomsCanReadReleasedInput, Prisma.SubscriptionPlanUncheckedCreateWithoutMangaCustomsCanReadReleasedInput>
 }
 
-export type SubscriptionPlanUpsertWithWhereUniqueWithoutMangaCustomsCanReadUnreleasedInput = {
+export type SubscriptionPlanCreateWithoutMangaCustomsCanReadUnreleasedInput = {
+  name: string
+  description: string
+  price: number
+  interval?: string
+  currency?: string
+  planId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  slug: string
+  productId: string
+  active?: boolean
+  canDownload?: boolean
+  canReadUnreleased?: boolean
+  hideAds?: boolean
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutSubscriptionPlanInput
+  organization: Prisma.OrganizationCreateNestedOneWithoutSubscriptionPlansInput
+  mangaCustomsCanReadReleased?: Prisma.MangaCustomCreateNestedManyWithoutSubscriptionPlansCanReadReleasedInput
+}
+
+export type SubscriptionPlanUncheckedCreateWithoutMangaCustomsCanReadUnreleasedInput = {
+  id?: number
+  name: string
+  description: string
+  price: number
+  interval?: string
+  currency?: string
+  planId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organizationId: number
+  slug: string
+  productId: string
+  active?: boolean
+  canDownload?: boolean
+  canReadUnreleased?: boolean
+  hideAds?: boolean
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutSubscriptionPlanInput
+  mangaCustomsCanReadReleased?: Prisma.MangaCustomUncheckedCreateNestedManyWithoutSubscriptionPlansCanReadReleasedInput
+}
+
+export type SubscriptionPlanCreateOrConnectWithoutMangaCustomsCanReadUnreleasedInput = {
   where: Prisma.SubscriptionPlanWhereUniqueInput
-  update: Prisma.XOR<Prisma.SubscriptionPlanUpdateWithoutMangaCustomsCanReadUnreleasedInput, Prisma.SubscriptionPlanUncheckedUpdateWithoutMangaCustomsCanReadUnreleasedInput>
   create: Prisma.XOR<Prisma.SubscriptionPlanCreateWithoutMangaCustomsCanReadUnreleasedInput, Prisma.SubscriptionPlanUncheckedCreateWithoutMangaCustomsCanReadUnreleasedInput>
-}
-
-export type SubscriptionPlanUpdateWithWhereUniqueWithoutMangaCustomsCanReadUnreleasedInput = {
-  where: Prisma.SubscriptionPlanWhereUniqueInput
-  data: Prisma.XOR<Prisma.SubscriptionPlanUpdateWithoutMangaCustomsCanReadUnreleasedInput, Prisma.SubscriptionPlanUncheckedUpdateWithoutMangaCustomsCanReadUnreleasedInput>
-}
-
-export type SubscriptionPlanUpdateManyWithWhereWithoutMangaCustomsCanReadUnreleasedInput = {
-  where: Prisma.SubscriptionPlanScalarWhereInput
-  data: Prisma.XOR<Prisma.SubscriptionPlanUpdateManyMutationInput, Prisma.SubscriptionPlanUncheckedUpdateManyWithoutMangaCustomsCanReadUnreleasedInput>
 }
 
 export type SubscriptionPlanUpsertWithWhereUniqueWithoutMangaCustomsCanReadReleasedInput = {
@@ -989,6 +973,22 @@ export type SubscriptionPlanUpdateManyWithWhereWithoutMangaCustomsCanReadRelease
   data: Prisma.XOR<Prisma.SubscriptionPlanUpdateManyMutationInput, Prisma.SubscriptionPlanUncheckedUpdateManyWithoutMangaCustomsCanReadReleasedInput>
 }
 
+export type SubscriptionPlanUpsertWithWhereUniqueWithoutMangaCustomsCanReadUnreleasedInput = {
+  where: Prisma.SubscriptionPlanWhereUniqueInput
+  update: Prisma.XOR<Prisma.SubscriptionPlanUpdateWithoutMangaCustomsCanReadUnreleasedInput, Prisma.SubscriptionPlanUncheckedUpdateWithoutMangaCustomsCanReadUnreleasedInput>
+  create: Prisma.XOR<Prisma.SubscriptionPlanCreateWithoutMangaCustomsCanReadUnreleasedInput, Prisma.SubscriptionPlanUncheckedCreateWithoutMangaCustomsCanReadUnreleasedInput>
+}
+
+export type SubscriptionPlanUpdateWithWhereUniqueWithoutMangaCustomsCanReadUnreleasedInput = {
+  where: Prisma.SubscriptionPlanWhereUniqueInput
+  data: Prisma.XOR<Prisma.SubscriptionPlanUpdateWithoutMangaCustomsCanReadUnreleasedInput, Prisma.SubscriptionPlanUncheckedUpdateWithoutMangaCustomsCanReadUnreleasedInput>
+}
+
+export type SubscriptionPlanUpdateManyWithWhereWithoutMangaCustomsCanReadUnreleasedInput = {
+  where: Prisma.SubscriptionPlanScalarWhereInput
+  data: Prisma.XOR<Prisma.SubscriptionPlanUpdateManyMutationInput, Prisma.SubscriptionPlanUncheckedUpdateManyWithoutMangaCustomsCanReadUnreleasedInput>
+}
+
 export type SubscriptionPlanCreateWithoutSubscriptionsInput = {
   name: string
   description: string
@@ -1005,8 +1005,8 @@ export type SubscriptionPlanCreateWithoutSubscriptionsInput = {
   canReadUnreleased?: boolean
   hideAds?: boolean
   organization: Prisma.OrganizationCreateNestedOneWithoutSubscriptionPlansInput
-  mangaCustomsCanReadUnreleased?: Prisma.MangaCustomCreateNestedManyWithoutSubscriptionPlansCanReadUnreleasedInput
   mangaCustomsCanReadReleased?: Prisma.MangaCustomCreateNestedManyWithoutSubscriptionPlansCanReadReleasedInput
+  mangaCustomsCanReadUnreleased?: Prisma.MangaCustomCreateNestedManyWithoutSubscriptionPlansCanReadUnreleasedInput
 }
 
 export type SubscriptionPlanUncheckedCreateWithoutSubscriptionsInput = {
@@ -1026,8 +1026,8 @@ export type SubscriptionPlanUncheckedCreateWithoutSubscriptionsInput = {
   canDownload?: boolean
   canReadUnreleased?: boolean
   hideAds?: boolean
-  mangaCustomsCanReadUnreleased?: Prisma.MangaCustomUncheckedCreateNestedManyWithoutSubscriptionPlansCanReadUnreleasedInput
   mangaCustomsCanReadReleased?: Prisma.MangaCustomUncheckedCreateNestedManyWithoutSubscriptionPlansCanReadReleasedInput
+  mangaCustomsCanReadUnreleased?: Prisma.MangaCustomUncheckedCreateNestedManyWithoutSubscriptionPlansCanReadUnreleasedInput
 }
 
 export type SubscriptionPlanCreateOrConnectWithoutSubscriptionsInput = {
@@ -1062,8 +1062,8 @@ export type SubscriptionPlanUpdateWithoutSubscriptionsInput = {
   canReadUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutSubscriptionPlansNestedInput
-  mangaCustomsCanReadUnreleased?: Prisma.MangaCustomUpdateManyWithoutSubscriptionPlansCanReadUnreleasedNestedInput
   mangaCustomsCanReadReleased?: Prisma.MangaCustomUpdateManyWithoutSubscriptionPlansCanReadReleasedNestedInput
+  mangaCustomsCanReadUnreleased?: Prisma.MangaCustomUpdateManyWithoutSubscriptionPlansCanReadUnreleasedNestedInput
 }
 
 export type SubscriptionPlanUncheckedUpdateWithoutSubscriptionsInput = {
@@ -1083,8 +1083,8 @@ export type SubscriptionPlanUncheckedUpdateWithoutSubscriptionsInput = {
   canDownload?: Prisma.BoolFieldUpdateOperationsInput | boolean
   canReadUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  mangaCustomsCanReadUnreleased?: Prisma.MangaCustomUncheckedUpdateManyWithoutSubscriptionPlansCanReadUnreleasedNestedInput
   mangaCustomsCanReadReleased?: Prisma.MangaCustomUncheckedUpdateManyWithoutSubscriptionPlansCanReadReleasedNestedInput
+  mangaCustomsCanReadUnreleased?: Prisma.MangaCustomUncheckedUpdateManyWithoutSubscriptionPlansCanReadUnreleasedNestedInput
 }
 
 export type SubscriptionPlanCreateManyOrganizationInput = {
@@ -1121,8 +1121,8 @@ export type SubscriptionPlanUpdateWithoutOrganizationInput = {
   canReadUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutSubscriptionPlanNestedInput
-  mangaCustomsCanReadUnreleased?: Prisma.MangaCustomUpdateManyWithoutSubscriptionPlansCanReadUnreleasedNestedInput
   mangaCustomsCanReadReleased?: Prisma.MangaCustomUpdateManyWithoutSubscriptionPlansCanReadReleasedNestedInput
+  mangaCustomsCanReadUnreleased?: Prisma.MangaCustomUpdateManyWithoutSubscriptionPlansCanReadUnreleasedNestedInput
 }
 
 export type SubscriptionPlanUncheckedUpdateWithoutOrganizationInput = {
@@ -1142,8 +1142,8 @@ export type SubscriptionPlanUncheckedUpdateWithoutOrganizationInput = {
   canReadUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutSubscriptionPlanNestedInput
-  mangaCustomsCanReadUnreleased?: Prisma.MangaCustomUncheckedUpdateManyWithoutSubscriptionPlansCanReadUnreleasedNestedInput
   mangaCustomsCanReadReleased?: Prisma.MangaCustomUncheckedUpdateManyWithoutSubscriptionPlansCanReadReleasedNestedInput
+  mangaCustomsCanReadUnreleased?: Prisma.MangaCustomUncheckedUpdateManyWithoutSubscriptionPlansCanReadUnreleasedNestedInput
 }
 
 export type SubscriptionPlanUncheckedUpdateManyWithoutOrganizationInput = {
@@ -1156,66 +1156,6 @@ export type SubscriptionPlanUncheckedUpdateManyWithoutOrganizationInput = {
   planId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  productId?: Prisma.StringFieldUpdateOperationsInput | string
-  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  canDownload?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  canReadUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
-}
-
-export type SubscriptionPlanUpdateWithoutMangaCustomsCanReadUnreleasedInput = {
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.FloatFieldUpdateOperationsInput | number
-  interval?: Prisma.StringFieldUpdateOperationsInput | string
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  planId?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  productId?: Prisma.StringFieldUpdateOperationsInput | string
-  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  canDownload?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  canReadUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  subscriptions?: Prisma.SubscriptionUpdateManyWithoutSubscriptionPlanNestedInput
-  organization?: Prisma.OrganizationUpdateOneRequiredWithoutSubscriptionPlansNestedInput
-  mangaCustomsCanReadReleased?: Prisma.MangaCustomUpdateManyWithoutSubscriptionPlansCanReadReleasedNestedInput
-}
-
-export type SubscriptionPlanUncheckedUpdateWithoutMangaCustomsCanReadUnreleasedInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.FloatFieldUpdateOperationsInput | number
-  interval?: Prisma.StringFieldUpdateOperationsInput | string
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  planId?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  organizationId?: Prisma.IntFieldUpdateOperationsInput | number
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  productId?: Prisma.StringFieldUpdateOperationsInput | string
-  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  canDownload?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  canReadUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutSubscriptionPlanNestedInput
-  mangaCustomsCanReadReleased?: Prisma.MangaCustomUncheckedUpdateManyWithoutSubscriptionPlansCanReadReleasedNestedInput
-}
-
-export type SubscriptionPlanUncheckedUpdateManyWithoutMangaCustomsCanReadUnreleasedInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.FloatFieldUpdateOperationsInput | number
-  interval?: Prisma.StringFieldUpdateOperationsInput | string
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  planId?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  organizationId?: Prisma.IntFieldUpdateOperationsInput | number
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   productId?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1284,6 +1224,66 @@ export type SubscriptionPlanUncheckedUpdateManyWithoutMangaCustomsCanReadRelease
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
+export type SubscriptionPlanUpdateWithoutMangaCustomsCanReadUnreleasedInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  interval?: Prisma.StringFieldUpdateOperationsInput | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  planId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  productId?: Prisma.StringFieldUpdateOperationsInput | string
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  canDownload?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  canReadUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutSubscriptionPlanNestedInput
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutSubscriptionPlansNestedInput
+  mangaCustomsCanReadReleased?: Prisma.MangaCustomUpdateManyWithoutSubscriptionPlansCanReadReleasedNestedInput
+}
+
+export type SubscriptionPlanUncheckedUpdateWithoutMangaCustomsCanReadUnreleasedInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  interval?: Prisma.StringFieldUpdateOperationsInput | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  planId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organizationId?: Prisma.IntFieldUpdateOperationsInput | number
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  productId?: Prisma.StringFieldUpdateOperationsInput | string
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  canDownload?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  canReadUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutSubscriptionPlanNestedInput
+  mangaCustomsCanReadReleased?: Prisma.MangaCustomUncheckedUpdateManyWithoutSubscriptionPlansCanReadReleasedNestedInput
+}
+
+export type SubscriptionPlanUncheckedUpdateManyWithoutMangaCustomsCanReadUnreleasedInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  interval?: Prisma.StringFieldUpdateOperationsInput | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  planId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organizationId?: Prisma.IntFieldUpdateOperationsInput | number
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  productId?: Prisma.StringFieldUpdateOperationsInput | string
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  canDownload?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  canReadUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+}
+
 
 /**
  * Count Type SubscriptionPlanCountOutputType
@@ -1291,14 +1291,14 @@ export type SubscriptionPlanUncheckedUpdateManyWithoutMangaCustomsCanReadRelease
 
 export type SubscriptionPlanCountOutputType = {
   subscriptions: number
-  mangaCustomsCanReadUnreleased: number
   mangaCustomsCanReadReleased: number
+  mangaCustomsCanReadUnreleased: number
 }
 
 export type SubscriptionPlanCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   subscriptions?: boolean | SubscriptionPlanCountOutputTypeCountSubscriptionsArgs
-  mangaCustomsCanReadUnreleased?: boolean | SubscriptionPlanCountOutputTypeCountMangaCustomsCanReadUnreleasedArgs
   mangaCustomsCanReadReleased?: boolean | SubscriptionPlanCountOutputTypeCountMangaCustomsCanReadReleasedArgs
+  mangaCustomsCanReadUnreleased?: boolean | SubscriptionPlanCountOutputTypeCountMangaCustomsCanReadUnreleasedArgs
 }
 
 /**
@@ -1321,14 +1321,14 @@ export type SubscriptionPlanCountOutputTypeCountSubscriptionsArgs<ExtArgs extend
 /**
  * SubscriptionPlanCountOutputType without action
  */
-export type SubscriptionPlanCountOutputTypeCountMangaCustomsCanReadUnreleasedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type SubscriptionPlanCountOutputTypeCountMangaCustomsCanReadReleasedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.MangaCustomWhereInput
 }
 
 /**
  * SubscriptionPlanCountOutputType without action
  */
-export type SubscriptionPlanCountOutputTypeCountMangaCustomsCanReadReleasedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type SubscriptionPlanCountOutputTypeCountMangaCustomsCanReadUnreleasedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.MangaCustomWhereInput
 }
 
@@ -1352,8 +1352,8 @@ export type SubscriptionPlanSelect<ExtArgs extends runtime.Types.Extensions.Inte
   hideAds?: boolean
   subscriptions?: boolean | Prisma.SubscriptionPlan$subscriptionsArgs<ExtArgs>
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
-  mangaCustomsCanReadUnreleased?: boolean | Prisma.SubscriptionPlan$mangaCustomsCanReadUnreleasedArgs<ExtArgs>
   mangaCustomsCanReadReleased?: boolean | Prisma.SubscriptionPlan$mangaCustomsCanReadReleasedArgs<ExtArgs>
+  mangaCustomsCanReadUnreleased?: boolean | Prisma.SubscriptionPlan$mangaCustomsCanReadUnreleasedArgs<ExtArgs>
   _count?: boolean | Prisma.SubscriptionPlanCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["subscriptionPlan"]>
 
@@ -1420,8 +1420,8 @@ export type SubscriptionPlanOmit<ExtArgs extends runtime.Types.Extensions.Intern
 export type SubscriptionPlanInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   subscriptions?: boolean | Prisma.SubscriptionPlan$subscriptionsArgs<ExtArgs>
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
-  mangaCustomsCanReadUnreleased?: boolean | Prisma.SubscriptionPlan$mangaCustomsCanReadUnreleasedArgs<ExtArgs>
   mangaCustomsCanReadReleased?: boolean | Prisma.SubscriptionPlan$mangaCustomsCanReadReleasedArgs<ExtArgs>
+  mangaCustomsCanReadUnreleased?: boolean | Prisma.SubscriptionPlan$mangaCustomsCanReadUnreleasedArgs<ExtArgs>
   _count?: boolean | Prisma.SubscriptionPlanCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SubscriptionPlanIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1436,8 +1436,8 @@ export type $SubscriptionPlanPayload<ExtArgs extends runtime.Types.Extensions.In
   objects: {
     subscriptions: Prisma.$SubscriptionPayload<ExtArgs>[]
     organization: Prisma.$OrganizationPayload<ExtArgs>
-    mangaCustomsCanReadUnreleased: Prisma.$MangaCustomPayload<ExtArgs>[]
     mangaCustomsCanReadReleased: Prisma.$MangaCustomPayload<ExtArgs>[]
+    mangaCustomsCanReadUnreleased: Prisma.$MangaCustomPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1852,8 +1852,8 @@ export interface Prisma__SubscriptionPlanClient<T, Null = never, ExtArgs extends
   readonly [Symbol.toStringTag]: "PrismaPromise"
   subscriptions<T extends Prisma.SubscriptionPlan$subscriptionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubscriptionPlan$subscriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   organization<T extends Prisma.OrganizationDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationDefaultArgs<ExtArgs>>): Prisma.Prisma__OrganizationClient<runtime.Types.Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  mangaCustomsCanReadUnreleased<T extends Prisma.SubscriptionPlan$mangaCustomsCanReadUnreleasedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubscriptionPlan$mangaCustomsCanReadUnreleasedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MangaCustomPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   mangaCustomsCanReadReleased<T extends Prisma.SubscriptionPlan$mangaCustomsCanReadReleasedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubscriptionPlan$mangaCustomsCanReadReleasedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MangaCustomPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  mangaCustomsCanReadUnreleased<T extends Prisma.SubscriptionPlan$mangaCustomsCanReadUnreleasedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubscriptionPlan$mangaCustomsCanReadUnreleasedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MangaCustomPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2319,9 +2319,9 @@ export type SubscriptionPlan$subscriptionsArgs<ExtArgs extends runtime.Types.Ext
 }
 
 /**
- * SubscriptionPlan.mangaCustomsCanReadUnreleased
+ * SubscriptionPlan.mangaCustomsCanReadReleased
  */
-export type SubscriptionPlan$mangaCustomsCanReadUnreleasedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type SubscriptionPlan$mangaCustomsCanReadReleasedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the MangaCustom
    */
@@ -2343,9 +2343,9 @@ export type SubscriptionPlan$mangaCustomsCanReadUnreleasedArgs<ExtArgs extends r
 }
 
 /**
- * SubscriptionPlan.mangaCustomsCanReadReleased
+ * SubscriptionPlan.mangaCustomsCanReadUnreleased
  */
-export type SubscriptionPlan$mangaCustomsCanReadReleasedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type SubscriptionPlan$mangaCustomsCanReadUnreleasedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the MangaCustom
    */
