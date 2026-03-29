@@ -29,6 +29,7 @@ export const editMangaCustom = async (organizationId: number, mangaSlug: string,
 		requireLogin: params.requireLogin,
 		isSimulRelease: params.isSimulRelease,
 		isNSFW: params.isNSFW,
+		workType: params.workType,
 	};
 
 	// Manejar image

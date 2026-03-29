@@ -17,6 +17,7 @@ export const EditMangaCustomRequest = t.Object({
     requireLogin: t.Optional(t.Union([t.Boolean(), t.Null()])),
     isSimulRelease: t.Optional(t.Union([t.Boolean(), t.Null()])),
     isNSFW: t.Optional(t.Union([t.Boolean(), t.Null()])),
+    workType: t.Optional(t.Union([t.String(), t.Null()])),
 });
 
 export type EditMangaCustomRequest = Static<typeof EditMangaCustomRequest>;

@@ -266,6 +266,7 @@ model MangaCustom {
   requireLogin                       Boolean            @default(false)
   isSimulRelease                     Boolean            @default(false)
   isNSFW                             Boolean            @default(false)
+  workType                           String             @default("manga") @db.VarChar(32)
   nextChapterAtMessage               String?
   usersAlsoReadMangaCustomIds        String?
   chapters                           Chapter[]
