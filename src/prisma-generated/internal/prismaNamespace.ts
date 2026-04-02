@@ -3211,6 +3211,8 @@ export const MangaCustomScalarFieldEnum = {
   requireLogin: 'requireLogin',
   isSimulRelease: 'isSimulRelease',
   isNSFW: 'isNSFW',
+  workType: 'workType',
+  deletedAt: 'deletedAt',
   nextChapterAtMessage: 'nextChapterAtMessage',
   usersAlsoReadMangaCustomIds: 'usersAlsoReadMangaCustomIds'
 } as const
@@ -3228,7 +3230,8 @@ export const ChapterScalarFieldEnum = {
   mangaCustomId: 'mangaCustomId',
   views: 'views',
   releasedAt: 'releasedAt',
-  isUnreleased: 'isUnreleased'
+  isUnreleased: 'isUnreleased',
+  deletedAt: 'deletedAt'
 } as const
 
 export type ChapterScalarFieldEnum = (typeof ChapterScalarFieldEnum)[keyof typeof ChapterScalarFieldEnum]
