@@ -6,6 +6,7 @@ export const editMangaCustom = async (organizationId: number, mangaSlug: string,
 		where: {
 			id: params.mangaCustomId,
 			organizationId,
+			deletedAt: null,
 			manga: {
 				slug: mangaSlug,
 			},

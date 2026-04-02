@@ -1,18 +1,18 @@
 import { prisma } from "../../models/prisma";
 
-export const deleteMangaCustom = async (organizationId: number, mangaSlug: string) => {
+export const restoreMangaCustom = async (organizationId: number, mangaSlug: string) => {
 	const mangaCustom = await prisma.mangaCustom.findFirst({
 		where: {
 			organizationId,
-			deletedAt: null,
 			manga: {
 				slug: mangaSlug,
 			},
+			deletedAt: { not: null },
 		},
 	});
 
 	if (!mangaCustom) {
-		throw new Error("Tu organización no tiene este manga");
+		throw new Error("No se encontró el manga eliminado");
 	}
 
 	await prisma.mangaCustom.update({
@@ -20,7 +20,7 @@ export const deleteMangaCustom = async (organizationId: number, mangaSlug: strin
 			id: mangaCustom.id,
 		},
 		data: {
-			deletedAt: new Date(),
+			deletedAt: null,
 		},
 	});
 };

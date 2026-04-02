@@ -4,15 +4,13 @@ export const getChapter = async (organizationId: number, mangaSlug: string, numb
 	const chapter = await prisma.chapter.findFirst({
 		where: {
 			number,
+			deletedAt: null,
 			mangaCustom: {
-				manga: {
-					slug: mangaSlug
-				},
-				organization: {
-					id: organizationId
-				}
-			}
-		}
+				manga: { slug: mangaSlug },
+				organization: { id: organizationId },
+				deletedAt: null,
+			},
+		},
 	});
 	if (!chapter) {
 		return null;
@@ -20,9 +18,8 @@ export const getChapter = async (organizationId: number, mangaSlug: string, numb
 	const nextChapter = (await prisma.chapter.findMany({
 		where: {
 			mangaCustomId: chapter.mangaCustomId,
-			number: {
-				gt: number
-			}
+			deletedAt: null,
+			number: { gt: number },
 		},
 		select: {
 			number: true,
@@ -37,9 +34,8 @@ export const getChapter = async (organizationId: number, mangaSlug: string, numb
 	const previousChapter = (await prisma.chapter.findMany({
 		where: {
 			mangaCustomId: chapter.mangaCustomId,
-			number: {
-				lt: number
-			}
+			deletedAt: null,
+			number: { lt: number },
 		},
 		select: {
 			number: true,

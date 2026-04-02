@@ -4,33 +4,19 @@ export const deleteChapter = async (organizationId: number, mangaSlug: string, n
 	const chapter = await prisma.chapter.findFirst({
 		where: {
 			number,
+			deletedAt: null,
 			mangaCustom: {
-				manga: {
-					slug: mangaSlug
-				},
-				organization: {
-					id: organizationId
-				}
-			}
-		}
+				manga: { slug: mangaSlug },
+				organization: { id: organizationId },
+			},
+		},
 	});
 	if (!chapter) {
 		return null;
 	}
-	await prisma.page.deleteMany({
-		where: {
-			chapterId: chapter.id
-		}
-	});
-	await prisma.userChapterHistory.deleteMany({
-		where: {
-			chapterId: chapter.id
-		}
-	});
-	await prisma.chapter.delete({
-		where: {
-			id: chapter.id
-		}
+	await prisma.chapter.update({
+		where: { id: chapter.id },
+		data: { deletedAt: new Date() },
 	});
 	return chapter;
 };

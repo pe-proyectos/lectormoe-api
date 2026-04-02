@@ -8,6 +8,7 @@ export const createRanking = async (mangaSlug: string, rank: string, comment: st
 	const mangaCustomId = await prisma.mangaCustom.findFirst({
 		where: {
 			organizationId,
+			deletedAt: null,
 			manga: {
 				slug: mangaSlug
 			}

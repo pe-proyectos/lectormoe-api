@@ -19,7 +19,6 @@ import { router as authorCreateRouter } from "./author/create";
 import { router as authorListRouter } from "./author/list";
 import { router as bookTypeListRouter } from "./book_type/list";
 import { router as chapterCreateRouter } from "./chapter/create";
-import { router as chapterDeleteRouter } from "./chapter/delete";
 import { router as chapterEditRouter } from "./chapter/edit";
 import { router as chapterGetRouter } from "./chapter/get";
 import { router as commentCreateRouter } from "./comment/create";
@@ -50,7 +49,6 @@ import { router as mangaCreateRouter } from "./manga/create";
 import { router as mangaGetRouter } from "./manga/get";
 import { router as mangaListRouter } from "./manga/list";
 import { router as mangaCustomCreateRouter } from "./manga-custom/create";
-import { router as mangaCustomDeleteRouter } from "./manga-custom/delete";
 import { router as mangaCustomEditRouter } from "./manga-custom/edit";
 import { router as mangaCustomGetRouter } from "./manga-custom/get";
 import { router as mangaCustomListRouter } from "./manga-custom/list";
@@ -124,7 +122,6 @@ export const router = () => async (app: Elysia) => {
 
 	// Chapter
 	app.use(chapterCreateRouter());
-	app.use(chapterDeleteRouter());
 	app.use(chapterEditRouter());
 	app.use(chapterGetRouter());
 
@@ -171,7 +168,6 @@ export const router = () => async (app: Elysia) => {
 
 	// Manga Custom
 	app.use(mangaCustomCreateRouter());
-	app.use(mangaCustomDeleteRouter());
 	app.use(mangaCustomEditRouter());
 	app.use(mangaCustomGetRouter());
 	app.use(mangaCustomListRouter());

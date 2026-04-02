@@ -35,6 +35,7 @@ export const getFeaturedManga = async (limit: number = 8, nsfw?: boolean) => {
 	// Get all manga customs with their organization info, ordered by views
 	const mangasCustoms = await prisma.mangaCustom.findMany({
 		where: {
+			deletedAt: null,
 			AND: [
 				...nsfwCondition,
 				{
@@ -65,6 +66,7 @@ export const getFeaturedManga = async (limit: number = 8, nsfw?: boolean) => {
 				},
 			},
 			chapters: {
+				where: { deletedAt: null },
 				select: {
 					id: true,
 					number: true,

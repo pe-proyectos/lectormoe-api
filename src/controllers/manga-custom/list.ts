@@ -33,8 +33,13 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 					organization: {
 						id: organizationId,
 					},
+					deletedAt: null,
 				}
-			} : {}),
+			} : {
+				mangaCustom: {
+					deletedAt: null,
+				}
+			}),
 			createdAt: {
 				gte: new Date(Date.now() - 24 * 60 * 60 * 1000), // Last 24 hours
 			}
@@ -82,6 +87,7 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 				id: {
 					in: paginatedIds,
 				},
+				deletedAt: null,
 				...popularNsfwFilter,
 				...(filters.search ? searchConditions : {}),
 				...(filters.title ? {
@@ -125,6 +131,7 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 					},
 				},
 				chapters: {
+					where: { deletedAt: null },
 					select: {
 						id: true,
 						number: true,
@@ -198,8 +205,14 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 			: { isNSFW: false, organization: { isNSFW: false } })
 		: {};
 
+	// Build soft-delete filter
+	const deletedFilter = filters.showDeleted === 'true'
+		? { deletedAt: { not: null } }
+		: { deletedAt: null };
+
 	// Build common where clause
 	const whereClause = {
+		...deletedFilter,
 		...(filters.type ? {
 			manga: {
 				bookType: {
@@ -260,6 +273,7 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 					},
 				},
 				chapters: {
+					where: { deletedAt: null },
 					select: {
 						id: true,
 						number: true,

@@ -32,6 +32,7 @@ export const createMangaCustom = async (organizationId: number, params: CreateMa
 		where: {
 			mangaId: params.mangaId,
 			organizationId: organization.id,
+			deletedAt: null,
 		},
 	});
 

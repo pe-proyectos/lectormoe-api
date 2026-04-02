@@ -7,13 +7,10 @@ export const editChapter = async (organizationId: number, mangaSlug: string, cha
 	const chapterExists = await prisma.chapter.findFirst({
 		where: {
 			number: chapterNumber,
+			deletedAt: null,
 			mangaCustom: {
-				manga: {
-					slug: mangaSlug,
-				},
-				organization: {
-					id: organizationId,
-				}
+				manga: { slug: mangaSlug },
+				organization: { id: organizationId },
 			},
 		},
 		include: {

@@ -22,6 +22,7 @@ export const MangaCustomListQuery = t.Object({
     type: t.Optional(t.Enum(BookTypeCodeEnum)),
     ids: t.Optional(t.String()), // Comma-separated IDs
     nsfw: t.Optional(t.String()), // 'true' = only NSFW, 'false' = only non-NSFW, omitted = all
+    showDeleted: t.Optional(t.String()), // 'true' = only deleted, omitted = only active
     ...PaginationQuery.properties,
 });
 

@@ -9,6 +9,7 @@ export const getMangaCustomBySlug = async (organizationId: number, mangaSlug: st
 			manga: {
 				slug: mangaSlug,
 			},
+			deletedAt: null,
 		},
 		include: {
 			manga: {
@@ -27,6 +28,7 @@ export const getMangaCustomBySlug = async (organizationId: number, mangaSlug: st
 				},
 			},
 			chapters: {
+				where: { deletedAt: null },
 				orderBy: {
 					number: Prisma.SortOrder.desc,
 				},

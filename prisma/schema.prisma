@@ -267,6 +267,7 @@ model MangaCustom {
   isSimulRelease                     Boolean            @default(false)
   isNSFW                             Boolean            @default(false)
   workType                           String             @default("manga") @db.VarChar(32)
+  deletedAt                          DateTime?
   nextChapterAtMessage               String?
   usersAlsoReadMangaCustomIds        String?
   chapters                           Chapter[]
@@ -299,6 +300,7 @@ model Chapter {
   views         Int                  @default(0)
   releasedAt    DateTime?            @db.Timestamp(6)
   isUnreleased  Boolean              @default(false)
+  deletedAt     DateTime?
   mangaCustom   MangaCustom          @relation(fields: [mangaCustomId], references: [id])
   pages         Page[]
   userHistory   UserChapterHistory[]
