@@ -17,12 +17,6 @@ export const listUser = async (organizationId: number, filters: UserListQuery) =
 		},
 	};
 	const where: Prisma.UserWhereInput = {};
-	if (filters?.email) {
-		where.email = {
-			contains: filters.email,
-			mode: Prisma.QueryMode.insensitive,
-		};
-	}
 	if (filters?.username) {
 		where.username = {
 			contains: filters.username,
@@ -38,56 +32,30 @@ export const listUser = async (organizationId: number, filters: UserListQuery) =
 			},
 		};
 	}
-	
-	// Construir filtro de permisos si se proporciona
-	let permissionWhere: Prisma.PermissionWhereInput = {
-		organizationId,
-	};
-	
+
+	// If permissionKeys filter is provided, only show users with those permissions in this org
 	if (filters?.permissionKeys && filters.permissionKeys.length > 0) {
-		// Crear un objeto dinámico con los permisos a filtrar
-		const permissionFilters: any = {};
+		const permissionFilters: any = { organizationId };
 		for (const key of filters.permissionKeys) {
 			permissionFilters[key] = true;
 		}
-		permissionWhere = {
-			...permissionWhere,
-			...permissionFilters,
-		};
+		const permissions = await prisma.permission.findMany({
+			where: permissionFilters,
+			select: { userId: true },
+		});
+		const userIds = permissions.map(p => p.userId);
+		if (userIds.length === 0) {
+			return { data: [], maxPage: 0, total: 0 };
+		}
+		where.id = { in: userIds };
 	}
-	
-	// Obtener IDs de usuarios que tienen permisos para esta organización
-	const permissions = await prisma.permission.findMany({
-		where: permissionWhere,
-		select: {
-			userId: true,
-		},
-	});
-	
-	const userIds = permissions.map(p => p.userId);
-	
-	if (userIds.length === 0) {
-		return {
-			data: [],
-			maxPage: 0,
-			total: 0,
-		};
-	}
-	
-	// Agregar filtro de userIds
-	const whereWithOrganization: Prisma.UserWhereInput = {
-		...where,
-		id: {
-			in: userIds,
-		},
-	};
-	
+
 	const page = filters?.page ? Number.parseInt(filters?.page || "1") : 1;
 	const limit = Number.parseInt(filters?.limit || "10");
 	const skip = (page - 1) * limit;
-	
-	let users = await prisma.user.findMany({
-		where: whereWithOrganization,
+
+	const users = await prisma.user.findMany({
+		where,
 		include: {
 			subscriptions: {
 				where: {
@@ -121,6 +89,9 @@ export const listUser = async (organizationId: number, filters: UserListQuery) =
 	const usersWithPermissions = await Promise.all(
 		users.map(async (user) => {
 			user.password = "********";
+			// Hide email from organization admins
+			(user as any).email = undefined;
+
 			const permission = await prisma.permission.findUnique({
 				where: {
 					userId_organizationId: {
@@ -129,9 +100,7 @@ export const listUser = async (organizationId: number, filters: UserListQuery) =
 					},
 				},
 			});
-			
-			// Siempre incluir permissions como array, con valores por defecto si no existen
-			// Esto es consistente con lo que espera el frontend
+
 			if (permission) {
 				(user as any).permissions = [{
 					organizationId,
@@ -167,17 +136,14 @@ export const listUser = async (organizationId: number, filters: UserListQuery) =
 					hideAds: permission.hideAds,
 				}];
 			} else {
-				// Valores por defecto para usuarios sin permisos - devolver array vacío
 				(user as any).permissions = [];
 			}
-			
+
 			return user;
 		})
 	);
 
-	const total = await prisma.user.count({
-		where: whereWithOrganization,
-	});
+	const total = await prisma.user.count({ where });
 
 	const limitForMaxPage = Number.parseInt(filters?.limit || "10");
 	return {
