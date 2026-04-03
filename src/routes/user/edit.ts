@@ -19,8 +19,8 @@ export const router = () =>
       if (user.id !== userId && !permissions?.canEditUser) {
         throw new Error("No tiene permisos para editar otros usuarios.");
       }
-      // Get user to edit (organizationId can be null for global profile edits)
-      const userToEdit = await getUserById(organizationId, userId);
+      // Get user to edit — search globally so admins can edit users without existing org permissions
+      const userToEdit = await getUserById(null, userId);
       if (!userToEdit) {
         throw new Error("No se pudo obtener el usuario a editar.");
       }
