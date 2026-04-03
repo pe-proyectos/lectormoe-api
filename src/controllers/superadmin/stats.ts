@@ -1,6 +1,8 @@
 import { prisma } from '../../models/prisma';
 
 export const getGlobalStats = async () => {
+	const startOfMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+
 	const [
 		totalUsers,
 		totalOrgs,
@@ -16,27 +18,14 @@ export const getGlobalStats = async () => {
 		prisma.organization.count({ where: { isDeleted: false } }),
 		prisma.mangaCustom.count({ where: { deletedAt: null } }),
 		prisma.chapter.count({ where: { deletedAt: null } }),
-		prisma.comment.count({ where: { hidden: false } }),
+		prisma.comment.count({ where: { hiddenAt: null } }),
 		prisma.subscription.count({ where: { active: true } }),
 		prisma.organizationTransaction.aggregate({
 			where: { status: 'COMPLETED', type: 'EARNING' },
 			_sum: { amount: true, capibaraFee: true },
 		}),
-		prisma.user.count({
-			where: {
-				createdAt: {
-					gte: new Date(new Date().getFullYear(), new Date().getMonth(), 1),
-				},
-			},
-		}),
-		prisma.organization.count({
-			where: {
-				isDeleted: false,
-				createdAt: {
-					gte: new Date(new Date().getFullYear(), new Date().getMonth(), 1),
-				},
-			},
-		}),
+		prisma.user.count({ where: { createdAt: { gte: startOfMonth } } }),
+		prisma.organization.count({ where: { isDeleted: false, createdAt: { gte: startOfMonth } } }),
 	]);
 
 	return {
@@ -60,24 +49,38 @@ export const getOrgStats = async () => {
 			id: true,
 			name: true,
 			slug: true,
-			imageUrl: true,
+			logoUrl: true,
 			createdAt: true,
 			_count: {
 				select: {
 					followers: true,
 					mangaCustoms: true,
-					subscriptions: true,
 				},
-			},
-			transactions: {
-				where: { status: 'COMPLETED', type: 'EARNING' },
-				select: { amount: true, capibaraFee: true },
 			},
 		},
 		orderBy: { createdAt: 'desc' },
 	});
 
-	return await Promise.all(
+	// Separate queries to avoid guessing relation names
+	const [revenueByOrg, subsByOrg] = await Promise.all([
+		prisma.organizationTransaction.groupBy({
+			by: ['organizationId'],
+			where: { status: 'COMPLETED', type: 'EARNING' },
+			_sum: { amount: true, capibaraFee: true },
+		}),
+		prisma.subscription.groupBy({
+			by: ['organizationId'],
+			where: { active: true },
+			_count: { id: true },
+		}),
+	]);
+
+	const revenueMap = new Map(
+		revenueByOrg.map((r) => [r.organizationId, { revenue: r._sum.amount ?? 0, fees: r._sum.capibaraFee ?? 0 }])
+	);
+	const subsMap = new Map(subsByOrg.map((s) => [s.organizationId, s._count.id]));
+
+	const results = await Promise.all(
 		orgs.map(async (org) => {
 			const chapterCount = await prisma.chapter.count({
 				where: {
@@ -85,23 +88,22 @@ export const getOrgStats = async () => {
 					deletedAt: null,
 				},
 			});
-
-			const totalRevenue = org.transactions.reduce((s, t) => s + t.amount, 0);
-			const capibaraFees = org.transactions.reduce((s, t) => s + (t.capibaraFee ?? 0), 0);
-
+			const rev = revenueMap.get(org.id) ?? { revenue: 0, fees: 0 };
 			return {
 				id: org.id,
 				name: org.name,
 				slug: org.slug,
-				imageUrl: org.imageUrl,
+				logoUrl: org.logoUrl,
 				createdAt: org.createdAt,
 				mangaCount: org._count.mangaCustoms,
 				chapterCount,
-				subscriptionCount: org._count.subscriptions,
+				subscriptionCount: subsMap.get(org.id) ?? 0,
 				followerCount: org._count.followers,
-				totalRevenue,
-				capibaraFees,
+				totalRevenue: rev.revenue,
+				capibaraFees: rev.fees,
 			};
 		})
 	);
+
+	return results;
 };

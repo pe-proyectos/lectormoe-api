@@ -78,7 +78,7 @@ export const listRequests = async (status?: string) => {
 
 export const reviewRequest = async (
 	id: number,
-	action: 'accept' | 'reject',
+	action: 'accept' | 'reject' | 'accept_no_email',
 	notes?: string
 ) => {
 	const request = await prisma.organizationRequest.findUnique({ where: { id } });
@@ -86,20 +86,21 @@ export const reviewRequest = async (
 	if (request.status !== 'pending')
 		throw new Error('Esta solicitud ya fue revisada.');
 
-	const newStatus = action === 'accept' ? 'accepted' : 'rejected';
+	const newStatus = action === 'reject' ? 'rejected' : 'accepted';
 
 	await prisma.organizationRequest.update({
 		where: { id },
 		data: { status: newStatus, reviewNotes: notes ?? null },
 	});
 
-	const subject = `Solicitud de registro ${request.scanName} en CapibaraTraductor`;
-	const html =
-		action === 'accept'
-			? acceptanceEmailHtml(request.applicantName, request.scanName)
-			: rejectionEmailHtml(request.applicantName, request.scanName, notes);
-
-	await sendAdminEmail(request.applicantEmail, subject, html);
+	if (action !== 'accept_no_email') {
+		const subject = `Solicitud de registro ${request.scanName} en CapibaraTraductor`;
+		const html =
+			action === 'accept'
+				? acceptanceEmailHtml(request.applicantName, request.scanName)
+				: rejectionEmailHtml(request.applicantName, request.scanName, notes);
+		await sendAdminEmail(request.applicantEmail, subject, html);
+	}
 
 	return { id, status: newStatus };
 };
