@@ -89,6 +89,7 @@ import { router as userChapterHistorySaveChapterRouter } from "./user-chapter-hi
 import { router as userChapterHistorySaveRouter } from "./user-chapter-history/save";
 import { router as userChapterHistoryUnreadChapterRouter } from "./user-chapter-history/unread-chapter";
 import { router as viewsCreateRouter } from "./views/create";
+import { router as superadminRouter } from "./superadmin/index";
 
 export const router = () => async (app: Elysia) => {
 	console.log('Loading routes...');
@@ -224,6 +225,9 @@ export const router = () => async (app: Elysia) => {
 
 	// Views
 	app.use(viewsCreateRouter());
+
+	// Superadmin
+	app.use(superadminRouter());
 
 	// Adsense
 	app.use(adsenseMonthlyRevenueRouter());
