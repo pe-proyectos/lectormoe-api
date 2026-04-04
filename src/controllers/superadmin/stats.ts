@@ -66,7 +66,7 @@ export const getOrgStats = async () => {
 		prisma.organizationTransaction.groupBy({
 			by: ['organizationId'],
 			where: { status: 'COMPLETED', type: 'EARNING' },
-			_sum: { amount: true, capibaraFee: true },
+			_sum: { amount: true, capibaraFee: true, paypalFee: true },
 		}),
 		prisma.subscription.groupBy({
 			by: ['organizationId'],
@@ -76,7 +76,14 @@ export const getOrgStats = async () => {
 	]);
 
 	const revenueMap = new Map(
-		revenueByOrg.map((r) => [r.organizationId, { revenue: r._sum.amount ?? 0, fees: r._sum.capibaraFee ?? 0 }])
+		revenueByOrg.map((r) => [
+			r.organizationId,
+			{
+				revenue: r._sum.amount ?? 0,
+				capibaraFees: r._sum.capibaraFee ?? 0,
+				paypalFees: r._sum.paypalFee ?? 0,
+			},
+		])
 	);
 	const subsMap = new Map(subsByOrg.map((s) => [s.organizationId, s._count.id]));
 
@@ -88,7 +95,8 @@ export const getOrgStats = async () => {
 					deletedAt: null,
 				},
 			});
-			const rev = revenueMap.get(org.id) ?? { revenue: 0, fees: 0 };
+			const rev = revenueMap.get(org.id) ?? { revenue: 0, capibaraFees: 0, paypalFees: 0 };
+			const saldo = rev.revenue - rev.capibaraFees - rev.paypalFees;
 			return {
 				id: org.id,
 				name: org.name,
@@ -100,7 +108,9 @@ export const getOrgStats = async () => {
 				subscriptionCount: subsMap.get(org.id) ?? 0,
 				followerCount: org._count.followers,
 				totalRevenue: rev.revenue,
-				capibaraFees: rev.fees,
+				capibaraFees: rev.capibaraFees,
+				paypalFees: rev.paypalFees,
+				saldo,
 			};
 		})
 	);
