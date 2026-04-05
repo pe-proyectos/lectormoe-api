@@ -85,5 +85,12 @@ export const editMangaCustom = async (organizationId: number, mangaSlug: string,
 		},
 	});
 
-	return await prisma.mangaCustom.findFirst({ where: { id: mangaCustom.id } });
+	return await prisma.mangaCustom.findFirst({
+		where: { id: mangaCustom.id },
+		include: {
+			genres: true,
+			subscriptionPlansCanReadUnreleased: true,
+			subscriptionPlansCanReadReleased: true,
+		},
+	});
 };
