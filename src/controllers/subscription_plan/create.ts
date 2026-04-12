@@ -44,7 +44,7 @@ export const createSubscriptionPlan = async (organizationId: number, params: Cre
 			organizationId: organization.id,
 			name: params.name,
 			slug: slug,
-			description: params.description,
+			description: params.description || '',
 			price: params.price,
 			interval: params.interval,
 			currency: params.currency,

@@ -18,6 +18,8 @@ export const MangaCustomListQuery = t.Object({
     shortDescription: t.Optional(t.String()),
     description: t.Optional(t.String()),
     search: t.Optional(t.String()),
+    status: t.Optional(t.String()),
+    genre: t.Optional(t.String()),
     order: t.Optional(t.Enum(OrderEnum)),
     type: t.Optional(t.Enum(BookTypeCodeEnum)),
     ids: t.Optional(t.String()), // Comma-separated IDs

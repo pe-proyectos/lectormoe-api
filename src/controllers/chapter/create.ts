@@ -100,7 +100,8 @@ export const createChapter = async (organizationId: number, mangaSlug: string, p
 		try {
 			const description = (mangaCustom.organization.discordWebhookMessageTemplateNewChapter)
 			?.replaceAll("%manga%", `${mangaCustom.manga?.title || mangaSlug || 'manga no encontrado'}`)
-			.replaceAll("%chapter%", `${chapter.title || chapter.number}`)
+			.replaceAll("%chapter%", `${chapter.number}`)
+			.replaceAll("%chapter_title%", `${chapter.title || ''}`)
 			.replaceAll("%link%", `https://capibaratraductor.com/${mangaCustom.organization.slug}/manga/${mangaSlug}/chapters/${chapter.number}`)
 			const message = {
 				username: `${mangaCustom.organization.name}`,
