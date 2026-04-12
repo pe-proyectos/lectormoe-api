@@ -102,6 +102,7 @@ export const createChapter = async (organizationId: number, mangaSlug: string, p
 			?.replaceAll("%manga%", `${mangaCustom.manga?.title || mangaSlug || 'manga no encontrado'}`)
 			.replaceAll("%chapter%", `${chapter.number}`)
 			.replaceAll("%chapter_title%", `${chapter.title || ''}`)
+			.replaceAll("%scan%", `${mangaCustom.organization.name || ''}`)
 			.replaceAll("%link%", `https://capibaratraductor.com/${mangaCustom.organization.slug}/manga/${mangaSlug}/chapters/${chapter.number}`)
 			const message = {
 				username: `${mangaCustom.organization.name}`,

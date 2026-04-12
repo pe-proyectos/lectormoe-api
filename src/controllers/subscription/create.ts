@@ -106,7 +106,8 @@ export const createSubscription = async (organizationId: number, userId: number,
 				organization.discordWebhookMessageTemplateNewSubscription
 					?.replaceAll("%user%", user.username || user.email || "Usuario desconocido")
 					.replaceAll("%plan%", subscriptionPlanExists.name || paypalPlan?.name || "Plan sin nombre")
-					.replaceAll("%amount%", `${subscription?.billing_info?.last_payment?.amount?.value || "0"} USD`);
+					.replaceAll("%amount%", `${subscription?.billing_info?.last_payment?.amount?.value || "0"} USD`)
+					.replaceAll("%scan%", organization.name || '');
 
 			const message = {
 				username: organization.name,
