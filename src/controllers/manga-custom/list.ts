@@ -108,6 +108,19 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 						mode: Prisma.QueryMode.insensitive
 					}
 				} : {}),
+				...(filters.status ? {
+					status: filters.status,
+				} : {}),
+				...(filters.genre ? {
+					genres: {
+						some: {
+							name: {
+								equals: filters.genre,
+								mode: Prisma.QueryMode.insensitive,
+							}
+						}
+					}
+				} : {}),
 				...idsFilter,
 			},
 			include: {
@@ -178,9 +191,6 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 		};
 	}
 
-	if (filters.type) {
-		order
-	}
 
 	// Parse IDs filter if provided
 	const idsFilter = filters.ids 

@@ -2,7 +2,7 @@ import { type Static, t } from 'elysia';
 
 export const CreateSubscriptionPlanRequest = t.Object({
     name: t.String(),
-    description: t.Optional(t.Union([t.String(), t.Null()])),
+    description: t.Optional(t.String()),
     price: t.Number({ minimum: 1, maximum: 1000 }),
     interval: t.String({ pattern: "^(DAY|WEEK|MONTH|YEAR)$" }),
     currency: t.String({ pattern: "^(USD)$" }),
