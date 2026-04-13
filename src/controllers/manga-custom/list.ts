@@ -76,9 +76,13 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 
 		// Build nsfw filter for popular path
 		const popularNsfwFilter = filters.nsfw === 'true'
-			? { OR: [{ isNSFW: true }, { organization: { isNSFW: true } }] }
+			? (organizationId
+				? {}  // En página de org /red/: sin filtro adicional
+				: { OR: [{ isNSFW: true }, { organization: { isNSFW: true } }] })
 			: filters.nsfw === 'false'
-			? { isNSFW: false, organization: { isNSFW: false } }
+			? (organizationId
+				? { isNSFW: false }
+				: { isNSFW: false, organization: { isNSFW: false } })
 			: {};
 
 		// Fetch only the paginated mangas with their relations
@@ -201,13 +205,12 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 		}
 		: {};
 
-	// nsfw=false: excluir mangas de orgs NSFW también (solo cuando no hay org específica)
-	// nsfw=true:  incluir mangas NSFW o de orgs NSFW
-	// Cuando organizationId está definido, no filtrar por organization.isNSFW para evitar
-	// que el spread sobreescriba organization: { id: organizationId }
+	// nsfw=false: excluir mangas NSFW
+	// nsfw=true + org específica: mostrar todo (la ruta /red/ ya valida adultos, no filtrar más)
+	// nsfw=true + sin org (global): mostrar mangas NSFW o de orgs NSFW
 	const nsfwFilter = filters.nsfw === 'true'
 		? (organizationId
-			? { isNSFW: true }
+			? {}  // En página de org /red/: sin filtro adicional, mostrar todo
 			: { OR: [{ isNSFW: true }, { organization: { isNSFW: true } }] })
 		: filters.nsfw === 'false'
 		? (organizationId
