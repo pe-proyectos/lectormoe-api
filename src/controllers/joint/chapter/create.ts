@@ -77,6 +77,22 @@ export const createJointChapter = async (
     data: { lastChapterAt: new Date() },
   });
 
+  // Update lastChapterAt for all org MangaCustoms that have this manga
+  const acceptedOrgIds = joint.members
+    .filter((m: any) => m.status === 'ACCEPTED')
+    .map((m: any) => m.organizationId);
+
+  if (acceptedOrgIds.length > 0) {
+    await prisma.mangaCustom.updateMany({
+      where: {
+        mangaId: joint.mangaId,
+        organizationId: { in: acceptedOrgIds },
+        deletedAt: null,
+      },
+      data: { lastChapterAt: new Date() },
+    });
+  }
+
   return prisma.chapter.findFirst({
     where: { id: chapter.id },
     include: {
