@@ -751,6 +751,7 @@ model MangaJoint {
   status           String        @default("ongoing") @db.VarChar(64)
   workType         String        @default("manga") @db.VarChar(64)
   lastChapterAt    DateTime?
+  views            Int           @default(0)
   createdAt        DateTime      @default(now()) @db.Timestamp(6)
   updatedAt        DateTime      @updatedAt
   deletedAt        DateTime?

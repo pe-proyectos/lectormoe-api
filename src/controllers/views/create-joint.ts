@@ -32,7 +32,10 @@ export const createViewHistoryJoint = async (
     });
 
     if (!existingView) {
-      // No per-joint view counter on MangaJoint model, but we still record for AdSense distribution
+      await tx.mangaJoint.update({
+        where: { id: joint.id },
+        data: { views: { increment: 1 } },
+      });
     }
   });
 
