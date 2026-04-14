@@ -2,13 +2,16 @@ import { prisma, Prisma } from "../../models/prisma";
 import type { UserChapterHistoryListQuery } from "../../types/user-chapter-history/list";
 
 export const listUserChapterHistory = async (organizationId: number | null, userId: number, filters: UserChapterHistoryListQuery) => {
-	// Build chapter filter: include both org chapters and joint chapters
+	// Build chapter filter: include both org chapters and joint chapters.
+	// When manga_slug is specified we're loading progress for a specific manga,
+	// so we skip the joint OR branch to avoid returning unrelated joint chapters.
 	const buildChapterFilter = () => {
 		const orgFilter: any = {
 			...(organizationId !== null ? { organizationId } : {}),
 		};
 		if (filters?.manga_slug) {
 			orgFilter.manga = { slug: filters.manga_slug };
+			return { mangaCustom: orgFilter };
 		}
 
 		return {
