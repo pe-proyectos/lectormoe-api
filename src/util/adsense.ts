@@ -281,12 +281,73 @@ export async function getMonthlyAdSenseRevenueCombined(year: number, month: numb
       })
     );
 
-    const totalViews = orgViewCounts.reduce((sum, o) => sum + o.viewCount, 0);
+    // 3b. Get joint view counts and distribute equally among ACCEPTED members with ads enabled
+    console.log('\n🔍 Fetching joint view counts...');
+
+    // Get all joints that had views this month
+    const jointViewCounts = await prisma.viewsHistory.groupBy({
+      by: ['jointId'],
+      where: {
+        viewedAt: { gte: startOfMonth, lt: startOfNextMonth },
+        jointId: { not: null },
+      },
+      _count: { ip: true },
+    });
+
+    console.log(`   Found ${jointViewCounts.length} joints with views this month`);
+
+    // Build a map of orgId → additional effective views from joints
+    const jointContributions = new Map<number, number>();
+
+    for (const jvc of jointViewCounts) {
+      if (!jvc.jointId) continue;
+
+      // Get ACCEPTED members of this joint
+      const members = await prisma.jointMember.findMany({
+        where: {
+          jointId: jvc.jointId,
+          status: 'ACCEPTED',
+          organization: { enableGoogleAds: true },
+        },
+        select: { organizationId: true },
+      });
+
+      if (members.length === 0) continue;
+
+      // Split views equally
+      const viewsPerMember = jvc._count.ip / members.length;
+
+      console.log(`   Joint ${jvc.jointId}: ${jvc._count.ip} views → ${members.length} members × ${viewsPerMember.toFixed(1)} views each`);
+
+      for (const m of members) {
+        const current = jointContributions.get(m.organizationId) || 0;
+        jointContributions.set(m.organizationId, current + viewsPerMember);
+      }
+    }
+
+    // Add joint contributions to org view counts
+    // Also add any org that only has joint views (wasn't in orgsWithAds query subset)
+    const orgViewCountsWithJoints = orgViewCounts.map(org => ({
+      ...org,
+      viewCount: org.viewCount + (jointContributions.get(org.id) || 0),
+    }));
+
+    // Add orgs that appear ONLY in joint contributions (no direct manga-custom views)
+    for (const [orgId, jointViews] of jointContributions.entries()) {
+      if (!orgViewCounts.find(o => o.id === orgId)) {
+        const org = orgsWithAds.find(o => o.id === orgId);
+        if (org) {
+          orgViewCountsWithJoints.push({ ...org, viewCount: jointViews });
+        }
+      }
+    }
+
+    const totalViews = orgViewCountsWithJoints.reduce((sum, o) => sum + o.viewCount, 0);
 
     if (totalViews === 0) {
       console.log('⚠️  No views found for the period — distributing equally');
       const equalShare = totalDomainRevenue / orgsWithAds.length;
-      return orgsWithAds.map(org => ({
+      return orgViewCountsWithJoints.map(org => ({
         slug: org.slug,
         revenue: equalShare,
         currency: 'USD',
@@ -300,7 +361,7 @@ export async function getMonthlyAdSenseRevenueCombined(year: number, month: numb
     console.log('📊 Revenue distribution by views:');
     console.log(`   (Total: $${totalDomainRevenue.toFixed(2)} — consumers apply 50% Capibara fee)\n`);
 
-    const revenueData: AdSenseRevenueData[] = orgViewCounts
+    const revenueData: AdSenseRevenueData[] = orgViewCountsWithJoints
       .filter(o => o.viewCount > 0)
       .map(org => {
         const viewPercentage = org.viewCount / totalViews;
