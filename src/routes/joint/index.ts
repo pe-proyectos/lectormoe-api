@@ -9,6 +9,7 @@ import { TransferJointRequest } from '../../types/joint/transfer';
 import { UpdateJointMemberPermissionsRequest } from '../../types/joint/permissions';
 import { CreateJointChapterRequest } from '../../types/joint/chapter/create';
 import { EditJointChapterRequest } from '../../types/joint/chapter/edit';
+import { requireJointMember } from '../../util/joint-auth';
 import { createJoint } from '../../controllers/joint/create';
 import { getJoint, getJointForAdmin } from '../../controllers/joint/get';
 import { editJoint } from '../../controllers/joint/edit';
@@ -50,6 +51,13 @@ export const router = () => new Elysia()
   // Get joint for admin (includes all member statuses)
   .get('/api/joint/:slug/admin', async ({ params: { slug }, organizationId }) => {
     if (!organizationId) throw new Error('Se requiere contexto de organización.');
+    const { member } = await requireJointMember(slug, organizationId);
+    // Only leaders/canEditJoint see the full list including non-accepted members
+    // Regular accepted members only see the public view
+    if (member.role !== 'LEADER' && !member.canEditJoint) {
+      const data = await getJoint(slug);
+      return { status: true, data };
+    }
     const data = await getJointForAdmin(slug);
     return { status: true, data };
   }, { response: t.Object({ status: t.Boolean(), data: t.Any() }) })

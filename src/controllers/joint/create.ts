@@ -1,10 +1,13 @@
 import { prisma } from '../../models/prisma';
 import type { CreateJointRequest } from '../../types/joint/create';
 
+const RESERVED_SLUGS = new Set(['admin', 'chapter', 'invite', 'member', 'respond', 'transfer']);
+
 async function generateJointSlug(baseSlug: string): Promise<string> {
   const suffixes = ['', '-b', '-c', '-d', '-e', '-f'];
   for (const suffix of suffixes) {
     const slug = `${baseSlug}${suffix}`;
+    if (RESERVED_SLUGS.has(slug)) continue; // skip reserved slugs
     const exists = await prisma.mangaJoint.findUnique({ where: { slug } });
     if (!exists) return slug;
   }

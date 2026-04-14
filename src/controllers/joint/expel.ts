@@ -17,8 +17,8 @@ export const expelFromJoint = async (
   });
   if (!targetOrg) throw new Error('Organización no encontrada.');
 
-  if (targetOrg.id === callerOrgId && member.role !== 'LEADER') {
-    throw new Error('No puedes expulsarte a ti mismo.');
+  if (targetOrg.id === callerOrgId) {
+    throw new Error('No puedes expulsarte a ti mismo. Si eres el líder, transfiere el liderazgo primero.');
   }
 
   const targetMember = await prisma.jointMember.findUnique({
