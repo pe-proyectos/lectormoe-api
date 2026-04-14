@@ -501,15 +501,18 @@ model ViewsHistory {
   id            Int          @id @default(autoincrement())
   mangaCustomId Int?
   chapterId     Int?
+  jointId       Int?
   ip            String
   viewedAt      DateTime
   createdAt     DateTime     @default(now()) @db.Timestamp(6)
   updatedAt     DateTime     @updatedAt
   chapter       Chapter?     @relation(fields: [chapterId], references: [id])
   mangaCustom   MangaCustom? @relation(fields: [mangaCustomId], references: [id])
+  joint         MangaJoint?  @relation(fields: [jointId], references: [id])
 
   @@index([mangaCustomId, viewedAt])
   @@index([mangaCustomId, createdAt])
+  @@index([jointId, viewedAt])
   @@index([viewedAt])
   @@index([createdAt])
   @@map("views")
@@ -753,6 +756,7 @@ model MangaJoint {
   deletedAt        DateTime?
   members          JointMember[]
   chapters         Chapter[]
+  viewsHistory     ViewsHistory[]
 
   @@index([mangaId])
   @@index([lastChapterAt])
