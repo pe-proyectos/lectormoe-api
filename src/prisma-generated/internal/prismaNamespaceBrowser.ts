@@ -721,6 +721,7 @@ export const MangaJointScalarFieldEnum = {
   status: 'status',
   workType: 'workType',
   lastChapterAt: 'lastChapterAt',
+  views: 'views',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   deletedAt: 'deletedAt'
