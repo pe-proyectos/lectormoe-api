@@ -1,4 +1,5 @@
 import { Elysia, t } from 'elysia';
+import { prisma } from '../../models/prisma';
 import { loggedUserOnly } from '../../plugins/auth';
 import { useOrganizationOptional } from '../../plugins/organization';
 import { CreateJointRequest } from '../../types/joint/create';
@@ -27,6 +28,47 @@ import { deleteJointChapter } from '../../controllers/joint/chapter/delete';
 
 export const router = () => new Elysia()
   // ─── PUBLIC ROUTES ──────────────────────────────────────────────────────────
+  .get('/api/joint/list', async ({ query }) => {
+    const page = parseInt((query as any).page || '1');
+    const limit = parseInt((query as any).limit || '20');
+    const skip = (page - 1) * limit;
+
+    const [joints, total] = await Promise.all([
+      prisma.mangaJoint.findMany({
+        where: { deletedAt: null },
+        include: {
+          manga: { select: { title: true, slug: true } },
+          members: {
+            where: { status: 'ACCEPTED' },
+            select: {
+              role: true,
+              organization: { select: { id: true, name: true, slug: true, logoUrl: true } },
+            },
+          },
+          chapters: {
+            where: { deletedAt: null },
+            select: { id: true, number: true, releasedAt: true },
+            orderBy: { number: 'desc' },
+            take: 2,
+          },
+        },
+        orderBy: { lastChapterAt: { sort: 'desc', nulls: 'last' } },
+        skip,
+        take: limit,
+      }),
+      prisma.mangaJoint.count({ where: { deletedAt: null } }),
+    ]);
+
+    return {
+      status: true,
+      data: joints,
+      total,
+      maxPage: Math.ceil(total / limit),
+    };
+  }, {
+    response: t.Object({ status: t.Boolean(), data: t.Any(), total: t.Number(), maxPage: t.Number() }),
+  })
+
   .get('/api/joint/:slug', async ({ params: { slug } }) => {
     const data = await getJoint(slug);
     return { status: true, data };
