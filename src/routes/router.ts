@@ -89,6 +89,8 @@ import { router as userChapterHistorySaveChapterRouter } from "./user-chapter-hi
 import { router as userChapterHistorySaveRouter } from "./user-chapter-history/save";
 import { router as userChapterHistoryUnreadChapterRouter } from "./user-chapter-history/unread-chapter";
 import { router as viewsCreateRouter } from "./views/create";
+import { router as viewsJointRouter } from "./views/create-joint";
+import { router as userChapterHistoryJointRouter } from "./user-chapter-history/save-joint";
 import { router as superadminRouter } from "./superadmin/index";
 import { router as jointRouter } from "./joint/index";
 
@@ -226,6 +228,10 @@ export const router = () => async (app: Elysia) => {
 
 	// Views
 	app.use(viewsCreateRouter());
+	app.use(viewsJointRouter());
+
+	// User Chapter History (Joint)
+	app.use(userChapterHistoryJointRouter());
 
 	// Joint
 	app.use(jointRouter());
