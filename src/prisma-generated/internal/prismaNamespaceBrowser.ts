@@ -482,6 +482,7 @@ export const FavoriteScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   mangaCustomId: 'mangaCustomId',
+  jointId: 'jointId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

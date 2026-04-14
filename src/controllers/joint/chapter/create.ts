@@ -1,6 +1,7 @@
 import { prisma } from '../../../models/prisma';
 import { requireJointMember, canUpload } from '../../../util/joint-auth';
 import type { CreateJointChapterRequest } from '../../../types/joint/chapter/create';
+import { sendNewJointChapterAlert } from '../../../services/email-notifications';
 
 export const createJointChapter = async (
   slug: string,
@@ -137,6 +138,11 @@ export const createJointChapter = async (
     } catch (e) {
       console.error('Error enviando webhook de joint a Discord:', e);
     }
+  }
+
+  // Send email notification to users who favorited this joint or any member org's manga (fire-and-forget)
+  if (!params.isUnreleased) {
+    sendNewJointChapterAlert(joint.id, chapter.id).catch(console.error);
   }
 
   return prisma.chapter.findFirst({

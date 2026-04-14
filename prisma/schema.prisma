@@ -467,15 +467,18 @@ model UserChapterHistory {
 }
 
 model Favorite {
-  id            Int         @id @default(autoincrement())
+  id            Int          @id @default(autoincrement())
   userId        Int
-  mangaCustomId Int
-  createdAt     DateTime    @default(now()) @db.Timestamp(6)
-  updatedAt     DateTime    @updatedAt
-  mangaCustom   MangaCustom @relation(fields: [mangaCustomId], references: [id])
-  user          User        @relation(fields: [userId], references: [id])
+  mangaCustomId Int?
+  jointId       Int?
+  createdAt     DateTime     @default(now()) @db.Timestamp(6)
+  updatedAt     DateTime     @updatedAt
+  mangaCustom   MangaCustom? @relation(fields: [mangaCustomId], references: [id])
+  joint         MangaJoint?  @relation(fields: [jointId], references: [id])
+  user          User         @relation(fields: [userId], references: [id])
 
   @@unique([userId, mangaCustomId])
+  @@unique([userId, jointId])
   @@map("favorite")
 }
 
@@ -758,6 +761,7 @@ model MangaJoint {
   members          JointMember[]
   chapters         Chapter[]
   viewsHistory     ViewsHistory[]
+  favorites        Favorite[]
 
   @@index([mangaId])
   @@index([lastChapterAt])

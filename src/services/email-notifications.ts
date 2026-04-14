@@ -236,6 +236,102 @@ export async function sendNewMangaReleaseAlert(
   console.log(`[Email] Sent new manga release alert for ${mangaCustom.title} to ${emails.length} users`);
 }
 
+/**
+ * Sends new joint chapter alert to users who favorited the joint or any
+ * related MangaCustom from an ACCEPTED member org.
+ */
+export async function sendNewJointChapterAlert(
+  jointId: number,
+  chapterId: number
+): Promise<void> {
+  const [chapter, joint] = await Promise.all([
+    prisma.chapter.findUnique({ where: { id: chapterId } }),
+    prisma.mangaJoint.findUnique({
+      where: { id: jointId },
+      include: {
+        members: {
+          where: { status: 'ACCEPTED' },
+          select: { organizationId: true },
+        },
+      },
+    }),
+  ]);
+
+  if (!chapter || !joint) return;
+
+  const memberOrgIds = joint.members.map((m) => m.organizationId);
+
+  // Collect users: direct joint favorites + favorites on any member org's MangaCustom for same manga
+  const [jointFavorites, mangaCustomFavorites] = await Promise.all([
+    prisma.favorite.findMany({
+      where: { jointId },
+      include: {
+        user: { select: { id: true, email: true, username: true, emailNotifications: true } },
+      },
+    }),
+    prisma.favorite.findMany({
+      where: {
+        mangaCustom: {
+          mangaId: joint.mangaId,
+          organizationId: { in: memberOrgIds },
+        },
+      },
+      include: {
+        user: { select: { id: true, email: true, username: true, emailNotifications: true } },
+      },
+    }),
+  ]);
+
+  // Deduplicate by userId
+  const userMap = new Map<number, { id: number; email: string; username: string }>();
+  for (const fav of [...jointFavorites, ...mangaCustomFavorites]) {
+    if (fav.user.emailNotifications && !userMap.has(fav.user.id)) {
+      userMap.set(fav.user.id, fav.user);
+    }
+  }
+
+  const eligibleUsers: { id: number; email: string; username: string }[] = [];
+  for (const u of userMap.values()) {
+    const allowed = await canSendEmail(u.id, 'new_chapter_alert');
+    if (allowed) eligibleUsers.push(u);
+  }
+
+  if (eligibleUsers.length === 0) return;
+
+  const readUrl = `${BASE_URL}/joint/manga/${joint.slug}/chapters/${chapter.number}`;
+  const orgNames = joint.members.length > 0
+    ? `Joint (${joint.members.length} scans)`
+    : 'Joint';
+
+  const emails = await Promise.all(
+    eligibleUsers.map(async (user) => {
+      const unsubscribeUrl = await getUnsubscribeUrl(user.id, 'new_chapter_alert');
+      const html = templates.newChapterAlertTemplate(
+        user.username,
+        joint.title,
+        chapter.number,
+        chapter.title,
+        joint.imageUrl,
+        readUrl,
+        orgNames,
+        unsubscribeUrl
+      );
+      return {
+        userId: user.id,
+        to: user.email,
+        subject: `Nuevo Cap. ${chapter.number} de ${joint.title} - Joint`,
+        html,
+        emailType: 'new_chapter_alert',
+        metadata: { jointId, chapterId },
+        dedupWindowMinutes: 60,
+      };
+    })
+  );
+
+  await sendBatchEmails(emails);
+  console.log(`[Email] Sent joint chapter alert for ${joint.title} Cap.${chapter.number} to ${emails.length} users`);
+}
+
 // ──────────── Staff Notifications ────────────
 
 /**

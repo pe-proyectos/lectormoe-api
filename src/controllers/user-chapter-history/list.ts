@@ -2,16 +2,26 @@ import { prisma, Prisma } from "../../models/prisma";
 import type { UserChapterHistoryListQuery } from "../../types/user-chapter-history/list";
 
 export const listUserChapterHistory = async (organizationId: number | null, userId: number, filters: UserChapterHistoryListQuery) => {
+	// Build chapter filter: include both org chapters and joint chapters
+	const buildChapterFilter = () => {
+		const orgFilter: any = {
+			...(organizationId !== null ? { organizationId } : {}),
+		};
+		if (filters?.manga_slug) {
+			orgFilter.manga = { slug: filters.manga_slug };
+		}
+
+		return {
+			OR: [
+				{ mangaCustom: orgFilter },
+				{ jointId: { not: null } },
+			],
+		};
+	};
+
 	const whereClause: any = {
 		userId,
-		chapter: {
-			mangaCustom: {
-				...(organizationId !== null ? { organizationId } : {}),
-				manga: {
-					slug: filters?.manga_slug,
-				}
-			}
-		},
+		chapter: buildChapterFilter(),
 		finishedAt: filters?.include_finished ? undefined : null,
 	};
 
@@ -20,9 +30,12 @@ export const listUserChapterHistory = async (organizationId: number | null, user
 		include: {
 			chapter: {
 				select: {
+					id: true,
 					title: true,
 					number: true,
 					imageUrl: true,
+					mangaCustomId: true,
+					jointId: true,
 					mangaCustom: {
 						select: {
 							title: true,
@@ -42,7 +55,15 @@ export const listUserChapterHistory = async (organizationId: number | null, user
 								}
 							}
 						}
-					}
+					},
+					joint: {
+						select: {
+							id: true,
+							title: true,
+							slug: true,
+							imageUrl: true,
+						}
+					},
 				}
 			}
 		},

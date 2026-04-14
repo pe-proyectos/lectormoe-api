@@ -997,10 +997,12 @@ export type MangaCustomCreateNestedOneWithoutFavoritesInput = {
   connect?: Prisma.MangaCustomWhereUniqueInput
 }
 
-export type MangaCustomUpdateOneRequiredWithoutFavoritesNestedInput = {
+export type MangaCustomUpdateOneWithoutFavoritesNestedInput = {
   create?: Prisma.XOR<Prisma.MangaCustomCreateWithoutFavoritesInput, Prisma.MangaCustomUncheckedCreateWithoutFavoritesInput>
   connectOrCreate?: Prisma.MangaCustomCreateOrConnectWithoutFavoritesInput
   upsert?: Prisma.MangaCustomUpsertWithoutFavoritesInput
+  disconnect?: Prisma.MangaCustomWhereInput | boolean
+  delete?: Prisma.MangaCustomWhereInput | boolean
   connect?: Prisma.MangaCustomWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.MangaCustomUpdateToOneWithWhereWithoutFavoritesInput, Prisma.MangaCustomUpdateWithoutFavoritesInput>, Prisma.MangaCustomUncheckedUpdateWithoutFavoritesInput>
 }

@@ -30,18 +30,21 @@ export type FavoriteAvgAggregateOutputType = {
   id: number | null
   userId: number | null
   mangaCustomId: number | null
+  jointId: number | null
 }
 
 export type FavoriteSumAggregateOutputType = {
   id: number | null
   userId: number | null
   mangaCustomId: number | null
+  jointId: number | null
 }
 
 export type FavoriteMinAggregateOutputType = {
   id: number | null
   userId: number | null
   mangaCustomId: number | null
+  jointId: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -50,6 +53,7 @@ export type FavoriteMaxAggregateOutputType = {
   id: number | null
   userId: number | null
   mangaCustomId: number | null
+  jointId: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -58,6 +62,7 @@ export type FavoriteCountAggregateOutputType = {
   id: number
   userId: number
   mangaCustomId: number
+  jointId: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -68,18 +73,21 @@ export type FavoriteAvgAggregateInputType = {
   id?: true
   userId?: true
   mangaCustomId?: true
+  jointId?: true
 }
 
 export type FavoriteSumAggregateInputType = {
   id?: true
   userId?: true
   mangaCustomId?: true
+  jointId?: true
 }
 
 export type FavoriteMinAggregateInputType = {
   id?: true
   userId?: true
   mangaCustomId?: true
+  jointId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -88,6 +96,7 @@ export type FavoriteMaxAggregateInputType = {
   id?: true
   userId?: true
   mangaCustomId?: true
+  jointId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -96,6 +105,7 @@ export type FavoriteCountAggregateInputType = {
   id?: true
   userId?: true
   mangaCustomId?: true
+  jointId?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -190,7 +200,8 @@ export type FavoriteGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 export type FavoriteGroupByOutputType = {
   id: number
   userId: number
-  mangaCustomId: number
+  mangaCustomId: number | null
+  jointId: number | null
   createdAt: Date
   updatedAt: Date
   _count: FavoriteCountAggregateOutputType | null
@@ -221,41 +232,49 @@ export type FavoriteWhereInput = {
   NOT?: Prisma.FavoriteWhereInput | Prisma.FavoriteWhereInput[]
   id?: Prisma.IntFilter<"Favorite"> | number
   userId?: Prisma.IntFilter<"Favorite"> | number
-  mangaCustomId?: Prisma.IntFilter<"Favorite"> | number
+  mangaCustomId?: Prisma.IntNullableFilter<"Favorite"> | number | null
+  jointId?: Prisma.IntNullableFilter<"Favorite"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Favorite"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Favorite"> | Date | string
-  mangaCustom?: Prisma.XOR<Prisma.MangaCustomScalarRelationFilter, Prisma.MangaCustomWhereInput>
+  mangaCustom?: Prisma.XOR<Prisma.MangaCustomNullableScalarRelationFilter, Prisma.MangaCustomWhereInput> | null
+  joint?: Prisma.XOR<Prisma.MangaJointNullableScalarRelationFilter, Prisma.MangaJointWhereInput> | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
 export type FavoriteOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  mangaCustomId?: Prisma.SortOrder
+  mangaCustomId?: Prisma.SortOrderInput | Prisma.SortOrder
+  jointId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   mangaCustom?: Prisma.MangaCustomOrderByWithRelationInput
+  joint?: Prisma.MangaJointOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
 }
 
 export type FavoriteWhereUniqueInput = Prisma.AtLeast<{
   id?: number
   userId_mangaCustomId?: Prisma.FavoriteUserIdMangaCustomIdCompoundUniqueInput
+  userId_jointId?: Prisma.FavoriteUserIdJointIdCompoundUniqueInput
   AND?: Prisma.FavoriteWhereInput | Prisma.FavoriteWhereInput[]
   OR?: Prisma.FavoriteWhereInput[]
   NOT?: Prisma.FavoriteWhereInput | Prisma.FavoriteWhereInput[]
   userId?: Prisma.IntFilter<"Favorite"> | number
-  mangaCustomId?: Prisma.IntFilter<"Favorite"> | number
+  mangaCustomId?: Prisma.IntNullableFilter<"Favorite"> | number | null
+  jointId?: Prisma.IntNullableFilter<"Favorite"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Favorite"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Favorite"> | Date | string
-  mangaCustom?: Prisma.XOR<Prisma.MangaCustomScalarRelationFilter, Prisma.MangaCustomWhereInput>
+  mangaCustom?: Prisma.XOR<Prisma.MangaCustomNullableScalarRelationFilter, Prisma.MangaCustomWhereInput> | null
+  joint?: Prisma.XOR<Prisma.MangaJointNullableScalarRelationFilter, Prisma.MangaJointWhereInput> | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-}, "id" | "userId_mangaCustomId">
+}, "id" | "userId_mangaCustomId" | "userId_jointId">
 
 export type FavoriteOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  mangaCustomId?: Prisma.SortOrder
+  mangaCustomId?: Prisma.SortOrderInput | Prisma.SortOrder
+  jointId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.FavoriteCountOrderByAggregateInput
@@ -271,7 +290,8 @@ export type FavoriteScalarWhereWithAggregatesInput = {
   NOT?: Prisma.FavoriteScalarWhereWithAggregatesInput | Prisma.FavoriteScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Favorite"> | number
   userId?: Prisma.IntWithAggregatesFilter<"Favorite"> | number
-  mangaCustomId?: Prisma.IntWithAggregatesFilter<"Favorite"> | number
+  mangaCustomId?: Prisma.IntNullableWithAggregatesFilter<"Favorite"> | number | null
+  jointId?: Prisma.IntNullableWithAggregatesFilter<"Favorite"> | number | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Favorite"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Favorite"> | Date | string
 }
@@ -279,14 +299,16 @@ export type FavoriteScalarWhereWithAggregatesInput = {
 export type FavoriteCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
-  mangaCustom: Prisma.MangaCustomCreateNestedOneWithoutFavoritesInput
+  mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutFavoritesInput
+  joint?: Prisma.MangaJointCreateNestedOneWithoutFavoritesInput
   user: Prisma.UserCreateNestedOneWithoutFavoritesInput
 }
 
 export type FavoriteUncheckedCreateInput = {
   id?: number
   userId: number
-  mangaCustomId: number
+  mangaCustomId?: number | null
+  jointId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -294,14 +316,16 @@ export type FavoriteUncheckedCreateInput = {
 export type FavoriteUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mangaCustom?: Prisma.MangaCustomUpdateOneRequiredWithoutFavoritesNestedInput
+  mangaCustom?: Prisma.MangaCustomUpdateOneWithoutFavoritesNestedInput
+  joint?: Prisma.MangaJointUpdateOneWithoutFavoritesNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutFavoritesNestedInput
 }
 
 export type FavoriteUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
-  mangaCustomId?: Prisma.IntFieldUpdateOperationsInput | number
+  mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -309,7 +333,8 @@ export type FavoriteUncheckedUpdateInput = {
 export type FavoriteCreateManyInput = {
   id?: number
   userId: number
-  mangaCustomId: number
+  mangaCustomId?: number | null
+  jointId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -322,7 +347,8 @@ export type FavoriteUpdateManyMutationInput = {
 export type FavoriteUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
-  mangaCustomId?: Prisma.IntFieldUpdateOperationsInput | number
+  mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -342,10 +368,16 @@ export type FavoriteUserIdMangaCustomIdCompoundUniqueInput = {
   mangaCustomId: number
 }
 
+export type FavoriteUserIdJointIdCompoundUniqueInput = {
+  userId: number
+  jointId: number
+}
+
 export type FavoriteCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   mangaCustomId?: Prisma.SortOrder
+  jointId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -354,12 +386,14 @@ export type FavoriteAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   mangaCustomId?: Prisma.SortOrder
+  jointId?: Prisma.SortOrder
 }
 
 export type FavoriteMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   mangaCustomId?: Prisma.SortOrder
+  jointId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -368,6 +402,7 @@ export type FavoriteMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   mangaCustomId?: Prisma.SortOrder
+  jointId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -376,6 +411,7 @@ export type FavoriteSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   mangaCustomId?: Prisma.SortOrder
+  jointId?: Prisma.SortOrder
 }
 
 export type FavoriteCreateNestedManyWithoutUserInput = {
@@ -462,15 +498,59 @@ export type FavoriteUncheckedUpdateManyWithoutMangaCustomNestedInput = {
   deleteMany?: Prisma.FavoriteScalarWhereInput | Prisma.FavoriteScalarWhereInput[]
 }
 
+export type FavoriteCreateNestedManyWithoutJointInput = {
+  create?: Prisma.XOR<Prisma.FavoriteCreateWithoutJointInput, Prisma.FavoriteUncheckedCreateWithoutJointInput> | Prisma.FavoriteCreateWithoutJointInput[] | Prisma.FavoriteUncheckedCreateWithoutJointInput[]
+  connectOrCreate?: Prisma.FavoriteCreateOrConnectWithoutJointInput | Prisma.FavoriteCreateOrConnectWithoutJointInput[]
+  createMany?: Prisma.FavoriteCreateManyJointInputEnvelope
+  connect?: Prisma.FavoriteWhereUniqueInput | Prisma.FavoriteWhereUniqueInput[]
+}
+
+export type FavoriteUncheckedCreateNestedManyWithoutJointInput = {
+  create?: Prisma.XOR<Prisma.FavoriteCreateWithoutJointInput, Prisma.FavoriteUncheckedCreateWithoutJointInput> | Prisma.FavoriteCreateWithoutJointInput[] | Prisma.FavoriteUncheckedCreateWithoutJointInput[]
+  connectOrCreate?: Prisma.FavoriteCreateOrConnectWithoutJointInput | Prisma.FavoriteCreateOrConnectWithoutJointInput[]
+  createMany?: Prisma.FavoriteCreateManyJointInputEnvelope
+  connect?: Prisma.FavoriteWhereUniqueInput | Prisma.FavoriteWhereUniqueInput[]
+}
+
+export type FavoriteUpdateManyWithoutJointNestedInput = {
+  create?: Prisma.XOR<Prisma.FavoriteCreateWithoutJointInput, Prisma.FavoriteUncheckedCreateWithoutJointInput> | Prisma.FavoriteCreateWithoutJointInput[] | Prisma.FavoriteUncheckedCreateWithoutJointInput[]
+  connectOrCreate?: Prisma.FavoriteCreateOrConnectWithoutJointInput | Prisma.FavoriteCreateOrConnectWithoutJointInput[]
+  upsert?: Prisma.FavoriteUpsertWithWhereUniqueWithoutJointInput | Prisma.FavoriteUpsertWithWhereUniqueWithoutJointInput[]
+  createMany?: Prisma.FavoriteCreateManyJointInputEnvelope
+  set?: Prisma.FavoriteWhereUniqueInput | Prisma.FavoriteWhereUniqueInput[]
+  disconnect?: Prisma.FavoriteWhereUniqueInput | Prisma.FavoriteWhereUniqueInput[]
+  delete?: Prisma.FavoriteWhereUniqueInput | Prisma.FavoriteWhereUniqueInput[]
+  connect?: Prisma.FavoriteWhereUniqueInput | Prisma.FavoriteWhereUniqueInput[]
+  update?: Prisma.FavoriteUpdateWithWhereUniqueWithoutJointInput | Prisma.FavoriteUpdateWithWhereUniqueWithoutJointInput[]
+  updateMany?: Prisma.FavoriteUpdateManyWithWhereWithoutJointInput | Prisma.FavoriteUpdateManyWithWhereWithoutJointInput[]
+  deleteMany?: Prisma.FavoriteScalarWhereInput | Prisma.FavoriteScalarWhereInput[]
+}
+
+export type FavoriteUncheckedUpdateManyWithoutJointNestedInput = {
+  create?: Prisma.XOR<Prisma.FavoriteCreateWithoutJointInput, Prisma.FavoriteUncheckedCreateWithoutJointInput> | Prisma.FavoriteCreateWithoutJointInput[] | Prisma.FavoriteUncheckedCreateWithoutJointInput[]
+  connectOrCreate?: Prisma.FavoriteCreateOrConnectWithoutJointInput | Prisma.FavoriteCreateOrConnectWithoutJointInput[]
+  upsert?: Prisma.FavoriteUpsertWithWhereUniqueWithoutJointInput | Prisma.FavoriteUpsertWithWhereUniqueWithoutJointInput[]
+  createMany?: Prisma.FavoriteCreateManyJointInputEnvelope
+  set?: Prisma.FavoriteWhereUniqueInput | Prisma.FavoriteWhereUniqueInput[]
+  disconnect?: Prisma.FavoriteWhereUniqueInput | Prisma.FavoriteWhereUniqueInput[]
+  delete?: Prisma.FavoriteWhereUniqueInput | Prisma.FavoriteWhereUniqueInput[]
+  connect?: Prisma.FavoriteWhereUniqueInput | Prisma.FavoriteWhereUniqueInput[]
+  update?: Prisma.FavoriteUpdateWithWhereUniqueWithoutJointInput | Prisma.FavoriteUpdateWithWhereUniqueWithoutJointInput[]
+  updateMany?: Prisma.FavoriteUpdateManyWithWhereWithoutJointInput | Prisma.FavoriteUpdateManyWithWhereWithoutJointInput[]
+  deleteMany?: Prisma.FavoriteScalarWhereInput | Prisma.FavoriteScalarWhereInput[]
+}
+
 export type FavoriteCreateWithoutUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
-  mangaCustom: Prisma.MangaCustomCreateNestedOneWithoutFavoritesInput
+  mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutFavoritesInput
+  joint?: Prisma.MangaJointCreateNestedOneWithoutFavoritesInput
 }
 
 export type FavoriteUncheckedCreateWithoutUserInput = {
   id?: number
-  mangaCustomId: number
+  mangaCustomId?: number | null
+  jointId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -507,7 +587,8 @@ export type FavoriteScalarWhereInput = {
   NOT?: Prisma.FavoriteScalarWhereInput | Prisma.FavoriteScalarWhereInput[]
   id?: Prisma.IntFilter<"Favorite"> | number
   userId?: Prisma.IntFilter<"Favorite"> | number
-  mangaCustomId?: Prisma.IntFilter<"Favorite"> | number
+  mangaCustomId?: Prisma.IntNullableFilter<"Favorite"> | number | null
+  jointId?: Prisma.IntNullableFilter<"Favorite"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Favorite"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Favorite"> | Date | string
 }
@@ -515,12 +596,14 @@ export type FavoriteScalarWhereInput = {
 export type FavoriteCreateWithoutMangaCustomInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
+  joint?: Prisma.MangaJointCreateNestedOneWithoutFavoritesInput
   user: Prisma.UserCreateNestedOneWithoutFavoritesInput
 }
 
 export type FavoriteUncheckedCreateWithoutMangaCustomInput = {
   id?: number
   userId: number
+  jointId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -551,9 +634,51 @@ export type FavoriteUpdateManyWithWhereWithoutMangaCustomInput = {
   data: Prisma.XOR<Prisma.FavoriteUpdateManyMutationInput, Prisma.FavoriteUncheckedUpdateManyWithoutMangaCustomInput>
 }
 
+export type FavoriteCreateWithoutJointInput = {
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutFavoritesInput
+  user: Prisma.UserCreateNestedOneWithoutFavoritesInput
+}
+
+export type FavoriteUncheckedCreateWithoutJointInput = {
+  id?: number
+  userId: number
+  mangaCustomId?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type FavoriteCreateOrConnectWithoutJointInput = {
+  where: Prisma.FavoriteWhereUniqueInput
+  create: Prisma.XOR<Prisma.FavoriteCreateWithoutJointInput, Prisma.FavoriteUncheckedCreateWithoutJointInput>
+}
+
+export type FavoriteCreateManyJointInputEnvelope = {
+  data: Prisma.FavoriteCreateManyJointInput | Prisma.FavoriteCreateManyJointInput[]
+  skipDuplicates?: boolean
+}
+
+export type FavoriteUpsertWithWhereUniqueWithoutJointInput = {
+  where: Prisma.FavoriteWhereUniqueInput
+  update: Prisma.XOR<Prisma.FavoriteUpdateWithoutJointInput, Prisma.FavoriteUncheckedUpdateWithoutJointInput>
+  create: Prisma.XOR<Prisma.FavoriteCreateWithoutJointInput, Prisma.FavoriteUncheckedCreateWithoutJointInput>
+}
+
+export type FavoriteUpdateWithWhereUniqueWithoutJointInput = {
+  where: Prisma.FavoriteWhereUniqueInput
+  data: Prisma.XOR<Prisma.FavoriteUpdateWithoutJointInput, Prisma.FavoriteUncheckedUpdateWithoutJointInput>
+}
+
+export type FavoriteUpdateManyWithWhereWithoutJointInput = {
+  where: Prisma.FavoriteScalarWhereInput
+  data: Prisma.XOR<Prisma.FavoriteUpdateManyMutationInput, Prisma.FavoriteUncheckedUpdateManyWithoutJointInput>
+}
+
 export type FavoriteCreateManyUserInput = {
   id?: number
-  mangaCustomId: number
+  mangaCustomId?: number | null
+  jointId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -561,19 +686,22 @@ export type FavoriteCreateManyUserInput = {
 export type FavoriteUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mangaCustom?: Prisma.MangaCustomUpdateOneRequiredWithoutFavoritesNestedInput
+  mangaCustom?: Prisma.MangaCustomUpdateOneWithoutFavoritesNestedInput
+  joint?: Prisma.MangaJointUpdateOneWithoutFavoritesNestedInput
 }
 
 export type FavoriteUncheckedUpdateWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  mangaCustomId?: Prisma.IntFieldUpdateOperationsInput | number
+  mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type FavoriteUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  mangaCustomId?: Prisma.IntFieldUpdateOperationsInput | number
+  mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -581,6 +709,7 @@ export type FavoriteUncheckedUpdateManyWithoutUserInput = {
 export type FavoriteCreateManyMangaCustomInput = {
   id?: number
   userId: number
+  jointId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -588,12 +717,14 @@ export type FavoriteCreateManyMangaCustomInput = {
 export type FavoriteUpdateWithoutMangaCustomInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  joint?: Prisma.MangaJointUpdateOneWithoutFavoritesNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutFavoritesNestedInput
 }
 
 export type FavoriteUncheckedUpdateWithoutMangaCustomInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -601,6 +732,38 @@ export type FavoriteUncheckedUpdateWithoutMangaCustomInput = {
 export type FavoriteUncheckedUpdateManyWithoutMangaCustomInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type FavoriteCreateManyJointInput = {
+  id?: number
+  userId: number
+  mangaCustomId?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type FavoriteUpdateWithoutJointInput = {
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  mangaCustom?: Prisma.MangaCustomUpdateOneWithoutFavoritesNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutFavoritesNestedInput
+}
+
+export type FavoriteUncheckedUpdateWithoutJointInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type FavoriteUncheckedUpdateManyWithoutJointInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -611,9 +774,11 @@ export type FavoriteSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   id?: boolean
   userId?: boolean
   mangaCustomId?: boolean
+  jointId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  mangaCustom?: boolean | Prisma.MangaCustomDefaultArgs<ExtArgs>
+  mangaCustom?: boolean | Prisma.Favorite$mangaCustomArgs<ExtArgs>
+  joint?: boolean | Prisma.Favorite$jointArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["favorite"]>
 
@@ -621,9 +786,11 @@ export type FavoriteSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   id?: boolean
   userId?: boolean
   mangaCustomId?: boolean
+  jointId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  mangaCustom?: boolean | Prisma.MangaCustomDefaultArgs<ExtArgs>
+  mangaCustom?: boolean | Prisma.Favorite$mangaCustomArgs<ExtArgs>
+  joint?: boolean | Prisma.Favorite$jointArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["favorite"]>
 
@@ -631,9 +798,11 @@ export type FavoriteSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   id?: boolean
   userId?: boolean
   mangaCustomId?: boolean
+  jointId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  mangaCustom?: boolean | Prisma.MangaCustomDefaultArgs<ExtArgs>
+  mangaCustom?: boolean | Prisma.Favorite$mangaCustomArgs<ExtArgs>
+  joint?: boolean | Prisma.Favorite$jointArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["favorite"]>
 
@@ -641,34 +810,40 @@ export type FavoriteSelectScalar = {
   id?: boolean
   userId?: boolean
   mangaCustomId?: boolean
+  jointId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type FavoriteOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "mangaCustomId" | "createdAt" | "updatedAt", ExtArgs["result"]["favorite"]>
+export type FavoriteOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "mangaCustomId" | "jointId" | "createdAt" | "updatedAt", ExtArgs["result"]["favorite"]>
 export type FavoriteInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  mangaCustom?: boolean | Prisma.MangaCustomDefaultArgs<ExtArgs>
+  mangaCustom?: boolean | Prisma.Favorite$mangaCustomArgs<ExtArgs>
+  joint?: boolean | Prisma.Favorite$jointArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type FavoriteIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  mangaCustom?: boolean | Prisma.MangaCustomDefaultArgs<ExtArgs>
+  mangaCustom?: boolean | Prisma.Favorite$mangaCustomArgs<ExtArgs>
+  joint?: boolean | Prisma.Favorite$jointArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type FavoriteIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  mangaCustom?: boolean | Prisma.MangaCustomDefaultArgs<ExtArgs>
+  mangaCustom?: boolean | Prisma.Favorite$mangaCustomArgs<ExtArgs>
+  joint?: boolean | Prisma.Favorite$jointArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
 export type $FavoritePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Favorite"
   objects: {
-    mangaCustom: Prisma.$MangaCustomPayload<ExtArgs>
+    mangaCustom: Prisma.$MangaCustomPayload<ExtArgs> | null
+    joint: Prisma.$MangaJointPayload<ExtArgs> | null
     user: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     userId: number
-    mangaCustomId: number
+    mangaCustomId: number | null
+    jointId: number | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["favorite"]>
@@ -1065,7 +1240,8 @@ readonly fields: FavoriteFieldRefs;
  */
 export interface Prisma__FavoriteClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  mangaCustom<T extends Prisma.MangaCustomDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MangaCustomDefaultArgs<ExtArgs>>): Prisma.Prisma__MangaCustomClient<runtime.Types.Result.GetResult<Prisma.$MangaCustomPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  mangaCustom<T extends Prisma.Favorite$mangaCustomArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Favorite$mangaCustomArgs<ExtArgs>>): Prisma.Prisma__MangaCustomClient<runtime.Types.Result.GetResult<Prisma.$MangaCustomPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  joint<T extends Prisma.Favorite$jointArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Favorite$jointArgs<ExtArgs>>): Prisma.Prisma__MangaJointClient<runtime.Types.Result.GetResult<Prisma.$MangaJointPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1099,6 +1275,7 @@ export interface FavoriteFieldRefs {
   readonly id: Prisma.FieldRef<"Favorite", 'Int'>
   readonly userId: Prisma.FieldRef<"Favorite", 'Int'>
   readonly mangaCustomId: Prisma.FieldRef<"Favorite", 'Int'>
+  readonly jointId: Prisma.FieldRef<"Favorite", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Favorite", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Favorite", 'DateTime'>
 }
@@ -1494,6 +1671,44 @@ export type FavoriteDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Limit how many Favorites to delete.
    */
   limit?: number
+}
+
+/**
+ * Favorite.mangaCustom
+ */
+export type Favorite$mangaCustomArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MangaCustom
+   */
+  select?: Prisma.MangaCustomSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MangaCustom
+   */
+  omit?: Prisma.MangaCustomOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MangaCustomInclude<ExtArgs> | null
+  where?: Prisma.MangaCustomWhereInput
+}
+
+/**
+ * Favorite.joint
+ */
+export type Favorite$jointArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MangaJoint
+   */
+  select?: Prisma.MangaJointSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MangaJoint
+   */
+  omit?: Prisma.MangaJointOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MangaJointInclude<ExtArgs> | null
+  where?: Prisma.MangaJointWhereInput
 }
 
 /**

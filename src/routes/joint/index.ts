@@ -25,6 +25,9 @@ import { createJointChapter } from '../../controllers/joint/chapter/create';
 import { getJointChapter } from '../../controllers/joint/chapter/get';
 import { editJointChapter } from '../../controllers/joint/chapter/edit';
 import { deleteJointChapter } from '../../controllers/joint/chapter/delete';
+import { saveJointFavorite } from '../../controllers/favorites/save-joint';
+import { deleteJointFavorite } from '../../controllers/favorites/delete-joint';
+import { getJointFavorite } from '../../controllers/favorites/get-joint';
 
 export const router = () => new Elysia()
   // ─── PUBLIC ROUTES ──────────────────────────────────────────────────────────
@@ -207,5 +210,22 @@ export const router = () => new Elysia()
   .delete('/api/joint/:slug/chapter/:number', async ({ params: { slug, number }, organizationId }) => {
     if (!organizationId) throw new Error('Se requiere contexto de organización.');
     const data = await deleteJointChapter(slug, parseFloat(number), organizationId);
+    return { status: true, data };
+  }, { response: t.Object({ status: t.Boolean(), data: t.Any() }) })
+
+  // ─── JOINT FAVORITE ROUTES ──────────────────────────────────────────────────
+
+  .get('/api/joint/:slug/favorite', async ({ params: { slug }, user }) => {
+    const data = await getJointFavorite(user.id, slug);
+    return { status: true, data };
+  }, { response: t.Object({ status: t.Boolean(), data: t.Any() }) })
+
+  .post('/api/joint/:slug/favorite', async ({ params: { slug }, user }) => {
+    const data = await saveJointFavorite(user.id, slug);
+    return { status: true, data };
+  }, { response: t.Object({ status: t.Boolean(), data: t.Any() }) })
+
+  .delete('/api/joint/:slug/favorite', async ({ params: { slug }, user }) => {
+    const data = await deleteJointFavorite(user.id, slug);
     return { status: true, data };
   }, { response: t.Object({ status: t.Boolean(), data: t.Any() }) });
