@@ -3547,6 +3547,7 @@ export const ViewsHistoryScalarFieldEnum = {
   id: 'id',
   mangaCustomId: 'mangaCustomId',
   chapterId: 'chapterId',
+  jointId: 'jointId',
   ip: 'ip',
   viewedAt: 'viewedAt',
   createdAt: 'createdAt',
