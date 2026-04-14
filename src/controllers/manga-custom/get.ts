@@ -78,5 +78,15 @@ export const getMangaCustomBySlug = async (organizationId: number, mangaSlug: st
 	if (!mangaCustom) {
 		return null;
 	}
-	return mangaCustom;
+
+	// Check if this manga belongs to an active joint
+	const activeJoint = await prisma.mangaJoint.findFirst({
+		where: { mangaId: mangaCustom.manga.id, deletedAt: null },
+		select: { slug: true },
+	});
+
+	return {
+		...mangaCustom,
+		jointSlug: activeJoint?.slug || null,
+	};
 };
