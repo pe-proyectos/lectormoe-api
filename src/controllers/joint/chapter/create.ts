@@ -93,6 +93,52 @@ export const createJointChapter = async (
     });
   }
 
+  // Send Discord webhook notifications to all members that have it enabled
+  const memberOrgs = await prisma.organization.findMany({
+    where: {
+      id: { in: acceptedOrgIds },
+      enableDiscordWebhookNewChapter: true,
+      discordWebhookUrlNewChapter: { not: null },
+    },
+    select: {
+      name: true,
+      discordWebhookUrlNewChapter: true,
+      discordWebhookMessageTemplateNewChapter: true,
+    },
+  });
+
+  const chapterWithData = await prisma.chapter.findFirst({
+    where: { id: chapter.id },
+    include: { joint: { include: { manga: { select: { title: true, slug: true } } } } },
+  });
+
+  for (const org of memberOrgs) {
+    try {
+      const description = org.discordWebhookMessageTemplateNewChapter
+        ?.replaceAll('%manga%', chapterWithData?.joint?.title || chapterWithData?.joint?.manga?.title || joint.slug)
+        .replaceAll('%chapter%', `${chapter.number}`)
+        .replaceAll('%chapter_title%', chapter.title || '')
+        .replaceAll('%scan%', org.name || '')
+        .replaceAll('%link%', `https://capibaratraductor.com/joint/manga/${joint.slug}/chapters/${chapter.number}`);
+
+      await fetch(org.discordWebhookUrlNewChapter!, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          username: org.name,
+          embeds: [{
+            title: '📣 - Nuevo capítulo publicado (Joint)',
+            description,
+            color: 0x9b59b6,
+            timestamp: new Date().toISOString(),
+          }],
+        }),
+      });
+    } catch (e) {
+      console.error('Error enviando webhook de joint a Discord:', e);
+    }
+  }
+
   return prisma.chapter.findFirst({
     where: { id: chapter.id },
     include: {
