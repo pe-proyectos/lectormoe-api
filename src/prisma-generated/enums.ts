@@ -9,7 +9,20 @@
 * 🟢 You can import this file directly.
 */
 
+export const JointRole = {
+  LEADER: 'LEADER',
+  UPLOADER: 'UPLOADER',
+  VIEWER: 'VIEWER'
+} as const
+
+export type JointRole = (typeof JointRole)[keyof typeof JointRole]
 
 
-// This file is empty because there are no enums in the schema.
-export {}
+export const JointMemberStatus = {
+  INVITED: 'INVITED',
+  ACCEPTED: 'ACCEPTED',
+  REJECTED: 'REJECTED',
+  EXPELLED: 'EXPELLED'
+} as const
+
+export type JointMemberStatus = (typeof JointMemberStatus)[keyof typeof JointMemberStatus]

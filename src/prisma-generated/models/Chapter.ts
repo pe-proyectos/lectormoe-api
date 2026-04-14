@@ -30,6 +30,8 @@ export type ChapterAvgAggregateOutputType = {
   id: number | null
   number: number | null
   mangaCustomId: number | null
+  jointId: number | null
+  uploadedByOrganizationId: number | null
   views: number | null
 }
 
@@ -37,6 +39,8 @@ export type ChapterSumAggregateOutputType = {
   id: number | null
   number: number | null
   mangaCustomId: number | null
+  jointId: number | null
+  uploadedByOrganizationId: number | null
   views: number | null
 }
 
@@ -48,6 +52,8 @@ export type ChapterMinAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   mangaCustomId: number | null
+  jointId: number | null
+  uploadedByOrganizationId: number | null
   views: number | null
   releasedAt: Date | null
   isUnreleased: boolean | null
@@ -62,6 +68,8 @@ export type ChapterMaxAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   mangaCustomId: number | null
+  jointId: number | null
+  uploadedByOrganizationId: number | null
   views: number | null
   releasedAt: Date | null
   isUnreleased: boolean | null
@@ -76,6 +84,8 @@ export type ChapterCountAggregateOutputType = {
   createdAt: number
   updatedAt: number
   mangaCustomId: number
+  jointId: number
+  uploadedByOrganizationId: number
   views: number
   releasedAt: number
   isUnreleased: number
@@ -88,6 +98,8 @@ export type ChapterAvgAggregateInputType = {
   id?: true
   number?: true
   mangaCustomId?: true
+  jointId?: true
+  uploadedByOrganizationId?: true
   views?: true
 }
 
@@ -95,6 +107,8 @@ export type ChapterSumAggregateInputType = {
   id?: true
   number?: true
   mangaCustomId?: true
+  jointId?: true
+  uploadedByOrganizationId?: true
   views?: true
 }
 
@@ -106,6 +120,8 @@ export type ChapterMinAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   mangaCustomId?: true
+  jointId?: true
+  uploadedByOrganizationId?: true
   views?: true
   releasedAt?: true
   isUnreleased?: true
@@ -120,6 +136,8 @@ export type ChapterMaxAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   mangaCustomId?: true
+  jointId?: true
+  uploadedByOrganizationId?: true
   views?: true
   releasedAt?: true
   isUnreleased?: true
@@ -134,6 +152,8 @@ export type ChapterCountAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   mangaCustomId?: true
+  jointId?: true
+  uploadedByOrganizationId?: true
   views?: true
   releasedAt?: true
   isUnreleased?: true
@@ -234,7 +254,9 @@ export type ChapterGroupByOutputType = {
   imageUrl: string | null
   createdAt: Date
   updatedAt: Date
-  mangaCustomId: number
+  mangaCustomId: number | null
+  jointId: number | null
+  uploadedByOrganizationId: number | null
   views: number
   releasedAt: Date | null
   isUnreleased: boolean
@@ -271,12 +293,17 @@ export type ChapterWhereInput = {
   imageUrl?: Prisma.StringNullableFilter<"Chapter"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Chapter"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Chapter"> | Date | string
-  mangaCustomId?: Prisma.IntFilter<"Chapter"> | number
+  mangaCustomId?: Prisma.IntNullableFilter<"Chapter"> | number | null
+  jointId?: Prisma.IntNullableFilter<"Chapter"> | number | null
+  uploadedByOrganizationId?: Prisma.IntNullableFilter<"Chapter"> | number | null
   views?: Prisma.IntFilter<"Chapter"> | number
   releasedAt?: Prisma.DateTimeNullableFilter<"Chapter"> | Date | string | null
   isUnreleased?: Prisma.BoolFilter<"Chapter"> | boolean
   deletedAt?: Prisma.DateTimeNullableFilter<"Chapter"> | Date | string | null
-  mangaCustom?: Prisma.XOR<Prisma.MangaCustomScalarRelationFilter, Prisma.MangaCustomWhereInput>
+  mangaCustom?: Prisma.XOR<Prisma.MangaCustomNullableScalarRelationFilter, Prisma.MangaCustomWhereInput> | null
+  joint?: Prisma.XOR<Prisma.MangaJointNullableScalarRelationFilter, Prisma.MangaJointWhereInput> | null
+  uploadedByOrganization?: Prisma.XOR<Prisma.OrganizationNullableScalarRelationFilter, Prisma.OrganizationWhereInput> | null
+  workedByOrganizations?: Prisma.OrganizationListRelationFilter
   pages?: Prisma.PageListRelationFilter
   userHistory?: Prisma.UserChapterHistoryListRelationFilter
   viewsHistory?: Prisma.ViewsHistoryListRelationFilter
@@ -289,12 +316,17 @@ export type ChapterOrderByWithRelationInput = {
   imageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  mangaCustomId?: Prisma.SortOrder
+  mangaCustomId?: Prisma.SortOrderInput | Prisma.SortOrder
+  jointId?: Prisma.SortOrderInput | Prisma.SortOrder
+  uploadedByOrganizationId?: Prisma.SortOrderInput | Prisma.SortOrder
   views?: Prisma.SortOrder
   releasedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   isUnreleased?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   mangaCustom?: Prisma.MangaCustomOrderByWithRelationInput
+  joint?: Prisma.MangaJointOrderByWithRelationInput
+  uploadedByOrganization?: Prisma.OrganizationOrderByWithRelationInput
+  workedByOrganizations?: Prisma.OrganizationOrderByRelationAggregateInput
   pages?: Prisma.PageOrderByRelationAggregateInput
   userHistory?: Prisma.UserChapterHistoryOrderByRelationAggregateInput
   viewsHistory?: Prisma.ViewsHistoryOrderByRelationAggregateInput
@@ -303,6 +335,7 @@ export type ChapterOrderByWithRelationInput = {
 export type ChapterWhereUniqueInput = Prisma.AtLeast<{
   id?: number
   number_mangaCustomId?: Prisma.ChapterNumberMangaCustomIdCompoundUniqueInput
+  number_jointId?: Prisma.ChapterNumberJointIdCompoundUniqueInput
   AND?: Prisma.ChapterWhereInput | Prisma.ChapterWhereInput[]
   OR?: Prisma.ChapterWhereInput[]
   NOT?: Prisma.ChapterWhereInput | Prisma.ChapterWhereInput[]
@@ -311,16 +344,21 @@ export type ChapterWhereUniqueInput = Prisma.AtLeast<{
   imageUrl?: Prisma.StringNullableFilter<"Chapter"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Chapter"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Chapter"> | Date | string
-  mangaCustomId?: Prisma.IntFilter<"Chapter"> | number
+  mangaCustomId?: Prisma.IntNullableFilter<"Chapter"> | number | null
+  jointId?: Prisma.IntNullableFilter<"Chapter"> | number | null
+  uploadedByOrganizationId?: Prisma.IntNullableFilter<"Chapter"> | number | null
   views?: Prisma.IntFilter<"Chapter"> | number
   releasedAt?: Prisma.DateTimeNullableFilter<"Chapter"> | Date | string | null
   isUnreleased?: Prisma.BoolFilter<"Chapter"> | boolean
   deletedAt?: Prisma.DateTimeNullableFilter<"Chapter"> | Date | string | null
-  mangaCustom?: Prisma.XOR<Prisma.MangaCustomScalarRelationFilter, Prisma.MangaCustomWhereInput>
+  mangaCustom?: Prisma.XOR<Prisma.MangaCustomNullableScalarRelationFilter, Prisma.MangaCustomWhereInput> | null
+  joint?: Prisma.XOR<Prisma.MangaJointNullableScalarRelationFilter, Prisma.MangaJointWhereInput> | null
+  uploadedByOrganization?: Prisma.XOR<Prisma.OrganizationNullableScalarRelationFilter, Prisma.OrganizationWhereInput> | null
+  workedByOrganizations?: Prisma.OrganizationListRelationFilter
   pages?: Prisma.PageListRelationFilter
   userHistory?: Prisma.UserChapterHistoryListRelationFilter
   viewsHistory?: Prisma.ViewsHistoryListRelationFilter
-}, "id" | "number_mangaCustomId">
+}, "id" | "number_mangaCustomId" | "number_jointId">
 
 export type ChapterOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -329,7 +367,9 @@ export type ChapterOrderByWithAggregationInput = {
   imageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  mangaCustomId?: Prisma.SortOrder
+  mangaCustomId?: Prisma.SortOrderInput | Prisma.SortOrder
+  jointId?: Prisma.SortOrderInput | Prisma.SortOrder
+  uploadedByOrganizationId?: Prisma.SortOrderInput | Prisma.SortOrder
   views?: Prisma.SortOrder
   releasedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   isUnreleased?: Prisma.SortOrder
@@ -351,7 +391,9 @@ export type ChapterScalarWhereWithAggregatesInput = {
   imageUrl?: Prisma.StringNullableWithAggregatesFilter<"Chapter"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Chapter"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Chapter"> | Date | string
-  mangaCustomId?: Prisma.IntWithAggregatesFilter<"Chapter"> | number
+  mangaCustomId?: Prisma.IntNullableWithAggregatesFilter<"Chapter"> | number | null
+  jointId?: Prisma.IntNullableWithAggregatesFilter<"Chapter"> | number | null
+  uploadedByOrganizationId?: Prisma.IntNullableWithAggregatesFilter<"Chapter"> | number | null
   views?: Prisma.IntWithAggregatesFilter<"Chapter"> | number
   releasedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Chapter"> | Date | string | null
   isUnreleased?: Prisma.BoolWithAggregatesFilter<"Chapter"> | boolean
@@ -368,7 +410,10 @@ export type ChapterCreateInput = {
   releasedAt?: Date | string | null
   isUnreleased?: boolean
   deletedAt?: Date | string | null
-  mangaCustom: Prisma.MangaCustomCreateNestedOneWithoutChaptersInput
+  mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutChaptersInput
+  joint?: Prisma.MangaJointCreateNestedOneWithoutChaptersInput
+  uploadedByOrganization?: Prisma.OrganizationCreateNestedOneWithoutUploadedJointChaptersInput
+  workedByOrganizations?: Prisma.OrganizationCreateNestedManyWithoutWorkedOnJointChaptersInput
   pages?: Prisma.PageCreateNestedManyWithoutChapterInput
   userHistory?: Prisma.UserChapterHistoryCreateNestedManyWithoutChapterInput
   viewsHistory?: Prisma.ViewsHistoryCreateNestedManyWithoutChapterInput
@@ -381,11 +426,14 @@ export type ChapterUncheckedCreateInput = {
   imageUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  mangaCustomId: number
+  mangaCustomId?: number | null
+  jointId?: number | null
+  uploadedByOrganizationId?: number | null
   views?: number
   releasedAt?: Date | string | null
   isUnreleased?: boolean
   deletedAt?: Date | string | null
+  workedByOrganizations?: Prisma.OrganizationUncheckedCreateNestedManyWithoutWorkedOnJointChaptersInput
   pages?: Prisma.PageUncheckedCreateNestedManyWithoutChapterInput
   userHistory?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutChapterInput
   viewsHistory?: Prisma.ViewsHistoryUncheckedCreateNestedManyWithoutChapterInput
@@ -401,7 +449,10 @@ export type ChapterUpdateInput = {
   releasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  mangaCustom?: Prisma.MangaCustomUpdateOneRequiredWithoutChaptersNestedInput
+  mangaCustom?: Prisma.MangaCustomUpdateOneWithoutChaptersNestedInput
+  joint?: Prisma.MangaJointUpdateOneWithoutChaptersNestedInput
+  uploadedByOrganization?: Prisma.OrganizationUpdateOneWithoutUploadedJointChaptersNestedInput
+  workedByOrganizations?: Prisma.OrganizationUpdateManyWithoutWorkedOnJointChaptersNestedInput
   pages?: Prisma.PageUpdateManyWithoutChapterNestedInput
   userHistory?: Prisma.UserChapterHistoryUpdateManyWithoutChapterNestedInput
   viewsHistory?: Prisma.ViewsHistoryUpdateManyWithoutChapterNestedInput
@@ -414,11 +465,14 @@ export type ChapterUncheckedUpdateInput = {
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mangaCustomId?: Prisma.IntFieldUpdateOperationsInput | number
+  mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  uploadedByOrganizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   releasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  workedByOrganizations?: Prisma.OrganizationUncheckedUpdateManyWithoutWorkedOnJointChaptersNestedInput
   pages?: Prisma.PageUncheckedUpdateManyWithoutChapterNestedInput
   userHistory?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutChapterNestedInput
   viewsHistory?: Prisma.ViewsHistoryUncheckedUpdateManyWithoutChapterNestedInput
@@ -431,7 +485,9 @@ export type ChapterCreateManyInput = {
   imageUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  mangaCustomId: number
+  mangaCustomId?: number | null
+  jointId?: number | null
+  uploadedByOrganizationId?: number | null
   views?: number
   releasedAt?: Date | string | null
   isUnreleased?: boolean
@@ -457,7 +513,9 @@ export type ChapterUncheckedUpdateManyInput = {
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mangaCustomId?: Prisma.IntFieldUpdateOperationsInput | number
+  mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  uploadedByOrganizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   releasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -479,6 +537,11 @@ export type ChapterNumberMangaCustomIdCompoundUniqueInput = {
   mangaCustomId: number
 }
 
+export type ChapterNumberJointIdCompoundUniqueInput = {
+  number: number
+  jointId: number
+}
+
 export type ChapterCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   number?: Prisma.SortOrder
@@ -487,6 +550,8 @@ export type ChapterCountOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   mangaCustomId?: Prisma.SortOrder
+  jointId?: Prisma.SortOrder
+  uploadedByOrganizationId?: Prisma.SortOrder
   views?: Prisma.SortOrder
   releasedAt?: Prisma.SortOrder
   isUnreleased?: Prisma.SortOrder
@@ -497,6 +562,8 @@ export type ChapterAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   number?: Prisma.SortOrder
   mangaCustomId?: Prisma.SortOrder
+  jointId?: Prisma.SortOrder
+  uploadedByOrganizationId?: Prisma.SortOrder
   views?: Prisma.SortOrder
 }
 
@@ -508,6 +575,8 @@ export type ChapterMaxOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   mangaCustomId?: Prisma.SortOrder
+  jointId?: Prisma.SortOrder
+  uploadedByOrganizationId?: Prisma.SortOrder
   views?: Prisma.SortOrder
   releasedAt?: Prisma.SortOrder
   isUnreleased?: Prisma.SortOrder
@@ -522,6 +591,8 @@ export type ChapterMinOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   mangaCustomId?: Prisma.SortOrder
+  jointId?: Prisma.SortOrder
+  uploadedByOrganizationId?: Prisma.SortOrder
   views?: Prisma.SortOrder
   releasedAt?: Prisma.SortOrder
   isUnreleased?: Prisma.SortOrder
@@ -532,6 +603,8 @@ export type ChapterSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   number?: Prisma.SortOrder
   mangaCustomId?: Prisma.SortOrder
+  jointId?: Prisma.SortOrder
+  uploadedByOrganizationId?: Prisma.SortOrder
   views?: Prisma.SortOrder
 }
 
@@ -543,6 +616,86 @@ export type ChapterScalarRelationFilter = {
 export type ChapterNullableScalarRelationFilter = {
   is?: Prisma.ChapterWhereInput | null
   isNot?: Prisma.ChapterWhereInput | null
+}
+
+export type ChapterCreateNestedManyWithoutUploadedByOrganizationInput = {
+  create?: Prisma.XOR<Prisma.ChapterCreateWithoutUploadedByOrganizationInput, Prisma.ChapterUncheckedCreateWithoutUploadedByOrganizationInput> | Prisma.ChapterCreateWithoutUploadedByOrganizationInput[] | Prisma.ChapterUncheckedCreateWithoutUploadedByOrganizationInput[]
+  connectOrCreate?: Prisma.ChapterCreateOrConnectWithoutUploadedByOrganizationInput | Prisma.ChapterCreateOrConnectWithoutUploadedByOrganizationInput[]
+  createMany?: Prisma.ChapterCreateManyUploadedByOrganizationInputEnvelope
+  connect?: Prisma.ChapterWhereUniqueInput | Prisma.ChapterWhereUniqueInput[]
+}
+
+export type ChapterCreateNestedManyWithoutWorkedByOrganizationsInput = {
+  create?: Prisma.XOR<Prisma.ChapterCreateWithoutWorkedByOrganizationsInput, Prisma.ChapterUncheckedCreateWithoutWorkedByOrganizationsInput> | Prisma.ChapterCreateWithoutWorkedByOrganizationsInput[] | Prisma.ChapterUncheckedCreateWithoutWorkedByOrganizationsInput[]
+  connectOrCreate?: Prisma.ChapterCreateOrConnectWithoutWorkedByOrganizationsInput | Prisma.ChapterCreateOrConnectWithoutWorkedByOrganizationsInput[]
+  connect?: Prisma.ChapterWhereUniqueInput | Prisma.ChapterWhereUniqueInput[]
+}
+
+export type ChapterUncheckedCreateNestedManyWithoutUploadedByOrganizationInput = {
+  create?: Prisma.XOR<Prisma.ChapterCreateWithoutUploadedByOrganizationInput, Prisma.ChapterUncheckedCreateWithoutUploadedByOrganizationInput> | Prisma.ChapterCreateWithoutUploadedByOrganizationInput[] | Prisma.ChapterUncheckedCreateWithoutUploadedByOrganizationInput[]
+  connectOrCreate?: Prisma.ChapterCreateOrConnectWithoutUploadedByOrganizationInput | Prisma.ChapterCreateOrConnectWithoutUploadedByOrganizationInput[]
+  createMany?: Prisma.ChapterCreateManyUploadedByOrganizationInputEnvelope
+  connect?: Prisma.ChapterWhereUniqueInput | Prisma.ChapterWhereUniqueInput[]
+}
+
+export type ChapterUncheckedCreateNestedManyWithoutWorkedByOrganizationsInput = {
+  create?: Prisma.XOR<Prisma.ChapterCreateWithoutWorkedByOrganizationsInput, Prisma.ChapterUncheckedCreateWithoutWorkedByOrganizationsInput> | Prisma.ChapterCreateWithoutWorkedByOrganizationsInput[] | Prisma.ChapterUncheckedCreateWithoutWorkedByOrganizationsInput[]
+  connectOrCreate?: Prisma.ChapterCreateOrConnectWithoutWorkedByOrganizationsInput | Prisma.ChapterCreateOrConnectWithoutWorkedByOrganizationsInput[]
+  connect?: Prisma.ChapterWhereUniqueInput | Prisma.ChapterWhereUniqueInput[]
+}
+
+export type ChapterUpdateManyWithoutUploadedByOrganizationNestedInput = {
+  create?: Prisma.XOR<Prisma.ChapterCreateWithoutUploadedByOrganizationInput, Prisma.ChapterUncheckedCreateWithoutUploadedByOrganizationInput> | Prisma.ChapterCreateWithoutUploadedByOrganizationInput[] | Prisma.ChapterUncheckedCreateWithoutUploadedByOrganizationInput[]
+  connectOrCreate?: Prisma.ChapterCreateOrConnectWithoutUploadedByOrganizationInput | Prisma.ChapterCreateOrConnectWithoutUploadedByOrganizationInput[]
+  upsert?: Prisma.ChapterUpsertWithWhereUniqueWithoutUploadedByOrganizationInput | Prisma.ChapterUpsertWithWhereUniqueWithoutUploadedByOrganizationInput[]
+  createMany?: Prisma.ChapterCreateManyUploadedByOrganizationInputEnvelope
+  set?: Prisma.ChapterWhereUniqueInput | Prisma.ChapterWhereUniqueInput[]
+  disconnect?: Prisma.ChapterWhereUniqueInput | Prisma.ChapterWhereUniqueInput[]
+  delete?: Prisma.ChapterWhereUniqueInput | Prisma.ChapterWhereUniqueInput[]
+  connect?: Prisma.ChapterWhereUniqueInput | Prisma.ChapterWhereUniqueInput[]
+  update?: Prisma.ChapterUpdateWithWhereUniqueWithoutUploadedByOrganizationInput | Prisma.ChapterUpdateWithWhereUniqueWithoutUploadedByOrganizationInput[]
+  updateMany?: Prisma.ChapterUpdateManyWithWhereWithoutUploadedByOrganizationInput | Prisma.ChapterUpdateManyWithWhereWithoutUploadedByOrganizationInput[]
+  deleteMany?: Prisma.ChapterScalarWhereInput | Prisma.ChapterScalarWhereInput[]
+}
+
+export type ChapterUpdateManyWithoutWorkedByOrganizationsNestedInput = {
+  create?: Prisma.XOR<Prisma.ChapterCreateWithoutWorkedByOrganizationsInput, Prisma.ChapterUncheckedCreateWithoutWorkedByOrganizationsInput> | Prisma.ChapterCreateWithoutWorkedByOrganizationsInput[] | Prisma.ChapterUncheckedCreateWithoutWorkedByOrganizationsInput[]
+  connectOrCreate?: Prisma.ChapterCreateOrConnectWithoutWorkedByOrganizationsInput | Prisma.ChapterCreateOrConnectWithoutWorkedByOrganizationsInput[]
+  upsert?: Prisma.ChapterUpsertWithWhereUniqueWithoutWorkedByOrganizationsInput | Prisma.ChapterUpsertWithWhereUniqueWithoutWorkedByOrganizationsInput[]
+  set?: Prisma.ChapterWhereUniqueInput | Prisma.ChapterWhereUniqueInput[]
+  disconnect?: Prisma.ChapterWhereUniqueInput | Prisma.ChapterWhereUniqueInput[]
+  delete?: Prisma.ChapterWhereUniqueInput | Prisma.ChapterWhereUniqueInput[]
+  connect?: Prisma.ChapterWhereUniqueInput | Prisma.ChapterWhereUniqueInput[]
+  update?: Prisma.ChapterUpdateWithWhereUniqueWithoutWorkedByOrganizationsInput | Prisma.ChapterUpdateWithWhereUniqueWithoutWorkedByOrganizationsInput[]
+  updateMany?: Prisma.ChapterUpdateManyWithWhereWithoutWorkedByOrganizationsInput | Prisma.ChapterUpdateManyWithWhereWithoutWorkedByOrganizationsInput[]
+  deleteMany?: Prisma.ChapterScalarWhereInput | Prisma.ChapterScalarWhereInput[]
+}
+
+export type ChapterUncheckedUpdateManyWithoutUploadedByOrganizationNestedInput = {
+  create?: Prisma.XOR<Prisma.ChapterCreateWithoutUploadedByOrganizationInput, Prisma.ChapterUncheckedCreateWithoutUploadedByOrganizationInput> | Prisma.ChapterCreateWithoutUploadedByOrganizationInput[] | Prisma.ChapterUncheckedCreateWithoutUploadedByOrganizationInput[]
+  connectOrCreate?: Prisma.ChapterCreateOrConnectWithoutUploadedByOrganizationInput | Prisma.ChapterCreateOrConnectWithoutUploadedByOrganizationInput[]
+  upsert?: Prisma.ChapterUpsertWithWhereUniqueWithoutUploadedByOrganizationInput | Prisma.ChapterUpsertWithWhereUniqueWithoutUploadedByOrganizationInput[]
+  createMany?: Prisma.ChapterCreateManyUploadedByOrganizationInputEnvelope
+  set?: Prisma.ChapterWhereUniqueInput | Prisma.ChapterWhereUniqueInput[]
+  disconnect?: Prisma.ChapterWhereUniqueInput | Prisma.ChapterWhereUniqueInput[]
+  delete?: Prisma.ChapterWhereUniqueInput | Prisma.ChapterWhereUniqueInput[]
+  connect?: Prisma.ChapterWhereUniqueInput | Prisma.ChapterWhereUniqueInput[]
+  update?: Prisma.ChapterUpdateWithWhereUniqueWithoutUploadedByOrganizationInput | Prisma.ChapterUpdateWithWhereUniqueWithoutUploadedByOrganizationInput[]
+  updateMany?: Prisma.ChapterUpdateManyWithWhereWithoutUploadedByOrganizationInput | Prisma.ChapterUpdateManyWithWhereWithoutUploadedByOrganizationInput[]
+  deleteMany?: Prisma.ChapterScalarWhereInput | Prisma.ChapterScalarWhereInput[]
+}
+
+export type ChapterUncheckedUpdateManyWithoutWorkedByOrganizationsNestedInput = {
+  create?: Prisma.XOR<Prisma.ChapterCreateWithoutWorkedByOrganizationsInput, Prisma.ChapterUncheckedCreateWithoutWorkedByOrganizationsInput> | Prisma.ChapterCreateWithoutWorkedByOrganizationsInput[] | Prisma.ChapterUncheckedCreateWithoutWorkedByOrganizationsInput[]
+  connectOrCreate?: Prisma.ChapterCreateOrConnectWithoutWorkedByOrganizationsInput | Prisma.ChapterCreateOrConnectWithoutWorkedByOrganizationsInput[]
+  upsert?: Prisma.ChapterUpsertWithWhereUniqueWithoutWorkedByOrganizationsInput | Prisma.ChapterUpsertWithWhereUniqueWithoutWorkedByOrganizationsInput[]
+  set?: Prisma.ChapterWhereUniqueInput | Prisma.ChapterWhereUniqueInput[]
+  disconnect?: Prisma.ChapterWhereUniqueInput | Prisma.ChapterWhereUniqueInput[]
+  delete?: Prisma.ChapterWhereUniqueInput | Prisma.ChapterWhereUniqueInput[]
+  connect?: Prisma.ChapterWhereUniqueInput | Prisma.ChapterWhereUniqueInput[]
+  update?: Prisma.ChapterUpdateWithWhereUniqueWithoutWorkedByOrganizationsInput | Prisma.ChapterUpdateWithWhereUniqueWithoutWorkedByOrganizationsInput[]
+  updateMany?: Prisma.ChapterUpdateManyWithWhereWithoutWorkedByOrganizationsInput | Prisma.ChapterUpdateManyWithWhereWithoutWorkedByOrganizationsInput[]
+  deleteMany?: Prisma.ChapterScalarWhereInput | Prisma.ChapterScalarWhereInput[]
 }
 
 export type ChapterCreateNestedManyWithoutMangaCustomInput = {
@@ -639,6 +792,188 @@ export type ChapterUpdateOneWithoutViewsHistoryNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ChapterUpdateToOneWithWhereWithoutViewsHistoryInput, Prisma.ChapterUpdateWithoutViewsHistoryInput>, Prisma.ChapterUncheckedUpdateWithoutViewsHistoryInput>
 }
 
+export type ChapterCreateNestedManyWithoutJointInput = {
+  create?: Prisma.XOR<Prisma.ChapterCreateWithoutJointInput, Prisma.ChapterUncheckedCreateWithoutJointInput> | Prisma.ChapterCreateWithoutJointInput[] | Prisma.ChapterUncheckedCreateWithoutJointInput[]
+  connectOrCreate?: Prisma.ChapterCreateOrConnectWithoutJointInput | Prisma.ChapterCreateOrConnectWithoutJointInput[]
+  createMany?: Prisma.ChapterCreateManyJointInputEnvelope
+  connect?: Prisma.ChapterWhereUniqueInput | Prisma.ChapterWhereUniqueInput[]
+}
+
+export type ChapterUncheckedCreateNestedManyWithoutJointInput = {
+  create?: Prisma.XOR<Prisma.ChapterCreateWithoutJointInput, Prisma.ChapterUncheckedCreateWithoutJointInput> | Prisma.ChapterCreateWithoutJointInput[] | Prisma.ChapterUncheckedCreateWithoutJointInput[]
+  connectOrCreate?: Prisma.ChapterCreateOrConnectWithoutJointInput | Prisma.ChapterCreateOrConnectWithoutJointInput[]
+  createMany?: Prisma.ChapterCreateManyJointInputEnvelope
+  connect?: Prisma.ChapterWhereUniqueInput | Prisma.ChapterWhereUniqueInput[]
+}
+
+export type ChapterUpdateManyWithoutJointNestedInput = {
+  create?: Prisma.XOR<Prisma.ChapterCreateWithoutJointInput, Prisma.ChapterUncheckedCreateWithoutJointInput> | Prisma.ChapterCreateWithoutJointInput[] | Prisma.ChapterUncheckedCreateWithoutJointInput[]
+  connectOrCreate?: Prisma.ChapterCreateOrConnectWithoutJointInput | Prisma.ChapterCreateOrConnectWithoutJointInput[]
+  upsert?: Prisma.ChapterUpsertWithWhereUniqueWithoutJointInput | Prisma.ChapterUpsertWithWhereUniqueWithoutJointInput[]
+  createMany?: Prisma.ChapterCreateManyJointInputEnvelope
+  set?: Prisma.ChapterWhereUniqueInput | Prisma.ChapterWhereUniqueInput[]
+  disconnect?: Prisma.ChapterWhereUniqueInput | Prisma.ChapterWhereUniqueInput[]
+  delete?: Prisma.ChapterWhereUniqueInput | Prisma.ChapterWhereUniqueInput[]
+  connect?: Prisma.ChapterWhereUniqueInput | Prisma.ChapterWhereUniqueInput[]
+  update?: Prisma.ChapterUpdateWithWhereUniqueWithoutJointInput | Prisma.ChapterUpdateWithWhereUniqueWithoutJointInput[]
+  updateMany?: Prisma.ChapterUpdateManyWithWhereWithoutJointInput | Prisma.ChapterUpdateManyWithWhereWithoutJointInput[]
+  deleteMany?: Prisma.ChapterScalarWhereInput | Prisma.ChapterScalarWhereInput[]
+}
+
+export type ChapterUncheckedUpdateManyWithoutJointNestedInput = {
+  create?: Prisma.XOR<Prisma.ChapterCreateWithoutJointInput, Prisma.ChapterUncheckedCreateWithoutJointInput> | Prisma.ChapterCreateWithoutJointInput[] | Prisma.ChapterUncheckedCreateWithoutJointInput[]
+  connectOrCreate?: Prisma.ChapterCreateOrConnectWithoutJointInput | Prisma.ChapterCreateOrConnectWithoutJointInput[]
+  upsert?: Prisma.ChapterUpsertWithWhereUniqueWithoutJointInput | Prisma.ChapterUpsertWithWhereUniqueWithoutJointInput[]
+  createMany?: Prisma.ChapterCreateManyJointInputEnvelope
+  set?: Prisma.ChapterWhereUniqueInput | Prisma.ChapterWhereUniqueInput[]
+  disconnect?: Prisma.ChapterWhereUniqueInput | Prisma.ChapterWhereUniqueInput[]
+  delete?: Prisma.ChapterWhereUniqueInput | Prisma.ChapterWhereUniqueInput[]
+  connect?: Prisma.ChapterWhereUniqueInput | Prisma.ChapterWhereUniqueInput[]
+  update?: Prisma.ChapterUpdateWithWhereUniqueWithoutJointInput | Prisma.ChapterUpdateWithWhereUniqueWithoutJointInput[]
+  updateMany?: Prisma.ChapterUpdateManyWithWhereWithoutJointInput | Prisma.ChapterUpdateManyWithWhereWithoutJointInput[]
+  deleteMany?: Prisma.ChapterScalarWhereInput | Prisma.ChapterScalarWhereInput[]
+}
+
+export type ChapterCreateWithoutUploadedByOrganizationInput = {
+  number: number
+  title: string
+  imageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  views?: number
+  releasedAt?: Date | string | null
+  isUnreleased?: boolean
+  deletedAt?: Date | string | null
+  mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutChaptersInput
+  joint?: Prisma.MangaJointCreateNestedOneWithoutChaptersInput
+  workedByOrganizations?: Prisma.OrganizationCreateNestedManyWithoutWorkedOnJointChaptersInput
+  pages?: Prisma.PageCreateNestedManyWithoutChapterInput
+  userHistory?: Prisma.UserChapterHistoryCreateNestedManyWithoutChapterInput
+  viewsHistory?: Prisma.ViewsHistoryCreateNestedManyWithoutChapterInput
+}
+
+export type ChapterUncheckedCreateWithoutUploadedByOrganizationInput = {
+  id?: number
+  number: number
+  title: string
+  imageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  mangaCustomId?: number | null
+  jointId?: number | null
+  views?: number
+  releasedAt?: Date | string | null
+  isUnreleased?: boolean
+  deletedAt?: Date | string | null
+  workedByOrganizations?: Prisma.OrganizationUncheckedCreateNestedManyWithoutWorkedOnJointChaptersInput
+  pages?: Prisma.PageUncheckedCreateNestedManyWithoutChapterInput
+  userHistory?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutChapterInput
+  viewsHistory?: Prisma.ViewsHistoryUncheckedCreateNestedManyWithoutChapterInput
+}
+
+export type ChapterCreateOrConnectWithoutUploadedByOrganizationInput = {
+  where: Prisma.ChapterWhereUniqueInput
+  create: Prisma.XOR<Prisma.ChapterCreateWithoutUploadedByOrganizationInput, Prisma.ChapterUncheckedCreateWithoutUploadedByOrganizationInput>
+}
+
+export type ChapterCreateManyUploadedByOrganizationInputEnvelope = {
+  data: Prisma.ChapterCreateManyUploadedByOrganizationInput | Prisma.ChapterCreateManyUploadedByOrganizationInput[]
+  skipDuplicates?: boolean
+}
+
+export type ChapterCreateWithoutWorkedByOrganizationsInput = {
+  number: number
+  title: string
+  imageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  views?: number
+  releasedAt?: Date | string | null
+  isUnreleased?: boolean
+  deletedAt?: Date | string | null
+  mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutChaptersInput
+  joint?: Prisma.MangaJointCreateNestedOneWithoutChaptersInput
+  uploadedByOrganization?: Prisma.OrganizationCreateNestedOneWithoutUploadedJointChaptersInput
+  pages?: Prisma.PageCreateNestedManyWithoutChapterInput
+  userHistory?: Prisma.UserChapterHistoryCreateNestedManyWithoutChapterInput
+  viewsHistory?: Prisma.ViewsHistoryCreateNestedManyWithoutChapterInput
+}
+
+export type ChapterUncheckedCreateWithoutWorkedByOrganizationsInput = {
+  id?: number
+  number: number
+  title: string
+  imageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  mangaCustomId?: number | null
+  jointId?: number | null
+  uploadedByOrganizationId?: number | null
+  views?: number
+  releasedAt?: Date | string | null
+  isUnreleased?: boolean
+  deletedAt?: Date | string | null
+  pages?: Prisma.PageUncheckedCreateNestedManyWithoutChapterInput
+  userHistory?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutChapterInput
+  viewsHistory?: Prisma.ViewsHistoryUncheckedCreateNestedManyWithoutChapterInput
+}
+
+export type ChapterCreateOrConnectWithoutWorkedByOrganizationsInput = {
+  where: Prisma.ChapterWhereUniqueInput
+  create: Prisma.XOR<Prisma.ChapterCreateWithoutWorkedByOrganizationsInput, Prisma.ChapterUncheckedCreateWithoutWorkedByOrganizationsInput>
+}
+
+export type ChapterUpsertWithWhereUniqueWithoutUploadedByOrganizationInput = {
+  where: Prisma.ChapterWhereUniqueInput
+  update: Prisma.XOR<Prisma.ChapterUpdateWithoutUploadedByOrganizationInput, Prisma.ChapterUncheckedUpdateWithoutUploadedByOrganizationInput>
+  create: Prisma.XOR<Prisma.ChapterCreateWithoutUploadedByOrganizationInput, Prisma.ChapterUncheckedCreateWithoutUploadedByOrganizationInput>
+}
+
+export type ChapterUpdateWithWhereUniqueWithoutUploadedByOrganizationInput = {
+  where: Prisma.ChapterWhereUniqueInput
+  data: Prisma.XOR<Prisma.ChapterUpdateWithoutUploadedByOrganizationInput, Prisma.ChapterUncheckedUpdateWithoutUploadedByOrganizationInput>
+}
+
+export type ChapterUpdateManyWithWhereWithoutUploadedByOrganizationInput = {
+  where: Prisma.ChapterScalarWhereInput
+  data: Prisma.XOR<Prisma.ChapterUpdateManyMutationInput, Prisma.ChapterUncheckedUpdateManyWithoutUploadedByOrganizationInput>
+}
+
+export type ChapterScalarWhereInput = {
+  AND?: Prisma.ChapterScalarWhereInput | Prisma.ChapterScalarWhereInput[]
+  OR?: Prisma.ChapterScalarWhereInput[]
+  NOT?: Prisma.ChapterScalarWhereInput | Prisma.ChapterScalarWhereInput[]
+  id?: Prisma.IntFilter<"Chapter"> | number
+  number?: Prisma.FloatFilter<"Chapter"> | number
+  title?: Prisma.StringFilter<"Chapter"> | string
+  imageUrl?: Prisma.StringNullableFilter<"Chapter"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"Chapter"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Chapter"> | Date | string
+  mangaCustomId?: Prisma.IntNullableFilter<"Chapter"> | number | null
+  jointId?: Prisma.IntNullableFilter<"Chapter"> | number | null
+  uploadedByOrganizationId?: Prisma.IntNullableFilter<"Chapter"> | number | null
+  views?: Prisma.IntFilter<"Chapter"> | number
+  releasedAt?: Prisma.DateTimeNullableFilter<"Chapter"> | Date | string | null
+  isUnreleased?: Prisma.BoolFilter<"Chapter"> | boolean
+  deletedAt?: Prisma.DateTimeNullableFilter<"Chapter"> | Date | string | null
+}
+
+export type ChapterUpsertWithWhereUniqueWithoutWorkedByOrganizationsInput = {
+  where: Prisma.ChapterWhereUniqueInput
+  update: Prisma.XOR<Prisma.ChapterUpdateWithoutWorkedByOrganizationsInput, Prisma.ChapterUncheckedUpdateWithoutWorkedByOrganizationsInput>
+  create: Prisma.XOR<Prisma.ChapterCreateWithoutWorkedByOrganizationsInput, Prisma.ChapterUncheckedCreateWithoutWorkedByOrganizationsInput>
+}
+
+export type ChapterUpdateWithWhereUniqueWithoutWorkedByOrganizationsInput = {
+  where: Prisma.ChapterWhereUniqueInput
+  data: Prisma.XOR<Prisma.ChapterUpdateWithoutWorkedByOrganizationsInput, Prisma.ChapterUncheckedUpdateWithoutWorkedByOrganizationsInput>
+}
+
+export type ChapterUpdateManyWithWhereWithoutWorkedByOrganizationsInput = {
+  where: Prisma.ChapterScalarWhereInput
+  data: Prisma.XOR<Prisma.ChapterUpdateManyMutationInput, Prisma.ChapterUncheckedUpdateManyWithoutWorkedByOrganizationsInput>
+}
+
 export type ChapterCreateWithoutMangaCustomInput = {
   number: number
   title: string
@@ -649,6 +984,9 @@ export type ChapterCreateWithoutMangaCustomInput = {
   releasedAt?: Date | string | null
   isUnreleased?: boolean
   deletedAt?: Date | string | null
+  joint?: Prisma.MangaJointCreateNestedOneWithoutChaptersInput
+  uploadedByOrganization?: Prisma.OrganizationCreateNestedOneWithoutUploadedJointChaptersInput
+  workedByOrganizations?: Prisma.OrganizationCreateNestedManyWithoutWorkedOnJointChaptersInput
   pages?: Prisma.PageCreateNestedManyWithoutChapterInput
   userHistory?: Prisma.UserChapterHistoryCreateNestedManyWithoutChapterInput
   viewsHistory?: Prisma.ViewsHistoryCreateNestedManyWithoutChapterInput
@@ -661,10 +999,13 @@ export type ChapterUncheckedCreateWithoutMangaCustomInput = {
   imageUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  jointId?: number | null
+  uploadedByOrganizationId?: number | null
   views?: number
   releasedAt?: Date | string | null
   isUnreleased?: boolean
   deletedAt?: Date | string | null
+  workedByOrganizations?: Prisma.OrganizationUncheckedCreateNestedManyWithoutWorkedOnJointChaptersInput
   pages?: Prisma.PageUncheckedCreateNestedManyWithoutChapterInput
   userHistory?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutChapterInput
   viewsHistory?: Prisma.ViewsHistoryUncheckedCreateNestedManyWithoutChapterInput
@@ -696,23 +1037,6 @@ export type ChapterUpdateManyWithWhereWithoutMangaCustomInput = {
   data: Prisma.XOR<Prisma.ChapterUpdateManyMutationInput, Prisma.ChapterUncheckedUpdateManyWithoutMangaCustomInput>
 }
 
-export type ChapterScalarWhereInput = {
-  AND?: Prisma.ChapterScalarWhereInput | Prisma.ChapterScalarWhereInput[]
-  OR?: Prisma.ChapterScalarWhereInput[]
-  NOT?: Prisma.ChapterScalarWhereInput | Prisma.ChapterScalarWhereInput[]
-  id?: Prisma.IntFilter<"Chapter"> | number
-  number?: Prisma.FloatFilter<"Chapter"> | number
-  title?: Prisma.StringFilter<"Chapter"> | string
-  imageUrl?: Prisma.StringNullableFilter<"Chapter"> | string | null
-  createdAt?: Prisma.DateTimeFilter<"Chapter"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Chapter"> | Date | string
-  mangaCustomId?: Prisma.IntFilter<"Chapter"> | number
-  views?: Prisma.IntFilter<"Chapter"> | number
-  releasedAt?: Prisma.DateTimeNullableFilter<"Chapter"> | Date | string | null
-  isUnreleased?: Prisma.BoolFilter<"Chapter"> | boolean
-  deletedAt?: Prisma.DateTimeNullableFilter<"Chapter"> | Date | string | null
-}
-
 export type ChapterCreateWithoutPagesInput = {
   number: number
   title: string
@@ -723,7 +1047,10 @@ export type ChapterCreateWithoutPagesInput = {
   releasedAt?: Date | string | null
   isUnreleased?: boolean
   deletedAt?: Date | string | null
-  mangaCustom: Prisma.MangaCustomCreateNestedOneWithoutChaptersInput
+  mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutChaptersInput
+  joint?: Prisma.MangaJointCreateNestedOneWithoutChaptersInput
+  uploadedByOrganization?: Prisma.OrganizationCreateNestedOneWithoutUploadedJointChaptersInput
+  workedByOrganizations?: Prisma.OrganizationCreateNestedManyWithoutWorkedOnJointChaptersInput
   userHistory?: Prisma.UserChapterHistoryCreateNestedManyWithoutChapterInput
   viewsHistory?: Prisma.ViewsHistoryCreateNestedManyWithoutChapterInput
 }
@@ -735,11 +1062,14 @@ export type ChapterUncheckedCreateWithoutPagesInput = {
   imageUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  mangaCustomId: number
+  mangaCustomId?: number | null
+  jointId?: number | null
+  uploadedByOrganizationId?: number | null
   views?: number
   releasedAt?: Date | string | null
   isUnreleased?: boolean
   deletedAt?: Date | string | null
+  workedByOrganizations?: Prisma.OrganizationUncheckedCreateNestedManyWithoutWorkedOnJointChaptersInput
   userHistory?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutChapterInput
   viewsHistory?: Prisma.ViewsHistoryUncheckedCreateNestedManyWithoutChapterInput
 }
@@ -770,7 +1100,10 @@ export type ChapterUpdateWithoutPagesInput = {
   releasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  mangaCustom?: Prisma.MangaCustomUpdateOneRequiredWithoutChaptersNestedInput
+  mangaCustom?: Prisma.MangaCustomUpdateOneWithoutChaptersNestedInput
+  joint?: Prisma.MangaJointUpdateOneWithoutChaptersNestedInput
+  uploadedByOrganization?: Prisma.OrganizationUpdateOneWithoutUploadedJointChaptersNestedInput
+  workedByOrganizations?: Prisma.OrganizationUpdateManyWithoutWorkedOnJointChaptersNestedInput
   userHistory?: Prisma.UserChapterHistoryUpdateManyWithoutChapterNestedInput
   viewsHistory?: Prisma.ViewsHistoryUpdateManyWithoutChapterNestedInput
 }
@@ -782,11 +1115,14 @@ export type ChapterUncheckedUpdateWithoutPagesInput = {
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mangaCustomId?: Prisma.IntFieldUpdateOperationsInput | number
+  mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  uploadedByOrganizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   releasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  workedByOrganizations?: Prisma.OrganizationUncheckedUpdateManyWithoutWorkedOnJointChaptersNestedInput
   userHistory?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutChapterNestedInput
   viewsHistory?: Prisma.ViewsHistoryUncheckedUpdateManyWithoutChapterNestedInput
 }
@@ -801,7 +1137,10 @@ export type ChapterCreateWithoutUserHistoryInput = {
   releasedAt?: Date | string | null
   isUnreleased?: boolean
   deletedAt?: Date | string | null
-  mangaCustom: Prisma.MangaCustomCreateNestedOneWithoutChaptersInput
+  mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutChaptersInput
+  joint?: Prisma.MangaJointCreateNestedOneWithoutChaptersInput
+  uploadedByOrganization?: Prisma.OrganizationCreateNestedOneWithoutUploadedJointChaptersInput
+  workedByOrganizations?: Prisma.OrganizationCreateNestedManyWithoutWorkedOnJointChaptersInput
   pages?: Prisma.PageCreateNestedManyWithoutChapterInput
   viewsHistory?: Prisma.ViewsHistoryCreateNestedManyWithoutChapterInput
 }
@@ -813,11 +1152,14 @@ export type ChapterUncheckedCreateWithoutUserHistoryInput = {
   imageUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  mangaCustomId: number
+  mangaCustomId?: number | null
+  jointId?: number | null
+  uploadedByOrganizationId?: number | null
   views?: number
   releasedAt?: Date | string | null
   isUnreleased?: boolean
   deletedAt?: Date | string | null
+  workedByOrganizations?: Prisma.OrganizationUncheckedCreateNestedManyWithoutWorkedOnJointChaptersInput
   pages?: Prisma.PageUncheckedCreateNestedManyWithoutChapterInput
   viewsHistory?: Prisma.ViewsHistoryUncheckedCreateNestedManyWithoutChapterInput
 }
@@ -848,7 +1190,10 @@ export type ChapterUpdateWithoutUserHistoryInput = {
   releasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  mangaCustom?: Prisma.MangaCustomUpdateOneRequiredWithoutChaptersNestedInput
+  mangaCustom?: Prisma.MangaCustomUpdateOneWithoutChaptersNestedInput
+  joint?: Prisma.MangaJointUpdateOneWithoutChaptersNestedInput
+  uploadedByOrganization?: Prisma.OrganizationUpdateOneWithoutUploadedJointChaptersNestedInput
+  workedByOrganizations?: Prisma.OrganizationUpdateManyWithoutWorkedOnJointChaptersNestedInput
   pages?: Prisma.PageUpdateManyWithoutChapterNestedInput
   viewsHistory?: Prisma.ViewsHistoryUpdateManyWithoutChapterNestedInput
 }
@@ -860,11 +1205,14 @@ export type ChapterUncheckedUpdateWithoutUserHistoryInput = {
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mangaCustomId?: Prisma.IntFieldUpdateOperationsInput | number
+  mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  uploadedByOrganizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   releasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  workedByOrganizations?: Prisma.OrganizationUncheckedUpdateManyWithoutWorkedOnJointChaptersNestedInput
   pages?: Prisma.PageUncheckedUpdateManyWithoutChapterNestedInput
   viewsHistory?: Prisma.ViewsHistoryUncheckedUpdateManyWithoutChapterNestedInput
 }
@@ -879,7 +1227,10 @@ export type ChapterCreateWithoutViewsHistoryInput = {
   releasedAt?: Date | string | null
   isUnreleased?: boolean
   deletedAt?: Date | string | null
-  mangaCustom: Prisma.MangaCustomCreateNestedOneWithoutChaptersInput
+  mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutChaptersInput
+  joint?: Prisma.MangaJointCreateNestedOneWithoutChaptersInput
+  uploadedByOrganization?: Prisma.OrganizationCreateNestedOneWithoutUploadedJointChaptersInput
+  workedByOrganizations?: Prisma.OrganizationCreateNestedManyWithoutWorkedOnJointChaptersInput
   pages?: Prisma.PageCreateNestedManyWithoutChapterInput
   userHistory?: Prisma.UserChapterHistoryCreateNestedManyWithoutChapterInput
 }
@@ -891,11 +1242,14 @@ export type ChapterUncheckedCreateWithoutViewsHistoryInput = {
   imageUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  mangaCustomId: number
+  mangaCustomId?: number | null
+  jointId?: number | null
+  uploadedByOrganizationId?: number | null
   views?: number
   releasedAt?: Date | string | null
   isUnreleased?: boolean
   deletedAt?: Date | string | null
+  workedByOrganizations?: Prisma.OrganizationUncheckedCreateNestedManyWithoutWorkedOnJointChaptersInput
   pages?: Prisma.PageUncheckedCreateNestedManyWithoutChapterInput
   userHistory?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutChapterInput
 }
@@ -926,7 +1280,10 @@ export type ChapterUpdateWithoutViewsHistoryInput = {
   releasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  mangaCustom?: Prisma.MangaCustomUpdateOneRequiredWithoutChaptersNestedInput
+  mangaCustom?: Prisma.MangaCustomUpdateOneWithoutChaptersNestedInput
+  joint?: Prisma.MangaJointUpdateOneWithoutChaptersNestedInput
+  uploadedByOrganization?: Prisma.OrganizationUpdateOneWithoutUploadedJointChaptersNestedInput
+  workedByOrganizations?: Prisma.OrganizationUpdateManyWithoutWorkedOnJointChaptersNestedInput
   pages?: Prisma.PageUpdateManyWithoutChapterNestedInput
   userHistory?: Prisma.UserChapterHistoryUpdateManyWithoutChapterNestedInput
 }
@@ -938,13 +1295,199 @@ export type ChapterUncheckedUpdateWithoutViewsHistoryInput = {
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mangaCustomId?: Prisma.IntFieldUpdateOperationsInput | number
+  mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  uploadedByOrganizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  views?: Prisma.IntFieldUpdateOperationsInput | number
+  releasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  workedByOrganizations?: Prisma.OrganizationUncheckedUpdateManyWithoutWorkedOnJointChaptersNestedInput
+  pages?: Prisma.PageUncheckedUpdateManyWithoutChapterNestedInput
+  userHistory?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutChapterNestedInput
+}
+
+export type ChapterCreateWithoutJointInput = {
+  number: number
+  title: string
+  imageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  views?: number
+  releasedAt?: Date | string | null
+  isUnreleased?: boolean
+  deletedAt?: Date | string | null
+  mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutChaptersInput
+  uploadedByOrganization?: Prisma.OrganizationCreateNestedOneWithoutUploadedJointChaptersInput
+  workedByOrganizations?: Prisma.OrganizationCreateNestedManyWithoutWorkedOnJointChaptersInput
+  pages?: Prisma.PageCreateNestedManyWithoutChapterInput
+  userHistory?: Prisma.UserChapterHistoryCreateNestedManyWithoutChapterInput
+  viewsHistory?: Prisma.ViewsHistoryCreateNestedManyWithoutChapterInput
+}
+
+export type ChapterUncheckedCreateWithoutJointInput = {
+  id?: number
+  number: number
+  title: string
+  imageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  mangaCustomId?: number | null
+  uploadedByOrganizationId?: number | null
+  views?: number
+  releasedAt?: Date | string | null
+  isUnreleased?: boolean
+  deletedAt?: Date | string | null
+  workedByOrganizations?: Prisma.OrganizationUncheckedCreateNestedManyWithoutWorkedOnJointChaptersInput
+  pages?: Prisma.PageUncheckedCreateNestedManyWithoutChapterInput
+  userHistory?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutChapterInput
+  viewsHistory?: Prisma.ViewsHistoryUncheckedCreateNestedManyWithoutChapterInput
+}
+
+export type ChapterCreateOrConnectWithoutJointInput = {
+  where: Prisma.ChapterWhereUniqueInput
+  create: Prisma.XOR<Prisma.ChapterCreateWithoutJointInput, Prisma.ChapterUncheckedCreateWithoutJointInput>
+}
+
+export type ChapterCreateManyJointInputEnvelope = {
+  data: Prisma.ChapterCreateManyJointInput | Prisma.ChapterCreateManyJointInput[]
+  skipDuplicates?: boolean
+}
+
+export type ChapterUpsertWithWhereUniqueWithoutJointInput = {
+  where: Prisma.ChapterWhereUniqueInput
+  update: Prisma.XOR<Prisma.ChapterUpdateWithoutJointInput, Prisma.ChapterUncheckedUpdateWithoutJointInput>
+  create: Prisma.XOR<Prisma.ChapterCreateWithoutJointInput, Prisma.ChapterUncheckedCreateWithoutJointInput>
+}
+
+export type ChapterUpdateWithWhereUniqueWithoutJointInput = {
+  where: Prisma.ChapterWhereUniqueInput
+  data: Prisma.XOR<Prisma.ChapterUpdateWithoutJointInput, Prisma.ChapterUncheckedUpdateWithoutJointInput>
+}
+
+export type ChapterUpdateManyWithWhereWithoutJointInput = {
+  where: Prisma.ChapterScalarWhereInput
+  data: Prisma.XOR<Prisma.ChapterUpdateManyMutationInput, Prisma.ChapterUncheckedUpdateManyWithoutJointInput>
+}
+
+export type ChapterCreateManyUploadedByOrganizationInput = {
+  id?: number
+  number: number
+  title: string
+  imageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  mangaCustomId?: number | null
+  jointId?: number | null
+  views?: number
+  releasedAt?: Date | string | null
+  isUnreleased?: boolean
+  deletedAt?: Date | string | null
+}
+
+export type ChapterUpdateWithoutUploadedByOrganizationInput = {
+  number?: Prisma.FloatFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  views?: Prisma.IntFieldUpdateOperationsInput | number
+  releasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  mangaCustom?: Prisma.MangaCustomUpdateOneWithoutChaptersNestedInput
+  joint?: Prisma.MangaJointUpdateOneWithoutChaptersNestedInput
+  workedByOrganizations?: Prisma.OrganizationUpdateManyWithoutWorkedOnJointChaptersNestedInput
+  pages?: Prisma.PageUpdateManyWithoutChapterNestedInput
+  userHistory?: Prisma.UserChapterHistoryUpdateManyWithoutChapterNestedInput
+  viewsHistory?: Prisma.ViewsHistoryUpdateManyWithoutChapterNestedInput
+}
+
+export type ChapterUncheckedUpdateWithoutUploadedByOrganizationInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  number?: Prisma.FloatFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  views?: Prisma.IntFieldUpdateOperationsInput | number
+  releasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  workedByOrganizations?: Prisma.OrganizationUncheckedUpdateManyWithoutWorkedOnJointChaptersNestedInput
+  pages?: Prisma.PageUncheckedUpdateManyWithoutChapterNestedInput
+  userHistory?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutChapterNestedInput
+  viewsHistory?: Prisma.ViewsHistoryUncheckedUpdateManyWithoutChapterNestedInput
+}
+
+export type ChapterUncheckedUpdateManyWithoutUploadedByOrganizationInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  number?: Prisma.FloatFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  views?: Prisma.IntFieldUpdateOperationsInput | number
+  releasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type ChapterUpdateWithoutWorkedByOrganizationsInput = {
+  number?: Prisma.FloatFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  views?: Prisma.IntFieldUpdateOperationsInput | number
+  releasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  mangaCustom?: Prisma.MangaCustomUpdateOneWithoutChaptersNestedInput
+  joint?: Prisma.MangaJointUpdateOneWithoutChaptersNestedInput
+  uploadedByOrganization?: Prisma.OrganizationUpdateOneWithoutUploadedJointChaptersNestedInput
+  pages?: Prisma.PageUpdateManyWithoutChapterNestedInput
+  userHistory?: Prisma.UserChapterHistoryUpdateManyWithoutChapterNestedInput
+  viewsHistory?: Prisma.ViewsHistoryUpdateManyWithoutChapterNestedInput
+}
+
+export type ChapterUncheckedUpdateWithoutWorkedByOrganizationsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  number?: Prisma.FloatFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  uploadedByOrganizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   releasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   pages?: Prisma.PageUncheckedUpdateManyWithoutChapterNestedInput
   userHistory?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutChapterNestedInput
+  viewsHistory?: Prisma.ViewsHistoryUncheckedUpdateManyWithoutChapterNestedInput
+}
+
+export type ChapterUncheckedUpdateManyWithoutWorkedByOrganizationsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  number?: Prisma.FloatFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  uploadedByOrganizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  views?: Prisma.IntFieldUpdateOperationsInput | number
+  releasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ChapterCreateManyMangaCustomInput = {
@@ -954,6 +1497,8 @@ export type ChapterCreateManyMangaCustomInput = {
   imageUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  jointId?: number | null
+  uploadedByOrganizationId?: number | null
   views?: number
   releasedAt?: Date | string | null
   isUnreleased?: boolean
@@ -970,6 +1515,9 @@ export type ChapterUpdateWithoutMangaCustomInput = {
   releasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  joint?: Prisma.MangaJointUpdateOneWithoutChaptersNestedInput
+  uploadedByOrganization?: Prisma.OrganizationUpdateOneWithoutUploadedJointChaptersNestedInput
+  workedByOrganizations?: Prisma.OrganizationUpdateManyWithoutWorkedOnJointChaptersNestedInput
   pages?: Prisma.PageUpdateManyWithoutChapterNestedInput
   userHistory?: Prisma.UserChapterHistoryUpdateManyWithoutChapterNestedInput
   viewsHistory?: Prisma.ViewsHistoryUpdateManyWithoutChapterNestedInput
@@ -982,10 +1530,13 @@ export type ChapterUncheckedUpdateWithoutMangaCustomInput = {
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  uploadedByOrganizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   releasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  workedByOrganizations?: Prisma.OrganizationUncheckedUpdateManyWithoutWorkedOnJointChaptersNestedInput
   pages?: Prisma.PageUncheckedUpdateManyWithoutChapterNestedInput
   userHistory?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutChapterNestedInput
   viewsHistory?: Prisma.ViewsHistoryUncheckedUpdateManyWithoutChapterNestedInput
@@ -998,6 +1549,75 @@ export type ChapterUncheckedUpdateManyWithoutMangaCustomInput = {
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  uploadedByOrganizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  views?: Prisma.IntFieldUpdateOperationsInput | number
+  releasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type ChapterCreateManyJointInput = {
+  id?: number
+  number: number
+  title: string
+  imageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  mangaCustomId?: number | null
+  uploadedByOrganizationId?: number | null
+  views?: number
+  releasedAt?: Date | string | null
+  isUnreleased?: boolean
+  deletedAt?: Date | string | null
+}
+
+export type ChapterUpdateWithoutJointInput = {
+  number?: Prisma.FloatFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  views?: Prisma.IntFieldUpdateOperationsInput | number
+  releasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  mangaCustom?: Prisma.MangaCustomUpdateOneWithoutChaptersNestedInput
+  uploadedByOrganization?: Prisma.OrganizationUpdateOneWithoutUploadedJointChaptersNestedInput
+  workedByOrganizations?: Prisma.OrganizationUpdateManyWithoutWorkedOnJointChaptersNestedInput
+  pages?: Prisma.PageUpdateManyWithoutChapterNestedInput
+  userHistory?: Prisma.UserChapterHistoryUpdateManyWithoutChapterNestedInput
+  viewsHistory?: Prisma.ViewsHistoryUpdateManyWithoutChapterNestedInput
+}
+
+export type ChapterUncheckedUpdateWithoutJointInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  number?: Prisma.FloatFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  uploadedByOrganizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  views?: Prisma.IntFieldUpdateOperationsInput | number
+  releasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  workedByOrganizations?: Prisma.OrganizationUncheckedUpdateManyWithoutWorkedOnJointChaptersNestedInput
+  pages?: Prisma.PageUncheckedUpdateManyWithoutChapterNestedInput
+  userHistory?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutChapterNestedInput
+  viewsHistory?: Prisma.ViewsHistoryUncheckedUpdateManyWithoutChapterNestedInput
+}
+
+export type ChapterUncheckedUpdateManyWithoutJointInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  number?: Prisma.FloatFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  uploadedByOrganizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   releasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1010,12 +1630,14 @@ export type ChapterUncheckedUpdateManyWithoutMangaCustomInput = {
  */
 
 export type ChapterCountOutputType = {
+  workedByOrganizations: number
   pages: number
   userHistory: number
   viewsHistory: number
 }
 
 export type ChapterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  workedByOrganizations?: boolean | ChapterCountOutputTypeCountWorkedByOrganizationsArgs
   pages?: boolean | ChapterCountOutputTypeCountPagesArgs
   userHistory?: boolean | ChapterCountOutputTypeCountUserHistoryArgs
   viewsHistory?: boolean | ChapterCountOutputTypeCountViewsHistoryArgs
@@ -1029,6 +1651,13 @@ export type ChapterCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exte
    * Select specific fields to fetch from the ChapterCountOutputType
    */
   select?: Prisma.ChapterCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * ChapterCountOutputType without action
+ */
+export type ChapterCountOutputTypeCountWorkedByOrganizationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OrganizationWhereInput
 }
 
 /**
@@ -1061,11 +1690,16 @@ export type ChapterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   createdAt?: boolean
   updatedAt?: boolean
   mangaCustomId?: boolean
+  jointId?: boolean
+  uploadedByOrganizationId?: boolean
   views?: boolean
   releasedAt?: boolean
   isUnreleased?: boolean
   deletedAt?: boolean
-  mangaCustom?: boolean | Prisma.MangaCustomDefaultArgs<ExtArgs>
+  mangaCustom?: boolean | Prisma.Chapter$mangaCustomArgs<ExtArgs>
+  joint?: boolean | Prisma.Chapter$jointArgs<ExtArgs>
+  uploadedByOrganization?: boolean | Prisma.Chapter$uploadedByOrganizationArgs<ExtArgs>
+  workedByOrganizations?: boolean | Prisma.Chapter$workedByOrganizationsArgs<ExtArgs>
   pages?: boolean | Prisma.Chapter$pagesArgs<ExtArgs>
   userHistory?: boolean | Prisma.Chapter$userHistoryArgs<ExtArgs>
   viewsHistory?: boolean | Prisma.Chapter$viewsHistoryArgs<ExtArgs>
@@ -1080,11 +1714,15 @@ export type ChapterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   createdAt?: boolean
   updatedAt?: boolean
   mangaCustomId?: boolean
+  jointId?: boolean
+  uploadedByOrganizationId?: boolean
   views?: boolean
   releasedAt?: boolean
   isUnreleased?: boolean
   deletedAt?: boolean
-  mangaCustom?: boolean | Prisma.MangaCustomDefaultArgs<ExtArgs>
+  mangaCustom?: boolean | Prisma.Chapter$mangaCustomArgs<ExtArgs>
+  joint?: boolean | Prisma.Chapter$jointArgs<ExtArgs>
+  uploadedByOrganization?: boolean | Prisma.Chapter$uploadedByOrganizationArgs<ExtArgs>
 }, ExtArgs["result"]["chapter"]>
 
 export type ChapterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1095,11 +1733,15 @@ export type ChapterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   createdAt?: boolean
   updatedAt?: boolean
   mangaCustomId?: boolean
+  jointId?: boolean
+  uploadedByOrganizationId?: boolean
   views?: boolean
   releasedAt?: boolean
   isUnreleased?: boolean
   deletedAt?: boolean
-  mangaCustom?: boolean | Prisma.MangaCustomDefaultArgs<ExtArgs>
+  mangaCustom?: boolean | Prisma.Chapter$mangaCustomArgs<ExtArgs>
+  joint?: boolean | Prisma.Chapter$jointArgs<ExtArgs>
+  uploadedByOrganization?: boolean | Prisma.Chapter$uploadedByOrganizationArgs<ExtArgs>
 }, ExtArgs["result"]["chapter"]>
 
 export type ChapterSelectScalar = {
@@ -1110,31 +1752,43 @@ export type ChapterSelectScalar = {
   createdAt?: boolean
   updatedAt?: boolean
   mangaCustomId?: boolean
+  jointId?: boolean
+  uploadedByOrganizationId?: boolean
   views?: boolean
   releasedAt?: boolean
   isUnreleased?: boolean
   deletedAt?: boolean
 }
 
-export type ChapterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "number" | "title" | "imageUrl" | "createdAt" | "updatedAt" | "mangaCustomId" | "views" | "releasedAt" | "isUnreleased" | "deletedAt", ExtArgs["result"]["chapter"]>
+export type ChapterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "number" | "title" | "imageUrl" | "createdAt" | "updatedAt" | "mangaCustomId" | "jointId" | "uploadedByOrganizationId" | "views" | "releasedAt" | "isUnreleased" | "deletedAt", ExtArgs["result"]["chapter"]>
 export type ChapterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  mangaCustom?: boolean | Prisma.MangaCustomDefaultArgs<ExtArgs>
+  mangaCustom?: boolean | Prisma.Chapter$mangaCustomArgs<ExtArgs>
+  joint?: boolean | Prisma.Chapter$jointArgs<ExtArgs>
+  uploadedByOrganization?: boolean | Prisma.Chapter$uploadedByOrganizationArgs<ExtArgs>
+  workedByOrganizations?: boolean | Prisma.Chapter$workedByOrganizationsArgs<ExtArgs>
   pages?: boolean | Prisma.Chapter$pagesArgs<ExtArgs>
   userHistory?: boolean | Prisma.Chapter$userHistoryArgs<ExtArgs>
   viewsHistory?: boolean | Prisma.Chapter$viewsHistoryArgs<ExtArgs>
   _count?: boolean | Prisma.ChapterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ChapterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  mangaCustom?: boolean | Prisma.MangaCustomDefaultArgs<ExtArgs>
+  mangaCustom?: boolean | Prisma.Chapter$mangaCustomArgs<ExtArgs>
+  joint?: boolean | Prisma.Chapter$jointArgs<ExtArgs>
+  uploadedByOrganization?: boolean | Prisma.Chapter$uploadedByOrganizationArgs<ExtArgs>
 }
 export type ChapterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  mangaCustom?: boolean | Prisma.MangaCustomDefaultArgs<ExtArgs>
+  mangaCustom?: boolean | Prisma.Chapter$mangaCustomArgs<ExtArgs>
+  joint?: boolean | Prisma.Chapter$jointArgs<ExtArgs>
+  uploadedByOrganization?: boolean | Prisma.Chapter$uploadedByOrganizationArgs<ExtArgs>
 }
 
 export type $ChapterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Chapter"
   objects: {
-    mangaCustom: Prisma.$MangaCustomPayload<ExtArgs>
+    mangaCustom: Prisma.$MangaCustomPayload<ExtArgs> | null
+    joint: Prisma.$MangaJointPayload<ExtArgs> | null
+    uploadedByOrganization: Prisma.$OrganizationPayload<ExtArgs> | null
+    workedByOrganizations: Prisma.$OrganizationPayload<ExtArgs>[]
     pages: Prisma.$PagePayload<ExtArgs>[]
     userHistory: Prisma.$UserChapterHistoryPayload<ExtArgs>[]
     viewsHistory: Prisma.$ViewsHistoryPayload<ExtArgs>[]
@@ -1146,7 +1800,9 @@ export type $ChapterPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     imageUrl: string | null
     createdAt: Date
     updatedAt: Date
-    mangaCustomId: number
+    mangaCustomId: number | null
+    jointId: number | null
+    uploadedByOrganizationId: number | null
     views: number
     releasedAt: Date | null
     isUnreleased: boolean
@@ -1545,7 +2201,10 @@ readonly fields: ChapterFieldRefs;
  */
 export interface Prisma__ChapterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  mangaCustom<T extends Prisma.MangaCustomDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MangaCustomDefaultArgs<ExtArgs>>): Prisma.Prisma__MangaCustomClient<runtime.Types.Result.GetResult<Prisma.$MangaCustomPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  mangaCustom<T extends Prisma.Chapter$mangaCustomArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Chapter$mangaCustomArgs<ExtArgs>>): Prisma.Prisma__MangaCustomClient<runtime.Types.Result.GetResult<Prisma.$MangaCustomPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  joint<T extends Prisma.Chapter$jointArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Chapter$jointArgs<ExtArgs>>): Prisma.Prisma__MangaJointClient<runtime.Types.Result.GetResult<Prisma.$MangaJointPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  uploadedByOrganization<T extends Prisma.Chapter$uploadedByOrganizationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Chapter$uploadedByOrganizationArgs<ExtArgs>>): Prisma.Prisma__OrganizationClient<runtime.Types.Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  workedByOrganizations<T extends Prisma.Chapter$workedByOrganizationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Chapter$workedByOrganizationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   pages<T extends Prisma.Chapter$pagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Chapter$pagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   userHistory<T extends Prisma.Chapter$userHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Chapter$userHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserChapterHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   viewsHistory<T extends Prisma.Chapter$viewsHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Chapter$viewsHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ViewsHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -1585,6 +2244,8 @@ export interface ChapterFieldRefs {
   readonly createdAt: Prisma.FieldRef<"Chapter", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Chapter", 'DateTime'>
   readonly mangaCustomId: Prisma.FieldRef<"Chapter", 'Int'>
+  readonly jointId: Prisma.FieldRef<"Chapter", 'Int'>
+  readonly uploadedByOrganizationId: Prisma.FieldRef<"Chapter", 'Int'>
   readonly views: Prisma.FieldRef<"Chapter", 'Int'>
   readonly releasedAt: Prisma.FieldRef<"Chapter", 'DateTime'>
   readonly isUnreleased: Prisma.FieldRef<"Chapter", 'Boolean'>
@@ -1982,6 +2643,87 @@ export type ChapterDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Limit how many Chapters to delete.
    */
   limit?: number
+}
+
+/**
+ * Chapter.mangaCustom
+ */
+export type Chapter$mangaCustomArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MangaCustom
+   */
+  select?: Prisma.MangaCustomSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MangaCustom
+   */
+  omit?: Prisma.MangaCustomOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MangaCustomInclude<ExtArgs> | null
+  where?: Prisma.MangaCustomWhereInput
+}
+
+/**
+ * Chapter.joint
+ */
+export type Chapter$jointArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MangaJoint
+   */
+  select?: Prisma.MangaJointSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MangaJoint
+   */
+  omit?: Prisma.MangaJointOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MangaJointInclude<ExtArgs> | null
+  where?: Prisma.MangaJointWhereInput
+}
+
+/**
+ * Chapter.uploadedByOrganization
+ */
+export type Chapter$uploadedByOrganizationArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Organization
+   */
+  select?: Prisma.OrganizationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Organization
+   */
+  omit?: Prisma.OrganizationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrganizationInclude<ExtArgs> | null
+  where?: Prisma.OrganizationWhereInput
+}
+
+/**
+ * Chapter.workedByOrganizations
+ */
+export type Chapter$workedByOrganizationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Organization
+   */
+  select?: Prisma.OrganizationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Organization
+   */
+  omit?: Prisma.OrganizationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrganizationInclude<ExtArgs> | null
+  where?: Prisma.OrganizationWhereInput
+  orderBy?: Prisma.OrganizationOrderByWithRelationInput | Prisma.OrganizationOrderByWithRelationInput[]
+  cursor?: Prisma.OrganizationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OrganizationScalarFieldEnum | Prisma.OrganizationScalarFieldEnum[]
 }
 
 /**

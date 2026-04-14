@@ -291,6 +291,7 @@ export type MangaWhereInput = {
   bookType?: Prisma.XOR<Prisma.BookTypeScalarRelationFilter, Prisma.BookTypeWhereInput>
   demography?: Prisma.XOR<Prisma.DemographyScalarRelationFilter, Prisma.DemographyWhereInput>
   custom?: Prisma.MangaCustomListRelationFilter
+  joints?: Prisma.MangaJointListRelationFilter
   authors?: Prisma.AuthorListRelationFilter
 }
 
@@ -311,6 +312,7 @@ export type MangaOrderByWithRelationInput = {
   bookType?: Prisma.BookTypeOrderByWithRelationInput
   demography?: Prisma.DemographyOrderByWithRelationInput
   custom?: Prisma.MangaCustomOrderByRelationAggregateInput
+  joints?: Prisma.MangaJointOrderByRelationAggregateInput
   authors?: Prisma.AuthorOrderByRelationAggregateInput
 }
 
@@ -334,6 +336,7 @@ export type MangaWhereUniqueInput = Prisma.AtLeast<{
   bookType?: Prisma.XOR<Prisma.BookTypeScalarRelationFilter, Prisma.BookTypeWhereInput>
   demography?: Prisma.XOR<Prisma.DemographyScalarRelationFilter, Prisma.DemographyWhereInput>
   custom?: Prisma.MangaCustomListRelationFilter
+  joints?: Prisma.MangaJointListRelationFilter
   authors?: Prisma.AuthorListRelationFilter
 }, "id" | "title" | "slug">
 
@@ -391,6 +394,7 @@ export type MangaCreateInput = {
   bookType: Prisma.BookTypeCreateNestedOneWithoutMangaInput
   demography: Prisma.DemographyCreateNestedOneWithoutMangasInput
   custom?: Prisma.MangaCustomCreateNestedManyWithoutMangaInput
+  joints?: Prisma.MangaJointCreateNestedManyWithoutMangaInput
   authors?: Prisma.AuthorCreateNestedManyWithoutMangasInput
 }
 
@@ -409,6 +413,7 @@ export type MangaUncheckedCreateInput = {
   bannerUrl?: string | null
   bookTypeId: number
   custom?: Prisma.MangaCustomUncheckedCreateNestedManyWithoutMangaInput
+  joints?: Prisma.MangaJointUncheckedCreateNestedManyWithoutMangaInput
   authors?: Prisma.AuthorUncheckedCreateNestedManyWithoutMangasInput
 }
 
@@ -426,6 +431,7 @@ export type MangaUpdateInput = {
   bookType?: Prisma.BookTypeUpdateOneRequiredWithoutMangaNestedInput
   demography?: Prisma.DemographyUpdateOneRequiredWithoutMangasNestedInput
   custom?: Prisma.MangaCustomUpdateManyWithoutMangaNestedInput
+  joints?: Prisma.MangaJointUpdateManyWithoutMangaNestedInput
   authors?: Prisma.AuthorUpdateManyWithoutMangasNestedInput
 }
 
@@ -444,6 +450,7 @@ export type MangaUncheckedUpdateInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bookTypeId?: Prisma.IntFieldUpdateOperationsInput | number
   custom?: Prisma.MangaCustomUncheckedUpdateManyWithoutMangaNestedInput
+  joints?: Prisma.MangaJointUncheckedUpdateManyWithoutMangaNestedInput
   authors?: Prisma.AuthorUncheckedUpdateManyWithoutMangasNestedInput
 }
 
@@ -703,6 +710,20 @@ export type MangaUncheckedUpdateManyWithoutDemographyNestedInput = {
   deleteMany?: Prisma.MangaScalarWhereInput | Prisma.MangaScalarWhereInput[]
 }
 
+export type MangaCreateNestedOneWithoutJointsInput = {
+  create?: Prisma.XOR<Prisma.MangaCreateWithoutJointsInput, Prisma.MangaUncheckedCreateWithoutJointsInput>
+  connectOrCreate?: Prisma.MangaCreateOrConnectWithoutJointsInput
+  connect?: Prisma.MangaWhereUniqueInput
+}
+
+export type MangaUpdateOneRequiredWithoutJointsNestedInput = {
+  create?: Prisma.XOR<Prisma.MangaCreateWithoutJointsInput, Prisma.MangaUncheckedCreateWithoutJointsInput>
+  connectOrCreate?: Prisma.MangaCreateOrConnectWithoutJointsInput
+  upsert?: Prisma.MangaUpsertWithoutJointsInput
+  connect?: Prisma.MangaWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MangaUpdateToOneWithWhereWithoutJointsInput, Prisma.MangaUpdateWithoutJointsInput>, Prisma.MangaUncheckedUpdateWithoutJointsInput>
+}
+
 export type MangaCreateWithoutAuthorsInput = {
   title: string
   slug: string
@@ -717,6 +738,7 @@ export type MangaCreateWithoutAuthorsInput = {
   bookType: Prisma.BookTypeCreateNestedOneWithoutMangaInput
   demography: Prisma.DemographyCreateNestedOneWithoutMangasInput
   custom?: Prisma.MangaCustomCreateNestedManyWithoutMangaInput
+  joints?: Prisma.MangaJointCreateNestedManyWithoutMangaInput
 }
 
 export type MangaUncheckedCreateWithoutAuthorsInput = {
@@ -734,6 +756,7 @@ export type MangaUncheckedCreateWithoutAuthorsInput = {
   bannerUrl?: string | null
   bookTypeId: number
   custom?: Prisma.MangaCustomUncheckedCreateNestedManyWithoutMangaInput
+  joints?: Prisma.MangaJointUncheckedCreateNestedManyWithoutMangaInput
 }
 
 export type MangaCreateOrConnectWithoutAuthorsInput = {
@@ -789,6 +812,7 @@ export type MangaCreateWithoutBookTypeInput = {
   bannerUrl?: string | null
   demography: Prisma.DemographyCreateNestedOneWithoutMangasInput
   custom?: Prisma.MangaCustomCreateNestedManyWithoutMangaInput
+  joints?: Prisma.MangaJointCreateNestedManyWithoutMangaInput
   authors?: Prisma.AuthorCreateNestedManyWithoutMangasInput
 }
 
@@ -806,6 +830,7 @@ export type MangaUncheckedCreateWithoutBookTypeInput = {
   updatedAt?: Date | string
   bannerUrl?: string | null
   custom?: Prisma.MangaCustomUncheckedCreateNestedManyWithoutMangaInput
+  joints?: Prisma.MangaJointUncheckedCreateNestedManyWithoutMangaInput
   authors?: Prisma.AuthorUncheckedCreateNestedManyWithoutMangasInput
 }
 
@@ -848,6 +873,7 @@ export type MangaCreateWithoutCustomInput = {
   bannerUrl?: string | null
   bookType: Prisma.BookTypeCreateNestedOneWithoutMangaInput
   demography: Prisma.DemographyCreateNestedOneWithoutMangasInput
+  joints?: Prisma.MangaJointCreateNestedManyWithoutMangaInput
   authors?: Prisma.AuthorCreateNestedManyWithoutMangasInput
 }
 
@@ -865,6 +891,7 @@ export type MangaUncheckedCreateWithoutCustomInput = {
   updatedAt?: Date | string
   bannerUrl?: string | null
   bookTypeId: number
+  joints?: Prisma.MangaJointUncheckedCreateNestedManyWithoutMangaInput
   authors?: Prisma.AuthorUncheckedCreateNestedManyWithoutMangasInput
 }
 
@@ -897,6 +924,7 @@ export type MangaUpdateWithoutCustomInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bookType?: Prisma.BookTypeUpdateOneRequiredWithoutMangaNestedInput
   demography?: Prisma.DemographyUpdateOneRequiredWithoutMangasNestedInput
+  joints?: Prisma.MangaJointUpdateManyWithoutMangaNestedInput
   authors?: Prisma.AuthorUpdateManyWithoutMangasNestedInput
 }
 
@@ -914,6 +942,7 @@ export type MangaUncheckedUpdateWithoutCustomInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bookTypeId?: Prisma.IntFieldUpdateOperationsInput | number
+  joints?: Prisma.MangaJointUncheckedUpdateManyWithoutMangaNestedInput
   authors?: Prisma.AuthorUncheckedUpdateManyWithoutMangasNestedInput
 }
 
@@ -930,6 +959,7 @@ export type MangaCreateWithoutDemographyInput = {
   bannerUrl?: string | null
   bookType: Prisma.BookTypeCreateNestedOneWithoutMangaInput
   custom?: Prisma.MangaCustomCreateNestedManyWithoutMangaInput
+  joints?: Prisma.MangaJointCreateNestedManyWithoutMangaInput
   authors?: Prisma.AuthorCreateNestedManyWithoutMangasInput
 }
 
@@ -947,6 +977,7 @@ export type MangaUncheckedCreateWithoutDemographyInput = {
   bannerUrl?: string | null
   bookTypeId: number
   custom?: Prisma.MangaCustomUncheckedCreateNestedManyWithoutMangaInput
+  joints?: Prisma.MangaJointUncheckedCreateNestedManyWithoutMangaInput
   authors?: Prisma.AuthorUncheckedCreateNestedManyWithoutMangasInput
 }
 
@@ -976,6 +1007,92 @@ export type MangaUpdateManyWithWhereWithoutDemographyInput = {
   data: Prisma.XOR<Prisma.MangaUpdateManyMutationInput, Prisma.MangaUncheckedUpdateManyWithoutDemographyInput>
 }
 
+export type MangaCreateWithoutJointsInput = {
+  title: string
+  slug: string
+  shortDescription?: string | null
+  description?: string | null
+  imageUrl?: string | null
+  releasedAt?: Date | string | null
+  nextChapterAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  bannerUrl?: string | null
+  bookType: Prisma.BookTypeCreateNestedOneWithoutMangaInput
+  demography: Prisma.DemographyCreateNestedOneWithoutMangasInput
+  custom?: Prisma.MangaCustomCreateNestedManyWithoutMangaInput
+  authors?: Prisma.AuthorCreateNestedManyWithoutMangasInput
+}
+
+export type MangaUncheckedCreateWithoutJointsInput = {
+  id?: number
+  demographyId: number
+  title: string
+  slug: string
+  shortDescription?: string | null
+  description?: string | null
+  imageUrl?: string | null
+  releasedAt?: Date | string | null
+  nextChapterAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  bannerUrl?: string | null
+  bookTypeId: number
+  custom?: Prisma.MangaCustomUncheckedCreateNestedManyWithoutMangaInput
+  authors?: Prisma.AuthorUncheckedCreateNestedManyWithoutMangasInput
+}
+
+export type MangaCreateOrConnectWithoutJointsInput = {
+  where: Prisma.MangaWhereUniqueInput
+  create: Prisma.XOR<Prisma.MangaCreateWithoutJointsInput, Prisma.MangaUncheckedCreateWithoutJointsInput>
+}
+
+export type MangaUpsertWithoutJointsInput = {
+  update: Prisma.XOR<Prisma.MangaUpdateWithoutJointsInput, Prisma.MangaUncheckedUpdateWithoutJointsInput>
+  create: Prisma.XOR<Prisma.MangaCreateWithoutJointsInput, Prisma.MangaUncheckedCreateWithoutJointsInput>
+  where?: Prisma.MangaWhereInput
+}
+
+export type MangaUpdateToOneWithWhereWithoutJointsInput = {
+  where?: Prisma.MangaWhereInput
+  data: Prisma.XOR<Prisma.MangaUpdateWithoutJointsInput, Prisma.MangaUncheckedUpdateWithoutJointsInput>
+}
+
+export type MangaUpdateWithoutJointsInput = {
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  releasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bookType?: Prisma.BookTypeUpdateOneRequiredWithoutMangaNestedInput
+  demography?: Prisma.DemographyUpdateOneRequiredWithoutMangasNestedInput
+  custom?: Prisma.MangaCustomUpdateManyWithoutMangaNestedInput
+  authors?: Prisma.AuthorUpdateManyWithoutMangasNestedInput
+}
+
+export type MangaUncheckedUpdateWithoutJointsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  demographyId?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  releasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bookTypeId?: Prisma.IntFieldUpdateOperationsInput | number
+  custom?: Prisma.MangaCustomUncheckedUpdateManyWithoutMangaNestedInput
+  authors?: Prisma.AuthorUncheckedUpdateManyWithoutMangasNestedInput
+}
+
 export type MangaUpdateWithoutAuthorsInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
@@ -990,6 +1107,7 @@ export type MangaUpdateWithoutAuthorsInput = {
   bookType?: Prisma.BookTypeUpdateOneRequiredWithoutMangaNestedInput
   demography?: Prisma.DemographyUpdateOneRequiredWithoutMangasNestedInput
   custom?: Prisma.MangaCustomUpdateManyWithoutMangaNestedInput
+  joints?: Prisma.MangaJointUpdateManyWithoutMangaNestedInput
 }
 
 export type MangaUncheckedUpdateWithoutAuthorsInput = {
@@ -1007,6 +1125,7 @@ export type MangaUncheckedUpdateWithoutAuthorsInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bookTypeId?: Prisma.IntFieldUpdateOperationsInput | number
   custom?: Prisma.MangaCustomUncheckedUpdateManyWithoutMangaNestedInput
+  joints?: Prisma.MangaJointUncheckedUpdateManyWithoutMangaNestedInput
 }
 
 export type MangaUncheckedUpdateManyWithoutAuthorsInput = {
@@ -1053,6 +1172,7 @@ export type MangaUpdateWithoutBookTypeInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   demography?: Prisma.DemographyUpdateOneRequiredWithoutMangasNestedInput
   custom?: Prisma.MangaCustomUpdateManyWithoutMangaNestedInput
+  joints?: Prisma.MangaJointUpdateManyWithoutMangaNestedInput
   authors?: Prisma.AuthorUpdateManyWithoutMangasNestedInput
 }
 
@@ -1070,6 +1190,7 @@ export type MangaUncheckedUpdateWithoutBookTypeInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   custom?: Prisma.MangaCustomUncheckedUpdateManyWithoutMangaNestedInput
+  joints?: Prisma.MangaJointUncheckedUpdateManyWithoutMangaNestedInput
   authors?: Prisma.AuthorUncheckedUpdateManyWithoutMangasNestedInput
 }
 
@@ -1116,6 +1237,7 @@ export type MangaUpdateWithoutDemographyInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bookType?: Prisma.BookTypeUpdateOneRequiredWithoutMangaNestedInput
   custom?: Prisma.MangaCustomUpdateManyWithoutMangaNestedInput
+  joints?: Prisma.MangaJointUpdateManyWithoutMangaNestedInput
   authors?: Prisma.AuthorUpdateManyWithoutMangasNestedInput
 }
 
@@ -1133,6 +1255,7 @@ export type MangaUncheckedUpdateWithoutDemographyInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bookTypeId?: Prisma.IntFieldUpdateOperationsInput | number
   custom?: Prisma.MangaCustomUncheckedUpdateManyWithoutMangaNestedInput
+  joints?: Prisma.MangaJointUncheckedUpdateManyWithoutMangaNestedInput
   authors?: Prisma.AuthorUncheckedUpdateManyWithoutMangasNestedInput
 }
 
@@ -1158,11 +1281,13 @@ export type MangaUncheckedUpdateManyWithoutDemographyInput = {
 
 export type MangaCountOutputType = {
   custom: number
+  joints: number
   authors: number
 }
 
 export type MangaCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   custom?: boolean | MangaCountOutputTypeCountCustomArgs
+  joints?: boolean | MangaCountOutputTypeCountJointsArgs
   authors?: boolean | MangaCountOutputTypeCountAuthorsArgs
 }
 
@@ -1181,6 +1306,13 @@ export type MangaCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extens
  */
 export type MangaCountOutputTypeCountCustomArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.MangaCustomWhereInput
+}
+
+/**
+ * MangaCountOutputType without action
+ */
+export type MangaCountOutputTypeCountJointsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MangaJointWhereInput
 }
 
 /**
@@ -1208,6 +1340,7 @@ export type MangaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   bookType?: boolean | Prisma.BookTypeDefaultArgs<ExtArgs>
   demography?: boolean | Prisma.DemographyDefaultArgs<ExtArgs>
   custom?: boolean | Prisma.Manga$customArgs<ExtArgs>
+  joints?: boolean | Prisma.Manga$jointsArgs<ExtArgs>
   authors?: boolean | Prisma.Manga$authorsArgs<ExtArgs>
   _count?: boolean | Prisma.MangaCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["manga"]>
@@ -1269,6 +1402,7 @@ export type MangaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   bookType?: boolean | Prisma.BookTypeDefaultArgs<ExtArgs>
   demography?: boolean | Prisma.DemographyDefaultArgs<ExtArgs>
   custom?: boolean | Prisma.Manga$customArgs<ExtArgs>
+  joints?: boolean | Prisma.Manga$jointsArgs<ExtArgs>
   authors?: boolean | Prisma.Manga$authorsArgs<ExtArgs>
   _count?: boolean | Prisma.MangaCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -1287,6 +1421,7 @@ export type $MangaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     bookType: Prisma.$BookTypePayload<ExtArgs>
     demography: Prisma.$DemographyPayload<ExtArgs>
     custom: Prisma.$MangaCustomPayload<ExtArgs>[]
+    joints: Prisma.$MangaJointPayload<ExtArgs>[]
     authors: Prisma.$AuthorPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1700,6 +1835,7 @@ export interface Prisma__MangaClient<T, Null = never, ExtArgs extends runtime.Ty
   bookType<T extends Prisma.BookTypeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BookTypeDefaultArgs<ExtArgs>>): Prisma.Prisma__BookTypeClient<runtime.Types.Result.GetResult<Prisma.$BookTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   demography<T extends Prisma.DemographyDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DemographyDefaultArgs<ExtArgs>>): Prisma.Prisma__DemographyClient<runtime.Types.Result.GetResult<Prisma.$DemographyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   custom<T extends Prisma.Manga$customArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Manga$customArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MangaCustomPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  joints<T extends Prisma.Manga$jointsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Manga$jointsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MangaJointPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   authors<T extends Prisma.Manga$authorsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Manga$authorsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuthorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2160,6 +2296,30 @@ export type Manga$customArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
   take?: number
   skip?: number
   distinct?: Prisma.MangaCustomScalarFieldEnum | Prisma.MangaCustomScalarFieldEnum[]
+}
+
+/**
+ * Manga.joints
+ */
+export type Manga$jointsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MangaJoint
+   */
+  select?: Prisma.MangaJointSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MangaJoint
+   */
+  omit?: Prisma.MangaJointOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MangaJointInclude<ExtArgs> | null
+  where?: Prisma.MangaJointWhereInput
+  orderBy?: Prisma.MangaJointOrderByWithRelationInput | Prisma.MangaJointOrderByWithRelationInput[]
+  cursor?: Prisma.MangaJointWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MangaJointScalarFieldEnum | Prisma.MangaJointScalarFieldEnum[]
 }
 
 /**

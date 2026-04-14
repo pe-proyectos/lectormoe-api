@@ -81,6 +81,9 @@ model Organization {
   rankings                                     Ranking[]
   subscriptions                                Subscription[]
   subscriptionPlans                            SubscriptionPlan[]
+  jointMembers                                 JointMember[]
+  uploadedJointChapters                        Chapter[]     @relation("ChapterUploader")
+  workedOnJointChapters                        Chapter[]     @relation("ChapterWorkedBy")
 
   @@map("organization")
 }
@@ -241,6 +244,7 @@ model Manga {
   bookType         BookType      @relation(fields: [bookTypeId], references: [id])
   demography       Demography    @relation(fields: [demographyId], references: [id])
   custom           MangaCustom[]
+  joints           MangaJoint[]
   authors          Author[]      @relation("AuthorToManga")
 
   @@map("manga")
@@ -290,23 +294,29 @@ model MangaCustom {
 }
 
 model Chapter {
-  id            Int                  @id @default(autoincrement())
-  number        Float
-  title         String               @db.VarChar(256)
-  imageUrl      String?              @db.VarChar(256)
-  createdAt     DateTime             @default(now()) @db.Timestamp(6)
-  updatedAt     DateTime             @updatedAt
-  mangaCustomId Int
-  views         Int                  @default(0)
-  releasedAt    DateTime?            @db.Timestamp(6)
-  isUnreleased  Boolean              @default(false)
-  deletedAt     DateTime?
-  mangaCustom   MangaCustom          @relation(fields: [mangaCustomId], references: [id])
-  pages         Page[]
-  userHistory   UserChapterHistory[]
-  viewsHistory  ViewsHistory[]
+  id                        Int                  @id @default(autoincrement())
+  number                    Float
+  title                     String               @db.VarChar(256)
+  imageUrl                  String?              @db.VarChar(256)
+  createdAt                 DateTime             @default(now()) @db.Timestamp(6)
+  updatedAt                 DateTime             @updatedAt
+  mangaCustomId             Int?
+  jointId                   Int?
+  uploadedByOrganizationId  Int?
+  views                     Int                  @default(0)
+  releasedAt                DateTime?            @db.Timestamp(6)
+  isUnreleased              Boolean              @default(false)
+  deletedAt                 DateTime?
+  mangaCustom               MangaCustom?         @relation(fields: [mangaCustomId], references: [id])
+  joint                     MangaJoint?          @relation(fields: [jointId], references: [id])
+  uploadedByOrganization    Organization?        @relation("ChapterUploader", fields: [uploadedByOrganizationId], references: [id])
+  workedByOrganizations     Organization[]       @relation("ChapterWorkedBy")
+  pages                     Page[]
+  userHistory               UserChapterHistory[]
+  viewsHistory              ViewsHistory[]
 
   @@unique([number, mangaCustomId])
+  @@unique([number, jointId])
   @@map("chapter")
 }
 
@@ -710,4 +720,59 @@ model UserAchievement {
   @@unique([userId, achievementId])
   @@index([userId])
   @@map("user_achievement")
+}
+
+enum JointRole {
+  LEADER
+  UPLOADER
+  VIEWER
+}
+
+enum JointMemberStatus {
+  INVITED
+  ACCEPTED
+  REJECTED
+  EXPELLED
+}
+
+model MangaJoint {
+  id               Int           @id @default(autoincrement())
+  slug             String        @unique @db.VarChar(256)
+  mangaId          Int
+  manga            Manga         @relation(fields: [mangaId], references: [id])
+  title            String        @default("") @db.VarChar(512)
+  shortDescription String?       @db.VarChar(300)
+  description      String?
+  imageUrl         String?
+  bannerUrl        String?
+  status           String        @default("ongoing") @db.VarChar(64)
+  workType         String        @default("manga") @db.VarChar(64)
+  lastChapterAt    DateTime?
+  createdAt        DateTime      @default(now()) @db.Timestamp(6)
+  updatedAt        DateTime      @updatedAt
+  deletedAt        DateTime?
+  members          JointMember[]
+  chapters         Chapter[]
+
+  @@index([mangaId])
+  @@index([lastChapterAt])
+  @@map("manga_joint")
+}
+
+model JointMember {
+  id             Int               @id @default(autoincrement())
+  jointId        Int
+  joint          MangaJoint        @relation(fields: [jointId], references: [id])
+  organizationId Int
+  organization   Organization      @relation(fields: [organizationId], references: [id])
+  role           JointRole         @default(VIEWER)
+  status         JointMemberStatus @default(INVITED)
+  canEditJoint   Boolean           @default(false)
+  canInvite      Boolean           @default(false)
+  canExpel       Boolean           @default(false)
+  invitedAt      DateTime          @default(now()) @db.Timestamp(6)
+  respondedAt    DateTime?         @db.Timestamp(6)
+
+  @@unique([jointId, organizationId])
+  @@map("joint_member")
 }

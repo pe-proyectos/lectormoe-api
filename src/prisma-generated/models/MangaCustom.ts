@@ -829,14 +829,14 @@ export type MangaCustomSumOrderByAggregateInput = {
   views?: Prisma.SortOrder
 }
 
-export type MangaCustomScalarRelationFilter = {
-  is?: Prisma.MangaCustomWhereInput
-  isNot?: Prisma.MangaCustomWhereInput
-}
-
 export type MangaCustomNullableScalarRelationFilter = {
   is?: Prisma.MangaCustomWhereInput | null
   isNot?: Prisma.MangaCustomWhereInput | null
+}
+
+export type MangaCustomScalarRelationFilter = {
+  is?: Prisma.MangaCustomWhereInput
+  isNot?: Prisma.MangaCustomWhereInput
 }
 
 export type MangaCustomCreateNestedManyWithoutOrganizationInput = {
@@ -929,10 +929,12 @@ export type MangaCustomCreateNestedOneWithoutChaptersInput = {
   connect?: Prisma.MangaCustomWhereUniqueInput
 }
 
-export type MangaCustomUpdateOneRequiredWithoutChaptersNestedInput = {
+export type MangaCustomUpdateOneWithoutChaptersNestedInput = {
   create?: Prisma.XOR<Prisma.MangaCustomCreateWithoutChaptersInput, Prisma.MangaCustomUncheckedCreateWithoutChaptersInput>
   connectOrCreate?: Prisma.MangaCustomCreateOrConnectWithoutChaptersInput
   upsert?: Prisma.MangaCustomUpsertWithoutChaptersInput
+  disconnect?: Prisma.MangaCustomWhereInput | boolean
+  delete?: Prisma.MangaCustomWhereInput | boolean
   connect?: Prisma.MangaCustomWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.MangaCustomUpdateToOneWithWhereWithoutChaptersInput, Prisma.MangaCustomUpdateWithoutChaptersInput>, Prisma.MangaCustomUncheckedUpdateWithoutChaptersInput>
 }

@@ -417,7 +417,9 @@ export const ModelName = {
   EmailVerificationToken: 'EmailVerificationToken',
   UserDailyActivity: 'UserDailyActivity',
   Achievement: 'Achievement',
-  UserAchievement: 'UserAchievement'
+  UserAchievement: 'UserAchievement',
+  MangaJoint: 'MangaJoint',
+  JointMember: 'JointMember'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -433,7 +435,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "token" | "organization" | "user" | "permission" | "passwordResetToken" | "countryOptions" | "author" | "bookType" | "manga" | "mangaCustom" | "chapter" | "page" | "comment" | "commentLike" | "ranking" | "demography" | "genre" | "analytics" | "userChapterHistory" | "favorite" | "audit" | "viewsHistory" | "subscriptionPlan" | "subscription" | "organizationTransaction" | "organizationFollower" | "organizationRequest" | "emailPreference" | "emailLog" | "unsubscribeToken" | "emailVerificationToken" | "userDailyActivity" | "achievement" | "userAchievement"
+    modelProps: "token" | "organization" | "user" | "permission" | "passwordResetToken" | "countryOptions" | "author" | "bookType" | "manga" | "mangaCustom" | "chapter" | "page" | "comment" | "commentLike" | "ranking" | "demography" | "genre" | "analytics" | "userChapterHistory" | "favorite" | "audit" | "viewsHistory" | "subscriptionPlan" | "subscription" | "organizationTransaction" | "organizationFollower" | "organizationRequest" | "emailPreference" | "emailLog" | "unsubscribeToken" | "emailVerificationToken" | "userDailyActivity" | "achievement" | "userAchievement" | "mangaJoint" | "jointMember"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2953,6 +2955,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    MangaJoint: {
+      payload: Prisma.$MangaJointPayload<ExtArgs>
+      fields: Prisma.MangaJointFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MangaJointFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MangaJointPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MangaJointFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MangaJointPayload>
+        }
+        findFirst: {
+          args: Prisma.MangaJointFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MangaJointPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MangaJointFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MangaJointPayload>
+        }
+        findMany: {
+          args: Prisma.MangaJointFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MangaJointPayload>[]
+        }
+        create: {
+          args: Prisma.MangaJointCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MangaJointPayload>
+        }
+        createMany: {
+          args: Prisma.MangaJointCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.MangaJointCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MangaJointPayload>[]
+        }
+        delete: {
+          args: Prisma.MangaJointDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MangaJointPayload>
+        }
+        update: {
+          args: Prisma.MangaJointUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MangaJointPayload>
+        }
+        deleteMany: {
+          args: Prisma.MangaJointDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MangaJointUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.MangaJointUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MangaJointPayload>[]
+        }
+        upsert: {
+          args: Prisma.MangaJointUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MangaJointPayload>
+        }
+        aggregate: {
+          args: Prisma.MangaJointAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMangaJoint>
+        }
+        groupBy: {
+          args: Prisma.MangaJointGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MangaJointGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MangaJointCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MangaJointCountAggregateOutputType> | number
+        }
+      }
+    }
+    JointMember: {
+      payload: Prisma.$JointMemberPayload<ExtArgs>
+      fields: Prisma.JointMemberFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.JointMemberFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JointMemberPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.JointMemberFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JointMemberPayload>
+        }
+        findFirst: {
+          args: Prisma.JointMemberFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JointMemberPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.JointMemberFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JointMemberPayload>
+        }
+        findMany: {
+          args: Prisma.JointMemberFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JointMemberPayload>[]
+        }
+        create: {
+          args: Prisma.JointMemberCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JointMemberPayload>
+        }
+        createMany: {
+          args: Prisma.JointMemberCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.JointMemberCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JointMemberPayload>[]
+        }
+        delete: {
+          args: Prisma.JointMemberDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JointMemberPayload>
+        }
+        update: {
+          args: Prisma.JointMemberUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JointMemberPayload>
+        }
+        deleteMany: {
+          args: Prisma.JointMemberDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.JointMemberUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.JointMemberUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JointMemberPayload>[]
+        }
+        upsert: {
+          args: Prisma.JointMemberUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JointMemberPayload>
+        }
+        aggregate: {
+          args: Prisma.JointMemberAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateJointMember>
+        }
+        groupBy: {
+          args: Prisma.JointMemberGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.JointMemberGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.JointMemberCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.JointMemberCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -3228,6 +3378,8 @@ export const ChapterScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   mangaCustomId: 'mangaCustomId',
+  jointId: 'jointId',
+  uploadedByOrganizationId: 'uploadedByOrganizationId',
   views: 'views',
   releasedAt: 'releasedAt',
   isUnreleased: 'isUnreleased',
@@ -3593,6 +3745,42 @@ export const UserAchievementScalarFieldEnum = {
 export type UserAchievementScalarFieldEnum = (typeof UserAchievementScalarFieldEnum)[keyof typeof UserAchievementScalarFieldEnum]
 
 
+export const MangaJointScalarFieldEnum = {
+  id: 'id',
+  slug: 'slug',
+  mangaId: 'mangaId',
+  title: 'title',
+  shortDescription: 'shortDescription',
+  description: 'description',
+  imageUrl: 'imageUrl',
+  bannerUrl: 'bannerUrl',
+  status: 'status',
+  workType: 'workType',
+  lastChapterAt: 'lastChapterAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type MangaJointScalarFieldEnum = (typeof MangaJointScalarFieldEnum)[keyof typeof MangaJointScalarFieldEnum]
+
+
+export const JointMemberScalarFieldEnum = {
+  id: 'id',
+  jointId: 'jointId',
+  organizationId: 'organizationId',
+  role: 'role',
+  status: 'status',
+  canEditJoint: 'canEditJoint',
+  canInvite: 'canInvite',
+  canExpel: 'canExpel',
+  invitedAt: 'invitedAt',
+  respondedAt: 'respondedAt'
+} as const
+
+export type JointMemberScalarFieldEnum = (typeof JointMemberScalarFieldEnum)[keyof typeof JointMemberScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -3714,6 +3902,34 @@ export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'J
  * Reference to a field of type 'QueryMode'
  */
 export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
+
+
+/**
+ * Reference to a field of type 'JointRole'
+ */
+export type EnumJointRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'JointRole'>
+    
+
+
+/**
+ * Reference to a field of type 'JointRole[]'
+ */
+export type ListEnumJointRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'JointRole[]'>
+    
+
+
+/**
+ * Reference to a field of type 'JointMemberStatus'
+ */
+export type EnumJointMemberStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'JointMemberStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'JointMemberStatus[]'
+ */
+export type ListEnumJointMemberStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'JointMemberStatus[]'>
     
 
 /**
@@ -3845,6 +4061,8 @@ export type GlobalOmitConfig = {
   userDailyActivity?: Prisma.UserDailyActivityOmit
   achievement?: Prisma.AchievementOmit
   userAchievement?: Prisma.UserAchievementOmit
+  mangaJoint?: Prisma.MangaJointOmit
+  jointMember?: Prisma.JointMemberOmit
 }
 
 /* Types for Logging */

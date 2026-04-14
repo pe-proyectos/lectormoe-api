@@ -84,7 +84,9 @@ export const ModelName = {
   EmailVerificationToken: 'EmailVerificationToken',
   UserDailyActivity: 'UserDailyActivity',
   Achievement: 'Achievement',
-  UserAchievement: 'UserAchievement'
+  UserAchievement: 'UserAchievement',
+  MangaJoint: 'MangaJoint',
+  JointMember: 'JointMember'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -339,6 +341,8 @@ export const ChapterScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   mangaCustomId: 'mangaCustomId',
+  jointId: 'jointId',
+  uploadedByOrganizationId: 'uploadedByOrganizationId',
   views: 'views',
   releasedAt: 'releasedAt',
   isUnreleased: 'isUnreleased',
@@ -702,6 +706,42 @@ export const UserAchievementScalarFieldEnum = {
 } as const
 
 export type UserAchievementScalarFieldEnum = (typeof UserAchievementScalarFieldEnum)[keyof typeof UserAchievementScalarFieldEnum]
+
+
+export const MangaJointScalarFieldEnum = {
+  id: 'id',
+  slug: 'slug',
+  mangaId: 'mangaId',
+  title: 'title',
+  shortDescription: 'shortDescription',
+  description: 'description',
+  imageUrl: 'imageUrl',
+  bannerUrl: 'bannerUrl',
+  status: 'status',
+  workType: 'workType',
+  lastChapterAt: 'lastChapterAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type MangaJointScalarFieldEnum = (typeof MangaJointScalarFieldEnum)[keyof typeof MangaJointScalarFieldEnum]
+
+
+export const JointMemberScalarFieldEnum = {
+  id: 'id',
+  jointId: 'jointId',
+  organizationId: 'organizationId',
+  role: 'role',
+  status: 'status',
+  canEditJoint: 'canEditJoint',
+  canInvite: 'canInvite',
+  canExpel: 'canExpel',
+  invitedAt: 'invitedAt',
+  respondedAt: 'respondedAt'
+} as const
+
+export type JointMemberScalarFieldEnum = (typeof JointMemberScalarFieldEnum)[keyof typeof JointMemberScalarFieldEnum]
 
 
 export const SortOrder = {
