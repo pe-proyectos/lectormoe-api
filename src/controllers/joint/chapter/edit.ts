@@ -33,7 +33,38 @@ export const editJointChapter = async (
       : params.image.startsWith('http') ? params.image : `${r2PublicUrl}/${params.image}`;
   }
 
+  // Chapter number change — validate it's free in this joint.
+  if (params.number !== undefined && params.number !== chapter.number) {
+    const collision = await prisma.chapter.findFirst({
+      where: { jointId: joint.id, number: params.number, deletedAt: null, NOT: { id: chapter.id } },
+      select: { id: true },
+    });
+    if (collision) throw new Error(`El capítulo ${params.number} ya existe en este joint.`);
+    updateData.number = params.number;
+  }
+
   await prisma.chapter.update({ where: { id: chapter.id }, data: updateData });
+
+  // Replace pages if provided (same behavior as the manga-custom edit).
+  if (params.pages) {
+    const existingPages = await prisma.page.findMany({ where: { chapterId: chapter.id } });
+    await prisma.page.deleteMany({ where: { chapterId: chapter.id } });
+    await Promise.all(params.pages.map(async (page, index) => {
+      const pageUrl = page.startsWith('http') ? page : `${r2PublicUrl}/${page}`;
+      const existing = existingPages.find(p => p.imageUrl === pageUrl || p.imageUrl?.endsWith(page));
+      await prisma.page.create({
+        data: {
+          imageUrl: pageUrl,
+          number: index + 1,
+          chapterId: chapter.id,
+          imageHeight: existing?.imageHeight || 100,
+          imageWidth: existing?.imageWidth || 100,
+          imageType: existing?.imageType || 'any',
+          isSinglePage: params.singlePages?.includes(index) ?? false,
+        },
+      });
+    }));
+  }
 
   if (params.workedByOrganizationIds !== undefined) {
     const acceptedMemberIds = await prisma.jointMember.findMany({
