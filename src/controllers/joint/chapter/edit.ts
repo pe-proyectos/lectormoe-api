@@ -1,5 +1,5 @@
 import { prisma } from '../../../models/prisma';
-import { requireJointMember, canEdit } from '../../../util/joint-auth';
+import { requireJointMember, canUpload } from '../../../util/joint-auth';
 import type { EditJointChapterRequest } from '../../../types/joint/chapter/edit';
 
 export const editJointChapter = async (
@@ -15,11 +15,10 @@ export const editJointChapter = async (
   });
   if (!chapter) throw new Error('Capítulo no encontrado.');
 
-  // Permission: uploader of the chapter OR leader/canEditJoint
-  const isUploader = chapter.uploadedByOrganizationId === organizationId;
-  const hasEditPerm = canEdit(member);
-  if (!isUploader && !hasEditPerm) {
-    throw new Error('No tienes permisos para editar este capítulo.');
+  // A joint is a collaborative work — any UPLOADER or LEADER can edit any chapter.
+  // Viewers can't edit. (Destructive delete is still restricted in delete.ts.)
+  if (!canUpload(member)) {
+    throw new Error('No tienes permisos para editar capítulos en este joint.');
   }
 
   const r2PublicUrl = Bun.env.R2_PUBLIC_URL || 'https://r2.capibaratraductor.com';
