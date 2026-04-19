@@ -1,10 +1,10 @@
 import { Elysia, t } from 'elysia';
 import { saveJointUserChapterHistory } from '../../controllers/user-chapter-history/save-joint';
 import { checkAndUnlockAchievements } from '../../controllers/user/achievements';
-import { loggedUserOnly } from '../../plugins/auth';
+import { loggedUserOnlyGlobal } from '../../plugins/auth';
 
 export const router = () => new Elysia()
-  .use(loggedUserOnly())
+  .use(loggedUserOnlyGlobal())
   .post(
     '/api/user-chapter-history/joint/:slug/chapter/:chapterNumber/pages/:pageNumber',
     async ({ user, params: { slug, chapterNumber, pageNumber } }) => {
