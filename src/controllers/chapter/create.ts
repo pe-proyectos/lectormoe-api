@@ -32,6 +32,18 @@ export const createChapter = async (organizationId: number, mangaSlug: string, p
 		throw new Error("No se encontró el manga");
 	}
 
+	// If this base manga has an active joint, chapters must be uploaded via the joint
+	// admin so they reach every member scan, not just this one.
+	const activeJoint = await prisma.mangaJoint.findFirst({
+		where: { mangaId: mangaCustom.mangaId, deletedAt: null },
+		select: { slug: true },
+	});
+	if (activeJoint) {
+		throw new Error(
+			`Este manga es parte del joint "${activeJoint.slug}". Sube los capítulos desde el admin del joint para que lleguen a todos los scans participantes.`
+		);
+	}
+
 	const chapterExists = await prisma.chapter.findFirst({
 		where: {
 			number: params.number,

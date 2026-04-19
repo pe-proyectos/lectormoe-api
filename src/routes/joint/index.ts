@@ -77,6 +77,16 @@ export const router = () => new Elysia()
     return { status: true, data };
   }, { response: t.Object({ status: t.Boolean(), data: t.Any() }) })
 
+  // Look up the active joint for a base manga (if any). Returns null when no active joint exists.
+  // Used by the manga admin edit UI to show a banner and prevent chapter uploads that would bypass the joint.
+  .get('/api/manga/:mangaSlug/joint', async ({ params: { mangaSlug } }) => {
+    const joint = await prisma.mangaJoint.findFirst({
+      where: { deletedAt: null, manga: { slug: mangaSlug } },
+      select: { id: true, slug: true, title: true },
+    });
+    return { status: true, data: joint };
+  }, { response: t.Object({ status: t.Boolean(), data: t.Any() }) })
+
   .get('/api/joint/:slug/chapter/:number', async ({ params: { slug, number } }) => {
     const data = await getJointChapter(slug, parseFloat(number));
     return { status: true, data };
