@@ -92,6 +92,22 @@ export const router = () => new Elysia()
     return { status: true, data };
   }, { response: t.Object({ status: t.Boolean(), data: t.Any() }) })
 
+  // Public pages endpoint — joint chapters have no subscription gating, so no org context needed.
+  .get('/api/joint/:slug/chapter/:number/pages', async ({ params: { slug, number } }) => {
+    const chapterNumber = parseFloat(number);
+    const joint = await prisma.mangaJoint.findFirst({
+      where: { slug, deletedAt: null },
+      select: { id: true },
+    });
+    if (!joint) throw new Error('Joint no encontrado.');
+    const chapter = await prisma.chapter.findFirst({
+      where: { jointId: joint.id, number: chapterNumber, deletedAt: null },
+      include: { pages: { orderBy: { number: 'asc' } } },
+    });
+    if (!chapter) throw new Error('Capítulo no encontrado.');
+    return { status: true, data: chapter.pages };
+  }, { response: t.Object({ status: t.Boolean(), data: t.Any() }) })
+
   // ─── AUTHENTICATED ROUTES ────────────────────────────────────────────────────
   .use(loggedUserOnly())
   .use(useOrganizationOptional())
