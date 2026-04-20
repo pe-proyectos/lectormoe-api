@@ -48,11 +48,26 @@ export const createChapter = async (organizationId: number, mangaSlug: string, p
 		where: {
 			number: params.number,
 			mangaCustomId: mangaCustom.id,
+			deletedAt: null,
 		}
 	});
 
 	if (chapterExists) {
 		throw new Error(`El capítulo ${params.number} ya existe`);
+	}
+
+	// Clear soft-deleted siblings so the (number, mangaCustomId) unique constraint
+	// doesn't block re-creating a chapter number after a delete.
+	const staleDeleted = await prisma.chapter.findMany({
+		where: { mangaCustomId: mangaCustom.id, number: params.number, deletedAt: { not: null } },
+		select: { id: true },
+	});
+	if (staleDeleted.length > 0) {
+		const ids = staleDeleted.map(s => s.id);
+		await prisma.page.deleteMany({ where: { chapterId: { in: ids } } });
+		await prisma.userChapterHistory.deleteMany({ where: { chapterId: { in: ids } } });
+		await prisma.viewsHistory.deleteMany({ where: { chapterId: { in: ids } } });
+		await prisma.chapter.deleteMany({ where: { id: { in: ids } } });
 	}
 
 	// Construir imageUrl desde fileKey

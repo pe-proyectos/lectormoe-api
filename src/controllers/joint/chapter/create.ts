@@ -14,11 +14,27 @@ export const createJointChapter = async (
     throw new Error('No tienes permisos para subir capítulos a este joint.');
   }
 
-  // Check chapter number doesn't already exist
+  // Check chapter number doesn't already exist (active)
   const existing = await prisma.chapter.findFirst({
     where: { jointId: joint.id, number: params.number, deletedAt: null },
   });
   if (existing) throw new Error(`El capítulo ${params.number} ya existe en este joint.`);
+
+  // The (number, jointId) unique constraint is DB-level and doesn't distinguish
+  // soft-deleted rows — if a previous chapter with this number was soft-deleted,
+  // inserting a new one would fail. Hard-delete stale soft-deleted siblings so
+  // re-create after delete works seamlessly.
+  const staleDeleted = await prisma.chapter.findMany({
+    where: { jointId: joint.id, number: params.number, deletedAt: { not: null } },
+    select: { id: true },
+  });
+  if (staleDeleted.length > 0) {
+    const ids = staleDeleted.map(s => s.id);
+    await prisma.page.deleteMany({ where: { chapterId: { in: ids } } });
+    await prisma.userChapterHistory.deleteMany({ where: { chapterId: { in: ids } } });
+    await prisma.viewsHistory.deleteMany({ where: { chapterId: { in: ids } } });
+    await prisma.chapter.deleteMany({ where: { id: { in: ids } } });
+  }
 
   const r2PublicUrl = Bun.env.R2_PUBLIC_URL || 'https://r2.capibaratraductor.com';
   let imageUrl: string | null = null;
