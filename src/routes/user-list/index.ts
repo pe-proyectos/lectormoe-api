@@ -15,7 +15,17 @@ export const router = () =>
 				"/api/user-list",
 				async ({ logged, user, organizationId, query }) => {
 					if (!logged || !user) throw new Error("No autorizado");
-					const { data, maxPage, total } = await listUserList(organizationId, user.id, query);
+					const type = query?.type === 'manga' || query?.type === 'joint' ? query.type : undefined;
+					const sort = query?.sort === 'recent' || query?.sort === 'title' ? query.sort : 'order';
+					const { data, maxPage, total } = await listUserList(organizationId, user.id, {
+						page: query?.page,
+						limit: query?.limit,
+						search: query?.search,
+						status: query?.status,
+						type,
+						scanSlug: query?.scanSlug,
+						sort,
+					});
 					return { status: true, data: { items: data, maxPage, total } };
 				},
 				{
@@ -23,6 +33,11 @@ export const router = () =>
 						t.Object({
 							page: t.Optional(t.String()),
 							limit: t.Optional(t.String()),
+							search: t.Optional(t.String()),
+							status: t.Optional(t.String()),
+							type: t.Optional(t.String()),
+							scanSlug: t.Optional(t.String()),
+							sort: t.Optional(t.String()),
 						}),
 					),
 					response: t.Object({ status: t.Boolean(), data: t.Any() }),
