@@ -56,7 +56,9 @@ export const getScans = async (params: GetScansParams = {}) => {
 	if (sort === 'name') {
 		orderBy = { name: Prisma.SortOrder.asc };
 	} else if (sort === 'mangas') {
-		orderBy = { mangasCustom: { _count: Prisma.SortOrder.desc } };
+		// Organization's relation is `mangaCustoms` — not to be confused with the
+		// Genre relation `mangasCustom` (different plural).
+		orderBy = { mangaCustoms: { _count: Prisma.SortOrder.desc } };
 	} else {
 		orderBy = { followers: { _count: Prisma.SortOrder.desc } };
 	}
@@ -75,7 +77,7 @@ export const getScans = async (params: GetScansParams = {}) => {
 			_count: {
 				select: {
 					followers: true,
-					mangasCustom: true,
+					mangaCustoms: true,
 				},
 			},
 		},
@@ -116,7 +118,7 @@ export const getScans = async (params: GetScansParams = {}) => {
 				isNSFW: org.isNSFW || false,
 				followerCount: org._count.followers,
 				genres: topGenres,
-				totalMangas: org._count.mangasCustom,
+				totalMangas: org._count.mangaCustoms,
 			};
 		})
 	);
