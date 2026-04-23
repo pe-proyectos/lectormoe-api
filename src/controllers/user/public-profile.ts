@@ -71,7 +71,6 @@ const PUBLIC_LIST_INCLUDE = {
       slug: true,
       title: true,
       imageUrl: true,
-      isNSFW: true,
       chapters: {
         where: { deletedAt: null },
         select: { id: true, number: true, title: true, releasedAt: true },

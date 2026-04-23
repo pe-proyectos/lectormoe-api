@@ -40,7 +40,6 @@ const FAVORITE_INCLUDE = {
 			slug: true,
 			title: true,
 			imageUrl: true,
-			isNSFW: true,
 			chapters: {
 				where: { deletedAt: null },
 				select: CHAPTER_SELECT,
