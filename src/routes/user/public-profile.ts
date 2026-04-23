@@ -1,5 +1,5 @@
 import { Elysia, t } from 'elysia';
-import { getPublicProfile, getPublicFavorites, getPublicFollowedScans } from '../../controllers/user/public-profile';
+import { getPublicProfile, getPublicFavorites, getPublicUserList, getPublicFollowedScans } from '../../controllers/user/public-profile';
 
 export const router = () => new Elysia()
   .get(
@@ -61,20 +61,38 @@ export const router = () => new Elysia()
   )
   .get(
     '/api/user/profile/:slug/favorites',
-    async ({ params, set }) => {
-      const favorites = await getPublicFavorites(params.slug);
+    async ({ params, query, set }) => {
+      const limit = query?.limit ? Math.min(500, Math.max(1, Number.parseInt(query.limit) || 12)) : 12;
+      const result = await getPublicFavorites(params.slug, limit);
 
-      if (favorites === null) {
+      if (result === null) {
         set.status = 404;
         return { status: false, error: 'Usuario no encontrado' };
       }
 
-      return { status: true, data: favorites };
+      return { status: true, data: result };
     },
     {
-      params: t.Object({
-        slug: t.String(),
-      }),
+      params: t.Object({ slug: t.String() }),
+      query: t.Optional(t.Object({ limit: t.Optional(t.String()) })),
+    }
+  )
+  .get(
+    '/api/user/profile/:slug/user-list',
+    async ({ params, query, set }) => {
+      const limit = query?.limit ? Math.min(500, Math.max(1, Number.parseInt(query.limit) || 12)) : 12;
+      const result = await getPublicUserList(params.slug, limit);
+
+      if (result === null) {
+        set.status = 404;
+        return { status: false, error: 'Usuario no encontrado' };
+      }
+
+      return { status: true, data: result };
+    },
+    {
+      params: t.Object({ slug: t.String() }),
+      query: t.Optional(t.Object({ limit: t.Optional(t.String()) })),
     }
   )
   .get(

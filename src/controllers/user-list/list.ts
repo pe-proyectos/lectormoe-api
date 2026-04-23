@@ -1,5 +1,4 @@
 import { prisma, Prisma } from "../../models/prisma";
-import type { FavoritesListQuery } from "../../types/favorites/list";
 
 const CHAPTER_SELECT = {
 	id: true,
@@ -8,7 +7,7 @@ const CHAPTER_SELECT = {
 	releasedAt: true,
 };
 
-const FAVORITE_INCLUDE = {
+const INCLUDE = {
 	mangaCustom: {
 		select: {
 			id: true,
@@ -17,16 +16,9 @@ const FAVORITE_INCLUDE = {
 			status: true,
 			isNSFW: true,
 			organization: {
-				select: {
-					id: true,
-					name: true,
-					slug: true,
-					isNSFW: true,
-				},
+				select: { id: true, name: true, slug: true, isNSFW: true },
 			},
-			manga: {
-				select: { slug: true },
-			},
+			manga: { select: { slug: true } },
 			chapters: {
 				select: CHAPTER_SELECT,
 				orderBy: { releasedAt: Prisma.SortOrder.desc },
@@ -51,9 +43,16 @@ const FAVORITE_INCLUDE = {
 	},
 };
 
-export const listFavorites = async (organizationId: number | null, userId: number, filters: FavoritesListQuery) => {
-	// organizationId filter only applies to mangaCustom favorites, not joints.
-	// When present, we OR with jointId so the user's joint favorites stay visible.
+export interface UserListQuery {
+	page?: string;
+	limit?: string;
+}
+
+export const listUserList = async (
+	organizationId: number | null,
+	userId: number,
+	filters: UserListQuery,
+) => {
 	const whereClause: any = organizationId !== null
 		? {
 			userId,
@@ -67,9 +66,9 @@ export const listFavorites = async (organizationId: number | null, userId: numbe
 	const limit = Number.parseInt(filters?.limit || "10");
 	const page = Number.parseInt(filters?.page || "1");
 
-	const favoriteData = await prisma.favorite.findMany({
+	const items = await prisma.userList.findMany({
 		where: whereClause,
-		include: FAVORITE_INCLUDE,
+		include: INCLUDE,
 		orderBy: [
 			{ order: Prisma.SortOrder.asc },
 			{ createdAt: Prisma.SortOrder.desc },
@@ -78,10 +77,10 @@ export const listFavorites = async (organizationId: number | null, userId: numbe
 		take: limit,
 	});
 
-	const total = await prisma.favorite.count({ where: whereClause });
+	const total = await prisma.userList.count({ where: whereClause });
 
 	return {
-		data: favoriteData,
+		data: items,
 		maxPage: Math.ceil(total / limit),
 		total,
 	};

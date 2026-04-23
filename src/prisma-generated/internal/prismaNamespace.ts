@@ -404,6 +404,7 @@ export const ModelName = {
   Analytics: 'Analytics',
   UserChapterHistory: 'UserChapterHistory',
   Favorite: 'Favorite',
+  UserList: 'UserList',
   Audit: 'Audit',
   ViewsHistory: 'ViewsHistory',
   SubscriptionPlan: 'SubscriptionPlan',
@@ -435,7 +436,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "token" | "organization" | "user" | "permission" | "passwordResetToken" | "countryOptions" | "author" | "bookType" | "manga" | "mangaCustom" | "chapter" | "page" | "comment" | "commentLike" | "ranking" | "demography" | "genre" | "analytics" | "userChapterHistory" | "favorite" | "audit" | "viewsHistory" | "subscriptionPlan" | "subscription" | "organizationTransaction" | "organizationFollower" | "organizationRequest" | "emailPreference" | "emailLog" | "unsubscribeToken" | "emailVerificationToken" | "userDailyActivity" | "achievement" | "userAchievement" | "mangaJoint" | "jointMember"
+    modelProps: "token" | "organization" | "user" | "permission" | "passwordResetToken" | "countryOptions" | "author" | "bookType" | "manga" | "mangaCustom" | "chapter" | "page" | "comment" | "commentLike" | "ranking" | "demography" | "genre" | "analytics" | "userChapterHistory" | "favorite" | "userList" | "audit" | "viewsHistory" | "subscriptionPlan" | "subscription" | "organizationTransaction" | "organizationFollower" | "organizationRequest" | "emailPreference" | "emailLog" | "unsubscribeToken" | "emailVerificationToken" | "userDailyActivity" | "achievement" | "userAchievement" | "mangaJoint" | "jointMember"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1916,6 +1917,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.FavoriteCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.FavoriteCountAggregateOutputType> | number
+        }
+      }
+    }
+    UserList: {
+      payload: Prisma.$UserListPayload<ExtArgs>
+      fields: Prisma.UserListFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.UserListFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserListPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.UserListFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserListPayload>
+        }
+        findFirst: {
+          args: Prisma.UserListFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserListPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.UserListFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserListPayload>
+        }
+        findMany: {
+          args: Prisma.UserListFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserListPayload>[]
+        }
+        create: {
+          args: Prisma.UserListCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserListPayload>
+        }
+        createMany: {
+          args: Prisma.UserListCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.UserListCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserListPayload>[]
+        }
+        delete: {
+          args: Prisma.UserListDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserListPayload>
+        }
+        update: {
+          args: Prisma.UserListUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserListPayload>
+        }
+        deleteMany: {
+          args: Prisma.UserListDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.UserListUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.UserListUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserListPayload>[]
+        }
+        upsert: {
+          args: Prisma.UserListUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserListPayload>
+        }
+        aggregate: {
+          args: Prisma.UserListAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUserList>
+        }
+        groupBy: {
+          args: Prisma.UserListGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserListGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.UserListCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserListCountAggregateOutputType> | number
         }
       }
     }
@@ -3520,11 +3595,25 @@ export const FavoriteScalarFieldEnum = {
   userId: 'userId',
   mangaCustomId: 'mangaCustomId',
   jointId: 'jointId',
+  order: 'order',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type FavoriteScalarFieldEnum = (typeof FavoriteScalarFieldEnum)[keyof typeof FavoriteScalarFieldEnum]
+
+
+export const UserListScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  mangaCustomId: 'mangaCustomId',
+  jointId: 'jointId',
+  order: 'order',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserListScalarFieldEnum = (typeof UserListScalarFieldEnum)[keyof typeof UserListScalarFieldEnum]
 
 
 export const AuditScalarFieldEnum = {
@@ -4050,6 +4139,7 @@ export type GlobalOmitConfig = {
   analytics?: Prisma.AnalyticsOmit
   userChapterHistory?: Prisma.UserChapterHistoryOmit
   favorite?: Prisma.FavoriteOmit
+  userList?: Prisma.UserListOmit
   audit?: Prisma.AuditOmit
   viewsHistory?: Prisma.ViewsHistoryOmit
   subscriptionPlan?: Prisma.SubscriptionPlanOmit

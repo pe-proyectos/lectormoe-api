@@ -71,6 +71,7 @@ export const ModelName = {
   Analytics: 'Analytics',
   UserChapterHistory: 'UserChapterHistory',
   Favorite: 'Favorite',
+  UserList: 'UserList',
   Audit: 'Audit',
   ViewsHistory: 'ViewsHistory',
   SubscriptionPlan: 'SubscriptionPlan',
@@ -483,11 +484,25 @@ export const FavoriteScalarFieldEnum = {
   userId: 'userId',
   mangaCustomId: 'mangaCustomId',
   jointId: 'jointId',
+  order: 'order',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type FavoriteScalarFieldEnum = (typeof FavoriteScalarFieldEnum)[keyof typeof FavoriteScalarFieldEnum]
+
+
+export const UserListScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  mangaCustomId: 'mangaCustomId',
+  jointId: 'jointId',
+  order: 'order',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserListScalarFieldEnum = (typeof UserListScalarFieldEnum)[keyof typeof UserListScalarFieldEnum]
 
 
 export const AuditScalarFieldEnum = {

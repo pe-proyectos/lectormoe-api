@@ -31,8 +31,16 @@ export const saveJointFavorite = async (userId: number, jointSlug: string) => {
 		}
 	}
 
+	const maxOrder = await prisma.favorite.aggregate({
+		where: { userId },
+		_max: { order: true },
+	});
 	await prisma.favorite.create({
-		data: { userId, jointId: joint.id },
+		data: {
+			userId,
+			jointId: joint.id,
+			order: (maxOrder._max.order ?? 0) + 1,
+		},
 	});
 
 	return true;

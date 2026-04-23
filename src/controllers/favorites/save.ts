@@ -43,8 +43,17 @@ export const saveFavorite = async (organizationId: number | null, userId: number
         }
     }
 
+    // New favorites append at the end of the user's order.
+    const maxOrder = await prisma.favorite.aggregate({
+        where: { userId },
+        _max: { order: true },
+    });
     await prisma.favorite.create({
-        data: { userId, mangaCustomId: manga.id },
+        data: {
+            userId,
+            mangaCustomId: manga.id,
+            order: (maxOrder._max.order ?? 0) + 1,
+        },
     });
 
     return true;

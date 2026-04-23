@@ -117,6 +117,7 @@ model User {
   emailPreference         EmailPreference?
   emailVerificationTokens EmailVerificationToken[]
   favorites               Favorite[]
+  userList                UserList[]
   organizationFollows     OrganizationFollower[]
   passwordResetTokens     PasswordResetToken[]
   permissions             Permission[]
@@ -276,6 +277,7 @@ model MangaCustom {
   usersAlsoReadMangaCustomIds        String?
   chapters                           Chapter[]
   favorites                          Favorite[]
+  userListEntries                    UserList[]
   manga                              Manga              @relation(fields: [mangaId], references: [id])
   organization                       Organization       @relation(fields: [organizationId], references: [id])
   rankings                           Ranking[]
@@ -471,6 +473,7 @@ model Favorite {
   userId        Int
   mangaCustomId Int?
   jointId       Int?
+  order         Int          @default(0)
   createdAt     DateTime     @default(now()) @db.Timestamp(6)
   updatedAt     DateTime     @updatedAt
   mangaCustom   MangaCustom? @relation(fields: [mangaCustomId], references: [id])
@@ -479,7 +482,28 @@ model Favorite {
 
   @@unique([userId, mangaCustomId])
   @@unique([userId, jointId])
+  @@index([userId, order])
   @@map("favorite")
+}
+
+// 'Mi lista' — user-curated reading list, separate from favorites.
+// Same shape and semantics as Favorite: either a mangaCustom or a joint, ordered.
+model UserList {
+  id            Int          @id @default(autoincrement())
+  userId        Int
+  mangaCustomId Int?
+  jointId       Int?
+  order         Int          @default(0)
+  createdAt     DateTime     @default(now()) @db.Timestamp(6)
+  updatedAt     DateTime     @updatedAt
+  mangaCustom   MangaCustom? @relation(fields: [mangaCustomId], references: [id])
+  joint         MangaJoint?  @relation(fields: [jointId], references: [id])
+  user          User         @relation(fields: [userId], references: [id])
+
+  @@unique([userId, mangaCustomId])
+  @@unique([userId, jointId])
+  @@index([userId, order])
+  @@map("user_list")
 }
 
 model Audit {
@@ -762,6 +786,7 @@ model MangaJoint {
   chapters         Chapter[]
   viewsHistory     ViewsHistory[]
   favorites        Favorite[]
+  userListEntries  UserList[]
 
   @@index([mangaId])
   @@index([lastChapterAt])

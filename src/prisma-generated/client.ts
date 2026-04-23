@@ -140,6 +140,11 @@ export type UserChapterHistory = Prisma.UserChapterHistoryModel
  */
 export type Favorite = Prisma.FavoriteModel
 /**
+ * Model UserList
+ * 
+ */
+export type UserList = Prisma.UserListModel
+/**
  * Model Audit
  * 
  */
