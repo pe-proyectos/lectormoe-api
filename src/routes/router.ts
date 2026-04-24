@@ -35,6 +35,7 @@ import { router as favoritesGetRouter } from "./favorites/get";
 import { router as favoritesListRouter } from "./favorites/list";
 import { router as favoritesSaveRouter } from "./favorites/save";
 import { router as favoritesReorderRouter } from "./favorites/reorder";
+import { router as favoritesToggleFinishedRouter } from "./favorites/toggle-finished";
 import { router as myListRouter } from "./user-list";
 import { router as filesPresignedUrlRouter } from "./files/presigned-url";
 import { router as genreCreateRouter } from "./genre/create";
@@ -150,6 +151,7 @@ export const router = () => async (app: Elysia) => {
 	app.use(favoritesListRouter());
 	app.use(favoritesSaveRouter());
 	app.use(favoritesReorderRouter());
+	app.use(favoritesToggleFinishedRouter());
 
 	// 'Mi lista' — user-curated reading list (distinct from favorites)
 	app.use(myListRouter());

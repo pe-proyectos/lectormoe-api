@@ -6,6 +6,7 @@ import { saveUserListManga, saveUserListJoint } from "../../controllers/user-lis
 import { getUserListManga, getUserListJoint } from "../../controllers/user-list/get";
 import { deleteUserListManga, deleteUserListJoint } from "../../controllers/user-list/delete";
 import { reorderUserList } from "../../controllers/user-list/reorder";
+import { toggleUserListFinished } from "../../controllers/user-list/toggle-finished";
 
 export const router = () =>
 	new Elysia()
@@ -118,6 +119,20 @@ export const router = () =>
 					},
 					{
 						body: t.Object({ ids: t.Array(t.Number()) }),
+						response: t.Object({ status: t.Boolean(), data: t.Any() }),
+					},
+				)
+				.patch(
+					"/api/user-list/:id/finished",
+					async ({ user, params, body }) => {
+						const id = Number.parseInt(params.id);
+						if (Number.isNaN(id)) throw new Error("Id inválido.");
+						const data = await toggleUserListFinished(user.id, id, !!body.finished);
+						return { status: true, data };
+					},
+					{
+						params: t.Object({ id: t.String() }),
+						body: t.Object({ finished: t.Boolean() }),
 						response: t.Object({ status: t.Boolean(), data: t.Any() }),
 					},
 				),

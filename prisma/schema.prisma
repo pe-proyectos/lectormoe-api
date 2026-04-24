@@ -474,6 +474,8 @@ model Favorite {
   mangaCustomId Int?
   jointId       Int?
   order         Int          @default(0)
+  // When the user marked this entry as finished reading (null = unread/in-progress).
+  finishedAt    DateTime?    @db.Timestamp(6)
   createdAt     DateTime     @default(now()) @db.Timestamp(6)
   updatedAt     DateTime     @updatedAt
   mangaCustom   MangaCustom? @relation(fields: [mangaCustomId], references: [id])
@@ -494,6 +496,7 @@ model UserList {
   mangaCustomId Int?
   jointId       Int?
   order         Int          @default(0)
+  finishedAt    DateTime?    @db.Timestamp(6)
   createdAt     DateTime     @default(now()) @db.Timestamp(6)
   updatedAt     DateTime     @updatedAt
   mangaCustom   MangaCustom? @relation(fields: [mangaCustomId], references: [id])

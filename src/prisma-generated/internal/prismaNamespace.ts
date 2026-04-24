@@ -3596,6 +3596,7 @@ export const FavoriteScalarFieldEnum = {
   mangaCustomId: 'mangaCustomId',
   jointId: 'jointId',
   order: 'order',
+  finishedAt: 'finishedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -3609,6 +3610,7 @@ export const UserListScalarFieldEnum = {
   mangaCustomId: 'mangaCustomId',
   jointId: 'jointId',
   order: 'order',
+  finishedAt: 'finishedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

@@ -48,6 +48,7 @@ export type UserListMinAggregateOutputType = {
   mangaCustomId: number | null
   jointId: number | null
   order: number | null
+  finishedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -58,6 +59,7 @@ export type UserListMaxAggregateOutputType = {
   mangaCustomId: number | null
   jointId: number | null
   order: number | null
+  finishedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -68,6 +70,7 @@ export type UserListCountAggregateOutputType = {
   mangaCustomId: number
   jointId: number
   order: number
+  finishedAt: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -96,6 +99,7 @@ export type UserListMinAggregateInputType = {
   mangaCustomId?: true
   jointId?: true
   order?: true
+  finishedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -106,6 +110,7 @@ export type UserListMaxAggregateInputType = {
   mangaCustomId?: true
   jointId?: true
   order?: true
+  finishedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -116,6 +121,7 @@ export type UserListCountAggregateInputType = {
   mangaCustomId?: true
   jointId?: true
   order?: true
+  finishedAt?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -213,6 +219,7 @@ export type UserListGroupByOutputType = {
   mangaCustomId: number | null
   jointId: number | null
   order: number
+  finishedAt: Date | null
   createdAt: Date
   updatedAt: Date
   _count: UserListCountAggregateOutputType | null
@@ -246,6 +253,7 @@ export type UserListWhereInput = {
   mangaCustomId?: Prisma.IntNullableFilter<"UserList"> | number | null
   jointId?: Prisma.IntNullableFilter<"UserList"> | number | null
   order?: Prisma.IntFilter<"UserList"> | number
+  finishedAt?: Prisma.DateTimeNullableFilter<"UserList"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"UserList"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"UserList"> | Date | string
   mangaCustom?: Prisma.XOR<Prisma.MangaCustomNullableScalarRelationFilter, Prisma.MangaCustomWhereInput> | null
@@ -259,6 +267,7 @@ export type UserListOrderByWithRelationInput = {
   mangaCustomId?: Prisma.SortOrderInput | Prisma.SortOrder
   jointId?: Prisma.SortOrderInput | Prisma.SortOrder
   order?: Prisma.SortOrder
+  finishedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   mangaCustom?: Prisma.MangaCustomOrderByWithRelationInput
@@ -277,6 +286,7 @@ export type UserListWhereUniqueInput = Prisma.AtLeast<{
   mangaCustomId?: Prisma.IntNullableFilter<"UserList"> | number | null
   jointId?: Prisma.IntNullableFilter<"UserList"> | number | null
   order?: Prisma.IntFilter<"UserList"> | number
+  finishedAt?: Prisma.DateTimeNullableFilter<"UserList"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"UserList"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"UserList"> | Date | string
   mangaCustom?: Prisma.XOR<Prisma.MangaCustomNullableScalarRelationFilter, Prisma.MangaCustomWhereInput> | null
@@ -290,6 +300,7 @@ export type UserListOrderByWithAggregationInput = {
   mangaCustomId?: Prisma.SortOrderInput | Prisma.SortOrder
   jointId?: Prisma.SortOrderInput | Prisma.SortOrder
   order?: Prisma.SortOrder
+  finishedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserListCountOrderByAggregateInput
@@ -308,12 +319,14 @@ export type UserListScalarWhereWithAggregatesInput = {
   mangaCustomId?: Prisma.IntNullableWithAggregatesFilter<"UserList"> | number | null
   jointId?: Prisma.IntNullableWithAggregatesFilter<"UserList"> | number | null
   order?: Prisma.IntWithAggregatesFilter<"UserList"> | number
+  finishedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"UserList"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"UserList"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"UserList"> | Date | string
 }
 
 export type UserListCreateInput = {
   order?: number
+  finishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutUserListEntriesInput
@@ -327,12 +340,14 @@ export type UserListUncheckedCreateInput = {
   mangaCustomId?: number | null
   jointId?: number | null
   order?: number
+  finishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type UserListUpdateInput = {
   order?: Prisma.IntFieldUpdateOperationsInput | number
+  finishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mangaCustom?: Prisma.MangaCustomUpdateOneWithoutUserListEntriesNestedInput
@@ -346,6 +361,7 @@ export type UserListUncheckedUpdateInput = {
   mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
+  finishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -356,12 +372,14 @@ export type UserListCreateManyInput = {
   mangaCustomId?: number | null
   jointId?: number | null
   order?: number
+  finishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type UserListUpdateManyMutationInput = {
   order?: Prisma.IntFieldUpdateOperationsInput | number
+  finishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -372,6 +390,7 @@ export type UserListUncheckedUpdateManyInput = {
   mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
+  finishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -402,6 +421,7 @@ export type UserListCountOrderByAggregateInput = {
   mangaCustomId?: Prisma.SortOrder
   jointId?: Prisma.SortOrder
   order?: Prisma.SortOrder
+  finishedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -420,6 +440,7 @@ export type UserListMaxOrderByAggregateInput = {
   mangaCustomId?: Prisma.SortOrder
   jointId?: Prisma.SortOrder
   order?: Prisma.SortOrder
+  finishedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -430,6 +451,7 @@ export type UserListMinOrderByAggregateInput = {
   mangaCustomId?: Prisma.SortOrder
   jointId?: Prisma.SortOrder
   order?: Prisma.SortOrder
+  finishedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -570,6 +592,7 @@ export type UserListUncheckedUpdateManyWithoutJointNestedInput = {
 
 export type UserListCreateWithoutUserInput = {
   order?: number
+  finishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutUserListEntriesInput
@@ -581,6 +604,7 @@ export type UserListUncheckedCreateWithoutUserInput = {
   mangaCustomId?: number | null
   jointId?: number | null
   order?: number
+  finishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -620,12 +644,14 @@ export type UserListScalarWhereInput = {
   mangaCustomId?: Prisma.IntNullableFilter<"UserList"> | number | null
   jointId?: Prisma.IntNullableFilter<"UserList"> | number | null
   order?: Prisma.IntFilter<"UserList"> | number
+  finishedAt?: Prisma.DateTimeNullableFilter<"UserList"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"UserList"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"UserList"> | Date | string
 }
 
 export type UserListCreateWithoutMangaCustomInput = {
   order?: number
+  finishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   joint?: Prisma.MangaJointCreateNestedOneWithoutUserListEntriesInput
@@ -637,6 +663,7 @@ export type UserListUncheckedCreateWithoutMangaCustomInput = {
   userId: number
   jointId?: number | null
   order?: number
+  finishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -669,6 +696,7 @@ export type UserListUpdateManyWithWhereWithoutMangaCustomInput = {
 
 export type UserListCreateWithoutJointInput = {
   order?: number
+  finishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutUserListEntriesInput
@@ -680,6 +708,7 @@ export type UserListUncheckedCreateWithoutJointInput = {
   userId: number
   mangaCustomId?: number | null
   order?: number
+  finishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -715,12 +744,14 @@ export type UserListCreateManyUserInput = {
   mangaCustomId?: number | null
   jointId?: number | null
   order?: number
+  finishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type UserListUpdateWithoutUserInput = {
   order?: Prisma.IntFieldUpdateOperationsInput | number
+  finishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mangaCustom?: Prisma.MangaCustomUpdateOneWithoutUserListEntriesNestedInput
@@ -732,6 +763,7 @@ export type UserListUncheckedUpdateWithoutUserInput = {
   mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
+  finishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -741,6 +773,7 @@ export type UserListUncheckedUpdateManyWithoutUserInput = {
   mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
+  finishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -750,12 +783,14 @@ export type UserListCreateManyMangaCustomInput = {
   userId: number
   jointId?: number | null
   order?: number
+  finishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type UserListUpdateWithoutMangaCustomInput = {
   order?: Prisma.IntFieldUpdateOperationsInput | number
+  finishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   joint?: Prisma.MangaJointUpdateOneWithoutUserListEntriesNestedInput
@@ -767,6 +802,7 @@ export type UserListUncheckedUpdateWithoutMangaCustomInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
+  finishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -776,6 +812,7 @@ export type UserListUncheckedUpdateManyWithoutMangaCustomInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
+  finishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -785,12 +822,14 @@ export type UserListCreateManyJointInput = {
   userId: number
   mangaCustomId?: number | null
   order?: number
+  finishedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type UserListUpdateWithoutJointInput = {
   order?: Prisma.IntFieldUpdateOperationsInput | number
+  finishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mangaCustom?: Prisma.MangaCustomUpdateOneWithoutUserListEntriesNestedInput
@@ -802,6 +841,7 @@ export type UserListUncheckedUpdateWithoutJointInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
+  finishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -811,6 +851,7 @@ export type UserListUncheckedUpdateManyWithoutJointInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
+  finishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -823,6 +864,7 @@ export type UserListSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   mangaCustomId?: boolean
   jointId?: boolean
   order?: boolean
+  finishedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   mangaCustom?: boolean | Prisma.UserList$mangaCustomArgs<ExtArgs>
@@ -836,6 +878,7 @@ export type UserListSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   mangaCustomId?: boolean
   jointId?: boolean
   order?: boolean
+  finishedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   mangaCustom?: boolean | Prisma.UserList$mangaCustomArgs<ExtArgs>
@@ -849,6 +892,7 @@ export type UserListSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   mangaCustomId?: boolean
   jointId?: boolean
   order?: boolean
+  finishedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   mangaCustom?: boolean | Prisma.UserList$mangaCustomArgs<ExtArgs>
@@ -862,11 +906,12 @@ export type UserListSelectScalar = {
   mangaCustomId?: boolean
   jointId?: boolean
   order?: boolean
+  finishedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserListOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "mangaCustomId" | "jointId" | "order" | "createdAt" | "updatedAt", ExtArgs["result"]["userList"]>
+export type UserListOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "mangaCustomId" | "jointId" | "order" | "finishedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["userList"]>
 export type UserListInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   mangaCustom?: boolean | Prisma.UserList$mangaCustomArgs<ExtArgs>
   joint?: boolean | Prisma.UserList$jointArgs<ExtArgs>
@@ -896,6 +941,7 @@ export type $UserListPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     mangaCustomId: number | null
     jointId: number | null
     order: number
+    finishedAt: Date | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["userList"]>
@@ -1329,6 +1375,7 @@ export interface UserListFieldRefs {
   readonly mangaCustomId: Prisma.FieldRef<"UserList", 'Int'>
   readonly jointId: Prisma.FieldRef<"UserList", 'Int'>
   readonly order: Prisma.FieldRef<"UserList", 'Int'>
+  readonly finishedAt: Prisma.FieldRef<"UserList", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"UserList", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"UserList", 'DateTime'>
 }
