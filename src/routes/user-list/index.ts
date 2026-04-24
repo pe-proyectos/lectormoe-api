@@ -18,6 +18,8 @@ export const router = () =>
 					if (!logged || !user) throw new Error("No autorizado");
 					const type = query?.type === 'manga' || query?.type === 'joint' ? query.type : undefined;
 					const sort = query?.sort === 'recent' || query?.sort === 'title' ? query.sort : 'order';
+					const finished = query?.finished === 'yes' || query?.finished === 'no' ? query.finished : undefined;
+					const favoritesOnly = query?.favoritesOnly === '1' || query?.favoritesOnly === 'true';
 					const { data, maxPage, total } = await listUserList(organizationId, user.id, {
 						page: query?.page,
 						limit: query?.limit,
@@ -26,6 +28,8 @@ export const router = () =>
 						type,
 						scanSlug: query?.scanSlug,
 						sort,
+						finished,
+						favoritesOnly,
 					});
 					return { status: true, data: { items: data, maxPage, total } };
 				},
@@ -39,6 +43,8 @@ export const router = () =>
 							type: t.Optional(t.String()),
 							scanSlug: t.Optional(t.String()),
 							sort: t.Optional(t.String()),
+							finished: t.Optional(t.String()),
+							favoritesOnly: t.Optional(t.String()),
 						}),
 					),
 					response: t.Object({ status: t.Boolean(), data: t.Any() }),

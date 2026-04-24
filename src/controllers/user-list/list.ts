@@ -50,6 +50,8 @@ export interface UserListQuery {
 	type?: 'manga' | 'joint'; // restrict to one kind
 	scanSlug?: string;      // only mangaCustom items from this scan
 	sort?: 'order' | 'recent' | 'title'; // default 'order'
+	finished?: 'yes' | 'no'; // only finished / only unread
+	favoritesOnly?: boolean;   // only entries the user has also favorited
 }
 
 export const listUserList = async (
@@ -100,6 +102,28 @@ export const listUserList = async (
 	if (filters?.scanSlug) {
 		andClauses.push({
 			mangaCustom: { organization: { slug: filters.scanSlug } },
+		});
+	}
+
+	if (filters?.finished === 'yes') {
+		andClauses.push({ finishedAt: { not: null } });
+	} else if (filters?.finished === 'no') {
+		andClauses.push({ finishedAt: null });
+	}
+
+	if (filters?.favoritesOnly) {
+		// Restrict to entries whose (mangaCustomId|jointId) also appears in the user's favorites.
+		const favs = await prisma.favorite.findMany({
+			where: { userId },
+			select: { mangaCustomId: true, jointId: true },
+		});
+		const favMangaIds = favs.map(f => f.mangaCustomId).filter((x): x is number => x !== null);
+		const favJointIds = favs.map(f => f.jointId).filter((x): x is number => x !== null);
+		andClauses.push({
+			OR: [
+				favMangaIds.length > 0 ? { mangaCustomId: { in: favMangaIds } } : { id: -1 },
+				favJointIds.length > 0 ? { jointId: { in: favJointIds } } : { id: -1 },
+			],
 		});
 	}
 
