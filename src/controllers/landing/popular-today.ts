@@ -25,38 +25,41 @@ export const getPopularToday = async (limit: number = 5, nsfw?: boolean) => {
 	const todayStart = new Date();
 	todayStart.setHours(0, 0, 0, 0);
 
-	// Count ViewsHistory rows per mangaCustomId since 00:00.
-	// Cap the candidate pool to limit*4 so the post-filter (covers, NSFW) still
-	// has room to fall back without extra queries.
+	// Push NSFW + soft-delete filters into the groupBy itself so the candidate
+	// pool only contains mangas that will survive the later filter — otherwise
+	// /red can return fewer than `limit` rows when most of today's top views
+	// happen to be SFW (or vice versa).
+	const mangaCustomFilter: any = { deletedAt: null };
+	if (nsfw === true) {
+		mangaCustomFilter.OR = [{ isNSFW: true }, { organization: { isNSFW: true } }];
+	} else if (nsfw === false) {
+		mangaCustomFilter.isNSFW = false;
+		mangaCustomFilter.organization = { isNSFW: false };
+	}
+
 	const grouped = await prisma.viewsHistory.groupBy({
 		by: ['mangaCustomId'],
 		where: {
 			mangaCustomId: { not: null },
 			viewedAt: { gte: todayStart },
+			mangaCustom: mangaCustomFilter,
 		},
 		_count: { _all: true },
 		orderBy: { _count: { mangaCustomId: Prisma.SortOrder.desc } },
-		take: limit * 4,
+		// Generous pool — the only post-filter remaining is "has a cover", which
+		// rarely culls more than a handful.
+		take: limit * 5,
 	});
 
 	if (grouped.length === 0) return [];
 
 	const ids = grouped.map((g) => g.mangaCustomId!).filter((x) => x !== null);
 
-	const nsfwCondition: object[] = nsfw === true
-		? [{ OR: [{ isNSFW: true }, { organization: { isNSFW: true } }] }]
-		: nsfw === false
-		? [{ isNSFW: false }, { organization: { isNSFW: false } }]
-		: [];
-
 	const mangasCustoms = await prisma.mangaCustom.findMany({
 		where: {
 			id: { in: ids },
 			deletedAt: null,
-			AND: [
-				...nsfwCondition,
-				{ OR: [{ imageUrl: { not: null } }, { manga: { imageUrl: { not: null } } }] },
-			],
+			OR: [{ imageUrl: { not: null } }, { manga: { imageUrl: { not: null } } }],
 		},
 		include: {
 			manga: { select: { id: true, title: true, slug: true, imageUrl: true } },
