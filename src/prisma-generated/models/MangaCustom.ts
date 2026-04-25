@@ -382,6 +382,7 @@ export type MangaCustomWhereInput = {
   genres?: Prisma.GenreListRelationFilter
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanListRelationFilter
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanListRelationFilter
+  notifications?: Prisma.NotificationListRelationFilter
 }
 
 export type MangaCustomOrderByWithRelationInput = {
@@ -418,6 +419,7 @@ export type MangaCustomOrderByWithRelationInput = {
   genres?: Prisma.GenreOrderByRelationAggregateInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanOrderByRelationAggregateInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanOrderByRelationAggregateInput
+  notifications?: Prisma.NotificationOrderByRelationAggregateInput
 }
 
 export type MangaCustomWhereUniqueInput = Prisma.AtLeast<{
@@ -458,6 +460,7 @@ export type MangaCustomWhereUniqueInput = Prisma.AtLeast<{
   genres?: Prisma.GenreListRelationFilter
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanListRelationFilter
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanListRelationFilter
+  notifications?: Prisma.NotificationListRelationFilter
 }, "id" | "mangaId_organizationId">
 
 export type MangaCustomOrderByWithAggregationInput = {
@@ -551,6 +554,7 @@ export type MangaCustomCreateInput = {
   genres?: Prisma.GenreCreateNestedManyWithoutMangasCustomInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanCreateNestedManyWithoutMangaCustomsCanReadReleasedInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanCreateNestedManyWithoutMangaCustomsCanReadUnreleasedInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutMangaCustomInput
 }
 
 export type MangaCustomUncheckedCreateInput = {
@@ -585,6 +589,7 @@ export type MangaCustomUncheckedCreateInput = {
   genres?: Prisma.GenreUncheckedCreateNestedManyWithoutMangasCustomInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanUncheckedCreateNestedManyWithoutMangaCustomsCanReadReleasedInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanUncheckedCreateNestedManyWithoutMangaCustomsCanReadUnreleasedInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutMangaCustomInput
 }
 
 export type MangaCustomUpdateInput = {
@@ -618,6 +623,7 @@ export type MangaCustomUpdateInput = {
   genres?: Prisma.GenreUpdateManyWithoutMangasCustomNestedInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanUpdateManyWithoutMangaCustomsCanReadReleasedNestedInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanUpdateManyWithoutMangaCustomsCanReadUnreleasedNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutMangaCustomNestedInput
 }
 
 export type MangaCustomUncheckedUpdateInput = {
@@ -652,6 +658,7 @@ export type MangaCustomUncheckedUpdateInput = {
   genres?: Prisma.GenreUncheckedUpdateManyWithoutMangasCustomNestedInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanUncheckedUpdateManyWithoutMangaCustomsCanReadReleasedNestedInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanUncheckedUpdateManyWithoutMangaCustomsCanReadUnreleasedNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutMangaCustomNestedInput
 }
 
 export type MangaCustomCreateManyInput = {
@@ -1122,6 +1129,22 @@ export type MangaCustomUncheckedUpdateManyWithoutSubscriptionPlansCanReadUnrelea
   deleteMany?: Prisma.MangaCustomScalarWhereInput | Prisma.MangaCustomScalarWhereInput[]
 }
 
+export type MangaCustomCreateNestedOneWithoutNotificationsInput = {
+  create?: Prisma.XOR<Prisma.MangaCustomCreateWithoutNotificationsInput, Prisma.MangaCustomUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.MangaCustomCreateOrConnectWithoutNotificationsInput
+  connect?: Prisma.MangaCustomWhereUniqueInput
+}
+
+export type MangaCustomUpdateOneWithoutNotificationsNestedInput = {
+  create?: Prisma.XOR<Prisma.MangaCustomCreateWithoutNotificationsInput, Prisma.MangaCustomUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.MangaCustomCreateOrConnectWithoutNotificationsInput
+  upsert?: Prisma.MangaCustomUpsertWithoutNotificationsInput
+  disconnect?: Prisma.MangaCustomWhereInput | boolean
+  delete?: Prisma.MangaCustomWhereInput | boolean
+  connect?: Prisma.MangaCustomWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MangaCustomUpdateToOneWithWhereWithoutNotificationsInput, Prisma.MangaCustomUpdateWithoutNotificationsInput>, Prisma.MangaCustomUncheckedUpdateWithoutNotificationsInput>
+}
+
 export type MangaCustomCreateWithoutOrganizationInput = {
   title: string
   shortDescription?: string | null
@@ -1152,6 +1175,7 @@ export type MangaCustomCreateWithoutOrganizationInput = {
   genres?: Prisma.GenreCreateNestedManyWithoutMangasCustomInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanCreateNestedManyWithoutMangaCustomsCanReadReleasedInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanCreateNestedManyWithoutMangaCustomsCanReadUnreleasedInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutMangaCustomInput
 }
 
 export type MangaCustomUncheckedCreateWithoutOrganizationInput = {
@@ -1185,6 +1209,7 @@ export type MangaCustomUncheckedCreateWithoutOrganizationInput = {
   genres?: Prisma.GenreUncheckedCreateNestedManyWithoutMangasCustomInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanUncheckedCreateNestedManyWithoutMangaCustomsCanReadReleasedInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanUncheckedCreateNestedManyWithoutMangaCustomsCanReadUnreleasedInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutMangaCustomInput
 }
 
 export type MangaCustomCreateOrConnectWithoutOrganizationInput = {
@@ -1272,6 +1297,7 @@ export type MangaCustomCreateWithoutMangaInput = {
   genres?: Prisma.GenreCreateNestedManyWithoutMangasCustomInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanCreateNestedManyWithoutMangaCustomsCanReadReleasedInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanCreateNestedManyWithoutMangaCustomsCanReadUnreleasedInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutMangaCustomInput
 }
 
 export type MangaCustomUncheckedCreateWithoutMangaInput = {
@@ -1305,6 +1331,7 @@ export type MangaCustomUncheckedCreateWithoutMangaInput = {
   genres?: Prisma.GenreUncheckedCreateNestedManyWithoutMangasCustomInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanUncheckedCreateNestedManyWithoutMangaCustomsCanReadReleasedInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanUncheckedCreateNestedManyWithoutMangaCustomsCanReadUnreleasedInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutMangaCustomInput
 }
 
 export type MangaCustomCreateOrConnectWithoutMangaInput = {
@@ -1363,6 +1390,7 @@ export type MangaCustomCreateWithoutChaptersInput = {
   genres?: Prisma.GenreCreateNestedManyWithoutMangasCustomInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanCreateNestedManyWithoutMangaCustomsCanReadReleasedInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanCreateNestedManyWithoutMangaCustomsCanReadUnreleasedInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutMangaCustomInput
 }
 
 export type MangaCustomUncheckedCreateWithoutChaptersInput = {
@@ -1396,6 +1424,7 @@ export type MangaCustomUncheckedCreateWithoutChaptersInput = {
   genres?: Prisma.GenreUncheckedCreateNestedManyWithoutMangasCustomInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanUncheckedCreateNestedManyWithoutMangaCustomsCanReadReleasedInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanUncheckedCreateNestedManyWithoutMangaCustomsCanReadUnreleasedInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutMangaCustomInput
 }
 
 export type MangaCustomCreateOrConnectWithoutChaptersInput = {
@@ -1444,6 +1473,7 @@ export type MangaCustomUpdateWithoutChaptersInput = {
   genres?: Prisma.GenreUpdateManyWithoutMangasCustomNestedInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanUpdateManyWithoutMangaCustomsCanReadReleasedNestedInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanUpdateManyWithoutMangaCustomsCanReadUnreleasedNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutMangaCustomNestedInput
 }
 
 export type MangaCustomUncheckedUpdateWithoutChaptersInput = {
@@ -1477,6 +1507,7 @@ export type MangaCustomUncheckedUpdateWithoutChaptersInput = {
   genres?: Prisma.GenreUncheckedUpdateManyWithoutMangasCustomNestedInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanUncheckedUpdateManyWithoutMangaCustomsCanReadReleasedNestedInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanUncheckedUpdateManyWithoutMangaCustomsCanReadUnreleasedNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutMangaCustomNestedInput
 }
 
 export type MangaCustomCreateWithoutRankingsInput = {
@@ -1509,6 +1540,7 @@ export type MangaCustomCreateWithoutRankingsInput = {
   genres?: Prisma.GenreCreateNestedManyWithoutMangasCustomInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanCreateNestedManyWithoutMangaCustomsCanReadReleasedInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanCreateNestedManyWithoutMangaCustomsCanReadUnreleasedInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutMangaCustomInput
 }
 
 export type MangaCustomUncheckedCreateWithoutRankingsInput = {
@@ -1542,6 +1574,7 @@ export type MangaCustomUncheckedCreateWithoutRankingsInput = {
   genres?: Prisma.GenreUncheckedCreateNestedManyWithoutMangasCustomInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanUncheckedCreateNestedManyWithoutMangaCustomsCanReadReleasedInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanUncheckedCreateNestedManyWithoutMangaCustomsCanReadUnreleasedInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutMangaCustomInput
 }
 
 export type MangaCustomCreateOrConnectWithoutRankingsInput = {
@@ -1590,6 +1623,7 @@ export type MangaCustomUpdateWithoutRankingsInput = {
   genres?: Prisma.GenreUpdateManyWithoutMangasCustomNestedInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanUpdateManyWithoutMangaCustomsCanReadReleasedNestedInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanUpdateManyWithoutMangaCustomsCanReadUnreleasedNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutMangaCustomNestedInput
 }
 
 export type MangaCustomUncheckedUpdateWithoutRankingsInput = {
@@ -1623,6 +1657,7 @@ export type MangaCustomUncheckedUpdateWithoutRankingsInput = {
   genres?: Prisma.GenreUncheckedUpdateManyWithoutMangasCustomNestedInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanUncheckedUpdateManyWithoutMangaCustomsCanReadReleasedNestedInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanUncheckedUpdateManyWithoutMangaCustomsCanReadUnreleasedNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutMangaCustomNestedInput
 }
 
 export type MangaCustomCreateWithoutGenresInput = {
@@ -1655,6 +1690,7 @@ export type MangaCustomCreateWithoutGenresInput = {
   viewsHistory?: Prisma.ViewsHistoryCreateNestedManyWithoutMangaCustomInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanCreateNestedManyWithoutMangaCustomsCanReadReleasedInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanCreateNestedManyWithoutMangaCustomsCanReadUnreleasedInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutMangaCustomInput
 }
 
 export type MangaCustomUncheckedCreateWithoutGenresInput = {
@@ -1688,6 +1724,7 @@ export type MangaCustomUncheckedCreateWithoutGenresInput = {
   viewsHistory?: Prisma.ViewsHistoryUncheckedCreateNestedManyWithoutMangaCustomInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanUncheckedCreateNestedManyWithoutMangaCustomsCanReadReleasedInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanUncheckedCreateNestedManyWithoutMangaCustomsCanReadUnreleasedInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutMangaCustomInput
 }
 
 export type MangaCustomCreateOrConnectWithoutGenresInput = {
@@ -1741,6 +1778,7 @@ export type MangaCustomCreateWithoutFavoritesInput = {
   genres?: Prisma.GenreCreateNestedManyWithoutMangasCustomInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanCreateNestedManyWithoutMangaCustomsCanReadReleasedInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanCreateNestedManyWithoutMangaCustomsCanReadUnreleasedInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutMangaCustomInput
 }
 
 export type MangaCustomUncheckedCreateWithoutFavoritesInput = {
@@ -1774,6 +1812,7 @@ export type MangaCustomUncheckedCreateWithoutFavoritesInput = {
   genres?: Prisma.GenreUncheckedCreateNestedManyWithoutMangasCustomInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanUncheckedCreateNestedManyWithoutMangaCustomsCanReadReleasedInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanUncheckedCreateNestedManyWithoutMangaCustomsCanReadUnreleasedInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutMangaCustomInput
 }
 
 export type MangaCustomCreateOrConnectWithoutFavoritesInput = {
@@ -1822,6 +1861,7 @@ export type MangaCustomUpdateWithoutFavoritesInput = {
   genres?: Prisma.GenreUpdateManyWithoutMangasCustomNestedInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanUpdateManyWithoutMangaCustomsCanReadReleasedNestedInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanUpdateManyWithoutMangaCustomsCanReadUnreleasedNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutMangaCustomNestedInput
 }
 
 export type MangaCustomUncheckedUpdateWithoutFavoritesInput = {
@@ -1855,6 +1895,7 @@ export type MangaCustomUncheckedUpdateWithoutFavoritesInput = {
   genres?: Prisma.GenreUncheckedUpdateManyWithoutMangasCustomNestedInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanUncheckedUpdateManyWithoutMangaCustomsCanReadReleasedNestedInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanUncheckedUpdateManyWithoutMangaCustomsCanReadUnreleasedNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutMangaCustomNestedInput
 }
 
 export type MangaCustomCreateWithoutUserListEntriesInput = {
@@ -1887,6 +1928,7 @@ export type MangaCustomCreateWithoutUserListEntriesInput = {
   genres?: Prisma.GenreCreateNestedManyWithoutMangasCustomInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanCreateNestedManyWithoutMangaCustomsCanReadReleasedInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanCreateNestedManyWithoutMangaCustomsCanReadUnreleasedInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutMangaCustomInput
 }
 
 export type MangaCustomUncheckedCreateWithoutUserListEntriesInput = {
@@ -1920,6 +1962,7 @@ export type MangaCustomUncheckedCreateWithoutUserListEntriesInput = {
   genres?: Prisma.GenreUncheckedCreateNestedManyWithoutMangasCustomInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanUncheckedCreateNestedManyWithoutMangaCustomsCanReadReleasedInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanUncheckedCreateNestedManyWithoutMangaCustomsCanReadUnreleasedInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutMangaCustomInput
 }
 
 export type MangaCustomCreateOrConnectWithoutUserListEntriesInput = {
@@ -1968,6 +2011,7 @@ export type MangaCustomUpdateWithoutUserListEntriesInput = {
   genres?: Prisma.GenreUpdateManyWithoutMangasCustomNestedInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanUpdateManyWithoutMangaCustomsCanReadReleasedNestedInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanUpdateManyWithoutMangaCustomsCanReadUnreleasedNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutMangaCustomNestedInput
 }
 
 export type MangaCustomUncheckedUpdateWithoutUserListEntriesInput = {
@@ -2001,6 +2045,7 @@ export type MangaCustomUncheckedUpdateWithoutUserListEntriesInput = {
   genres?: Prisma.GenreUncheckedUpdateManyWithoutMangasCustomNestedInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanUncheckedUpdateManyWithoutMangaCustomsCanReadReleasedNestedInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanUncheckedUpdateManyWithoutMangaCustomsCanReadUnreleasedNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutMangaCustomNestedInput
 }
 
 export type MangaCustomCreateWithoutViewsHistoryInput = {
@@ -2033,6 +2078,7 @@ export type MangaCustomCreateWithoutViewsHistoryInput = {
   genres?: Prisma.GenreCreateNestedManyWithoutMangasCustomInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanCreateNestedManyWithoutMangaCustomsCanReadReleasedInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanCreateNestedManyWithoutMangaCustomsCanReadUnreleasedInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutMangaCustomInput
 }
 
 export type MangaCustomUncheckedCreateWithoutViewsHistoryInput = {
@@ -2066,6 +2112,7 @@ export type MangaCustomUncheckedCreateWithoutViewsHistoryInput = {
   genres?: Prisma.GenreUncheckedCreateNestedManyWithoutMangasCustomInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanUncheckedCreateNestedManyWithoutMangaCustomsCanReadReleasedInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanUncheckedCreateNestedManyWithoutMangaCustomsCanReadUnreleasedInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutMangaCustomInput
 }
 
 export type MangaCustomCreateOrConnectWithoutViewsHistoryInput = {
@@ -2114,6 +2161,7 @@ export type MangaCustomUpdateWithoutViewsHistoryInput = {
   genres?: Prisma.GenreUpdateManyWithoutMangasCustomNestedInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanUpdateManyWithoutMangaCustomsCanReadReleasedNestedInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanUpdateManyWithoutMangaCustomsCanReadUnreleasedNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutMangaCustomNestedInput
 }
 
 export type MangaCustomUncheckedUpdateWithoutViewsHistoryInput = {
@@ -2147,6 +2195,7 @@ export type MangaCustomUncheckedUpdateWithoutViewsHistoryInput = {
   genres?: Prisma.GenreUncheckedUpdateManyWithoutMangasCustomNestedInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanUncheckedUpdateManyWithoutMangaCustomsCanReadReleasedNestedInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanUncheckedUpdateManyWithoutMangaCustomsCanReadUnreleasedNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutMangaCustomNestedInput
 }
 
 export type MangaCustomCreateWithoutSubscriptionPlansCanReadReleasedInput = {
@@ -2179,6 +2228,7 @@ export type MangaCustomCreateWithoutSubscriptionPlansCanReadReleasedInput = {
   viewsHistory?: Prisma.ViewsHistoryCreateNestedManyWithoutMangaCustomInput
   genres?: Prisma.GenreCreateNestedManyWithoutMangasCustomInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanCreateNestedManyWithoutMangaCustomsCanReadUnreleasedInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutMangaCustomInput
 }
 
 export type MangaCustomUncheckedCreateWithoutSubscriptionPlansCanReadReleasedInput = {
@@ -2212,6 +2262,7 @@ export type MangaCustomUncheckedCreateWithoutSubscriptionPlansCanReadReleasedInp
   viewsHistory?: Prisma.ViewsHistoryUncheckedCreateNestedManyWithoutMangaCustomInput
   genres?: Prisma.GenreUncheckedCreateNestedManyWithoutMangasCustomInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanUncheckedCreateNestedManyWithoutMangaCustomsCanReadUnreleasedInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutMangaCustomInput
 }
 
 export type MangaCustomCreateOrConnectWithoutSubscriptionPlansCanReadReleasedInput = {
@@ -2249,6 +2300,7 @@ export type MangaCustomCreateWithoutSubscriptionPlansCanReadUnreleasedInput = {
   viewsHistory?: Prisma.ViewsHistoryCreateNestedManyWithoutMangaCustomInput
   genres?: Prisma.GenreCreateNestedManyWithoutMangasCustomInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanCreateNestedManyWithoutMangaCustomsCanReadReleasedInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutMangaCustomInput
 }
 
 export type MangaCustomUncheckedCreateWithoutSubscriptionPlansCanReadUnreleasedInput = {
@@ -2282,6 +2334,7 @@ export type MangaCustomUncheckedCreateWithoutSubscriptionPlansCanReadUnreleasedI
   viewsHistory?: Prisma.ViewsHistoryUncheckedCreateNestedManyWithoutMangaCustomInput
   genres?: Prisma.GenreUncheckedCreateNestedManyWithoutMangasCustomInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanUncheckedCreateNestedManyWithoutMangaCustomsCanReadReleasedInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutMangaCustomInput
 }
 
 export type MangaCustomCreateOrConnectWithoutSubscriptionPlansCanReadUnreleasedInput = {
@@ -2319,6 +2372,156 @@ export type MangaCustomUpdateWithWhereUniqueWithoutSubscriptionPlansCanReadUnrel
 export type MangaCustomUpdateManyWithWhereWithoutSubscriptionPlansCanReadUnreleasedInput = {
   where: Prisma.MangaCustomScalarWhereInput
   data: Prisma.XOR<Prisma.MangaCustomUpdateManyMutationInput, Prisma.MangaCustomUncheckedUpdateManyWithoutSubscriptionPlansCanReadUnreleasedInput>
+}
+
+export type MangaCustomCreateWithoutNotificationsInput = {
+  title: string
+  shortDescription?: string | null
+  description?: string | null
+  imageUrl?: string | null
+  releasedAt?: Date | string | null
+  nextChapterAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  views?: number
+  lastChapterAt?: Date | string | null
+  status?: string
+  visibility?: string
+  bannerUrl?: string | null
+  requireLogin?: boolean
+  isSimulRelease?: boolean
+  isNSFW?: boolean
+  workType?: string
+  deletedAt?: Date | string | null
+  nextChapterAtMessage?: string | null
+  usersAlsoReadMangaCustomIds?: string | null
+  chapters?: Prisma.ChapterCreateNestedManyWithoutMangaCustomInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutMangaCustomInput
+  userListEntries?: Prisma.UserListCreateNestedManyWithoutMangaCustomInput
+  manga: Prisma.MangaCreateNestedOneWithoutCustomInput
+  organization: Prisma.OrganizationCreateNestedOneWithoutMangaCustomsInput
+  rankings?: Prisma.RankingCreateNestedManyWithoutMangaCustomInput
+  viewsHistory?: Prisma.ViewsHistoryCreateNestedManyWithoutMangaCustomInput
+  genres?: Prisma.GenreCreateNestedManyWithoutMangasCustomInput
+  subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanCreateNestedManyWithoutMangaCustomsCanReadReleasedInput
+  subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanCreateNestedManyWithoutMangaCustomsCanReadUnreleasedInput
+}
+
+export type MangaCustomUncheckedCreateWithoutNotificationsInput = {
+  id?: number
+  mangaId: number
+  organizationId: number
+  title: string
+  shortDescription?: string | null
+  description?: string | null
+  imageUrl?: string | null
+  releasedAt?: Date | string | null
+  nextChapterAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  views?: number
+  lastChapterAt?: Date | string | null
+  status?: string
+  visibility?: string
+  bannerUrl?: string | null
+  requireLogin?: boolean
+  isSimulRelease?: boolean
+  isNSFW?: boolean
+  workType?: string
+  deletedAt?: Date | string | null
+  nextChapterAtMessage?: string | null
+  usersAlsoReadMangaCustomIds?: string | null
+  chapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutMangaCustomInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutMangaCustomInput
+  userListEntries?: Prisma.UserListUncheckedCreateNestedManyWithoutMangaCustomInput
+  rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutMangaCustomInput
+  viewsHistory?: Prisma.ViewsHistoryUncheckedCreateNestedManyWithoutMangaCustomInput
+  genres?: Prisma.GenreUncheckedCreateNestedManyWithoutMangasCustomInput
+  subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanUncheckedCreateNestedManyWithoutMangaCustomsCanReadReleasedInput
+  subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanUncheckedCreateNestedManyWithoutMangaCustomsCanReadUnreleasedInput
+}
+
+export type MangaCustomCreateOrConnectWithoutNotificationsInput = {
+  where: Prisma.MangaCustomWhereUniqueInput
+  create: Prisma.XOR<Prisma.MangaCustomCreateWithoutNotificationsInput, Prisma.MangaCustomUncheckedCreateWithoutNotificationsInput>
+}
+
+export type MangaCustomUpsertWithoutNotificationsInput = {
+  update: Prisma.XOR<Prisma.MangaCustomUpdateWithoutNotificationsInput, Prisma.MangaCustomUncheckedUpdateWithoutNotificationsInput>
+  create: Prisma.XOR<Prisma.MangaCustomCreateWithoutNotificationsInput, Prisma.MangaCustomUncheckedCreateWithoutNotificationsInput>
+  where?: Prisma.MangaCustomWhereInput
+}
+
+export type MangaCustomUpdateToOneWithWhereWithoutNotificationsInput = {
+  where?: Prisma.MangaCustomWhereInput
+  data: Prisma.XOR<Prisma.MangaCustomUpdateWithoutNotificationsInput, Prisma.MangaCustomUncheckedUpdateWithoutNotificationsInput>
+}
+
+export type MangaCustomUpdateWithoutNotificationsInput = {
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  releasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  views?: Prisma.IntFieldUpdateOperationsInput | number
+  lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  visibility?: Prisma.StringFieldUpdateOperationsInput | string
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requireLogin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isSimulRelease?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  workType?: Prisma.StringFieldUpdateOperationsInput | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextChapterAtMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  chapters?: Prisma.ChapterUpdateManyWithoutMangaCustomNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutMangaCustomNestedInput
+  userListEntries?: Prisma.UserListUpdateManyWithoutMangaCustomNestedInput
+  manga?: Prisma.MangaUpdateOneRequiredWithoutCustomNestedInput
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutMangaCustomsNestedInput
+  rankings?: Prisma.RankingUpdateManyWithoutMangaCustomNestedInput
+  viewsHistory?: Prisma.ViewsHistoryUpdateManyWithoutMangaCustomNestedInput
+  genres?: Prisma.GenreUpdateManyWithoutMangasCustomNestedInput
+  subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanUpdateManyWithoutMangaCustomsCanReadReleasedNestedInput
+  subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanUpdateManyWithoutMangaCustomsCanReadUnreleasedNestedInput
+}
+
+export type MangaCustomUncheckedUpdateWithoutNotificationsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  mangaId?: Prisma.IntFieldUpdateOperationsInput | number
+  organizationId?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  releasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  views?: Prisma.IntFieldUpdateOperationsInput | number
+  lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  visibility?: Prisma.StringFieldUpdateOperationsInput | string
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requireLogin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isSimulRelease?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  workType?: Prisma.StringFieldUpdateOperationsInput | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  nextChapterAtMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  chapters?: Prisma.ChapterUncheckedUpdateManyWithoutMangaCustomNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutMangaCustomNestedInput
+  userListEntries?: Prisma.UserListUncheckedUpdateManyWithoutMangaCustomNestedInput
+  rankings?: Prisma.RankingUncheckedUpdateManyWithoutMangaCustomNestedInput
+  viewsHistory?: Prisma.ViewsHistoryUncheckedUpdateManyWithoutMangaCustomNestedInput
+  genres?: Prisma.GenreUncheckedUpdateManyWithoutMangasCustomNestedInput
+  subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanUncheckedUpdateManyWithoutMangaCustomsCanReadReleasedNestedInput
+  subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanUncheckedUpdateManyWithoutMangaCustomsCanReadUnreleasedNestedInput
 }
 
 export type MangaCustomCreateManyOrganizationInput = {
@@ -2376,6 +2579,7 @@ export type MangaCustomUpdateWithoutOrganizationInput = {
   genres?: Prisma.GenreUpdateManyWithoutMangasCustomNestedInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanUpdateManyWithoutMangaCustomsCanReadReleasedNestedInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanUpdateManyWithoutMangaCustomsCanReadUnreleasedNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutMangaCustomNestedInput
 }
 
 export type MangaCustomUncheckedUpdateWithoutOrganizationInput = {
@@ -2409,6 +2613,7 @@ export type MangaCustomUncheckedUpdateWithoutOrganizationInput = {
   genres?: Prisma.GenreUncheckedUpdateManyWithoutMangasCustomNestedInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanUncheckedUpdateManyWithoutMangaCustomsCanReadReleasedNestedInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanUncheckedUpdateManyWithoutMangaCustomsCanReadUnreleasedNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutMangaCustomNestedInput
 }
 
 export type MangaCustomUncheckedUpdateManyWithoutOrganizationInput = {
@@ -2491,6 +2696,7 @@ export type MangaCustomUpdateWithoutMangaInput = {
   genres?: Prisma.GenreUpdateManyWithoutMangasCustomNestedInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanUpdateManyWithoutMangaCustomsCanReadReleasedNestedInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanUpdateManyWithoutMangaCustomsCanReadUnreleasedNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutMangaCustomNestedInput
 }
 
 export type MangaCustomUncheckedUpdateWithoutMangaInput = {
@@ -2524,6 +2730,7 @@ export type MangaCustomUncheckedUpdateWithoutMangaInput = {
   genres?: Prisma.GenreUncheckedUpdateManyWithoutMangasCustomNestedInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanUncheckedUpdateManyWithoutMangaCustomsCanReadReleasedNestedInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanUncheckedUpdateManyWithoutMangaCustomsCanReadUnreleasedNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutMangaCustomNestedInput
 }
 
 export type MangaCustomUncheckedUpdateManyWithoutMangaInput = {
@@ -2581,6 +2788,7 @@ export type MangaCustomUpdateWithoutGenresInput = {
   viewsHistory?: Prisma.ViewsHistoryUpdateManyWithoutMangaCustomNestedInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanUpdateManyWithoutMangaCustomsCanReadReleasedNestedInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanUpdateManyWithoutMangaCustomsCanReadUnreleasedNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutMangaCustomNestedInput
 }
 
 export type MangaCustomUncheckedUpdateWithoutGenresInput = {
@@ -2614,6 +2822,7 @@ export type MangaCustomUncheckedUpdateWithoutGenresInput = {
   viewsHistory?: Prisma.ViewsHistoryUncheckedUpdateManyWithoutMangaCustomNestedInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanUncheckedUpdateManyWithoutMangaCustomsCanReadReleasedNestedInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanUncheckedUpdateManyWithoutMangaCustomsCanReadUnreleasedNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutMangaCustomNestedInput
 }
 
 export type MangaCustomUncheckedUpdateManyWithoutGenresInput = {
@@ -2672,6 +2881,7 @@ export type MangaCustomUpdateWithoutSubscriptionPlansCanReadReleasedInput = {
   viewsHistory?: Prisma.ViewsHistoryUpdateManyWithoutMangaCustomNestedInput
   genres?: Prisma.GenreUpdateManyWithoutMangasCustomNestedInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanUpdateManyWithoutMangaCustomsCanReadUnreleasedNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutMangaCustomNestedInput
 }
 
 export type MangaCustomUncheckedUpdateWithoutSubscriptionPlansCanReadReleasedInput = {
@@ -2705,6 +2915,7 @@ export type MangaCustomUncheckedUpdateWithoutSubscriptionPlansCanReadReleasedInp
   viewsHistory?: Prisma.ViewsHistoryUncheckedUpdateManyWithoutMangaCustomNestedInput
   genres?: Prisma.GenreUncheckedUpdateManyWithoutMangasCustomNestedInput
   subscriptionPlansCanReadUnreleased?: Prisma.SubscriptionPlanUncheckedUpdateManyWithoutMangaCustomsCanReadUnreleasedNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutMangaCustomNestedInput
 }
 
 export type MangaCustomUncheckedUpdateManyWithoutSubscriptionPlansCanReadReleasedInput = {
@@ -2763,6 +2974,7 @@ export type MangaCustomUpdateWithoutSubscriptionPlansCanReadUnreleasedInput = {
   viewsHistory?: Prisma.ViewsHistoryUpdateManyWithoutMangaCustomNestedInput
   genres?: Prisma.GenreUpdateManyWithoutMangasCustomNestedInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanUpdateManyWithoutMangaCustomsCanReadReleasedNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutMangaCustomNestedInput
 }
 
 export type MangaCustomUncheckedUpdateWithoutSubscriptionPlansCanReadUnreleasedInput = {
@@ -2796,6 +3008,7 @@ export type MangaCustomUncheckedUpdateWithoutSubscriptionPlansCanReadUnreleasedI
   viewsHistory?: Prisma.ViewsHistoryUncheckedUpdateManyWithoutMangaCustomNestedInput
   genres?: Prisma.GenreUncheckedUpdateManyWithoutMangasCustomNestedInput
   subscriptionPlansCanReadReleased?: Prisma.SubscriptionPlanUncheckedUpdateManyWithoutMangaCustomsCanReadReleasedNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutMangaCustomNestedInput
 }
 
 export type MangaCustomUncheckedUpdateManyWithoutSubscriptionPlansCanReadUnreleasedInput = {
@@ -2838,6 +3051,7 @@ export type MangaCustomCountOutputType = {
   genres: number
   subscriptionPlansCanReadReleased: number
   subscriptionPlansCanReadUnreleased: number
+  notifications: number
 }
 
 export type MangaCustomCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2849,6 +3063,7 @@ export type MangaCustomCountOutputTypeSelect<ExtArgs extends runtime.Types.Exten
   genres?: boolean | MangaCustomCountOutputTypeCountGenresArgs
   subscriptionPlansCanReadReleased?: boolean | MangaCustomCountOutputTypeCountSubscriptionPlansCanReadReleasedArgs
   subscriptionPlansCanReadUnreleased?: boolean | MangaCustomCountOutputTypeCountSubscriptionPlansCanReadUnreleasedArgs
+  notifications?: boolean | MangaCustomCountOutputTypeCountNotificationsArgs
 }
 
 /**
@@ -2917,6 +3132,13 @@ export type MangaCustomCountOutputTypeCountSubscriptionPlansCanReadUnreleasedArg
   where?: Prisma.SubscriptionPlanWhereInput
 }
 
+/**
+ * MangaCustomCountOutputType without action
+ */
+export type MangaCustomCountOutputTypeCountNotificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NotificationWhereInput
+}
+
 
 export type MangaCustomSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2952,6 +3174,7 @@ export type MangaCustomSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   genres?: boolean | Prisma.MangaCustom$genresArgs<ExtArgs>
   subscriptionPlansCanReadReleased?: boolean | Prisma.MangaCustom$subscriptionPlansCanReadReleasedArgs<ExtArgs>
   subscriptionPlansCanReadUnreleased?: boolean | Prisma.MangaCustom$subscriptionPlansCanReadUnreleasedArgs<ExtArgs>
+  notifications?: boolean | Prisma.MangaCustom$notificationsArgs<ExtArgs>
   _count?: boolean | Prisma.MangaCustomCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["mangaCustom"]>
 
@@ -3049,6 +3272,7 @@ export type MangaCustomInclude<ExtArgs extends runtime.Types.Extensions.Internal
   genres?: boolean | Prisma.MangaCustom$genresArgs<ExtArgs>
   subscriptionPlansCanReadReleased?: boolean | Prisma.MangaCustom$subscriptionPlansCanReadReleasedArgs<ExtArgs>
   subscriptionPlansCanReadUnreleased?: boolean | Prisma.MangaCustom$subscriptionPlansCanReadUnreleasedArgs<ExtArgs>
+  notifications?: boolean | Prisma.MangaCustom$notificationsArgs<ExtArgs>
   _count?: boolean | Prisma.MangaCustomCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type MangaCustomIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3073,6 +3297,7 @@ export type $MangaCustomPayload<ExtArgs extends runtime.Types.Extensions.Interna
     genres: Prisma.$GenrePayload<ExtArgs>[]
     subscriptionPlansCanReadReleased: Prisma.$SubscriptionPlanPayload<ExtArgs>[]
     subscriptionPlansCanReadUnreleased: Prisma.$SubscriptionPlanPayload<ExtArgs>[]
+    notifications: Prisma.$NotificationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -3502,6 +3727,7 @@ export interface Prisma__MangaCustomClient<T, Null = never, ExtArgs extends runt
   genres<T extends Prisma.MangaCustom$genresArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MangaCustom$genresArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   subscriptionPlansCanReadReleased<T extends Prisma.MangaCustom$subscriptionPlansCanReadReleasedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MangaCustom$subscriptionPlansCanReadReleasedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubscriptionPlanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   subscriptionPlansCanReadUnreleased<T extends Prisma.MangaCustom$subscriptionPlansCanReadUnreleasedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MangaCustom$subscriptionPlansCanReadUnreleasedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubscriptionPlanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notifications<T extends Prisma.MangaCustom$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MangaCustom$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4139,6 +4365,30 @@ export type MangaCustom$subscriptionPlansCanReadUnreleasedArgs<ExtArgs extends r
   take?: number
   skip?: number
   distinct?: Prisma.SubscriptionPlanScalarFieldEnum | Prisma.SubscriptionPlanScalarFieldEnum[]
+}
+
+/**
+ * MangaCustom.notifications
+ */
+export type MangaCustom$notificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Notification
+   */
+  select?: Prisma.NotificationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Notification
+   */
+  omit?: Prisma.NotificationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NotificationInclude<ExtArgs> | null
+  where?: Prisma.NotificationWhereInput
+  orderBy?: Prisma.NotificationOrderByWithRelationInput | Prisma.NotificationOrderByWithRelationInput[]
+  cursor?: Prisma.NotificationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
 }
 
 /**

@@ -1,7 +1,7 @@
 import { prisma } from "../../models/prisma";
 import type { CreateSubscriptionRequest } from "../../types/subscription/create";
 import { getPlanById, getSubscriptionByPaypalId, suspendSubscriptionByPaypalId } from '../../util/paypal';
-import { sendNewSubscriberNotification } from "../../services/email-notifications";
+import { notifyNewSubscriber } from "../../services/notify-new-chapter";
 
 export const createSubscription = async (organizationId: number, userId: number, params: CreateSubscriptionRequest) => {
 	const organization = await prisma.organization.findFirst({
@@ -130,14 +130,10 @@ export const createSubscription = async (organizationId: number, userId: number,
 			console.error("Error al enviar el webhook de suscripción a Discord:", error);
 		}
 	}
-	// Send email notification to organization staff (fire-and-forget)
-	const amount = `${subscription?.billing_info?.last_payment?.amount?.value || "0"} USD`;
-	sendNewSubscriberNotification(
-		organizationId,
-		user.id,
-		subscriptionPlanExists.name || paypalPlan?.name || "Plan sin nombre",
-		amount
-	).catch(console.error);
+	// Notify org staff (fire-and-forget). Email dispatched 30 min later by the
+	// notification cron if still unread. Plan name + amount are re-fetched from
+	// the subscription row at dispatch time.
+	notifyNewSubscriber(createdSubscription.id).catch(console.error);
 
 	return createdSubscription;
 };

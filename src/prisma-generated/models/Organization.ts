@@ -553,6 +553,7 @@ export type OrganizationWhereInput = {
   jointMembers?: Prisma.JointMemberListRelationFilter
   uploadedJointChapters?: Prisma.ChapterListRelationFilter
   workedOnJointChapters?: Prisma.ChapterListRelationFilter
+  notifications?: Prisma.NotificationListRelationFilter
 }
 
 export type OrganizationOrderByWithRelationInput = {
@@ -618,6 +619,7 @@ export type OrganizationOrderByWithRelationInput = {
   jointMembers?: Prisma.JointMemberOrderByRelationAggregateInput
   uploadedJointChapters?: Prisma.ChapterOrderByRelationAggregateInput
   workedOnJointChapters?: Prisma.ChapterOrderByRelationAggregateInput
+  notifications?: Prisma.NotificationOrderByRelationAggregateInput
 }
 
 export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
@@ -686,6 +688,7 @@ export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
   jointMembers?: Prisma.JointMemberListRelationFilter
   uploadedJointChapters?: Prisma.ChapterListRelationFilter
   workedOnJointChapters?: Prisma.ChapterListRelationFilter
+  notifications?: Prisma.NotificationListRelationFilter
 }, "id" | "domain" | "slug">
 
 export type OrganizationOrderByWithAggregationInput = {
@@ -854,6 +857,7 @@ export type OrganizationCreateInput = {
   jointMembers?: Prisma.JointMemberCreateNestedManyWithoutOrganizationInput
   uploadedJointChapters?: Prisma.ChapterCreateNestedManyWithoutUploadedByOrganizationInput
   workedOnJointChapters?: Prisma.ChapterCreateNestedManyWithoutWorkedByOrganizationsInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateInput = {
@@ -919,6 +923,7 @@ export type OrganizationUncheckedCreateInput = {
   jointMembers?: Prisma.JointMemberUncheckedCreateNestedManyWithoutOrganizationInput
   uploadedJointChapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutUploadedByOrganizationInput
   workedOnJointChapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutWorkedByOrganizationsInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUpdateInput = {
@@ -983,6 +988,7 @@ export type OrganizationUpdateInput = {
   jointMembers?: Prisma.JointMemberUpdateManyWithoutOrganizationNestedInput
   uploadedJointChapters?: Prisma.ChapterUpdateManyWithoutUploadedByOrganizationNestedInput
   workedOnJointChapters?: Prisma.ChapterUpdateManyWithoutWorkedByOrganizationsNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateInput = {
@@ -1048,6 +1054,7 @@ export type OrganizationUncheckedUpdateInput = {
   jointMembers?: Prisma.JointMemberUncheckedUpdateManyWithoutOrganizationNestedInput
   uploadedJointChapters?: Prisma.ChapterUncheckedUpdateManyWithoutUploadedByOrganizationNestedInput
   workedOnJointChapters?: Prisma.ChapterUncheckedUpdateManyWithoutWorkedByOrganizationsNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateManyInput = {
@@ -1647,6 +1654,22 @@ export type OrganizationUpdateOneRequiredWithoutJointMembersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutJointMembersInput, Prisma.OrganizationUpdateWithoutJointMembersInput>, Prisma.OrganizationUncheckedUpdateWithoutJointMembersInput>
 }
 
+export type OrganizationCreateNestedOneWithoutNotificationsInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutNotificationsInput, Prisma.OrganizationUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutNotificationsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneWithoutNotificationsNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutNotificationsInput, Prisma.OrganizationUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutNotificationsInput
+  upsert?: Prisma.OrganizationUpsertWithoutNotificationsInput
+  disconnect?: Prisma.OrganizationWhereInput | boolean
+  delete?: Prisma.OrganizationWhereInput | boolean
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutNotificationsInput, Prisma.OrganizationUpdateWithoutNotificationsInput>, Prisma.OrganizationUncheckedUpdateWithoutNotificationsInput>
+}
+
 export type OrganizationCreateWithoutPermissionsInput = {
   name: string
   title: string
@@ -1708,6 +1731,7 @@ export type OrganizationCreateWithoutPermissionsInput = {
   jointMembers?: Prisma.JointMemberCreateNestedManyWithoutOrganizationInput
   uploadedJointChapters?: Prisma.ChapterCreateNestedManyWithoutUploadedByOrganizationInput
   workedOnJointChapters?: Prisma.ChapterCreateNestedManyWithoutWorkedByOrganizationsInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutPermissionsInput = {
@@ -1772,6 +1796,7 @@ export type OrganizationUncheckedCreateWithoutPermissionsInput = {
   jointMembers?: Prisma.JointMemberUncheckedCreateNestedManyWithoutOrganizationInput
   uploadedJointChapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutUploadedByOrganizationInput
   workedOnJointChapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutWorkedByOrganizationsInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutPermissionsInput = {
@@ -1851,6 +1876,7 @@ export type OrganizationUpdateWithoutPermissionsInput = {
   jointMembers?: Prisma.JointMemberUpdateManyWithoutOrganizationNestedInput
   uploadedJointChapters?: Prisma.ChapterUpdateManyWithoutUploadedByOrganizationNestedInput
   workedOnJointChapters?: Prisma.ChapterUpdateManyWithoutWorkedByOrganizationsNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutPermissionsInput = {
@@ -1915,6 +1941,7 @@ export type OrganizationUncheckedUpdateWithoutPermissionsInput = {
   jointMembers?: Prisma.JointMemberUncheckedUpdateManyWithoutOrganizationNestedInput
   uploadedJointChapters?: Prisma.ChapterUncheckedUpdateManyWithoutUploadedByOrganizationNestedInput
   workedOnJointChapters?: Prisma.ChapterUncheckedUpdateManyWithoutWorkedByOrganizationsNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutPasswordResetTokensInput = {
@@ -1978,6 +2005,7 @@ export type OrganizationCreateWithoutPasswordResetTokensInput = {
   jointMembers?: Prisma.JointMemberCreateNestedManyWithoutOrganizationInput
   uploadedJointChapters?: Prisma.ChapterCreateNestedManyWithoutUploadedByOrganizationInput
   workedOnJointChapters?: Prisma.ChapterCreateNestedManyWithoutWorkedByOrganizationsInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutPasswordResetTokensInput = {
@@ -2042,6 +2070,7 @@ export type OrganizationUncheckedCreateWithoutPasswordResetTokensInput = {
   jointMembers?: Prisma.JointMemberUncheckedCreateNestedManyWithoutOrganizationInput
   uploadedJointChapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutUploadedByOrganizationInput
   workedOnJointChapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutWorkedByOrganizationsInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutPasswordResetTokensInput = {
@@ -2121,6 +2150,7 @@ export type OrganizationUpdateWithoutPasswordResetTokensInput = {
   jointMembers?: Prisma.JointMemberUpdateManyWithoutOrganizationNestedInput
   uploadedJointChapters?: Prisma.ChapterUpdateManyWithoutUploadedByOrganizationNestedInput
   workedOnJointChapters?: Prisma.ChapterUpdateManyWithoutWorkedByOrganizationsNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutPasswordResetTokensInput = {
@@ -2185,6 +2215,7 @@ export type OrganizationUncheckedUpdateWithoutPasswordResetTokensInput = {
   jointMembers?: Prisma.JointMemberUncheckedUpdateManyWithoutOrganizationNestedInput
   uploadedJointChapters?: Prisma.ChapterUncheckedUpdateManyWithoutUploadedByOrganizationNestedInput
   workedOnJointChapters?: Prisma.ChapterUncheckedUpdateManyWithoutWorkedByOrganizationsNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutCountryOptionsInput = {
@@ -2248,6 +2279,7 @@ export type OrganizationCreateWithoutCountryOptionsInput = {
   jointMembers?: Prisma.JointMemberCreateNestedManyWithoutOrganizationInput
   uploadedJointChapters?: Prisma.ChapterCreateNestedManyWithoutUploadedByOrganizationInput
   workedOnJointChapters?: Prisma.ChapterCreateNestedManyWithoutWorkedByOrganizationsInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutCountryOptionsInput = {
@@ -2312,6 +2344,7 @@ export type OrganizationUncheckedCreateWithoutCountryOptionsInput = {
   jointMembers?: Prisma.JointMemberUncheckedCreateNestedManyWithoutOrganizationInput
   uploadedJointChapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutUploadedByOrganizationInput
   workedOnJointChapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutWorkedByOrganizationsInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutCountryOptionsInput = {
@@ -2391,6 +2424,7 @@ export type OrganizationUpdateWithoutCountryOptionsInput = {
   jointMembers?: Prisma.JointMemberUpdateManyWithoutOrganizationNestedInput
   uploadedJointChapters?: Prisma.ChapterUpdateManyWithoutUploadedByOrganizationNestedInput
   workedOnJointChapters?: Prisma.ChapterUpdateManyWithoutWorkedByOrganizationsNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutCountryOptionsInput = {
@@ -2455,6 +2489,7 @@ export type OrganizationUncheckedUpdateWithoutCountryOptionsInput = {
   jointMembers?: Prisma.JointMemberUncheckedUpdateManyWithoutOrganizationNestedInput
   uploadedJointChapters?: Prisma.ChapterUncheckedUpdateManyWithoutUploadedByOrganizationNestedInput
   workedOnJointChapters?: Prisma.ChapterUncheckedUpdateManyWithoutWorkedByOrganizationsNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutMangaCustomsInput = {
@@ -2518,6 +2553,7 @@ export type OrganizationCreateWithoutMangaCustomsInput = {
   jointMembers?: Prisma.JointMemberCreateNestedManyWithoutOrganizationInput
   uploadedJointChapters?: Prisma.ChapterCreateNestedManyWithoutUploadedByOrganizationInput
   workedOnJointChapters?: Prisma.ChapterCreateNestedManyWithoutWorkedByOrganizationsInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutMangaCustomsInput = {
@@ -2582,6 +2618,7 @@ export type OrganizationUncheckedCreateWithoutMangaCustomsInput = {
   jointMembers?: Prisma.JointMemberUncheckedCreateNestedManyWithoutOrganizationInput
   uploadedJointChapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutUploadedByOrganizationInput
   workedOnJointChapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutWorkedByOrganizationsInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutMangaCustomsInput = {
@@ -2661,6 +2698,7 @@ export type OrganizationUpdateWithoutMangaCustomsInput = {
   jointMembers?: Prisma.JointMemberUpdateManyWithoutOrganizationNestedInput
   uploadedJointChapters?: Prisma.ChapterUpdateManyWithoutUploadedByOrganizationNestedInput
   workedOnJointChapters?: Prisma.ChapterUpdateManyWithoutWorkedByOrganizationsNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutMangaCustomsInput = {
@@ -2725,6 +2763,7 @@ export type OrganizationUncheckedUpdateWithoutMangaCustomsInput = {
   jointMembers?: Prisma.JointMemberUncheckedUpdateManyWithoutOrganizationNestedInput
   uploadedJointChapters?: Prisma.ChapterUncheckedUpdateManyWithoutUploadedByOrganizationNestedInput
   workedOnJointChapters?: Prisma.ChapterUncheckedUpdateManyWithoutWorkedByOrganizationsNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutUploadedJointChaptersInput = {
@@ -2788,6 +2827,7 @@ export type OrganizationCreateWithoutUploadedJointChaptersInput = {
   subscriptionPlans?: Prisma.SubscriptionPlanCreateNestedManyWithoutOrganizationInput
   jointMembers?: Prisma.JointMemberCreateNestedManyWithoutOrganizationInput
   workedOnJointChapters?: Prisma.ChapterCreateNestedManyWithoutWorkedByOrganizationsInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutUploadedJointChaptersInput = {
@@ -2852,6 +2892,7 @@ export type OrganizationUncheckedCreateWithoutUploadedJointChaptersInput = {
   subscriptionPlans?: Prisma.SubscriptionPlanUncheckedCreateNestedManyWithoutOrganizationInput
   jointMembers?: Prisma.JointMemberUncheckedCreateNestedManyWithoutOrganizationInput
   workedOnJointChapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutWorkedByOrganizationsInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutUploadedJointChaptersInput = {
@@ -2920,6 +2961,7 @@ export type OrganizationCreateWithoutWorkedOnJointChaptersInput = {
   subscriptionPlans?: Prisma.SubscriptionPlanCreateNestedManyWithoutOrganizationInput
   jointMembers?: Prisma.JointMemberCreateNestedManyWithoutOrganizationInput
   uploadedJointChapters?: Prisma.ChapterCreateNestedManyWithoutUploadedByOrganizationInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutWorkedOnJointChaptersInput = {
@@ -2984,6 +3026,7 @@ export type OrganizationUncheckedCreateWithoutWorkedOnJointChaptersInput = {
   subscriptionPlans?: Prisma.SubscriptionPlanUncheckedCreateNestedManyWithoutOrganizationInput
   jointMembers?: Prisma.JointMemberUncheckedCreateNestedManyWithoutOrganizationInput
   uploadedJointChapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutUploadedByOrganizationInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutWorkedOnJointChaptersInput = {
@@ -3063,6 +3106,7 @@ export type OrganizationUpdateWithoutUploadedJointChaptersInput = {
   subscriptionPlans?: Prisma.SubscriptionPlanUpdateManyWithoutOrganizationNestedInput
   jointMembers?: Prisma.JointMemberUpdateManyWithoutOrganizationNestedInput
   workedOnJointChapters?: Prisma.ChapterUpdateManyWithoutWorkedByOrganizationsNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutUploadedJointChaptersInput = {
@@ -3127,6 +3171,7 @@ export type OrganizationUncheckedUpdateWithoutUploadedJointChaptersInput = {
   subscriptionPlans?: Prisma.SubscriptionPlanUncheckedUpdateManyWithoutOrganizationNestedInput
   jointMembers?: Prisma.JointMemberUncheckedUpdateManyWithoutOrganizationNestedInput
   workedOnJointChapters?: Prisma.ChapterUncheckedUpdateManyWithoutWorkedByOrganizationsNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUpsertWithWhereUniqueWithoutWorkedOnJointChaptersInput = {
@@ -3257,6 +3302,7 @@ export type OrganizationCreateWithoutCommentsInput = {
   jointMembers?: Prisma.JointMemberCreateNestedManyWithoutOrganizationInput
   uploadedJointChapters?: Prisma.ChapterCreateNestedManyWithoutUploadedByOrganizationInput
   workedOnJointChapters?: Prisma.ChapterCreateNestedManyWithoutWorkedByOrganizationsInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutCommentsInput = {
@@ -3321,6 +3367,7 @@ export type OrganizationUncheckedCreateWithoutCommentsInput = {
   jointMembers?: Prisma.JointMemberUncheckedCreateNestedManyWithoutOrganizationInput
   uploadedJointChapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutUploadedByOrganizationInput
   workedOnJointChapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutWorkedByOrganizationsInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutCommentsInput = {
@@ -3400,6 +3447,7 @@ export type OrganizationUpdateWithoutCommentsInput = {
   jointMembers?: Prisma.JointMemberUpdateManyWithoutOrganizationNestedInput
   uploadedJointChapters?: Prisma.ChapterUpdateManyWithoutUploadedByOrganizationNestedInput
   workedOnJointChapters?: Prisma.ChapterUpdateManyWithoutWorkedByOrganizationsNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutCommentsInput = {
@@ -3464,6 +3512,7 @@ export type OrganizationUncheckedUpdateWithoutCommentsInput = {
   jointMembers?: Prisma.JointMemberUncheckedUpdateManyWithoutOrganizationNestedInput
   uploadedJointChapters?: Prisma.ChapterUncheckedUpdateManyWithoutUploadedByOrganizationNestedInput
   workedOnJointChapters?: Prisma.ChapterUncheckedUpdateManyWithoutWorkedByOrganizationsNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutCommentLikesInput = {
@@ -3527,6 +3576,7 @@ export type OrganizationCreateWithoutCommentLikesInput = {
   jointMembers?: Prisma.JointMemberCreateNestedManyWithoutOrganizationInput
   uploadedJointChapters?: Prisma.ChapterCreateNestedManyWithoutUploadedByOrganizationInput
   workedOnJointChapters?: Prisma.ChapterCreateNestedManyWithoutWorkedByOrganizationsInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutCommentLikesInput = {
@@ -3591,6 +3641,7 @@ export type OrganizationUncheckedCreateWithoutCommentLikesInput = {
   jointMembers?: Prisma.JointMemberUncheckedCreateNestedManyWithoutOrganizationInput
   uploadedJointChapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutUploadedByOrganizationInput
   workedOnJointChapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutWorkedByOrganizationsInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutCommentLikesInput = {
@@ -3670,6 +3721,7 @@ export type OrganizationUpdateWithoutCommentLikesInput = {
   jointMembers?: Prisma.JointMemberUpdateManyWithoutOrganizationNestedInput
   uploadedJointChapters?: Prisma.ChapterUpdateManyWithoutUploadedByOrganizationNestedInput
   workedOnJointChapters?: Prisma.ChapterUpdateManyWithoutWorkedByOrganizationsNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutCommentLikesInput = {
@@ -3734,6 +3786,7 @@ export type OrganizationUncheckedUpdateWithoutCommentLikesInput = {
   jointMembers?: Prisma.JointMemberUncheckedUpdateManyWithoutOrganizationNestedInput
   uploadedJointChapters?: Prisma.ChapterUncheckedUpdateManyWithoutUploadedByOrganizationNestedInput
   workedOnJointChapters?: Prisma.ChapterUncheckedUpdateManyWithoutWorkedByOrganizationsNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutRankingsInput = {
@@ -3797,6 +3850,7 @@ export type OrganizationCreateWithoutRankingsInput = {
   jointMembers?: Prisma.JointMemberCreateNestedManyWithoutOrganizationInput
   uploadedJointChapters?: Prisma.ChapterCreateNestedManyWithoutUploadedByOrganizationInput
   workedOnJointChapters?: Prisma.ChapterCreateNestedManyWithoutWorkedByOrganizationsInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutRankingsInput = {
@@ -3861,6 +3915,7 @@ export type OrganizationUncheckedCreateWithoutRankingsInput = {
   jointMembers?: Prisma.JointMemberUncheckedCreateNestedManyWithoutOrganizationInput
   uploadedJointChapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutUploadedByOrganizationInput
   workedOnJointChapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutWorkedByOrganizationsInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutRankingsInput = {
@@ -3940,6 +3995,7 @@ export type OrganizationUpdateWithoutRankingsInput = {
   jointMembers?: Prisma.JointMemberUpdateManyWithoutOrganizationNestedInput
   uploadedJointChapters?: Prisma.ChapterUpdateManyWithoutUploadedByOrganizationNestedInput
   workedOnJointChapters?: Prisma.ChapterUpdateManyWithoutWorkedByOrganizationsNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutRankingsInput = {
@@ -4004,6 +4060,7 @@ export type OrganizationUncheckedUpdateWithoutRankingsInput = {
   jointMembers?: Prisma.JointMemberUncheckedUpdateManyWithoutOrganizationNestedInput
   uploadedJointChapters?: Prisma.ChapterUncheckedUpdateManyWithoutUploadedByOrganizationNestedInput
   workedOnJointChapters?: Prisma.ChapterUncheckedUpdateManyWithoutWorkedByOrganizationsNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutGenresInput = {
@@ -4067,6 +4124,7 @@ export type OrganizationCreateWithoutGenresInput = {
   jointMembers?: Prisma.JointMemberCreateNestedManyWithoutOrganizationInput
   uploadedJointChapters?: Prisma.ChapterCreateNestedManyWithoutUploadedByOrganizationInput
   workedOnJointChapters?: Prisma.ChapterCreateNestedManyWithoutWorkedByOrganizationsInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutGenresInput = {
@@ -4131,6 +4189,7 @@ export type OrganizationUncheckedCreateWithoutGenresInput = {
   jointMembers?: Prisma.JointMemberUncheckedCreateNestedManyWithoutOrganizationInput
   uploadedJointChapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutUploadedByOrganizationInput
   workedOnJointChapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutWorkedByOrganizationsInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutGenresInput = {
@@ -4210,6 +4269,7 @@ export type OrganizationUpdateWithoutGenresInput = {
   jointMembers?: Prisma.JointMemberUpdateManyWithoutOrganizationNestedInput
   uploadedJointChapters?: Prisma.ChapterUpdateManyWithoutUploadedByOrganizationNestedInput
   workedOnJointChapters?: Prisma.ChapterUpdateManyWithoutWorkedByOrganizationsNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutGenresInput = {
@@ -4274,6 +4334,7 @@ export type OrganizationUncheckedUpdateWithoutGenresInput = {
   jointMembers?: Prisma.JointMemberUncheckedUpdateManyWithoutOrganizationNestedInput
   uploadedJointChapters?: Prisma.ChapterUncheckedUpdateManyWithoutUploadedByOrganizationNestedInput
   workedOnJointChapters?: Prisma.ChapterUncheckedUpdateManyWithoutWorkedByOrganizationsNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutAnalyticsInput = {
@@ -4337,6 +4398,7 @@ export type OrganizationCreateWithoutAnalyticsInput = {
   jointMembers?: Prisma.JointMemberCreateNestedManyWithoutOrganizationInput
   uploadedJointChapters?: Prisma.ChapterCreateNestedManyWithoutUploadedByOrganizationInput
   workedOnJointChapters?: Prisma.ChapterCreateNestedManyWithoutWorkedByOrganizationsInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutAnalyticsInput = {
@@ -4401,6 +4463,7 @@ export type OrganizationUncheckedCreateWithoutAnalyticsInput = {
   jointMembers?: Prisma.JointMemberUncheckedCreateNestedManyWithoutOrganizationInput
   uploadedJointChapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutUploadedByOrganizationInput
   workedOnJointChapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutWorkedByOrganizationsInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutAnalyticsInput = {
@@ -4480,6 +4543,7 @@ export type OrganizationUpdateWithoutAnalyticsInput = {
   jointMembers?: Prisma.JointMemberUpdateManyWithoutOrganizationNestedInput
   uploadedJointChapters?: Prisma.ChapterUpdateManyWithoutUploadedByOrganizationNestedInput
   workedOnJointChapters?: Prisma.ChapterUpdateManyWithoutWorkedByOrganizationsNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutAnalyticsInput = {
@@ -4544,6 +4608,7 @@ export type OrganizationUncheckedUpdateWithoutAnalyticsInput = {
   jointMembers?: Prisma.JointMemberUncheckedUpdateManyWithoutOrganizationNestedInput
   uploadedJointChapters?: Prisma.ChapterUncheckedUpdateManyWithoutUploadedByOrganizationNestedInput
   workedOnJointChapters?: Prisma.ChapterUncheckedUpdateManyWithoutWorkedByOrganizationsNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutAuditsInput = {
@@ -4607,6 +4672,7 @@ export type OrganizationCreateWithoutAuditsInput = {
   jointMembers?: Prisma.JointMemberCreateNestedManyWithoutOrganizationInput
   uploadedJointChapters?: Prisma.ChapterCreateNestedManyWithoutUploadedByOrganizationInput
   workedOnJointChapters?: Prisma.ChapterCreateNestedManyWithoutWorkedByOrganizationsInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutAuditsInput = {
@@ -4671,6 +4737,7 @@ export type OrganizationUncheckedCreateWithoutAuditsInput = {
   jointMembers?: Prisma.JointMemberUncheckedCreateNestedManyWithoutOrganizationInput
   uploadedJointChapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutUploadedByOrganizationInput
   workedOnJointChapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutWorkedByOrganizationsInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutAuditsInput = {
@@ -4750,6 +4817,7 @@ export type OrganizationUpdateWithoutAuditsInput = {
   jointMembers?: Prisma.JointMemberUpdateManyWithoutOrganizationNestedInput
   uploadedJointChapters?: Prisma.ChapterUpdateManyWithoutUploadedByOrganizationNestedInput
   workedOnJointChapters?: Prisma.ChapterUpdateManyWithoutWorkedByOrganizationsNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutAuditsInput = {
@@ -4814,6 +4882,7 @@ export type OrganizationUncheckedUpdateWithoutAuditsInput = {
   jointMembers?: Prisma.JointMemberUncheckedUpdateManyWithoutOrganizationNestedInput
   uploadedJointChapters?: Prisma.ChapterUncheckedUpdateManyWithoutUploadedByOrganizationNestedInput
   workedOnJointChapters?: Prisma.ChapterUncheckedUpdateManyWithoutWorkedByOrganizationsNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutSubscriptionPlansInput = {
@@ -4877,6 +4946,7 @@ export type OrganizationCreateWithoutSubscriptionPlansInput = {
   jointMembers?: Prisma.JointMemberCreateNestedManyWithoutOrganizationInput
   uploadedJointChapters?: Prisma.ChapterCreateNestedManyWithoutUploadedByOrganizationInput
   workedOnJointChapters?: Prisma.ChapterCreateNestedManyWithoutWorkedByOrganizationsInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutSubscriptionPlansInput = {
@@ -4941,6 +5011,7 @@ export type OrganizationUncheckedCreateWithoutSubscriptionPlansInput = {
   jointMembers?: Prisma.JointMemberUncheckedCreateNestedManyWithoutOrganizationInput
   uploadedJointChapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutUploadedByOrganizationInput
   workedOnJointChapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutWorkedByOrganizationsInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutSubscriptionPlansInput = {
@@ -5020,6 +5091,7 @@ export type OrganizationUpdateWithoutSubscriptionPlansInput = {
   jointMembers?: Prisma.JointMemberUpdateManyWithoutOrganizationNestedInput
   uploadedJointChapters?: Prisma.ChapterUpdateManyWithoutUploadedByOrganizationNestedInput
   workedOnJointChapters?: Prisma.ChapterUpdateManyWithoutWorkedByOrganizationsNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutSubscriptionPlansInput = {
@@ -5084,6 +5156,7 @@ export type OrganizationUncheckedUpdateWithoutSubscriptionPlansInput = {
   jointMembers?: Prisma.JointMemberUncheckedUpdateManyWithoutOrganizationNestedInput
   uploadedJointChapters?: Prisma.ChapterUncheckedUpdateManyWithoutUploadedByOrganizationNestedInput
   workedOnJointChapters?: Prisma.ChapterUncheckedUpdateManyWithoutWorkedByOrganizationsNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutSubscriptionsInput = {
@@ -5147,6 +5220,7 @@ export type OrganizationCreateWithoutSubscriptionsInput = {
   jointMembers?: Prisma.JointMemberCreateNestedManyWithoutOrganizationInput
   uploadedJointChapters?: Prisma.ChapterCreateNestedManyWithoutUploadedByOrganizationInput
   workedOnJointChapters?: Prisma.ChapterCreateNestedManyWithoutWorkedByOrganizationsInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutSubscriptionsInput = {
@@ -5211,6 +5285,7 @@ export type OrganizationUncheckedCreateWithoutSubscriptionsInput = {
   jointMembers?: Prisma.JointMemberUncheckedCreateNestedManyWithoutOrganizationInput
   uploadedJointChapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutUploadedByOrganizationInput
   workedOnJointChapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutWorkedByOrganizationsInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutSubscriptionsInput = {
@@ -5290,6 +5365,7 @@ export type OrganizationUpdateWithoutSubscriptionsInput = {
   jointMembers?: Prisma.JointMemberUpdateManyWithoutOrganizationNestedInput
   uploadedJointChapters?: Prisma.ChapterUpdateManyWithoutUploadedByOrganizationNestedInput
   workedOnJointChapters?: Prisma.ChapterUpdateManyWithoutWorkedByOrganizationsNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutSubscriptionsInput = {
@@ -5354,6 +5430,7 @@ export type OrganizationUncheckedUpdateWithoutSubscriptionsInput = {
   jointMembers?: Prisma.JointMemberUncheckedUpdateManyWithoutOrganizationNestedInput
   uploadedJointChapters?: Prisma.ChapterUncheckedUpdateManyWithoutUploadedByOrganizationNestedInput
   workedOnJointChapters?: Prisma.ChapterUncheckedUpdateManyWithoutWorkedByOrganizationsNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutOrganizationTransactionInput = {
@@ -5417,6 +5494,7 @@ export type OrganizationCreateWithoutOrganizationTransactionInput = {
   jointMembers?: Prisma.JointMemberCreateNestedManyWithoutOrganizationInput
   uploadedJointChapters?: Prisma.ChapterCreateNestedManyWithoutUploadedByOrganizationInput
   workedOnJointChapters?: Prisma.ChapterCreateNestedManyWithoutWorkedByOrganizationsInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutOrganizationTransactionInput = {
@@ -5481,6 +5559,7 @@ export type OrganizationUncheckedCreateWithoutOrganizationTransactionInput = {
   jointMembers?: Prisma.JointMemberUncheckedCreateNestedManyWithoutOrganizationInput
   uploadedJointChapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutUploadedByOrganizationInput
   workedOnJointChapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutWorkedByOrganizationsInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutOrganizationTransactionInput = {
@@ -5560,6 +5639,7 @@ export type OrganizationUpdateWithoutOrganizationTransactionInput = {
   jointMembers?: Prisma.JointMemberUpdateManyWithoutOrganizationNestedInput
   uploadedJointChapters?: Prisma.ChapterUpdateManyWithoutUploadedByOrganizationNestedInput
   workedOnJointChapters?: Prisma.ChapterUpdateManyWithoutWorkedByOrganizationsNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutOrganizationTransactionInput = {
@@ -5624,6 +5704,7 @@ export type OrganizationUncheckedUpdateWithoutOrganizationTransactionInput = {
   jointMembers?: Prisma.JointMemberUncheckedUpdateManyWithoutOrganizationNestedInput
   uploadedJointChapters?: Prisma.ChapterUncheckedUpdateManyWithoutUploadedByOrganizationNestedInput
   workedOnJointChapters?: Prisma.ChapterUncheckedUpdateManyWithoutWorkedByOrganizationsNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutFollowersInput = {
@@ -5687,6 +5768,7 @@ export type OrganizationCreateWithoutFollowersInput = {
   jointMembers?: Prisma.JointMemberCreateNestedManyWithoutOrganizationInput
   uploadedJointChapters?: Prisma.ChapterCreateNestedManyWithoutUploadedByOrganizationInput
   workedOnJointChapters?: Prisma.ChapterCreateNestedManyWithoutWorkedByOrganizationsInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutFollowersInput = {
@@ -5751,6 +5833,7 @@ export type OrganizationUncheckedCreateWithoutFollowersInput = {
   jointMembers?: Prisma.JointMemberUncheckedCreateNestedManyWithoutOrganizationInput
   uploadedJointChapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutUploadedByOrganizationInput
   workedOnJointChapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutWorkedByOrganizationsInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutFollowersInput = {
@@ -5830,6 +5913,7 @@ export type OrganizationUpdateWithoutFollowersInput = {
   jointMembers?: Prisma.JointMemberUpdateManyWithoutOrganizationNestedInput
   uploadedJointChapters?: Prisma.ChapterUpdateManyWithoutUploadedByOrganizationNestedInput
   workedOnJointChapters?: Prisma.ChapterUpdateManyWithoutWorkedByOrganizationsNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutFollowersInput = {
@@ -5894,6 +5978,7 @@ export type OrganizationUncheckedUpdateWithoutFollowersInput = {
   jointMembers?: Prisma.JointMemberUncheckedUpdateManyWithoutOrganizationNestedInput
   uploadedJointChapters?: Prisma.ChapterUncheckedUpdateManyWithoutUploadedByOrganizationNestedInput
   workedOnJointChapters?: Prisma.ChapterUncheckedUpdateManyWithoutWorkedByOrganizationsNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutJointMembersInput = {
@@ -5957,6 +6042,7 @@ export type OrganizationCreateWithoutJointMembersInput = {
   subscriptionPlans?: Prisma.SubscriptionPlanCreateNestedManyWithoutOrganizationInput
   uploadedJointChapters?: Prisma.ChapterCreateNestedManyWithoutUploadedByOrganizationInput
   workedOnJointChapters?: Prisma.ChapterCreateNestedManyWithoutWorkedByOrganizationsInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutJointMembersInput = {
@@ -6021,6 +6107,7 @@ export type OrganizationUncheckedCreateWithoutJointMembersInput = {
   subscriptionPlans?: Prisma.SubscriptionPlanUncheckedCreateNestedManyWithoutOrganizationInput
   uploadedJointChapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutUploadedByOrganizationInput
   workedOnJointChapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutWorkedByOrganizationsInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutJointMembersInput = {
@@ -6100,6 +6187,7 @@ export type OrganizationUpdateWithoutJointMembersInput = {
   subscriptionPlans?: Prisma.SubscriptionPlanUpdateManyWithoutOrganizationNestedInput
   uploadedJointChapters?: Prisma.ChapterUpdateManyWithoutUploadedByOrganizationNestedInput
   workedOnJointChapters?: Prisma.ChapterUpdateManyWithoutWorkedByOrganizationsNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutJointMembersInput = {
@@ -6162,6 +6250,281 @@ export type OrganizationUncheckedUpdateWithoutJointMembersInput = {
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutOrganizationNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutOrganizationNestedInput
   subscriptionPlans?: Prisma.SubscriptionPlanUncheckedUpdateManyWithoutOrganizationNestedInput
+  uploadedJointChapters?: Prisma.ChapterUncheckedUpdateManyWithoutUploadedByOrganizationNestedInput
+  workedOnJointChapters?: Prisma.ChapterUncheckedUpdateManyWithoutWorkedByOrganizationsNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutNotificationsInput = {
+  name: string
+  title: string
+  domain: string
+  slug: string
+  description?: string | null
+  imageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  googleAdsMetaContent?: string | null
+  googleAdsAdsTxtContent?: string | null
+  bannerUrl?: string | null
+  discordUrl?: string | null
+  facebookUrl?: string | null
+  instagramUrl?: string | null
+  logoUrl?: string | null
+  patreonUrl?: string | null
+  tiktokUrl?: string | null
+  twitchUrl?: string | null
+  twitterUrl?: string | null
+  youtubeUrl?: string | null
+  enableGoogleAds?: boolean
+  faviconUrl?: string | null
+  enableMangaSection?: boolean
+  enableManhuaSection?: boolean
+  enableManhwaSection?: boolean
+  language?: string
+  monitorWebsiteId?: string | null
+  useAllowedCountries?: boolean
+  useBlockedCountries?: boolean
+  adsterraAdSource?: string | null
+  enableAdsterraAds?: boolean
+  enableMainBanner?: boolean
+  enableMainSlider?: boolean
+  enableSubscriptionSection?: boolean
+  discordWebhookUrlNewChapter?: string | null
+  discordWebhookUrlNewSubscription?: string | null
+  enableDiscordWebhookNewChapter?: boolean
+  enableDiscordWebhookNewSubscription?: boolean
+  discordWebhookMessageTemplateNewChapter?: string | null
+  discordWebhookMessageTemplateNewSubscription?: string | null
+  isPublic?: boolean
+  isNSFW?: boolean
+  isDeleted?: boolean
+  enableAds?: boolean
+  analytics?: Prisma.AnalyticsCreateNestedManyWithoutOrganizationInput
+  audits?: Prisma.AuditCreateNestedManyWithoutOrganizationInput
+  comments?: Prisma.CommentCreateNestedManyWithoutOrganizationInput
+  commentLikes?: Prisma.CommentLikeCreateNestedManyWithoutOrganizationInput
+  countryOptions?: Prisma.CountryOptionsCreateNestedManyWithoutOrganizationInput
+  genres?: Prisma.GenreCreateNestedManyWithoutOrganizationInput
+  mangaCustoms?: Prisma.MangaCustomCreateNestedManyWithoutOrganizationInput
+  followers?: Prisma.OrganizationFollowerCreateNestedManyWithoutOrganizationInput
+  OrganizationTransaction?: Prisma.OrganizationTransactionCreateNestedManyWithoutOrganizationInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutOrganizationInput
+  permissions?: Prisma.PermissionCreateNestedManyWithoutOrganizationInput
+  rankings?: Prisma.RankingCreateNestedManyWithoutOrganizationInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutOrganizationInput
+  subscriptionPlans?: Prisma.SubscriptionPlanCreateNestedManyWithoutOrganizationInput
+  jointMembers?: Prisma.JointMemberCreateNestedManyWithoutOrganizationInput
+  uploadedJointChapters?: Prisma.ChapterCreateNestedManyWithoutUploadedByOrganizationInput
+  workedOnJointChapters?: Prisma.ChapterCreateNestedManyWithoutWorkedByOrganizationsInput
+}
+
+export type OrganizationUncheckedCreateWithoutNotificationsInput = {
+  id?: number
+  name: string
+  title: string
+  domain: string
+  slug: string
+  description?: string | null
+  imageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  googleAdsMetaContent?: string | null
+  googleAdsAdsTxtContent?: string | null
+  bannerUrl?: string | null
+  discordUrl?: string | null
+  facebookUrl?: string | null
+  instagramUrl?: string | null
+  logoUrl?: string | null
+  patreonUrl?: string | null
+  tiktokUrl?: string | null
+  twitchUrl?: string | null
+  twitterUrl?: string | null
+  youtubeUrl?: string | null
+  enableGoogleAds?: boolean
+  faviconUrl?: string | null
+  enableMangaSection?: boolean
+  enableManhuaSection?: boolean
+  enableManhwaSection?: boolean
+  language?: string
+  monitorWebsiteId?: string | null
+  useAllowedCountries?: boolean
+  useBlockedCountries?: boolean
+  adsterraAdSource?: string | null
+  enableAdsterraAds?: boolean
+  enableMainBanner?: boolean
+  enableMainSlider?: boolean
+  enableSubscriptionSection?: boolean
+  discordWebhookUrlNewChapter?: string | null
+  discordWebhookUrlNewSubscription?: string | null
+  enableDiscordWebhookNewChapter?: boolean
+  enableDiscordWebhookNewSubscription?: boolean
+  discordWebhookMessageTemplateNewChapter?: string | null
+  discordWebhookMessageTemplateNewSubscription?: string | null
+  isPublic?: boolean
+  isNSFW?: boolean
+  isDeleted?: boolean
+  enableAds?: boolean
+  analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutOrganizationInput
+  audits?: Prisma.AuditUncheckedCreateNestedManyWithoutOrganizationInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutOrganizationInput
+  commentLikes?: Prisma.CommentLikeUncheckedCreateNestedManyWithoutOrganizationInput
+  countryOptions?: Prisma.CountryOptionsUncheckedCreateNestedManyWithoutOrganizationInput
+  genres?: Prisma.GenreUncheckedCreateNestedManyWithoutOrganizationInput
+  mangaCustoms?: Prisma.MangaCustomUncheckedCreateNestedManyWithoutOrganizationInput
+  followers?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutOrganizationInput
+  OrganizationTransaction?: Prisma.OrganizationTransactionUncheckedCreateNestedManyWithoutOrganizationInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutOrganizationInput
+  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutOrganizationInput
+  rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutOrganizationInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutOrganizationInput
+  subscriptionPlans?: Prisma.SubscriptionPlanUncheckedCreateNestedManyWithoutOrganizationInput
+  jointMembers?: Prisma.JointMemberUncheckedCreateNestedManyWithoutOrganizationInput
+  uploadedJointChapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutUploadedByOrganizationInput
+  workedOnJointChapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutWorkedByOrganizationsInput
+}
+
+export type OrganizationCreateOrConnectWithoutNotificationsInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutNotificationsInput, Prisma.OrganizationUncheckedCreateWithoutNotificationsInput>
+}
+
+export type OrganizationUpsertWithoutNotificationsInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutNotificationsInput, Prisma.OrganizationUncheckedUpdateWithoutNotificationsInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutNotificationsInput, Prisma.OrganizationUncheckedCreateWithoutNotificationsInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutNotificationsInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutNotificationsInput, Prisma.OrganizationUncheckedUpdateWithoutNotificationsInput>
+}
+
+export type OrganizationUpdateWithoutNotificationsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  domain?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  googleAdsMetaContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleAdsAdsTxtContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  facebookUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagramUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  patreonUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tiktokUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  twitchUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableGoogleAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  faviconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableMangaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  enableManhuaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  enableManhwaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  monitorWebsiteId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  useAllowedCountries?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  useBlockedCountries?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  adsterraAdSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableAdsterraAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  enableMainBanner?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  enableMainSlider?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  enableSubscriptionSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  discordWebhookUrlNewChapter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordWebhookUrlNewSubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableDiscordWebhookNewChapter?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  enableDiscordWebhookNewSubscription?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  discordWebhookMessageTemplateNewChapter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordWebhookMessageTemplateNewSubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  enableAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  analytics?: Prisma.AnalyticsUpdateManyWithoutOrganizationNestedInput
+  audits?: Prisma.AuditUpdateManyWithoutOrganizationNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutOrganizationNestedInput
+  commentLikes?: Prisma.CommentLikeUpdateManyWithoutOrganizationNestedInput
+  countryOptions?: Prisma.CountryOptionsUpdateManyWithoutOrganizationNestedInput
+  genres?: Prisma.GenreUpdateManyWithoutOrganizationNestedInput
+  mangaCustoms?: Prisma.MangaCustomUpdateManyWithoutOrganizationNestedInput
+  followers?: Prisma.OrganizationFollowerUpdateManyWithoutOrganizationNestedInput
+  OrganizationTransaction?: Prisma.OrganizationTransactionUpdateManyWithoutOrganizationNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutOrganizationNestedInput
+  permissions?: Prisma.PermissionUpdateManyWithoutOrganizationNestedInput
+  rankings?: Prisma.RankingUpdateManyWithoutOrganizationNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutOrganizationNestedInput
+  subscriptionPlans?: Prisma.SubscriptionPlanUpdateManyWithoutOrganizationNestedInput
+  jointMembers?: Prisma.JointMemberUpdateManyWithoutOrganizationNestedInput
+  uploadedJointChapters?: Prisma.ChapterUpdateManyWithoutUploadedByOrganizationNestedInput
+  workedOnJointChapters?: Prisma.ChapterUpdateManyWithoutWorkedByOrganizationsNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutNotificationsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  domain?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  googleAdsMetaContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleAdsAdsTxtContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  facebookUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagramUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  patreonUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tiktokUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  twitchUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableGoogleAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  faviconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableMangaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  enableManhuaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  enableManhwaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  monitorWebsiteId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  useAllowedCountries?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  useBlockedCountries?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  adsterraAdSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableAdsterraAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  enableMainBanner?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  enableMainSlider?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  enableSubscriptionSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  discordWebhookUrlNewChapter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordWebhookUrlNewSubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableDiscordWebhookNewChapter?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  enableDiscordWebhookNewSubscription?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  discordWebhookMessageTemplateNewChapter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordWebhookMessageTemplateNewSubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  enableAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutOrganizationNestedInput
+  audits?: Prisma.AuditUncheckedUpdateManyWithoutOrganizationNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutOrganizationNestedInput
+  commentLikes?: Prisma.CommentLikeUncheckedUpdateManyWithoutOrganizationNestedInput
+  countryOptions?: Prisma.CountryOptionsUncheckedUpdateManyWithoutOrganizationNestedInput
+  genres?: Prisma.GenreUncheckedUpdateManyWithoutOrganizationNestedInput
+  mangaCustoms?: Prisma.MangaCustomUncheckedUpdateManyWithoutOrganizationNestedInput
+  followers?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutOrganizationNestedInput
+  OrganizationTransaction?: Prisma.OrganizationTransactionUncheckedUpdateManyWithoutOrganizationNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutOrganizationNestedInput
+  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutOrganizationNestedInput
+  rankings?: Prisma.RankingUncheckedUpdateManyWithoutOrganizationNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutOrganizationNestedInput
+  subscriptionPlans?: Prisma.SubscriptionPlanUncheckedUpdateManyWithoutOrganizationNestedInput
+  jointMembers?: Prisma.JointMemberUncheckedUpdateManyWithoutOrganizationNestedInput
   uploadedJointChapters?: Prisma.ChapterUncheckedUpdateManyWithoutUploadedByOrganizationNestedInput
   workedOnJointChapters?: Prisma.ChapterUncheckedUpdateManyWithoutWorkedByOrganizationsNestedInput
 }
@@ -6227,6 +6590,7 @@ export type OrganizationUpdateWithoutWorkedOnJointChaptersInput = {
   subscriptionPlans?: Prisma.SubscriptionPlanUpdateManyWithoutOrganizationNestedInput
   jointMembers?: Prisma.JointMemberUpdateManyWithoutOrganizationNestedInput
   uploadedJointChapters?: Prisma.ChapterUpdateManyWithoutUploadedByOrganizationNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutWorkedOnJointChaptersInput = {
@@ -6291,6 +6655,7 @@ export type OrganizationUncheckedUpdateWithoutWorkedOnJointChaptersInput = {
   subscriptionPlans?: Prisma.SubscriptionPlanUncheckedUpdateManyWithoutOrganizationNestedInput
   jointMembers?: Prisma.JointMemberUncheckedUpdateManyWithoutOrganizationNestedInput
   uploadedJointChapters?: Prisma.ChapterUncheckedUpdateManyWithoutUploadedByOrganizationNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateManyWithoutWorkedOnJointChaptersInput = {
@@ -6364,6 +6729,7 @@ export type OrganizationCountOutputType = {
   jointMembers: number
   uploadedJointChapters: number
   workedOnJointChapters: number
+  notifications: number
 }
 
 export type OrganizationCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -6384,6 +6750,7 @@ export type OrganizationCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   jointMembers?: boolean | OrganizationCountOutputTypeCountJointMembersArgs
   uploadedJointChapters?: boolean | OrganizationCountOutputTypeCountUploadedJointChaptersArgs
   workedOnJointChapters?: boolean | OrganizationCountOutputTypeCountWorkedOnJointChaptersArgs
+  notifications?: boolean | OrganizationCountOutputTypeCountNotificationsArgs
 }
 
 /**
@@ -6515,6 +6882,13 @@ export type OrganizationCountOutputTypeCountWorkedOnJointChaptersArgs<ExtArgs ex
   where?: Prisma.ChapterWhereInput
 }
 
+/**
+ * OrganizationCountOutputType without action
+ */
+export type OrganizationCountOutputTypeCountNotificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NotificationWhereInput
+}
+
 
 export type OrganizationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -6579,6 +6953,7 @@ export type OrganizationSelect<ExtArgs extends runtime.Types.Extensions.Internal
   jointMembers?: boolean | Prisma.Organization$jointMembersArgs<ExtArgs>
   uploadedJointChapters?: boolean | Prisma.Organization$uploadedJointChaptersArgs<ExtArgs>
   workedOnJointChapters?: boolean | Prisma.Organization$workedOnJointChaptersArgs<ExtArgs>
+  notifications?: boolean | Prisma.Organization$notificationsArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["organization"]>
 
@@ -6745,6 +7120,7 @@ export type OrganizationInclude<ExtArgs extends runtime.Types.Extensions.Interna
   jointMembers?: boolean | Prisma.Organization$jointMembersArgs<ExtArgs>
   uploadedJointChapters?: boolean | Prisma.Organization$uploadedJointChaptersArgs<ExtArgs>
   workedOnJointChapters?: boolean | Prisma.Organization$workedOnJointChaptersArgs<ExtArgs>
+  notifications?: boolean | Prisma.Organization$notificationsArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type OrganizationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -6770,6 +7146,7 @@ export type $OrganizationPayload<ExtArgs extends runtime.Types.Extensions.Intern
     jointMembers: Prisma.$JointMemberPayload<ExtArgs>[]
     uploadedJointChapters: Prisma.$ChapterPayload<ExtArgs>[]
     workedOnJointChapters: Prisma.$ChapterPayload<ExtArgs>[]
+    notifications: Prisma.$NotificationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -7228,6 +7605,7 @@ export interface Prisma__OrganizationClient<T, Null = never, ExtArgs extends run
   jointMembers<T extends Prisma.Organization$jointMembersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$jointMembersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JointMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   uploadedJointChapters<T extends Prisma.Organization$uploadedJointChaptersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$uploadedJointChaptersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChapterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   workedOnJointChapters<T extends Prisma.Organization$workedOnJointChaptersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$workedOnJointChaptersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChapterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notifications<T extends Prisma.Organization$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8095,6 +8473,30 @@ export type Organization$workedOnJointChaptersArgs<ExtArgs extends runtime.Types
   take?: number
   skip?: number
   distinct?: Prisma.ChapterScalarFieldEnum | Prisma.ChapterScalarFieldEnum[]
+}
+
+/**
+ * Organization.notifications
+ */
+export type Organization$notificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Notification
+   */
+  select?: Prisma.NotificationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Notification
+   */
+  omit?: Prisma.NotificationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NotificationInclude<ExtArgs> | null
+  where?: Prisma.NotificationWhereInput
+  orderBy?: Prisma.NotificationOrderByWithRelationInput | Prisma.NotificationOrderByWithRelationInput[]
+  cursor?: Prisma.NotificationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
 }
 
 /**

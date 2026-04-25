@@ -84,6 +84,7 @@ model Organization {
   jointMembers                                 JointMember[]
   uploadedJointChapters                        Chapter[]     @relation("ChapterUploader")
   workedOnJointChapters                        Chapter[]     @relation("ChapterWorkedBy")
+  notifications                                Notification[]
 
   @@map("organization")
 }
@@ -364,6 +365,8 @@ model Comment {
   replies        Comment[]     @relation("CommentReplies")
   user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   likes          CommentLike[]
+  notifications        Notification[] @relation("NotificationComment")
+  parentNotifications  Notification[] @relation("NotificationParentComment")
 
   @@index([organizationId])
   @@index([userId])
@@ -598,6 +601,7 @@ model Subscription {
   organization         Organization?             @relation(fields: [organizationId], references: [id])
   subscriptionPlan     SubscriptionPlan          @relation(fields: [subscriptionPlanId], references: [id])
   user                 User                      @relation(fields: [userId], references: [id])
+  notifications        Notification[]
 
   @@map("subscription")
 }
@@ -831,13 +835,32 @@ model Notification {
   joint         MangaJoint?  @relation(fields: [jointId], references: [id])
   chapterId     Int?
   chapter       Chapter?     @relation(fields: [chapterId], references: [id])
-  // 'favorite' | 'user_list' — the reason this user is being notified. If the
-  // manga is in both, prefer 'favorite' (more intentional signal).
+  // 'favorite' | 'user_list' | 'reply' | 'org_follower' | 'org_staff' — why this
+  // user is being notified. For new_chapter: favorite wins over user_list.
   source        String       @default("favorite") @db.VarChar(32)
   readAt        DateTime?
   createdAt     DateTime     @default(now()) @db.Timestamp(6)
 
+  // null until the cron sends the delayed email. The cron picks rows where
+  // readAt IS NULL AND emailSentAt IS NULL AND createdAt < now - 30 min.
+  emailSentAt     DateTime?
+
+  // For comment_reply notifications.
+  commentId       Int?
+  comment         Comment?      @relation("NotificationComment", fields: [commentId], references: [id])
+  parentCommentId Int?
+  parentComment   Comment?      @relation("NotificationParentComment", fields: [parentCommentId], references: [id])
+
+  // For new_subscriber / failed_payment notifications.
+  subscriptionId  Int?
+  subscription    Subscription? @relation(fields: [subscriptionId], references: [id])
+
+  // For new_manga / new_subscriber / failed_payment — the org context.
+  organizationId  Int?
+  organization    Organization? @relation(fields: [organizationId], references: [id])
+
   @@index([userId, readAt, createdAt])
   @@index([userId, createdAt])
+  @@index([readAt, emailSentAt, createdAt])
   @@map("notification")
 }

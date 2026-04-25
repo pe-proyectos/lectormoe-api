@@ -307,6 +307,7 @@ export type ChapterWhereInput = {
   pages?: Prisma.PageListRelationFilter
   userHistory?: Prisma.UserChapterHistoryListRelationFilter
   viewsHistory?: Prisma.ViewsHistoryListRelationFilter
+  notifications?: Prisma.NotificationListRelationFilter
 }
 
 export type ChapterOrderByWithRelationInput = {
@@ -330,6 +331,7 @@ export type ChapterOrderByWithRelationInput = {
   pages?: Prisma.PageOrderByRelationAggregateInput
   userHistory?: Prisma.UserChapterHistoryOrderByRelationAggregateInput
   viewsHistory?: Prisma.ViewsHistoryOrderByRelationAggregateInput
+  notifications?: Prisma.NotificationOrderByRelationAggregateInput
 }
 
 export type ChapterWhereUniqueInput = Prisma.AtLeast<{
@@ -358,6 +360,7 @@ export type ChapterWhereUniqueInput = Prisma.AtLeast<{
   pages?: Prisma.PageListRelationFilter
   userHistory?: Prisma.UserChapterHistoryListRelationFilter
   viewsHistory?: Prisma.ViewsHistoryListRelationFilter
+  notifications?: Prisma.NotificationListRelationFilter
 }, "id" | "number_mangaCustomId" | "number_jointId">
 
 export type ChapterOrderByWithAggregationInput = {
@@ -417,6 +420,7 @@ export type ChapterCreateInput = {
   pages?: Prisma.PageCreateNestedManyWithoutChapterInput
   userHistory?: Prisma.UserChapterHistoryCreateNestedManyWithoutChapterInput
   viewsHistory?: Prisma.ViewsHistoryCreateNestedManyWithoutChapterInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutChapterInput
 }
 
 export type ChapterUncheckedCreateInput = {
@@ -437,6 +441,7 @@ export type ChapterUncheckedCreateInput = {
   pages?: Prisma.PageUncheckedCreateNestedManyWithoutChapterInput
   userHistory?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutChapterInput
   viewsHistory?: Prisma.ViewsHistoryUncheckedCreateNestedManyWithoutChapterInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutChapterInput
 }
 
 export type ChapterUpdateInput = {
@@ -456,6 +461,7 @@ export type ChapterUpdateInput = {
   pages?: Prisma.PageUpdateManyWithoutChapterNestedInput
   userHistory?: Prisma.UserChapterHistoryUpdateManyWithoutChapterNestedInput
   viewsHistory?: Prisma.ViewsHistoryUpdateManyWithoutChapterNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutChapterNestedInput
 }
 
 export type ChapterUncheckedUpdateInput = {
@@ -476,6 +482,7 @@ export type ChapterUncheckedUpdateInput = {
   pages?: Prisma.PageUncheckedUpdateManyWithoutChapterNestedInput
   userHistory?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutChapterNestedInput
   viewsHistory?: Prisma.ViewsHistoryUncheckedUpdateManyWithoutChapterNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutChapterNestedInput
 }
 
 export type ChapterCreateManyInput = {
@@ -834,6 +841,22 @@ export type ChapterUncheckedUpdateManyWithoutJointNestedInput = {
   deleteMany?: Prisma.ChapterScalarWhereInput | Prisma.ChapterScalarWhereInput[]
 }
 
+export type ChapterCreateNestedOneWithoutNotificationsInput = {
+  create?: Prisma.XOR<Prisma.ChapterCreateWithoutNotificationsInput, Prisma.ChapterUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.ChapterCreateOrConnectWithoutNotificationsInput
+  connect?: Prisma.ChapterWhereUniqueInput
+}
+
+export type ChapterUpdateOneWithoutNotificationsNestedInput = {
+  create?: Prisma.XOR<Prisma.ChapterCreateWithoutNotificationsInput, Prisma.ChapterUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.ChapterCreateOrConnectWithoutNotificationsInput
+  upsert?: Prisma.ChapterUpsertWithoutNotificationsInput
+  disconnect?: Prisma.ChapterWhereInput | boolean
+  delete?: Prisma.ChapterWhereInput | boolean
+  connect?: Prisma.ChapterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ChapterUpdateToOneWithWhereWithoutNotificationsInput, Prisma.ChapterUpdateWithoutNotificationsInput>, Prisma.ChapterUncheckedUpdateWithoutNotificationsInput>
+}
+
 export type ChapterCreateWithoutUploadedByOrganizationInput = {
   number: number
   title: string
@@ -850,6 +873,7 @@ export type ChapterCreateWithoutUploadedByOrganizationInput = {
   pages?: Prisma.PageCreateNestedManyWithoutChapterInput
   userHistory?: Prisma.UserChapterHistoryCreateNestedManyWithoutChapterInput
   viewsHistory?: Prisma.ViewsHistoryCreateNestedManyWithoutChapterInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutChapterInput
 }
 
 export type ChapterUncheckedCreateWithoutUploadedByOrganizationInput = {
@@ -869,6 +893,7 @@ export type ChapterUncheckedCreateWithoutUploadedByOrganizationInput = {
   pages?: Prisma.PageUncheckedCreateNestedManyWithoutChapterInput
   userHistory?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutChapterInput
   viewsHistory?: Prisma.ViewsHistoryUncheckedCreateNestedManyWithoutChapterInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutChapterInput
 }
 
 export type ChapterCreateOrConnectWithoutUploadedByOrganizationInput = {
@@ -897,6 +922,7 @@ export type ChapterCreateWithoutWorkedByOrganizationsInput = {
   pages?: Prisma.PageCreateNestedManyWithoutChapterInput
   userHistory?: Prisma.UserChapterHistoryCreateNestedManyWithoutChapterInput
   viewsHistory?: Prisma.ViewsHistoryCreateNestedManyWithoutChapterInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutChapterInput
 }
 
 export type ChapterUncheckedCreateWithoutWorkedByOrganizationsInput = {
@@ -916,6 +942,7 @@ export type ChapterUncheckedCreateWithoutWorkedByOrganizationsInput = {
   pages?: Prisma.PageUncheckedCreateNestedManyWithoutChapterInput
   userHistory?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutChapterInput
   viewsHistory?: Prisma.ViewsHistoryUncheckedCreateNestedManyWithoutChapterInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutChapterInput
 }
 
 export type ChapterCreateOrConnectWithoutWorkedByOrganizationsInput = {
@@ -990,6 +1017,7 @@ export type ChapterCreateWithoutMangaCustomInput = {
   pages?: Prisma.PageCreateNestedManyWithoutChapterInput
   userHistory?: Prisma.UserChapterHistoryCreateNestedManyWithoutChapterInput
   viewsHistory?: Prisma.ViewsHistoryCreateNestedManyWithoutChapterInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutChapterInput
 }
 
 export type ChapterUncheckedCreateWithoutMangaCustomInput = {
@@ -1009,6 +1037,7 @@ export type ChapterUncheckedCreateWithoutMangaCustomInput = {
   pages?: Prisma.PageUncheckedCreateNestedManyWithoutChapterInput
   userHistory?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutChapterInput
   viewsHistory?: Prisma.ViewsHistoryUncheckedCreateNestedManyWithoutChapterInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutChapterInput
 }
 
 export type ChapterCreateOrConnectWithoutMangaCustomInput = {
@@ -1053,6 +1082,7 @@ export type ChapterCreateWithoutPagesInput = {
   workedByOrganizations?: Prisma.OrganizationCreateNestedManyWithoutWorkedOnJointChaptersInput
   userHistory?: Prisma.UserChapterHistoryCreateNestedManyWithoutChapterInput
   viewsHistory?: Prisma.ViewsHistoryCreateNestedManyWithoutChapterInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutChapterInput
 }
 
 export type ChapterUncheckedCreateWithoutPagesInput = {
@@ -1072,6 +1102,7 @@ export type ChapterUncheckedCreateWithoutPagesInput = {
   workedByOrganizations?: Prisma.OrganizationUncheckedCreateNestedManyWithoutWorkedOnJointChaptersInput
   userHistory?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutChapterInput
   viewsHistory?: Prisma.ViewsHistoryUncheckedCreateNestedManyWithoutChapterInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutChapterInput
 }
 
 export type ChapterCreateOrConnectWithoutPagesInput = {
@@ -1106,6 +1137,7 @@ export type ChapterUpdateWithoutPagesInput = {
   workedByOrganizations?: Prisma.OrganizationUpdateManyWithoutWorkedOnJointChaptersNestedInput
   userHistory?: Prisma.UserChapterHistoryUpdateManyWithoutChapterNestedInput
   viewsHistory?: Prisma.ViewsHistoryUpdateManyWithoutChapterNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutChapterNestedInput
 }
 
 export type ChapterUncheckedUpdateWithoutPagesInput = {
@@ -1125,6 +1157,7 @@ export type ChapterUncheckedUpdateWithoutPagesInput = {
   workedByOrganizations?: Prisma.OrganizationUncheckedUpdateManyWithoutWorkedOnJointChaptersNestedInput
   userHistory?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutChapterNestedInput
   viewsHistory?: Prisma.ViewsHistoryUncheckedUpdateManyWithoutChapterNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutChapterNestedInput
 }
 
 export type ChapterCreateWithoutUserHistoryInput = {
@@ -1143,6 +1176,7 @@ export type ChapterCreateWithoutUserHistoryInput = {
   workedByOrganizations?: Prisma.OrganizationCreateNestedManyWithoutWorkedOnJointChaptersInput
   pages?: Prisma.PageCreateNestedManyWithoutChapterInput
   viewsHistory?: Prisma.ViewsHistoryCreateNestedManyWithoutChapterInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutChapterInput
 }
 
 export type ChapterUncheckedCreateWithoutUserHistoryInput = {
@@ -1162,6 +1196,7 @@ export type ChapterUncheckedCreateWithoutUserHistoryInput = {
   workedByOrganizations?: Prisma.OrganizationUncheckedCreateNestedManyWithoutWorkedOnJointChaptersInput
   pages?: Prisma.PageUncheckedCreateNestedManyWithoutChapterInput
   viewsHistory?: Prisma.ViewsHistoryUncheckedCreateNestedManyWithoutChapterInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutChapterInput
 }
 
 export type ChapterCreateOrConnectWithoutUserHistoryInput = {
@@ -1196,6 +1231,7 @@ export type ChapterUpdateWithoutUserHistoryInput = {
   workedByOrganizations?: Prisma.OrganizationUpdateManyWithoutWorkedOnJointChaptersNestedInput
   pages?: Prisma.PageUpdateManyWithoutChapterNestedInput
   viewsHistory?: Prisma.ViewsHistoryUpdateManyWithoutChapterNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutChapterNestedInput
 }
 
 export type ChapterUncheckedUpdateWithoutUserHistoryInput = {
@@ -1215,6 +1251,7 @@ export type ChapterUncheckedUpdateWithoutUserHistoryInput = {
   workedByOrganizations?: Prisma.OrganizationUncheckedUpdateManyWithoutWorkedOnJointChaptersNestedInput
   pages?: Prisma.PageUncheckedUpdateManyWithoutChapterNestedInput
   viewsHistory?: Prisma.ViewsHistoryUncheckedUpdateManyWithoutChapterNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutChapterNestedInput
 }
 
 export type ChapterCreateWithoutViewsHistoryInput = {
@@ -1233,6 +1270,7 @@ export type ChapterCreateWithoutViewsHistoryInput = {
   workedByOrganizations?: Prisma.OrganizationCreateNestedManyWithoutWorkedOnJointChaptersInput
   pages?: Prisma.PageCreateNestedManyWithoutChapterInput
   userHistory?: Prisma.UserChapterHistoryCreateNestedManyWithoutChapterInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutChapterInput
 }
 
 export type ChapterUncheckedCreateWithoutViewsHistoryInput = {
@@ -1252,6 +1290,7 @@ export type ChapterUncheckedCreateWithoutViewsHistoryInput = {
   workedByOrganizations?: Prisma.OrganizationUncheckedCreateNestedManyWithoutWorkedOnJointChaptersInput
   pages?: Prisma.PageUncheckedCreateNestedManyWithoutChapterInput
   userHistory?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutChapterInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutChapterInput
 }
 
 export type ChapterCreateOrConnectWithoutViewsHistoryInput = {
@@ -1286,6 +1325,7 @@ export type ChapterUpdateWithoutViewsHistoryInput = {
   workedByOrganizations?: Prisma.OrganizationUpdateManyWithoutWorkedOnJointChaptersNestedInput
   pages?: Prisma.PageUpdateManyWithoutChapterNestedInput
   userHistory?: Prisma.UserChapterHistoryUpdateManyWithoutChapterNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutChapterNestedInput
 }
 
 export type ChapterUncheckedUpdateWithoutViewsHistoryInput = {
@@ -1305,6 +1345,7 @@ export type ChapterUncheckedUpdateWithoutViewsHistoryInput = {
   workedByOrganizations?: Prisma.OrganizationUncheckedUpdateManyWithoutWorkedOnJointChaptersNestedInput
   pages?: Prisma.PageUncheckedUpdateManyWithoutChapterNestedInput
   userHistory?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutChapterNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutChapterNestedInput
 }
 
 export type ChapterCreateWithoutJointInput = {
@@ -1323,6 +1364,7 @@ export type ChapterCreateWithoutJointInput = {
   pages?: Prisma.PageCreateNestedManyWithoutChapterInput
   userHistory?: Prisma.UserChapterHistoryCreateNestedManyWithoutChapterInput
   viewsHistory?: Prisma.ViewsHistoryCreateNestedManyWithoutChapterInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutChapterInput
 }
 
 export type ChapterUncheckedCreateWithoutJointInput = {
@@ -1342,6 +1384,7 @@ export type ChapterUncheckedCreateWithoutJointInput = {
   pages?: Prisma.PageUncheckedCreateNestedManyWithoutChapterInput
   userHistory?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutChapterInput
   viewsHistory?: Prisma.ViewsHistoryUncheckedCreateNestedManyWithoutChapterInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutChapterInput
 }
 
 export type ChapterCreateOrConnectWithoutJointInput = {
@@ -1368,6 +1411,100 @@ export type ChapterUpdateWithWhereUniqueWithoutJointInput = {
 export type ChapterUpdateManyWithWhereWithoutJointInput = {
   where: Prisma.ChapterScalarWhereInput
   data: Prisma.XOR<Prisma.ChapterUpdateManyMutationInput, Prisma.ChapterUncheckedUpdateManyWithoutJointInput>
+}
+
+export type ChapterCreateWithoutNotificationsInput = {
+  number: number
+  title: string
+  imageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  views?: number
+  releasedAt?: Date | string | null
+  isUnreleased?: boolean
+  deletedAt?: Date | string | null
+  mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutChaptersInput
+  joint?: Prisma.MangaJointCreateNestedOneWithoutChaptersInput
+  uploadedByOrganization?: Prisma.OrganizationCreateNestedOneWithoutUploadedJointChaptersInput
+  workedByOrganizations?: Prisma.OrganizationCreateNestedManyWithoutWorkedOnJointChaptersInput
+  pages?: Prisma.PageCreateNestedManyWithoutChapterInput
+  userHistory?: Prisma.UserChapterHistoryCreateNestedManyWithoutChapterInput
+  viewsHistory?: Prisma.ViewsHistoryCreateNestedManyWithoutChapterInput
+}
+
+export type ChapterUncheckedCreateWithoutNotificationsInput = {
+  id?: number
+  number: number
+  title: string
+  imageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  mangaCustomId?: number | null
+  jointId?: number | null
+  uploadedByOrganizationId?: number | null
+  views?: number
+  releasedAt?: Date | string | null
+  isUnreleased?: boolean
+  deletedAt?: Date | string | null
+  workedByOrganizations?: Prisma.OrganizationUncheckedCreateNestedManyWithoutWorkedOnJointChaptersInput
+  pages?: Prisma.PageUncheckedCreateNestedManyWithoutChapterInput
+  userHistory?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutChapterInput
+  viewsHistory?: Prisma.ViewsHistoryUncheckedCreateNestedManyWithoutChapterInput
+}
+
+export type ChapterCreateOrConnectWithoutNotificationsInput = {
+  where: Prisma.ChapterWhereUniqueInput
+  create: Prisma.XOR<Prisma.ChapterCreateWithoutNotificationsInput, Prisma.ChapterUncheckedCreateWithoutNotificationsInput>
+}
+
+export type ChapterUpsertWithoutNotificationsInput = {
+  update: Prisma.XOR<Prisma.ChapterUpdateWithoutNotificationsInput, Prisma.ChapterUncheckedUpdateWithoutNotificationsInput>
+  create: Prisma.XOR<Prisma.ChapterCreateWithoutNotificationsInput, Prisma.ChapterUncheckedCreateWithoutNotificationsInput>
+  where?: Prisma.ChapterWhereInput
+}
+
+export type ChapterUpdateToOneWithWhereWithoutNotificationsInput = {
+  where?: Prisma.ChapterWhereInput
+  data: Prisma.XOR<Prisma.ChapterUpdateWithoutNotificationsInput, Prisma.ChapterUncheckedUpdateWithoutNotificationsInput>
+}
+
+export type ChapterUpdateWithoutNotificationsInput = {
+  number?: Prisma.FloatFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  views?: Prisma.IntFieldUpdateOperationsInput | number
+  releasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  mangaCustom?: Prisma.MangaCustomUpdateOneWithoutChaptersNestedInput
+  joint?: Prisma.MangaJointUpdateOneWithoutChaptersNestedInput
+  uploadedByOrganization?: Prisma.OrganizationUpdateOneWithoutUploadedJointChaptersNestedInput
+  workedByOrganizations?: Prisma.OrganizationUpdateManyWithoutWorkedOnJointChaptersNestedInput
+  pages?: Prisma.PageUpdateManyWithoutChapterNestedInput
+  userHistory?: Prisma.UserChapterHistoryUpdateManyWithoutChapterNestedInput
+  viewsHistory?: Prisma.ViewsHistoryUpdateManyWithoutChapterNestedInput
+}
+
+export type ChapterUncheckedUpdateWithoutNotificationsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  number?: Prisma.FloatFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  uploadedByOrganizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  views?: Prisma.IntFieldUpdateOperationsInput | number
+  releasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  workedByOrganizations?: Prisma.OrganizationUncheckedUpdateManyWithoutWorkedOnJointChaptersNestedInput
+  pages?: Prisma.PageUncheckedUpdateManyWithoutChapterNestedInput
+  userHistory?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutChapterNestedInput
+  viewsHistory?: Prisma.ViewsHistoryUncheckedUpdateManyWithoutChapterNestedInput
 }
 
 export type ChapterCreateManyUploadedByOrganizationInput = {
@@ -1401,6 +1538,7 @@ export type ChapterUpdateWithoutUploadedByOrganizationInput = {
   pages?: Prisma.PageUpdateManyWithoutChapterNestedInput
   userHistory?: Prisma.UserChapterHistoryUpdateManyWithoutChapterNestedInput
   viewsHistory?: Prisma.ViewsHistoryUpdateManyWithoutChapterNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutChapterNestedInput
 }
 
 export type ChapterUncheckedUpdateWithoutUploadedByOrganizationInput = {
@@ -1420,6 +1558,7 @@ export type ChapterUncheckedUpdateWithoutUploadedByOrganizationInput = {
   pages?: Prisma.PageUncheckedUpdateManyWithoutChapterNestedInput
   userHistory?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutChapterNestedInput
   viewsHistory?: Prisma.ViewsHistoryUncheckedUpdateManyWithoutChapterNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutChapterNestedInput
 }
 
 export type ChapterUncheckedUpdateManyWithoutUploadedByOrganizationInput = {
@@ -1453,6 +1592,7 @@ export type ChapterUpdateWithoutWorkedByOrganizationsInput = {
   pages?: Prisma.PageUpdateManyWithoutChapterNestedInput
   userHistory?: Prisma.UserChapterHistoryUpdateManyWithoutChapterNestedInput
   viewsHistory?: Prisma.ViewsHistoryUpdateManyWithoutChapterNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutChapterNestedInput
 }
 
 export type ChapterUncheckedUpdateWithoutWorkedByOrganizationsInput = {
@@ -1472,6 +1612,7 @@ export type ChapterUncheckedUpdateWithoutWorkedByOrganizationsInput = {
   pages?: Prisma.PageUncheckedUpdateManyWithoutChapterNestedInput
   userHistory?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutChapterNestedInput
   viewsHistory?: Prisma.ViewsHistoryUncheckedUpdateManyWithoutChapterNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutChapterNestedInput
 }
 
 export type ChapterUncheckedUpdateManyWithoutWorkedByOrganizationsInput = {
@@ -1521,6 +1662,7 @@ export type ChapterUpdateWithoutMangaCustomInput = {
   pages?: Prisma.PageUpdateManyWithoutChapterNestedInput
   userHistory?: Prisma.UserChapterHistoryUpdateManyWithoutChapterNestedInput
   viewsHistory?: Prisma.ViewsHistoryUpdateManyWithoutChapterNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutChapterNestedInput
 }
 
 export type ChapterUncheckedUpdateWithoutMangaCustomInput = {
@@ -1540,6 +1682,7 @@ export type ChapterUncheckedUpdateWithoutMangaCustomInput = {
   pages?: Prisma.PageUncheckedUpdateManyWithoutChapterNestedInput
   userHistory?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutChapterNestedInput
   viewsHistory?: Prisma.ViewsHistoryUncheckedUpdateManyWithoutChapterNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutChapterNestedInput
 }
 
 export type ChapterUncheckedUpdateManyWithoutMangaCustomInput = {
@@ -1588,6 +1731,7 @@ export type ChapterUpdateWithoutJointInput = {
   pages?: Prisma.PageUpdateManyWithoutChapterNestedInput
   userHistory?: Prisma.UserChapterHistoryUpdateManyWithoutChapterNestedInput
   viewsHistory?: Prisma.ViewsHistoryUpdateManyWithoutChapterNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutChapterNestedInput
 }
 
 export type ChapterUncheckedUpdateWithoutJointInput = {
@@ -1607,6 +1751,7 @@ export type ChapterUncheckedUpdateWithoutJointInput = {
   pages?: Prisma.PageUncheckedUpdateManyWithoutChapterNestedInput
   userHistory?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutChapterNestedInput
   viewsHistory?: Prisma.ViewsHistoryUncheckedUpdateManyWithoutChapterNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutChapterNestedInput
 }
 
 export type ChapterUncheckedUpdateManyWithoutJointInput = {
@@ -1634,6 +1779,7 @@ export type ChapterCountOutputType = {
   pages: number
   userHistory: number
   viewsHistory: number
+  notifications: number
 }
 
 export type ChapterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1641,6 +1787,7 @@ export type ChapterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extension
   pages?: boolean | ChapterCountOutputTypeCountPagesArgs
   userHistory?: boolean | ChapterCountOutputTypeCountUserHistoryArgs
   viewsHistory?: boolean | ChapterCountOutputTypeCountViewsHistoryArgs
+  notifications?: boolean | ChapterCountOutputTypeCountNotificationsArgs
 }
 
 /**
@@ -1681,6 +1828,13 @@ export type ChapterCountOutputTypeCountViewsHistoryArgs<ExtArgs extends runtime.
   where?: Prisma.ViewsHistoryWhereInput
 }
 
+/**
+ * ChapterCountOutputType without action
+ */
+export type ChapterCountOutputTypeCountNotificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NotificationWhereInput
+}
+
 
 export type ChapterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1703,6 +1857,7 @@ export type ChapterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   pages?: boolean | Prisma.Chapter$pagesArgs<ExtArgs>
   userHistory?: boolean | Prisma.Chapter$userHistoryArgs<ExtArgs>
   viewsHistory?: boolean | Prisma.Chapter$viewsHistoryArgs<ExtArgs>
+  notifications?: boolean | Prisma.Chapter$notificationsArgs<ExtArgs>
   _count?: boolean | Prisma.ChapterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["chapter"]>
 
@@ -1769,6 +1924,7 @@ export type ChapterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   pages?: boolean | Prisma.Chapter$pagesArgs<ExtArgs>
   userHistory?: boolean | Prisma.Chapter$userHistoryArgs<ExtArgs>
   viewsHistory?: boolean | Prisma.Chapter$viewsHistoryArgs<ExtArgs>
+  notifications?: boolean | Prisma.Chapter$notificationsArgs<ExtArgs>
   _count?: boolean | Prisma.ChapterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ChapterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1792,6 +1948,7 @@ export type $ChapterPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     pages: Prisma.$PagePayload<ExtArgs>[]
     userHistory: Prisma.$UserChapterHistoryPayload<ExtArgs>[]
     viewsHistory: Prisma.$ViewsHistoryPayload<ExtArgs>[]
+    notifications: Prisma.$NotificationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -2208,6 +2365,7 @@ export interface Prisma__ChapterClient<T, Null = never, ExtArgs extends runtime.
   pages<T extends Prisma.Chapter$pagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Chapter$pagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   userHistory<T extends Prisma.Chapter$userHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Chapter$userHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserChapterHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   viewsHistory<T extends Prisma.Chapter$viewsHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Chapter$viewsHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ViewsHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notifications<T extends Prisma.Chapter$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Chapter$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2796,6 +2954,30 @@ export type Chapter$viewsHistoryArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.ViewsHistoryScalarFieldEnum | Prisma.ViewsHistoryScalarFieldEnum[]
+}
+
+/**
+ * Chapter.notifications
+ */
+export type Chapter$notificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Notification
+   */
+  select?: Prisma.NotificationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Notification
+   */
+  omit?: Prisma.NotificationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NotificationInclude<ExtArgs> | null
+  where?: Prisma.NotificationWhereInput
+  orderBy?: Prisma.NotificationOrderByWithRelationInput | Prisma.NotificationOrderByWithRelationInput[]
+  cursor?: Prisma.NotificationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
 }
 
 /**

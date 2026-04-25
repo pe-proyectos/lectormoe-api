@@ -26,6 +26,34 @@ const INCLUDE = {
 			title: true,
 		},
 	},
+	comment: {
+		select: {
+			id: true,
+			comment: true,
+			identifier: true,
+			user: { select: { username: true } },
+		},
+	},
+	parentComment: {
+		select: {
+			id: true,
+			comment: true,
+			identifier: true,
+		},
+	},
+	subscription: {
+		select: {
+			id: true,
+			subscriptionPlan: { select: { name: true } },
+		},
+	},
+	organization: {
+		select: {
+			id: true,
+			name: true,
+			slug: true,
+		},
+	},
 };
 
 export interface NotificationListQuery {

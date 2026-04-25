@@ -1,6 +1,5 @@
 import { prisma } from "../../models/prisma";
 import type { CreateChapterRequest } from "../../types/chapter/create";
-import { sendNewChapterAlert } from "../../services/email-notifications";
 import { notifyNewChapter } from "../../services/notify-new-chapter";
 
 export const createChapter = async (organizationId: number, mangaSlug: string, params: CreateChapterRequest) => {
@@ -157,9 +156,9 @@ export const createChapter = async (organizationId: number, mangaSlug: string, p
 		}
 	}
 
-	// Send email notification to users who favorited this manga (fire-and-forget)
+	// Notify users who favorited / user-listed this manga (fire-and-forget).
+	// Email is dispatched 30 min later by the notification cron if still unread.
 	if (!params.isUnreleased) {
-		sendNewChapterAlert(mangaCustom.id, chapter.id, organizationId).catch(console.error);
 		notifyNewChapter({ chapterId: chapter.id, mangaCustomId: chapter.mangaCustomId }).catch(console.error);
 	}
 

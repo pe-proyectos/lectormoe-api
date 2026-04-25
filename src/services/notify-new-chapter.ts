@@ -54,3 +54,111 @@ export const notifyNewChapter = async (params: {
     skipDuplicates: true,
   });
 };
+
+// Fan-out: parent-comment author gets notified when someone replies. Skip
+// self-replies. The reply.organizationId is captured so the dispatcher can
+// rebuild the thread URL.
+export const notifyCommentReply = async (replyCommentId: number) => {
+  const reply = await prisma.comment.findUnique({
+    where: { id: replyCommentId },
+    select: {
+      id: true,
+      userId: true,
+      parentId: true,
+      organizationId: true,
+      parent: { select: { id: true, userId: true } },
+    },
+  });
+  if (!reply || !reply.parentId || !reply.parent) return;
+  if (reply.userId === reply.parent.userId) return;
+
+  await prisma.notification.create({
+    data: {
+      userId: reply.parent.userId,
+      type: 'comment_reply',
+      commentId: reply.id,
+      parentCommentId: reply.parent.id,
+      organizationId: reply.organizationId,
+      source: 'reply',
+    },
+  });
+};
+
+// Fan-out: organization followers get notified for a new manga release.
+export const notifyNewManga = async (mangaCustomId: number, organizationId: number) => {
+  const followers = await prisma.organizationFollower.findMany({
+    where: { organizationId },
+    select: { userId: true },
+  });
+  if (followers.length === 0) return;
+
+  await prisma.notification.createMany({
+    data: followers.map((f) => ({
+      userId: f.userId,
+      type: 'new_manga',
+      mangaCustomId,
+      organizationId,
+      source: 'org_follower',
+    })),
+    skipDuplicates: true,
+  });
+};
+
+// Fan-out: org staff (Permission.canSeeAdminPanel = true) get notified about
+// a new active subscriber.
+export const notifyNewSubscriber = async (subscriptionId: number) => {
+  const subscription = await prisma.subscription.findUnique({
+    where: { id: subscriptionId },
+    select: { id: true, organizationId: true },
+  });
+  if (!subscription || !subscription.organizationId) return;
+
+  const staff = await prisma.permission.findMany({
+    where: {
+      organizationId: subscription.organizationId,
+      canSeeAdminPanel: true,
+    },
+    select: { userId: true },
+  });
+  if (staff.length === 0) return;
+
+  await prisma.notification.createMany({
+    data: staff.map((p) => ({
+      userId: p.userId,
+      type: 'new_subscriber',
+      subscriptionId: subscription.id,
+      organizationId: subscription.organizationId,
+      source: 'org_staff',
+    })),
+    skipDuplicates: true,
+  });
+};
+
+// Fan-out: org staff get notified about a failed payment on a subscription.
+export const notifyFailedPayment = async (subscriptionId: number) => {
+  const subscription = await prisma.subscription.findUnique({
+    where: { id: subscriptionId },
+    select: { id: true, organizationId: true },
+  });
+  if (!subscription || !subscription.organizationId) return;
+
+  const staff = await prisma.permission.findMany({
+    where: {
+      organizationId: subscription.organizationId,
+      canSeeAdminPanel: true,
+    },
+    select: { userId: true },
+  });
+  if (staff.length === 0) return;
+
+  await prisma.notification.createMany({
+    data: staff.map((p) => ({
+      userId: p.userId,
+      type: 'failed_payment',
+      subscriptionId: subscription.id,
+      organizationId: subscription.organizationId,
+      source: 'org_staff',
+    })),
+    skipDuplicates: true,
+  });
+};

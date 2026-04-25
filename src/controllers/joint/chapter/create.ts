@@ -1,7 +1,6 @@
 import { prisma } from '../../../models/prisma';
 import { requireJointMember, canUpload } from '../../../util/joint-auth';
 import type { CreateJointChapterRequest } from '../../../types/joint/chapter/create';
-import { sendNewJointChapterAlert } from '../../../services/email-notifications';
 import { notifyNewChapter } from '../../../services/notify-new-chapter';
 
 export const createJointChapter = async (
@@ -157,9 +156,9 @@ export const createJointChapter = async (
     }
   }
 
-  // Send email notification to users who favorited this joint or any member org's manga (fire-and-forget)
+  // Notify users who favorited the joint (or any member org's manga) — email
+  // is dispatched 30 min later by the notification cron if still unread.
   if (!params.isUnreleased) {
-    sendNewJointChapterAlert(joint.id, chapter.id).catch(console.error);
     notifyNewChapter({ chapterId: chapter.id, jointId: joint.id }).catch(console.error);
   }
 

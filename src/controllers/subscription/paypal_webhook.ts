@@ -1,7 +1,7 @@
 import { prisma } from "../../models/prisma";
 import { PaypalWebhookEvent } from "../../types/subscription/paypal_webhook";
 import { getSubscriptionByPaypalId } from "../../util/paypal";
-import { sendFailedPaymentAlert } from "../../services/email-notifications";
+import { notifyFailedPayment } from "../../services/notify-new-chapter";
 
 export const handlePaypalWebhook = async (webhookEvent: PaypalWebhookEvent) => {
     console.log("webhookEvent");
@@ -89,9 +89,10 @@ export const handlePaypalWebhook = async (webhookEvent: PaypalWebhookEvent) => {
         case "BILLING.SUBSCRIPTION.PAYMENT.FAILED":
         case "PAYMENT.SALE.DENIED":
             updateData = { endDate: new Date() };
-            // Send email alert to staff and user about the failed payment
+            // Notify org staff (fire-and-forget). Email dispatched 30 min later
+            // by the notification cron if still unread.
             if (subscription.organizationId) {
-                sendFailedPaymentAlert(subscription.organizationId, subscription.id).catch(console.error);
+                notifyFailedPayment(subscription.id).catch(console.error);
             }
             break;
         case "PAYMENT.SALE.REFUNDED":

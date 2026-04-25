@@ -87,7 +87,8 @@ export const ModelName = {
   Achievement: 'Achievement',
   UserAchievement: 'UserAchievement',
   MangaJoint: 'MangaJoint',
-  JointMember: 'JointMember'
+  JointMember: 'JointMember',
+  Notification: 'Notification'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -762,6 +763,26 @@ export const JointMemberScalarFieldEnum = {
 } as const
 
 export type JointMemberScalarFieldEnum = (typeof JointMemberScalarFieldEnum)[keyof typeof JointMemberScalarFieldEnum]
+
+
+export const NotificationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  type: 'type',
+  mangaCustomId: 'mangaCustomId',
+  jointId: 'jointId',
+  chapterId: 'chapterId',
+  source: 'source',
+  readAt: 'readAt',
+  createdAt: 'createdAt',
+  emailSentAt: 'emailSentAt',
+  commentId: 'commentId',
+  parentCommentId: 'parentCommentId',
+  subscriptionId: 'subscriptionId',
+  organizationId: 'organizationId'
+} as const
+
+export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
 
 
 export const SortOrder = {

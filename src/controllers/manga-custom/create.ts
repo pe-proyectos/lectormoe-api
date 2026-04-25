@@ -1,6 +1,6 @@
 import { prisma } from "../../models/prisma";
 import type { CreateMangaCustomRequest } from "../../types/manga-custom/create";
-import { sendNewMangaReleaseAlert } from "../../services/email-notifications";
+import { notifyNewManga } from "../../services/notify-new-chapter";
 
 export const createMangaCustom = async (organizationId: number, params: CreateMangaCustomRequest) => {
 	const [organization, manga] = await Promise.all([
@@ -99,8 +99,9 @@ export const createMangaCustom = async (organizationId: number, params: CreateMa
 		},
 	});
 
-	// Send email notification to organization followers (fire-and-forget)
-	sendNewMangaReleaseAlert(mangaCustom.id, organizationId).catch(console.error);
+	// Notify organization followers (fire-and-forget). Email dispatched 30 min
+	// later by the notification cron if still unread.
+	notifyNewManga(mangaCustom.id, organizationId).catch(console.error);
 
 	return mangaCustom;
 };

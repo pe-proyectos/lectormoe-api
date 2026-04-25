@@ -202,3 +202,8 @@ export type MangaJoint = Prisma.MangaJointModel
  * 
  */
 export type JointMember = Prisma.JointMemberModel
+/**
+ * Model Notification
+ * 
+ */
+export type Notification = Prisma.NotificationModel

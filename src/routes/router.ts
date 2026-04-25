@@ -38,6 +38,7 @@ import { router as favoritesReorderRouter } from "./favorites/reorder";
 import { router as favoritesToggleFinishedRouter } from "./favorites/toggle-finished";
 import { router as myListRouter } from "./user-list";
 import { router as notificationRouter } from "./notification";
+import { router as notificationCronRouter } from "./notification/cron";
 import { router as filesPresignedUrlRouter } from "./files/presigned-url";
 import { router as genreCreateRouter } from "./genre/create";
 import { router as genreDeleteRouter } from "./genre/delete";
@@ -160,6 +161,7 @@ export const router = () => async (app: Elysia) => {
 
 	// In-app notifications (bell-icon inbox)
 	app.use(notificationRouter());
+	app.use(notificationCronRouter());
 
 	// Files
 	app.use(filesPresignedUrlRouter());
