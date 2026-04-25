@@ -37,6 +37,9 @@ export const getPopularToday = async (limit: number = 5, nsfw?: boolean) => {
 		mangaCustomFilter.organization = { isNSFW: false };
 	}
 
+	// Pull a generous candidate pool. We can't directly group by manga.id at
+	// the SQL level (mangaId lives on MangaCustom, not ViewsHistory), so we
+	// over-fetch by mangaCustomId and dedupe in memory below.
 	const grouped = await prisma.viewsHistory.groupBy({
 		by: ['mangaCustomId'],
 		where: {
@@ -46,9 +49,7 @@ export const getPopularToday = async (limit: number = 5, nsfw?: boolean) => {
 		},
 		_count: { _all: true },
 		orderBy: { _count: { mangaCustomId: Prisma.SortOrder.desc } },
-		// Generous pool — the only post-filter remaining is "has a cover", which
-		// rarely culls more than a handful.
-		take: limit * 5,
+		take: limit * 10,
 	});
 
 	if (grouped.length === 0) return [];
@@ -73,20 +74,36 @@ export const getPopularToday = async (limit: number = 5, nsfw?: boolean) => {
 		},
 	});
 
-	// Re-sort by today's view count (the findMany above doesn't preserve order
-	// because we filtered by id IN (...)).
-	const countsById = new Map<number, number>();
+	const countsByCustomId = new Map<number, number>();
 	for (const g of grouped) {
-		if (g.mangaCustomId !== null) countsById.set(g.mangaCustomId, g._count._all);
+		if (g.mangaCustomId !== null) countsByCustomId.set(g.mangaCustomId, g._count._all);
 	}
 
-	const ranked = mangasCustoms
-		.filter((mc) => {
-			const cover = mc.imageUrl || mc.manga.imageUrl;
-			return cover && cover.trim() !== '';
-		})
-		.sort((a, b) => (countsById.get(b.id) ?? 0) - (countsById.get(a.id) ?? 0))
-		.slice(0, limit);
+	// Dedupe by underlying Manga: when several scans publish the same manga,
+	// sum their view counts (so popularity reflects total interest) and keep
+	// the MangaCustom with the highest individual count as the representative
+	// (so the user lands on whichever scan is currently driving the views).
+	const byMangaId = new Map<number, { mc: typeof mangasCustoms[number]; total: number; topCount: number }>();
+	for (const mc of mangasCustoms) {
+		const cover = mc.imageUrl || mc.manga.imageUrl;
+		if (!cover || cover.trim() === '') continue;
+		const count = countsByCustomId.get(mc.id) ?? 0;
+		const existing = byMangaId.get(mc.manga.id);
+		if (!existing) {
+			byMangaId.set(mc.manga.id, { mc, total: count, topCount: count });
+		} else {
+			existing.total += count;
+			if (count > existing.topCount) {
+				existing.topCount = count;
+				existing.mc = mc;
+			}
+		}
+	}
+
+	const ranked = [...byMangaId.values()]
+		.sort((a, b) => b.total - a.total)
+		.slice(0, limit)
+		.map((entry) => entry.mc);
 
 	return ranked.map((mangaCustom) => {
 		const organization = mangaCustom.organization;
