@@ -1,7 +1,7 @@
 import { prisma } from "../../models/prisma";
 import { CreateCommentRequest } from "../../types/comment/create";
 import { uploadFile } from "../../util/upload-file";
-import { notifyCommentReply } from "../../services/notify-new-chapter";
+import { notifyComment } from "../../services/notify-new-chapter";
 
 export const createComment = async (organizationId: number, userId: number, params: CreateCommentRequest) => {
   const comment = await prisma.comment.create({
@@ -42,11 +42,9 @@ export const createComment = async (organizationId: number, userId: number, para
 		}
 	}
 
-  // Fire-and-forget: notify parent comment author if this is a reply. Email
-  // is dispatched 30 min later by the notification cron if still unread.
-  if (comment.parentId) {
-    notifyCommentReply(comment.id).catch(console.error);
-  }
+  // Fire-and-forget fan-out: reply notification (delayed-email) for the parent
+  // author and in-app notifications for content owners. Runs for every comment.
+  notifyComment(comment.id).catch(console.error);
 
   return !!comment;
 };

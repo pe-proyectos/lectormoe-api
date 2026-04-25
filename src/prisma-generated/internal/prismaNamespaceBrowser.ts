@@ -190,6 +190,7 @@ export const UserScalarFieldEnum = {
   isPrivateHistory: 'isPrivateHistory',
   isPublicProfile: 'isPublicProfile',
   pushNotifications: 'pushNotifications',
+  notifyCommentsOnOwnedContent: 'notifyCommentsOnOwnedContent',
   theme: 'theme'
 } as const
 

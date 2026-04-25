@@ -18,6 +18,9 @@ const mapTypeToEmailType = (t: string): string | null => {
       return 'new_subscriber_alert';
     case 'failed_payment':
       return 'failed_payment_alert';
+    case 'comment_on_owned_content':
+      // In-app only — no email type mapping.
+      return null;
     default:
       return null;
   }
@@ -273,6 +276,10 @@ export const dispatchNotificationEmail = async (notificationId: number): Promise
       return sendNewSubscriberEmail(n);
     case 'failed_payment':
       return sendFailedPaymentEmail(n);
+    case 'comment_on_owned_content':
+      // In-app only: rows are stamped with emailSentAt at creation so the cron
+      // skips them. Belt-and-suspenders in case a row gets manually re-armed.
+      return false;
     default:
       return false;
   }

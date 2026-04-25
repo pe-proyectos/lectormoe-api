@@ -54,6 +54,7 @@ export type UserMinAggregateOutputType = {
   isPrivateHistory: boolean | null
   isPublicProfile: boolean | null
   pushNotifications: boolean | null
+  notifyCommentsOnOwnedContent: boolean | null
   theme: string | null
 }
 
@@ -77,6 +78,7 @@ export type UserMaxAggregateOutputType = {
   isPrivateHistory: boolean | null
   isPublicProfile: boolean | null
   pushNotifications: boolean | null
+  notifyCommentsOnOwnedContent: boolean | null
   theme: string | null
 }
 
@@ -100,6 +102,7 @@ export type UserCountAggregateOutputType = {
   isPrivateHistory: number
   isPublicProfile: number
   pushNotifications: number
+  notifyCommentsOnOwnedContent: number
   theme: number
   _all: number
 }
@@ -133,6 +136,7 @@ export type UserMinAggregateInputType = {
   isPrivateHistory?: true
   isPublicProfile?: true
   pushNotifications?: true
+  notifyCommentsOnOwnedContent?: true
   theme?: true
 }
 
@@ -156,6 +160,7 @@ export type UserMaxAggregateInputType = {
   isPrivateHistory?: true
   isPublicProfile?: true
   pushNotifications?: true
+  notifyCommentsOnOwnedContent?: true
   theme?: true
 }
 
@@ -179,6 +184,7 @@ export type UserCountAggregateInputType = {
   isPrivateHistory?: true
   isPublicProfile?: true
   pushNotifications?: true
+  notifyCommentsOnOwnedContent?: true
   theme?: true
   _all?: true
 }
@@ -289,6 +295,7 @@ export type UserGroupByOutputType = {
   isPrivateHistory: boolean
   isPublicProfile: boolean
   pushNotifications: boolean
+  notifyCommentsOnOwnedContent: boolean
   theme: string
   _count: UserCountAggregateOutputType | null
   _avg: UserAvgAggregateOutputType | null
@@ -335,6 +342,7 @@ export type UserWhereInput = {
   isPrivateHistory?: Prisma.BoolFilter<"User"> | boolean
   isPublicProfile?: Prisma.BoolFilter<"User"> | boolean
   pushNotifications?: Prisma.BoolFilter<"User"> | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFilter<"User"> | boolean
   theme?: Prisma.StringFilter<"User"> | string
   analytics?: Prisma.AnalyticsListRelationFilter
   audits?: Prisma.AuditListRelationFilter
@@ -378,6 +386,7 @@ export type UserOrderByWithRelationInput = {
   isPrivateHistory?: Prisma.SortOrder
   isPublicProfile?: Prisma.SortOrder
   pushNotifications?: Prisma.SortOrder
+  notifyCommentsOnOwnedContent?: Prisma.SortOrder
   theme?: Prisma.SortOrder
   analytics?: Prisma.AnalyticsOrderByRelationAggregateInput
   audits?: Prisma.AuditOrderByRelationAggregateInput
@@ -424,6 +433,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   isPrivateHistory?: Prisma.BoolFilter<"User"> | boolean
   isPublicProfile?: Prisma.BoolFilter<"User"> | boolean
   pushNotifications?: Prisma.BoolFilter<"User"> | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFilter<"User"> | boolean
   theme?: Prisma.StringFilter<"User"> | string
   analytics?: Prisma.AnalyticsListRelationFilter
   audits?: Prisma.AuditListRelationFilter
@@ -467,6 +477,7 @@ export type UserOrderByWithAggregationInput = {
   isPrivateHistory?: Prisma.SortOrder
   isPublicProfile?: Prisma.SortOrder
   pushNotifications?: Prisma.SortOrder
+  notifyCommentsOnOwnedContent?: Prisma.SortOrder
   theme?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _avg?: Prisma.UserAvgOrderByAggregateInput
@@ -498,6 +509,7 @@ export type UserScalarWhereWithAggregatesInput = {
   isPrivateHistory?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   isPublicProfile?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   pushNotifications?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   theme?: Prisma.StringWithAggregatesFilter<"User"> | string
 }
 
@@ -520,6 +532,7 @@ export type UserCreateInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
@@ -563,6 +576,7 @@ export type UserUncheckedCreateInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
@@ -605,6 +619,7 @@ export type UserUpdateInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
@@ -648,6 +663,7 @@ export type UserUncheckedUpdateInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
@@ -691,6 +707,7 @@ export type UserCreateManyInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
 }
 
@@ -713,6 +730,7 @@ export type UserUpdateManyMutationInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -736,6 +754,7 @@ export type UserUncheckedUpdateManyInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -764,6 +783,7 @@ export type UserCountOrderByAggregateInput = {
   isPrivateHistory?: Prisma.SortOrder
   isPublicProfile?: Prisma.SortOrder
   pushNotifications?: Prisma.SortOrder
+  notifyCommentsOnOwnedContent?: Prisma.SortOrder
   theme?: Prisma.SortOrder
 }
 
@@ -791,6 +811,7 @@ export type UserMaxOrderByAggregateInput = {
   isPrivateHistory?: Prisma.SortOrder
   isPublicProfile?: Prisma.SortOrder
   pushNotifications?: Prisma.SortOrder
+  notifyCommentsOnOwnedContent?: Prisma.SortOrder
   theme?: Prisma.SortOrder
 }
 
@@ -814,6 +835,7 @@ export type UserMinOrderByAggregateInput = {
   isPrivateHistory?: Prisma.SortOrder
   isPublicProfile?: Prisma.SortOrder
   pushNotifications?: Prisma.SortOrder
+  notifyCommentsOnOwnedContent?: Prisma.SortOrder
   theme?: Prisma.SortOrder
 }
 
@@ -1137,6 +1159,7 @@ export type UserCreateWithoutTokensInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
@@ -1179,6 +1202,7 @@ export type UserUncheckedCreateWithoutTokensInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
@@ -1236,6 +1260,7 @@ export type UserUpdateWithoutTokensInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
@@ -1278,6 +1303,7 @@ export type UserUncheckedUpdateWithoutTokensInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
@@ -1319,6 +1345,7 @@ export type UserCreateWithoutPermissionsInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
@@ -1361,6 +1388,7 @@ export type UserUncheckedCreateWithoutPermissionsInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
@@ -1418,6 +1446,7 @@ export type UserUpdateWithoutPermissionsInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
@@ -1460,6 +1489,7 @@ export type UserUncheckedUpdateWithoutPermissionsInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
@@ -1501,6 +1531,7 @@ export type UserCreateWithoutPasswordResetTokensInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
@@ -1543,6 +1574,7 @@ export type UserUncheckedCreateWithoutPasswordResetTokensInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
@@ -1600,6 +1632,7 @@ export type UserUpdateWithoutPasswordResetTokensInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
@@ -1642,6 +1675,7 @@ export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
@@ -1683,6 +1717,7 @@ export type UserCreateWithoutCommentInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
@@ -1725,6 +1760,7 @@ export type UserUncheckedCreateWithoutCommentInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
@@ -1771,6 +1807,7 @@ export type UserCreateWithoutCommentsInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
@@ -1813,6 +1850,7 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
@@ -1870,6 +1908,7 @@ export type UserUpdateWithoutCommentInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
@@ -1912,6 +1951,7 @@ export type UserUncheckedUpdateWithoutCommentInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
@@ -1964,6 +2004,7 @@ export type UserUpdateWithoutCommentsInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
@@ -2006,6 +2047,7 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
@@ -2047,6 +2089,7 @@ export type UserCreateWithoutRankingsInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
@@ -2089,6 +2132,7 @@ export type UserUncheckedCreateWithoutRankingsInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
@@ -2146,6 +2190,7 @@ export type UserUpdateWithoutRankingsInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
@@ -2188,6 +2233,7 @@ export type UserUncheckedUpdateWithoutRankingsInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
@@ -2229,6 +2275,7 @@ export type UserCreateWithoutAnalyticsInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -2271,6 +2318,7 @@ export type UserUncheckedCreateWithoutAnalyticsInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -2328,6 +2376,7 @@ export type UserUpdateWithoutAnalyticsInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -2370,6 +2419,7 @@ export type UserUncheckedUpdateWithoutAnalyticsInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -2411,6 +2461,7 @@ export type UserCreateWithoutHistoryInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
@@ -2453,6 +2504,7 @@ export type UserUncheckedCreateWithoutHistoryInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
@@ -2510,6 +2562,7 @@ export type UserUpdateWithoutHistoryInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
@@ -2552,6 +2605,7 @@ export type UserUncheckedUpdateWithoutHistoryInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
@@ -2593,6 +2647,7 @@ export type UserCreateWithoutFavoritesInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
@@ -2635,6 +2690,7 @@ export type UserUncheckedCreateWithoutFavoritesInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
@@ -2692,6 +2748,7 @@ export type UserUpdateWithoutFavoritesInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
@@ -2734,6 +2791,7 @@ export type UserUncheckedUpdateWithoutFavoritesInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
@@ -2775,6 +2833,7 @@ export type UserCreateWithoutUserListInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
@@ -2817,6 +2876,7 @@ export type UserUncheckedCreateWithoutUserListInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
@@ -2874,6 +2934,7 @@ export type UserUpdateWithoutUserListInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
@@ -2916,6 +2977,7 @@ export type UserUncheckedUpdateWithoutUserListInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
@@ -2957,6 +3019,7 @@ export type UserCreateWithoutAuditsInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -2999,6 +3062,7 @@ export type UserUncheckedCreateWithoutAuditsInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -3056,6 +3120,7 @@ export type UserUpdateWithoutAuditsInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -3098,6 +3163,7 @@ export type UserUncheckedUpdateWithoutAuditsInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -3139,6 +3205,7 @@ export type UserCreateWithoutSubscriptionsInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
@@ -3181,6 +3248,7 @@ export type UserUncheckedCreateWithoutSubscriptionsInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
@@ -3238,6 +3306,7 @@ export type UserUpdateWithoutSubscriptionsInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
@@ -3280,6 +3349,7 @@ export type UserUncheckedUpdateWithoutSubscriptionsInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
@@ -3321,6 +3391,7 @@ export type UserCreateWithoutOrganizationFollowsInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
@@ -3363,6 +3434,7 @@ export type UserUncheckedCreateWithoutOrganizationFollowsInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
@@ -3420,6 +3492,7 @@ export type UserUpdateWithoutOrganizationFollowsInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
@@ -3462,6 +3535,7 @@ export type UserUncheckedUpdateWithoutOrganizationFollowsInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
@@ -3503,6 +3577,7 @@ export type UserCreateWithoutEmailPreferenceInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
@@ -3545,6 +3620,7 @@ export type UserUncheckedCreateWithoutEmailPreferenceInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
@@ -3602,6 +3678,7 @@ export type UserUpdateWithoutEmailPreferenceInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
@@ -3644,6 +3721,7 @@ export type UserUncheckedUpdateWithoutEmailPreferenceInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
@@ -3685,6 +3763,7 @@ export type UserCreateWithoutEmailLogsInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
@@ -3727,6 +3806,7 @@ export type UserUncheckedCreateWithoutEmailLogsInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
@@ -3784,6 +3864,7 @@ export type UserUpdateWithoutEmailLogsInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
@@ -3826,6 +3907,7 @@ export type UserUncheckedUpdateWithoutEmailLogsInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
@@ -3867,6 +3949,7 @@ export type UserCreateWithoutUnsubscribeTokensInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
@@ -3909,6 +3992,7 @@ export type UserUncheckedCreateWithoutUnsubscribeTokensInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
@@ -3966,6 +4050,7 @@ export type UserUpdateWithoutUnsubscribeTokensInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
@@ -4008,6 +4093,7 @@ export type UserUncheckedUpdateWithoutUnsubscribeTokensInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
@@ -4049,6 +4135,7 @@ export type UserCreateWithoutEmailVerificationTokensInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
@@ -4091,6 +4178,7 @@ export type UserUncheckedCreateWithoutEmailVerificationTokensInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
@@ -4148,6 +4236,7 @@ export type UserUpdateWithoutEmailVerificationTokensInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
@@ -4190,6 +4279,7 @@ export type UserUncheckedUpdateWithoutEmailVerificationTokensInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
@@ -4231,6 +4321,7 @@ export type UserCreateWithoutDailyActivitiesInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
@@ -4273,6 +4364,7 @@ export type UserUncheckedCreateWithoutDailyActivitiesInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
@@ -4330,6 +4422,7 @@ export type UserUpdateWithoutDailyActivitiesInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
@@ -4372,6 +4465,7 @@ export type UserUncheckedUpdateWithoutDailyActivitiesInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
@@ -4413,6 +4507,7 @@ export type UserCreateWithoutAchievementsInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
@@ -4455,6 +4550,7 @@ export type UserUncheckedCreateWithoutAchievementsInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
@@ -4512,6 +4608,7 @@ export type UserUpdateWithoutAchievementsInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
@@ -4554,6 +4651,7 @@ export type UserUncheckedUpdateWithoutAchievementsInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
@@ -4595,6 +4693,7 @@ export type UserCreateWithoutNotificationsInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
@@ -4637,6 +4736,7 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: string
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
@@ -4694,6 +4794,7 @@ export type UserUpdateWithoutNotificationsInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
@@ -4736,6 +4837,7 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
@@ -4971,6 +5073,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: boolean
   analytics?: boolean | Prisma.User$analyticsArgs<ExtArgs>
   audits?: boolean | Prisma.User$auditsArgs<ExtArgs>
@@ -5015,6 +5118,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: boolean
 }, ExtArgs["result"]["user"]>
 
@@ -5038,6 +5142,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: boolean
 }, ExtArgs["result"]["user"]>
 
@@ -5061,10 +5166,11 @@ export type UserSelectScalar = {
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
   theme?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "slug" | "email" | "password" | "createdAt" | "updatedAt" | "description" | "imageUrl" | "birthdate" | "bannerUrl" | "bannerUrlChangedAt" | "imageUrlChangedAt" | "usernameChangedAt" | "emailNotifications" | "emailVerified" | "isPrivateHistory" | "isPublicProfile" | "pushNotifications" | "theme", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "slug" | "email" | "password" | "createdAt" | "updatedAt" | "description" | "imageUrl" | "birthdate" | "bannerUrl" | "bannerUrlChangedAt" | "imageUrlChangedAt" | "usernameChangedAt" | "emailNotifications" | "emailVerified" | "isPrivateHistory" | "isPublicProfile" | "pushNotifications" | "notifyCommentsOnOwnedContent" | "theme", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   analytics?: boolean | Prisma.User$analyticsArgs<ExtArgs>
   audits?: boolean | Prisma.User$auditsArgs<ExtArgs>
@@ -5135,6 +5241,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     isPrivateHistory: boolean
     isPublicProfile: boolean
     pushNotifications: boolean
+    notifyCommentsOnOwnedContent: boolean
     theme: string
   }, ExtArgs["result"]["user"]>
   composites: {}
@@ -5598,6 +5705,7 @@ export interface UserFieldRefs {
   readonly isPrivateHistory: Prisma.FieldRef<"User", 'Boolean'>
   readonly isPublicProfile: Prisma.FieldRef<"User", 'Boolean'>
   readonly pushNotifications: Prisma.FieldRef<"User", 'Boolean'>
+  readonly notifyCommentsOnOwnedContent: Prisma.FieldRef<"User", 'Boolean'>
   readonly theme: Prisma.FieldRef<"User", 'String'>
 }
     

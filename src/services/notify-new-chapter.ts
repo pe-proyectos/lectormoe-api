@@ -77,34 +77,136 @@ export const notifyNewChapter = async (params: {
   });
 };
 
-// Fan-out: parent-comment author gets notified when someone replies. Skip
-// self-replies. The reply.organizationId is captured so the dispatcher can
-// rebuild the thread URL.
-export const notifyCommentReply = async (replyCommentId: number) => {
-  const reply = await prisma.comment.findUnique({
-    where: { id: replyCommentId },
+// Single entry point fired for every new comment. Produces:
+//   - reply notification for the parent author (delayed-email via cron) if any
+//   - "comment on owned content" notifications (in-app only) for owners of the
+//     manga / chapter / joint the comment is on
+// In-app-only is achieved by stamping emailSentAt at creation so the cron's
+// `where { emailSentAt: null }` filter excludes them.
+export const notifyComment = async (commentId: number) => {
+  const comment = await prisma.comment.findUnique({
+    where: { id: commentId },
     select: {
       id: true,
       userId: true,
       parentId: true,
+      identifier: true,
       organizationId: true,
-      parent: { select: { id: true, userId: true } },
+      parent: {
+        select: {
+          id: true,
+          userId: true,
+          user: { select: { emailNotifications: true } },
+        },
+      },
     },
   });
-  if (!reply || !reply.parentId || !reply.parent) return;
-  if (reply.userId === reply.parent.userId) return;
+  if (!comment) return;
 
-  await prisma.notification.create({
-    data: {
-      userId: reply.parent.userId,
+  // Identifier formats:
+  //   {mangaSlug}                          → top-level on a scan manga
+  //   {mangaSlug}_{chapterNumber}          → chapter on a scan manga
+  //   joint_{jointSlug}                    → top-level on a joint
+  //   joint_{jointSlug}_{chapterNumber}    → chapter on a joint
+  const identifier = comment.identifier;
+  const isJoint = identifier.startsWith('joint_');
+
+  // Resolve owner userIds for the content the comment is on.
+  let ownerUserIds: number[] = [];
+  if (isJoint) {
+    // Strip the leading "joint_" then strip a trailing "_<digits>" if present.
+    let jointSlug = identifier.slice('joint_'.length);
+    const lastUnderscore = jointSlug.lastIndexOf('_');
+    if (lastUnderscore > 0 && /^\d+$/.test(jointSlug.slice(lastUnderscore + 1))) {
+      jointSlug = jointSlug.slice(0, lastUnderscore);
+    }
+    const joint = await prisma.mangaJoint.findFirst({
+      where: { slug: jointSlug, deletedAt: null },
+      select: {
+        members: {
+          where: { status: 'ACCEPTED' },
+          select: { organization: { select: { permissions: { where: { canSeeAdminPanel: true }, select: { userId: true } } } } },
+        },
+      },
+    });
+    if (joint) {
+      const set = new Set<number>();
+      for (const m of joint.members) {
+        for (const p of m.organization.permissions) set.add(p.userId);
+      }
+      ownerUserIds = [...set];
+    }
+  } else if (comment.organizationId) {
+    const staff = await prisma.permission.findMany({
+      where: { organizationId: comment.organizationId, canSeeAdminPanel: true },
+      select: { userId: true },
+    });
+    ownerUserIds = staff.map((s) => s.userId);
+  }
+
+  // Per-user opt-out filter.
+  if (ownerUserIds.length > 0) {
+    const prefs = await prisma.user.findMany({
+      where: { id: { in: ownerUserIds } },
+      select: { id: true, notifyCommentsOnOwnedContent: true },
+    });
+    const allowed = new Set(prefs.filter((u) => u.notifyCommentsOnOwnedContent).map((u) => u.id));
+    ownerUserIds = ownerUserIds.filter((id) => allowed.has(id));
+  }
+
+  const planned: Array<{
+    userId: number;
+    type: 'comment_reply' | 'comment_on_owned_content';
+    commentId: number;
+    parentCommentId: number | null;
+    organizationId: number | null;
+    source: 'reply' | 'owned_content';
+    emailSentAt?: Date | null;
+  }> = [];
+
+  // Reply notification — preserves existing behavior.
+  if (
+    comment.parentId &&
+    comment.parent &&
+    comment.userId !== comment.parent.userId &&
+    comment.parent.user?.emailNotifications !== false
+  ) {
+    planned.push({
+      userId: comment.parent.userId,
       type: 'comment_reply',
-      commentId: reply.id,
-      parentCommentId: reply.parent.id,
-      organizationId: reply.organizationId,
+      commentId: comment.id,
+      parentCommentId: comment.parent.id,
+      organizationId: comment.organizationId,
       source: 'reply',
-    },
+    });
+  }
+
+  // Owned-content notifications — in-app only.
+  const replyTargetUserId = comment.parent?.userId ?? null;
+  for (const userId of ownerUserIds) {
+    if (userId === comment.userId) continue;
+    if (replyTargetUserId !== null && userId === replyTargetUserId) continue;
+    planned.push({
+      userId,
+      type: 'comment_on_owned_content',
+      commentId: comment.id,
+      parentCommentId: comment.parentId ?? null,
+      organizationId: comment.organizationId,
+      source: 'owned_content',
+      emailSentAt: new Date(),
+    });
+  }
+
+  if (planned.length === 0) return;
+
+  await prisma.notification.createMany({
+    data: planned,
+    skipDuplicates: true,
   });
 };
+
+// Backwards-compat alias for callers still importing the old name.
+export const notifyCommentReply = notifyComment;
 
 // Fan-out: organization followers get notified for a new manga release.
 export const notifyNewManga = async (mangaCustomId: number, organizationId: number) => {

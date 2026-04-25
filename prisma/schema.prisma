@@ -110,6 +110,7 @@ model User {
   isPrivateHistory        Boolean                  @default(false)
   isPublicProfile         Boolean                  @default(true)
   pushNotifications       Boolean                  @default(true)
+  notifyCommentsOnOwnedContent Boolean             @default(true)
   theme                   String                   @default("dark") @db.VarChar(20)
   analytics               Analytics[]
   audits                  Audit[]

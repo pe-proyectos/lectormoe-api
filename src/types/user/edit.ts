@@ -14,6 +14,7 @@ export const EditUserRequest = t.Object({
   isPrivateHistory: t.Optional(t.Boolean()),
   emailNotifications: t.Optional(t.Boolean()),
   pushNotifications: t.Optional(t.Boolean()),
+  notifyCommentsOnOwnedContent: t.Optional(t.Boolean()),
   theme: t.Optional(t.String()),
   hierarchyLevel: t.Optional(t.Number()),
   image: t.Optional(t.Union([t.String(), t.Null()])),

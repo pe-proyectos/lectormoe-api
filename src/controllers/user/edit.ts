@@ -82,6 +82,10 @@ export const editUser = async (
   if (params.pushNotifications !== undefined) {
     userUpdateData.pushNotifications = params.pushNotifications;
   }
+
+  if (params.notifyCommentsOnOwnedContent !== undefined) {
+    userUpdateData.notifyCommentsOnOwnedContent = params.notifyCommentsOnOwnedContent;
+  }
   
   if (params.theme !== undefined) {
     userUpdateData.theme = params.theme;
