@@ -203,6 +203,11 @@ export type MangaJoint = Prisma.MangaJointModel
  */
 export type JointMember = Prisma.JointMemberModel
 /**
+ * Model JointMemberHistory
+ * 
+ */
+export type JointMemberHistory = Prisma.JointMemberHistoryModel
+/**
  * Model Notification
  * 
  */

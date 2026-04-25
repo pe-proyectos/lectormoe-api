@@ -10,6 +10,7 @@ import { TransferJointRequest } from '../../types/joint/transfer';
 import { UpdateJointMemberPermissionsRequest } from '../../types/joint/permissions';
 import { CreateJointChapterRequest } from '../../types/joint/chapter/create';
 import { EditJointChapterRequest } from '../../types/joint/chapter/edit';
+import { BulkMoveJointChaptersRequest, TransferAuthorshipRequest } from '../../types/joint/chapter/move';
 import { requireJointMember } from '../../util/joint-auth';
 import { createJoint } from '../../controllers/joint/create';
 import { getJoint, getJointForAdmin } from '../../controllers/joint/get';
@@ -25,6 +26,11 @@ import { createJointChapter } from '../../controllers/joint/chapter/create';
 import { getJointChapter } from '../../controllers/joint/chapter/get';
 import { editJointChapter } from '../../controllers/joint/chapter/edit';
 import { deleteJointChapter } from '../../controllers/joint/chapter/delete';
+import { leaveJoint } from '../../controllers/joint/leave';
+import { promoteChapterToJoint } from '../../controllers/joint/chapter/promote';
+import { demoteChapterFromJoint } from '../../controllers/joint/chapter/demote';
+import { bulkMoveJointChapters } from '../../controllers/joint/chapter/bulk-move';
+import { transferChapterAuthorship } from '../../controllers/joint/chapter/transfer-authorship';
 import { saveJointFavorite } from '../../controllers/favorites/save-joint';
 import { deleteJointFavorite } from '../../controllers/favorites/delete-joint';
 import { getJointFavorite } from '../../controllers/favorites/get-joint';
@@ -150,37 +156,44 @@ export const router = () => new Elysia()
   }, { body: EditJointRequest, response: t.Object({ status: t.Boolean(), data: t.Any() }) })
 
   // Dissolve joint
-  .delete('/api/joint/:slug', async ({ params: { slug }, organizationId }) => {
+  .delete('/api/joint/:slug', async ({ params: { slug }, organizationId, user }) => {
     if (!organizationId) throw new Error('Se requiere contexto de organización.');
-    const data = await deleteJoint(slug, organizationId);
+    const data = await deleteJoint(slug, organizationId, user?.id ?? null);
+    return { status: true, data };
+  }, { response: t.Object({ status: t.Boolean(), data: t.Any() }) })
+
+  // Leave joint (voluntary)
+  .post('/api/joint/:slug/leave', async ({ params: { slug }, organizationId, user }) => {
+    if (!organizationId) throw new Error('Se requiere contexto de organización.');
+    const data = await leaveJoint(slug, organizationId, user?.id ?? null);
     return { status: true, data };
   }, { response: t.Object({ status: t.Boolean(), data: t.Any() }) })
 
   // Invite org to joint
-  .post('/api/joint/:slug/invite', async ({ params: { slug }, organizationId, body }) => {
+  .post('/api/joint/:slug/invite', async ({ params: { slug }, organizationId, body, user }) => {
     if (!organizationId) throw new Error('Se requiere contexto de organización.');
-    const data = await inviteToJoint(slug, organizationId, body);
+    const data = await inviteToJoint(slug, organizationId, body, user?.id ?? null);
     return { status: true, data };
   }, { body: InviteToJointRequest, response: t.Object({ status: t.Boolean(), data: t.Any() }) })
 
   // Respond to invitation
-  .patch('/api/joint/:slug/respond', async ({ params: { slug }, organizationId, body }) => {
+  .patch('/api/joint/:slug/respond', async ({ params: { slug }, organizationId, body, user }) => {
     if (!organizationId) throw new Error('Se requiere contexto de organización.');
-    const data = await respondToJointInvite(slug, organizationId, body);
+    const data = await respondToJointInvite(slug, organizationId, body, user?.id ?? null);
     return { status: true, data };
   }, { body: RespondToJointRequest, response: t.Object({ status: t.Boolean(), data: t.Any() }) })
 
   // Expel member
-  .delete('/api/joint/:slug/member/:orgSlug', async ({ params: { slug, orgSlug }, organizationId }) => {
+  .delete('/api/joint/:slug/member/:orgSlug', async ({ params: { slug, orgSlug }, organizationId, user }) => {
     if (!organizationId) throw new Error('Se requiere contexto de organización.');
-    const data = await expelFromJoint(slug, organizationId, orgSlug);
+    const data = await expelFromJoint(slug, organizationId, orgSlug, user?.id ?? null);
     return { status: true, data };
   }, { response: t.Object({ status: t.Boolean(), data: t.Any() }) })
 
   // Transfer leadership
-  .patch('/api/joint/:slug/transfer', async ({ params: { slug }, organizationId, body }) => {
+  .patch('/api/joint/:slug/transfer', async ({ params: { slug }, organizationId, body, user }) => {
     if (!organizationId) throw new Error('Se requiere contexto de organización.');
-    const data = await transferJointLeadership(slug, organizationId, body);
+    const data = await transferJointLeadership(slug, organizationId, body, user?.id ?? null);
     return { status: true, data };
   }, { body: TransferJointRequest, response: t.Object({ status: t.Boolean(), data: t.Any() }) })
 
@@ -238,6 +251,39 @@ export const router = () => new Elysia()
     const data = await deleteJointChapter(slug, parseFloat(number), organizationId);
     return { status: true, data };
   }, { response: t.Object({ status: t.Boolean(), data: t.Any() }) })
+
+  // Promote a solo (MangaCustom) chapter into the joint
+  .post('/api/joint/:slug/chapters/:chapterId/promote', async ({ params: { slug, chapterId }, organizationId, user }) => {
+    if (!organizationId) throw new Error('Se requiere contexto de organización.');
+    const data = await promoteChapterToJoint(slug, organizationId, parseInt(chapterId), user?.id ?? null);
+    return { status: true, data };
+  }, { response: t.Object({ status: t.Boolean(), data: t.Any() }) })
+
+  // Demote a joint chapter back to its uploader's MangaCustom; ?replace=1 to overwrite a colliding cap.
+  .post('/api/joint/:slug/chapters/:chapterId/demote', async ({ params: { slug, chapterId }, organizationId, user, query }) => {
+    if (!organizationId) throw new Error('Se requiere contexto de organización.');
+    const replace = (query as any)?.replace === '1' || (query as any)?.replace === 'true';
+    const data = await demoteChapterFromJoint(slug, organizationId, parseInt(chapterId), {
+      replace, actorUserId: user?.id ?? null,
+    });
+    return { status: true, data };
+  }, { response: t.Object({ status: t.Boolean(), data: t.Any() }) })
+
+  // Bulk move (skip-and-report)
+  .post('/api/joint/:slug/chapters/bulk-move', async ({ params: { slug }, organizationId, user, body }) => {
+    if (!organizationId) throw new Error('Se requiere contexto de organización.');
+    const data = await bulkMoveJointChapters(slug, organizationId, body.chapterIds, body.direction, {
+      replaceConflicts: body.replaceConflicts, actorUserId: user?.id ?? null,
+    });
+    return { status: true, data };
+  }, { body: BulkMoveJointChaptersRequest, response: t.Object({ status: t.Boolean(), data: t.Any() }) })
+
+  // Transfer chapter authorship
+  .post('/api/joint/:slug/chapters/:chapterId/transfer-authorship', async ({ params: { slug, chapterId }, organizationId, user, body }) => {
+    if (!organizationId) throw new Error('Se requiere contexto de organización.');
+    const data = await transferChapterAuthorship(slug, organizationId, parseInt(chapterId), body.toOrganizationId, user?.id ?? null);
+    return { status: true, data };
+  }, { body: TransferAuthorshipRequest, response: t.Object({ status: t.Boolean(), data: t.Any() }) })
 
   // ─── JOINT FAVORITE ROUTES ──────────────────────────────────────────────────
 

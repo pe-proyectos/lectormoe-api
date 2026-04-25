@@ -1,11 +1,13 @@
 import { prisma } from '../../models/prisma';
 import { requireJointMember } from '../../util/joint-auth';
+import { recordJointMemberHistory } from '../../services/joint-history';
 import type { TransferJointRequest } from '../../types/joint/transfer';
 
 export const transferJointLeadership = async (
   slug: string,
   callerOrgId: number,
-  params: TransferJointRequest
+  params: TransferJointRequest,
+  actorUserId?: number | null,
 ) => {
   const { joint, member } = await requireJointMember(slug, callerOrgId);
 
@@ -27,7 +29,6 @@ export const transferJointLeadership = async (
     throw new Error('La organización no es miembro activo del joint.');
   }
 
-  // Transfer: caller → UPLOADER, target → LEADER
   await prisma.$transaction([
     prisma.jointMember.update({
       where: { id: member.id },
@@ -38,6 +39,27 @@ export const transferJointLeadership = async (
       data: { role: 'LEADER' },
     }),
   ]);
+
+  await recordJointMemberHistory({
+    jointId: joint.id,
+    organizationId: callerOrgId,
+    fromStatus: 'ACCEPTED',
+    toStatus: 'ACCEPTED',
+    fromRole: 'LEADER',
+    toRole: 'UPLOADER',
+    action: 'transfer_leadership',
+    actorUserId,
+  });
+  await recordJointMemberHistory({
+    jointId: joint.id,
+    organizationId: targetOrg.id,
+    fromStatus: 'ACCEPTED',
+    toStatus: 'ACCEPTED',
+    fromRole: targetMember.role,
+    toRole: 'LEADER',
+    action: 'transfer_leadership',
+    actorUserId,
+  });
 
   return { success: true };
 };

@@ -85,6 +85,7 @@ model Organization {
   uploadedJointChapters                        Chapter[]     @relation("ChapterUploader")
   workedOnJointChapters                        Chapter[]     @relation("ChapterWorkedBy")
   notifications                                Notification[]
+  jointMemberHistory                           JointMemberHistory[]
 
   @@map("organization")
 }
@@ -773,6 +774,7 @@ enum JointMemberStatus {
   ACCEPTED
   REJECTED
   EXPELLED
+  LEFT
 }
 
 model MangaJoint {
@@ -798,6 +800,7 @@ model MangaJoint {
   favorites        Favorite[]
   userListEntries  UserList[]
   notifications    Notification[]
+  memberHistory    JointMemberHistory[]
 
   @@index([mangaId])
   @@index([lastChapterAt])
@@ -820,6 +823,28 @@ model JointMember {
 
   @@unique([jointId, organizationId])
   @@map("joint_member")
+}
+
+model JointMemberHistory {
+  id             Int                @id @default(autoincrement())
+  jointId        Int
+  joint          MangaJoint         @relation(fields: [jointId], references: [id])
+  organizationId Int
+  organization   Organization       @relation(fields: [organizationId], references: [id])
+  fromStatus     JointMemberStatus?
+  toStatus       JointMemberStatus
+  fromRole       JointRole?
+  toRole         JointRole?
+  // 'invite' | 'accept' | 'reject' | 'leave' | 'expel' | 'transfer_leadership' | 'auto_promote' | 'auto_dissolve'
+  action         String             @db.VarChar(64)
+  // userId of the actor that triggered the change. NULL = system / cron.
+  actorUserId    Int?
+  reason         String?
+  createdAt      DateTime           @default(now()) @db.Timestamp(6)
+
+  @@index([jointId, createdAt])
+  @@index([organizationId, createdAt])
+  @@map("joint_member_history")
 }
 
 model Notification {

@@ -115,6 +115,33 @@ export const getPopularToday = async (limit: number = 5, nsfw?: boolean) => {
 		if (g.jointId !== null) countsByJointId.set(g.jointId, g._count._all);
 	}
 
+	// Roll solo-chapter views from any ACCEPTED member's MangaCustom into the
+	// matching joint's bucket. Without this, a manga that pre-dates the joint
+	// looks artificially small in popular-today because its views are scattered
+	// across the per-org MCs instead of attributed to the joint.
+	if (joints.length > 0 && mangasCustoms.length > 0) {
+		const acceptedMembers = await prisma.jointMember.findMany({
+			where: {
+				jointId: { in: joints.map(j => j.id) },
+				status: 'ACCEPTED',
+			},
+			select: { jointId: true, organizationId: true, joint: { select: { mangaId: true } } },
+		});
+		const orgToJoint = new Map<string, number>();
+		for (const m of acceptedMembers) {
+			orgToJoint.set(`${m.joint.mangaId}:${m.organizationId}`, m.jointId);
+		}
+		for (const mc of mangasCustoms) {
+			const jId = orgToJoint.get(`${mc.manga.id}:${mc.organizationId}`);
+			if (!jId) continue;
+			const mcCount = countsByCustomId.get(mc.id) ?? 0;
+			if (mcCount === 0) continue;
+			countsByJointId.set(jId, (countsByJointId.get(jId) ?? 0) + mcCount);
+			// Zero the MC count so dedupe doesn't double-credit it as the bestMc.
+			countsByCustomId.set(mc.id, 0);
+		}
+	}
+
 	// Dedupe by underlying Manga.id: sum views across all mangaCustoms + the
 	// joint that share the same manga, then choose a representative:
 	//   - If a joint exists for this manga, prefer it (the manga page already

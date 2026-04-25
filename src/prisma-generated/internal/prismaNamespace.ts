@@ -421,6 +421,7 @@ export const ModelName = {
   UserAchievement: 'UserAchievement',
   MangaJoint: 'MangaJoint',
   JointMember: 'JointMember',
+  JointMemberHistory: 'JointMemberHistory',
   Notification: 'Notification'
 } as const
 
@@ -437,7 +438,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "token" | "organization" | "user" | "permission" | "passwordResetToken" | "countryOptions" | "author" | "bookType" | "manga" | "mangaCustom" | "chapter" | "page" | "comment" | "commentLike" | "ranking" | "demography" | "genre" | "analytics" | "userChapterHistory" | "favorite" | "userList" | "audit" | "viewsHistory" | "subscriptionPlan" | "subscription" | "organizationTransaction" | "organizationFollower" | "organizationRequest" | "emailPreference" | "emailLog" | "unsubscribeToken" | "emailVerificationToken" | "userDailyActivity" | "achievement" | "userAchievement" | "mangaJoint" | "jointMember" | "notification"
+    modelProps: "token" | "organization" | "user" | "permission" | "passwordResetToken" | "countryOptions" | "author" | "bookType" | "manga" | "mangaCustom" | "chapter" | "page" | "comment" | "commentLike" | "ranking" | "demography" | "genre" | "analytics" | "userChapterHistory" | "favorite" | "userList" | "audit" | "viewsHistory" | "subscriptionPlan" | "subscription" | "organizationTransaction" | "organizationFollower" | "organizationRequest" | "emailPreference" | "emailLog" | "unsubscribeToken" | "emailVerificationToken" | "userDailyActivity" | "achievement" | "userAchievement" | "mangaJoint" | "jointMember" | "jointMemberHistory" | "notification"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -3179,6 +3180,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    JointMemberHistory: {
+      payload: Prisma.$JointMemberHistoryPayload<ExtArgs>
+      fields: Prisma.JointMemberHistoryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.JointMemberHistoryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JointMemberHistoryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.JointMemberHistoryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JointMemberHistoryPayload>
+        }
+        findFirst: {
+          args: Prisma.JointMemberHistoryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JointMemberHistoryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.JointMemberHistoryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JointMemberHistoryPayload>
+        }
+        findMany: {
+          args: Prisma.JointMemberHistoryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JointMemberHistoryPayload>[]
+        }
+        create: {
+          args: Prisma.JointMemberHistoryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JointMemberHistoryPayload>
+        }
+        createMany: {
+          args: Prisma.JointMemberHistoryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.JointMemberHistoryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JointMemberHistoryPayload>[]
+        }
+        delete: {
+          args: Prisma.JointMemberHistoryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JointMemberHistoryPayload>
+        }
+        update: {
+          args: Prisma.JointMemberHistoryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JointMemberHistoryPayload>
+        }
+        deleteMany: {
+          args: Prisma.JointMemberHistoryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.JointMemberHistoryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.JointMemberHistoryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JointMemberHistoryPayload>[]
+        }
+        upsert: {
+          args: Prisma.JointMemberHistoryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JointMemberHistoryPayload>
+        }
+        aggregate: {
+          args: Prisma.JointMemberHistoryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateJointMemberHistory>
+        }
+        groupBy: {
+          args: Prisma.JointMemberHistoryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.JointMemberHistoryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.JointMemberHistoryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.JointMemberHistoryCountAggregateOutputType> | number
+        }
+      }
+    }
     Notification: {
       payload: Prisma.$NotificationPayload<ExtArgs>
       fields: Prisma.NotificationFieldRefs
@@ -3950,6 +4025,23 @@ export const JointMemberScalarFieldEnum = {
 export type JointMemberScalarFieldEnum = (typeof JointMemberScalarFieldEnum)[keyof typeof JointMemberScalarFieldEnum]
 
 
+export const JointMemberHistoryScalarFieldEnum = {
+  id: 'id',
+  jointId: 'jointId',
+  organizationId: 'organizationId',
+  fromStatus: 'fromStatus',
+  toStatus: 'toStatus',
+  fromRole: 'fromRole',
+  toRole: 'toRole',
+  action: 'action',
+  actorUserId: 'actorUserId',
+  reason: 'reason',
+  createdAt: 'createdAt'
+} as const
+
+export type JointMemberHistoryScalarFieldEnum = (typeof JointMemberHistoryScalarFieldEnum)[keyof typeof JointMemberHistoryScalarFieldEnum]
+
+
 export const NotificationScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -4253,6 +4345,7 @@ export type GlobalOmitConfig = {
   userAchievement?: Prisma.UserAchievementOmit
   mangaJoint?: Prisma.MangaJointOmit
   jointMember?: Prisma.JointMemberOmit
+  jointMemberHistory?: Prisma.JointMemberHistoryOmit
   notification?: Prisma.NotificationOmit
 }
 

@@ -4,6 +4,10 @@ import { prisma } from '../models/prisma';
 // distinct user that has the manga (or joint) in their favorites or user-list.
 // "favorite" wins over "user_list" when the user has both. Fire-and-forget —
 // callers should not await this in the request path.
+//
+// Joint-aware: when a chapter is created against a mangaCustomId AND the manga
+// has an active joint that the org is an ACCEPTED member of, the fan-out also
+// includes users following the joint. Dedupe is by userId across all sources.
 export const notifyNewChapter = async (params: {
   chapterId: number;
   mangaCustomId?: number | null;
@@ -12,42 +16,60 @@ export const notifyNewChapter = async (params: {
   const { chapterId, mangaCustomId, jointId } = params;
   if (!mangaCustomId && !jointId) return;
 
-  // Collect (userId, source) pairs. Favorite wins over user_list when both.
+  // Resolve a sibling joint when the chapter was published from a member's
+  // MangaCustom. The chapter rides the joint's notification fan-out too.
+  let extraJointId: number | null = null;
+  if (mangaCustomId && !jointId) {
+    const mc = await prisma.mangaCustom.findUnique({
+      where: { id: mangaCustomId },
+      select: { mangaId: true, organizationId: true },
+    });
+    if (mc) {
+      const sibling = await prisma.mangaJoint.findFirst({
+        where: {
+          deletedAt: null,
+          mangaId: mc.mangaId,
+          members: { some: { organizationId: mc.organizationId, status: 'ACCEPTED' } },
+        },
+        select: { id: true },
+      });
+      if (sibling) extraJointId = sibling.id;
+    }
+  }
+
   const sourceByUser = new Map<number, 'favorite' | 'user_list'>();
 
-  if (mangaCustomId) {
+  const collect = async (kind: 'mc' | 'joint', targetId: number) => {
     const ulRows = await prisma.userList.findMany({
-      where: { mangaCustomId },
+      where: kind === 'mc' ? { mangaCustomId: targetId } : { jointId: targetId },
       select: { userId: true },
     });
-    for (const r of ulRows) sourceByUser.set(r.userId, 'user_list');
+    for (const r of ulRows) {
+      if (!sourceByUser.has(r.userId)) sourceByUser.set(r.userId, 'user_list');
+    }
     const favRows = await prisma.favorite.findMany({
-      where: { mangaCustomId },
+      where: kind === 'mc' ? { mangaCustomId: targetId } : { jointId: targetId },
       select: { userId: true },
     });
     for (const r of favRows) sourceByUser.set(r.userId, 'favorite');
-  }
-  if (jointId) {
-    const ulRows = await prisma.userList.findMany({
-      where: { jointId },
-      select: { userId: true },
-    });
-    for (const r of ulRows) sourceByUser.set(r.userId, 'user_list');
-    const favRows = await prisma.favorite.findMany({
-      where: { jointId },
-      select: { userId: true },
-    });
-    for (const r of favRows) sourceByUser.set(r.userId, 'favorite');
-  }
+  };
+
+  if (mangaCustomId) await collect('mc', mangaCustomId);
+  if (jointId) await collect('joint', jointId);
+  if (extraJointId) await collect('joint', extraJointId);
 
   if (sourceByUser.size === 0) return;
+
+  // Each user gets ONE notification. Prefer attaching the joint context when
+  // available (so the FE can route to /joint/manga/...).
+  const effectiveJointId = jointId ?? extraJointId ?? null;
 
   await prisma.notification.createMany({
     data: [...sourceByUser.entries()].map(([userId, source]) => ({
       userId,
       type: 'new_chapter',
-      mangaCustomId: mangaCustomId ?? null,
-      jointId: jointId ?? null,
+      mangaCustomId: effectiveJointId ? null : (mangaCustomId ?? null),
+      jointId: effectiveJointId,
       chapterId,
       source,
     })),

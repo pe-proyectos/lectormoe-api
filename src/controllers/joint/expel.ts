@@ -1,10 +1,13 @@
 import { prisma } from '../../models/prisma';
 import { requireJointMember, canExpel } from '../../util/joint-auth';
+import { detachOrgFromJoint } from '../../services/joint-detach';
+import { recordJointMemberHistory } from '../../services/joint-history';
 
 export const expelFromJoint = async (
   slug: string,
   callerOrgId: number,
-  targetOrgSlug: string
+  targetOrgSlug: string,
+  actorUserId?: number | null,
 ) => {
   const { joint, member } = await requireJointMember(slug, callerOrgId);
 
@@ -33,8 +36,23 @@ export const expelFromJoint = async (
     throw new Error('No puedes expulsar al líder. Primero transfiere el liderazgo.');
   }
 
-  return prisma.jointMember.update({
+  const detach = await detachOrgFromJoint(joint.id, targetOrg.id, { actorUserId, reason: 'expel' });
+
+  const updated = await prisma.jointMember.update({
     where: { id: targetMember.id },
     data: { status: 'EXPELLED' },
   });
+
+  await recordJointMemberHistory({
+    jointId: joint.id,
+    organizationId: targetOrg.id,
+    fromStatus: 'ACCEPTED',
+    toStatus: 'EXPELLED',
+    fromRole: targetMember.role,
+    toRole: targetMember.role,
+    action: 'expel',
+    actorUserId,
+  });
+
+  return { ...updated, detach };
 };

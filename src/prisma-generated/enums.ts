@@ -22,7 +22,8 @@ export const JointMemberStatus = {
   INVITED: 'INVITED',
   ACCEPTED: 'ACCEPTED',
   REJECTED: 'REJECTED',
-  EXPELLED: 'EXPELLED'
+  EXPELLED: 'EXPELLED',
+  LEFT: 'LEFT'
 } as const
 
 export type JointMemberStatus = (typeof JointMemberStatus)[keyof typeof JointMemberStatus]

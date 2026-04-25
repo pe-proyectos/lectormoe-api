@@ -88,6 +88,7 @@ export const ModelName = {
   UserAchievement: 'UserAchievement',
   MangaJoint: 'MangaJoint',
   JointMember: 'JointMember',
+  JointMemberHistory: 'JointMemberHistory',
   Notification: 'Notification'
 } as const
 
@@ -763,6 +764,23 @@ export const JointMemberScalarFieldEnum = {
 } as const
 
 export type JointMemberScalarFieldEnum = (typeof JointMemberScalarFieldEnum)[keyof typeof JointMemberScalarFieldEnum]
+
+
+export const JointMemberHistoryScalarFieldEnum = {
+  id: 'id',
+  jointId: 'jointId',
+  organizationId: 'organizationId',
+  fromStatus: 'fromStatus',
+  toStatus: 'toStatus',
+  fromRole: 'fromRole',
+  toRole: 'toRole',
+  action: 'action',
+  actorUserId: 'actorUserId',
+  reason: 'reason',
+  createdAt: 'createdAt'
+} as const
+
+export type JointMemberHistoryScalarFieldEnum = (typeof JointMemberHistoryScalarFieldEnum)[keyof typeof JointMemberHistoryScalarFieldEnum]
 
 
 export const NotificationScalarFieldEnum = {

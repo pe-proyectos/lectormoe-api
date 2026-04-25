@@ -311,6 +311,7 @@ export type MangaJointWhereInput = {
   favorites?: Prisma.FavoriteListRelationFilter
   userListEntries?: Prisma.UserListListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
+  memberHistory?: Prisma.JointMemberHistoryListRelationFilter
 }
 
 export type MangaJointOrderByWithRelationInput = {
@@ -336,6 +337,7 @@ export type MangaJointOrderByWithRelationInput = {
   favorites?: Prisma.FavoriteOrderByRelationAggregateInput
   userListEntries?: Prisma.UserListOrderByRelationAggregateInput
   notifications?: Prisma.NotificationOrderByRelationAggregateInput
+  memberHistory?: Prisma.JointMemberHistoryOrderByRelationAggregateInput
 }
 
 export type MangaJointWhereUniqueInput = Prisma.AtLeast<{
@@ -364,6 +366,7 @@ export type MangaJointWhereUniqueInput = Prisma.AtLeast<{
   favorites?: Prisma.FavoriteListRelationFilter
   userListEntries?: Prisma.UserListListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
+  memberHistory?: Prisma.JointMemberHistoryListRelationFilter
 }, "id" | "slug">
 
 export type MangaJointOrderByWithAggregationInput = {
@@ -431,6 +434,7 @@ export type MangaJointCreateInput = {
   favorites?: Prisma.FavoriteCreateNestedManyWithoutJointInput
   userListEntries?: Prisma.UserListCreateNestedManyWithoutJointInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutJointInput
+  memberHistory?: Prisma.JointMemberHistoryCreateNestedManyWithoutJointInput
 }
 
 export type MangaJointUncheckedCreateInput = {
@@ -455,6 +459,7 @@ export type MangaJointUncheckedCreateInput = {
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutJointInput
   userListEntries?: Prisma.UserListUncheckedCreateNestedManyWithoutJointInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutJointInput
+  memberHistory?: Prisma.JointMemberHistoryUncheckedCreateNestedManyWithoutJointInput
 }
 
 export type MangaJointUpdateInput = {
@@ -478,6 +483,7 @@ export type MangaJointUpdateInput = {
   favorites?: Prisma.FavoriteUpdateManyWithoutJointNestedInput
   userListEntries?: Prisma.UserListUpdateManyWithoutJointNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutJointNestedInput
+  memberHistory?: Prisma.JointMemberHistoryUpdateManyWithoutJointNestedInput
 }
 
 export type MangaJointUncheckedUpdateInput = {
@@ -502,6 +508,7 @@ export type MangaJointUncheckedUpdateInput = {
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutJointNestedInput
   userListEntries?: Prisma.UserListUncheckedUpdateManyWithoutJointNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutJointNestedInput
+  memberHistory?: Prisma.JointMemberHistoryUncheckedUpdateManyWithoutJointNestedInput
 }
 
 export type MangaJointCreateManyInput = {
@@ -762,6 +769,20 @@ export type MangaJointUpdateOneRequiredWithoutMembersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.MangaJointUpdateToOneWithWhereWithoutMembersInput, Prisma.MangaJointUpdateWithoutMembersInput>, Prisma.MangaJointUncheckedUpdateWithoutMembersInput>
 }
 
+export type MangaJointCreateNestedOneWithoutMemberHistoryInput = {
+  create?: Prisma.XOR<Prisma.MangaJointCreateWithoutMemberHistoryInput, Prisma.MangaJointUncheckedCreateWithoutMemberHistoryInput>
+  connectOrCreate?: Prisma.MangaJointCreateOrConnectWithoutMemberHistoryInput
+  connect?: Prisma.MangaJointWhereUniqueInput
+}
+
+export type MangaJointUpdateOneRequiredWithoutMemberHistoryNestedInput = {
+  create?: Prisma.XOR<Prisma.MangaJointCreateWithoutMemberHistoryInput, Prisma.MangaJointUncheckedCreateWithoutMemberHistoryInput>
+  connectOrCreate?: Prisma.MangaJointCreateOrConnectWithoutMemberHistoryInput
+  upsert?: Prisma.MangaJointUpsertWithoutMemberHistoryInput
+  connect?: Prisma.MangaJointWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MangaJointUpdateToOneWithWhereWithoutMemberHistoryInput, Prisma.MangaJointUpdateWithoutMemberHistoryInput>, Prisma.MangaJointUncheckedUpdateWithoutMemberHistoryInput>
+}
+
 export type MangaJointCreateNestedOneWithoutNotificationsInput = {
   create?: Prisma.XOR<Prisma.MangaJointCreateWithoutNotificationsInput, Prisma.MangaJointUncheckedCreateWithoutNotificationsInput>
   connectOrCreate?: Prisma.MangaJointCreateOrConnectWithoutNotificationsInput
@@ -798,6 +819,7 @@ export type MangaJointCreateWithoutMangaInput = {
   favorites?: Prisma.FavoriteCreateNestedManyWithoutJointInput
   userListEntries?: Prisma.UserListCreateNestedManyWithoutJointInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutJointInput
+  memberHistory?: Prisma.JointMemberHistoryCreateNestedManyWithoutJointInput
 }
 
 export type MangaJointUncheckedCreateWithoutMangaInput = {
@@ -821,6 +843,7 @@ export type MangaJointUncheckedCreateWithoutMangaInput = {
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutJointInput
   userListEntries?: Prisma.UserListUncheckedCreateNestedManyWithoutJointInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutJointInput
+  memberHistory?: Prisma.JointMemberHistoryUncheckedCreateNestedManyWithoutJointInput
 }
 
 export type MangaJointCreateOrConnectWithoutMangaInput = {
@@ -890,6 +913,7 @@ export type MangaJointCreateWithoutChaptersInput = {
   favorites?: Prisma.FavoriteCreateNestedManyWithoutJointInput
   userListEntries?: Prisma.UserListCreateNestedManyWithoutJointInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutJointInput
+  memberHistory?: Prisma.JointMemberHistoryCreateNestedManyWithoutJointInput
 }
 
 export type MangaJointUncheckedCreateWithoutChaptersInput = {
@@ -913,6 +937,7 @@ export type MangaJointUncheckedCreateWithoutChaptersInput = {
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutJointInput
   userListEntries?: Prisma.UserListUncheckedCreateNestedManyWithoutJointInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutJointInput
+  memberHistory?: Prisma.JointMemberHistoryUncheckedCreateNestedManyWithoutJointInput
 }
 
 export type MangaJointCreateOrConnectWithoutChaptersInput = {
@@ -951,6 +976,7 @@ export type MangaJointUpdateWithoutChaptersInput = {
   favorites?: Prisma.FavoriteUpdateManyWithoutJointNestedInput
   userListEntries?: Prisma.UserListUpdateManyWithoutJointNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutJointNestedInput
+  memberHistory?: Prisma.JointMemberHistoryUpdateManyWithoutJointNestedInput
 }
 
 export type MangaJointUncheckedUpdateWithoutChaptersInput = {
@@ -974,6 +1000,7 @@ export type MangaJointUncheckedUpdateWithoutChaptersInput = {
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutJointNestedInput
   userListEntries?: Prisma.UserListUncheckedUpdateManyWithoutJointNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutJointNestedInput
+  memberHistory?: Prisma.JointMemberHistoryUncheckedUpdateManyWithoutJointNestedInput
 }
 
 export type MangaJointCreateWithoutFavoritesInput = {
@@ -996,6 +1023,7 @@ export type MangaJointCreateWithoutFavoritesInput = {
   viewsHistory?: Prisma.ViewsHistoryCreateNestedManyWithoutJointInput
   userListEntries?: Prisma.UserListCreateNestedManyWithoutJointInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutJointInput
+  memberHistory?: Prisma.JointMemberHistoryCreateNestedManyWithoutJointInput
 }
 
 export type MangaJointUncheckedCreateWithoutFavoritesInput = {
@@ -1019,6 +1047,7 @@ export type MangaJointUncheckedCreateWithoutFavoritesInput = {
   viewsHistory?: Prisma.ViewsHistoryUncheckedCreateNestedManyWithoutJointInput
   userListEntries?: Prisma.UserListUncheckedCreateNestedManyWithoutJointInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutJointInput
+  memberHistory?: Prisma.JointMemberHistoryUncheckedCreateNestedManyWithoutJointInput
 }
 
 export type MangaJointCreateOrConnectWithoutFavoritesInput = {
@@ -1057,6 +1086,7 @@ export type MangaJointUpdateWithoutFavoritesInput = {
   viewsHistory?: Prisma.ViewsHistoryUpdateManyWithoutJointNestedInput
   userListEntries?: Prisma.UserListUpdateManyWithoutJointNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutJointNestedInput
+  memberHistory?: Prisma.JointMemberHistoryUpdateManyWithoutJointNestedInput
 }
 
 export type MangaJointUncheckedUpdateWithoutFavoritesInput = {
@@ -1080,6 +1110,7 @@ export type MangaJointUncheckedUpdateWithoutFavoritesInput = {
   viewsHistory?: Prisma.ViewsHistoryUncheckedUpdateManyWithoutJointNestedInput
   userListEntries?: Prisma.UserListUncheckedUpdateManyWithoutJointNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutJointNestedInput
+  memberHistory?: Prisma.JointMemberHistoryUncheckedUpdateManyWithoutJointNestedInput
 }
 
 export type MangaJointCreateWithoutUserListEntriesInput = {
@@ -1102,6 +1133,7 @@ export type MangaJointCreateWithoutUserListEntriesInput = {
   viewsHistory?: Prisma.ViewsHistoryCreateNestedManyWithoutJointInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutJointInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutJointInput
+  memberHistory?: Prisma.JointMemberHistoryCreateNestedManyWithoutJointInput
 }
 
 export type MangaJointUncheckedCreateWithoutUserListEntriesInput = {
@@ -1125,6 +1157,7 @@ export type MangaJointUncheckedCreateWithoutUserListEntriesInput = {
   viewsHistory?: Prisma.ViewsHistoryUncheckedCreateNestedManyWithoutJointInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutJointInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutJointInput
+  memberHistory?: Prisma.JointMemberHistoryUncheckedCreateNestedManyWithoutJointInput
 }
 
 export type MangaJointCreateOrConnectWithoutUserListEntriesInput = {
@@ -1163,6 +1196,7 @@ export type MangaJointUpdateWithoutUserListEntriesInput = {
   viewsHistory?: Prisma.ViewsHistoryUpdateManyWithoutJointNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutJointNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutJointNestedInput
+  memberHistory?: Prisma.JointMemberHistoryUpdateManyWithoutJointNestedInput
 }
 
 export type MangaJointUncheckedUpdateWithoutUserListEntriesInput = {
@@ -1186,6 +1220,7 @@ export type MangaJointUncheckedUpdateWithoutUserListEntriesInput = {
   viewsHistory?: Prisma.ViewsHistoryUncheckedUpdateManyWithoutJointNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutJointNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutJointNestedInput
+  memberHistory?: Prisma.JointMemberHistoryUncheckedUpdateManyWithoutJointNestedInput
 }
 
 export type MangaJointCreateWithoutViewsHistoryInput = {
@@ -1208,6 +1243,7 @@ export type MangaJointCreateWithoutViewsHistoryInput = {
   favorites?: Prisma.FavoriteCreateNestedManyWithoutJointInput
   userListEntries?: Prisma.UserListCreateNestedManyWithoutJointInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutJointInput
+  memberHistory?: Prisma.JointMemberHistoryCreateNestedManyWithoutJointInput
 }
 
 export type MangaJointUncheckedCreateWithoutViewsHistoryInput = {
@@ -1231,6 +1267,7 @@ export type MangaJointUncheckedCreateWithoutViewsHistoryInput = {
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutJointInput
   userListEntries?: Prisma.UserListUncheckedCreateNestedManyWithoutJointInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutJointInput
+  memberHistory?: Prisma.JointMemberHistoryUncheckedCreateNestedManyWithoutJointInput
 }
 
 export type MangaJointCreateOrConnectWithoutViewsHistoryInput = {
@@ -1269,6 +1306,7 @@ export type MangaJointUpdateWithoutViewsHistoryInput = {
   favorites?: Prisma.FavoriteUpdateManyWithoutJointNestedInput
   userListEntries?: Prisma.UserListUpdateManyWithoutJointNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutJointNestedInput
+  memberHistory?: Prisma.JointMemberHistoryUpdateManyWithoutJointNestedInput
 }
 
 export type MangaJointUncheckedUpdateWithoutViewsHistoryInput = {
@@ -1292,6 +1330,7 @@ export type MangaJointUncheckedUpdateWithoutViewsHistoryInput = {
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutJointNestedInput
   userListEntries?: Prisma.UserListUncheckedUpdateManyWithoutJointNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutJointNestedInput
+  memberHistory?: Prisma.JointMemberHistoryUncheckedUpdateManyWithoutJointNestedInput
 }
 
 export type MangaJointCreateWithoutMembersInput = {
@@ -1314,6 +1353,7 @@ export type MangaJointCreateWithoutMembersInput = {
   favorites?: Prisma.FavoriteCreateNestedManyWithoutJointInput
   userListEntries?: Prisma.UserListCreateNestedManyWithoutJointInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutJointInput
+  memberHistory?: Prisma.JointMemberHistoryCreateNestedManyWithoutJointInput
 }
 
 export type MangaJointUncheckedCreateWithoutMembersInput = {
@@ -1337,6 +1377,7 @@ export type MangaJointUncheckedCreateWithoutMembersInput = {
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutJointInput
   userListEntries?: Prisma.UserListUncheckedCreateNestedManyWithoutJointInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutJointInput
+  memberHistory?: Prisma.JointMemberHistoryUncheckedCreateNestedManyWithoutJointInput
 }
 
 export type MangaJointCreateOrConnectWithoutMembersInput = {
@@ -1375,6 +1416,7 @@ export type MangaJointUpdateWithoutMembersInput = {
   favorites?: Prisma.FavoriteUpdateManyWithoutJointNestedInput
   userListEntries?: Prisma.UserListUpdateManyWithoutJointNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutJointNestedInput
+  memberHistory?: Prisma.JointMemberHistoryUpdateManyWithoutJointNestedInput
 }
 
 export type MangaJointUncheckedUpdateWithoutMembersInput = {
@@ -1393,6 +1435,117 @@ export type MangaJointUncheckedUpdateWithoutMembersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  chapters?: Prisma.ChapterUncheckedUpdateManyWithoutJointNestedInput
+  viewsHistory?: Prisma.ViewsHistoryUncheckedUpdateManyWithoutJointNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutJointNestedInput
+  userListEntries?: Prisma.UserListUncheckedUpdateManyWithoutJointNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutJointNestedInput
+  memberHistory?: Prisma.JointMemberHistoryUncheckedUpdateManyWithoutJointNestedInput
+}
+
+export type MangaJointCreateWithoutMemberHistoryInput = {
+  slug: string
+  title?: string
+  shortDescription?: string | null
+  description?: string | null
+  imageUrl?: string | null
+  bannerUrl?: string | null
+  status?: string
+  workType?: string
+  lastChapterAt?: Date | string | null
+  views?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  manga: Prisma.MangaCreateNestedOneWithoutJointsInput
+  members?: Prisma.JointMemberCreateNestedManyWithoutJointInput
+  chapters?: Prisma.ChapterCreateNestedManyWithoutJointInput
+  viewsHistory?: Prisma.ViewsHistoryCreateNestedManyWithoutJointInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutJointInput
+  userListEntries?: Prisma.UserListCreateNestedManyWithoutJointInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutJointInput
+}
+
+export type MangaJointUncheckedCreateWithoutMemberHistoryInput = {
+  id?: number
+  slug: string
+  mangaId: number
+  title?: string
+  shortDescription?: string | null
+  description?: string | null
+  imageUrl?: string | null
+  bannerUrl?: string | null
+  status?: string
+  workType?: string
+  lastChapterAt?: Date | string | null
+  views?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  members?: Prisma.JointMemberUncheckedCreateNestedManyWithoutJointInput
+  chapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutJointInput
+  viewsHistory?: Prisma.ViewsHistoryUncheckedCreateNestedManyWithoutJointInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutJointInput
+  userListEntries?: Prisma.UserListUncheckedCreateNestedManyWithoutJointInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutJointInput
+}
+
+export type MangaJointCreateOrConnectWithoutMemberHistoryInput = {
+  where: Prisma.MangaJointWhereUniqueInput
+  create: Prisma.XOR<Prisma.MangaJointCreateWithoutMemberHistoryInput, Prisma.MangaJointUncheckedCreateWithoutMemberHistoryInput>
+}
+
+export type MangaJointUpsertWithoutMemberHistoryInput = {
+  update: Prisma.XOR<Prisma.MangaJointUpdateWithoutMemberHistoryInput, Prisma.MangaJointUncheckedUpdateWithoutMemberHistoryInput>
+  create: Prisma.XOR<Prisma.MangaJointCreateWithoutMemberHistoryInput, Prisma.MangaJointUncheckedCreateWithoutMemberHistoryInput>
+  where?: Prisma.MangaJointWhereInput
+}
+
+export type MangaJointUpdateToOneWithWhereWithoutMemberHistoryInput = {
+  where?: Prisma.MangaJointWhereInput
+  data: Prisma.XOR<Prisma.MangaJointUpdateWithoutMemberHistoryInput, Prisma.MangaJointUncheckedUpdateWithoutMemberHistoryInput>
+}
+
+export type MangaJointUpdateWithoutMemberHistoryInput = {
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  workType?: Prisma.StringFieldUpdateOperationsInput | string
+  lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  views?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  manga?: Prisma.MangaUpdateOneRequiredWithoutJointsNestedInput
+  members?: Prisma.JointMemberUpdateManyWithoutJointNestedInput
+  chapters?: Prisma.ChapterUpdateManyWithoutJointNestedInput
+  viewsHistory?: Prisma.ViewsHistoryUpdateManyWithoutJointNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutJointNestedInput
+  userListEntries?: Prisma.UserListUpdateManyWithoutJointNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutJointNestedInput
+}
+
+export type MangaJointUncheckedUpdateWithoutMemberHistoryInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  mangaId?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  workType?: Prisma.StringFieldUpdateOperationsInput | string
+  lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  views?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  members?: Prisma.JointMemberUncheckedUpdateManyWithoutJointNestedInput
   chapters?: Prisma.ChapterUncheckedUpdateManyWithoutJointNestedInput
   viewsHistory?: Prisma.ViewsHistoryUncheckedUpdateManyWithoutJointNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutJointNestedInput
@@ -1420,6 +1573,7 @@ export type MangaJointCreateWithoutNotificationsInput = {
   viewsHistory?: Prisma.ViewsHistoryCreateNestedManyWithoutJointInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutJointInput
   userListEntries?: Prisma.UserListCreateNestedManyWithoutJointInput
+  memberHistory?: Prisma.JointMemberHistoryCreateNestedManyWithoutJointInput
 }
 
 export type MangaJointUncheckedCreateWithoutNotificationsInput = {
@@ -1443,6 +1597,7 @@ export type MangaJointUncheckedCreateWithoutNotificationsInput = {
   viewsHistory?: Prisma.ViewsHistoryUncheckedCreateNestedManyWithoutJointInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutJointInput
   userListEntries?: Prisma.UserListUncheckedCreateNestedManyWithoutJointInput
+  memberHistory?: Prisma.JointMemberHistoryUncheckedCreateNestedManyWithoutJointInput
 }
 
 export type MangaJointCreateOrConnectWithoutNotificationsInput = {
@@ -1481,6 +1636,7 @@ export type MangaJointUpdateWithoutNotificationsInput = {
   viewsHistory?: Prisma.ViewsHistoryUpdateManyWithoutJointNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutJointNestedInput
   userListEntries?: Prisma.UserListUpdateManyWithoutJointNestedInput
+  memberHistory?: Prisma.JointMemberHistoryUpdateManyWithoutJointNestedInput
 }
 
 export type MangaJointUncheckedUpdateWithoutNotificationsInput = {
@@ -1504,6 +1660,7 @@ export type MangaJointUncheckedUpdateWithoutNotificationsInput = {
   viewsHistory?: Prisma.ViewsHistoryUncheckedUpdateManyWithoutJointNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutJointNestedInput
   userListEntries?: Prisma.UserListUncheckedUpdateManyWithoutJointNestedInput
+  memberHistory?: Prisma.JointMemberHistoryUncheckedUpdateManyWithoutJointNestedInput
 }
 
 export type MangaJointCreateManyMangaInput = {
@@ -1543,6 +1700,7 @@ export type MangaJointUpdateWithoutMangaInput = {
   favorites?: Prisma.FavoriteUpdateManyWithoutJointNestedInput
   userListEntries?: Prisma.UserListUpdateManyWithoutJointNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutJointNestedInput
+  memberHistory?: Prisma.JointMemberHistoryUpdateManyWithoutJointNestedInput
 }
 
 export type MangaJointUncheckedUpdateWithoutMangaInput = {
@@ -1566,6 +1724,7 @@ export type MangaJointUncheckedUpdateWithoutMangaInput = {
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutJointNestedInput
   userListEntries?: Prisma.UserListUncheckedUpdateManyWithoutJointNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutJointNestedInput
+  memberHistory?: Prisma.JointMemberHistoryUncheckedUpdateManyWithoutJointNestedInput
 }
 
 export type MangaJointUncheckedUpdateManyWithoutMangaInput = {
@@ -1597,6 +1756,7 @@ export type MangaJointCountOutputType = {
   favorites: number
   userListEntries: number
   notifications: number
+  memberHistory: number
 }
 
 export type MangaJointCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1606,6 +1766,7 @@ export type MangaJointCountOutputTypeSelect<ExtArgs extends runtime.Types.Extens
   favorites?: boolean | MangaJointCountOutputTypeCountFavoritesArgs
   userListEntries?: boolean | MangaJointCountOutputTypeCountUserListEntriesArgs
   notifications?: boolean | MangaJointCountOutputTypeCountNotificationsArgs
+  memberHistory?: boolean | MangaJointCountOutputTypeCountMemberHistoryArgs
 }
 
 /**
@@ -1660,6 +1821,13 @@ export type MangaJointCountOutputTypeCountNotificationsArgs<ExtArgs extends runt
   where?: Prisma.NotificationWhereInput
 }
 
+/**
+ * MangaJointCountOutputType without action
+ */
+export type MangaJointCountOutputTypeCountMemberHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.JointMemberHistoryWhereInput
+}
+
 
 export type MangaJointSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1684,6 +1852,7 @@ export type MangaJointSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   favorites?: boolean | Prisma.MangaJoint$favoritesArgs<ExtArgs>
   userListEntries?: boolean | Prisma.MangaJoint$userListEntriesArgs<ExtArgs>
   notifications?: boolean | Prisma.MangaJoint$notificationsArgs<ExtArgs>
+  memberHistory?: boolean | Prisma.MangaJoint$memberHistoryArgs<ExtArgs>
   _count?: boolean | Prisma.MangaJointCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["mangaJoint"]>
 
@@ -1752,6 +1921,7 @@ export type MangaJointInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   favorites?: boolean | Prisma.MangaJoint$favoritesArgs<ExtArgs>
   userListEntries?: boolean | Prisma.MangaJoint$userListEntriesArgs<ExtArgs>
   notifications?: boolean | Prisma.MangaJoint$notificationsArgs<ExtArgs>
+  memberHistory?: boolean | Prisma.MangaJoint$memberHistoryArgs<ExtArgs>
   _count?: boolean | Prisma.MangaJointCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type MangaJointIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1771,6 +1941,7 @@ export type $MangaJointPayload<ExtArgs extends runtime.Types.Extensions.Internal
     favorites: Prisma.$FavoritePayload<ExtArgs>[]
     userListEntries: Prisma.$UserListPayload<ExtArgs>[]
     notifications: Prisma.$NotificationPayload<ExtArgs>[]
+    memberHistory: Prisma.$JointMemberHistoryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -2189,6 +2360,7 @@ export interface Prisma__MangaJointClient<T, Null = never, ExtArgs extends runti
   favorites<T extends Prisma.MangaJoint$favoritesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MangaJoint$favoritesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FavoritePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   userListEntries<T extends Prisma.MangaJoint$userListEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MangaJoint$userListEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserListPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   notifications<T extends Prisma.MangaJoint$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MangaJoint$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  memberHistory<T extends Prisma.MangaJoint$memberHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MangaJoint$memberHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JointMemberHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2770,6 +2942,30 @@ export type MangaJoint$notificationsArgs<ExtArgs extends runtime.Types.Extension
   take?: number
   skip?: number
   distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
+}
+
+/**
+ * MangaJoint.memberHistory
+ */
+export type MangaJoint$memberHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the JointMemberHistory
+   */
+  select?: Prisma.JointMemberHistorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the JointMemberHistory
+   */
+  omit?: Prisma.JointMemberHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.JointMemberHistoryInclude<ExtArgs> | null
+  where?: Prisma.JointMemberHistoryWhereInput
+  orderBy?: Prisma.JointMemberHistoryOrderByWithRelationInput | Prisma.JointMemberHistoryOrderByWithRelationInput[]
+  cursor?: Prisma.JointMemberHistoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.JointMemberHistoryScalarFieldEnum | Prisma.JointMemberHistoryScalarFieldEnum[]
 }
 
 /**
