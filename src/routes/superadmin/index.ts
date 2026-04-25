@@ -3,6 +3,7 @@ import jwt from '@elysiajs/jwt';
 import { getSuperadminSecret, superadminAuth } from '../../plugins/superadmin-auth';
 import { getGlobalStats, getOrgStats } from '../../controllers/superadmin/stats';
 import { listRequests, reviewRequest } from '../../controllers/superadmin/requests';
+import { computeMonthlyAdRevenue, persistMonthlyAdRevenue } from '../../services/ad-revenue';
 
 export const router = () =>
 	new Elysia()
@@ -61,6 +62,46 @@ export const router = () =>
 				body: t.Object({
 					action: t.String(),
 					notes: t.Optional(t.String()),
+				}),
+			}
+		)
+		// Manual ad-revenue trigger (back-fills, re-runs). Idempotent: orgs that
+		// already have an ad-revenue tx for the period are skipped.
+		// `month` is 1-indexed in the query string (1 = January) for human-friendliness;
+		// internally we convert to the 0-indexed monthIndex used by the service.
+		.post(
+			'/api/superadmin/process-ad-revenue',
+			async ({ query }) => {
+				const year = Number(query.year);
+				const month = Number(query.month);
+				if (!Number.isInteger(year) || year < 2000 || year > 3000) {
+					throw new Error('Invalid year.');
+				}
+				if (!Number.isInteger(month) || month < 1 || month > 12) {
+					throw new Error('Invalid month (expected 1-12).');
+				}
+				const breakdown = await computeMonthlyAdRevenue(year, month - 1);
+				const persistResult = await persistMonthlyAdRevenue(breakdown);
+				return {
+					status: true,
+					data: {
+						year,
+						month,
+						totalGoogle: breakdown.totalGoogle,
+						totalAdsterra: breakdown.totalAdsterra,
+						platformCut: breakdown.platformCut,
+						scanPool: breakdown.scanPool,
+						orgsWithPayout: breakdown.perOrg.length,
+						inserted: persistResult.inserted,
+						skipped: persistResult.skipped,
+						perOrg: breakdown.perOrg,
+					},
+				};
+			},
+			{
+				query: t.Object({
+					year: t.String(),
+					month: t.String(),
 				}),
 			}
 		);

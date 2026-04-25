@@ -1,3 +1,7 @@
+// DEPRECATED: superseded by routes/ad-revenue/cron.ts which combines Google
+// AdSense + Adsterra into one monthly run. This file is kept around only so
+// the manual `bun run src/commands/update-cron-adsense.ts` script (used for
+// historical backfills) still resolves its imports.
 import { Elysia } from "elysia";
 import { cron, Patterns } from "@elysiajs/cron";
 import { updateCronAdSense } from "../../commands/update-cron-adsense";

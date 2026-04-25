@@ -1,6 +1,6 @@
 import { Elysia } from "elysia";
 
-import { router as adsenseMonthlyRevenueRouter } from "./adsense/monthly-revenue";
+import { router as adRevenueCronRouter } from "./ad-revenue/cron";
 import { router as analyticsCreateRouter } from "./analytics/create";
 import { router as analyticsGetRouter } from "./analytics/get";
 import { router as analyticsEmailStatisticsRouter } from "./analytics/email-statistics";
@@ -255,8 +255,8 @@ export const router = () => async (app: Elysia) => {
 	// Superadmin
 	app.use(superadminRouter());
 
-	// Adsense
-	app.use(adsenseMonthlyRevenueRouter());
+	// Ad revenue (Google AdSense + Adsterra) — replaces legacy adsense-only cron.
+	app.use(adRevenueCronRouter());
 
 	console.log('Routes loaded');
 	
