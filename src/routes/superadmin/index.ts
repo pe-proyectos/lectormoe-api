@@ -4,6 +4,7 @@ import { getSuperadminSecret, superadminAuth } from '../../plugins/superadmin-au
 import { getGlobalStats, getOrgStats } from '../../controllers/superadmin/stats';
 import { listRequests, reviewRequest } from '../../controllers/superadmin/requests';
 import { searchUsers, createScan } from '../../controllers/superadmin/scan';
+import { listUsersAdmin, resendVerificationEmail } from '../../controllers/superadmin/users';
 import { computeMonthlyAdRevenue, persistMonthlyAdRevenue } from '../../services/ad-revenue';
 
 export const router = () =>
@@ -99,6 +100,36 @@ export const router = () =>
 					ownerUserId: t.Number(),
 				}),
 			}
+		)
+		.get(
+			'/api/superadmin/users',
+			async ({ query }) => {
+				const data = await listUsersAdmin({
+					page: query.page,
+					limit: query.limit,
+					search: query.search,
+					verified: query.verified,
+				});
+				return { status: true, data };
+			},
+			{
+				query: t.Object({
+					page: t.Optional(t.String()),
+					limit: t.Optional(t.String()),
+					search: t.Optional(t.String()),
+					verified: t.Optional(t.String()),
+				}),
+			}
+		)
+		.post(
+			'/api/superadmin/users/:id/resend-verification',
+			async ({ params }) => {
+				const id = Number.parseInt(params.id);
+				if (Number.isNaN(id)) throw new Error('Id inválido.');
+				const data = await resendVerificationEmail(id);
+				return { status: true, data };
+			},
+			{ params: t.Object({ id: t.String() }) }
 		)
 		// Manual ad-revenue trigger (back-fills, re-runs). Idempotent: orgs that
 		// already have an ad-revenue tx for the period are skipped.
