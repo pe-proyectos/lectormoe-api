@@ -128,6 +128,7 @@ model User {
   achievements            UserAchievement[]
   history                 UserChapterHistory[]
   dailyActivities         UserDailyActivity[]
+  notifications           Notification[]
 
   @@map("user")
 }
@@ -285,6 +286,7 @@ model MangaCustom {
   genres                             Genre[]            @relation("GenreToMangaCustom")
   subscriptionPlansCanReadReleased   SubscriptionPlan[] @relation("MangaCustomToSubscriptionPlanCanReadReleased")
   subscriptionPlansCanReadUnreleased SubscriptionPlan[] @relation("MangaCustomToSubscriptionPlanCanReadUnreleased")
+  notifications                      Notification[]
 
   @@unique([mangaId, organizationId])
   @@index([organizationId])
@@ -316,6 +318,7 @@ model Chapter {
   pages                     Page[]
   userHistory               UserChapterHistory[]
   viewsHistory              ViewsHistory[]
+  notifications             Notification[]
 
   @@unique([number, mangaCustomId])
   @@unique([number, jointId])
@@ -790,6 +793,7 @@ model MangaJoint {
   viewsHistory     ViewsHistory[]
   favorites        Favorite[]
   userListEntries  UserList[]
+  notifications    Notification[]
 
   @@index([mangaId])
   @@index([lastChapterAt])
@@ -812,4 +816,28 @@ model JointMember {
 
   @@unique([jointId, organizationId])
   @@map("joint_member")
+}
+
+model Notification {
+  id            Int          @id @default(autoincrement())
+  userId        Int
+  user          User         @relation(fields: [userId], references: [id])
+  type          String       @default("new_chapter") @db.VarChar(64)
+  // The thing the notification is about. Exactly one of mangaCustomId / jointId
+  // is set for new_chapter notifications.
+  mangaCustomId Int?
+  mangaCustom   MangaCustom? @relation(fields: [mangaCustomId], references: [id])
+  jointId       Int?
+  joint         MangaJoint?  @relation(fields: [jointId], references: [id])
+  chapterId     Int?
+  chapter       Chapter?     @relation(fields: [chapterId], references: [id])
+  // 'favorite' | 'user_list' — the reason this user is being notified. If the
+  // manga is in both, prefer 'favorite' (more intentional signal).
+  source        String       @default("favorite") @db.VarChar(32)
+  readAt        DateTime?
+  createdAt     DateTime     @default(now()) @db.Timestamp(6)
+
+  @@index([userId, readAt, createdAt])
+  @@index([userId, createdAt])
+  @@map("notification")
 }

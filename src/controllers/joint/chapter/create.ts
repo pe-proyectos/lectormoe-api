@@ -2,6 +2,7 @@ import { prisma } from '../../../models/prisma';
 import { requireJointMember, canUpload } from '../../../util/joint-auth';
 import type { CreateJointChapterRequest } from '../../../types/joint/chapter/create';
 import { sendNewJointChapterAlert } from '../../../services/email-notifications';
+import { notifyNewChapter } from '../../../services/notify-new-chapter';
 
 export const createJointChapter = async (
   slug: string,
@@ -159,6 +160,7 @@ export const createJointChapter = async (
   // Send email notification to users who favorited this joint or any member org's manga (fire-and-forget)
   if (!params.isUnreleased) {
     sendNewJointChapterAlert(joint.id, chapter.id).catch(console.error);
+    notifyNewChapter({ chapterId: chapter.id, jointId: joint.id }).catch(console.error);
   }
 
   return prisma.chapter.findFirst({

@@ -1,6 +1,7 @@
 import { prisma } from "../../models/prisma";
 import type { CreateChapterRequest } from "../../types/chapter/create";
 import { sendNewChapterAlert } from "../../services/email-notifications";
+import { notifyNewChapter } from "../../services/notify-new-chapter";
 
 export const createChapter = async (organizationId: number, mangaSlug: string, params: CreateChapterRequest) => {
 	const mangaCustom = await prisma.mangaCustom.findFirst({
@@ -159,6 +160,7 @@ export const createChapter = async (organizationId: number, mangaSlug: string, p
 	// Send email notification to users who favorited this manga (fire-and-forget)
 	if (!params.isUnreleased) {
 		sendNewChapterAlert(mangaCustom.id, chapter.id, organizationId).catch(console.error);
+		notifyNewChapter({ chapterId: chapter.id, mangaCustomId: chapter.mangaCustomId }).catch(console.error);
 	}
 
 	return chapter;
