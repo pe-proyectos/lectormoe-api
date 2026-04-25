@@ -22,7 +22,11 @@ export const getJointChapter = async (slug: string, chapterNumber: number) => {
     include: {
       members: {
         where: { status: 'ACCEPTED' },
-        select: { organizationId: true, organization: { select: { slug: true } } },
+        select: {
+          organizationId: true,
+          role: true,
+          organization: { select: { id: true, name: true, slug: true, logoUrl: true } },
+        },
       },
     },
   });
