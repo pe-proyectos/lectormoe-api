@@ -40,7 +40,7 @@ export const getPopularToday = async (limit: number = 5, nsfw?: boolean) => {
 	// Pull a generous candidate pool. We can't directly group by manga.id at
 	// the SQL level (mangaId lives on MangaCustom, not ViewsHistory), so we
 	// over-fetch by mangaCustomId and dedupe in memory below.
-	const grouped = await prisma.viewsHistory.groupBy({
+	const groupedManga = await prisma.viewsHistory.groupBy({
 		by: ['mangaCustomId'],
 		where: {
 			mangaCustomId: { not: null },
@@ -52,64 +52,145 @@ export const getPopularToday = async (limit: number = 5, nsfw?: boolean) => {
 		take: limit * 10,
 	});
 
-	if (grouped.length === 0) return [];
-
-	const ids = grouped.map((g) => g.mangaCustomId!).filter((x) => x !== null);
-
-	const mangasCustoms = await prisma.mangaCustom.findMany({
-		where: {
-			id: { in: ids },
-			deletedAt: null,
-			OR: [{ imageUrl: { not: null } }, { manga: { imageUrl: { not: null } } }],
-		},
-		include: {
-			manga: { select: { id: true, title: true, slug: true, imageUrl: true } },
-			organization: { select: { id: true, name: true, domain: true, slug: true, isNSFW: true } },
-			chapters: {
-				where: { deletedAt: null },
-				select: { id: true, number: true, title: true, releasedAt: true },
-				orderBy: { number: Prisma.SortOrder.desc },
-				take: 2,
+	// Joint views — joints have no isNSFW field, so they only contribute when
+	// browsing the SFW landing (matches SortableMangaList convention).
+	const groupedJoint = nsfw === true
+		? []
+		: await prisma.viewsHistory.groupBy({
+			by: ['jointId'],
+			where: {
+				jointId: { not: null },
+				chapterId: null, // count joint-page views only, not chapter-detail views
+				viewedAt: { gte: todayStart },
+				joint: { deletedAt: null },
 			},
-		},
-	});
+			_count: { _all: true },
+			orderBy: { _count: { jointId: Prisma.SortOrder.desc } },
+			take: limit * 10,
+		});
+
+	if (groupedManga.length === 0 && groupedJoint.length === 0) return [];
+
+	const customIds = groupedManga.map((g) => g.mangaCustomId!).filter((x) => x !== null);
+	const jointIds = groupedJoint.map((g) => g.jointId!).filter((x) => x !== null);
+
+	const [mangasCustoms, joints] = await Promise.all([
+		customIds.length === 0 ? Promise.resolve([] as any[]) : prisma.mangaCustom.findMany({
+			where: {
+				id: { in: customIds },
+				deletedAt: null,
+				OR: [{ imageUrl: { not: null } }, { manga: { imageUrl: { not: null } } }],
+			},
+			include: {
+				manga: { select: { id: true, title: true, slug: true, imageUrl: true } },
+				organization: { select: { id: true, name: true, domain: true, slug: true, isNSFW: true } },
+				chapters: {
+					where: { deletedAt: null },
+					select: { id: true, number: true, title: true, releasedAt: true },
+					orderBy: { number: Prisma.SortOrder.desc },
+					take: 2,
+				},
+			},
+		}),
+		jointIds.length === 0 ? Promise.resolve([] as any[]) : prisma.mangaJoint.findMany({
+			where: { id: { in: jointIds }, deletedAt: null },
+			include: {
+				manga: { select: { id: true, title: true, slug: true, imageUrl: true } },
+				chapters: {
+					where: { deletedAt: null },
+					select: { id: true, number: true, title: true, releasedAt: true },
+					orderBy: { number: Prisma.SortOrder.desc },
+					take: 2,
+				},
+			},
+		}),
+	]);
 
 	const countsByCustomId = new Map<number, number>();
-	for (const g of grouped) {
+	for (const g of groupedManga) {
 		if (g.mangaCustomId !== null) countsByCustomId.set(g.mangaCustomId, g._count._all);
 	}
+	const countsByJointId = new Map<number, number>();
+	for (const g of groupedJoint) {
+		if (g.jointId !== null) countsByJointId.set(g.jointId, g._count._all);
+	}
 
-	// Dedupe by underlying Manga: when several scans publish the same manga,
-	// sum their view counts (so popularity reflects total interest) and keep
-	// the MangaCustom with the highest individual count as the representative
-	// (so the user lands on whichever scan is currently driving the views).
-	const byMangaId = new Map<number, { mc: typeof mangasCustoms[number]; total: number; topCount: number }>();
+	// Dedupe by underlying Manga.id: sum views across all mangaCustoms + the
+	// joint that share the same manga, then choose a representative:
+	//   - If a joint exists for this manga, prefer it (the manga page already
+	//     redirects to /joint/manga/<slug>, so it is the canonical view).
+	//   - Otherwise pick the MangaCustom with the highest individual count.
+	type MC = typeof mangasCustoms[number];
+	type J = typeof joints[number];
+	type Entry = { mangaId: number; total: number; joint?: J; bestMc?: MC; bestMcCount: number };
+	const byMangaId = new Map<number, Entry>();
+
 	for (const mc of mangasCustoms) {
 		const cover = mc.imageUrl || mc.manga.imageUrl;
 		if (!cover || cover.trim() === '') continue;
 		const count = countsByCustomId.get(mc.id) ?? 0;
 		const existing = byMangaId.get(mc.manga.id);
 		if (!existing) {
-			byMangaId.set(mc.manga.id, { mc, total: count, topCount: count });
+			byMangaId.set(mc.manga.id, { mangaId: mc.manga.id, total: count, bestMc: mc, bestMcCount: count });
 		} else {
 			existing.total += count;
-			if (count > existing.topCount) {
-				existing.topCount = count;
-				existing.mc = mc;
+			if (count > existing.bestMcCount) {
+				existing.bestMcCount = count;
+				existing.bestMc = mc;
 			}
+		}
+	}
+	for (const j of joints) {
+		const cover = j.imageUrl || j.manga.imageUrl;
+		if (!cover || cover.trim() === '') continue;
+		const count = countsByJointId.get(j.id) ?? 0;
+		const existing = byMangaId.get(j.manga.id);
+		if (!existing) {
+			byMangaId.set(j.manga.id, { mangaId: j.manga.id, total: count, joint: j, bestMcCount: 0 });
+		} else {
+			existing.total += count;
+			existing.joint = j;
 		}
 	}
 
 	const ranked = [...byMangaId.values()]
+		.filter((e) => e.joint || e.bestMc)
 		.sort((a, b) => b.total - a.total)
-		.slice(0, limit)
-		.map((entry) => entry.mc);
+		.slice(0, limit);
 
-	return ranked.map((mangaCustom) => {
-		const organization = mangaCustom.organization;
-		const manga = mangaCustom.manga;
-		const coverUrl = mangaCustom.imageUrl || manga.imageUrl || '';
-		const lastChapters = mangaCustom.chapters.map((chapter) => ({
+	return ranked.map((entry) => {
+		// Joint takes precedence: the per-org manga page redirects there anyway.
+		if (entry.joint) {
+			const j = entry.joint;
+			const coverUrl = j.imageUrl || j.manga.imageUrl || '';
+			const lastChapters = j.chapters.map((chapter: any) => ({
+				id: chapter.id,
+				number: chapter.number,
+				title: chapter.title,
+				releasedAt: chapter.releasedAt,
+				chapterUrl: `/joint/manga/${j.slug}/chapters/${chapter.number}`,
+			}));
+			return {
+				id: `joint-${j.id}`,
+				title: j.title || j.manga.title,
+				cover: coverUrl,
+				scanName: 'Joint',
+				scanSlug: '',
+				scanUrl: '/scans',
+				mangaSlug: j.slug,
+				mangaUrl: `/joint/manga/${j.slug}`,
+				badgeColor: 'bg-purple-600',
+				chapters: lastChapters,
+				organizationId: 0,
+				isNSFW: false,
+				isJoint: true,
+			};
+		}
+		const mc = entry.bestMc!;
+		const organization = mc.organization;
+		const manga = mc.manga;
+		const coverUrl = mc.imageUrl || manga.imageUrl || '';
+		const lastChapters = mc.chapters.map((chapter: any) => ({
 			id: chapter.id,
 			number: chapter.number,
 			title: chapter.title,
@@ -117,8 +198,8 @@ export const getPopularToday = async (limit: number = 5, nsfw?: boolean) => {
 			chapterUrl: `/${organization.slug}/manga/${manga.slug}/chapters/${chapter.number}`,
 		}));
 		return {
-			id: mangaCustom.id.toString(),
-			title: mangaCustom.title || manga.title,
+			id: mc.id.toString(),
+			title: mc.title || manga.title,
 			cover: coverUrl,
 			scanName: organization.name,
 			scanSlug: organization.slug,
@@ -128,7 +209,8 @@ export const getPopularToday = async (limit: number = 5, nsfw?: boolean) => {
 			badgeColor: getBadgeColor(organization.name),
 			chapters: lastChapters,
 			organizationId: organization.id,
-			isNSFW: mangaCustom.isNSFW || organization.isNSFW,
+			isNSFW: mc.isNSFW || organization.isNSFW,
+			isJoint: false,
 		};
 	});
 };
