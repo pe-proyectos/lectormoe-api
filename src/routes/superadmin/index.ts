@@ -3,6 +3,7 @@ import jwt from '@elysiajs/jwt';
 import { getSuperadminSecret, superadminAuth } from '../../plugins/superadmin-auth';
 import { getGlobalStats, getOrgStats } from '../../controllers/superadmin/stats';
 import { listRequests, reviewRequest } from '../../controllers/superadmin/requests';
+import { searchUsers, createScan } from '../../controllers/superadmin/scan';
 import { computeMonthlyAdRevenue, persistMonthlyAdRevenue } from '../../services/ad-revenue';
 
 export const router = () =>
@@ -62,6 +63,40 @@ export const router = () =>
 				body: t.Object({
 					action: t.String(),
 					notes: t.Optional(t.String()),
+				}),
+			}
+		)
+		.get(
+			'/api/superadmin/users/search',
+			async ({ query }) => {
+				const limit = query.limit ? Number(query.limit) : 10;
+				const data = await searchUsers(query.q ?? '', limit);
+				return { status: true, data };
+			},
+			{
+				query: t.Object({
+					q: t.Optional(t.String()),
+					limit: t.Optional(t.String()),
+				}),
+			}
+		)
+		.post(
+			'/api/superadmin/scan',
+			async ({ body }) => {
+				const data = await createScan({
+					name: body.name,
+					slug: body.slug,
+					isNSFW: body.isNSFW,
+					ownerUserId: body.ownerUserId,
+				});
+				return { status: true, data };
+			},
+			{
+				body: t.Object({
+					name: t.String(),
+					slug: t.String(),
+					isNSFW: t.Boolean(),
+					ownerUserId: t.Number(),
 				}),
 			}
 		)
