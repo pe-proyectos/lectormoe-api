@@ -9,6 +9,8 @@ export const checkToken = async (
   // ANY active sub anywhere — a $1 sub to scan B should hide ads on scan A
   // too. Per-org plan benefits (canDownload, canReadUnreleased, hideAds)
   // are still scoped via subscriptionPlan.organizationId on each row.
+  // Note: also pull `hideAds` on the user payload — the frontend ad-gate
+  // short-circuits to no-ads when this flag is true (admin override / giveaway).
   const includeSubscriptions = {
     subscriptions: {
       where: { active: true },

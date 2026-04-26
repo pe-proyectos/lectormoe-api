@@ -34,6 +34,7 @@ export const listUsersAdmin = async (filters: ListUsersFilters) => {
 				slug: true,
 				imageUrl: true,
 				emailVerified: true,
+				hideAds: true,
 				createdAt: true,
 			},
 			orderBy: { createdAt: Prisma.SortOrder.desc },
@@ -48,6 +49,15 @@ export const listUsersAdmin = async (filters: ListUsersFilters) => {
 		total,
 		maxPage: Math.max(1, Math.ceil(total / limit)),
 	};
+};
+
+export const setUserHideAds = async (userId: number, hideAds: boolean) => {
+	const updated = await prisma.user.update({
+		where: { id: userId },
+		data: { hideAds },
+		select: { id: true, hideAds: true },
+	});
+	return updated;
 };
 
 export const resendVerificationEmail = async (userId: number) => {

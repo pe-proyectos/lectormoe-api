@@ -191,6 +191,7 @@ export const UserScalarFieldEnum = {
   isPublicProfile: 'isPublicProfile',
   pushNotifications: 'pushNotifications',
   notifyCommentsOnOwnedContent: 'notifyCommentsOnOwnedContent',
+  hideAds: 'hideAds',
   theme: 'theme'
 } as const
 

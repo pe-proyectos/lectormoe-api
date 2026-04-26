@@ -4,7 +4,7 @@ import { getSuperadminSecret, superadminAuth } from '../../plugins/superadmin-au
 import { getGlobalStats, getOrgStats } from '../../controllers/superadmin/stats';
 import { listRequests, reviewRequest } from '../../controllers/superadmin/requests';
 import { searchUsers, createScan } from '../../controllers/superadmin/scan';
-import { listUsersAdmin, resendVerificationEmail } from '../../controllers/superadmin/users';
+import { listUsersAdmin, resendVerificationEmail, setUserHideAds } from '../../controllers/superadmin/users';
 import { listAllSubscriptions, listAnySubscriptionPayments } from '../../controllers/superadmin/subscriptions';
 import { computeMonthlyAdRevenue, persistMonthlyAdRevenue } from '../../services/ad-revenue';
 
@@ -120,6 +120,19 @@ export const router = () =>
 					search: t.Optional(t.String()),
 					verified: t.Optional(t.String()),
 				}),
+			}
+		)
+		.patch(
+			'/api/superadmin/users/:id/hide-ads',
+			async ({ params, body }) => {
+				const id = Number.parseInt(params.id);
+				if (Number.isNaN(id)) throw new Error('Id inválido.');
+				const data = await setUserHideAds(id, !!body.hideAds);
+				return { status: true, data };
+			},
+			{
+				params: t.Object({ id: t.String() }),
+				body: t.Object({ hideAds: t.Boolean() }),
 			}
 		)
 		.post(

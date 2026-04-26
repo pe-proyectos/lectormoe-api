@@ -111,6 +111,9 @@ model User {
   isPublicProfile         Boolean                  @default(true)
   pushNotifications       Boolean                  @default(true)
   notifyCommentsOnOwnedContent Boolean             @default(true)
+  // Global no-ads override (admins, giveaway prizes, etc.). Independent of
+  // subscriptions — applies on every page regardless of plan / scan.
+  hideAds                 Boolean                  @default(false)
   theme                   String                   @default("dark") @db.VarChar(20)
   analytics               Analytics[]
   audits                  Audit[]
