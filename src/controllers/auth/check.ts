@@ -4,19 +4,14 @@ export const checkToken = async (
   organizationId: number | null,
   token: string
 ) => {
-  // Incluir suscripciones activas
-  // Si hay organizationId, filtrar por esa organización
-  // Si no hay organizationId (landing page), devolver todas las suscripciones activas
+  // Always return ALL active subscriptions, regardless of org context.
+  // The frontend ad-gate (calculateShowAds) needs to know if the user has
+  // ANY active sub anywhere — a $1 sub to scan B should hide ads on scan A
+  // too. Per-org plan benefits (canDownload, canReadUnreleased, hideAds)
+  // are still scoped via subscriptionPlan.organizationId on each row.
   const includeSubscriptions = {
     subscriptions: {
-      where: organizationId !== null
-        ? {
-            active: true,
-            organizationId,
-          }
-        : {
-            active: true,
-          },
+      where: { active: true },
       select: {
         id: true,
         startDate: true,
