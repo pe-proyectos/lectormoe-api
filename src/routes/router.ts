@@ -107,6 +107,7 @@ import { router as superadminRouter } from "./superadmin/index";
 import { router as jointRouter } from "./joint/index";
 import { router as raffleRouter } from "./raffle/index";
 import { router as raffleCronRouter } from "./raffle/cron";
+import { router as discordRouter } from "./discord/index";
 
 export const router = () => async (app: Elysia) => {
 	console.log('Loading routes...');
@@ -269,6 +270,9 @@ export const router = () => async (app: Elysia) => {
 	// Raffle (Luckys)
 	app.use(raffleRouter());
 	app.use(raffleCronRouter());
+
+	// Discord (account linking + bot membership verification)
+	app.use(discordRouter());
 
 	// Superadmin
 	app.use(superadminRouter());

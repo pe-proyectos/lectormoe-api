@@ -115,6 +115,11 @@ model User {
   // subscriptions — applies on every page regardless of plan / scan.
   hideAds                 Boolean                  @default(false)
   theme                   String                   @default("dark") @db.VarChar(20)
+  discordId           String?    @unique @db.VarChar(64)
+  discordUsername     String?    @db.VarChar(64)
+  discordAvatar       String?    @db.VarChar(64)
+  discordVerifiedAt   DateTime?
+  discordLastCheckAt  DateTime?
   analytics               Analytics[]
   audits                  Audit[]
   Comment                 Comment[]                @relation("HiddenByUser")

@@ -57,6 +57,11 @@ export type UserMinAggregateOutputType = {
   notifyCommentsOnOwnedContent: boolean | null
   hideAds: boolean | null
   theme: string | null
+  discordId: string | null
+  discordUsername: string | null
+  discordAvatar: string | null
+  discordVerifiedAt: Date | null
+  discordLastCheckAt: Date | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -82,6 +87,11 @@ export type UserMaxAggregateOutputType = {
   notifyCommentsOnOwnedContent: boolean | null
   hideAds: boolean | null
   theme: string | null
+  discordId: string | null
+  discordUsername: string | null
+  discordAvatar: string | null
+  discordVerifiedAt: Date | null
+  discordLastCheckAt: Date | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -107,6 +117,11 @@ export type UserCountAggregateOutputType = {
   notifyCommentsOnOwnedContent: number
   hideAds: number
   theme: number
+  discordId: number
+  discordUsername: number
+  discordAvatar: number
+  discordVerifiedAt: number
+  discordLastCheckAt: number
   _all: number
 }
 
@@ -142,6 +157,11 @@ export type UserMinAggregateInputType = {
   notifyCommentsOnOwnedContent?: true
   hideAds?: true
   theme?: true
+  discordId?: true
+  discordUsername?: true
+  discordAvatar?: true
+  discordVerifiedAt?: true
+  discordLastCheckAt?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -167,6 +187,11 @@ export type UserMaxAggregateInputType = {
   notifyCommentsOnOwnedContent?: true
   hideAds?: true
   theme?: true
+  discordId?: true
+  discordUsername?: true
+  discordAvatar?: true
+  discordVerifiedAt?: true
+  discordLastCheckAt?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -192,6 +217,11 @@ export type UserCountAggregateInputType = {
   notifyCommentsOnOwnedContent?: true
   hideAds?: true
   theme?: true
+  discordId?: true
+  discordUsername?: true
+  discordAvatar?: true
+  discordVerifiedAt?: true
+  discordLastCheckAt?: true
   _all?: true
 }
 
@@ -304,6 +334,11 @@ export type UserGroupByOutputType = {
   notifyCommentsOnOwnedContent: boolean
   hideAds: boolean
   theme: string
+  discordId: string | null
+  discordUsername: string | null
+  discordAvatar: string | null
+  discordVerifiedAt: Date | null
+  discordLastCheckAt: Date | null
   _count: UserCountAggregateOutputType | null
   _avg: UserAvgAggregateOutputType | null
   _sum: UserSumAggregateOutputType | null
@@ -352,6 +387,11 @@ export type UserWhereInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFilter<"User"> | boolean
   hideAds?: Prisma.BoolFilter<"User"> | boolean
   theme?: Prisma.StringFilter<"User"> | string
+  discordId?: Prisma.StringNullableFilter<"User"> | string | null
+  discordUsername?: Prisma.StringNullableFilter<"User"> | string | null
+  discordAvatar?: Prisma.StringNullableFilter<"User"> | string | null
+  discordVerifiedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  discordLastCheckAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   analytics?: Prisma.AnalyticsListRelationFilter
   audits?: Prisma.AuditListRelationFilter
   Comment?: Prisma.CommentListRelationFilter
@@ -399,6 +439,11 @@ export type UserOrderByWithRelationInput = {
   notifyCommentsOnOwnedContent?: Prisma.SortOrder
   hideAds?: Prisma.SortOrder
   theme?: Prisma.SortOrder
+  discordId?: Prisma.SortOrderInput | Prisma.SortOrder
+  discordUsername?: Prisma.SortOrderInput | Prisma.SortOrder
+  discordAvatar?: Prisma.SortOrderInput | Prisma.SortOrder
+  discordVerifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  discordLastCheckAt?: Prisma.SortOrderInput | Prisma.SortOrder
   analytics?: Prisma.AnalyticsOrderByRelationAggregateInput
   audits?: Prisma.AuditOrderByRelationAggregateInput
   Comment?: Prisma.CommentOrderByRelationAggregateInput
@@ -428,6 +473,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   username?: string
   slug?: string
   email?: string
+  discordId?: string
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
@@ -449,6 +495,10 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   notifyCommentsOnOwnedContent?: Prisma.BoolFilter<"User"> | boolean
   hideAds?: Prisma.BoolFilter<"User"> | boolean
   theme?: Prisma.StringFilter<"User"> | string
+  discordUsername?: Prisma.StringNullableFilter<"User"> | string | null
+  discordAvatar?: Prisma.StringNullableFilter<"User"> | string | null
+  discordVerifiedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  discordLastCheckAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   analytics?: Prisma.AnalyticsListRelationFilter
   audits?: Prisma.AuditListRelationFilter
   Comment?: Prisma.CommentListRelationFilter
@@ -471,7 +521,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   notifications?: Prisma.NotificationListRelationFilter
   raffleTickets?: Prisma.RaffleTicketListRelationFilter
   raffleComments?: Prisma.RaffleCommentListRelationFilter
-}, "id" | "username" | "slug" | "email">
+}, "id" | "username" | "slug" | "email" | "discordId">
 
 export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -496,6 +546,11 @@ export type UserOrderByWithAggregationInput = {
   notifyCommentsOnOwnedContent?: Prisma.SortOrder
   hideAds?: Prisma.SortOrder
   theme?: Prisma.SortOrder
+  discordId?: Prisma.SortOrderInput | Prisma.SortOrder
+  discordUsername?: Prisma.SortOrderInput | Prisma.SortOrder
+  discordAvatar?: Prisma.SortOrderInput | Prisma.SortOrder
+  discordVerifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  discordLastCheckAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
@@ -529,6 +584,11 @@ export type UserScalarWhereWithAggregatesInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   hideAds?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   theme?: Prisma.StringWithAggregatesFilter<"User"> | string
+  discordId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  discordUsername?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  discordAvatar?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  discordVerifiedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  discordLastCheckAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
 }
 
 export type UserCreateInput = {
@@ -553,6 +613,11 @@ export type UserCreateInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -600,6 +665,11 @@ export type UserUncheckedCreateInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -646,6 +716,11 @@ export type UserUpdateInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -693,6 +768,11 @@ export type UserUncheckedUpdateInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -740,6 +820,11 @@ export type UserCreateManyInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
 }
 
 export type UserUpdateManyMutationInput = {
@@ -764,6 +849,11 @@ export type UserUpdateManyMutationInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -789,6 +879,11 @@ export type UserUncheckedUpdateManyInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type UserScalarRelationFilter = {
@@ -819,6 +914,11 @@ export type UserCountOrderByAggregateInput = {
   notifyCommentsOnOwnedContent?: Prisma.SortOrder
   hideAds?: Prisma.SortOrder
   theme?: Prisma.SortOrder
+  discordId?: Prisma.SortOrder
+  discordUsername?: Prisma.SortOrder
+  discordAvatar?: Prisma.SortOrder
+  discordVerifiedAt?: Prisma.SortOrder
+  discordLastCheckAt?: Prisma.SortOrder
 }
 
 export type UserAvgOrderByAggregateInput = {
@@ -848,6 +948,11 @@ export type UserMaxOrderByAggregateInput = {
   notifyCommentsOnOwnedContent?: Prisma.SortOrder
   hideAds?: Prisma.SortOrder
   theme?: Prisma.SortOrder
+  discordId?: Prisma.SortOrder
+  discordUsername?: Prisma.SortOrder
+  discordAvatar?: Prisma.SortOrder
+  discordVerifiedAt?: Prisma.SortOrder
+  discordLastCheckAt?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -873,6 +978,11 @@ export type UserMinOrderByAggregateInput = {
   notifyCommentsOnOwnedContent?: Prisma.SortOrder
   hideAds?: Prisma.SortOrder
   theme?: Prisma.SortOrder
+  discordId?: Prisma.SortOrder
+  discordUsername?: Prisma.SortOrder
+  discordAvatar?: Prisma.SortOrder
+  discordVerifiedAt?: Prisma.SortOrder
+  discordLastCheckAt?: Prisma.SortOrder
 }
 
 export type UserSumOrderByAggregateInput = {
@@ -1226,6 +1336,11 @@ export type UserCreateWithoutTokensInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -1272,6 +1387,11 @@ export type UserUncheckedCreateWithoutTokensInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -1333,6 +1453,11 @@ export type UserUpdateWithoutTokensInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -1379,6 +1504,11 @@ export type UserUncheckedUpdateWithoutTokensInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -1424,6 +1554,11 @@ export type UserCreateWithoutPermissionsInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -1470,6 +1605,11 @@ export type UserUncheckedCreateWithoutPermissionsInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -1531,6 +1671,11 @@ export type UserUpdateWithoutPermissionsInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -1577,6 +1722,11 @@ export type UserUncheckedUpdateWithoutPermissionsInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -1622,6 +1772,11 @@ export type UserCreateWithoutPasswordResetTokensInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -1668,6 +1823,11 @@ export type UserUncheckedCreateWithoutPasswordResetTokensInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -1729,6 +1889,11 @@ export type UserUpdateWithoutPasswordResetTokensInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -1775,6 +1940,11 @@ export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -1820,6 +1990,11 @@ export type UserCreateWithoutCommentInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
@@ -1866,6 +2041,11 @@ export type UserUncheckedCreateWithoutCommentInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
@@ -1916,6 +2096,11 @@ export type UserCreateWithoutCommentsInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -1962,6 +2147,11 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -2023,6 +2213,11 @@ export type UserUpdateWithoutCommentInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
@@ -2069,6 +2264,11 @@ export type UserUncheckedUpdateWithoutCommentInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
@@ -2125,6 +2325,11 @@ export type UserUpdateWithoutCommentsInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -2171,6 +2376,11 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -2216,6 +2426,11 @@ export type UserCreateWithoutRankingsInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -2262,6 +2477,11 @@ export type UserUncheckedCreateWithoutRankingsInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -2323,6 +2543,11 @@ export type UserUpdateWithoutRankingsInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -2369,6 +2594,11 @@ export type UserUncheckedUpdateWithoutRankingsInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -2414,6 +2644,11 @@ export type UserCreateWithoutAnalyticsInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
@@ -2460,6 +2695,11 @@ export type UserUncheckedCreateWithoutAnalyticsInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
@@ -2521,6 +2761,11 @@ export type UserUpdateWithoutAnalyticsInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
@@ -2567,6 +2812,11 @@ export type UserUncheckedUpdateWithoutAnalyticsInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
@@ -2612,6 +2862,11 @@ export type UserCreateWithoutHistoryInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -2658,6 +2913,11 @@ export type UserUncheckedCreateWithoutHistoryInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -2719,6 +2979,11 @@ export type UserUpdateWithoutHistoryInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -2765,6 +3030,11 @@ export type UserUncheckedUpdateWithoutHistoryInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -2810,6 +3080,11 @@ export type UserCreateWithoutFavoritesInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -2856,6 +3131,11 @@ export type UserUncheckedCreateWithoutFavoritesInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -2917,6 +3197,11 @@ export type UserUpdateWithoutFavoritesInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -2963,6 +3248,11 @@ export type UserUncheckedUpdateWithoutFavoritesInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -3008,6 +3298,11 @@ export type UserCreateWithoutUserListInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -3054,6 +3349,11 @@ export type UserUncheckedCreateWithoutUserListInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -3115,6 +3415,11 @@ export type UserUpdateWithoutUserListInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -3161,6 +3466,11 @@ export type UserUncheckedUpdateWithoutUserListInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -3206,6 +3516,11 @@ export type UserCreateWithoutAuditsInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
@@ -3252,6 +3567,11 @@ export type UserUncheckedCreateWithoutAuditsInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
@@ -3313,6 +3633,11 @@ export type UserUpdateWithoutAuditsInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
@@ -3359,6 +3684,11 @@ export type UserUncheckedUpdateWithoutAuditsInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
@@ -3404,6 +3734,11 @@ export type UserCreateWithoutSubscriptionsInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -3450,6 +3785,11 @@ export type UserUncheckedCreateWithoutSubscriptionsInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -3511,6 +3851,11 @@ export type UserUpdateWithoutSubscriptionsInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -3557,6 +3902,11 @@ export type UserUncheckedUpdateWithoutSubscriptionsInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -3602,6 +3952,11 @@ export type UserCreateWithoutOrganizationFollowsInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -3648,6 +4003,11 @@ export type UserUncheckedCreateWithoutOrganizationFollowsInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -3709,6 +4069,11 @@ export type UserUpdateWithoutOrganizationFollowsInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -3755,6 +4120,11 @@ export type UserUncheckedUpdateWithoutOrganizationFollowsInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -3800,6 +4170,11 @@ export type UserCreateWithoutEmailPreferenceInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -3846,6 +4221,11 @@ export type UserUncheckedCreateWithoutEmailPreferenceInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -3907,6 +4287,11 @@ export type UserUpdateWithoutEmailPreferenceInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -3953,6 +4338,11 @@ export type UserUncheckedUpdateWithoutEmailPreferenceInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -3998,6 +4388,11 @@ export type UserCreateWithoutEmailLogsInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -4044,6 +4439,11 @@ export type UserUncheckedCreateWithoutEmailLogsInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -4105,6 +4505,11 @@ export type UserUpdateWithoutEmailLogsInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -4151,6 +4556,11 @@ export type UserUncheckedUpdateWithoutEmailLogsInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -4196,6 +4606,11 @@ export type UserCreateWithoutUnsubscribeTokensInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -4242,6 +4657,11 @@ export type UserUncheckedCreateWithoutUnsubscribeTokensInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -4303,6 +4723,11 @@ export type UserUpdateWithoutUnsubscribeTokensInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -4349,6 +4774,11 @@ export type UserUncheckedUpdateWithoutUnsubscribeTokensInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -4394,6 +4824,11 @@ export type UserCreateWithoutEmailVerificationTokensInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -4440,6 +4875,11 @@ export type UserUncheckedCreateWithoutEmailVerificationTokensInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -4501,6 +4941,11 @@ export type UserUpdateWithoutEmailVerificationTokensInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -4547,6 +4992,11 @@ export type UserUncheckedUpdateWithoutEmailVerificationTokensInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -4592,6 +5042,11 @@ export type UserCreateWithoutDailyActivitiesInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -4638,6 +5093,11 @@ export type UserUncheckedCreateWithoutDailyActivitiesInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -4699,6 +5159,11 @@ export type UserUpdateWithoutDailyActivitiesInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -4745,6 +5210,11 @@ export type UserUncheckedUpdateWithoutDailyActivitiesInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -4790,6 +5260,11 @@ export type UserCreateWithoutAchievementsInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -4836,6 +5311,11 @@ export type UserUncheckedCreateWithoutAchievementsInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -4897,6 +5377,11 @@ export type UserUpdateWithoutAchievementsInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -4943,6 +5428,11 @@ export type UserUncheckedUpdateWithoutAchievementsInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -4988,6 +5478,11 @@ export type UserCreateWithoutNotificationsInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -5034,6 +5529,11 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -5095,6 +5595,11 @@ export type UserUpdateWithoutNotificationsInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -5141,6 +5646,11 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -5186,6 +5696,11 @@ export type UserCreateWithoutRaffleTicketsInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -5232,6 +5747,11 @@ export type UserUncheckedCreateWithoutRaffleTicketsInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -5293,6 +5813,11 @@ export type UserUpdateWithoutRaffleTicketsInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -5339,6 +5864,11 @@ export type UserUncheckedUpdateWithoutRaffleTicketsInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -5384,6 +5914,11 @@ export type UserCreateWithoutRaffleCommentsInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -5430,6 +5965,11 @@ export type UserUncheckedCreateWithoutRaffleCommentsInput = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -5491,6 +6031,11 @@ export type UserUpdateWithoutRaffleCommentsInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -5537,6 +6082,11 @@ export type UserUncheckedUpdateWithoutRaffleCommentsInput = {
   notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -5794,6 +6344,11 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: boolean
+  discordId?: boolean
+  discordUsername?: boolean
+  discordAvatar?: boolean
+  discordVerifiedAt?: boolean
+  discordLastCheckAt?: boolean
   analytics?: boolean | Prisma.User$analyticsArgs<ExtArgs>
   audits?: boolean | Prisma.User$auditsArgs<ExtArgs>
   Comment?: boolean | Prisma.User$CommentArgs<ExtArgs>
@@ -5842,6 +6397,11 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: boolean
+  discordId?: boolean
+  discordUsername?: boolean
+  discordAvatar?: boolean
+  discordVerifiedAt?: boolean
+  discordLastCheckAt?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -5867,6 +6427,11 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: boolean
+  discordId?: boolean
+  discordUsername?: boolean
+  discordAvatar?: boolean
+  discordVerifiedAt?: boolean
+  discordLastCheckAt?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -5892,9 +6457,14 @@ export type UserSelectScalar = {
   notifyCommentsOnOwnedContent?: boolean
   hideAds?: boolean
   theme?: boolean
+  discordId?: boolean
+  discordUsername?: boolean
+  discordAvatar?: boolean
+  discordVerifiedAt?: boolean
+  discordLastCheckAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "slug" | "email" | "password" | "createdAt" | "updatedAt" | "description" | "imageUrl" | "birthdate" | "bannerUrl" | "bannerUrlChangedAt" | "imageUrlChangedAt" | "usernameChangedAt" | "emailNotifications" | "emailVerified" | "isPrivateHistory" | "isPublicProfile" | "pushNotifications" | "notifyCommentsOnOwnedContent" | "hideAds" | "theme", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "slug" | "email" | "password" | "createdAt" | "updatedAt" | "description" | "imageUrl" | "birthdate" | "bannerUrl" | "bannerUrlChangedAt" | "imageUrlChangedAt" | "usernameChangedAt" | "emailNotifications" | "emailVerified" | "isPrivateHistory" | "isPublicProfile" | "pushNotifications" | "notifyCommentsOnOwnedContent" | "hideAds" | "theme" | "discordId" | "discordUsername" | "discordAvatar" | "discordVerifiedAt" | "discordLastCheckAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   analytics?: boolean | Prisma.User$analyticsArgs<ExtArgs>
   audits?: boolean | Prisma.User$auditsArgs<ExtArgs>
@@ -5972,6 +6542,11 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     notifyCommentsOnOwnedContent: boolean
     hideAds: boolean
     theme: string
+    discordId: string | null
+    discordUsername: string | null
+    discordAvatar: string | null
+    discordVerifiedAt: Date | null
+    discordLastCheckAt: Date | null
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -6439,6 +7014,11 @@ export interface UserFieldRefs {
   readonly notifyCommentsOnOwnedContent: Prisma.FieldRef<"User", 'Boolean'>
   readonly hideAds: Prisma.FieldRef<"User", 'Boolean'>
   readonly theme: Prisma.FieldRef<"User", 'String'>
+  readonly discordId: Prisma.FieldRef<"User", 'String'>
+  readonly discordUsername: Prisma.FieldRef<"User", 'String'>
+  readonly discordAvatar: Prisma.FieldRef<"User", 'String'>
+  readonly discordVerifiedAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly discordLastCheckAt: Prisma.FieldRef<"User", 'DateTime'>
 }
     
 

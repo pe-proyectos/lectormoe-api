@@ -3751,7 +3751,12 @@ export const UserScalarFieldEnum = {
   pushNotifications: 'pushNotifications',
   notifyCommentsOnOwnedContent: 'notifyCommentsOnOwnedContent',
   hideAds: 'hideAds',
-  theme: 'theme'
+  theme: 'theme',
+  discordId: 'discordId',
+  discordUsername: 'discordUsername',
+  discordAvatar: 'discordAvatar',
+  discordVerifiedAt: 'discordVerifiedAt',
+  discordLastCheckAt: 'discordLastCheckAt'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]

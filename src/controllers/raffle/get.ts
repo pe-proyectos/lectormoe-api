@@ -1,5 +1,6 @@
 import { prisma } from "../../models/prisma";
 import { padTicket } from "../../services/raffle-draw";
+import { isInGuildCached } from "../../services/discord-membership";
 
 export const getRaffleBySlug = async (slug: string, currentUserId: number | null) => {
   const r = await prisma.raffle.findUnique({
@@ -9,10 +10,39 @@ export const getRaffleBySlug = async (slug: string, currentUserId: number | null
   if (!r || r.deletedAt) return null;
 
   let userTicketCount = 0;
+  let viewerDiscord: { linked: boolean; verified: boolean; reason?: string } = {
+    linked: false,
+    verified: false,
+    reason: "not-logged",
+  };
+  // Phase 1 gate: only emailVerified is required to participate. Discord is an
+  // optional badge / future stricter gate.
+  let viewerCanParticipate = false;
+  let viewerBlockReason: string | null = "not-logged";
   if (currentUserId) {
     userTicketCount = await prisma.raffleTicket.count({
       where: { raffleId: r.id, userId: currentUserId, refundedAt: null },
     });
+
+    const u = await prisma.user.findUnique({
+      where: { id: currentUserId },
+      select: { discordId: true, emailVerified: true },
+    });
+    viewerCanParticipate = !!u?.emailVerified;
+    viewerBlockReason = u?.emailVerified ? null : "email-not-verified";
+    if (!u?.discordId) {
+      viewerDiscord = { linked: false, verified: false, reason: "not-linked" };
+    } else {
+      // Use cached check so the detail render doesn't slam Discord every load.
+      try {
+        const inGuild = await isInGuildCached(u.discordId);
+        viewerDiscord = inGuild
+          ? { linked: true, verified: true }
+          : { linked: true, verified: false, reason: "not-in-guild" };
+      } catch {
+        viewerDiscord = { linked: true, verified: false, reason: "check-failed" };
+      }
+    }
   }
 
   let winner: any = null;
@@ -58,6 +88,11 @@ export const getRaffleBySlug = async (slug: string, currentUserId: number | null
     available: Math.max(0, r.maxTickets - r._count.tickets),
     userTicketCount,
     winner,
+    viewer: {
+      discord: viewerDiscord,
+      canParticipate: viewerCanParticipate,
+      blockReason: viewerBlockReason,
+    },
     createdAt: r.createdAt,
   };
 };

@@ -2,6 +2,20 @@ import { prisma } from "../../models/prisma";
 import { padTicket, executeDraw } from "../../services/raffle-draw";
 import { broadcast } from "../../services/raffle-events";
 import { capturePaypalOrder, createPaypalOrder } from "../../util/paypal";
+// Phase 1 gate: only require a verified email to participate. Discord linking
+// is exposed in /settings as an optional connection (badge in raffles, used
+// later for stricter gating once the bot is fully wired in prod). Keeping the
+// helper around so we can re-enable bot-membership gating with a one-line swap.
+const requireRafflePrerequisites = async (userId: number) => {
+  const u = await prisma.user.findUnique({
+    where: { id: userId },
+    select: { emailVerified: true },
+  });
+  if (!u) throw new Error("Usuario no encontrado.");
+  if (!u.emailVerified) {
+    throw new Error("Verifica tu correo electrónico antes de participar en el sorteo.");
+  }
+};
 
 const TICKETS_PAGE_DEFAULT = 30;
 
@@ -66,6 +80,8 @@ export const createPaypalOrderForRaffle = async (slug: string, userId: number, c
   if (raffle.ticketPrice <= 0) throw new Error("Este sorteo es gratuito; no requiere PayPal.");
   if (count < 1) throw new Error("Cantidad inválida.");
 
+  await requireRafflePrerequisites(userId);
+
   const sold = raffle._count.tickets;
   const available = raffle.maxTickets - sold;
   if (count > available) throw new Error(`Solo quedan ${available} tickets disponibles.`);
@@ -103,6 +119,8 @@ export const purchaseTickets = async (
   });
   if (!raffle || raffle.deletedAt) throw new Error("Sorteo no encontrado.");
   if (raffle.status !== "active") throw new Error("El sorteo no está activo.");
+
+  await requireRafflePrerequisites(userId);
 
   const count = Math.max(1, Math.floor(params.count ?? 1));
   const sold = raffle._count.tickets;
