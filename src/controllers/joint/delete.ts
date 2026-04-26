@@ -50,6 +50,24 @@ export const dissolveJoint = async (
     });
   }
 
+  // Fallback for legacy chapters with uploadedByOrganizationId = NULL: they
+  // didn't match any member's detach pass and would be orphaned under a
+  // soft-deleted joint. Attribute them to the LEADER (or the oldest ACCEPTED
+  // member if no LEADER) and move to that org's MangaCustom. Skip if no
+  // members exist at all.
+  const orphanCount = await prisma.chapter.count({
+    where: { jointId, uploadedByOrganizationId: null, deletedAt: null },
+  });
+  if (orphanCount > 0 && acceptedMembers.length > 0) {
+    const leader = acceptedMembers.find((m) => m.role === 'LEADER') ?? acceptedMembers[0];
+    const orphanResult = await detachOrgFromJoint(jointId, leader.organizationId, {
+      actorUserId: opts.actorUserId ?? null,
+      reason: 'orphan_fallback',
+      uploaderFilter: 'null', // see joint-detach.ts
+    });
+    detachResults.push({ organizationId: leader.organizationId, moved: orphanResult.moved, conflicts: orphanResult.conflicts });
+  }
+
   await prisma.jointMember.updateMany({
     where: { jointId, status: 'ACCEPTED' },
     data: { status: 'LEFT' },

@@ -1,6 +1,16 @@
 import { prisma } from '../models/prisma';
 
-export type DetachOptions = { actorUserId?: number | null; reason?: string };
+// `uploaderFilter`:
+//   undefined / 'match' (default) — match chapters whose uploadedByOrganizationId
+//                                   equals the org being detached (the normal case).
+//   'null'                         — match chapters with uploadedByOrganizationId = NULL
+//                                   (legacy / orphan rows). Used by dissolveJoint to
+//                                   sweep orphans into the LEADER as the final step.
+export type DetachOptions = {
+  actorUserId?: number | null;
+  reason?: string;
+  uploaderFilter?: 'match' | 'null';
+};
 
 export interface DetachResult {
   moved: number;
@@ -91,8 +101,12 @@ export const detachOrgFromJoint = async (
   const ensured = await ensureMangaCustom(organizationId, joint.mangaId);
   const mcId = ensured.id;
 
+  const uploaderWhere = opts?.uploaderFilter === 'null'
+    ? { uploadedByOrganizationId: null }
+    : { uploadedByOrganizationId: organizationId };
+
   const chapters = await prisma.chapter.findMany({
-    where: { jointId, uploadedByOrganizationId: organizationId, deletedAt: null },
+    where: { jointId, ...uploaderWhere, deletedAt: null },
     select: { id: true, number: true, releasedAt: true, createdAt: true, title: true },
   });
 
@@ -153,7 +167,13 @@ export const detachOrgFromJoint = async (
       if (mineWins) {
         await prisma.chapter.update({
           where: { id: ch.id },
-          data: { jointId: null, mangaCustomId: mcId },
+          data: {
+            jointId: null,
+            mangaCustomId: mcId,
+            // For null-uploader sweep, attribute the chapter to the receiving org
+            // so future operations have a clean owner reference.
+            ...(opts?.uploaderFilter === 'null' ? { uploadedByOrganizationId: organizationId } : {}),
+          },
         });
         moved += 1;
       }
@@ -181,7 +201,11 @@ export const detachOrgFromJoint = async (
 
     await prisma.chapter.update({
       where: { id: ch.id },
-      data: { jointId: null, mangaCustomId: mcId },
+      data: {
+        jointId: null,
+        mangaCustomId: mcId,
+        ...(opts?.uploaderFilter === 'null' ? { uploadedByOrganizationId: organizationId } : {}),
+      },
     });
     moved += 1;
 
