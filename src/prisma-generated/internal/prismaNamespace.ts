@@ -4390,6 +4390,9 @@ export const RaffleScalarFieldEnum = {
   revealStartedAt: 'revealStartedAt',
   revealOrder: 'revealOrder',
   revealDigits: 'revealDigits',
+  winnersCount: 'winnersCount',
+  eliminationIntervalMs: 'eliminationIntervalMs',
+  lastEliminationAt: 'lastEliminationAt',
   cancelReason: 'cancelReason',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
@@ -4409,6 +4412,8 @@ export const RaffleTicketScalarFieldEnum = {
   paypalCaptureId: 'paypalCaptureId',
   amountPaid: 'amountPaid',
   refundedAt: 'refundedAt',
+  eliminatedAt: 'eliminatedAt',
+  eliminationOrder: 'eliminationOrder',
   createdAt: 'createdAt'
 } as const
 

@@ -41,10 +41,18 @@ export const listRaffleTickets = async (slug: string, params: {
     };
   }
 
+  // Sort: alive tickets (eliminatedAt IS NULL) first by number ASC, then
+  // eliminated tickets by eliminationOrder ASC. Postgres NULLS FIRST when
+  // sorting ASC means alive rows naturally precede eliminated rows on
+  // eliminationOrder; we use number as the secondary key for alive rows and
+  // eliminationOrder is unique per raffle for eliminated rows.
   const [tickets, total] = await Promise.all([
     prisma.raffleTicket.findMany({
       where,
-      orderBy: { number: "asc" },
+      orderBy: [
+        { eliminationOrder: { sort: "asc", nulls: "first" } },
+        { number: "asc" },
+      ],
       skip: (page - 1) * limit,
       take: limit,
       include: {
@@ -62,6 +70,8 @@ export const listRaffleTickets = async (slug: string, params: {
       userUsername: t.user.username,
       userImageUrl: t.user.imageUrl,
       comment: t.comment,
+      eliminatedAt: t.eliminatedAt,
+      eliminationOrder: t.eliminationOrder,
       createdAt: t.createdAt,
     })),
     total,

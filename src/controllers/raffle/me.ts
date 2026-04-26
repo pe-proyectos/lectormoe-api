@@ -1,5 +1,6 @@
 import { prisma } from "../../models/prisma";
 import { padTicket } from "../../services/raffle-draw";
+import { resolveR2Url } from "../../util/r2-url";
 
 export const getMyRaffleHistory = async (userId: number) => {
   const tickets = await prisma.raffleTicket.findMany({
@@ -45,7 +46,7 @@ export const getMyRaffleHistory = async (userId: number) => {
       raffle: {
         slug: t.raffle.slug,
         title: t.raffle.title,
-        imageUrl: t.raffle.imageUrl,
+        imageUrl: resolveR2Url(t.raffle.imageUrl),
         status: t.raffle.status,
         ticketPrice: t.raffle.ticketPrice,
         currency: t.raffle.currency,
@@ -63,7 +64,7 @@ export const getMyRaffleHistory = async (userId: number) => {
       status: r.status,
       failureReason: r.failureReason,
       createdAt: r.createdAt,
-      raffle: r.raffle,
+      raffle: { ...r.raffle, imageUrl: resolveR2Url(r.raffle.imageUrl) },
     })),
   };
 };

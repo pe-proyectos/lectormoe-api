@@ -6,6 +6,7 @@ import { superadminAuth } from "../../plugins/superadmin-auth";
 import { prisma } from "../../models/prisma";
 import { listRaffles } from "../../controllers/raffle/list";
 import { getRaffleBySlug } from "../../controllers/raffle/get";
+import { getRaffleDrawState } from "../../controllers/raffle/draw-state";
 import {
   listRaffleTickets,
   createPaypalOrderForRaffle,
@@ -41,27 +42,22 @@ const buildSnapshot = async (slug: string, viewerUserId: number | null) => {
       where: { raffleId: r.id, userId: viewerUserId, refundedAt: null },
     });
   }
-  let winner: any = null;
-  if ((r.status === "completed" || r.status === "drawing") && r.winnerUserId && r.winnerTicketId) {
-    const [user, ticket] = await Promise.all([
-      prisma.user.findUnique({
-        where: { id: r.winnerUserId },
-        select: { slug: true, username: true, imageUrl: true },
-      }),
-      prisma.raffleTicket.findUnique({
-        where: { id: r.winnerTicketId },
-        select: { number: true },
-      }),
-    ]);
-    winner = ticket
-      ? {
-          ticketNumber: padTicket(ticket.number),
-          userSlug: user?.slug ?? "",
-          userUsername: user?.username ?? "",
-          userImageUrl: user?.imageUrl ?? null,
-        }
-      : null;
+  let winners: any[] | null = null;
+  if (r.status === "completed") {
+    const survivors = await prisma.raffleTicket.findMany({
+      where: { raffleId: r.id, eliminatedAt: null },
+      orderBy: { number: "asc" },
+      include: { user: { select: { slug: true, username: true, imageUrl: true } } },
+    });
+    winners = survivors.map((t) => ({
+      ticketNumber: padTicket(t.number),
+      userSlug: t.user.slug,
+      userUsername: t.user.username,
+      userImageUrl: t.user.imageUrl,
+      comment: t.comment,
+    }));
   }
+  const winner = winners && winners.length > 0 ? winners[0] : null;
   return {
     raffleId: r.id,
     snapshot: {
@@ -69,10 +65,10 @@ const buildSnapshot = async (slug: string, viewerUserId: number | null) => {
       status: r.status,
       sold: r._count.tickets,
       available: Math.max(0, r.maxTickets - r._count.tickets),
-      revealStartedAt: r.revealStartedAt ? r.revealStartedAt.toISOString() : null,
-      revealOrder: (r.revealOrder as any) ?? null,
-      revealDigits: r.revealDigits ?? null,
+      winnersCount: r.winnersCount,
+      eliminationIntervalMs: r.eliminationIntervalMs,
       winner,
+      winners,
       viewerTicketsCount,
     },
   };
@@ -140,6 +136,18 @@ export const router = () =>
           q: t.Optional(t.String()),
         }),
       },
+    )
+    .get(
+      "/api/raffle/:slug/draw-state",
+      async ({ params, set }: any) => {
+        const data = await getRaffleDrawState(params.slug);
+        if (!data) {
+          set.status = 404;
+          return { status: false, message: "Sorteo no encontrado." };
+        }
+        return { status: true, data };
+      },
+      { params: t.Object({ slug: t.String() }) },
     )
     .get(
       "/api/raffle/:slug/comments",
@@ -304,6 +312,8 @@ export const router = () =>
           minTickets: t.Optional(t.Number()),
           maxTickets: t.Number(),
           maxTicketsPerUser: t.Optional(t.Number()),
+          winnersCount: t.Optional(t.Number()),
+          eliminationIntervalMs: t.Optional(t.Number()),
           drawType: t.String(),
           drawAt: t.Optional(t.Union([t.String(), t.Null()])),
         }),
@@ -328,6 +338,8 @@ export const router = () =>
           minTickets: t.Optional(t.Number()),
           maxTickets: t.Optional(t.Number()),
           maxTicketsPerUser: t.Optional(t.Number()),
+          winnersCount: t.Optional(t.Number()),
+          eliminationIntervalMs: t.Optional(t.Number()),
           drawType: t.Optional(t.String()),
           drawAt: t.Optional(t.Union([t.String(), t.Null()])),
         }),

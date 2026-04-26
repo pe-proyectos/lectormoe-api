@@ -924,6 +924,15 @@ model Raffle {
   revealStartedAt     DateTime?
   revealOrder         Json?
   revealDigits        String?
+  // How many surviving tickets at the end of the elimination tournament.
+  // Default 1 keeps existing single-winner raffles behaving like before.
+  winnersCount        Int             @default(1)
+  // Milliseconds between eliminations. Hardcoded UI is 5000 for now but
+  // exposed as a column so we can tune per-raffle (or speed up demos) later.
+  eliminationIntervalMs Int           @default(5000)
+  // Wall-clock of the most recent elimination. Used by clients (polling) to
+  // compute "Próxima eliminación en Xs".
+  lastEliminationAt   DateTime?
   cancelReason        String?         @db.VarChar(256)
   createdAt           DateTime        @default(now()) @db.Timestamp(6)
   updatedAt           DateTime        @updatedAt
@@ -948,6 +957,8 @@ model RaffleTicket {
   paypalCaptureId     String?         @db.VarChar(64)
   amountPaid          Float           @default(0)
   refundedAt          DateTime?
+  eliminatedAt        DateTime?
+  eliminationOrder    Int?
   createdAt           DateTime        @default(now()) @db.Timestamp(6)
   refund              RaffleRefund?
 

@@ -1,4 +1,5 @@
 import { prisma } from "../../models/prisma";
+import { resolveR2Url } from "../../util/r2-url";
 
 const PAGE_LIMIT_DEFAULT = 24;
 
@@ -65,8 +66,8 @@ export const listRaffles = async (params: {
         slug: r.slug,
         title: r.title,
         description: r.description,
-        imageUrl: r.imageUrl,
-        bannerUrl: r.bannerUrl,
+        imageUrl: resolveR2Url(r.imageUrl),
+        bannerUrl: resolveR2Url(r.bannerUrl),
         ticketPrice: r.ticketPrice,
         currency: r.currency,
         minTickets: r.minTickets,

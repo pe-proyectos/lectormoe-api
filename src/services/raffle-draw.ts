@@ -2,10 +2,6 @@ import { prisma } from "../models/prisma";
 import { refundPaypalCapture } from "../util/paypal";
 import { broadcast } from "./raffle-events";
 
-const DIGIT_REVEAL_MS = 5_000;
-const REVEAL_PADDING_MS = 10_000;
-const TOTAL_REVEAL_MS = DIGIT_REVEAL_MS * 5 + REVEAL_PADDING_MS;
-
 const shuffle = <T,>(arr: T[]): T[] => {
   const copy = arr.slice();
   for (let i = copy.length - 1; i > 0; i--) {
@@ -16,6 +12,21 @@ const shuffle = <T,>(arr: T[]): T[] => {
 };
 
 export const padTicket = (n: number) => n.toString().padStart(5, "0");
+
+type SurvivorRow = {
+  number: number;
+  comment: string | null;
+  user: { slug: string; username: string; imageUrl: string | null };
+};
+
+const buildWinnerEntries = (rows: SurvivorRow[]) =>
+  rows.map((t) => ({
+    ticketNumber: padTicket(t.number),
+    userSlug: t.user.slug,
+    userUsername: t.user.username,
+    userImageUrl: t.user.imageUrl,
+    comment: t.comment,
+  }));
 
 export async function executeDraw(raffleId: number): Promise<void> {
   const raffle = await prisma.raffle.findUnique({
@@ -29,67 +40,140 @@ export async function executeDraw(raffleId: number): Promise<void> {
   }
 
   if (raffle.tickets.length < raffle.minTickets) {
-    await executeCancel(raffleId, "min-not-reached");
+    await executeCancel(raffleId, "No se alcanzó la cantidad mínima de tickets");
     return;
   }
 
-  const winner = raffle.tickets[Math.floor(Math.random() * raffle.tickets.length)];
-  const revealOrder = shuffle([0, 1, 2, 3, 4]);
-  const revealDigits = padTicket(winner.number);
-  const revealStartedAt = new Date();
+  const winnersCount = Math.max(1, raffle.winnersCount ?? 1);
+  const intervalMs = Math.max(0, raffle.eliminationIntervalMs ?? 5000);
 
+  // Short-circuit: not enough tickets to actually eliminate anyone — everyone
+  // wins. No SSE elimination events, just flip to completed.
+  if (raffle.tickets.length <= winnersCount) {
+    const survivors = await prisma.raffleTicket.findMany({
+      where: { raffleId },
+      orderBy: { number: "asc" },
+      include: { user: { select: { slug: true, username: true, imageUrl: true } } },
+    });
+    const lowest = survivors[0];
+    await prisma.raffle.update({
+      where: { id: raffleId },
+      data: {
+        status: "completed",
+        winnerTicketId: lowest?.id ?? null,
+        winnerUserId: lowest?.userId ?? null,
+      },
+    });
+    broadcast(raffleId, {
+      type: "draw_completed",
+      winners: buildWinnerEntries(survivors),
+    });
+    return;
+  }
+
+  const startedAt = new Date();
   await prisma.raffle.update({
     where: { id: raffleId },
     data: {
       status: "drawing",
-      winnerTicketId: winner.id,
-      winnerUserId: winner.userId,
-      revealStartedAt,
-      revealOrder,
-      revealDigits,
+      lastEliminationAt: null,
+      // Stamp legacy reveal fields as null so anything inspecting them sees a
+      // clean elimination-tournament raffle (not a half-completed legacy one).
+      revealStartedAt: null,
+      revealOrder: null as any,
+      revealDigits: null,
     },
   });
 
   broadcast(raffleId, {
     type: "draw_started",
-    revealOrder,
-    revealDigits,
-    revealStartedAt: revealStartedAt.toISOString(),
+    totalTickets: raffle.tickets.length,
+    winnersCount,
+    eliminationIntervalMs: intervalMs,
+    startedAt: startedAt.toISOString(),
   });
 
-  // Schedule the completion broadcast and status flip after the animation.
-  setTimeout(async () => {
-    try {
-      // Defensive: the raffle could have been hard-deleted (test cleanup, manual
-      // wipe) between draw_started and the completion timer. Skip the update
-      // and broadcast in that case instead of throwing.
-      const stillExists = await prisma.raffle.findUnique({
-        where: { id: raffleId },
-        select: { id: true, status: true },
-      });
-      if (!stillExists || stillExists.status === "completed") return;
+  const eliminationsNeeded = raffle.tickets.length - winnersCount;
+  const shuffledTicketIds = shuffle(raffle.tickets.map((t) => t.id)).slice(0, eliminationsNeeded);
 
-      const winnerUser = await prisma.user.findUnique({
-        where: { id: winner.userId },
-        select: { slug: true, username: true, imageUrl: true },
-      });
-      await prisma.raffle.update({
-        where: { id: raffleId },
-        data: { status: "completed" },
-      });
-      broadcast(raffleId, {
-        type: "draw_completed",
-        winner: {
-          ticketNumber: revealDigits,
-          userSlug: winnerUser?.slug ?? "",
-          userUsername: winnerUser?.username ?? "",
-          userImageUrl: winnerUser?.imageUrl ?? null,
-        },
-      });
-    } catch (err) {
-      console.error(`[raffle-draw] Failed to complete draw for raffle #${raffleId}:`, err);
+  const scheduleNext = (index: number) => {
+    if (index >= shuffledTicketIds.length) {
+      // Finalisation step.
+      setTimeout(async () => {
+        try {
+          const current = await prisma.raffle.findUnique({
+            where: { id: raffleId },
+            select: { id: true, status: true },
+          });
+          if (!current || current.status !== "drawing") return;
+
+          const survivors = await prisma.raffleTicket.findMany({
+            where: { raffleId, eliminatedAt: null },
+            orderBy: { number: "asc" },
+            include: { user: { select: { slug: true, username: true, imageUrl: true } } },
+          });
+          const lowest = survivors[0];
+          await prisma.raffle.update({
+            where: { id: raffleId },
+            data: {
+              status: "completed",
+              winnerTicketId: lowest?.id ?? null,
+              winnerUserId: lowest?.userId ?? null,
+            },
+          });
+          broadcast(raffleId, {
+            type: "draw_completed",
+            winners: buildWinnerEntries(survivors),
+          });
+        } catch (err) {
+          console.error(`[raffle-draw] Failed to finalise draw for raffle #${raffleId}:`, err);
+        }
+      }, intervalMs);
+      return;
     }
-  }, TOTAL_REVEAL_MS);
+
+    setTimeout(async () => {
+      try {
+        // Defensive: handle cancel/delete mid-tournament.
+        const current = await prisma.raffle.findUnique({
+          where: { id: raffleId },
+          select: { id: true, status: true },
+        });
+        if (!current || current.status !== "drawing") return;
+
+        const ticketId = shuffledTicketIds[index];
+        const eliminationOrder = index + 1;
+        const now = new Date();
+        const eliminated = await prisma.raffleTicket.update({
+          where: { id: ticketId },
+          data: { eliminatedAt: now, eliminationOrder },
+          include: { user: { select: { slug: true, username: true, imageUrl: true } } },
+        });
+        await prisma.raffle.update({
+          where: { id: raffleId },
+          data: { lastEliminationAt: now },
+        });
+
+        const remainingCount = raffle.tickets.length - eliminationOrder;
+        broadcast(raffleId, {
+          type: "elimination",
+          ticketNumber: padTicket(eliminated.number),
+          userSlug: eliminated.user.slug,
+          userUsername: eliminated.user.username,
+          userImageUrl: eliminated.user.imageUrl,
+          comment: eliminated.comment,
+          eliminationOrder,
+          remainingCount,
+        });
+
+        scheduleNext(index + 1);
+      } catch (err) {
+        console.error(`[raffle-draw] Elimination ${index + 1} failed for raffle #${raffleId}:`, err);
+      }
+    }, intervalMs);
+  };
+
+  scheduleNext(0);
 }
 
 export async function executeCancel(raffleId: number, reason: string): Promise<void> {

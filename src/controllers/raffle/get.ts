@@ -1,6 +1,7 @@
 import { prisma } from "../../models/prisma";
 import { padTicket } from "../../services/raffle-draw";
 import { isInGuildCached } from "../../services/discord-membership";
+import { resolveR2Url } from "../../util/r2-url";
 
 export const getRaffleBySlug = async (slug: string, currentUserId: number | null) => {
   const r = await prisma.raffle.findUnique({
@@ -45,8 +46,30 @@ export const getRaffleBySlug = async (slug: string, currentUserId: number | null
     }
   }
 
+  let winners: any[] | null = null;
+  if (r.status === "completed") {
+    const survivors = await prisma.raffleTicket.findMany({
+      where: { raffleId: r.id, eliminatedAt: null },
+      orderBy: { number: "asc" },
+      include: { user: { select: { slug: true, username: true, imageUrl: true } } },
+    });
+    winners = survivors.map((t) => ({
+      ticketNumber: padTicket(t.number),
+      userSlug: t.user.slug,
+      userUsername: t.user.username,
+      userImageUrl: t.user.imageUrl,
+      comment: t.comment,
+    }));
+  }
+
+  // Legacy single 'winner' field — points at the lowest-numbered surviving
+  // ticket so old consumers keep working. For status=drawing we still resolve
+  // it from winnerTicketId/winnerUserId in case anything was stamped early
+  // (legacy raffles); otherwise it's null until completion.
   let winner: any = null;
-  if ((r.status === "completed" || r.status === "drawing") && r.winnerUserId && r.winnerTicketId) {
+  if (winners && winners.length > 0) {
+    winner = winners[0];
+  } else if (r.status === "drawing" && r.winnerUserId && r.winnerTicketId) {
     const [user, ticket] = await Promise.all([
       prisma.user.findUnique({
         where: { id: r.winnerUserId },
@@ -70,13 +93,15 @@ export const getRaffleBySlug = async (slug: string, currentUserId: number | null
     slug: r.slug,
     title: r.title,
     description: r.description,
-    imageUrl: r.imageUrl,
-    bannerUrl: r.bannerUrl,
+    imageUrl: resolveR2Url(r.imageUrl),
+    bannerUrl: resolveR2Url(r.bannerUrl),
     ticketPrice: r.ticketPrice,
     currency: r.currency,
     minTickets: r.minTickets,
     maxTickets: r.maxTickets,
     maxTicketsPerUser: r.maxTicketsPerUser,
+    winnersCount: r.winnersCount,
+    eliminationIntervalMs: r.eliminationIntervalMs,
     drawType: r.drawType,
     drawAt: r.drawAt,
     status: r.status,
@@ -88,6 +113,7 @@ export const getRaffleBySlug = async (slug: string, currentUserId: number | null
     available: Math.max(0, r.maxTickets - r._count.tickets),
     userTicketCount,
     winner,
+    winners,
     viewer: {
       discord: viewerDiscord,
       canParticipate: viewerCanParticipate,

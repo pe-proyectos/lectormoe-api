@@ -32,6 +32,7 @@ export type RaffleTicketAvgAggregateOutputType = {
   userId: number | null
   number: number | null
   amountPaid: number | null
+  eliminationOrder: number | null
 }
 
 export type RaffleTicketSumAggregateOutputType = {
@@ -40,6 +41,7 @@ export type RaffleTicketSumAggregateOutputType = {
   userId: number | null
   number: number | null
   amountPaid: number | null
+  eliminationOrder: number | null
 }
 
 export type RaffleTicketMinAggregateOutputType = {
@@ -52,6 +54,8 @@ export type RaffleTicketMinAggregateOutputType = {
   paypalCaptureId: string | null
   amountPaid: number | null
   refundedAt: Date | null
+  eliminatedAt: Date | null
+  eliminationOrder: number | null
   createdAt: Date | null
 }
 
@@ -65,6 +69,8 @@ export type RaffleTicketMaxAggregateOutputType = {
   paypalCaptureId: string | null
   amountPaid: number | null
   refundedAt: Date | null
+  eliminatedAt: Date | null
+  eliminationOrder: number | null
   createdAt: Date | null
 }
 
@@ -78,6 +84,8 @@ export type RaffleTicketCountAggregateOutputType = {
   paypalCaptureId: number
   amountPaid: number
   refundedAt: number
+  eliminatedAt: number
+  eliminationOrder: number
   createdAt: number
   _all: number
 }
@@ -89,6 +97,7 @@ export type RaffleTicketAvgAggregateInputType = {
   userId?: true
   number?: true
   amountPaid?: true
+  eliminationOrder?: true
 }
 
 export type RaffleTicketSumAggregateInputType = {
@@ -97,6 +106,7 @@ export type RaffleTicketSumAggregateInputType = {
   userId?: true
   number?: true
   amountPaid?: true
+  eliminationOrder?: true
 }
 
 export type RaffleTicketMinAggregateInputType = {
@@ -109,6 +119,8 @@ export type RaffleTicketMinAggregateInputType = {
   paypalCaptureId?: true
   amountPaid?: true
   refundedAt?: true
+  eliminatedAt?: true
+  eliminationOrder?: true
   createdAt?: true
 }
 
@@ -122,6 +134,8 @@ export type RaffleTicketMaxAggregateInputType = {
   paypalCaptureId?: true
   amountPaid?: true
   refundedAt?: true
+  eliminatedAt?: true
+  eliminationOrder?: true
   createdAt?: true
 }
 
@@ -135,6 +149,8 @@ export type RaffleTicketCountAggregateInputType = {
   paypalCaptureId?: true
   amountPaid?: true
   refundedAt?: true
+  eliminatedAt?: true
+  eliminationOrder?: true
   createdAt?: true
   _all?: true
 }
@@ -235,6 +251,8 @@ export type RaffleTicketGroupByOutputType = {
   paypalCaptureId: string | null
   amountPaid: number
   refundedAt: Date | null
+  eliminatedAt: Date | null
+  eliminationOrder: number | null
   createdAt: Date
   _count: RaffleTicketCountAggregateOutputType | null
   _avg: RaffleTicketAvgAggregateOutputType | null
@@ -271,6 +289,8 @@ export type RaffleTicketWhereInput = {
   paypalCaptureId?: Prisma.StringNullableFilter<"RaffleTicket"> | string | null
   amountPaid?: Prisma.FloatFilter<"RaffleTicket"> | number
   refundedAt?: Prisma.DateTimeNullableFilter<"RaffleTicket"> | Date | string | null
+  eliminatedAt?: Prisma.DateTimeNullableFilter<"RaffleTicket"> | Date | string | null
+  eliminationOrder?: Prisma.IntNullableFilter<"RaffleTicket"> | number | null
   createdAt?: Prisma.DateTimeFilter<"RaffleTicket"> | Date | string
   raffle?: Prisma.XOR<Prisma.RaffleScalarRelationFilter, Prisma.RaffleWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -287,6 +307,8 @@ export type RaffleTicketOrderByWithRelationInput = {
   paypalCaptureId?: Prisma.SortOrderInput | Prisma.SortOrder
   amountPaid?: Prisma.SortOrder
   refundedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  eliminatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  eliminationOrder?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   raffle?: Prisma.RaffleOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
@@ -307,6 +329,8 @@ export type RaffleTicketWhereUniqueInput = Prisma.AtLeast<{
   paypalCaptureId?: Prisma.StringNullableFilter<"RaffleTicket"> | string | null
   amountPaid?: Prisma.FloatFilter<"RaffleTicket"> | number
   refundedAt?: Prisma.DateTimeNullableFilter<"RaffleTicket"> | Date | string | null
+  eliminatedAt?: Prisma.DateTimeNullableFilter<"RaffleTicket"> | Date | string | null
+  eliminationOrder?: Prisma.IntNullableFilter<"RaffleTicket"> | number | null
   createdAt?: Prisma.DateTimeFilter<"RaffleTicket"> | Date | string
   raffle?: Prisma.XOR<Prisma.RaffleScalarRelationFilter, Prisma.RaffleWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -323,6 +347,8 @@ export type RaffleTicketOrderByWithAggregationInput = {
   paypalCaptureId?: Prisma.SortOrderInput | Prisma.SortOrder
   amountPaid?: Prisma.SortOrder
   refundedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  eliminatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  eliminationOrder?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.RaffleTicketCountOrderByAggregateInput
   _avg?: Prisma.RaffleTicketAvgOrderByAggregateInput
@@ -344,6 +370,8 @@ export type RaffleTicketScalarWhereWithAggregatesInput = {
   paypalCaptureId?: Prisma.StringNullableWithAggregatesFilter<"RaffleTicket"> | string | null
   amountPaid?: Prisma.FloatWithAggregatesFilter<"RaffleTicket"> | number
   refundedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"RaffleTicket"> | Date | string | null
+  eliminatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"RaffleTicket"> | Date | string | null
+  eliminationOrder?: Prisma.IntNullableWithAggregatesFilter<"RaffleTicket"> | number | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"RaffleTicket"> | Date | string
 }
 
@@ -354,6 +382,8 @@ export type RaffleTicketCreateInput = {
   paypalCaptureId?: string | null
   amountPaid?: number
   refundedAt?: Date | string | null
+  eliminatedAt?: Date | string | null
+  eliminationOrder?: number | null
   createdAt?: Date | string
   raffle: Prisma.RaffleCreateNestedOneWithoutTicketsInput
   user: Prisma.UserCreateNestedOneWithoutRaffleTicketsInput
@@ -370,6 +400,8 @@ export type RaffleTicketUncheckedCreateInput = {
   paypalCaptureId?: string | null
   amountPaid?: number
   refundedAt?: Date | string | null
+  eliminatedAt?: Date | string | null
+  eliminationOrder?: number | null
   createdAt?: Date | string
   refund?: Prisma.RaffleRefundUncheckedCreateNestedOneWithoutRaffleTicketInput
 }
@@ -381,6 +413,8 @@ export type RaffleTicketUpdateInput = {
   paypalCaptureId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amountPaid?: Prisma.FloatFieldUpdateOperationsInput | number
   refundedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  eliminatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  eliminationOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   raffle?: Prisma.RaffleUpdateOneRequiredWithoutTicketsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutRaffleTicketsNestedInput
@@ -397,6 +431,8 @@ export type RaffleTicketUncheckedUpdateInput = {
   paypalCaptureId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amountPaid?: Prisma.FloatFieldUpdateOperationsInput | number
   refundedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  eliminatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  eliminationOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   refund?: Prisma.RaffleRefundUncheckedUpdateOneWithoutRaffleTicketNestedInput
 }
@@ -411,6 +447,8 @@ export type RaffleTicketCreateManyInput = {
   paypalCaptureId?: string | null
   amountPaid?: number
   refundedAt?: Date | string | null
+  eliminatedAt?: Date | string | null
+  eliminationOrder?: number | null
   createdAt?: Date | string
 }
 
@@ -421,6 +459,8 @@ export type RaffleTicketUpdateManyMutationInput = {
   paypalCaptureId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amountPaid?: Prisma.FloatFieldUpdateOperationsInput | number
   refundedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  eliminatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  eliminationOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -434,6 +474,8 @@ export type RaffleTicketUncheckedUpdateManyInput = {
   paypalCaptureId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amountPaid?: Prisma.FloatFieldUpdateOperationsInput | number
   refundedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  eliminatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  eliminationOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -462,6 +504,8 @@ export type RaffleTicketCountOrderByAggregateInput = {
   paypalCaptureId?: Prisma.SortOrder
   amountPaid?: Prisma.SortOrder
   refundedAt?: Prisma.SortOrder
+  eliminatedAt?: Prisma.SortOrder
+  eliminationOrder?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -471,6 +515,7 @@ export type RaffleTicketAvgOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   number?: Prisma.SortOrder
   amountPaid?: Prisma.SortOrder
+  eliminationOrder?: Prisma.SortOrder
 }
 
 export type RaffleTicketMaxOrderByAggregateInput = {
@@ -483,6 +528,8 @@ export type RaffleTicketMaxOrderByAggregateInput = {
   paypalCaptureId?: Prisma.SortOrder
   amountPaid?: Prisma.SortOrder
   refundedAt?: Prisma.SortOrder
+  eliminatedAt?: Prisma.SortOrder
+  eliminationOrder?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -496,6 +543,8 @@ export type RaffleTicketMinOrderByAggregateInput = {
   paypalCaptureId?: Prisma.SortOrder
   amountPaid?: Prisma.SortOrder
   refundedAt?: Prisma.SortOrder
+  eliminatedAt?: Prisma.SortOrder
+  eliminationOrder?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -505,6 +554,7 @@ export type RaffleTicketSumOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   number?: Prisma.SortOrder
   amountPaid?: Prisma.SortOrder
+  eliminationOrder?: Prisma.SortOrder
 }
 
 export type RaffleTicketScalarRelationFilter = {
@@ -617,6 +667,8 @@ export type RaffleTicketCreateWithoutUserInput = {
   paypalCaptureId?: string | null
   amountPaid?: number
   refundedAt?: Date | string | null
+  eliminatedAt?: Date | string | null
+  eliminationOrder?: number | null
   createdAt?: Date | string
   raffle: Prisma.RaffleCreateNestedOneWithoutTicketsInput
   refund?: Prisma.RaffleRefundCreateNestedOneWithoutRaffleTicketInput
@@ -631,6 +683,8 @@ export type RaffleTicketUncheckedCreateWithoutUserInput = {
   paypalCaptureId?: string | null
   amountPaid?: number
   refundedAt?: Date | string | null
+  eliminatedAt?: Date | string | null
+  eliminationOrder?: number | null
   createdAt?: Date | string
   refund?: Prisma.RaffleRefundUncheckedCreateNestedOneWithoutRaffleTicketInput
 }
@@ -674,6 +728,8 @@ export type RaffleTicketScalarWhereInput = {
   paypalCaptureId?: Prisma.StringNullableFilter<"RaffleTicket"> | string | null
   amountPaid?: Prisma.FloatFilter<"RaffleTicket"> | number
   refundedAt?: Prisma.DateTimeNullableFilter<"RaffleTicket"> | Date | string | null
+  eliminatedAt?: Prisma.DateTimeNullableFilter<"RaffleTicket"> | Date | string | null
+  eliminationOrder?: Prisma.IntNullableFilter<"RaffleTicket"> | number | null
   createdAt?: Prisma.DateTimeFilter<"RaffleTicket"> | Date | string
 }
 
@@ -684,6 +740,8 @@ export type RaffleTicketCreateWithoutRaffleInput = {
   paypalCaptureId?: string | null
   amountPaid?: number
   refundedAt?: Date | string | null
+  eliminatedAt?: Date | string | null
+  eliminationOrder?: number | null
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutRaffleTicketsInput
   refund?: Prisma.RaffleRefundCreateNestedOneWithoutRaffleTicketInput
@@ -698,6 +756,8 @@ export type RaffleTicketUncheckedCreateWithoutRaffleInput = {
   paypalCaptureId?: string | null
   amountPaid?: number
   refundedAt?: Date | string | null
+  eliminatedAt?: Date | string | null
+  eliminationOrder?: number | null
   createdAt?: Date | string
   refund?: Prisma.RaffleRefundUncheckedCreateNestedOneWithoutRaffleTicketInput
 }
@@ -735,6 +795,8 @@ export type RaffleTicketCreateWithoutRefundInput = {
   paypalCaptureId?: string | null
   amountPaid?: number
   refundedAt?: Date | string | null
+  eliminatedAt?: Date | string | null
+  eliminationOrder?: number | null
   createdAt?: Date | string
   raffle: Prisma.RaffleCreateNestedOneWithoutTicketsInput
   user: Prisma.UserCreateNestedOneWithoutRaffleTicketsInput
@@ -750,6 +812,8 @@ export type RaffleTicketUncheckedCreateWithoutRefundInput = {
   paypalCaptureId?: string | null
   amountPaid?: number
   refundedAt?: Date | string | null
+  eliminatedAt?: Date | string | null
+  eliminationOrder?: number | null
   createdAt?: Date | string
 }
 
@@ -776,6 +840,8 @@ export type RaffleTicketUpdateWithoutRefundInput = {
   paypalCaptureId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amountPaid?: Prisma.FloatFieldUpdateOperationsInput | number
   refundedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  eliminatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  eliminationOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   raffle?: Prisma.RaffleUpdateOneRequiredWithoutTicketsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutRaffleTicketsNestedInput
@@ -791,6 +857,8 @@ export type RaffleTicketUncheckedUpdateWithoutRefundInput = {
   paypalCaptureId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amountPaid?: Prisma.FloatFieldUpdateOperationsInput | number
   refundedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  eliminatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  eliminationOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -803,6 +871,8 @@ export type RaffleTicketCreateManyUserInput = {
   paypalCaptureId?: string | null
   amountPaid?: number
   refundedAt?: Date | string | null
+  eliminatedAt?: Date | string | null
+  eliminationOrder?: number | null
   createdAt?: Date | string
 }
 
@@ -813,6 +883,8 @@ export type RaffleTicketUpdateWithoutUserInput = {
   paypalCaptureId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amountPaid?: Prisma.FloatFieldUpdateOperationsInput | number
   refundedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  eliminatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  eliminationOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   raffle?: Prisma.RaffleUpdateOneRequiredWithoutTicketsNestedInput
   refund?: Prisma.RaffleRefundUpdateOneWithoutRaffleTicketNestedInput
@@ -827,6 +899,8 @@ export type RaffleTicketUncheckedUpdateWithoutUserInput = {
   paypalCaptureId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amountPaid?: Prisma.FloatFieldUpdateOperationsInput | number
   refundedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  eliminatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  eliminationOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   refund?: Prisma.RaffleRefundUncheckedUpdateOneWithoutRaffleTicketNestedInput
 }
@@ -840,6 +914,8 @@ export type RaffleTicketUncheckedUpdateManyWithoutUserInput = {
   paypalCaptureId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amountPaid?: Prisma.FloatFieldUpdateOperationsInput | number
   refundedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  eliminatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  eliminationOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -852,6 +928,8 @@ export type RaffleTicketCreateManyRaffleInput = {
   paypalCaptureId?: string | null
   amountPaid?: number
   refundedAt?: Date | string | null
+  eliminatedAt?: Date | string | null
+  eliminationOrder?: number | null
   createdAt?: Date | string
 }
 
@@ -862,6 +940,8 @@ export type RaffleTicketUpdateWithoutRaffleInput = {
   paypalCaptureId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amountPaid?: Prisma.FloatFieldUpdateOperationsInput | number
   refundedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  eliminatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  eliminationOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutRaffleTicketsNestedInput
   refund?: Prisma.RaffleRefundUpdateOneWithoutRaffleTicketNestedInput
@@ -876,6 +956,8 @@ export type RaffleTicketUncheckedUpdateWithoutRaffleInput = {
   paypalCaptureId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amountPaid?: Prisma.FloatFieldUpdateOperationsInput | number
   refundedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  eliminatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  eliminationOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   refund?: Prisma.RaffleRefundUncheckedUpdateOneWithoutRaffleTicketNestedInput
 }
@@ -889,6 +971,8 @@ export type RaffleTicketUncheckedUpdateManyWithoutRaffleInput = {
   paypalCaptureId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amountPaid?: Prisma.FloatFieldUpdateOperationsInput | number
   refundedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  eliminatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  eliminationOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -904,6 +988,8 @@ export type RaffleTicketSelect<ExtArgs extends runtime.Types.Extensions.Internal
   paypalCaptureId?: boolean
   amountPaid?: boolean
   refundedAt?: boolean
+  eliminatedAt?: boolean
+  eliminationOrder?: boolean
   createdAt?: boolean
   raffle?: boolean | Prisma.RaffleDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -920,6 +1006,8 @@ export type RaffleTicketSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   paypalCaptureId?: boolean
   amountPaid?: boolean
   refundedAt?: boolean
+  eliminatedAt?: boolean
+  eliminationOrder?: boolean
   createdAt?: boolean
   raffle?: boolean | Prisma.RaffleDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -935,6 +1023,8 @@ export type RaffleTicketSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   paypalCaptureId?: boolean
   amountPaid?: boolean
   refundedAt?: boolean
+  eliminatedAt?: boolean
+  eliminationOrder?: boolean
   createdAt?: boolean
   raffle?: boolean | Prisma.RaffleDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -950,10 +1040,12 @@ export type RaffleTicketSelectScalar = {
   paypalCaptureId?: boolean
   amountPaid?: boolean
   refundedAt?: boolean
+  eliminatedAt?: boolean
+  eliminationOrder?: boolean
   createdAt?: boolean
 }
 
-export type RaffleTicketOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "raffleId" | "userId" | "number" | "comment" | "paypalOrderId" | "paypalCaptureId" | "amountPaid" | "refundedAt" | "createdAt", ExtArgs["result"]["raffleTicket"]>
+export type RaffleTicketOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "raffleId" | "userId" | "number" | "comment" | "paypalOrderId" | "paypalCaptureId" | "amountPaid" | "refundedAt" | "eliminatedAt" | "eliminationOrder" | "createdAt", ExtArgs["result"]["raffleTicket"]>
 export type RaffleTicketInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   raffle?: boolean | Prisma.RaffleDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -985,6 +1077,8 @@ export type $RaffleTicketPayload<ExtArgs extends runtime.Types.Extensions.Intern
     paypalCaptureId: string | null
     amountPaid: number
     refundedAt: Date | null
+    eliminatedAt: Date | null
+    eliminationOrder: number | null
     createdAt: Date
   }, ExtArgs["result"]["raffleTicket"]>
   composites: {}
@@ -1421,6 +1515,8 @@ export interface RaffleTicketFieldRefs {
   readonly paypalCaptureId: Prisma.FieldRef<"RaffleTicket", 'String'>
   readonly amountPaid: Prisma.FieldRef<"RaffleTicket", 'Float'>
   readonly refundedAt: Prisma.FieldRef<"RaffleTicket", 'DateTime'>
+  readonly eliminatedAt: Prisma.FieldRef<"RaffleTicket", 'DateTime'>
+  readonly eliminationOrder: Prisma.FieldRef<"RaffleTicket", 'Int'>
   readonly createdAt: Prisma.FieldRef<"RaffleTicket", 'DateTime'>
 }
     

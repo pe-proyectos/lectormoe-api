@@ -34,6 +34,8 @@ export type RaffleAvgAggregateOutputType = {
   maxTicketsPerUser: number | null
   winnerTicketId: number | null
   winnerUserId: number | null
+  winnersCount: number | null
+  eliminationIntervalMs: number | null
 }
 
 export type RaffleSumAggregateOutputType = {
@@ -44,6 +46,8 @@ export type RaffleSumAggregateOutputType = {
   maxTicketsPerUser: number | null
   winnerTicketId: number | null
   winnerUserId: number | null
+  winnersCount: number | null
+  eliminationIntervalMs: number | null
 }
 
 export type RaffleMinAggregateOutputType = {
@@ -65,6 +69,9 @@ export type RaffleMinAggregateOutputType = {
   winnerUserId: number | null
   revealStartedAt: Date | null
   revealDigits: string | null
+  winnersCount: number | null
+  eliminationIntervalMs: number | null
+  lastEliminationAt: Date | null
   cancelReason: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -90,6 +97,9 @@ export type RaffleMaxAggregateOutputType = {
   winnerUserId: number | null
   revealStartedAt: Date | null
   revealDigits: string | null
+  winnersCount: number | null
+  eliminationIntervalMs: number | null
+  lastEliminationAt: Date | null
   cancelReason: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -116,6 +126,9 @@ export type RaffleCountAggregateOutputType = {
   revealStartedAt: number
   revealOrder: number
   revealDigits: number
+  winnersCount: number
+  eliminationIntervalMs: number
+  lastEliminationAt: number
   cancelReason: number
   createdAt: number
   updatedAt: number
@@ -132,6 +145,8 @@ export type RaffleAvgAggregateInputType = {
   maxTicketsPerUser?: true
   winnerTicketId?: true
   winnerUserId?: true
+  winnersCount?: true
+  eliminationIntervalMs?: true
 }
 
 export type RaffleSumAggregateInputType = {
@@ -142,6 +157,8 @@ export type RaffleSumAggregateInputType = {
   maxTicketsPerUser?: true
   winnerTicketId?: true
   winnerUserId?: true
+  winnersCount?: true
+  eliminationIntervalMs?: true
 }
 
 export type RaffleMinAggregateInputType = {
@@ -163,6 +180,9 @@ export type RaffleMinAggregateInputType = {
   winnerUserId?: true
   revealStartedAt?: true
   revealDigits?: true
+  winnersCount?: true
+  eliminationIntervalMs?: true
+  lastEliminationAt?: true
   cancelReason?: true
   createdAt?: true
   updatedAt?: true
@@ -188,6 +208,9 @@ export type RaffleMaxAggregateInputType = {
   winnerUserId?: true
   revealStartedAt?: true
   revealDigits?: true
+  winnersCount?: true
+  eliminationIntervalMs?: true
+  lastEliminationAt?: true
   cancelReason?: true
   createdAt?: true
   updatedAt?: true
@@ -214,6 +237,9 @@ export type RaffleCountAggregateInputType = {
   revealStartedAt?: true
   revealOrder?: true
   revealDigits?: true
+  winnersCount?: true
+  eliminationIntervalMs?: true
+  lastEliminationAt?: true
   cancelReason?: true
   createdAt?: true
   updatedAt?: true
@@ -327,6 +353,9 @@ export type RaffleGroupByOutputType = {
   revealStartedAt: Date | null
   revealOrder: runtime.JsonValue | null
   revealDigits: string | null
+  winnersCount: number
+  eliminationIntervalMs: number
+  lastEliminationAt: Date | null
   cancelReason: string | null
   createdAt: Date
   updatedAt: Date
@@ -376,6 +405,9 @@ export type RaffleWhereInput = {
   revealStartedAt?: Prisma.DateTimeNullableFilter<"Raffle"> | Date | string | null
   revealOrder?: Prisma.JsonNullableFilter<"Raffle">
   revealDigits?: Prisma.StringNullableFilter<"Raffle"> | string | null
+  winnersCount?: Prisma.IntFilter<"Raffle"> | number
+  eliminationIntervalMs?: Prisma.IntFilter<"Raffle"> | number
+  lastEliminationAt?: Prisma.DateTimeNullableFilter<"Raffle"> | Date | string | null
   cancelReason?: Prisma.StringNullableFilter<"Raffle"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Raffle"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Raffle"> | Date | string
@@ -405,6 +437,9 @@ export type RaffleOrderByWithRelationInput = {
   revealStartedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   revealOrder?: Prisma.SortOrderInput | Prisma.SortOrder
   revealDigits?: Prisma.SortOrderInput | Prisma.SortOrder
+  winnersCount?: Prisma.SortOrder
+  eliminationIntervalMs?: Prisma.SortOrder
+  lastEliminationAt?: Prisma.SortOrderInput | Prisma.SortOrder
   cancelReason?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -437,6 +472,9 @@ export type RaffleWhereUniqueInput = Prisma.AtLeast<{
   revealStartedAt?: Prisma.DateTimeNullableFilter<"Raffle"> | Date | string | null
   revealOrder?: Prisma.JsonNullableFilter<"Raffle">
   revealDigits?: Prisma.StringNullableFilter<"Raffle"> | string | null
+  winnersCount?: Prisma.IntFilter<"Raffle"> | number
+  eliminationIntervalMs?: Prisma.IntFilter<"Raffle"> | number
+  lastEliminationAt?: Prisma.DateTimeNullableFilter<"Raffle"> | Date | string | null
   cancelReason?: Prisma.StringNullableFilter<"Raffle"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Raffle"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Raffle"> | Date | string
@@ -466,6 +504,9 @@ export type RaffleOrderByWithAggregationInput = {
   revealStartedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   revealOrder?: Prisma.SortOrderInput | Prisma.SortOrder
   revealDigits?: Prisma.SortOrderInput | Prisma.SortOrder
+  winnersCount?: Prisma.SortOrder
+  eliminationIntervalMs?: Prisma.SortOrder
+  lastEliminationAt?: Prisma.SortOrderInput | Prisma.SortOrder
   cancelReason?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -500,6 +541,9 @@ export type RaffleScalarWhereWithAggregatesInput = {
   revealStartedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Raffle"> | Date | string | null
   revealOrder?: Prisma.JsonNullableWithAggregatesFilter<"Raffle">
   revealDigits?: Prisma.StringNullableWithAggregatesFilter<"Raffle"> | string | null
+  winnersCount?: Prisma.IntWithAggregatesFilter<"Raffle"> | number
+  eliminationIntervalMs?: Prisma.IntWithAggregatesFilter<"Raffle"> | number
+  lastEliminationAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Raffle"> | Date | string | null
   cancelReason?: Prisma.StringNullableWithAggregatesFilter<"Raffle"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Raffle"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Raffle"> | Date | string
@@ -525,6 +569,9 @@ export type RaffleCreateInput = {
   revealStartedAt?: Date | string | null
   revealOrder?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   revealDigits?: string | null
+  winnersCount?: number
+  eliminationIntervalMs?: number
+  lastEliminationAt?: Date | string | null
   cancelReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -554,6 +601,9 @@ export type RaffleUncheckedCreateInput = {
   revealStartedAt?: Date | string | null
   revealOrder?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   revealDigits?: string | null
+  winnersCount?: number
+  eliminationIntervalMs?: number
+  lastEliminationAt?: Date | string | null
   cancelReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -582,6 +632,9 @@ export type RaffleUpdateInput = {
   revealStartedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revealOrder?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   revealDigits?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  winnersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  eliminationIntervalMs?: Prisma.IntFieldUpdateOperationsInput | number
+  lastEliminationAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -611,6 +664,9 @@ export type RaffleUncheckedUpdateInput = {
   revealStartedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revealOrder?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   revealDigits?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  winnersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  eliminationIntervalMs?: Prisma.IntFieldUpdateOperationsInput | number
+  lastEliminationAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -640,6 +696,9 @@ export type RaffleCreateManyInput = {
   revealStartedAt?: Date | string | null
   revealOrder?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   revealDigits?: string | null
+  winnersCount?: number
+  eliminationIntervalMs?: number
+  lastEliminationAt?: Date | string | null
   cancelReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -665,6 +724,9 @@ export type RaffleUpdateManyMutationInput = {
   revealStartedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revealOrder?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   revealDigits?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  winnersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  eliminationIntervalMs?: Prisma.IntFieldUpdateOperationsInput | number
+  lastEliminationAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -691,6 +753,9 @@ export type RaffleUncheckedUpdateManyInput = {
   revealStartedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revealOrder?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   revealDigits?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  winnersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  eliminationIntervalMs?: Prisma.IntFieldUpdateOperationsInput | number
+  lastEliminationAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -717,6 +782,9 @@ export type RaffleCountOrderByAggregateInput = {
   revealStartedAt?: Prisma.SortOrder
   revealOrder?: Prisma.SortOrder
   revealDigits?: Prisma.SortOrder
+  winnersCount?: Prisma.SortOrder
+  eliminationIntervalMs?: Prisma.SortOrder
+  lastEliminationAt?: Prisma.SortOrder
   cancelReason?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -731,6 +799,8 @@ export type RaffleAvgOrderByAggregateInput = {
   maxTicketsPerUser?: Prisma.SortOrder
   winnerTicketId?: Prisma.SortOrder
   winnerUserId?: Prisma.SortOrder
+  winnersCount?: Prisma.SortOrder
+  eliminationIntervalMs?: Prisma.SortOrder
 }
 
 export type RaffleMaxOrderByAggregateInput = {
@@ -752,6 +822,9 @@ export type RaffleMaxOrderByAggregateInput = {
   winnerUserId?: Prisma.SortOrder
   revealStartedAt?: Prisma.SortOrder
   revealDigits?: Prisma.SortOrder
+  winnersCount?: Prisma.SortOrder
+  eliminationIntervalMs?: Prisma.SortOrder
+  lastEliminationAt?: Prisma.SortOrder
   cancelReason?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -777,6 +850,9 @@ export type RaffleMinOrderByAggregateInput = {
   winnerUserId?: Prisma.SortOrder
   revealStartedAt?: Prisma.SortOrder
   revealDigits?: Prisma.SortOrder
+  winnersCount?: Prisma.SortOrder
+  eliminationIntervalMs?: Prisma.SortOrder
+  lastEliminationAt?: Prisma.SortOrder
   cancelReason?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -791,6 +867,8 @@ export type RaffleSumOrderByAggregateInput = {
   maxTicketsPerUser?: Prisma.SortOrder
   winnerTicketId?: Prisma.SortOrder
   winnerUserId?: Prisma.SortOrder
+  winnersCount?: Prisma.SortOrder
+  eliminationIntervalMs?: Prisma.SortOrder
 }
 
 export type RaffleScalarRelationFilter = {
@@ -859,6 +937,9 @@ export type RaffleCreateWithoutTicketsInput = {
   revealStartedAt?: Date | string | null
   revealOrder?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   revealDigits?: string | null
+  winnersCount?: number
+  eliminationIntervalMs?: number
+  lastEliminationAt?: Date | string | null
   cancelReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -887,6 +968,9 @@ export type RaffleUncheckedCreateWithoutTicketsInput = {
   revealStartedAt?: Date | string | null
   revealOrder?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   revealDigits?: string | null
+  winnersCount?: number
+  eliminationIntervalMs?: number
+  lastEliminationAt?: Date | string | null
   cancelReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -930,6 +1014,9 @@ export type RaffleUpdateWithoutTicketsInput = {
   revealStartedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revealOrder?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   revealDigits?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  winnersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  eliminationIntervalMs?: Prisma.IntFieldUpdateOperationsInput | number
+  lastEliminationAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -958,6 +1045,9 @@ export type RaffleUncheckedUpdateWithoutTicketsInput = {
   revealStartedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revealOrder?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   revealDigits?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  winnersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  eliminationIntervalMs?: Prisma.IntFieldUpdateOperationsInput | number
+  lastEliminationAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -985,6 +1075,9 @@ export type RaffleCreateWithoutCommentsInput = {
   revealStartedAt?: Date | string | null
   revealOrder?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   revealDigits?: string | null
+  winnersCount?: number
+  eliminationIntervalMs?: number
+  lastEliminationAt?: Date | string | null
   cancelReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1013,6 +1106,9 @@ export type RaffleUncheckedCreateWithoutCommentsInput = {
   revealStartedAt?: Date | string | null
   revealOrder?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   revealDigits?: string | null
+  winnersCount?: number
+  eliminationIntervalMs?: number
+  lastEliminationAt?: Date | string | null
   cancelReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1056,6 +1152,9 @@ export type RaffleUpdateWithoutCommentsInput = {
   revealStartedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revealOrder?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   revealDigits?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  winnersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  eliminationIntervalMs?: Prisma.IntFieldUpdateOperationsInput | number
+  lastEliminationAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1084,6 +1183,9 @@ export type RaffleUncheckedUpdateWithoutCommentsInput = {
   revealStartedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revealOrder?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   revealDigits?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  winnersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  eliminationIntervalMs?: Prisma.IntFieldUpdateOperationsInput | number
+  lastEliminationAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1111,6 +1213,9 @@ export type RaffleCreateWithoutRefundsInput = {
   revealStartedAt?: Date | string | null
   revealOrder?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   revealDigits?: string | null
+  winnersCount?: number
+  eliminationIntervalMs?: number
+  lastEliminationAt?: Date | string | null
   cancelReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1139,6 +1244,9 @@ export type RaffleUncheckedCreateWithoutRefundsInput = {
   revealStartedAt?: Date | string | null
   revealOrder?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   revealDigits?: string | null
+  winnersCount?: number
+  eliminationIntervalMs?: number
+  lastEliminationAt?: Date | string | null
   cancelReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1182,6 +1290,9 @@ export type RaffleUpdateWithoutRefundsInput = {
   revealStartedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revealOrder?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   revealDigits?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  winnersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  eliminationIntervalMs?: Prisma.IntFieldUpdateOperationsInput | number
+  lastEliminationAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1210,6 +1321,9 @@ export type RaffleUncheckedUpdateWithoutRefundsInput = {
   revealStartedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revealOrder?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   revealDigits?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  winnersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  eliminationIntervalMs?: Prisma.IntFieldUpdateOperationsInput | number
+  lastEliminationAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1287,6 +1401,9 @@ export type RaffleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   revealStartedAt?: boolean
   revealOrder?: boolean
   revealDigits?: boolean
+  winnersCount?: boolean
+  eliminationIntervalMs?: boolean
+  lastEliminationAt?: boolean
   cancelReason?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1317,6 +1434,9 @@ export type RaffleSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   revealStartedAt?: boolean
   revealOrder?: boolean
   revealDigits?: boolean
+  winnersCount?: boolean
+  eliminationIntervalMs?: boolean
+  lastEliminationAt?: boolean
   cancelReason?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1343,6 +1463,9 @@ export type RaffleSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   revealStartedAt?: boolean
   revealOrder?: boolean
   revealDigits?: boolean
+  winnersCount?: boolean
+  eliminationIntervalMs?: boolean
+  lastEliminationAt?: boolean
   cancelReason?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1369,13 +1492,16 @@ export type RaffleSelectScalar = {
   revealStartedAt?: boolean
   revealOrder?: boolean
   revealDigits?: boolean
+  winnersCount?: boolean
+  eliminationIntervalMs?: boolean
+  lastEliminationAt?: boolean
   cancelReason?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
 }
 
-export type RaffleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "title" | "description" | "imageUrl" | "bannerUrl" | "ticketPrice" | "currency" | "minTickets" | "maxTickets" | "maxTicketsPerUser" | "drawType" | "drawAt" | "status" | "winnerTicketId" | "winnerUserId" | "revealStartedAt" | "revealOrder" | "revealDigits" | "cancelReason" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["raffle"]>
+export type RaffleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "title" | "description" | "imageUrl" | "bannerUrl" | "ticketPrice" | "currency" | "minTickets" | "maxTickets" | "maxTicketsPerUser" | "drawType" | "drawAt" | "status" | "winnerTicketId" | "winnerUserId" | "revealStartedAt" | "revealOrder" | "revealDigits" | "winnersCount" | "eliminationIntervalMs" | "lastEliminationAt" | "cancelReason" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["raffle"]>
 export type RaffleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tickets?: boolean | Prisma.Raffle$ticketsArgs<ExtArgs>
   comments?: boolean | Prisma.Raffle$commentsArgs<ExtArgs>
@@ -1412,6 +1538,9 @@ export type $RafflePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     revealStartedAt: Date | null
     revealOrder: runtime.JsonValue | null
     revealDigits: string | null
+    winnersCount: number
+    eliminationIntervalMs: number
+    lastEliminationAt: Date | null
     cancelReason: string | null
     createdAt: Date
     updatedAt: Date
@@ -1861,6 +1990,9 @@ export interface RaffleFieldRefs {
   readonly revealStartedAt: Prisma.FieldRef<"Raffle", 'DateTime'>
   readonly revealOrder: Prisma.FieldRef<"Raffle", 'Json'>
   readonly revealDigits: Prisma.FieldRef<"Raffle", 'String'>
+  readonly winnersCount: Prisma.FieldRef<"Raffle", 'Int'>
+  readonly eliminationIntervalMs: Prisma.FieldRef<"Raffle", 'Int'>
+  readonly lastEliminationAt: Prisma.FieldRef<"Raffle", 'DateTime'>
   readonly cancelReason: Prisma.FieldRef<"Raffle", 'String'>
   readonly createdAt: Prisma.FieldRef<"Raffle", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Raffle", 'DateTime'>

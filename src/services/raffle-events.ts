@@ -1,6 +1,23 @@
 // In-memory pub/sub for raffle realtime events. Single Bun process = single bus;
 // scaling to N processes will need Redis pubsub.
 
+export type RaffleWinner = {
+  ticketNumber: string;
+  userSlug: string;
+  userUsername: string;
+  userImageUrl: string | null;
+  comment?: string | null;
+};
+
+export type RaffleEliminatedEntry = {
+  ticketNumber: string;
+  userSlug: string;
+  userUsername: string;
+  userImageUrl: string | null;
+  comment: string | null;
+  eliminationOrder: number;
+};
+
 export type RaffleEvent =
   | {
       type: 'snapshot';
@@ -9,15 +26,10 @@ export type RaffleEvent =
         status: string;
         sold: number;
         available: number;
-        revealStartedAt: string | null;
-        revealOrder: number[] | null;
-        revealDigits: string | null;
-        winner: {
-          ticketNumber: string;
-          userSlug: string;
-          userUsername: string;
-          userImageUrl: string | null;
-        } | null;
+        winnersCount: number;
+        eliminationIntervalMs: number;
+        winner: RaffleWinner | null;
+        winners: RaffleWinner[] | null;
         viewerTicketsCount?: number;
       };
     }
@@ -37,18 +49,24 @@ export type RaffleEvent =
   | { type: 'ticket_purchased'; sold: number; available: number }
   | {
       type: 'draw_started';
-      revealOrder: number[];
-      revealDigits: string;
-      revealStartedAt: string;
+      totalTickets: number;
+      winnersCount: number;
+      eliminationIntervalMs: number;
+      startedAt: string;
+    }
+  | {
+      type: 'elimination';
+      ticketNumber: string;
+      userSlug: string;
+      userUsername: string;
+      userImageUrl: string | null;
+      comment: string | null;
+      eliminationOrder: number;
+      remainingCount: number;
     }
   | {
       type: 'draw_completed';
-      winner: {
-        ticketNumber: string;
-        userSlug: string;
-        userUsername: string;
-        userImageUrl: string | null;
-      };
+      winners: RaffleWinner[];
     }
   | { type: 'cancelled'; reason: string };
 
