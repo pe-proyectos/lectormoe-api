@@ -1,7 +1,7 @@
 import { prisma } from "../../models/prisma";
 import { padTicket, executeDraw } from "../../services/raffle-draw";
 import { broadcast } from "../../services/raffle-events";
-import { capturePaypalOrder, createPaypalOrder } from "../../util/paypal";
+import { capturePaypalOrder, createPaypalOrder, refundPaypalCapture } from "../../util/paypal";
 // Phase 1 gate: only require a verified email to participate. Discord linking
 // is exposed in /settings as an optional connection (badge in raffles, used
 // later for stricter gating once the bot is fully wired in prod). Keeping the
@@ -108,21 +108,13 @@ export const createPaypalOrderForRaffle = async (slug: string, userId: number, c
   return { orderId: order.id, amount, currency: raffle.currency };
 };
 
-const allocateNextTicketNumbers = async (raffleId: number, count: number): Promise<number[]> => {
-  // Postgres-friendly: find current max via aggregate; collisions handled by unique constraint.
-  const last = await prisma.raffleTicket.aggregate({
-    where: { raffleId },
-    _max: { number: true },
-  });
-  const start = (last._max.number ?? 0) + 1;
-  return Array.from({ length: count }, (_, i) => start + i);
-};
-
 export const purchaseTickets = async (
   slug: string,
   userId: number,
   params: { count?: number; comment?: string; paypalOrderId?: string },
 ) => {
+  // Pre-validation outside the transaction (fail fast for obvious issues).
+  // Atomic re-checks happen inside the locked transaction below.
   const raffle = await prisma.raffle.findUnique({
     where: { slug },
     include: { _count: { select: { tickets: true } } },
@@ -133,17 +125,20 @@ export const purchaseTickets = async (
   await requireRafflePrerequisites(userId);
 
   const count = Math.max(1, Math.floor(params.count ?? 1));
-  const sold = raffle._count.tickets;
-  const available = raffle.maxTickets - sold;
-  if (count > available) throw new Error(`Solo quedan ${available} tickets disponibles.`);
+  const preSold = raffle._count.tickets;
+  const preAvailable = raffle.maxTickets - preSold;
+  if (count > preAvailable) throw new Error(`Solo quedan ${preAvailable} tickets disponibles.`);
 
-  const userOwned = await prisma.raffleTicket.count({
+  const preOwned = await prisma.raffleTicket.count({
     where: { raffleId: raffle.id, userId, refundedAt: null },
   });
-  if (userOwned + count > raffle.maxTicketsPerUser) {
+  if (preOwned + count > raffle.maxTicketsPerUser) {
     throw new Error(`Máximo ${raffle.maxTicketsPerUser} tickets por usuario.`);
   }
 
+  // ─── PayPal capture (HTTP, slow) — done OUTSIDE the txn ───────────────
+  // We don't want to hold a row lock during a remote API call. If the DB
+  // transaction below fails after this succeeds, we refund.
   let captureId: string | null = null;
   let amountPaidPerTicket = 0;
 
@@ -160,36 +155,97 @@ export const purchaseTickets = async (
     captureId = captureObj?.id ?? null;
     const paidValue = parseFloat(captureObj?.amount?.value ?? "0");
     const expected = raffle.ticketPrice * count;
-    // Allow tiny rounding diff.
     if (Math.abs(paidValue - expected) > 0.01) {
+      // Mismatch — refund the capture immediately so the user isn't stuck.
+      if (captureId) {
+        try {
+          await refundPaypalCapture(captureId, {
+            value: paidValue.toFixed(2),
+            currency_code: raffle.currency,
+          });
+        } catch (refundErr) {
+          console.error(`[raffle-tickets] amount-mismatch refund failed for capture ${captureId}:`, refundErr);
+        }
+      }
       throw new Error(`Importe de PayPal (${paidValue}) no coincide con el esperado (${expected}).`);
     }
     amountPaidPerTicket = raffle.ticketPrice;
   }
 
-  const numbers = await allocateNextTicketNumbers(raffle.id, count);
   const trimmedComment = params.comment?.trim().slice(0, 500) || null;
 
-  // Insert tickets one by one to handle the rare race on number collisions; we keep
-  // it simple and rely on the unique constraint to guard concurrency.
-  const created = await prisma.$transaction(
-    numbers.map((n) =>
-      prisma.raffleTicket.create({
-        data: {
-          raffleId: raffle.id,
-          userId,
-          number: n,
-          comment: trimmedComment,
-          paypalOrderId: params.paypalOrderId ?? null,
-          paypalCaptureId: captureId,
-          amountPaid: amountPaidPerTicket,
-        },
-        include: { user: { select: { slug: true, username: true, imageUrl: true } } },
-      }),
-    ),
-  );
+  // ─── Atomic allocation + insert with advisory lock ────────────────────
+  // pg_advisory_xact_lock(raffleId) serialises all concurrent buys for THIS
+  // raffle (other raffles unaffected). Holding it through the count→
+  // allocate→insert window eliminates BOTH overcount past maxTickets AND
+  // ticket number collisions. The lock auto-releases on txn commit/rollback.
+  let created: Array<{ id: number; number: number; comment: string | null; amountPaid: number; createdAt: Date }>;
+  let newSold: number;
+  try {
+    const result = await prisma.$transaction(async (tx) => {
+      await tx.$executeRawUnsafe(`SELECT pg_advisory_xact_lock($1::int, 0)`, raffle.id);
 
-  const newSold = sold + created.length;
+      // Re-validate inside the lock.
+      const fresh = await tx.raffle.findUnique({
+        where: { id: raffle.id },
+        select: { id: true, status: true, deletedAt: true, maxTickets: true, maxTicketsPerUser: true },
+      });
+      if (!fresh || fresh.deletedAt) throw new Error("Sorteo no encontrado.");
+      if (fresh.status !== "active") throw new Error("El sorteo no está activo.");
+
+      const [soldNow, lastNumberAgg, ownedNow] = await Promise.all([
+        tx.raffleTicket.count({ where: { raffleId: raffle.id } }),
+        tx.raffleTicket.aggregate({ where: { raffleId: raffle.id }, _max: { number: true } }),
+        tx.raffleTicket.count({ where: { raffleId: raffle.id, userId, refundedAt: null } }),
+      ]);
+      const availableNow = fresh.maxTickets - soldNow;
+      if (count > availableNow) throw new Error(`Solo quedan ${availableNow} tickets disponibles.`);
+      if (ownedNow + count > fresh.maxTicketsPerUser) {
+        throw new Error(`Máximo ${fresh.maxTicketsPerUser} tickets por usuario.`);
+      }
+
+      const start = (lastNumberAgg._max.number ?? 0) + 1;
+      if (start + count - 1 > 99999) {
+        throw new Error("Rango de números agotado.");
+      }
+      const numbers = Array.from({ length: count }, (_, i) => start + i);
+
+      const rows: Array<{ id: number; number: number; comment: string | null; amountPaid: number; createdAt: Date }> = [];
+      for (const n of numbers) {
+        const t = await tx.raffleTicket.create({
+          data: {
+            raffleId: raffle.id,
+            userId,
+            number: n,
+            comment: trimmedComment,
+            paypalOrderId: params.paypalOrderId ?? null,
+            paypalCaptureId: captureId,
+            amountPaid: amountPaidPerTicket,
+          },
+          select: { id: true, number: true, comment: true, amountPaid: true, createdAt: true },
+        });
+        rows.push(t);
+      }
+      return { rows, newSold: soldNow + rows.length };
+    }, { timeout: 15_000 });
+    created = result.rows;
+    newSold = result.newSold;
+  } catch (err) {
+    // DB write failed AFTER PayPal capture succeeded — refund the capture.
+    if (captureId) {
+      console.error(`[raffle-tickets] DB write failed after PayPal capture ${captureId}; refunding.`, err);
+      try {
+        await refundPaypalCapture(captureId, {
+          value: (amountPaidPerTicket * count).toFixed(2),
+          currency_code: raffle.currency,
+        });
+      } catch (refundErr) {
+        console.error(`[raffle-tickets] CRITICAL: refund failed for capture ${captureId} after DB failure. Manual reconciliation required.`, refundErr);
+      }
+    }
+    throw err;
+  }
+
   broadcast(raffle.id, {
     type: "ticket_purchased",
     sold: newSold,
@@ -198,7 +254,6 @@ export const purchaseTickets = async (
 
   // max-tickets raffles auto-draw inline once full.
   if (raffle.drawType === "max-tickets" && newSold >= raffle.maxTickets) {
-    // Fire-and-forget; errors logged inside.
     executeDraw(raffle.id).catch((err) =>
       console.error(`[raffle-tickets] auto-draw failed for #${raffle.id}:`, err),
     );
