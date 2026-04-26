@@ -89,7 +89,11 @@ export const ModelName = {
   MangaJoint: 'MangaJoint',
   JointMember: 'JointMember',
   JointMemberHistory: 'JointMemberHistory',
-  Notification: 'Notification'
+  Notification: 'Notification',
+  Raffle: 'Raffle',
+  RaffleTicket: 'RaffleTicket',
+  RaffleComment: 'RaffleComment',
+  RaffleRefund: 'RaffleRefund'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -804,6 +808,78 @@ export const NotificationScalarFieldEnum = {
 } as const
 
 export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
+
+
+export const RaffleScalarFieldEnum = {
+  id: 'id',
+  slug: 'slug',
+  title: 'title',
+  description: 'description',
+  imageUrl: 'imageUrl',
+  bannerUrl: 'bannerUrl',
+  ticketPrice: 'ticketPrice',
+  currency: 'currency',
+  minTickets: 'minTickets',
+  maxTickets: 'maxTickets',
+  maxTicketsPerUser: 'maxTicketsPerUser',
+  drawType: 'drawType',
+  drawAt: 'drawAt',
+  status: 'status',
+  winnerTicketId: 'winnerTicketId',
+  winnerUserId: 'winnerUserId',
+  revealStartedAt: 'revealStartedAt',
+  revealOrder: 'revealOrder',
+  revealDigits: 'revealDigits',
+  cancelReason: 'cancelReason',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type RaffleScalarFieldEnum = (typeof RaffleScalarFieldEnum)[keyof typeof RaffleScalarFieldEnum]
+
+
+export const RaffleTicketScalarFieldEnum = {
+  id: 'id',
+  raffleId: 'raffleId',
+  userId: 'userId',
+  number: 'number',
+  comment: 'comment',
+  paypalOrderId: 'paypalOrderId',
+  paypalCaptureId: 'paypalCaptureId',
+  amountPaid: 'amountPaid',
+  refundedAt: 'refundedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type RaffleTicketScalarFieldEnum = (typeof RaffleTicketScalarFieldEnum)[keyof typeof RaffleTicketScalarFieldEnum]
+
+
+export const RaffleCommentScalarFieldEnum = {
+  id: 'id',
+  raffleId: 'raffleId',
+  userId: 'userId',
+  body: 'body',
+  createdAt: 'createdAt'
+} as const
+
+export type RaffleCommentScalarFieldEnum = (typeof RaffleCommentScalarFieldEnum)[keyof typeof RaffleCommentScalarFieldEnum]
+
+
+export const RaffleRefundScalarFieldEnum = {
+  id: 'id',
+  raffleId: 'raffleId',
+  raffleTicketId: 'raffleTicketId',
+  userId: 'userId',
+  amount: 'amount',
+  currency: 'currency',
+  paypalRefundId: 'paypalRefundId',
+  status: 'status',
+  failureReason: 'failureReason',
+  createdAt: 'createdAt'
+} as const
+
+export type RaffleRefundScalarFieldEnum = (typeof RaffleRefundScalarFieldEnum)[keyof typeof RaffleRefundScalarFieldEnum]
 
 
 export const SortOrder = {

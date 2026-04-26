@@ -422,7 +422,11 @@ export const ModelName = {
   MangaJoint: 'MangaJoint',
   JointMember: 'JointMember',
   JointMemberHistory: 'JointMemberHistory',
-  Notification: 'Notification'
+  Notification: 'Notification',
+  Raffle: 'Raffle',
+  RaffleTicket: 'RaffleTicket',
+  RaffleComment: 'RaffleComment',
+  RaffleRefund: 'RaffleRefund'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -438,7 +442,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "token" | "organization" | "user" | "permission" | "passwordResetToken" | "countryOptions" | "author" | "bookType" | "manga" | "mangaCustom" | "chapter" | "page" | "comment" | "commentLike" | "ranking" | "demography" | "genre" | "analytics" | "userChapterHistory" | "favorite" | "userList" | "audit" | "viewsHistory" | "subscriptionPlan" | "subscription" | "organizationTransaction" | "organizationFollower" | "organizationRequest" | "emailPreference" | "emailLog" | "unsubscribeToken" | "emailVerificationToken" | "userDailyActivity" | "achievement" | "userAchievement" | "mangaJoint" | "jointMember" | "jointMemberHistory" | "notification"
+    modelProps: "token" | "organization" | "user" | "permission" | "passwordResetToken" | "countryOptions" | "author" | "bookType" | "manga" | "mangaCustom" | "chapter" | "page" | "comment" | "commentLike" | "ranking" | "demography" | "genre" | "analytics" | "userChapterHistory" | "favorite" | "userList" | "audit" | "viewsHistory" | "subscriptionPlan" | "subscription" | "organizationTransaction" | "organizationFollower" | "organizationRequest" | "emailPreference" | "emailLog" | "unsubscribeToken" | "emailVerificationToken" | "userDailyActivity" | "achievement" | "userAchievement" | "mangaJoint" | "jointMember" | "jointMemberHistory" | "notification" | "raffle" | "raffleTicket" | "raffleComment" | "raffleRefund"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -3328,6 +3332,302 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Raffle: {
+      payload: Prisma.$RafflePayload<ExtArgs>
+      fields: Prisma.RaffleFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RaffleFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RafflePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RaffleFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RafflePayload>
+        }
+        findFirst: {
+          args: Prisma.RaffleFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RafflePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RaffleFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RafflePayload>
+        }
+        findMany: {
+          args: Prisma.RaffleFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RafflePayload>[]
+        }
+        create: {
+          args: Prisma.RaffleCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RafflePayload>
+        }
+        createMany: {
+          args: Prisma.RaffleCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RaffleCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RafflePayload>[]
+        }
+        delete: {
+          args: Prisma.RaffleDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RafflePayload>
+        }
+        update: {
+          args: Prisma.RaffleUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RafflePayload>
+        }
+        deleteMany: {
+          args: Prisma.RaffleDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RaffleUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RaffleUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RafflePayload>[]
+        }
+        upsert: {
+          args: Prisma.RaffleUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RafflePayload>
+        }
+        aggregate: {
+          args: Prisma.RaffleAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRaffle>
+        }
+        groupBy: {
+          args: Prisma.RaffleGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RaffleGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RaffleCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RaffleCountAggregateOutputType> | number
+        }
+      }
+    }
+    RaffleTicket: {
+      payload: Prisma.$RaffleTicketPayload<ExtArgs>
+      fields: Prisma.RaffleTicketFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RaffleTicketFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RaffleTicketPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RaffleTicketFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RaffleTicketPayload>
+        }
+        findFirst: {
+          args: Prisma.RaffleTicketFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RaffleTicketPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RaffleTicketFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RaffleTicketPayload>
+        }
+        findMany: {
+          args: Prisma.RaffleTicketFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RaffleTicketPayload>[]
+        }
+        create: {
+          args: Prisma.RaffleTicketCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RaffleTicketPayload>
+        }
+        createMany: {
+          args: Prisma.RaffleTicketCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RaffleTicketCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RaffleTicketPayload>[]
+        }
+        delete: {
+          args: Prisma.RaffleTicketDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RaffleTicketPayload>
+        }
+        update: {
+          args: Prisma.RaffleTicketUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RaffleTicketPayload>
+        }
+        deleteMany: {
+          args: Prisma.RaffleTicketDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RaffleTicketUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RaffleTicketUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RaffleTicketPayload>[]
+        }
+        upsert: {
+          args: Prisma.RaffleTicketUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RaffleTicketPayload>
+        }
+        aggregate: {
+          args: Prisma.RaffleTicketAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRaffleTicket>
+        }
+        groupBy: {
+          args: Prisma.RaffleTicketGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RaffleTicketGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RaffleTicketCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RaffleTicketCountAggregateOutputType> | number
+        }
+      }
+    }
+    RaffleComment: {
+      payload: Prisma.$RaffleCommentPayload<ExtArgs>
+      fields: Prisma.RaffleCommentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RaffleCommentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RaffleCommentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RaffleCommentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RaffleCommentPayload>
+        }
+        findFirst: {
+          args: Prisma.RaffleCommentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RaffleCommentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RaffleCommentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RaffleCommentPayload>
+        }
+        findMany: {
+          args: Prisma.RaffleCommentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RaffleCommentPayload>[]
+        }
+        create: {
+          args: Prisma.RaffleCommentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RaffleCommentPayload>
+        }
+        createMany: {
+          args: Prisma.RaffleCommentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RaffleCommentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RaffleCommentPayload>[]
+        }
+        delete: {
+          args: Prisma.RaffleCommentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RaffleCommentPayload>
+        }
+        update: {
+          args: Prisma.RaffleCommentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RaffleCommentPayload>
+        }
+        deleteMany: {
+          args: Prisma.RaffleCommentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RaffleCommentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RaffleCommentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RaffleCommentPayload>[]
+        }
+        upsert: {
+          args: Prisma.RaffleCommentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RaffleCommentPayload>
+        }
+        aggregate: {
+          args: Prisma.RaffleCommentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRaffleComment>
+        }
+        groupBy: {
+          args: Prisma.RaffleCommentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RaffleCommentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RaffleCommentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RaffleCommentCountAggregateOutputType> | number
+        }
+      }
+    }
+    RaffleRefund: {
+      payload: Prisma.$RaffleRefundPayload<ExtArgs>
+      fields: Prisma.RaffleRefundFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RaffleRefundFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RaffleRefundPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RaffleRefundFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RaffleRefundPayload>
+        }
+        findFirst: {
+          args: Prisma.RaffleRefundFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RaffleRefundPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RaffleRefundFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RaffleRefundPayload>
+        }
+        findMany: {
+          args: Prisma.RaffleRefundFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RaffleRefundPayload>[]
+        }
+        create: {
+          args: Prisma.RaffleRefundCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RaffleRefundPayload>
+        }
+        createMany: {
+          args: Prisma.RaffleRefundCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RaffleRefundCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RaffleRefundPayload>[]
+        }
+        delete: {
+          args: Prisma.RaffleRefundDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RaffleRefundPayload>
+        }
+        update: {
+          args: Prisma.RaffleRefundUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RaffleRefundPayload>
+        }
+        deleteMany: {
+          args: Prisma.RaffleRefundDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RaffleRefundUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RaffleRefundUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RaffleRefundPayload>[]
+        }
+        upsert: {
+          args: Prisma.RaffleRefundUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RaffleRefundPayload>
+        }
+        aggregate: {
+          args: Prisma.RaffleRefundAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRaffleRefund>
+        }
+        groupBy: {
+          args: Prisma.RaffleRefundGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RaffleRefundGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RaffleRefundCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RaffleRefundCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -4065,6 +4365,78 @@ export const NotificationScalarFieldEnum = {
 export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
 
 
+export const RaffleScalarFieldEnum = {
+  id: 'id',
+  slug: 'slug',
+  title: 'title',
+  description: 'description',
+  imageUrl: 'imageUrl',
+  bannerUrl: 'bannerUrl',
+  ticketPrice: 'ticketPrice',
+  currency: 'currency',
+  minTickets: 'minTickets',
+  maxTickets: 'maxTickets',
+  maxTicketsPerUser: 'maxTicketsPerUser',
+  drawType: 'drawType',
+  drawAt: 'drawAt',
+  status: 'status',
+  winnerTicketId: 'winnerTicketId',
+  winnerUserId: 'winnerUserId',
+  revealStartedAt: 'revealStartedAt',
+  revealOrder: 'revealOrder',
+  revealDigits: 'revealDigits',
+  cancelReason: 'cancelReason',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type RaffleScalarFieldEnum = (typeof RaffleScalarFieldEnum)[keyof typeof RaffleScalarFieldEnum]
+
+
+export const RaffleTicketScalarFieldEnum = {
+  id: 'id',
+  raffleId: 'raffleId',
+  userId: 'userId',
+  number: 'number',
+  comment: 'comment',
+  paypalOrderId: 'paypalOrderId',
+  paypalCaptureId: 'paypalCaptureId',
+  amountPaid: 'amountPaid',
+  refundedAt: 'refundedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type RaffleTicketScalarFieldEnum = (typeof RaffleTicketScalarFieldEnum)[keyof typeof RaffleTicketScalarFieldEnum]
+
+
+export const RaffleCommentScalarFieldEnum = {
+  id: 'id',
+  raffleId: 'raffleId',
+  userId: 'userId',
+  body: 'body',
+  createdAt: 'createdAt'
+} as const
+
+export type RaffleCommentScalarFieldEnum = (typeof RaffleCommentScalarFieldEnum)[keyof typeof RaffleCommentScalarFieldEnum]
+
+
+export const RaffleRefundScalarFieldEnum = {
+  id: 'id',
+  raffleId: 'raffleId',
+  raffleTicketId: 'raffleTicketId',
+  userId: 'userId',
+  amount: 'amount',
+  currency: 'currency',
+  paypalRefundId: 'paypalRefundId',
+  status: 'status',
+  failureReason: 'failureReason',
+  createdAt: 'createdAt'
+} as const
+
+export type RaffleRefundScalarFieldEnum = (typeof RaffleRefundScalarFieldEnum)[keyof typeof RaffleRefundScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -4350,6 +4722,10 @@ export type GlobalOmitConfig = {
   jointMember?: Prisma.JointMemberOmit
   jointMemberHistory?: Prisma.JointMemberHistoryOmit
   notification?: Prisma.NotificationOmit
+  raffle?: Prisma.RaffleOmit
+  raffleTicket?: Prisma.RaffleTicketOmit
+  raffleComment?: Prisma.RaffleCommentOmit
+  raffleRefund?: Prisma.RaffleRefundOmit
 }
 
 /* Types for Logging */

@@ -105,6 +105,8 @@ import { router as viewsJointRouter } from "./views/create-joint";
 import { router as userChapterHistoryJointRouter } from "./user-chapter-history/save-joint";
 import { router as superadminRouter } from "./superadmin/index";
 import { router as jointRouter } from "./joint/index";
+import { router as raffleRouter } from "./raffle/index";
+import { router as raffleCronRouter } from "./raffle/cron";
 
 export const router = () => async (app: Elysia) => {
 	console.log('Loading routes...');
@@ -263,6 +265,10 @@ export const router = () => async (app: Elysia) => {
 
 	// Joint
 	app.use(jointRouter());
+
+	// Raffle (Luckys)
+	app.use(raffleRouter());
+	app.use(raffleCronRouter());
 
 	// Superadmin
 	app.use(superadminRouter());

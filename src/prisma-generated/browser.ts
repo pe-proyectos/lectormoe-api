@@ -212,3 +212,23 @@ export type JointMemberHistory = Prisma.JointMemberHistoryModel
  * 
  */
 export type Notification = Prisma.NotificationModel
+/**
+ * Model Raffle
+ * 
+ */
+export type Raffle = Prisma.RaffleModel
+/**
+ * Model RaffleTicket
+ * 
+ */
+export type RaffleTicket = Prisma.RaffleTicketModel
+/**
+ * Model RaffleComment
+ * 
+ */
+export type RaffleComment = Prisma.RaffleCommentModel
+/**
+ * Model RaffleRefund
+ * 
+ */
+export type RaffleRefund = Prisma.RaffleRefundModel

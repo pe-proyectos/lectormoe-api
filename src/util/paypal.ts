@@ -11,6 +11,9 @@ const environment =
         url: "https://api-m.sandbox.paypal.com/v1",
       };
 
+// Orders + Payments APIs are v2; reuse the same hostname.
+const paypalV2Base = environment.url.replace(/\/v1$/, "/v2");
+
 async function getAccessToken(): Promise<string> {
   const authString = `${environment.clientId}:${environment.clientSecret}`;
   const encodedAuth = btoa(authString);
@@ -329,4 +332,88 @@ export async function resumeSubscriptionByPaypalId(paypalSubscriptionId: string)
   const updatedSubscription = await response.json();
   console.log("Suscripción actualizada:", updatedSubscription);
   return updatedSubscription;
+}
+
+// ── Orders API (one-time payments, used by raffles) ─────────────────────────
+
+export async function createPaypalOrder(amount: number, currency: string, raffleSlug: string) {
+  const token = await getAccessToken();
+
+  const response = await fetch(`${paypalV2Base}/checkout/orders`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      intent: "CAPTURE",
+      purchase_units: [
+        {
+          reference_id: `raffle:${raffleSlug}`,
+          description: `Tickets de sorteo: ${raffleSlug}`,
+          amount: {
+            currency_code: currency,
+            value: amount.toFixed(2),
+          },
+        },
+      ],
+      application_context: {
+        shipping_preference: "NO_SHIPPING",
+        user_action: "PAY_NOW",
+      },
+    }),
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    console.error("Error al crear la orden de PayPal:", error);
+    throw new Error("Failed to create PayPal order.");
+  }
+
+  return response.json();
+}
+
+export async function capturePaypalOrder(orderId: string) {
+  const token = await getAccessToken();
+
+  const response = await fetch(`${paypalV2Base}/checkout/orders/${orderId}/capture`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    console.error("Error al capturar la orden de PayPal:", error);
+    throw new Error("Failed to capture PayPal order.");
+  }
+
+  return response.json();
+}
+
+// captureId comes from the captured order's purchase_units[0].payments.captures[0].id
+export async function refundPaypalCapture(captureId: string, amount?: { value: string; currency_code: string }) {
+  const token = await getAccessToken();
+
+  const body: Record<string, any> = {};
+  if (amount) body.amount = amount;
+
+  const response = await fetch(`${paypalV2Base}/payments/captures/${captureId}/refund`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(body),
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    console.error("Error al reembolsar la captura de PayPal:", error);
+    throw new Error("Failed to refund PayPal capture.");
+  }
+
+  return response.json();
 }

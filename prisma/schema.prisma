@@ -135,6 +135,8 @@ model User {
   history                 UserChapterHistory[]
   dailyActivities         UserDailyActivity[]
   notifications           Notification[]
+  raffleTickets           RaffleTicket[]
+  raffleComments          RaffleComment[]
 
   @@map("user")
 }
@@ -895,4 +897,87 @@ model Notification {
   @@index([userId, createdAt])
   @@index([readAt, emailSentAt, createdAt])
   @@map("notification")
+}
+
+model Raffle {
+  id                  Int             @id @default(autoincrement())
+  slug                String          @unique @db.VarChar(256)
+  title               String          @db.VarChar(256)
+  description         String?         @db.Text
+  imageUrl            String?
+  bannerUrl           String?
+  ticketPrice         Float           @default(0)
+  currency            String          @default("USD") @db.VarChar(8)
+  minTickets          Int             @default(1)
+  maxTickets          Int
+  maxTicketsPerUser   Int             @default(1)
+  drawType            String          @db.VarChar(32)
+  drawAt              DateTime?
+  status              String          @default("active") @db.VarChar(32)
+  winnerTicketId      Int?
+  winnerUserId        Int?
+  revealStartedAt     DateTime?
+  revealOrder         Json?
+  revealDigits        String?
+  cancelReason        String?         @db.VarChar(256)
+  createdAt           DateTime        @default(now()) @db.Timestamp(6)
+  updatedAt           DateTime        @updatedAt
+  deletedAt           DateTime?
+  tickets             RaffleTicket[]
+  comments            RaffleComment[]
+  refunds             RaffleRefund[]
+
+  @@index([status, drawAt])
+  @@map("raffle")
+}
+
+model RaffleTicket {
+  id                  Int             @id @default(autoincrement())
+  raffleId            Int
+  raffle              Raffle          @relation(fields: [raffleId], references: [id])
+  userId              Int
+  user                User            @relation(fields: [userId], references: [id])
+  number              Int
+  comment             String?         @db.VarChar(500)
+  paypalOrderId       String?         @db.VarChar(64)
+  paypalCaptureId     String?         @db.VarChar(64)
+  amountPaid          Float           @default(0)
+  refundedAt          DateTime?
+  createdAt           DateTime        @default(now()) @db.Timestamp(6)
+  refund              RaffleRefund?
+
+  @@unique([raffleId, number])
+  @@index([raffleId, userId])
+  @@map("raffle_ticket")
+}
+
+model RaffleComment {
+  id          Int       @id @default(autoincrement())
+  raffleId    Int
+  raffle      Raffle    @relation(fields: [raffleId], references: [id])
+  userId      Int
+  user        User      @relation(fields: [userId], references: [id])
+  body        String    @db.VarChar(500)
+  createdAt   DateTime  @default(now()) @db.Timestamp(6)
+
+  @@index([raffleId, createdAt])
+  @@map("raffle_comment")
+}
+
+model RaffleRefund {
+  id              Int           @id @default(autoincrement())
+  raffleId        Int
+  raffle          Raffle        @relation(fields: [raffleId], references: [id])
+  raffleTicketId  Int           @unique
+  raffleTicket    RaffleTicket  @relation(fields: [raffleTicketId], references: [id])
+  userId          Int
+  amount          Float
+  currency        String        @db.VarChar(8)
+  paypalRefundId  String?       @db.VarChar(64)
+  status          String        @db.VarChar(32)
+  failureReason   String?       @db.VarChar(256)
+  createdAt       DateTime      @default(now()) @db.Timestamp(6)
+
+  @@index([userId, createdAt])
+  @@map("raffle_refund")
 }

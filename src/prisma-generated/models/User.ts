@@ -372,6 +372,8 @@ export type UserWhereInput = {
   history?: Prisma.UserChapterHistoryListRelationFilter
   dailyActivities?: Prisma.UserDailyActivityListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
+  raffleTickets?: Prisma.RaffleTicketListRelationFilter
+  raffleComments?: Prisma.RaffleCommentListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -417,6 +419,8 @@ export type UserOrderByWithRelationInput = {
   history?: Prisma.UserChapterHistoryOrderByRelationAggregateInput
   dailyActivities?: Prisma.UserDailyActivityOrderByRelationAggregateInput
   notifications?: Prisma.NotificationOrderByRelationAggregateInput
+  raffleTickets?: Prisma.RaffleTicketOrderByRelationAggregateInput
+  raffleComments?: Prisma.RaffleCommentOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -465,6 +469,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   history?: Prisma.UserChapterHistoryListRelationFilter
   dailyActivities?: Prisma.UserDailyActivityListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
+  raffleTickets?: Prisma.RaffleTicketListRelationFilter
+  raffleComments?: Prisma.RaffleCommentListRelationFilter
 }, "id" | "username" | "slug" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -567,6 +573,8 @@ export type UserCreateInput = {
   history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -612,6 +620,8 @@ export type UserUncheckedCreateInput = {
   history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -656,6 +666,8 @@ export type UserUpdateInput = {
   history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -701,6 +713,8 @@ export type UserUncheckedUpdateInput = {
   history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -1162,6 +1176,34 @@ export type UserUpdateOneRequiredWithoutNotificationsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutNotificationsInput, Prisma.UserUpdateWithoutNotificationsInput>, Prisma.UserUncheckedUpdateWithoutNotificationsInput>
 }
 
+export type UserCreateNestedOneWithoutRaffleTicketsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRaffleTicketsInput, Prisma.UserUncheckedCreateWithoutRaffleTicketsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRaffleTicketsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutRaffleTicketsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRaffleTicketsInput, Prisma.UserUncheckedCreateWithoutRaffleTicketsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRaffleTicketsInput
+  upsert?: Prisma.UserUpsertWithoutRaffleTicketsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRaffleTicketsInput, Prisma.UserUpdateWithoutRaffleTicketsInput>, Prisma.UserUncheckedUpdateWithoutRaffleTicketsInput>
+}
+
+export type UserCreateNestedOneWithoutRaffleCommentsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRaffleCommentsInput, Prisma.UserUncheckedCreateWithoutRaffleCommentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRaffleCommentsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutRaffleCommentsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRaffleCommentsInput, Prisma.UserUncheckedCreateWithoutRaffleCommentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRaffleCommentsInput
+  upsert?: Prisma.UserUpsertWithoutRaffleCommentsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRaffleCommentsInput, Prisma.UserUpdateWithoutRaffleCommentsInput>, Prisma.UserUncheckedUpdateWithoutRaffleCommentsInput>
+}
+
 export type UserCreateWithoutTokensInput = {
   username: string
   slug: string
@@ -1203,6 +1245,8 @@ export type UserCreateWithoutTokensInput = {
   history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutTokensInput = {
@@ -1247,6 +1291,8 @@ export type UserUncheckedCreateWithoutTokensInput = {
   history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutTokensInput = {
@@ -1306,6 +1352,8 @@ export type UserUpdateWithoutTokensInput = {
   history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTokensInput = {
@@ -1350,6 +1398,8 @@ export type UserUncheckedUpdateWithoutTokensInput = {
   history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPermissionsInput = {
@@ -1393,6 +1443,8 @@ export type UserCreateWithoutPermissionsInput = {
   history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPermissionsInput = {
@@ -1437,6 +1489,8 @@ export type UserUncheckedCreateWithoutPermissionsInput = {
   history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPermissionsInput = {
@@ -1496,6 +1550,8 @@ export type UserUpdateWithoutPermissionsInput = {
   history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPermissionsInput = {
@@ -1540,6 +1596,8 @@ export type UserUncheckedUpdateWithoutPermissionsInput = {
   history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPasswordResetTokensInput = {
@@ -1583,6 +1641,8 @@ export type UserCreateWithoutPasswordResetTokensInput = {
   history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPasswordResetTokensInput = {
@@ -1627,6 +1687,8 @@ export type UserUncheckedCreateWithoutPasswordResetTokensInput = {
   history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPasswordResetTokensInput = {
@@ -1686,6 +1748,8 @@ export type UserUpdateWithoutPasswordResetTokensInput = {
   history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
@@ -1730,6 +1794,8 @@ export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
   history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCommentInput = {
@@ -1773,6 +1839,8 @@ export type UserCreateWithoutCommentInput = {
   history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCommentInput = {
@@ -1817,6 +1885,8 @@ export type UserUncheckedCreateWithoutCommentInput = {
   history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCommentInput = {
@@ -1865,6 +1935,8 @@ export type UserCreateWithoutCommentsInput = {
   history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCommentsInput = {
@@ -1909,6 +1981,8 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCommentsInput = {
@@ -1968,6 +2042,8 @@ export type UserUpdateWithoutCommentInput = {
   history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCommentInput = {
@@ -2012,6 +2088,8 @@ export type UserUncheckedUpdateWithoutCommentInput = {
   history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutCommentsInput = {
@@ -2066,6 +2144,8 @@ export type UserUpdateWithoutCommentsInput = {
   history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCommentsInput = {
@@ -2110,6 +2190,8 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutRankingsInput = {
@@ -2153,6 +2235,8 @@ export type UserCreateWithoutRankingsInput = {
   history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRankingsInput = {
@@ -2197,6 +2281,8 @@ export type UserUncheckedCreateWithoutRankingsInput = {
   history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRankingsInput = {
@@ -2256,6 +2342,8 @@ export type UserUpdateWithoutRankingsInput = {
   history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRankingsInput = {
@@ -2300,6 +2388,8 @@ export type UserUncheckedUpdateWithoutRankingsInput = {
   history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAnalyticsInput = {
@@ -2343,6 +2433,8 @@ export type UserCreateWithoutAnalyticsInput = {
   history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAnalyticsInput = {
@@ -2387,6 +2479,8 @@ export type UserUncheckedCreateWithoutAnalyticsInput = {
   history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAnalyticsInput = {
@@ -2446,6 +2540,8 @@ export type UserUpdateWithoutAnalyticsInput = {
   history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAnalyticsInput = {
@@ -2490,6 +2586,8 @@ export type UserUncheckedUpdateWithoutAnalyticsInput = {
   history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutHistoryInput = {
@@ -2533,6 +2631,8 @@ export type UserCreateWithoutHistoryInput = {
   achievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutHistoryInput = {
@@ -2577,6 +2677,8 @@ export type UserUncheckedCreateWithoutHistoryInput = {
   achievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutHistoryInput = {
@@ -2636,6 +2738,8 @@ export type UserUpdateWithoutHistoryInput = {
   achievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutHistoryInput = {
@@ -2680,6 +2784,8 @@ export type UserUncheckedUpdateWithoutHistoryInput = {
   achievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutFavoritesInput = {
@@ -2723,6 +2829,8 @@ export type UserCreateWithoutFavoritesInput = {
   history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutFavoritesInput = {
@@ -2767,6 +2875,8 @@ export type UserUncheckedCreateWithoutFavoritesInput = {
   history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutFavoritesInput = {
@@ -2826,6 +2936,8 @@ export type UserUpdateWithoutFavoritesInput = {
   history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFavoritesInput = {
@@ -2870,6 +2982,8 @@ export type UserUncheckedUpdateWithoutFavoritesInput = {
   history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutUserListInput = {
@@ -2913,6 +3027,8 @@ export type UserCreateWithoutUserListInput = {
   history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutUserListInput = {
@@ -2957,6 +3073,8 @@ export type UserUncheckedCreateWithoutUserListInput = {
   history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutUserListInput = {
@@ -3016,6 +3134,8 @@ export type UserUpdateWithoutUserListInput = {
   history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserListInput = {
@@ -3060,6 +3180,8 @@ export type UserUncheckedUpdateWithoutUserListInput = {
   history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAuditsInput = {
@@ -3103,6 +3225,8 @@ export type UserCreateWithoutAuditsInput = {
   history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAuditsInput = {
@@ -3147,6 +3271,8 @@ export type UserUncheckedCreateWithoutAuditsInput = {
   history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAuditsInput = {
@@ -3206,6 +3332,8 @@ export type UserUpdateWithoutAuditsInput = {
   history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuditsInput = {
@@ -3250,6 +3378,8 @@ export type UserUncheckedUpdateWithoutAuditsInput = {
   history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSubscriptionsInput = {
@@ -3293,6 +3423,8 @@ export type UserCreateWithoutSubscriptionsInput = {
   history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSubscriptionsInput = {
@@ -3337,6 +3469,8 @@ export type UserUncheckedCreateWithoutSubscriptionsInput = {
   history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSubscriptionsInput = {
@@ -3396,6 +3530,8 @@ export type UserUpdateWithoutSubscriptionsInput = {
   history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSubscriptionsInput = {
@@ -3440,6 +3576,8 @@ export type UserUncheckedUpdateWithoutSubscriptionsInput = {
   history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutOrganizationFollowsInput = {
@@ -3483,6 +3621,8 @@ export type UserCreateWithoutOrganizationFollowsInput = {
   history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutOrganizationFollowsInput = {
@@ -3527,6 +3667,8 @@ export type UserUncheckedCreateWithoutOrganizationFollowsInput = {
   history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutOrganizationFollowsInput = {
@@ -3586,6 +3728,8 @@ export type UserUpdateWithoutOrganizationFollowsInput = {
   history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOrganizationFollowsInput = {
@@ -3630,6 +3774,8 @@ export type UserUncheckedUpdateWithoutOrganizationFollowsInput = {
   history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutEmailPreferenceInput = {
@@ -3673,6 +3819,8 @@ export type UserCreateWithoutEmailPreferenceInput = {
   history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutEmailPreferenceInput = {
@@ -3717,6 +3865,8 @@ export type UserUncheckedCreateWithoutEmailPreferenceInput = {
   history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutEmailPreferenceInput = {
@@ -3776,6 +3926,8 @@ export type UserUpdateWithoutEmailPreferenceInput = {
   history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEmailPreferenceInput = {
@@ -3820,6 +3972,8 @@ export type UserUncheckedUpdateWithoutEmailPreferenceInput = {
   history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutEmailLogsInput = {
@@ -3863,6 +4017,8 @@ export type UserCreateWithoutEmailLogsInput = {
   history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutEmailLogsInput = {
@@ -3907,6 +4063,8 @@ export type UserUncheckedCreateWithoutEmailLogsInput = {
   history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutEmailLogsInput = {
@@ -3966,6 +4124,8 @@ export type UserUpdateWithoutEmailLogsInput = {
   history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEmailLogsInput = {
@@ -4010,6 +4170,8 @@ export type UserUncheckedUpdateWithoutEmailLogsInput = {
   history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutUnsubscribeTokensInput = {
@@ -4053,6 +4215,8 @@ export type UserCreateWithoutUnsubscribeTokensInput = {
   history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutUnsubscribeTokensInput = {
@@ -4097,6 +4261,8 @@ export type UserUncheckedCreateWithoutUnsubscribeTokensInput = {
   history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutUnsubscribeTokensInput = {
@@ -4156,6 +4322,8 @@ export type UserUpdateWithoutUnsubscribeTokensInput = {
   history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUnsubscribeTokensInput = {
@@ -4200,6 +4368,8 @@ export type UserUncheckedUpdateWithoutUnsubscribeTokensInput = {
   history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutEmailVerificationTokensInput = {
@@ -4243,6 +4413,8 @@ export type UserCreateWithoutEmailVerificationTokensInput = {
   history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutEmailVerificationTokensInput = {
@@ -4287,6 +4459,8 @@ export type UserUncheckedCreateWithoutEmailVerificationTokensInput = {
   history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutEmailVerificationTokensInput = {
@@ -4346,6 +4520,8 @@ export type UserUpdateWithoutEmailVerificationTokensInput = {
   history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEmailVerificationTokensInput = {
@@ -4390,6 +4566,8 @@ export type UserUncheckedUpdateWithoutEmailVerificationTokensInput = {
   history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutDailyActivitiesInput = {
@@ -4433,6 +4611,8 @@ export type UserCreateWithoutDailyActivitiesInput = {
   achievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
   history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutDailyActivitiesInput = {
@@ -4477,6 +4657,8 @@ export type UserUncheckedCreateWithoutDailyActivitiesInput = {
   achievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
   history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutDailyActivitiesInput = {
@@ -4536,6 +4718,8 @@ export type UserUpdateWithoutDailyActivitiesInput = {
   achievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
   history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDailyActivitiesInput = {
@@ -4580,6 +4764,8 @@ export type UserUncheckedUpdateWithoutDailyActivitiesInput = {
   achievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
   history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAchievementsInput = {
@@ -4623,6 +4809,8 @@ export type UserCreateWithoutAchievementsInput = {
   history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAchievementsInput = {
@@ -4667,6 +4855,8 @@ export type UserUncheckedCreateWithoutAchievementsInput = {
   history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAchievementsInput = {
@@ -4726,6 +4916,8 @@ export type UserUpdateWithoutAchievementsInput = {
   history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAchievementsInput = {
@@ -4770,6 +4962,8 @@ export type UserUncheckedUpdateWithoutAchievementsInput = {
   history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutNotificationsInput = {
@@ -4813,6 +5007,8 @@ export type UserCreateWithoutNotificationsInput = {
   achievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
   history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -4857,6 +5053,8 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   achievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
   history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -4916,6 +5114,8 @@ export type UserUpdateWithoutNotificationsInput = {
   achievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
   history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -4960,6 +5160,404 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   achievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
   history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
   dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutRaffleTicketsInput = {
+  username: string
+  slug: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  description?: string | null
+  imageUrl?: string | null
+  birthdate?: Date | string | null
+  bannerUrl?: string | null
+  bannerUrlChangedAt?: Date | string | null
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
+  emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
+  pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
+  hideAds?: boolean
+  theme?: string
+  analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
+  audits?: Prisma.AuditCreateNestedManyWithoutUserInput
+  Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  userList?: Prisma.UserListCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
+  rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenCreateNestedManyWithoutUserInput
+  achievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutRaffleTicketsInput = {
+  id?: number
+  username: string
+  slug: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  description?: string | null
+  imageUrl?: string | null
+  birthdate?: Date | string | null
+  bannerUrl?: string | null
+  bannerUrlChangedAt?: Date | string | null
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
+  emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
+  pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
+  hideAds?: boolean
+  theme?: string
+  analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
+  audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
+  Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
+  rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedCreateNestedManyWithoutUserInput
+  achievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutRaffleTicketsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutRaffleTicketsInput, Prisma.UserUncheckedCreateWithoutRaffleTicketsInput>
+}
+
+export type UserUpsertWithoutRaffleTicketsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutRaffleTicketsInput, Prisma.UserUncheckedUpdateWithoutRaffleTicketsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutRaffleTicketsInput, Prisma.UserUncheckedCreateWithoutRaffleTicketsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutRaffleTicketsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutRaffleTicketsInput, Prisma.UserUncheckedUpdateWithoutRaffleTicketsInput>
+}
+
+export type UserUpdateWithoutRaffleTicketsInput = {
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
+  analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
+  audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
+  Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
+  rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenUpdateManyWithoutUserNestedInput
+  achievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutRaffleTicketsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
+  analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
+  audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
+  Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
+  rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedUpdateManyWithoutUserNestedInput
+  achievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutRaffleCommentsInput = {
+  username: string
+  slug: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  description?: string | null
+  imageUrl?: string | null
+  birthdate?: Date | string | null
+  bannerUrl?: string | null
+  bannerUrlChangedAt?: Date | string | null
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
+  emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
+  pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
+  hideAds?: boolean
+  theme?: string
+  analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
+  audits?: Prisma.AuditCreateNestedManyWithoutUserInput
+  Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  userList?: Prisma.UserListCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
+  rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenCreateNestedManyWithoutUserInput
+  achievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutRaffleCommentsInput = {
+  id?: number
+  username: string
+  slug: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  description?: string | null
+  imageUrl?: string | null
+  birthdate?: Date | string | null
+  bannerUrl?: string | null
+  bannerUrlChangedAt?: Date | string | null
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
+  emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
+  pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
+  hideAds?: boolean
+  theme?: string
+  analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
+  audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
+  Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
+  rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedCreateNestedManyWithoutUserInput
+  achievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutRaffleCommentsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutRaffleCommentsInput, Prisma.UserUncheckedCreateWithoutRaffleCommentsInput>
+}
+
+export type UserUpsertWithoutRaffleCommentsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutRaffleCommentsInput, Prisma.UserUncheckedUpdateWithoutRaffleCommentsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutRaffleCommentsInput, Prisma.UserUncheckedCreateWithoutRaffleCommentsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutRaffleCommentsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutRaffleCommentsInput, Prisma.UserUncheckedUpdateWithoutRaffleCommentsInput>
+}
+
+export type UserUpdateWithoutRaffleCommentsInput = {
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
+  analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
+  audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
+  Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
+  rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenUpdateManyWithoutUserNestedInput
+  achievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutRaffleCommentsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
+  analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
+  audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
+  Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
+  rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedUpdateManyWithoutUserNestedInput
+  achievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -4987,6 +5585,8 @@ export type UserCountOutputType = {
   history: number
   dailyActivities: number
   notifications: number
+  raffleTickets: number
+  raffleComments: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -5009,6 +5609,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   history?: boolean | UserCountOutputTypeCountHistoryArgs
   dailyActivities?: boolean | UserCountOutputTypeCountDailyActivitiesArgs
   notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
+  raffleTickets?: boolean | UserCountOutputTypeCountRaffleTicketsArgs
+  raffleComments?: boolean | UserCountOutputTypeCountRaffleCommentsArgs
 }
 
 /**
@@ -5154,6 +5756,20 @@ export type UserCountOutputTypeCountNotificationsArgs<ExtArgs extends runtime.Ty
   where?: Prisma.NotificationWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountRaffleTicketsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RaffleTicketWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountRaffleCommentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RaffleCommentWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -5198,6 +5814,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   history?: boolean | Prisma.User$historyArgs<ExtArgs>
   dailyActivities?: boolean | Prisma.User$dailyActivitiesArgs<ExtArgs>
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
+  raffleTickets?: boolean | Prisma.User$raffleTicketsArgs<ExtArgs>
+  raffleComments?: boolean | Prisma.User$raffleCommentsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -5298,6 +5916,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   history?: boolean | Prisma.User$historyArgs<ExtArgs>
   dailyActivities?: boolean | Prisma.User$dailyActivitiesArgs<ExtArgs>
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
+  raffleTickets?: boolean | Prisma.User$raffleTicketsArgs<ExtArgs>
+  raffleComments?: boolean | Prisma.User$raffleCommentsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -5326,6 +5946,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     history: Prisma.$UserChapterHistoryPayload<ExtArgs>[]
     dailyActivities: Prisma.$UserDailyActivityPayload<ExtArgs>[]
     notifications: Prisma.$NotificationPayload<ExtArgs>[]
+    raffleTickets: Prisma.$RaffleTicketPayload<ExtArgs>[]
+    raffleComments: Prisma.$RaffleCommentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -5764,6 +6386,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   history<T extends Prisma.User$historyArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$historyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserChapterHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   dailyActivities<T extends Prisma.User$dailyActivitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$dailyActivitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserDailyActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   notifications<T extends Prisma.User$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  raffleTickets<T extends Prisma.User$raffleTicketsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$raffleTicketsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RaffleTicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  raffleComments<T extends Prisma.User$raffleCommentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$raffleCommentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RaffleCommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6675,6 +7299,54 @@ export type User$notificationsArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
+}
+
+/**
+ * User.raffleTickets
+ */
+export type User$raffleTicketsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RaffleTicket
+   */
+  select?: Prisma.RaffleTicketSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RaffleTicket
+   */
+  omit?: Prisma.RaffleTicketOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RaffleTicketInclude<ExtArgs> | null
+  where?: Prisma.RaffleTicketWhereInput
+  orderBy?: Prisma.RaffleTicketOrderByWithRelationInput | Prisma.RaffleTicketOrderByWithRelationInput[]
+  cursor?: Prisma.RaffleTicketWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RaffleTicketScalarFieldEnum | Prisma.RaffleTicketScalarFieldEnum[]
+}
+
+/**
+ * User.raffleComments
+ */
+export type User$raffleCommentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RaffleComment
+   */
+  select?: Prisma.RaffleCommentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RaffleComment
+   */
+  omit?: Prisma.RaffleCommentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RaffleCommentInclude<ExtArgs> | null
+  where?: Prisma.RaffleCommentWhereInput
+  orderBy?: Prisma.RaffleCommentOrderByWithRelationInput | Prisma.RaffleCommentOrderByWithRelationInput[]
+  cursor?: Prisma.RaffleCommentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RaffleCommentScalarFieldEnum | Prisma.RaffleCommentScalarFieldEnum[]
 }
 
 /**
