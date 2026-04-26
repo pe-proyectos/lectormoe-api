@@ -77,11 +77,15 @@ import { router as pagesOrderRouter } from "./pages/order";
 import { router as subscriptionCreateRouter } from "./subscription/create";
 import { router as subscriptionEditRouter } from "./subscription/edit";
 import { router as subscriptionListRouter } from "./subscription/list";
+import { router as subscriptionMeListRouter } from "./subscription/me-list";
+import { router as subscriptionMePaymentsRouter } from "./subscription/me-payments";
+import { router as subscriptionMeActiveRouter } from "./subscription/me-active";
 import { router as subscriptionMonthlyRevenueRouter } from "./subscription/monthly-revenue";
 import { router as subscriptionPaypalWebhookRouter } from "./subscription/paypal_webhook";
 import { router as subscriptionStatisticsRouter } from "./subscription/statistics";
 import { router as subscriptionSubscriptionsByPlanRouter } from "./subscription/subscriptions-by-plan";
 import { router as subscriptionSyncStatusRouter } from "./subscription/sync-status";
+import { router as subscriptionReconcileCronRouter } from "./subscription/reconcile-cron";
 import { router as subscriptionPlanCreateRouter } from "./subscription_plan/create";
 import { router as subscriptionPlanEditRouter } from "./subscription_plan/edit";
 import { router as subscriptionPlanListRouter } from "./subscription_plan/list";
@@ -218,11 +222,15 @@ export const router = () => async (app: Elysia) => {
 	app.use(subscriptionCreateRouter());
 	app.use(subscriptionEditRouter());
 	app.use(subscriptionListRouter());
+	app.use(subscriptionMeListRouter());
+	app.use(subscriptionMePaymentsRouter());
+	app.use(subscriptionMeActiveRouter());
 	app.use(subscriptionMonthlyRevenueRouter());
 	app.use(subscriptionPaypalWebhookRouter());
 	app.use(subscriptionStatisticsRouter());
 	app.use(subscriptionSubscriptionsByPlanRouter());
 	app.use(subscriptionSyncStatusRouter());
+	app.use(subscriptionReconcileCronRouter());
 
 	// Subscription Plan
 	app.use(subscriptionPlanCreateRouter());

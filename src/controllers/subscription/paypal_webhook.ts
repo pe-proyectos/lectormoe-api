@@ -2,16 +2,32 @@ import { prisma } from "../../models/prisma";
 import { PaypalWebhookEvent } from "../../types/subscription/paypal_webhook";
 import { getSubscriptionByPaypalId } from "../../util/paypal";
 import { notifyFailedPayment } from "../../services/notify-new-chapter";
+import { reconcileSubscriptionFromPaypal } from "../../services/subscription-reconcile";
 
 export const handlePaypalWebhook = async (webhookEvent: PaypalWebhookEvent) => {
     console.log("webhookEvent");
     console.log(webhookEvent);
 
-    const subscription = await prisma.subscription.findFirst({
+    let subscription = await prisma.subscription.findFirst({
         where: {
             paypalSubscriptionId: webhookEvent.resource.id,
         },
     });
+
+    // Self-heal: webhook arrived for a sub our DB doesn't know about (Beli case
+    // — checkout completed but client-side POST /api/subscription never landed).
+    // Try to insert it from the PayPal payload before bailing.
+    if (!subscription) {
+        const paypalSubId = webhookEvent.resource.billing_agreement_id ?? webhookEvent.resource.id;
+        try {
+            const created = await reconcileSubscriptionFromPaypal(paypalSubId);
+            if (created) {
+                subscription = await prisma.subscription.findUnique({ where: { id: created.id } });
+            }
+        } catch (e) {
+            console.error('[webhook] self-heal failed', e);
+        }
+    }
 
     if (!subscription) {
         throw new Error("Subscription not found");
