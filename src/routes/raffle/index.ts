@@ -80,7 +80,11 @@ const buildSnapshot = async (slug: string, viewerUserId: number | null) => {
 
 export const router = () =>
   new Elysia()
-    // ─── PUBLIC LIST ─────────────────────────────────────────────────────────
+    // ─── PUBLIC + LOGGED + SUPERADMIN routes are split into separate groups so
+    // each group's auth `.use(...)` only applies to its own endpoints. Without
+    // this isolation, `loggedUserOnlyGlobal` would gate the superadmin routes
+    // too and reject Bearer-only requests as "No autorizado, token incorrecto".
+    .group("", (app) => app
     .use(loggedOptional())
     .get(
       "/api/raffle",
@@ -213,7 +217,9 @@ export const router = () =>
       },
       { params: t.Object({ slug: t.String() }) },
     )
+    )
     // ─── LOGGED-IN ACTIONS ───────────────────────────────────────────────────
+    .group("", (app) => app
     .use(loggedUserOnlyGlobal())
     .post(
       "/api/raffle/:slug/comments",
@@ -257,7 +263,9 @@ export const router = () =>
         }),
       },
     )
+    )
     // ─── SUPERADMIN ──────────────────────────────────────────────────────────
+    .group("", (app) => app
     .use(superadminAuth())
     .get(
       "/api/superadmin/raffles",
@@ -349,4 +357,5 @@ export const router = () =>
         params: t.Object({ slug: t.String() }),
         body: t.Object({ reason: t.Optional(t.String()) }),
       },
+    )
     );
