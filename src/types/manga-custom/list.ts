@@ -22,6 +22,8 @@ export const MangaCustomListQuery = t.Object({
     genre: t.Optional(t.String()),
     order: t.Optional(t.Enum(OrderEnum)),
     type: t.Optional(t.Enum(BookTypeCodeEnum)),
+    // 'writing' = only novel/light-novel/book/short-story; 'manga' = exclude those four; omitted = all.
+    contentKind: t.Optional(t.String()),
     ids: t.Optional(t.String()), // Comma-separated IDs
     nsfw: t.Optional(t.String()), // 'true' = only NSFW, 'false' = only non-NSFW, omitted = all
     showDeleted: t.Optional(t.String()), // 'true' = only deleted, omitted = only active

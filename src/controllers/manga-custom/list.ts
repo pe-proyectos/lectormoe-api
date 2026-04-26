@@ -232,6 +232,10 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 					code: filters.type
 				}
 			}
+		} : filters.contentKind === 'writing' ? {
+			manga: { bookType: { code: { in: ['novel', 'light-novel', 'book', 'short-story'] } } }
+		} : filters.contentKind === 'manga' ? {
+			manga: { bookType: { code: { notIn: ['novel', 'light-novel', 'book', 'short-story'] } } }
 		} : {}),
 		...(organizationId ? {
 			organization: {
