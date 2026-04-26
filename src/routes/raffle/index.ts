@@ -145,14 +145,16 @@ export const router = () =>
       "/api/raffle/:slug/comments",
       async ({ params, query }) => {
         const before = query.before ? Number(query.before) : undefined;
+        const after = query.after ? Number(query.after) : undefined;
         const limit = query.limit ? Number(query.limit) : 50;
-        const data = await listRaffleComments(params.slug, { before, limit });
+        const data = await listRaffleComments(params.slug, { before, after, limit });
         return { status: true, data };
       },
       {
         params: t.Object({ slug: t.String() }),
         query: t.Object({
           before: t.Optional(t.String()),
+          after: t.Optional(t.String()),
           limit: t.Optional(t.String()),
         }),
       },

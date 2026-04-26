@@ -5,7 +5,7 @@ import { broadcast } from "../../services/raffle-events";
 const COMMENTS_PAGE_DEFAULT = 50;
 const COMMENT_MAX_LEN = 500;
 
-export const listRaffleComments = async (slug: string, params: { before?: number; limit?: number }) => {
+export const listRaffleComments = async (slug: string, params: { before?: number; after?: number; limit?: number }) => {
   const raffle = await prisma.raffle.findUnique({ where: { slug } });
   if (!raffle || raffle.deletedAt) throw new Error("Sorteo no encontrado.");
 
@@ -13,36 +13,44 @@ export const listRaffleComments = async (slug: string, params: { before?: number
 
   const where: any = { raffleId: raffle.id };
   if (params.before) where.id = { lt: params.before };
+  // 'after' supports the FE polling loop — fetches only newer comments since the
+  // last id the client saw. When set, we order ascending and skip the reverse.
+  if (params.after) where.id = { gt: params.after };
 
   const rows = await prisma.raffleComment.findMany({
     where,
-    orderBy: { id: "desc" },
+    orderBy: { id: params.after ? "asc" : "desc" },
     take: limit,
     include: { user: { select: { id: true, slug: true, username: true, imageUrl: true } } },
   });
 
-  // Resolve which authors have a (non-refunded) ticket in this raffle.
+  // Resolve ticket COUNT (non-refunded) per author so the chat can show the
+  // holder badge and total tickets bought.
   const userIds = Array.from(new Set(rows.map((r) => r.userId)));
-  const ticketHolders = userIds.length === 0
+  const ticketCounts = userIds.length === 0
     ? []
-    : await prisma.raffleTicket.findMany({
+    : await prisma.raffleTicket.groupBy({
+        by: ["userId"],
         where: { raffleId: raffle.id, userId: { in: userIds }, refundedAt: null },
-        select: { userId: true },
-        distinct: ["userId"],
+        _count: { _all: true },
       });
-  const holderIds = new Set(ticketHolders.map((t) => t.userId));
+  const countByUser = new Map<number, number>(ticketCounts.map((t) => [t.userId, t._count._all]));
 
-  // Reverse so the client gets oldest-first for chronological display.
-  return rows.reverse().map((c) => ({
-    id: c.id,
-    userId: c.userId,
-    userSlug: c.user.slug,
-    userUsername: c.user.username,
-    userImageUrl: c.user.imageUrl,
-    isTicketHolder: holderIds.has(c.userId),
-    body: c.body,
-    createdAt: c.createdAt,
-  }));
+  const ordered = params.after ? rows : rows.reverse();
+  return ordered.map((c) => {
+    const ticketCount = countByUser.get(c.userId) ?? 0;
+    return {
+      id: c.id,
+      userId: c.userId,
+      userSlug: c.user.slug,
+      userUsername: c.user.username,
+      userImageUrl: c.user.imageUrl,
+      isTicketHolder: ticketCount > 0,
+      ticketCount,
+      body: c.body,
+      createdAt: c.createdAt,
+    };
+  });
 };
 
 export const createRaffleComment = async (slug: string, userId: number, rawBody: string) => {
@@ -58,9 +66,9 @@ export const createRaffleComment = async (slug: string, userId: number, rawBody:
     include: { user: { select: { id: true, slug: true, username: true, imageUrl: true } } },
   });
 
-  const isTicketHolder = (await prisma.raffleTicket.count({
+  const ticketCount = await prisma.raffleTicket.count({
     where: { raffleId: raffle.id, userId, refundedAt: null },
-  })) > 0;
+  });
 
   const payload = {
     id: created.id,
@@ -68,7 +76,8 @@ export const createRaffleComment = async (slug: string, userId: number, rawBody:
     userSlug: created.user.slug,
     userUsername: created.user.username,
     userImageUrl: created.user.imageUrl,
-    isTicketHolder,
+    isTicketHolder: ticketCount > 0,
+    ticketCount,
     body: created.body,
     createdAt: created.createdAt.toISOString(),
   };
