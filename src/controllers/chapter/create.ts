@@ -88,6 +88,8 @@ export const createChapter = async (organizationId: number, mangaSlug: string, p
 			releasedAt: params.isUnreleased === true ? null : (params?.releasedAt || new Date()),
 			imageUrl,
 			isUnreleased: params.isUnreleased ?? false,
+			// Text-based chapters (novels, books) carry markdown instead of pages.
+			...(params.bodyMarkdown !== undefined ? { bodyMarkdown: params.bodyMarkdown } : {}),
 		},
 	});
 

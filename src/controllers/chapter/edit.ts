@@ -61,10 +61,14 @@ export const editChapter = async (organizationId: number, mangaSlug: string, cha
 		if (params.image === null) {
 			updateData.imageUrl = null;
 		} else if (typeof params.image === 'string') {
-			updateData.imageUrl = params.image.startsWith('http') 
-				? params.image 
+			updateData.imageUrl = params.image.startsWith('http')
+				? params.image
 				: `${r2PublicUrl}/${params.image}`;
 		}
+	}
+
+	if (params.bodyMarkdown !== undefined) {
+		updateData.bodyMarkdown = params.bodyMarkdown;
 	}
 
 	// Si isUnreleased es true y releasedAt está en updateData como null,

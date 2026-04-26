@@ -23,7 +23,23 @@ const getBadgeColor = (orgName: string): string => {
 	return colors[Math.abs(hash) % colors.length];
 };
 
-export const getFeaturedManga = async (limit: number = 8, nsfw?: boolean) => {
+// BookType.code values that classify a Manga row as a "writing" (text-based)
+// instead of a comic/manga.
+const WRITING_BOOK_TYPE_CODES = ["novel", "light-novel", "book", "short-story"];
+
+type ContentKind = "manga" | "writing" | "all";
+
+const buildContentKindFilter = (contentKind?: ContentKind): object[] => {
+	if (contentKind === "writing") {
+		return [{ manga: { bookType: { code: { in: WRITING_BOOK_TYPE_CODES } } } }];
+	}
+	if (contentKind === "manga") {
+		return [{ manga: { bookType: { code: { notIn: WRITING_BOOK_TYPE_CODES } } } }];
+	}
+	return [];
+};
+
+export const getFeaturedManga = async (limit: number = 8, nsfw?: boolean, contentKind: ContentKind = "all") => {
 	// nsfw=false: excluir mangas con isNSFW=true o que pertenezcan a una org NSFW
 	// nsfw=true:  solo mangas marcados isNSFW=true o de una org NSFW
 	const nsfwCondition: object[] = nsfw === true
@@ -32,12 +48,15 @@ export const getFeaturedManga = async (limit: number = 8, nsfw?: boolean) => {
 		? [{ isNSFW: false }, { organization: { isNSFW: false } }]
 		: [];
 
+	const contentKindCondition = buildContentKindFilter(contentKind);
+
 	// Get all manga customs with their organization info, ordered by views
 	const mangasCustoms = await prisma.mangaCustom.findMany({
 		where: {
 			deletedAt: null,
 			AND: [
 				...nsfwCondition,
+				...contentKindCondition,
 				{
 					// Only include mangas with cover images
 					OR: [

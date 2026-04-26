@@ -40,6 +40,8 @@ import { router as myListRouter } from "./user-list";
 import { router as notificationRouter } from "./notification";
 import { router as notificationCronRouter } from "./notification/cron";
 import { router as filesPresignedUrlRouter } from "./files/presigned-url";
+import { router as filesParseDocxRouter } from "./files/parse-docx";
+import { router as filesParseMdRouter } from "./files/parse-md";
 import { router as genreCreateRouter } from "./genre/create";
 import { router as genreDeleteRouter } from "./genre/delete";
 import { router as genreEditRouter } from "./genre/edit";
@@ -165,6 +167,8 @@ export const router = () => async (app: Elysia) => {
 
 	// Files
 	app.use(filesPresignedUrlRouter());
+	app.use(filesParseDocxRouter());
+	app.use(filesParseMdRouter());
 
 	// Genre
 	app.use(genreCreateRouter());

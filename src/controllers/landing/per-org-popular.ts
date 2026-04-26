@@ -1,7 +1,17 @@
 import { prisma } from "../../models/prisma";
 
-export const getPerOrgPopular = async (nsfw: boolean = false) => {
+const WRITING_BOOK_TYPE_CODES = ["novel", "light-novel", "book", "short-story"];
+
+type ContentKind = "manga" | "writing" | "all";
+
+export const getPerOrgPopular = async (nsfw: boolean = false, contentKind: ContentKind = "all") => {
   const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
+
+  const writingFilterForViews = contentKind === "writing"
+    ? { manga: { bookType: { code: { in: WRITING_BOOK_TYPE_CODES } } } }
+    : contentKind === "manga"
+    ? { manga: { bookType: { code: { notIn: WRITING_BOOK_TYPE_CODES } } } }
+    : {};
 
   // 1. Get all matching org IDs in one query
   const organizations = await prisma.organization.findMany({
@@ -22,6 +32,7 @@ export const getPerOrgPopular = async (nsfw: boolean = false) => {
       mangaCustom: {
         organizationId: { in: orgIds },
         visibility: 'public',
+        ...writingFilterForViews,
       },
     },
     _count: { ip: true },
@@ -37,7 +48,7 @@ export const getPerOrgPopular = async (nsfw: boolean = false) => {
 
   // 3. Single fetch for all mangas with their org info — filter NSFW at manga level too
   const mangas = await prisma.mangaCustom.findMany({
-    where: { id: { in: mangaIds }, isNSFW: nsfw, deletedAt: null },
+    where: { id: { in: mangaIds }, isNSFW: nsfw, deletedAt: null, ...writingFilterForViews },
     select: {
       id: true,
       title: true,

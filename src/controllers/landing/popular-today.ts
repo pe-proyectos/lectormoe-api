@@ -19,7 +19,11 @@ const getBadgeColor = (orgName: string): string => {
 	return colors[Math.abs(hash) % colors.length];
 };
 
-export const getPopularToday = async (limit: number = 5, nsfw?: boolean) => {
+const WRITING_BOOK_TYPE_CODES = ["novel", "light-novel", "book", "short-story"];
+
+type ContentKind = "manga" | "writing" | "all";
+
+export const getPopularToday = async (limit: number = 5, nsfw?: boolean, contentKind: ContentKind = "all") => {
 	// "Today" anchored at 00:00 server-local — matches the convention used by
 	// analytics/get.ts and analytics/engagement-statistics.ts.
 	const todayStart = new Date();
@@ -35,6 +39,11 @@ export const getPopularToday = async (limit: number = 5, nsfw?: boolean) => {
 	} else if (nsfw === false) {
 		mangaCustomFilter.isNSFW = false;
 		mangaCustomFilter.organization = { isNSFW: false };
+	}
+	if (contentKind === "writing") {
+		mangaCustomFilter.manga = { ...(mangaCustomFilter.manga || {}), bookType: { code: { in: WRITING_BOOK_TYPE_CODES } } };
+	} else if (contentKind === "manga") {
+		mangaCustomFilter.manga = { ...(mangaCustomFilter.manga || {}), bookType: { code: { notIn: WRITING_BOOK_TYPE_CODES } } };
 	}
 
 	// Pull a generous candidate pool. We can't directly group by manga.id at
@@ -54,7 +63,9 @@ export const getPopularToday = async (limit: number = 5, nsfw?: boolean) => {
 
 	// Joint views — joints have no isNSFW field, so they only contribute when
 	// browsing the SFW landing (matches SortableMangaList convention).
-	const groupedJoint = nsfw === true
+	// Also skip joints entirely when filtering to writings: joints are only used
+	// for collaborative manga uploads and have no bookType association.
+	const groupedJoint = nsfw === true || contentKind === "writing"
 		? []
 		: await prisma.viewsHistory.groupBy({
 			by: ['jointId'],
@@ -80,6 +91,11 @@ export const getPopularToday = async (limit: number = 5, nsfw?: boolean) => {
 				id: { in: customIds },
 				deletedAt: null,
 				OR: [{ imageUrl: { not: null } }, { manga: { imageUrl: { not: null } } }],
+				...(contentKind === "writing"
+					? { manga: { bookType: { code: { in: WRITING_BOOK_TYPE_CODES } } } }
+					: contentKind === "manga"
+					? { manga: { bookType: { code: { notIn: WRITING_BOOK_TYPE_CODES } } } }
+					: {}),
 			},
 			include: {
 				manga: { select: { id: true, title: true, slug: true, imageUrl: true } },

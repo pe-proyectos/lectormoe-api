@@ -11,6 +11,7 @@ export const CreateChapterRequest = t.Object({
         t.String(),
     ])),
     isUnreleased: t.Optional(t.Boolean()),
+    bodyMarkdown: t.Optional(t.Union([t.String(), t.Null()])),
 });
 
 export type CreateChapterRequest = Static<typeof CreateChapterRequest>;

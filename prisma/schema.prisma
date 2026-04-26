@@ -314,6 +314,9 @@ model Chapter {
   releasedAt                DateTime?            @db.Timestamp(6)
   isUnreleased              Boolean              @default(false)
   deletedAt                 DateTime?
+  // Markdown body for text-based chapters (novels, books, etc.). When set,
+  // the chapter is rendered by NovelReader and `pages` should be empty.
+  bodyMarkdown              String?              @db.Text
   mangaCustom               MangaCustom?         @relation(fields: [mangaCustomId], references: [id])
   joint                     MangaJoint?          @relation(fields: [jointId], references: [id])
   uploadedByOrganization    Organization?        @relation("ChapterUploader", fields: [uploadedByOrganizationId], references: [id])

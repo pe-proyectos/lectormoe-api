@@ -7,7 +7,10 @@ export const router = () => new Elysia()
 		async ({ query }) => {
 			const limit = query?.limit ? Number.parseInt(query.limit) : 8;
 			const nsfw = query?.nsfw === 'true' ? true : query?.nsfw === 'false' ? false : undefined;
-			const data = await getFeaturedManga(limit, nsfw);
+			const contentKind = (query?.contentKind === 'writing' || query?.contentKind === 'manga')
+				? query.contentKind
+				: 'all';
+			const data = await getFeaturedManga(limit, nsfw, contentKind);
 			return { status: true, data };
 		},
 		{
@@ -15,6 +18,7 @@ export const router = () => new Elysia()
 				t.Object({
 					limit: t.Optional(t.String()),
 					nsfw: t.Optional(t.String()),
+					contentKind: t.Optional(t.String()),
 				})
 			),
 			response: t.Object({
@@ -44,4 +48,3 @@ export const router = () => new Elysia()
 			}),
 		}
 	);
-

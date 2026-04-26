@@ -11,6 +11,7 @@ export const EditChapterRequest = t.Object({
         t.String(),
     ])),
     isUnreleased: t.Optional(t.Boolean()),
+    bodyMarkdown: t.Optional(t.Union([t.String(), t.Null()])),
 });
 
 export type EditChapterRequest = Static<typeof EditChapterRequest>;
