@@ -5,6 +5,7 @@ import { getGlobalStats, getOrgStats } from '../../controllers/superadmin/stats'
 import { listRequests, reviewRequest } from '../../controllers/superadmin/requests';
 import { searchUsers, createScan } from '../../controllers/superadmin/scan';
 import { listUsersAdmin, resendVerificationEmail } from '../../controllers/superadmin/users';
+import { listAllSubscriptions, listAnySubscriptionPayments } from '../../controllers/superadmin/subscriptions';
 import { computeMonthlyAdRevenue, persistMonthlyAdRevenue } from '../../services/ad-revenue';
 
 export const router = () =>
@@ -127,6 +128,39 @@ export const router = () =>
 				const id = Number.parseInt(params.id);
 				if (Number.isNaN(id)) throw new Error('Id inválido.');
 				const data = await resendVerificationEmail(id);
+				return { status: true, data };
+			},
+			{ params: t.Object({ id: t.String() }) }
+		)
+		.get(
+			'/api/superadmin/subscriptions',
+			async ({ query }) => {
+				const data = await listAllSubscriptions({
+					page: query.page,
+					limit: query.limit,
+					search: query.search,
+					status: query.status,
+					organizationId: query.organizationId,
+				});
+				return { status: true, data };
+			},
+			{
+				query: t.Object({
+					page: t.Optional(t.String()),
+					limit: t.Optional(t.String()),
+					search: t.Optional(t.String()),
+					status: t.Optional(t.String()),
+					organizationId: t.Optional(t.String()),
+				}),
+			}
+		)
+		.get(
+			'/api/superadmin/subscriptions/:id/payments',
+			async ({ params }) => {
+				const id = Number.parseInt(params.id);
+				if (Number.isNaN(id)) throw new Error('Id inválido.');
+				const data = await listAnySubscriptionPayments(id);
+				if (!data) throw new Error('Suscripción no encontrada.');
 				return { status: true, data };
 			},
 			{ params: t.Object({ id: t.String() }) }
