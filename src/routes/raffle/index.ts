@@ -9,6 +9,7 @@ import { getRaffleBySlug } from "../../controllers/raffle/get";
 import { getRaffleDrawState } from "../../controllers/raffle/draw-state";
 import {
   listRaffleTickets,
+  listMyRaffleTickets,
   createPaypalOrderForRaffle,
   purchaseTickets,
 } from "../../controllers/raffle/tickets";
@@ -272,6 +273,14 @@ export const router = () =>
           paypalOrderId: t.Optional(t.String()),
         }),
       },
+    )
+    .get(
+      "/api/raffle/:slug/my-tickets",
+      async ({ params, user }: any) => {
+        const data = await listMyRaffleTickets(params.slug, user.id);
+        return { status: true, data };
+      },
+      { params: t.Object({ slug: t.String() }) },
     )
     )
     // ─── SUPERADMIN ──────────────────────────────────────────────────────────

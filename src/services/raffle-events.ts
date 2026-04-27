@@ -55,6 +55,7 @@ export type RaffleEvent =
       startedAt: string;
     }
   | {
+      // Phase 1 elimination (single ticket every eliminationIntervalMs).
       type: 'elimination';
       ticketNumber: string;
       userSlug: string;
@@ -63,6 +64,31 @@ export type RaffleEvent =
       comment: string | null;
       eliminationOrder: number;
       remainingCount: number;
+    }
+  // ─── Three-phase events ──────────────────────────────────────────────
+  | { type: 'phase_started'; phase: 'phase1' | 'phase2' | 'phase3_intro' | 'phase3' }
+  // Phase 2 wind gust — moves N tickets visually. lightState at gust time
+  // determines whether they get eliminated.
+  | {
+      type: 'wind_gust';
+      ticketIds: number[];
+      lightState: 'red' | 'green';
+      eliminatedTicketIds: number[]; // populated only if lightState=red
+    }
+  | { type: 'light_change'; lightState: 'red' | 'green' }
+  // Phase 3 horse advance — each ticket gets a random +1..+3 step.
+  | {
+      type: 'horse_advance';
+      steps: { ticketId: number; horseSteps: number }[];
+    }
+  // Phase 3 last-place elimination.
+  | {
+      type: 'horse_elimination';
+      ticketId: number;
+      ticketNumber: string;
+      userSlug: string;
+      userUsername: string;
+      userImageUrl: string | null;
     }
   | {
       type: 'draw_completed';

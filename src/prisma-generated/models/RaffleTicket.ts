@@ -33,6 +33,7 @@ export type RaffleTicketAvgAggregateOutputType = {
   number: number | null
   amountPaid: number | null
   eliminationOrder: number | null
+  horseSteps: number | null
 }
 
 export type RaffleTicketSumAggregateOutputType = {
@@ -42,6 +43,7 @@ export type RaffleTicketSumAggregateOutputType = {
   number: number | null
   amountPaid: number | null
   eliminationOrder: number | null
+  horseSteps: number | null
 }
 
 export type RaffleTicketMinAggregateOutputType = {
@@ -56,6 +58,8 @@ export type RaffleTicketMinAggregateOutputType = {
   refundedAt: Date | null
   eliminatedAt: Date | null
   eliminationOrder: number | null
+  horseSteps: number | null
+  blownAt: Date | null
   createdAt: Date | null
 }
 
@@ -71,6 +75,8 @@ export type RaffleTicketMaxAggregateOutputType = {
   refundedAt: Date | null
   eliminatedAt: Date | null
   eliminationOrder: number | null
+  horseSteps: number | null
+  blownAt: Date | null
   createdAt: Date | null
 }
 
@@ -86,6 +92,8 @@ export type RaffleTicketCountAggregateOutputType = {
   refundedAt: number
   eliminatedAt: number
   eliminationOrder: number
+  horseSteps: number
+  blownAt: number
   createdAt: number
   _all: number
 }
@@ -98,6 +106,7 @@ export type RaffleTicketAvgAggregateInputType = {
   number?: true
   amountPaid?: true
   eliminationOrder?: true
+  horseSteps?: true
 }
 
 export type RaffleTicketSumAggregateInputType = {
@@ -107,6 +116,7 @@ export type RaffleTicketSumAggregateInputType = {
   number?: true
   amountPaid?: true
   eliminationOrder?: true
+  horseSteps?: true
 }
 
 export type RaffleTicketMinAggregateInputType = {
@@ -121,6 +131,8 @@ export type RaffleTicketMinAggregateInputType = {
   refundedAt?: true
   eliminatedAt?: true
   eliminationOrder?: true
+  horseSteps?: true
+  blownAt?: true
   createdAt?: true
 }
 
@@ -136,6 +148,8 @@ export type RaffleTicketMaxAggregateInputType = {
   refundedAt?: true
   eliminatedAt?: true
   eliminationOrder?: true
+  horseSteps?: true
+  blownAt?: true
   createdAt?: true
 }
 
@@ -151,6 +165,8 @@ export type RaffleTicketCountAggregateInputType = {
   refundedAt?: true
   eliminatedAt?: true
   eliminationOrder?: true
+  horseSteps?: true
+  blownAt?: true
   createdAt?: true
   _all?: true
 }
@@ -253,6 +269,8 @@ export type RaffleTicketGroupByOutputType = {
   refundedAt: Date | null
   eliminatedAt: Date | null
   eliminationOrder: number | null
+  horseSteps: number
+  blownAt: Date | null
   createdAt: Date
   _count: RaffleTicketCountAggregateOutputType | null
   _avg: RaffleTicketAvgAggregateOutputType | null
@@ -291,6 +309,8 @@ export type RaffleTicketWhereInput = {
   refundedAt?: Prisma.DateTimeNullableFilter<"RaffleTicket"> | Date | string | null
   eliminatedAt?: Prisma.DateTimeNullableFilter<"RaffleTicket"> | Date | string | null
   eliminationOrder?: Prisma.IntNullableFilter<"RaffleTicket"> | number | null
+  horseSteps?: Prisma.IntFilter<"RaffleTicket"> | number
+  blownAt?: Prisma.DateTimeNullableFilter<"RaffleTicket"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"RaffleTicket"> | Date | string
   raffle?: Prisma.XOR<Prisma.RaffleScalarRelationFilter, Prisma.RaffleWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -309,6 +329,8 @@ export type RaffleTicketOrderByWithRelationInput = {
   refundedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   eliminatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   eliminationOrder?: Prisma.SortOrderInput | Prisma.SortOrder
+  horseSteps?: Prisma.SortOrder
+  blownAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   raffle?: Prisma.RaffleOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
@@ -331,6 +353,8 @@ export type RaffleTicketWhereUniqueInput = Prisma.AtLeast<{
   refundedAt?: Prisma.DateTimeNullableFilter<"RaffleTicket"> | Date | string | null
   eliminatedAt?: Prisma.DateTimeNullableFilter<"RaffleTicket"> | Date | string | null
   eliminationOrder?: Prisma.IntNullableFilter<"RaffleTicket"> | number | null
+  horseSteps?: Prisma.IntFilter<"RaffleTicket"> | number
+  blownAt?: Prisma.DateTimeNullableFilter<"RaffleTicket"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"RaffleTicket"> | Date | string
   raffle?: Prisma.XOR<Prisma.RaffleScalarRelationFilter, Prisma.RaffleWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -349,6 +373,8 @@ export type RaffleTicketOrderByWithAggregationInput = {
   refundedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   eliminatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   eliminationOrder?: Prisma.SortOrderInput | Prisma.SortOrder
+  horseSteps?: Prisma.SortOrder
+  blownAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.RaffleTicketCountOrderByAggregateInput
   _avg?: Prisma.RaffleTicketAvgOrderByAggregateInput
@@ -372,6 +398,8 @@ export type RaffleTicketScalarWhereWithAggregatesInput = {
   refundedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"RaffleTicket"> | Date | string | null
   eliminatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"RaffleTicket"> | Date | string | null
   eliminationOrder?: Prisma.IntNullableWithAggregatesFilter<"RaffleTicket"> | number | null
+  horseSteps?: Prisma.IntWithAggregatesFilter<"RaffleTicket"> | number
+  blownAt?: Prisma.DateTimeNullableWithAggregatesFilter<"RaffleTicket"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"RaffleTicket"> | Date | string
 }
 
@@ -384,6 +412,8 @@ export type RaffleTicketCreateInput = {
   refundedAt?: Date | string | null
   eliminatedAt?: Date | string | null
   eliminationOrder?: number | null
+  horseSteps?: number
+  blownAt?: Date | string | null
   createdAt?: Date | string
   raffle: Prisma.RaffleCreateNestedOneWithoutTicketsInput
   user: Prisma.UserCreateNestedOneWithoutRaffleTicketsInput
@@ -402,6 +432,8 @@ export type RaffleTicketUncheckedCreateInput = {
   refundedAt?: Date | string | null
   eliminatedAt?: Date | string | null
   eliminationOrder?: number | null
+  horseSteps?: number
+  blownAt?: Date | string | null
   createdAt?: Date | string
   refund?: Prisma.RaffleRefundUncheckedCreateNestedOneWithoutRaffleTicketInput
 }
@@ -415,6 +447,8 @@ export type RaffleTicketUpdateInput = {
   refundedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   eliminatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   eliminationOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  horseSteps?: Prisma.IntFieldUpdateOperationsInput | number
+  blownAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   raffle?: Prisma.RaffleUpdateOneRequiredWithoutTicketsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutRaffleTicketsNestedInput
@@ -433,6 +467,8 @@ export type RaffleTicketUncheckedUpdateInput = {
   refundedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   eliminatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   eliminationOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  horseSteps?: Prisma.IntFieldUpdateOperationsInput | number
+  blownAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   refund?: Prisma.RaffleRefundUncheckedUpdateOneWithoutRaffleTicketNestedInput
 }
@@ -449,6 +485,8 @@ export type RaffleTicketCreateManyInput = {
   refundedAt?: Date | string | null
   eliminatedAt?: Date | string | null
   eliminationOrder?: number | null
+  horseSteps?: number
+  blownAt?: Date | string | null
   createdAt?: Date | string
 }
 
@@ -461,6 +499,8 @@ export type RaffleTicketUpdateManyMutationInput = {
   refundedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   eliminatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   eliminationOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  horseSteps?: Prisma.IntFieldUpdateOperationsInput | number
+  blownAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -476,6 +516,8 @@ export type RaffleTicketUncheckedUpdateManyInput = {
   refundedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   eliminatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   eliminationOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  horseSteps?: Prisma.IntFieldUpdateOperationsInput | number
+  blownAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -506,6 +548,8 @@ export type RaffleTicketCountOrderByAggregateInput = {
   refundedAt?: Prisma.SortOrder
   eliminatedAt?: Prisma.SortOrder
   eliminationOrder?: Prisma.SortOrder
+  horseSteps?: Prisma.SortOrder
+  blownAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -516,6 +560,7 @@ export type RaffleTicketAvgOrderByAggregateInput = {
   number?: Prisma.SortOrder
   amountPaid?: Prisma.SortOrder
   eliminationOrder?: Prisma.SortOrder
+  horseSteps?: Prisma.SortOrder
 }
 
 export type RaffleTicketMaxOrderByAggregateInput = {
@@ -530,6 +575,8 @@ export type RaffleTicketMaxOrderByAggregateInput = {
   refundedAt?: Prisma.SortOrder
   eliminatedAt?: Prisma.SortOrder
   eliminationOrder?: Prisma.SortOrder
+  horseSteps?: Prisma.SortOrder
+  blownAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -545,6 +592,8 @@ export type RaffleTicketMinOrderByAggregateInput = {
   refundedAt?: Prisma.SortOrder
   eliminatedAt?: Prisma.SortOrder
   eliminationOrder?: Prisma.SortOrder
+  horseSteps?: Prisma.SortOrder
+  blownAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -555,6 +604,7 @@ export type RaffleTicketSumOrderByAggregateInput = {
   number?: Prisma.SortOrder
   amountPaid?: Prisma.SortOrder
   eliminationOrder?: Prisma.SortOrder
+  horseSteps?: Prisma.SortOrder
 }
 
 export type RaffleTicketScalarRelationFilter = {
@@ -669,6 +719,8 @@ export type RaffleTicketCreateWithoutUserInput = {
   refundedAt?: Date | string | null
   eliminatedAt?: Date | string | null
   eliminationOrder?: number | null
+  horseSteps?: number
+  blownAt?: Date | string | null
   createdAt?: Date | string
   raffle: Prisma.RaffleCreateNestedOneWithoutTicketsInput
   refund?: Prisma.RaffleRefundCreateNestedOneWithoutRaffleTicketInput
@@ -685,6 +737,8 @@ export type RaffleTicketUncheckedCreateWithoutUserInput = {
   refundedAt?: Date | string | null
   eliminatedAt?: Date | string | null
   eliminationOrder?: number | null
+  horseSteps?: number
+  blownAt?: Date | string | null
   createdAt?: Date | string
   refund?: Prisma.RaffleRefundUncheckedCreateNestedOneWithoutRaffleTicketInput
 }
@@ -730,6 +784,8 @@ export type RaffleTicketScalarWhereInput = {
   refundedAt?: Prisma.DateTimeNullableFilter<"RaffleTicket"> | Date | string | null
   eliminatedAt?: Prisma.DateTimeNullableFilter<"RaffleTicket"> | Date | string | null
   eliminationOrder?: Prisma.IntNullableFilter<"RaffleTicket"> | number | null
+  horseSteps?: Prisma.IntFilter<"RaffleTicket"> | number
+  blownAt?: Prisma.DateTimeNullableFilter<"RaffleTicket"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"RaffleTicket"> | Date | string
 }
 
@@ -742,6 +798,8 @@ export type RaffleTicketCreateWithoutRaffleInput = {
   refundedAt?: Date | string | null
   eliminatedAt?: Date | string | null
   eliminationOrder?: number | null
+  horseSteps?: number
+  blownAt?: Date | string | null
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutRaffleTicketsInput
   refund?: Prisma.RaffleRefundCreateNestedOneWithoutRaffleTicketInput
@@ -758,6 +816,8 @@ export type RaffleTicketUncheckedCreateWithoutRaffleInput = {
   refundedAt?: Date | string | null
   eliminatedAt?: Date | string | null
   eliminationOrder?: number | null
+  horseSteps?: number
+  blownAt?: Date | string | null
   createdAt?: Date | string
   refund?: Prisma.RaffleRefundUncheckedCreateNestedOneWithoutRaffleTicketInput
 }
@@ -797,6 +857,8 @@ export type RaffleTicketCreateWithoutRefundInput = {
   refundedAt?: Date | string | null
   eliminatedAt?: Date | string | null
   eliminationOrder?: number | null
+  horseSteps?: number
+  blownAt?: Date | string | null
   createdAt?: Date | string
   raffle: Prisma.RaffleCreateNestedOneWithoutTicketsInput
   user: Prisma.UserCreateNestedOneWithoutRaffleTicketsInput
@@ -814,6 +876,8 @@ export type RaffleTicketUncheckedCreateWithoutRefundInput = {
   refundedAt?: Date | string | null
   eliminatedAt?: Date | string | null
   eliminationOrder?: number | null
+  horseSteps?: number
+  blownAt?: Date | string | null
   createdAt?: Date | string
 }
 
@@ -842,6 +906,8 @@ export type RaffleTicketUpdateWithoutRefundInput = {
   refundedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   eliminatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   eliminationOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  horseSteps?: Prisma.IntFieldUpdateOperationsInput | number
+  blownAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   raffle?: Prisma.RaffleUpdateOneRequiredWithoutTicketsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutRaffleTicketsNestedInput
@@ -859,6 +925,8 @@ export type RaffleTicketUncheckedUpdateWithoutRefundInput = {
   refundedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   eliminatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   eliminationOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  horseSteps?: Prisma.IntFieldUpdateOperationsInput | number
+  blownAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -873,6 +941,8 @@ export type RaffleTicketCreateManyUserInput = {
   refundedAt?: Date | string | null
   eliminatedAt?: Date | string | null
   eliminationOrder?: number | null
+  horseSteps?: number
+  blownAt?: Date | string | null
   createdAt?: Date | string
 }
 
@@ -885,6 +955,8 @@ export type RaffleTicketUpdateWithoutUserInput = {
   refundedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   eliminatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   eliminationOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  horseSteps?: Prisma.IntFieldUpdateOperationsInput | number
+  blownAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   raffle?: Prisma.RaffleUpdateOneRequiredWithoutTicketsNestedInput
   refund?: Prisma.RaffleRefundUpdateOneWithoutRaffleTicketNestedInput
@@ -901,6 +973,8 @@ export type RaffleTicketUncheckedUpdateWithoutUserInput = {
   refundedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   eliminatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   eliminationOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  horseSteps?: Prisma.IntFieldUpdateOperationsInput | number
+  blownAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   refund?: Prisma.RaffleRefundUncheckedUpdateOneWithoutRaffleTicketNestedInput
 }
@@ -916,6 +990,8 @@ export type RaffleTicketUncheckedUpdateManyWithoutUserInput = {
   refundedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   eliminatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   eliminationOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  horseSteps?: Prisma.IntFieldUpdateOperationsInput | number
+  blownAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -930,6 +1006,8 @@ export type RaffleTicketCreateManyRaffleInput = {
   refundedAt?: Date | string | null
   eliminatedAt?: Date | string | null
   eliminationOrder?: number | null
+  horseSteps?: number
+  blownAt?: Date | string | null
   createdAt?: Date | string
 }
 
@@ -942,6 +1020,8 @@ export type RaffleTicketUpdateWithoutRaffleInput = {
   refundedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   eliminatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   eliminationOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  horseSteps?: Prisma.IntFieldUpdateOperationsInput | number
+  blownAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutRaffleTicketsNestedInput
   refund?: Prisma.RaffleRefundUpdateOneWithoutRaffleTicketNestedInput
@@ -958,6 +1038,8 @@ export type RaffleTicketUncheckedUpdateWithoutRaffleInput = {
   refundedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   eliminatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   eliminationOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  horseSteps?: Prisma.IntFieldUpdateOperationsInput | number
+  blownAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   refund?: Prisma.RaffleRefundUncheckedUpdateOneWithoutRaffleTicketNestedInput
 }
@@ -973,6 +1055,8 @@ export type RaffleTicketUncheckedUpdateManyWithoutRaffleInput = {
   refundedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   eliminatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   eliminationOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  horseSteps?: Prisma.IntFieldUpdateOperationsInput | number
+  blownAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -990,6 +1074,8 @@ export type RaffleTicketSelect<ExtArgs extends runtime.Types.Extensions.Internal
   refundedAt?: boolean
   eliminatedAt?: boolean
   eliminationOrder?: boolean
+  horseSteps?: boolean
+  blownAt?: boolean
   createdAt?: boolean
   raffle?: boolean | Prisma.RaffleDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1008,6 +1094,8 @@ export type RaffleTicketSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   refundedAt?: boolean
   eliminatedAt?: boolean
   eliminationOrder?: boolean
+  horseSteps?: boolean
+  blownAt?: boolean
   createdAt?: boolean
   raffle?: boolean | Prisma.RaffleDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1025,6 +1113,8 @@ export type RaffleTicketSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   refundedAt?: boolean
   eliminatedAt?: boolean
   eliminationOrder?: boolean
+  horseSteps?: boolean
+  blownAt?: boolean
   createdAt?: boolean
   raffle?: boolean | Prisma.RaffleDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1042,10 +1132,12 @@ export type RaffleTicketSelectScalar = {
   refundedAt?: boolean
   eliminatedAt?: boolean
   eliminationOrder?: boolean
+  horseSteps?: boolean
+  blownAt?: boolean
   createdAt?: boolean
 }
 
-export type RaffleTicketOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "raffleId" | "userId" | "number" | "comment" | "paypalOrderId" | "paypalCaptureId" | "amountPaid" | "refundedAt" | "eliminatedAt" | "eliminationOrder" | "createdAt", ExtArgs["result"]["raffleTicket"]>
+export type RaffleTicketOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "raffleId" | "userId" | "number" | "comment" | "paypalOrderId" | "paypalCaptureId" | "amountPaid" | "refundedAt" | "eliminatedAt" | "eliminationOrder" | "horseSteps" | "blownAt" | "createdAt", ExtArgs["result"]["raffleTicket"]>
 export type RaffleTicketInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   raffle?: boolean | Prisma.RaffleDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1079,6 +1171,8 @@ export type $RaffleTicketPayload<ExtArgs extends runtime.Types.Extensions.Intern
     refundedAt: Date | null
     eliminatedAt: Date | null
     eliminationOrder: number | null
+    horseSteps: number
+    blownAt: Date | null
     createdAt: Date
   }, ExtArgs["result"]["raffleTicket"]>
   composites: {}
@@ -1517,6 +1611,8 @@ export interface RaffleTicketFieldRefs {
   readonly refundedAt: Prisma.FieldRef<"RaffleTicket", 'DateTime'>
   readonly eliminatedAt: Prisma.FieldRef<"RaffleTicket", 'DateTime'>
   readonly eliminationOrder: Prisma.FieldRef<"RaffleTicket", 'Int'>
+  readonly horseSteps: Prisma.FieldRef<"RaffleTicket", 'Int'>
+  readonly blownAt: Prisma.FieldRef<"RaffleTicket", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"RaffleTicket", 'DateTime'>
 }
     

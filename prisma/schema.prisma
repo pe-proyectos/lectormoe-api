@@ -933,6 +933,20 @@ model Raffle {
   // Wall-clock of the most recent elimination. Used by clients (polling) to
   // compute "Próxima eliminación en Xs".
   lastEliminationAt   DateTime?
+  // Three-phase elimination tournament:
+  //   phase1 → 5s eliminations until 30 tickets remain (only if total > 50)
+  //   phase2 → Squid-Game wind+lights until 10 remain
+  //   phase3_intro → 30s pause before horse race
+  //   phase3 → horse race until 1 remains
+  drawPhase           String?         @db.VarChar(16)
+  // Phase 2 light state ("red" or "green"). Wind gusts during red eliminate.
+  lightState          String?         @db.VarChar(8)
+  lastLightChangeAt   DateTime?
+  lastWindAt          DateTime?
+  // Phase 3 timing.
+  phase3StartedAt     DateTime?
+  lastHorseAdvanceAt  DateTime?
+  lastHorseEliminationAt DateTime?
   cancelReason        String?         @db.VarChar(256)
   createdAt           DateTime        @default(now()) @db.Timestamp(6)
   updatedAt           DateTime        @updatedAt
@@ -959,6 +973,12 @@ model RaffleTicket {
   refundedAt          DateTime?
   eliminatedAt        DateTime?
   eliminationOrder    Int?
+  // Phase 3 horse-race progress. Higher = further along the track. Reset at
+  // phase 3 start. Not used in earlier phases.
+  horseSteps          Int             @default(0)
+  // Last wall-clock time this ticket was visually moved by a wind gust in
+  // phase 2. The FE animates from this; the backend uses it nowhere else.
+  blownAt             DateTime?
   createdAt           DateTime        @default(now()) @db.Timestamp(6)
   refund              RaffleRefund?
 

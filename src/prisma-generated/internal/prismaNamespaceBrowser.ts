@@ -838,6 +838,13 @@ export const RaffleScalarFieldEnum = {
   winnersCount: 'winnersCount',
   eliminationIntervalMs: 'eliminationIntervalMs',
   lastEliminationAt: 'lastEliminationAt',
+  drawPhase: 'drawPhase',
+  lightState: 'lightState',
+  lastLightChangeAt: 'lastLightChangeAt',
+  lastWindAt: 'lastWindAt',
+  phase3StartedAt: 'phase3StartedAt',
+  lastHorseAdvanceAt: 'lastHorseAdvanceAt',
+  lastHorseEliminationAt: 'lastHorseEliminationAt',
   cancelReason: 'cancelReason',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
@@ -859,6 +866,8 @@ export const RaffleTicketScalarFieldEnum = {
   refundedAt: 'refundedAt',
   eliminatedAt: 'eliminatedAt',
   eliminationOrder: 'eliminationOrder',
+  horseSteps: 'horseSteps',
+  blownAt: 'blownAt',
   createdAt: 'createdAt'
 } as const
 

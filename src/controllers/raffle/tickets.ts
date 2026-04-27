@@ -19,6 +19,43 @@ const requireRafflePrerequisites = async (userId: number) => {
 
 const TICKETS_PAGE_DEFAULT = 30;
 
+// Viewer's own tickets in a single raffle, with status (alive / eliminated /
+// winner). Used by the "Mis tickets" strip in the raffle detail page so the
+// user can see at a glance whether their tickets survived.
+export const listMyRaffleTickets = async (slug: string, userId: number) => {
+  const raffle = await prisma.raffle.findUnique({
+    where: { slug },
+    select: { id: true, status: true, deletedAt: true },
+  });
+  if (!raffle || raffle.deletedAt) throw new Error("Sorteo no encontrado.");
+
+  const tickets = await prisma.raffleTicket.findMany({
+    where: { raffleId: raffle.id, userId },
+    orderBy: { number: "asc" },
+    select: {
+      id: true,
+      number: true,
+      eliminatedAt: true,
+      eliminationOrder: true,
+      refundedAt: true,
+      comment: true,
+    },
+  });
+
+  // A surviving ticket on a completed raffle = winner.
+  const isCompleted = raffle.status === "completed";
+  return tickets.map((t) => ({
+    id: t.id,
+    number: padTicket(t.number),
+    comment: t.comment,
+    refunded: t.refundedAt !== null,
+    eliminated: t.eliminatedAt !== null,
+    eliminationOrder: t.eliminationOrder,
+    isWinner: isCompleted && t.eliminatedAt === null && !t.refundedAt,
+    alive: t.eliminatedAt === null && !t.refundedAt && !isCompleted,
+  }));
+};
+
 export const listRaffleTickets = async (slug: string, params: {
   page?: number;
   limit?: number;
