@@ -1,16 +1,18 @@
 import { prisma } from "../../models/prisma";
-import { padTicket } from "../../services/raffle-draw";
+import {
+  padTicket,
+  phase1IntervalMs,
+  phase2WindIntervalMs,
+  phase2LightIntervalMs,
+  phase3AdvanceIntervalMs,
+  phase3EliminationIntervalMs,
+} from "../../services/raffle-draw";
 
-// Mirrors the constants in raffle-draw.ts. Kept here so the FE can compute
-// "next X in Ys" countdowns from `last*At` timestamps without needing the
-// service to publish a separate "next*At" for each timer.
-const PHASE1_INTERVAL_MS = 5_000;
+// Mirrors the constants in raffle-draw.ts via the helper exports — keeps
+// the FE countdowns aligned with the service's actual scheduling. Phase 3
+// helpers take alive count so we can reflect the finale acceleration.
 const PHASE1_TARGET = 30;
 const PHASE2_TARGET = 10;
-const PHASE2_WIND_INTERVAL_MS = 3_000;
-const PHASE2_LIGHT_INTERVAL_MS = 10_000;
-const PHASE3_ADVANCE_INTERVAL_MS = 3_000;
-const PHASE3_ELIMINATION_INTERVAL_MS = 15_000;
 
 export const getRaffleDrawState = async (slug: string) => {
   const raffle = await prisma.raffle.findUnique({
@@ -73,15 +75,20 @@ export const getRaffleDrawState = async (slug: string) => {
     eliminationsUntilNextPhase = Math.max(0, remainingCount - raffle.winnersCount);
   }
 
-  // Coarse ETA when phase 1 ends (5s × eliminations remaining in phase 1).
-  // Useful for a "termina aprox en Xs" hint. Phase 2 is non-deterministic
-  // (depends on light state) so we don't try; phase 3 also uses 15s × kills.
+  // Coarse ETA when phase 1 / phase 3 ends. Phase 2 is non-deterministic
+  // (depends on light state cycle) so we skip it.
   let phaseEndsApproxAt: string | null = null;
   if (raffle.drawPhase === "phase1") {
-    const ms = Math.max(0, remainingCount - PHASE1_TARGET) * PHASE1_INTERVAL_MS;
+    const ms = Math.max(0, remainingCount - PHASE1_TARGET) * phase1IntervalMs();
     phaseEndsApproxAt = new Date(Date.now() + ms).toISOString();
   } else if (raffle.drawPhase === "phase3") {
-    const ms = Math.max(0, remainingCount - raffle.winnersCount) * PHASE3_ELIMINATION_INTERVAL_MS;
+    // Account for the finale acceleration (≤3 alive uses 10s, otherwise 15s).
+    let ms = 0;
+    let alive = remainingCount;
+    while (alive > raffle.winnersCount) {
+      ms += phase3EliminationIntervalMs(alive);
+      alive--;
+    }
     phaseEndsApproxAt = new Date(Date.now() + ms).toISOString();
   }
 
@@ -94,29 +101,32 @@ export const getRaffleDrawState = async (slug: string) => {
   // Phase 2 — wind + light timers.
   const nextWindAt =
     raffle.drawPhase === "phase2" && raffle.lastWindAt
-      ? new Date(raffle.lastWindAt.getTime() + PHASE2_WIND_INTERVAL_MS).toISOString()
+      ? new Date(raffle.lastWindAt.getTime() + phase2WindIntervalMs()).toISOString()
       : raffle.drawPhase === "phase2"
-      ? new Date(Date.now() + PHASE2_WIND_INTERVAL_MS).toISOString()
+      ? new Date(Date.now() + phase2WindIntervalMs()).toISOString()
       : null;
   const nextLightChangeAt =
     raffle.drawPhase === "phase2" && raffle.lastLightChangeAt
-      ? new Date(raffle.lastLightChangeAt.getTime() + PHASE2_LIGHT_INTERVAL_MS).toISOString()
+      ? new Date(raffle.lastLightChangeAt.getTime() + phase2LightIntervalMs()).toISOString()
       : null;
 
-  // Phase 3 intro / phase 3 ticking.
+  // Phase 3 intro / phase 3 ticking — uses the alive-aware helpers so the
+  // FE countdown reflects the dramatic finale tightening.
   const phase3StartsAt =
     raffle.drawPhase === "phase3_intro" && raffle.phase3StartedAt
       ? raffle.phase3StartedAt.toISOString()
       : null;
+  const advanceMs = phase3AdvanceIntervalMs(remainingCount);
+  const eliminationMs = phase3EliminationIntervalMs(remainingCount);
   const nextHorseAdvanceAt =
     raffle.drawPhase === "phase3" && raffle.lastHorseAdvanceAt
-      ? new Date(raffle.lastHorseAdvanceAt.getTime() + PHASE3_ADVANCE_INTERVAL_MS).toISOString()
+      ? new Date(raffle.lastHorseAdvanceAt.getTime() + advanceMs).toISOString()
       : raffle.drawPhase === "phase3"
-      ? new Date(Date.now() + PHASE3_ADVANCE_INTERVAL_MS).toISOString()
+      ? new Date(Date.now() + advanceMs).toISOString()
       : null;
   const nextHorseEliminationAt =
     raffle.drawPhase === "phase3" && raffle.lastHorseEliminationAt
-      ? new Date(raffle.lastHorseEliminationAt.getTime() + PHASE3_ELIMINATION_INTERVAL_MS).toISOString()
+      ? new Date(raffle.lastHorseEliminationAt.getTime() + eliminationMs).toISOString()
       : null;
 
   const aliveRoster = aliveTickets.map((t) => ({
@@ -180,6 +190,7 @@ export const getRaffleDrawState = async (slug: string) => {
     nextHorseAdvanceAt,
     nextHorseEliminationAt,
     lastPlace,
+    isFinaleStretch: raffle.drawPhase === "phase3" && remainingCount <= 3,
     // Rosters
     aliveTickets: aliveRoster,
     recentEliminated,

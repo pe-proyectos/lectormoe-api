@@ -23,15 +23,31 @@ export const padTicket = (n: number) => {
 // ─── Phase parameters ───────────────────────────────────────────────────────
 //
 // Tunable timings for the three-phase elimination tournament. All in ms.
+// Tuned for tight pacing: each phase should feel distinct and not drag.
 const PHASE1_INTERVAL_MS = 5_000;
 const PHASE1_TARGET = 30; // Reduce to 30 in phase 1 (only fires when total > 50)
 const PHASE2_TARGET = 10; // Reduce to 10 in phase 2
 const PHASE2_WIND_INTERVAL_MS = 3_000;
-const PHASE2_LIGHT_INTERVAL_MS = 10_000;
+const PHASE2_LIGHT_INTERVAL_MS = 7_000; // was 10s — flips faster for more tension
 const PHASE2_WIND_BATCH = 5; // Tickets blown per gust
-const PHASE3_INTRO_MS = 30_000;
+const PHASE3_INTRO_MS = 15_000; // was 30s — shorter lobby, keeps momentum
 const PHASE3_ADVANCE_INTERVAL_MS = 3_000;
 const PHASE3_ELIMINATION_INTERVAL_MS = 15_000;
+// Final-stretch acceleration: when there are 3 or fewer horses left, the
+// pace tightens dramatically (5s advances, 10s eliminations) so the
+// finale doesn't drag.
+const PHASE3_FINAL_THRESHOLD = 3;
+const PHASE3_FINAL_ADVANCE_INTERVAL_MS = 5_000;
+const PHASE3_FINAL_ELIMINATION_INTERVAL_MS = 10_000;
+
+// Helpers exported so draw-state can mirror the same pacing math.
+export const phase3AdvanceIntervalMs = (aliveCount: number): number =>
+  aliveCount <= PHASE3_FINAL_THRESHOLD ? PHASE3_FINAL_ADVANCE_INTERVAL_MS : PHASE3_ADVANCE_INTERVAL_MS;
+export const phase3EliminationIntervalMs = (aliveCount: number): number =>
+  aliveCount <= PHASE3_FINAL_THRESHOLD ? PHASE3_FINAL_ELIMINATION_INTERVAL_MS : PHASE3_ELIMINATION_INTERVAL_MS;
+export const phase2LightIntervalMs = (): number => PHASE2_LIGHT_INTERVAL_MS;
+export const phase2WindIntervalMs = (): number => PHASE2_WIND_INTERVAL_MS;
+export const phase1IntervalMs = (): number => PHASE1_INTERVAL_MS;
 
 type SurvivorRow = {
   number: number;
@@ -419,7 +435,7 @@ async function enterPhase3(raffleId: number): Promise<void> {
   schedulePhase3Elimination(raffleId);
 }
 
-function schedulePhase3Advance(raffleId: number): void {
+function schedulePhase3Advance(raffleId: number, intervalMs: number = PHASE3_ADVANCE_INTERVAL_MS): void {
   const t = setTimeout(async () => {
     clearTimer(raffleId, "main");
     try {
@@ -439,6 +455,9 @@ function schedulePhase3Advance(raffleId: number): void {
         await finalisePhase3(raffleId);
         return;
       }
+      // Re-pick interval based on current alive count for the NEXT tick
+      // (dramatic finale acceleration once we hit the threshold).
+      intervalMs = phase3AdvanceIntervalMs(alive.length);
 
       const updates: { ticketId: number; horseSteps: number }[] = [];
       for (const t of alive) {
@@ -455,15 +474,15 @@ function schedulePhase3Advance(raffleId: number): void {
         data: { lastHorseAdvanceAt: new Date() },
       });
       broadcast(raffleId, { type: "horse_advance", steps: updates });
-      schedulePhase3Advance(raffleId);
+      schedulePhase3Advance(raffleId, intervalMs);
     } catch (err) {
       console.error(`[raffle-draw] phase3 advance failed for raffle #${raffleId}:`, err);
     }
-  }, PHASE3_ADVANCE_INTERVAL_MS);
+  }, intervalMs);
   setTimer(raffleId, "main", t);
 }
 
-function schedulePhase3Elimination(raffleId: number): void {
+function schedulePhase3Elimination(raffleId: number, intervalMs: number = PHASE3_ELIMINATION_INTERVAL_MS): void {
   const t = setTimeout(async () => {
     clearTimer(raffleId, "horseElim");
     try {
@@ -511,11 +530,14 @@ function schedulePhase3Elimination(raffleId: number): void {
         await finalisePhase3(raffleId);
         return;
       }
-      schedulePhase3Elimination(raffleId);
+      // Pick the next-tick interval based on alive count post-elimination so
+      // the dramatic finale acceleration kicks in at the threshold.
+      const nextInterval = phase3EliminationIntervalMs(alive.length - 1);
+      schedulePhase3Elimination(raffleId, nextInterval);
     } catch (err) {
       console.error(`[raffle-draw] phase3 elimination failed for raffle #${raffleId}:`, err);
     }
-  }, PHASE3_ELIMINATION_INTERVAL_MS);
+  }, intervalMs);
   setTimer(raffleId, "horseElim", t);
 }
 
