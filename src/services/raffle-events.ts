@@ -67,7 +67,7 @@ export type RaffleEvent =
       remainingCount: number;
     }
   // ─── Three-phase events ──────────────────────────────────────────────
-  | { type: 'phase_started'; phase: 'phase1' | 'phase2' | 'phase3_intro' | 'phase3' }
+  | { type: 'phase_started'; phase: 'phase1' | 'phase2_intro' | 'phase2' | 'phase3_intro' | 'phase3' }
   // Phase 2 wind gust — moves N tickets visually. lightState at gust time
   // determines whether they get eliminated.
   | {

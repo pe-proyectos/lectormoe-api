@@ -110,10 +110,21 @@ export const getRaffleDrawState = async (slug: string) => {
       ? new Date(raffle.lastLightChangeAt.getTime() + phase2LightIntervalMs()).toISOString()
       : null;
 
-  // Phase 3 intro / phase 3 ticking — uses the alive-aware helpers so the
-  // FE countdown reflects the dramatic finale tightening.
-  const phase3StartsAt =
-    raffle.drawPhase === "phase3_intro" && raffle.phase3StartedAt
+  // Phase intro lobby end: shared by phase2_intro AND phase3_intro. The
+  // raffle row stores the "next phase starts at" timestamp in phase3StartedAt
+  // for both lobbies (no separate column). When the actual phase 3 begins,
+  // the column is overwritten with the real start time.
+  const phaseIntroEndsAt =
+    (raffle.drawPhase === "phase2_intro" || raffle.drawPhase === "phase3_intro") && raffle.phase3StartedAt
+      ? raffle.phase3StartedAt.toISOString()
+      : null;
+  // Legacy alias kept for backwards compat with older FE bundles.
+  const phase3StartsAt = raffle.drawPhase === "phase3_intro" ? phaseIntroEndsAt : null;
+  // Actual phase 3 start timestamp — exposed always (when set) so the FE
+  // can filter phase-3 finalists from the full ticket roster (a ticket
+  // belongs to phase 3 iff !eliminatedAt OR eliminatedAt >= phase3StartedAt).
+  const phase3StartedAt =
+    raffle.drawPhase === "phase3" && raffle.phase3StartedAt
       ? raffle.phase3StartedAt.toISOString()
       : null;
   const advanceMs = phase3AdvanceIntervalMs(remainingCount);
@@ -185,8 +196,10 @@ export const getRaffleDrawState = async (slug: string) => {
     lightState: raffle.lightState,
     nextWindAt,
     nextLightChangeAt,
-    // Phase 3
+    // Phase 3 / shared intro lobby
     phase3StartsAt,
+    phaseIntroEndsAt,
+    phase3StartedAt,
     nextHorseAdvanceAt,
     nextHorseEliminationAt,
     lastPlace,

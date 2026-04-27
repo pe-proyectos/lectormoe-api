@@ -30,7 +30,11 @@ const PHASE2_TARGET = 10; // Reduce to 10 in phase 2
 const PHASE2_WIND_INTERVAL_MS = 3_000;
 const PHASE2_LIGHT_INTERVAL_MS = 6_000; // was 7s — flips faster for more tension
 const PHASE2_WIND_BATCH = 5; // Tickets blown per gust
-const PHASE3_INTRO_MS = 12_000; // was 15s — keep momentum
+// 60s lobbies between phases — long enough for viewers to absorb who survived
+// before the next round of mayhem starts. Used by both phase2_intro and
+// phase3_intro.
+const PHASE2_INTRO_MS = 60_000;
+const PHASE3_INTRO_MS = 60_000;
 const PHASE3_ADVANCE_INTERVAL_MS = 3_000;
 const PHASE3_ELIMINATION_INTERVAL_MS = 12_000; // was 15s
 // Final-stretch acceleration: when there are 3 or fewer horses left, the
@@ -224,7 +228,7 @@ function schedulePhase1Tick(raffleId: number): void {
         select: { id: true, number: true },
       });
       if (alive.length <= PHASE1_TARGET) {
-        await enterPhase2(raffleId);
+        await enterPhase2Intro(raffleId);
         return;
       }
       // Pick a random alive ticket to eliminate.
@@ -258,6 +262,32 @@ function schedulePhase1Tick(raffleId: number): void {
       console.error(`[raffle-draw] phase1 tick failed for raffle #${raffleId}:`, err);
     }
   }, PHASE1_INTERVAL_MS);
+  setTimer(raffleId, "main", t);
+}
+
+// ─── Phase 2 intro: 60s lobby ───────────────────────────────────────────────
+async function enterPhase2Intro(raffleId: number): Promise<void> {
+  await prisma.raffle.update({
+    where: { id: raffleId },
+    data: {
+      drawPhase: "phase2_intro",
+      // Reuse phase3StartedAt as the "next phase starts at" anchor — the FE
+      // already knows how to read this for the intro countdown. (Phase 3
+      // overwrites it later with its own start time.)
+      phase3StartedAt: new Date(Date.now() + PHASE2_INTRO_MS),
+    },
+  });
+  broadcast(raffleId, { type: "phase_started", phase: "phase2_intro" });
+
+  const t = setTimeout(async () => {
+    clearTimer(raffleId, "main");
+    try {
+      if (!(await isStillDrawing(raffleId))) return;
+      await enterPhase2(raffleId);
+    } catch (err) {
+      console.error(`[raffle-draw] phase2 intro failed for raffle #${raffleId}:`, err);
+    }
+  }, PHASE2_INTRO_MS);
   setTimer(raffleId, "main", t);
 }
 
@@ -666,10 +696,12 @@ export async function resumeStuckDraws(): Promise<void> {
 
       // Re-enter the appropriate phase. Picks the same threshold rules as
       // executeDraw so a crash in phase 1 with 25 alive tickets resumes in
-      // phase 2 (where we should be).
+      // the right place.
       if (alive > 50) {
         await enterPhase1(raffle.id);
       } else if (alive > PHASE2_TARGET) {
+        // Crashed in phase 1 → phase 2 transition: skip the intro
+        // since we don't know when it would have ended; jump to phase 2.
         await enterPhase2(raffle.id);
       } else {
         await enterPhase3Intro(raffle.id);
