@@ -65,7 +65,10 @@ export const listRaffleTickets = async (slug: string, params: {
   if (!raffle || raffle.deletedAt) throw new Error("Sorteo no encontrado.");
 
   const page = Math.max(1, params.page ?? 1);
-  const limit = Math.min(100, Math.max(1, params.limit ?? TICKETS_PAGE_DEFAULT));
+  // Cap raised from 100 → 1000 so the raffle detail page can show all
+  // tickets in one shot (real-time elimination state visible without
+  // pagination). 1000 fits typical raffles; bigger ones still page.
+  const limit = Math.min(1000, Math.max(1, params.limit ?? TICKETS_PAGE_DEFAULT));
 
   const where: any = { raffleId: raffle.id };
   if (params.q && params.q.trim().length > 0) {

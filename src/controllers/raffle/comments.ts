@@ -5,6 +5,35 @@ import { broadcast } from "../../services/raffle-events";
 const COMMENTS_PAGE_DEFAULT = 50;
 const COMMENT_MAX_LEN = 500;
 
+// Per-user ticket buckets used by the chat badge:
+//   ticketCount       — total non-refunded tickets the user holds
+//   aliveTicketCount  — subset that haven't been eliminated (still in the draw)
+//
+// The FE renders "N 🎟️" when alive == total (no losses yet) and
+// "alive/total 🎟️" once any of the user's tickets have been eliminated, so
+// a viewer can see at a glance whether a chatter still has skin in the game.
+const fetchTicketBuckets = async (raffleId: number, userIds: number[]) => {
+  if (userIds.length === 0) {
+    return { totalByUser: new Map<number, number>(), aliveByUser: new Map<number, number>() };
+  }
+  const [totals, alive] = await Promise.all([
+    prisma.raffleTicket.groupBy({
+      by: ["userId"],
+      where: { raffleId, userId: { in: userIds }, refundedAt: null },
+      _count: { _all: true },
+    }),
+    prisma.raffleTicket.groupBy({
+      by: ["userId"],
+      where: { raffleId, userId: { in: userIds }, refundedAt: null, eliminatedAt: null },
+      _count: { _all: true },
+    }),
+  ]);
+  return {
+    totalByUser: new Map<number, number>(totals.map((t) => [t.userId, t._count._all])),
+    aliveByUser: new Map<number, number>(alive.map((t) => [t.userId, t._count._all])),
+  };
+};
+
 export const listRaffleComments = async (slug: string, params: { before?: number; after?: number; limit?: number }) => {
   const raffle = await prisma.raffle.findUnique({ where: { slug } });
   if (!raffle || raffle.deletedAt) throw new Error("Sorteo no encontrado.");
@@ -24,21 +53,13 @@ export const listRaffleComments = async (slug: string, params: { before?: number
     include: { user: { select: { id: true, slug: true, username: true, imageUrl: true } } },
   });
 
-  // Resolve ticket COUNT (non-refunded) per author so the chat can show the
-  // holder badge and total tickets bought.
   const userIds = Array.from(new Set(rows.map((r) => r.userId)));
-  const ticketCounts = userIds.length === 0
-    ? []
-    : await prisma.raffleTicket.groupBy({
-        by: ["userId"],
-        where: { raffleId: raffle.id, userId: { in: userIds }, refundedAt: null },
-        _count: { _all: true },
-      });
-  const countByUser = new Map<number, number>(ticketCounts.map((t) => [t.userId, t._count._all]));
+  const { totalByUser, aliveByUser } = await fetchTicketBuckets(raffle.id, userIds);
 
   const ordered = params.after ? rows : rows.reverse();
   return ordered.map((c) => {
-    const ticketCount = countByUser.get(c.userId) ?? 0;
+    const ticketCount = totalByUser.get(c.userId) ?? 0;
+    const aliveTicketCount = aliveByUser.get(c.userId) ?? 0;
     return {
       id: c.id,
       userId: c.userId,
@@ -47,6 +68,7 @@ export const listRaffleComments = async (slug: string, params: { before?: number
       userImageUrl: c.user.imageUrl,
       isTicketHolder: ticketCount > 0,
       ticketCount,
+      aliveTicketCount,
       body: c.body,
       createdAt: c.createdAt,
     };
@@ -66,9 +88,9 @@ export const createRaffleComment = async (slug: string, userId: number, rawBody:
     include: { user: { select: { id: true, slug: true, username: true, imageUrl: true } } },
   });
 
-  const ticketCount = await prisma.raffleTicket.count({
-    where: { raffleId: raffle.id, userId, refundedAt: null },
-  });
+  const { totalByUser, aliveByUser } = await fetchTicketBuckets(raffle.id, [userId]);
+  const ticketCount = totalByUser.get(userId) ?? 0;
+  const aliveTicketCount = aliveByUser.get(userId) ?? 0;
 
   const payload = {
     id: created.id,
@@ -78,6 +100,7 @@ export const createRaffleComment = async (slug: string, userId: number, rawBody:
     userImageUrl: created.user.imageUrl,
     isTicketHolder: ticketCount > 0,
     ticketCount,
+    aliveTicketCount,
     body: created.body,
     createdAt: created.createdAt.toISOString(),
   };
