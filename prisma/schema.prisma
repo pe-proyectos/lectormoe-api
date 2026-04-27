@@ -947,6 +947,13 @@ model Raffle {
   phase3StartedAt     DateTime?
   lastHorseAdvanceAt  DateTime?
   lastHorseEliminationAt DateTime?
+  // Phase 1 "bomb round" state. Bombs are placed on N tickets at a time
+  // (default 10), then K of them actually explode (default 5) after a 5s
+  // fuse. Stored on the raffle row so late-joining clients can render the
+  // current round even if they missed the SSE bomb_placed event.
+  phase1BombTicketIds     Json?
+  phase1ExplodeTicketIds  Json?
+  phase1BombsPlacedAt     DateTime?
   cancelReason        String?         @db.VarChar(256)
   createdAt           DateTime        @default(now()) @db.Timestamp(6)
   updatedAt           DateTime        @updatedAt

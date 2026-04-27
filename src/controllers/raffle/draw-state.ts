@@ -30,6 +30,9 @@ export const getRaffleDrawState = async (slug: string) => {
       phase3StartedAt: true,
       lastHorseAdvanceAt: true,
       lastHorseEliminationAt: true,
+      phase1BombTicketIds: true,
+      phase1ExplodeTicketIds: true,
+      phase1BombsPlacedAt: true,
       deletedAt: true,
     },
   });
@@ -79,8 +82,11 @@ export const getRaffleDrawState = async (slug: string) => {
   // (depends on light state cycle) so we skip it.
   let phaseEndsApproxAt: string | null = null;
   if (raffle.drawPhase === "phase1") {
-    const ms = Math.max(0, remainingCount - PHASE1_TARGET) * phase1IntervalMs();
-    phaseEndsApproxAt = new Date(Date.now() + ms).toISOString();
+    // Phase 1 now uses bomb rounds: each round eliminates ~5 tickets in
+    // phase1IntervalMs() (fuse + gap). Round count is ceil(toGo / 5).
+    const toGo = Math.max(0, remainingCount - PHASE1_TARGET);
+    const roundsLeft = Math.ceil(toGo / 5);
+    phaseEndsApproxAt = new Date(Date.now() + roundsLeft * phase1IntervalMs()).toISOString();
   } else if (raffle.drawPhase === "phase3") {
     // Account for the finale acceleration (≤3 alive uses 10s, otherwise 15s).
     let ms = 0;
@@ -204,6 +210,18 @@ export const getRaffleDrawState = async (slug: string) => {
     nextHorseEliminationAt,
     lastPlace,
     isFinaleStretch: raffle.drawPhase === "phase3" && remainingCount <= 3,
+    // Phase 1 bomb-round state. Populated only while a round is in flight
+    // (between phase1_bombs_placed and phase1_bombs_exploded). Late-joining
+    // clients use this to render the tick-tack on the right avatars.
+    phase1Bombs:
+      raffle.drawPhase === "phase1" && raffle.phase1BombsPlacedAt
+        ? {
+            bombTicketIds: (raffle.phase1BombTicketIds as number[] | null) ?? [],
+            explodeCount: ((raffle.phase1ExplodeTicketIds as number[] | null) ?? []).length,
+            placedAt: raffle.phase1BombsPlacedAt.toISOString(),
+            fuseMs: 5000,
+          }
+        : null,
     // Active interval lengths so the FE can render the depleting progress
     // bars without hard-coding the values (especially since phase 3 timings
     // shift down once the finale stretch starts).

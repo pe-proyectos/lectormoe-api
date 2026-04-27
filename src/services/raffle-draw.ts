@@ -24,8 +24,17 @@ export const padTicket = (n: number) => {
 //
 // Tunable timings for the three-phase elimination tournament. All in ms.
 // Tuned for tight pacing: each phase should feel distinct and not drag.
-const PHASE1_INTERVAL_MS = 4_000; // was 5s — snappier ticking
-const PHASE1_TARGET = 30; // Reduce to 30 in phase 1 (only fires when total > 50)
+// Phase 1 "bomb round" mechanic: every round we arm 10 random alive
+// tickets with bombs (visible to all viewers), wait 5s for tension, then
+// only 5 of those bombs actually go off. The other 5 just puff smoke
+// and survive. Near the target threshold we still arm 10 bombs but cap
+// the explosion count so we never overshoot 30 alive.
+const PHASE1_INTERVAL_MS = 7_000; // round cycle = fuse + gap, used for ETA
+const PHASE1_TARGET = 30;
+const PHASE1_BOMBS_PER_ROUND = 10;
+const PHASE1_EXPLOSIONS_PER_ROUND = 5;
+const PHASE1_FUSE_MS = 5_000;
+const PHASE1_GAP_MS = 2_000;
 const PHASE2_TARGET = 10; // Reduce to 10 in phase 2
 const PHASE2_WIND_INTERVAL_MS = 3_000;
 const PHASE2_LIGHT_INTERVAL_MS = 6_000; // was 7s — flips faster for more tension
@@ -215,10 +224,12 @@ async function enterPhase1(raffleId: number): Promise<void> {
     data: { drawPhase: "phase1", lastEliminationAt: null },
   });
   broadcast(raffleId, { type: "phase_started", phase: "phase1" });
-  schedulePhase1Tick(raffleId);
+  schedulePhase1Round(raffleId);
 }
 
-function schedulePhase1Tick(raffleId: number): void {
+// Phase 1 round: arm bombs on 10 random tickets, broadcast, schedule the
+// explosion 5s later. The explosion handler decides which subset goes off.
+function schedulePhase1Round(raffleId: number): void {
   const t = setTimeout(async () => {
     clearTimer(raffleId, "main");
     try {
@@ -231,38 +242,105 @@ function schedulePhase1Tick(raffleId: number): void {
         await enterPhase2Intro(raffleId);
         return;
       }
-      // Pick a random alive ticket to eliminate.
-      const victim = alive[Math.floor(Math.random() * alive.length)];
+
+      // Cap explosions so we don't overshoot the 30-alive target — close to
+      // the boundary the round still places 10 bombs but only enough go off
+      // to land exactly on 30. Smoke (non-fatal bombs) covers the rest.
+      const maxToEliminate = alive.length - PHASE1_TARGET;
+      const toExplode = Math.max(1, Math.min(PHASE1_EXPLOSIONS_PER_ROUND, maxToEliminate));
+      const bombsThisRound = Math.min(PHASE1_BOMBS_PER_ROUND, alive.length);
+
+      const bombCandidates = shuffle(alive).slice(0, bombsThisRound);
+      const bombIds = bombCandidates.map((t) => t.id);
+      // Pick which subset will actually explode (others puff smoke).
+      const explodeIds = shuffle(bombCandidates).slice(0, toExplode).map((t) => t.id);
+
       const now = new Date();
-      const eliminationOrder = (await prisma.raffleTicket.count({
-        where: { raffleId, eliminatedAt: { not: null } },
-      })) + 1;
-      const eliminated = await prisma.raffleTicket.update({
-        where: { id: victim.id },
-        data: { eliminatedAt: now, eliminationOrder },
-        include: { user: { select: { slug: true, username: true, imageUrl: true } } },
-      });
       await prisma.raffle.update({
         where: { id: raffleId },
-        data: { lastEliminationAt: now },
+        data: {
+          phase1BombTicketIds: bombIds as any,
+          phase1ExplodeTicketIds: explodeIds as any,
+          phase1BombsPlacedAt: now,
+        },
       });
       broadcast(raffleId, {
-        type: "elimination",
-        ticketId: eliminated.id,
-        ticketNumber: padTicket(eliminated.number),
-        userSlug: eliminated.user.slug,
-        userUsername: eliminated.user.username,
-        userImageUrl: eliminated.user.imageUrl,
-        comment: eliminated.comment,
-        eliminationOrder,
-        remainingCount: alive.length - 1,
+        type: "phase1_bombs_placed",
+        bombTicketIds: bombIds,
+        explodeCount: toExplode,
+        fuseMs: PHASE1_FUSE_MS,
       });
-      schedulePhase1Tick(raffleId);
+
+      // Schedule the explosion at the end of the fuse.
+      const explodeTimer = setTimeout(() => explodePhase1Round(raffleId), PHASE1_FUSE_MS);
+      setTimer(raffleId, "main", explodeTimer);
     } catch (err) {
-      console.error(`[raffle-draw] phase1 tick failed for raffle #${raffleId}:`, err);
+      console.error(`[raffle-draw] phase1 round failed for raffle #${raffleId}:`, err);
     }
-  }, PHASE1_INTERVAL_MS);
+  }, PHASE1_GAP_MS);
   setTimer(raffleId, "main", t);
+}
+
+// Phase 1 explosion: commits the eliminations for the previously-armed
+// round, broadcasts what blew up vs what just smoked, then queues the
+// next round.
+async function explodePhase1Round(raffleId: number): Promise<void> {
+  clearTimer(raffleId, "main");
+  try {
+    if (!(await isStillDrawing(raffleId))) return;
+    const r = await prisma.raffle.findUnique({
+      where: { id: raffleId },
+      select: {
+        drawPhase: true,
+        phase1BombTicketIds: true,
+        phase1ExplodeTicketIds: true,
+      },
+    });
+    if (!r || r.drawPhase !== "phase1") return;
+    const bombIds = (r.phase1BombTicketIds as number[] | null) ?? [];
+    const explodeIds = (r.phase1ExplodeTicketIds as number[] | null) ?? [];
+    if (bombIds.length === 0 || explodeIds.length === 0) {
+      // No round in flight — start one.
+      schedulePhase1Round(raffleId);
+      return;
+    }
+    const smokeIds = bombIds.filter((id) => !explodeIds.includes(id));
+
+    const now = new Date();
+    const startOrder = (await prisma.raffleTicket.count({
+      where: { raffleId, eliminatedAt: { not: null } },
+    })) + 1;
+    for (let i = 0; i < explodeIds.length; i++) {
+      await prisma.raffleTicket.update({
+        where: { id: explodeIds[i] },
+        data: { eliminatedAt: now, eliminationOrder: startOrder + i },
+      });
+    }
+    await prisma.raffle.update({
+      where: { id: raffleId },
+      data: {
+        phase1BombTicketIds: null as any,
+        phase1ExplodeTicketIds: null as any,
+        phase1BombsPlacedAt: null,
+        lastEliminationAt: now,
+      },
+    });
+    broadcast(raffleId, {
+      type: "phase1_bombs_exploded",
+      explodedTicketIds: explodeIds,
+      smokeTicketIds: smokeIds,
+    });
+
+    // Check if we hit the target, otherwise queue the next round.
+    const aliveAfter = await aliveCount(raffleId);
+    if (aliveAfter <= PHASE1_TARGET) {
+      await enterPhase2Intro(raffleId);
+      return;
+    }
+    schedulePhase1Round(raffleId);
+  } catch (err) {
+    console.error(`[raffle-draw] phase1 explosion failed for raffle #${raffleId}:`, err);
+  }
 }
 
 // ─── Phase 2 intro: 60s lobby ───────────────────────────────────────────────
@@ -692,6 +770,20 @@ export async function resumeStuckDraws(): Promise<void> {
       if (alive <= 1) {
         await finalisePhase3(raffle.id);
         continue;
+      }
+
+      // Clear any stale phase-1 bomb state — the old round's timers are
+      // dead so we don't want viewers stuck staring at frozen ticking
+      // bombs that will never explode. A fresh round kicks off below.
+      if (raffle.phase1BombsPlacedAt) {
+        await prisma.raffle.update({
+          where: { id: raffle.id },
+          data: {
+            phase1BombTicketIds: null as any,
+            phase1ExplodeTicketIds: null as any,
+            phase1BombsPlacedAt: null,
+          },
+        });
       }
 
       // Re-enter the appropriate phase. Picks the same threshold rules as

@@ -68,6 +68,20 @@ export type RaffleEvent =
     }
   // ─── Three-phase events ──────────────────────────────────────────────
   | { type: 'phase_started'; phase: 'phase1' | 'phase2_intro' | 'phase2' | 'phase3_intro' | 'phase3' }
+  // Phase 1 bomb-round events. bombs_placed arms 10 random tickets with
+  // bombs (FE animates a tick-tack shake); fuseMs later, bombs_exploded
+  // commits which subset blew up and which just puffed smoke.
+  | {
+      type: 'phase1_bombs_placed';
+      bombTicketIds: number[];
+      explodeCount: number;
+      fuseMs: number;
+    }
+  | {
+      type: 'phase1_bombs_exploded';
+      explodedTicketIds: number[];
+      smokeTicketIds: number[];
+    }
   // Phase 2 wind gust — moves N tickets visually. lightState at gust time
   // determines whether they get eliminated.
   | {
