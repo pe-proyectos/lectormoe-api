@@ -24,21 +24,20 @@ export const padTicket = (n: number) => {
 //
 // Tunable timings for the three-phase elimination tournament. All in ms.
 // Tuned for tight pacing: each phase should feel distinct and not drag.
-const PHASE1_INTERVAL_MS = 5_000;
+const PHASE1_INTERVAL_MS = 4_000; // was 5s — snappier ticking
 const PHASE1_TARGET = 30; // Reduce to 30 in phase 1 (only fires when total > 50)
 const PHASE2_TARGET = 10; // Reduce to 10 in phase 2
 const PHASE2_WIND_INTERVAL_MS = 3_000;
-const PHASE2_LIGHT_INTERVAL_MS = 7_000; // was 10s — flips faster for more tension
+const PHASE2_LIGHT_INTERVAL_MS = 6_000; // was 7s — flips faster for more tension
 const PHASE2_WIND_BATCH = 5; // Tickets blown per gust
-const PHASE3_INTRO_MS = 15_000; // was 30s — shorter lobby, keeps momentum
+const PHASE3_INTRO_MS = 12_000; // was 15s — keep momentum
 const PHASE3_ADVANCE_INTERVAL_MS = 3_000;
-const PHASE3_ELIMINATION_INTERVAL_MS = 15_000;
+const PHASE3_ELIMINATION_INTERVAL_MS = 12_000; // was 15s
 // Final-stretch acceleration: when there are 3 or fewer horses left, the
-// pace tightens dramatically (5s advances, 10s eliminations) so the
-// finale doesn't drag.
+// pace tightens dramatically so the finale doesn't drag.
 const PHASE3_FINAL_THRESHOLD = 3;
-const PHASE3_FINAL_ADVANCE_INTERVAL_MS = 5_000;
-const PHASE3_FINAL_ELIMINATION_INTERVAL_MS = 10_000;
+const PHASE3_FINAL_ADVANCE_INTERVAL_MS = 4_000; // was 5s
+const PHASE3_FINAL_ELIMINATION_INTERVAL_MS = 8_000; // was 10s
 
 // Helpers exported so draw-state can mirror the same pacing math.
 export const phase3AdvanceIntervalMs = (aliveCount: number): number =>

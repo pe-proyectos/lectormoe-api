@@ -112,6 +112,10 @@ export const listRaffleTickets = async (slug: string, params: {
       comment: t.comment,
       eliminatedAt: t.eliminatedAt,
       eliminationOrder: t.eliminationOrder,
+      // Phase 3 horse-race progress — included so the FE can render
+      // eliminated horses frozen at their last position in the column
+      // grid instead of dropping them off the visible track.
+      horseSteps: t.horseSteps,
       createdAt: t.createdAt,
     })),
     total,

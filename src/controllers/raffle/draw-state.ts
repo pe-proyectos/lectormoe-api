@@ -191,6 +191,16 @@ export const getRaffleDrawState = async (slug: string) => {
     nextHorseEliminationAt,
     lastPlace,
     isFinaleStretch: raffle.drawPhase === "phase3" && remainingCount <= 3,
+    // Active interval lengths so the FE can render the depleting progress
+    // bars without hard-coding the values (especially since phase 3 timings
+    // shift down once the finale stretch starts).
+    intervals: {
+      phase1Ms: phase1IntervalMs(),
+      phase2WindMs: phase2WindIntervalMs(),
+      phase2LightMs: phase2LightIntervalMs(),
+      phase3AdvanceMs: phase3AdvanceIntervalMs(remainingCount),
+      phase3EliminationMs: phase3EliminationIntervalMs(remainingCount),
+    },
     // Rosters
     aliveTickets: aliveRoster,
     recentEliminated,
