@@ -85,6 +85,12 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 				: { isNSFW: false, organization: { isNSFW: false } })
 			: {};
 
+		// Hide deactivated orgs (isPublic=false or isDeleted=true) from global
+		// listings. Org-specific paths skip this — middleware already gates.
+		const popularOrgVisibility = !organizationId
+			? [{ organization: { isPublic: true, isDeleted: false } }]
+			: [];
+
 		// Fetch only the paginated mangas with their relations
 		const popularMangasCustoms = await prisma.mangaCustom.findMany({
 			where: {
@@ -93,6 +99,7 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 				},
 				deletedAt: null,
 				...popularNsfwFilter,
+				...(popularOrgVisibility.length > 0 ? { AND: popularOrgVisibility } : {}),
 				...(filters.search ? searchConditions : {}),
 				...(filters.title ? {
 					title: {
@@ -223,6 +230,12 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 		? { deletedAt: { not: null } }
 		: { deletedAt: null };
 
+	// Hide deactivated orgs (isPublic=false or isDeleted=true) from global
+	// listings. Org-specific paths skip this — middleware already gates.
+	const orgVisibilityAnds = !organizationId
+		? [{ organization: { isPublic: true, isDeleted: false } }]
+		: [];
+
 	// Build common where clause
 	const whereClause = {
 		...deletedFilter,
@@ -243,6 +256,7 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 			},
 		} : {}),
 		...nsfwFilter,
+		...(orgVisibilityAnds.length > 0 ? { AND: orgVisibilityAnds } : {}),
 		...(filters.search ? searchConditions : {}),
 		...(filters.title ? {
 			title: {

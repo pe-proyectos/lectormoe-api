@@ -64,6 +64,8 @@ export const getFeaturedManga = async (limit: number = 8, nsfw?: boolean, conten
 						{ manga: { imageUrl: { not: null } } },
 					],
 				},
+				// Hide deactivated orgs (isPublic=false or isDeleted=true).
+				{ organization: { isPublic: true, isDeleted: false } },
 			],
 		},
 		include: {

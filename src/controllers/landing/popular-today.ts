@@ -45,6 +45,9 @@ export const getPopularToday = async (limit: number = 5, nsfw?: boolean, content
 	} else if (contentKind === "manga") {
 		mangaCustomFilter.manga = { ...(mangaCustomFilter.manga || {}), bookType: { code: { notIn: WRITING_BOOK_TYPE_CODES } } };
 	}
+	// Hide deactivated orgs (isPublic=false or isDeleted=true). AND-merged so
+	// it composes correctly with the OR/organization keys above.
+	mangaCustomFilter.AND = [{ organization: { isPublic: true, isDeleted: false } }];
 
 	// Pull a generous candidate pool. We can't directly group by manga.id at
 	// the SQL level (mangaId lives on MangaCustom, not ViewsHistory), so we
@@ -96,6 +99,7 @@ export const getPopularToday = async (limit: number = 5, nsfw?: boolean, content
 					: contentKind === "manga"
 					? { manga: { bookType: { code: { notIn: WRITING_BOOK_TYPE_CODES } } } }
 					: {}),
+				AND: [{ organization: { isPublic: true, isDeleted: false } }],
 			},
 			include: {
 				manga: { select: { id: true, title: true, slug: true, imageUrl: true } },
