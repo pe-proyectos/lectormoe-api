@@ -191,9 +191,13 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 
 		// Sort by view count order
 		const viewCountMap = new Map(viewCounts.map(v => [v.mangaCustomId, v._count.ip]));
-		const sortedMangas = popularMangasCustoms.sort((a, b) => 
+		const sortedMangas = popularMangasCustoms.sort((a, b) =>
 			(viewCountMap.get(b.id) || 0) - (viewCountMap.get(a.id) || 0)
 		);
+
+		// Same joint-merge as the main branch — popular cards need the joint
+		// chapters too, otherwise a leader org's card shows stale per-org top-2.
+		await mergeJointChaptersIntoMangaCustoms(sortedMangas);
 
 		return {
 			data: sortedMangas,
@@ -353,9 +357,77 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 		})
 	]);
 
+	// ─── Joint chapter merge ───────────────────────────────────────────────
+	// When a mangaCustom belongs to an org that's an ACCEPTED member of an
+	// active joint for the same base manga, the latest chapters in the joint
+	// won't be visible via mangaCustomId (joint chapters live on jointId, with
+	// mangaCustomId=null for new uploads). We pull joint chapters for those
+	// mangaCustoms and merge them into the card's `chapters` array so cards
+	// surface the real latest chapter (including joint releases), not the
+	// stale per-org top-2.
+	await mergeJointChaptersIntoMangaCustoms(mangasCustoms);
+
 	return {
 		data: mangasCustoms,
 		maxPage: Math.ceil(total / Number.parseInt(filters?.limit || "10")),
 		total,
 	};
 };
+
+// Merges joint chapter previews into each mangaCustom's `chapters` array
+// in-place. For mangaCustoms whose org is an ACCEPTED member of an active
+// joint for the same base manga, augments the top-N chapter list with joint
+// chapters and re-dedupes by chapter number, keeping the most recently
+// released entry. Used by both the popular and main listing branches.
+async function mergeJointChaptersIntoMangaCustoms(mangaCustoms: any[]): Promise<void> {
+	if (mangaCustoms.length === 0) return;
+	const mangaIds = Array.from(new Set(mangaCustoms.map((m) => m.mangaId)));
+	const orgMcByKey = new Map<string, any>();
+	for (const mc of mangaCustoms) orgMcByKey.set(`${mc.organizationId}-${mc.mangaId}`, mc);
+
+	const joints = await prisma.mangaJoint.findMany({
+		where: { mangaId: { in: mangaIds }, deletedAt: null },
+		select: {
+			id: true,
+			mangaId: true,
+			members: {
+				where: { status: "ACCEPTED" },
+				select: { organizationId: true },
+			},
+			chapters: {
+				where: { deletedAt: null },
+				orderBy: { number: Prisma.SortOrder.desc },
+				take: 5,
+				select: {
+					id: true,
+					number: true,
+					title: true,
+					releasedAt: true,
+					views: true,
+				},
+			},
+		},
+	});
+
+	for (const joint of joints) {
+		for (const member of joint.members) {
+			const mc = orgMcByKey.get(`${member.organizationId}-${joint.mangaId}`);
+			if (!mc) continue;
+			const existing: any[] = Array.isArray(mc.chapters) ? mc.chapters : [];
+			const merged = new Map<number, any>();
+			for (const c of [...existing, ...joint.chapters]) {
+				const prev = merged.get(c.number);
+				if (!prev) {
+					merged.set(c.number, c);
+					continue;
+				}
+				const prevTs = prev.releasedAt ? new Date(prev.releasedAt).getTime() : 0;
+				const cTs = c.releasedAt ? new Date(c.releasedAt).getTime() : 0;
+				if (cTs > prevTs) merged.set(c.number, c);
+			}
+			mc.chapters = [...merged.values()]
+				.sort((a, b) => b.number - a.number)
+				.slice(0, 2);
+		}
+	}
+}
