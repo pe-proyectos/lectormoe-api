@@ -4,6 +4,9 @@ import { padTicket } from "../../services/raffle-draw";
 // Mirrors the constants in raffle-draw.ts. Kept here so the FE can compute
 // "next X in Ys" countdowns from `last*At` timestamps without needing the
 // service to publish a separate "next*At" for each timer.
+const PHASE1_INTERVAL_MS = 5_000;
+const PHASE1_TARGET = 30;
+const PHASE2_TARGET = 10;
 const PHASE2_WIND_INTERVAL_MS = 3_000;
 const PHASE2_LIGHT_INTERVAL_MS = 10_000;
 const PHASE3_ADVANCE_INTERVAL_MS = 3_000;
@@ -30,13 +33,20 @@ export const getRaffleDrawState = async (slug: string) => {
   });
   if (!raffle || raffle.deletedAt) return null;
 
-  const [totalTickets, eliminatedCount, aliveTickets, winnersRows] = await Promise.all([
+  const [totalTickets, eliminatedCount, aliveTickets, recentEliminatedRows, winnersRows] = await Promise.all([
     prisma.raffleTicket.count({ where: { raffleId: raffle.id } }),
     prisma.raffleTicket.count({ where: { raffleId: raffle.id, eliminatedAt: { not: null } } }),
-    // For phase 2 + phase 3 we need the alive ticket roster with avatars.
     prisma.raffleTicket.findMany({
       where: { raffleId: raffle.id, eliminatedAt: null },
       orderBy: { number: "asc" },
+      include: { user: { select: { slug: true, username: true, imageUrl: true } } },
+    }),
+    // Last 10 eliminated tickets, newest first. Used for the "ya cayeron"
+    // strip so the user can see who got knocked out across all phases.
+    prisma.raffleTicket.findMany({
+      where: { raffleId: raffle.id, eliminatedAt: { not: null } },
+      orderBy: { eliminationOrder: "desc" },
+      take: 10,
       include: { user: { select: { slug: true, username: true, imageUrl: true } } },
     }),
     raffle.status === "completed"
@@ -51,13 +61,37 @@ export const getRaffleDrawState = async (slug: string) => {
   const remainingCount = totalTickets - eliminatedCount;
   const eliminationsRemaining = Math.max(0, remainingCount - raffle.winnersCount);
 
+  // ─── Phase progress / ETAs ──────────────────────────────────────────────
+  // How many eliminations until the NEXT phase boundary. Used for "Quedan
+  // X para fase 2" labels in the UI.
+  let eliminationsUntilNextPhase: number | null = null;
+  if (raffle.drawPhase === "phase1") {
+    eliminationsUntilNextPhase = Math.max(0, remainingCount - PHASE1_TARGET);
+  } else if (raffle.drawPhase === "phase2") {
+    eliminationsUntilNextPhase = Math.max(0, remainingCount - PHASE2_TARGET);
+  } else if (raffle.drawPhase === "phase3") {
+    eliminationsUntilNextPhase = Math.max(0, remainingCount - raffle.winnersCount);
+  }
+
+  // Coarse ETA when phase 1 ends (5s × eliminations remaining in phase 1).
+  // Useful for a "termina aprox en Xs" hint. Phase 2 is non-deterministic
+  // (depends on light state) so we don't try; phase 3 also uses 15s × kills.
+  let phaseEndsApproxAt: string | null = null;
+  if (raffle.drawPhase === "phase1") {
+    const ms = Math.max(0, remainingCount - PHASE1_TARGET) * PHASE1_INTERVAL_MS;
+    phaseEndsApproxAt = new Date(Date.now() + ms).toISOString();
+  } else if (raffle.drawPhase === "phase3") {
+    const ms = Math.max(0, remainingCount - raffle.winnersCount) * PHASE3_ELIMINATION_INTERVAL_MS;
+    phaseEndsApproxAt = new Date(Date.now() + ms).toISOString();
+  }
+
   // Phase 1 — classic single-elimination interval.
   const nextEliminationAt =
     raffle.drawPhase === "phase1" && raffle.lastEliminationAt
       ? new Date(raffle.lastEliminationAt.getTime() + raffle.eliminationIntervalMs).toISOString()
       : null;
 
-  // Phase 2 — wind + light timers (independent).
+  // Phase 2 — wind + light timers.
   const nextWindAt =
     raffle.drawPhase === "phase2" && raffle.lastWindAt
       ? new Date(raffle.lastWindAt.getTime() + PHASE2_WIND_INTERVAL_MS).toISOString()
@@ -69,7 +103,7 @@ export const getRaffleDrawState = async (slug: string) => {
       ? new Date(raffle.lastLightChangeAt.getTime() + PHASE2_LIGHT_INTERVAL_MS).toISOString()
       : null;
 
-  // Phase 3 intro countdown OR phase 3 ticking.
+  // Phase 3 intro / phase 3 ticking.
   const phase3StartsAt =
     raffle.drawPhase === "phase3_intro" && raffle.phase3StartedAt
       ? raffle.phase3StartedAt.toISOString()
@@ -85,7 +119,6 @@ export const getRaffleDrawState = async (slug: string) => {
       ? new Date(raffle.lastHorseEliminationAt.getTime() + PHASE3_ELIMINATION_INTERVAL_MS).toISOString()
       : null;
 
-  // Build alive roster (used by phase 2 grid and phase 3 horse columns).
   const aliveRoster = aliveTickets.map((t) => ({
     id: t.id,
     number: padTicket(t.number),
@@ -95,6 +128,16 @@ export const getRaffleDrawState = async (slug: string) => {
     userImageUrl: t.user.imageUrl,
     horseSteps: t.horseSteps,
     blownAt: t.blownAt ? t.blownAt.toISOString() : null,
+  }));
+
+  const recentEliminated = recentEliminatedRows.map((t) => ({
+    id: t.id,
+    number: padTicket(t.number),
+    rawNumber: t.number,
+    userSlug: t.user.slug,
+    userUsername: t.user.username,
+    userImageUrl: t.user.imageUrl,
+    eliminationOrder: t.eliminationOrder ?? 0,
   }));
 
   // Phase 3 last-place ticket (for the "Próxima eliminación: 15s #00023" badge).
@@ -123,6 +166,8 @@ export const getRaffleDrawState = async (slug: string) => {
     remainingCount,
     winnersCount: raffle.winnersCount,
     eliminationsRemaining,
+    eliminationsUntilNextPhase,
+    phaseEndsApproxAt,
     eliminationIntervalMs: raffle.eliminationIntervalMs,
     lastEliminationAt: raffle.lastEliminationAt ? raffle.lastEliminationAt.toISOString() : null,
     nextEliminationAt,
@@ -135,8 +180,9 @@ export const getRaffleDrawState = async (slug: string) => {
     nextHorseAdvanceAt,
     nextHorseEliminationAt,
     lastPlace,
-    // Roster used by phase 2 grid AND phase 3 columns.
+    // Rosters
     aliveTickets: aliveRoster,
+    recentEliminated,
     winners,
   };
 };

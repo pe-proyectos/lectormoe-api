@@ -57,6 +57,7 @@ export type RaffleEvent =
   | {
       // Phase 1 elimination (single ticket every eliminationIntervalMs).
       type: 'elimination';
+      ticketId: number;
       ticketNumber: string;
       userSlug: string;
       userUsername: string;

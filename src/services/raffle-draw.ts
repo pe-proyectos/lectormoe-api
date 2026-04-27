@@ -229,6 +229,7 @@ function schedulePhase1Tick(raffleId: number): void {
       });
       broadcast(raffleId, {
         type: "elimination",
+        ticketId: eliminated.id,
         ticketNumber: padTicket(eliminated.number),
         userSlug: eliminated.user.slug,
         userUsername: eliminated.user.username,
