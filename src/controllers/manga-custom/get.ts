@@ -79,9 +79,21 @@ export const getMangaCustomBySlug = async (organizationId: number, mangaSlug: st
 		return null;
 	}
 
-	// Check if this manga belongs to an active joint
+	// Only redirect to the joint page when the CURRENT org (the one whose
+	// page the viewer is on) is an ACCEPTED member of the joint. A joint
+	// owned by a different scan should not hijack other scans' manga pages
+	// — those scans never agreed to enter the joint.
 	const activeJoint = await prisma.mangaJoint.findFirst({
-		where: { mangaId: mangaCustom.manga.id, deletedAt: null },
+		where: {
+			mangaId: mangaCustom.manga.id,
+			deletedAt: null,
+			members: {
+				some: {
+					organizationId,
+					status: "ACCEPTED",
+				},
+			},
+		},
 		select: { slug: true },
 	});
 
