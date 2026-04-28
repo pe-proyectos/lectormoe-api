@@ -105,6 +105,7 @@ export const getRaffleBySlug = async (slug: string, currentUserId: number | null
     drawType: r.drawType,
     drawAt: r.drawAt,
     status: r.status,
+    completedAt: r.completedAt,
     cancelReason: r.cancelReason,
     revealStartedAt: r.revealStartedAt,
     revealOrder: r.revealOrder,

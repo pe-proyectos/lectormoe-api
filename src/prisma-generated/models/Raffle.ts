@@ -80,6 +80,7 @@ export type RaffleMinAggregateOutputType = {
   lastHorseAdvanceAt: Date | null
   lastHorseEliminationAt: Date | null
   phase1BombsPlacedAt: Date | null
+  completedAt: Date | null
   cancelReason: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -116,6 +117,7 @@ export type RaffleMaxAggregateOutputType = {
   lastHorseAdvanceAt: Date | null
   lastHorseEliminationAt: Date | null
   phase1BombsPlacedAt: Date | null
+  completedAt: Date | null
   cancelReason: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -155,6 +157,7 @@ export type RaffleCountAggregateOutputType = {
   phase1BombTicketIds: number
   phase1ExplodeTicketIds: number
   phase1BombsPlacedAt: number
+  completedAt: number
   cancelReason: number
   createdAt: number
   updatedAt: number
@@ -217,6 +220,7 @@ export type RaffleMinAggregateInputType = {
   lastHorseAdvanceAt?: true
   lastHorseEliminationAt?: true
   phase1BombsPlacedAt?: true
+  completedAt?: true
   cancelReason?: true
   createdAt?: true
   updatedAt?: true
@@ -253,6 +257,7 @@ export type RaffleMaxAggregateInputType = {
   lastHorseAdvanceAt?: true
   lastHorseEliminationAt?: true
   phase1BombsPlacedAt?: true
+  completedAt?: true
   cancelReason?: true
   createdAt?: true
   updatedAt?: true
@@ -292,6 +297,7 @@ export type RaffleCountAggregateInputType = {
   phase1BombTicketIds?: true
   phase1ExplodeTicketIds?: true
   phase1BombsPlacedAt?: true
+  completedAt?: true
   cancelReason?: true
   createdAt?: true
   updatedAt?: true
@@ -418,6 +424,7 @@ export type RaffleGroupByOutputType = {
   phase1BombTicketIds: runtime.JsonValue | null
   phase1ExplodeTicketIds: runtime.JsonValue | null
   phase1BombsPlacedAt: Date | null
+  completedAt: Date | null
   cancelReason: string | null
   createdAt: Date
   updatedAt: Date
@@ -480,6 +487,7 @@ export type RaffleWhereInput = {
   phase1BombTicketIds?: Prisma.JsonNullableFilter<"Raffle">
   phase1ExplodeTicketIds?: Prisma.JsonNullableFilter<"Raffle">
   phase1BombsPlacedAt?: Prisma.DateTimeNullableFilter<"Raffle"> | Date | string | null
+  completedAt?: Prisma.DateTimeNullableFilter<"Raffle"> | Date | string | null
   cancelReason?: Prisma.StringNullableFilter<"Raffle"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Raffle"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Raffle"> | Date | string
@@ -522,6 +530,7 @@ export type RaffleOrderByWithRelationInput = {
   phase1BombTicketIds?: Prisma.SortOrderInput | Prisma.SortOrder
   phase1ExplodeTicketIds?: Prisma.SortOrderInput | Prisma.SortOrder
   phase1BombsPlacedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  completedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   cancelReason?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -567,6 +576,7 @@ export type RaffleWhereUniqueInput = Prisma.AtLeast<{
   phase1BombTicketIds?: Prisma.JsonNullableFilter<"Raffle">
   phase1ExplodeTicketIds?: Prisma.JsonNullableFilter<"Raffle">
   phase1BombsPlacedAt?: Prisma.DateTimeNullableFilter<"Raffle"> | Date | string | null
+  completedAt?: Prisma.DateTimeNullableFilter<"Raffle"> | Date | string | null
   cancelReason?: Prisma.StringNullableFilter<"Raffle"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Raffle"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Raffle"> | Date | string
@@ -609,6 +619,7 @@ export type RaffleOrderByWithAggregationInput = {
   phase1BombTicketIds?: Prisma.SortOrderInput | Prisma.SortOrder
   phase1ExplodeTicketIds?: Prisma.SortOrderInput | Prisma.SortOrder
   phase1BombsPlacedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  completedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   cancelReason?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -656,6 +667,7 @@ export type RaffleScalarWhereWithAggregatesInput = {
   phase1BombTicketIds?: Prisma.JsonNullableWithAggregatesFilter<"Raffle">
   phase1ExplodeTicketIds?: Prisma.JsonNullableWithAggregatesFilter<"Raffle">
   phase1BombsPlacedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Raffle"> | Date | string | null
+  completedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Raffle"> | Date | string | null
   cancelReason?: Prisma.StringNullableWithAggregatesFilter<"Raffle"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Raffle"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Raffle"> | Date | string
@@ -694,6 +706,7 @@ export type RaffleCreateInput = {
   phase1BombTicketIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   phase1ExplodeTicketIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   phase1BombsPlacedAt?: Date | string | null
+  completedAt?: Date | string | null
   cancelReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -736,6 +749,7 @@ export type RaffleUncheckedCreateInput = {
   phase1BombTicketIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   phase1ExplodeTicketIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   phase1BombsPlacedAt?: Date | string | null
+  completedAt?: Date | string | null
   cancelReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -777,6 +791,7 @@ export type RaffleUpdateInput = {
   phase1BombTicketIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   phase1ExplodeTicketIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   phase1BombsPlacedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -819,6 +834,7 @@ export type RaffleUncheckedUpdateInput = {
   phase1BombTicketIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   phase1ExplodeTicketIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   phase1BombsPlacedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -861,6 +877,7 @@ export type RaffleCreateManyInput = {
   phase1BombTicketIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   phase1ExplodeTicketIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   phase1BombsPlacedAt?: Date | string | null
+  completedAt?: Date | string | null
   cancelReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -899,6 +916,7 @@ export type RaffleUpdateManyMutationInput = {
   phase1BombTicketIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   phase1ExplodeTicketIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   phase1BombsPlacedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -938,6 +956,7 @@ export type RaffleUncheckedUpdateManyInput = {
   phase1BombTicketIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   phase1ExplodeTicketIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   phase1BombsPlacedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -977,6 +996,7 @@ export type RaffleCountOrderByAggregateInput = {
   phase1BombTicketIds?: Prisma.SortOrder
   phase1ExplodeTicketIds?: Prisma.SortOrder
   phase1BombsPlacedAt?: Prisma.SortOrder
+  completedAt?: Prisma.SortOrder
   cancelReason?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -1025,6 +1045,7 @@ export type RaffleMaxOrderByAggregateInput = {
   lastHorseAdvanceAt?: Prisma.SortOrder
   lastHorseEliminationAt?: Prisma.SortOrder
   phase1BombsPlacedAt?: Prisma.SortOrder
+  completedAt?: Prisma.SortOrder
   cancelReason?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -1061,6 +1082,7 @@ export type RaffleMinOrderByAggregateInput = {
   lastHorseAdvanceAt?: Prisma.SortOrder
   lastHorseEliminationAt?: Prisma.SortOrder
   phase1BombsPlacedAt?: Prisma.SortOrder
+  completedAt?: Prisma.SortOrder
   cancelReason?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -1158,6 +1180,7 @@ export type RaffleCreateWithoutTicketsInput = {
   phase1BombTicketIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   phase1ExplodeTicketIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   phase1BombsPlacedAt?: Date | string | null
+  completedAt?: Date | string | null
   cancelReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1199,6 +1222,7 @@ export type RaffleUncheckedCreateWithoutTicketsInput = {
   phase1BombTicketIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   phase1ExplodeTicketIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   phase1BombsPlacedAt?: Date | string | null
+  completedAt?: Date | string | null
   cancelReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1255,6 +1279,7 @@ export type RaffleUpdateWithoutTicketsInput = {
   phase1BombTicketIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   phase1ExplodeTicketIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   phase1BombsPlacedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1296,6 +1321,7 @@ export type RaffleUncheckedUpdateWithoutTicketsInput = {
   phase1BombTicketIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   phase1ExplodeTicketIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   phase1BombsPlacedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1336,6 +1362,7 @@ export type RaffleCreateWithoutCommentsInput = {
   phase1BombTicketIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   phase1ExplodeTicketIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   phase1BombsPlacedAt?: Date | string | null
+  completedAt?: Date | string | null
   cancelReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1377,6 +1404,7 @@ export type RaffleUncheckedCreateWithoutCommentsInput = {
   phase1BombTicketIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   phase1ExplodeTicketIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   phase1BombsPlacedAt?: Date | string | null
+  completedAt?: Date | string | null
   cancelReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1433,6 +1461,7 @@ export type RaffleUpdateWithoutCommentsInput = {
   phase1BombTicketIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   phase1ExplodeTicketIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   phase1BombsPlacedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1474,6 +1503,7 @@ export type RaffleUncheckedUpdateWithoutCommentsInput = {
   phase1BombTicketIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   phase1ExplodeTicketIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   phase1BombsPlacedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1514,6 +1544,7 @@ export type RaffleCreateWithoutRefundsInput = {
   phase1BombTicketIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   phase1ExplodeTicketIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   phase1BombsPlacedAt?: Date | string | null
+  completedAt?: Date | string | null
   cancelReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1555,6 +1586,7 @@ export type RaffleUncheckedCreateWithoutRefundsInput = {
   phase1BombTicketIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   phase1ExplodeTicketIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   phase1BombsPlacedAt?: Date | string | null
+  completedAt?: Date | string | null
   cancelReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1611,6 +1643,7 @@ export type RaffleUpdateWithoutRefundsInput = {
   phase1BombTicketIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   phase1ExplodeTicketIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   phase1BombsPlacedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1652,6 +1685,7 @@ export type RaffleUncheckedUpdateWithoutRefundsInput = {
   phase1BombTicketIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   phase1ExplodeTicketIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   phase1BombsPlacedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1742,6 +1776,7 @@ export type RaffleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   phase1BombTicketIds?: boolean
   phase1ExplodeTicketIds?: boolean
   phase1BombsPlacedAt?: boolean
+  completedAt?: boolean
   cancelReason?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1785,6 +1820,7 @@ export type RaffleSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   phase1BombTicketIds?: boolean
   phase1ExplodeTicketIds?: boolean
   phase1BombsPlacedAt?: boolean
+  completedAt?: boolean
   cancelReason?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1824,6 +1860,7 @@ export type RaffleSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   phase1BombTicketIds?: boolean
   phase1ExplodeTicketIds?: boolean
   phase1BombsPlacedAt?: boolean
+  completedAt?: boolean
   cancelReason?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1863,13 +1900,14 @@ export type RaffleSelectScalar = {
   phase1BombTicketIds?: boolean
   phase1ExplodeTicketIds?: boolean
   phase1BombsPlacedAt?: boolean
+  completedAt?: boolean
   cancelReason?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
 }
 
-export type RaffleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "title" | "description" | "imageUrl" | "bannerUrl" | "ticketPrice" | "currency" | "minTickets" | "maxTickets" | "maxTicketsPerUser" | "drawType" | "drawAt" | "status" | "winnerTicketId" | "winnerUserId" | "revealStartedAt" | "revealOrder" | "revealDigits" | "winnersCount" | "eliminationIntervalMs" | "lastEliminationAt" | "drawPhase" | "lightState" | "lastLightChangeAt" | "lastWindAt" | "phase3StartedAt" | "lastHorseAdvanceAt" | "lastHorseEliminationAt" | "phase1BombTicketIds" | "phase1ExplodeTicketIds" | "phase1BombsPlacedAt" | "cancelReason" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["raffle"]>
+export type RaffleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "title" | "description" | "imageUrl" | "bannerUrl" | "ticketPrice" | "currency" | "minTickets" | "maxTickets" | "maxTicketsPerUser" | "drawType" | "drawAt" | "status" | "winnerTicketId" | "winnerUserId" | "revealStartedAt" | "revealOrder" | "revealDigits" | "winnersCount" | "eliminationIntervalMs" | "lastEliminationAt" | "drawPhase" | "lightState" | "lastLightChangeAt" | "lastWindAt" | "phase3StartedAt" | "lastHorseAdvanceAt" | "lastHorseEliminationAt" | "phase1BombTicketIds" | "phase1ExplodeTicketIds" | "phase1BombsPlacedAt" | "completedAt" | "cancelReason" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["raffle"]>
 export type RaffleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tickets?: boolean | Prisma.Raffle$ticketsArgs<ExtArgs>
   comments?: boolean | Prisma.Raffle$commentsArgs<ExtArgs>
@@ -1919,6 +1957,7 @@ export type $RafflePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     phase1BombTicketIds: runtime.JsonValue | null
     phase1ExplodeTicketIds: runtime.JsonValue | null
     phase1BombsPlacedAt: Date | null
+    completedAt: Date | null
     cancelReason: string | null
     createdAt: Date
     updatedAt: Date
@@ -2381,6 +2420,7 @@ export interface RaffleFieldRefs {
   readonly phase1BombTicketIds: Prisma.FieldRef<"Raffle", 'Json'>
   readonly phase1ExplodeTicketIds: Prisma.FieldRef<"Raffle", 'Json'>
   readonly phase1BombsPlacedAt: Prisma.FieldRef<"Raffle", 'DateTime'>
+  readonly completedAt: Prisma.FieldRef<"Raffle", 'DateTime'>
   readonly cancelReason: Prisma.FieldRef<"Raffle", 'String'>
   readonly createdAt: Prisma.FieldRef<"Raffle", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Raffle", 'DateTime'>

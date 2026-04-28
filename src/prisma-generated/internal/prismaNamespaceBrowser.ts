@@ -848,6 +848,7 @@ export const RaffleScalarFieldEnum = {
   phase1BombTicketIds: 'phase1BombTicketIds',
   phase1ExplodeTicketIds: 'phase1ExplodeTicketIds',
   phase1BombsPlacedAt: 'phase1BombsPlacedAt',
+  completedAt: 'completedAt',
   cancelReason: 'cancelReason',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',

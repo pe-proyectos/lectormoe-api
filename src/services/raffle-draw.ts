@@ -182,6 +182,7 @@ export async function executeDraw(raffleId: number): Promise<void> {
         status: "completed",
         winnerTicketId: lowest?.id ?? null,
         winnerUserId: lowest?.userId ?? null,
+        completedAt: new Date(),
       },
     });
     if (finalised.count !== 1) return;
@@ -664,6 +665,7 @@ async function finalisePhase3(raffleId: number): Promise<void> {
         winnerTicketId: lowest?.id ?? null,
         winnerUserId: lowest?.userId ?? null,
         drawPhase: null,
+        completedAt: new Date(),
       },
     });
     if (finalised.count !== 1) return;

@@ -954,6 +954,10 @@ model Raffle {
   phase1BombTicketIds     Json?
   phase1ExplodeTicketIds  Json?
   phase1BombsPlacedAt     DateTime?
+  // Set when status flips to "completed". Used to close the live chat
+  // 1 hour after the winner is decided so the room doesn't stay open
+  // for spam after everyone leaves.
+  completedAt             DateTime?
   cancelReason        String?         @db.VarChar(256)
   createdAt           DateTime        @default(now()) @db.Timestamp(6)
   updatedAt           DateTime        @updatedAt

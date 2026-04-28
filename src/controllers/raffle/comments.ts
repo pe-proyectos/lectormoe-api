@@ -75,9 +75,43 @@ export const listRaffleComments = async (slug: string, params: { before?: number
   });
 };
 
+// Live chat closes 1 hour after the raffle finishes. After that we lock
+// out new messages so the room doesn't fill up with spam after the prize
+// has been delivered.
+const CHAT_CLOSE_AFTER_COMPLETION_MS = 60 * 60 * 1000;
+// Per-user spam cooldown — same author can't fire two messages within
+// this window. Cheap to enforce: just check the timestamp of their last
+// comment on this raffle.
+const COMMENT_COOLDOWN_MS = 3_000;
+
 export const createRaffleComment = async (slug: string, userId: number, rawBody: string) => {
   const raffle = await prisma.raffle.findUnique({ where: { slug } });
   if (!raffle || raffle.deletedAt) throw new Error("Sorteo no encontrado.");
+
+  // Chat closes 1h after completion.
+  if (raffle.status === "completed" && raffle.completedAt) {
+    const elapsed = Date.now() - raffle.completedAt.getTime();
+    if (elapsed > CHAT_CLOSE_AFTER_COMPLETION_MS) {
+      throw new Error("El chat de este sorteo ya está cerrado.");
+    }
+  }
+  if (raffle.status === "cancelled") {
+    throw new Error("El sorteo fue cancelado, el chat está cerrado.");
+  }
+
+  // Anti-spam cooldown.
+  const lastComment = await prisma.raffleComment.findFirst({
+    where: { raffleId: raffle.id, userId },
+    orderBy: { createdAt: "desc" },
+    select: { createdAt: true },
+  });
+  if (lastComment) {
+    const sinceLast = Date.now() - lastComment.createdAt.getTime();
+    if (sinceLast < COMMENT_COOLDOWN_MS) {
+      const waitS = Math.ceil((COMMENT_COOLDOWN_MS - sinceLast) / 1000);
+      throw new Error(`Espera ${waitS}s antes de enviar otro mensaje.`);
+    }
+  }
 
   const sanitized = sanitizeMarkdownInput(rawBody ?? "");
   if (!sanitized) throw new Error("El comentario está vacío.");
