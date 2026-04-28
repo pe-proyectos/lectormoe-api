@@ -415,35 +415,49 @@ function schedulePhase2Wind(raffleId: number): void {
         return;
       }
 
-      // Cap the batch so a red-light gust can't overshoot the target.
-      const maxEliminable = Math.max(0, aliveTickets.length - PHASE2_TARGET);
-      const batchSize = r.lightState === "red"
-        ? Math.min(PHASE2_WIND_BATCH, maxEliminable)
-        : Math.min(PHASE2_WIND_BATCH, aliveTickets.length);
-
-      const blown = shuffle(aliveTickets).slice(0, batchSize);
+      // New phase 2 mechanic mirrors phase 1's "bombs vs explosions":
+      //   * Wind blows half of all alive tickets (rounded up).
+      //   * Of those blown, half (rounded up) actually get eliminated —
+      //     but only during red light. Green-light gusts still smoke
+      //     all blown tickets without any deaths.
+      //   * Cap so we never overshoot the 10-alive target.
+      const windCount = Math.min(Math.ceil(aliveTickets.length / 2), aliveTickets.length);
+      const blown = shuffle(aliveTickets).slice(0, windCount);
       const blownIds = blown.map((t) => t.id);
       const now = new Date();
 
+      const maxEliminable = Math.max(0, aliveTickets.length - PHASE2_TARGET);
       let eliminatedIds: number[] = [];
-      if (r.lightState === "red" && batchSize > 0) {
-        // Eliminate the blown tickets.
+      if (r.lightState === "red" && maxEliminable > 0 && blown.length > 0) {
+        // Eliminate half of the blown set, capped to maxEliminable.
+        const halfOfBlown = Math.ceil(blown.length / 2);
+        const toExplode = Math.min(halfOfBlown, maxEliminable);
+        const explodeSubset = shuffle(blown).slice(0, toExplode);
         const startOrder = (await prisma.raffleTicket.count({
           where: { raffleId, eliminatedAt: { not: null } },
         })) + 1;
-        for (let i = 0; i < blown.length; i++) {
+        for (let i = 0; i < explodeSubset.length; i++) {
           await prisma.raffleTicket.update({
-            where: { id: blown[i].id },
+            where: { id: explodeSubset[i].id },
             data: { eliminatedAt: now, eliminationOrder: startOrder + i, blownAt: now },
           });
         }
-        eliminatedIds = blownIds;
+        eliminatedIds = explodeSubset.map((t) => t.id);
+        // Also stamp blownAt on the survivors so their smoke animation fires.
+        const survivorIds = blownIds.filter((id) => !eliminatedIds.includes(id));
+        if (survivorIds.length > 0) {
+          await prisma.raffleTicket.updateMany({
+            where: { id: { in: survivorIds } },
+            data: { blownAt: now },
+          });
+        }
         await prisma.raffle.update({
           where: { id: raffleId },
           data: { lastEliminationAt: now, lastWindAt: now },
         });
       } else {
-        // Green light: just stamp blownAt for the FE animation.
+        // Green light (or no headroom to eliminate): just stamp blownAt
+        // on every blown ticket for the smoke animation.
         await prisma.raffleTicket.updateMany({
           where: { id: { in: blownIds } },
           data: { blownAt: now },
@@ -609,12 +623,29 @@ function schedulePhase3Elimination(raffleId: number, intervalMs: number = PHASE3
 
       const alive = await prisma.raffleTicket.findMany({
         where: { raffleId, eliminatedAt: null },
-        orderBy: [{ horseSteps: "asc" }, { number: "asc" }], // tie-break by ticket number
+        orderBy: [{ horseSteps: "asc" }, { number: "asc" }],
         include: { user: { select: { slug: true, username: true, imageUrl: true } } },
       });
       if (alive.length <= 1) {
         clearTimer(raffleId, "main");
         await finalisePhase3(raffleId);
+        return;
+      }
+      // Tie-skip rule: if multiple horses share the lowest step count,
+      // none gets eliminated this round — wait for the next cycle to
+      // break the tie. Just advance lastHorseEliminationAt so the FE
+      // countdown resets and reschedule the next elimination tick.
+      const minSteps = alive[0].horseSteps;
+      const tied = alive.filter((t) => t.horseSteps === minSteps);
+      if (tied.length > 1) {
+        const skipNow = new Date();
+        await prisma.raffle.update({
+          where: { id: raffleId },
+          data: { lastHorseEliminationAt: skipNow },
+        });
+        console.log(`[raffle-draw] phase3 elimination skipped — ${tied.length}-way tie at ${minSteps} steps for raffle #${raffleId}`);
+        const tieInterval = phase3EliminationIntervalMs(alive.length);
+        schedulePhase3Elimination(raffleId, tieInterval);
         return;
       }
       const last = alive[0];
