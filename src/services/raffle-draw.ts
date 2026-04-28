@@ -29,21 +29,27 @@ export const padTicket = (n: number) => {
 // only 5 of those bombs actually go off. The other 5 just puff smoke
 // and survive. Near the target threshold we still arm 10 bombs but cap
 // the explosion count so we never overshoot 30 alive.
-const PHASE1_INTERVAL_MS = 7_000; // round cycle = fuse + gap, used for ETA
+const PHASE1_INTERVAL_MS = 9_000; // round cycle = fuse + gap, used for ETA
 const PHASE1_TARGET = 30;
 const PHASE1_BOMBS_PER_ROUND = 10;
 const PHASE1_EXPLOSIONS_PER_ROUND = 5;
 const PHASE1_FUSE_MS = 5_000;
-const PHASE1_GAP_MS = 2_000;
+// Post-explosion gap. Bumped from 2s → 4s so the smoke + dead avatars
+// have time to settle on screen before the next wave of bombs arms.
+const PHASE1_GAP_MS = 4_000;
 const PHASE2_TARGET = 10; // Reduce to 10 in phase 2
 const PHASE2_WIND_INTERVAL_MS = 3_000;
 const PHASE2_LIGHT_INTERVAL_MS = 6_000; // was 7s — flips faster for more tension
 const PHASE2_WIND_BATCH = 5; // Tickets blown per gust
-// 60s lobbies between phases — long enough for viewers to absorb who survived
-// before the next round of mayhem starts. Used by both phase2_intro and
-// phase3_intro.
-const PHASE2_INTRO_MS = 60_000;
-const PHASE3_INTRO_MS = 60_000;
+// 90s lobbies between phases — long enough for viewers to absorb who
+// survived (the intro view shows every survivor's avatar + number) before
+// the next round of mayhem starts.
+const PHASE2_INTRO_MS = 90_000;
+const PHASE3_INTRO_MS = 90_000;
+// Victory pause: hold for this long after the last horse elimination
+// before flipping to the winner screen. Gives the explosion + horse
+// crossing the finish line animations time to land before celebrating.
+const PHASE3_VICTORY_PAUSE_MS = 8_000;
 const PHASE3_ADVANCE_INTERVAL_MS = 3_000;
 const PHASE3_ELIMINATION_INTERVAL_MS = 12_000; // was 15s
 // Final-stretch acceleration: when there are 3 or fewer horses left, the
@@ -635,7 +641,16 @@ function schedulePhase3Elimination(raffleId: number, intervalMs: number = PHASE3
 
       if (alive.length - 1 <= 1) {
         clearTimer(raffleId, "main");
-        await finalisePhase3(raffleId);
+        // Hold for the victory pause so the explosion of the loser + the
+        // sole survivor crossing the finish line animations have time to
+        // play before we flip to the winner celebration screen.
+        const victoryTimer = setTimeout(() => {
+          pendingTimers.get(raffleId)?.delete("main");
+          finalisePhase3(raffleId).catch((err) =>
+            console.error(`[raffle-draw] delayed finalisePhase3 failed for raffle #${raffleId}:`, err)
+          );
+        }, PHASE3_VICTORY_PAUSE_MS);
+        setTimer(raffleId, "main", victoryTimer);
         return;
       }
       // Pick the next-tick interval based on alive count post-elimination so
