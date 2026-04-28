@@ -32,7 +32,12 @@ export const router = () =>
     .use(
       cron({
         name: "raffle-due-draws",
-        pattern: "* * * * *",
+        // 6-field pattern: every 5 seconds. The minute-precision pattern
+        // ("* * * * *") was leaving a "Sorteando..." dead zone of up to
+        // 60s between the FE countdown hitting 0 and the backend actually
+        // firing executeDraw — bumping to 5s tightens that to the
+        // user-perceptible blink between drawAt and the phase splash.
+        pattern: "*/5 * * * * *",
         run: processDueRaffles,
       }),
     )
@@ -41,6 +46,7 @@ export const router = () =>
     // scans for raffles in status="drawing" with stale lastEliminationAt
     // and resumes their elimination chain (or finalises directly if all
     // eliminations were already committed before the crash).
+    // Stays at minute precision — recovery doesn't need to be fast.
     .use(
       cron({
         name: "raffle-resume-stuck",
