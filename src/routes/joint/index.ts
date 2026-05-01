@@ -99,17 +99,54 @@ export const router = () => new Elysia()
   }, { response: t.Object({ status: t.Boolean(), data: t.Any() }) })
 
   // Public pages endpoint — joint chapters have no subscription gating, so no org context needed.
+  // Uses the same aggregated lookup as getJointChapter: joint-anchored first, then solo chapters
+  // from accepted members, so pages load for both joint and pre-existing solo chapters.
   .get('/api/joint/:slug/chapter/:number/pages', async ({ params: { slug, number } }) => {
     const chapterNumber = parseFloat(number);
     const joint = await prisma.mangaJoint.findFirst({
       where: { slug, deletedAt: null },
-      select: { id: true },
+      select: {
+        id: true,
+        mangaId: true,
+        members: {
+          where: { status: 'ACCEPTED' },
+          select: { organizationId: true },
+        },
+      },
     });
     if (!joint) throw new Error('Joint no encontrado.');
-    const chapter = await prisma.chapter.findFirst({
-      where: { jointId: joint.id, number: chapterNumber, deletedAt: null },
-      include: { pages: { orderBy: { number: 'asc' } } },
-    });
+
+    const acceptedOrgIds = joint.members.map((m) => m.organizationId);
+
+    const [jointChapter, soloChapter] = await Promise.all([
+      prisma.chapter.findFirst({
+        where: { jointId: joint.id, number: chapterNumber, deletedAt: null },
+        include: { pages: { orderBy: { number: 'asc' } } },
+      }),
+      acceptedOrgIds.length === 0 ? Promise.resolve(null) : prisma.chapter.findFirst({
+        where: {
+          deletedAt: null,
+          number: chapterNumber,
+          mangaCustom: {
+            mangaId: joint.mangaId,
+            organizationId: { in: acceptedOrgIds },
+            deletedAt: null,
+          },
+        },
+        include: { pages: { orderBy: { number: 'asc' } } },
+        orderBy: [{ releasedAt: 'desc' }, { createdAt: 'desc' }],
+      }),
+    ]);
+
+    let chapter: any = null;
+    if (jointChapter && soloChapter) {
+      const jTs = (jointChapter.releasedAt ?? jointChapter.createdAt).getTime();
+      const sTs = (soloChapter.releasedAt ?? soloChapter.createdAt).getTime();
+      chapter = jTs >= sTs ? jointChapter : soloChapter;
+    } else {
+      chapter = jointChapter || soloChapter;
+    }
+
     if (!chapter) throw new Error('Capítulo no encontrado.');
     return { status: true, data: chapter.pages };
   }, { response: t.Object({ status: t.Boolean(), data: t.Any() }) })
