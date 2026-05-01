@@ -84,10 +84,15 @@ export const router = () => new Elysia()
   }, { response: t.Object({ status: t.Boolean(), data: t.Any() }) })
 
   // Look up the active joint for a base manga (if any). Returns null when no active joint exists.
-  // Used by the manga admin edit UI to show a banner and prevent chapter uploads that would bypass the joint.
-  .get('/api/manga/:mangaSlug/joint', async ({ params: { mangaSlug } }) => {
+  // Only returns the joint if the requesting org is an ACCEPTED member — INVITED orgs are not
+  // bound by the joint and should continue uploading solo.
+  .get('/api/manga/:mangaSlug/joint', async ({ params: { mangaSlug }, request: { headers } }) => {
+    const orgSlug = headers.get('x-organization');
+    const memberFilter = orgSlug
+      ? { members: { some: { organization: { slug: orgSlug }, status: 'ACCEPTED' } } }
+      : {};
     const joint = await prisma.mangaJoint.findFirst({
-      where: { deletedAt: null, manga: { slug: mangaSlug } },
+      where: { deletedAt: null, manga: { slug: mangaSlug }, ...memberFilter },
       select: { id: true, slug: true, title: true },
     });
     return { status: true, data: joint };

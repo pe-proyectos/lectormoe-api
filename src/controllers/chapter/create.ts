@@ -32,10 +32,15 @@ export const createChapter = async (organizationId: number, mangaSlug: string, p
 		throw new Error("No se encontró el manga");
 	}
 
-	// If this base manga has an active joint, chapters must be uploaded via the joint
-	// admin so they reach every member scan, not just this one.
+	// If this org is an ACCEPTED member of an active joint for this manga,
+	// chapters must be uploaded via the joint admin so they reach every member.
+	// INVITED (not yet accepted) orgs are not bound and can still upload solo.
 	const activeJoint = await prisma.mangaJoint.findFirst({
-		where: { mangaId: mangaCustom.mangaId, deletedAt: null },
+		where: {
+			mangaId: mangaCustom.mangaId,
+			deletedAt: null,
+			members: { some: { organizationId, status: 'ACCEPTED' } },
+		},
 		select: { slug: true },
 	});
 	if (activeJoint) {

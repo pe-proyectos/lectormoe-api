@@ -88,6 +88,21 @@ export const editMangaCustom = async (organizationId: number, mangaSlug: string,
 	return await prisma.mangaCustom.findFirst({
 		where: { id: mangaCustom.id },
 		include: {
+			manga: {
+				include: {
+					authors: true,
+					demography: true,
+					bookType: true,
+				},
+			},
+			organization: {
+				select: {
+					id: true,
+					name: true,
+					slug: true,
+					isNSFW: true,
+				},
+			},
 			genres: true,
 			subscriptionPlansCanReadUnreleased: true,
 			subscriptionPlansCanReadReleased: true,
