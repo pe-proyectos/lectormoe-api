@@ -58,10 +58,13 @@ export const handlePaypalWebhook = async (webhookEvent: PaypalWebhookEvent) => {
                 });
 
                 if (subscriptionWithPlan && subscriptionWithPlan.subscriptionPlan.organization) {
-                    // Calculate fees (PayPal typically charges 2.9% + $0.30)
-                    const paypalFee = Math.max(0.30, paymentAmount * 0.029);
-                    const capibaraFee = paymentAmount * 0.05; // Assuming 5% for Capibara
-                    const netAmount = paymentAmount - paypalFee - capibaraFee;
+                    // Capibara takes 50% of the subscription amount as total commission.
+                    // PayPal fees come from Capibara's cut; org always nets 50%.
+                    // PayPal provides the actual fee in transaction_fee when available.
+                    const actualPaypalFee = parseFloat(webhookEvent.resource?.transaction_fee?.value ?? '0') || undefined;
+                    const paypalFee = actualPaypalFee ?? Math.max(0.30, paymentAmount * 0.0349 + 0.30);
+                    const netAmount = paymentAmount * 0.5;
+                    const capibaraFee = Math.max(0, paymentAmount * 0.5 - paypalFee);
 
                                          // Create organization transaction
                      await prisma.organizationTransaction.create({

@@ -1,11 +1,13 @@
 import { prisma } from '../models/prisma';
 import { getSubscriptionByPaypalId, getTransactionsOfSubscription } from '../util/paypal';
 
-// Same fee math as the webhook handler. If you change fees, change both.
-function feeBreakdown(amount: number) {
-  const paypalFee = Math.max(0.30, amount * 0.029);
-  const capibaraFee = amount * 0.05;
-  const netAmount = amount - paypalFee - capibaraFee;
+// Capibara takes 50% of the subscription amount as total commission.
+// PayPal fees are deducted from Capibara's cut; the org always nets 50%.
+// Pass the actual PayPal fee when available (e.g. from webhook transaction_fee).
+function feeBreakdown(amount: number, actualPaypalFee?: number) {
+  const netAmount = amount * 0.5;
+  const paypalFee = actualPaypalFee ?? Math.max(0.30, amount * 0.0349 + 0.30);
+  const capibaraFee = Math.max(0, amount * 0.5 - paypalFee);
   return { paypalFee, capibaraFee, netAmount };
 }
 
