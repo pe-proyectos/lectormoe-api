@@ -161,6 +161,7 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 						number: true,
 						title: true,
 						releasedAt: true,
+						isUnreleased: true,
 					},
 					orderBy: {
 						number: Prisma.SortOrder.desc,
@@ -198,6 +199,16 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 		// Same joint-merge as the main branch — popular cards need the joint
 		// chapters too, otherwise a leader org's card shows stale per-org top-2.
 		await mergeJointChaptersIntoMangaCustoms(sortedMangas);
+
+		// Hide unreleased chapter previews on cards where the flag is set.
+		const nowPopular = new Date();
+		for (const mc of sortedMangas) {
+			if (mc.hideUnreleasedChapters) {
+				mc.chapters = mc.chapters.filter(
+					(c: any) => !c.isUnreleased && (!c.releasedAt || new Date(c.releasedAt) <= nowPopular)
+				);
+			}
+		}
 
 		return {
 			data: sortedMangas,
@@ -327,6 +338,7 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 						number: true,
 						title: true,
 						releasedAt: true,
+						isUnreleased: true,
 						views: true,
 					},
 					orderBy: {
@@ -366,6 +378,16 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 	// surface the real latest chapter (including joint releases), not the
 	// stale per-org top-2.
 	await mergeJointChaptersIntoMangaCustoms(mangasCustoms);
+
+	// Hide unreleased chapter previews on cards where the flag is set.
+	const now = new Date();
+	for (const mc of mangasCustoms) {
+		if (mc.hideUnreleasedChapters) {
+			mc.chapters = mc.chapters.filter(
+				(c: any) => !c.isUnreleased && (!c.releasedAt || new Date(c.releasedAt) <= now)
+			);
+		}
+	}
 
 	return {
 		data: mangasCustoms,
