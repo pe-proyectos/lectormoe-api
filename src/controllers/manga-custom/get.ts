@@ -1,6 +1,6 @@
 import { prisma, Prisma } from "../../models/prisma";
 
-export const getMangaCustomBySlug = async (organizationId: number, mangaSlug: string) => {
+export const getMangaCustomBySlug = async (organizationId: number, mangaSlug: string, user?: any) => {
 	const mangaCustom = await prisma.mangaCustom.findFirst({
 		where: {
 			organization: {
@@ -131,6 +131,26 @@ export const getMangaCustomBySlug = async (organizationId: number, mangaSlug: st
 				if (cTs >= prevTs) merged.set(c.number, c);
 			}
 			chapters = [...merged.values()].sort((a, b) => b.number - a.number);
+		}
+	}
+
+	// Filter unreleased chapters when the opt-in flag is set, unless the user
+	// has an active subscription for this organization (subscribers can see
+	// early-access / scheduled chapters).
+	const hideUnreleased = mangaCustom.hideUnreleasedChapters === true;
+	if (hideUnreleased) {
+		const hasActiveSub = user != null && Array.isArray(user.subscriptions) &&
+			user.subscriptions.some((sub: any) =>
+				sub.active &&
+				sub.subscriptionPlan?.organizationId === organizationId
+			);
+		if (!hasActiveSub) {
+			const now = new Date();
+			chapters = chapters.filter(
+				(c: any) =>
+					!c.isUnreleased &&
+					(!c.releasedAt || new Date(c.releasedAt) <= now)
+			);
 		}
 	}
 
