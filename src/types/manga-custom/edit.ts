@@ -18,6 +18,7 @@ export const EditMangaCustomRequest = t.Object({
     isSimulRelease: t.Optional(t.Union([t.Boolean(), t.Null()])),
     isNSFW: t.Optional(t.Union([t.Boolean(), t.Null()])),
     workType: t.Optional(t.Union([t.String(), t.Null()])),
+    hideUnreleasedChapters: t.Optional(t.Boolean()),
 });
 
 export type EditMangaCustomRequest = Static<typeof EditMangaCustomRequest>;

@@ -31,6 +31,7 @@ export const editMangaCustom = async (organizationId: number, mangaSlug: string,
 		isSimulRelease: params.isSimulRelease,
 		isNSFW: params.isNSFW,
 		workType: params.workType,
+		...(params.hideUnreleasedChapters !== undefined ? { hideUnreleasedChapters: params.hideUnreleasedChapters } : {}),
 	};
 
 	// Manejar image
