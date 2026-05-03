@@ -129,6 +129,7 @@ model User {
   emailVerificationTokens EmailVerificationToken[]
   favorites               Favorite[]
   userList                UserList[]
+  pageBookmarks           UserPageBookmark[]
   organizationFollows     OrganizationFollower[]
   passwordResetTokens     PasswordResetToken[]
   permissions             Permission[]
@@ -288,6 +289,7 @@ model MangaCustom {
   workType                           String             @default("manga") @db.VarChar(32)
   deletedAt                          DateTime?
   nextChapterAtMessage               String?
+  hideUnreleasedChapters             Boolean            @default(false)
   usersAlsoReadMangaCustomIds        String?
   chapters                           Chapter[]
   favorites                          Favorite[]
@@ -333,6 +335,7 @@ model Chapter {
   workedByOrganizations     Organization[]       @relation("ChapterWorkedBy")
   pages                     Page[]
   userHistory               UserChapterHistory[]
+  pageBookmarks             UserPageBookmark[]
   viewsHistory              ViewsHistory[]
   notifications             Notification[]
 
@@ -528,6 +531,23 @@ model UserList {
   @@unique([userId, jointId])
   @@index([userId, order])
   @@map("user_list")
+}
+
+model UserPageBookmark {
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  chapterId  Int
+  pageNumber Int
+  note       String?  @db.VarChar(256)
+  order      Int      @default(0)
+  createdAt  DateTime @default(now()) @db.Timestamp(6)
+  updatedAt  DateTime @updatedAt
+  user       User     @relation(fields: [userId], references: [id])
+  chapter    Chapter  @relation(fields: [chapterId], references: [id])
+
+  @@unique([userId, chapterId, pageNumber])
+  @@index([userId, order])
+  @@map("user_page_bookmark")
 }
 
 model Audit {
