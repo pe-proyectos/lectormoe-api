@@ -94,11 +94,49 @@ export const getMangaCustomBySlug = async (organizationId: number, mangaSlug: st
 				},
 			},
 		},
-		select: { slug: true },
+		select: { id: true, slug: true },
 	});
+
+	// Merge joint chapters into the chapter list so members see joint-uploaded
+	// chapters alongside (or instead of) their own solo chapters.
+	let chapters: any[] = mangaCustom.chapters;
+	if (activeJoint) {
+		const jointChapters = await prisma.chapter.findMany({
+			where: {
+				jointId: activeJoint.id,
+				deletedAt: null,
+			},
+			select: {
+				id: true,
+				number: true,
+				title: true,
+				releasedAt: true,
+				isUnreleased: true,
+				imageUrl: true,
+				views: true,
+				createdAt: true,
+				updatedAt: true,
+			},
+			orderBy: { number: 'desc' },
+		});
+
+		if (jointChapters.length > 0) {
+			// Deduplicate by chapter number, keeping the most recently released entry.
+			const merged = new Map<number, any>();
+			for (const c of [...chapters, ...jointChapters]) {
+				const prev = merged.get(c.number);
+				if (!prev) { merged.set(c.number, c); continue; }
+				const prevTs = prev.releasedAt ? new Date(prev.releasedAt).getTime() : 0;
+				const cTs = c.releasedAt ? new Date(c.releasedAt).getTime() : 0;
+				if (cTs >= prevTs) merged.set(c.number, c);
+			}
+			chapters = [...merged.values()].sort((a, b) => b.number - a.number);
+		}
+	}
 
 	return {
 		...mangaCustom,
+		chapters,
 		jointSlug: activeJoint?.slug || null,
 	};
 };
