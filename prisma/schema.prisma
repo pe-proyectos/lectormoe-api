@@ -521,6 +521,7 @@ model UserList {
   jointId       Int?
   order         Int          @default(0)
   finishedAt    DateTime?    @db.Timestamp(6)
+  readingStatus String       @default("READING") @db.VarChar(32)
   createdAt     DateTime     @default(now()) @db.Timestamp(6)
   updatedAt     DateTime     @updatedAt
   mangaCustom   MangaCustom? @relation(fields: [mangaCustomId], references: [id])

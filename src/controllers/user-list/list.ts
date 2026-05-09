@@ -47,6 +47,7 @@ export interface UserListQuery {
 	limit?: string;
 	search?: string;
 	status?: string;        // mangaCustom.status filter
+	readingStatus?: string; // user's own reading status (READING, PLAN_TO_READ, COMPLETED, PAUSED, DROPPED)
 	type?: 'manga' | 'joint'; // restrict to one kind
 	scanSlug?: string;      // only mangaCustom items from this scan
 	sort?: 'order' | 'recent' | 'title'; // default 'order'
@@ -109,6 +110,10 @@ export const listUserList = async (
 		andClauses.push({ finishedAt: { not: null } });
 	} else if (filters?.finished === 'no') {
 		andClauses.push({ finishedAt: null });
+	}
+
+	if (filters?.readingStatus) {
+		andClauses.push({ readingStatus: filters.readingStatus });
 	}
 
 	if (filters?.favoritesOnly) {

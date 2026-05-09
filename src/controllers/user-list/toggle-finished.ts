@@ -9,8 +9,11 @@ export const toggleUserListFinished = async (userId: number, id: number, finishe
 
 	const updated = await prisma.userList.update({
 		where: { id },
-		data: { finishedAt: finished ? new Date() : null },
-		select: { id: true, finishedAt: true },
+		data: {
+			finishedAt: finished ? new Date() : null,
+			readingStatus: finished ? "COMPLETED" : "READING",
+		},
+		select: { id: true, finishedAt: true, readingStatus: true },
 	});
 	return updated;
 };

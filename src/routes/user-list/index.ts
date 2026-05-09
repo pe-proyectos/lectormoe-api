@@ -7,6 +7,7 @@ import { getUserListManga, getUserListJoint } from "../../controllers/user-list/
 import { deleteUserListManga, deleteUserListJoint } from "../../controllers/user-list/delete";
 import { reorderUserList } from "../../controllers/user-list/reorder";
 import { toggleUserListFinished } from "../../controllers/user-list/toggle-finished";
+import { setUserListReadingStatus, VALID_READING_STATUSES } from "../../controllers/user-list/set-reading-status";
 
 export const router = () =>
 	new Elysia()
@@ -20,11 +21,15 @@ export const router = () =>
 					const sort = query?.sort === 'recent' || query?.sort === 'title' ? query.sort : 'order';
 					const finished = query?.finished === 'yes' || query?.finished === 'no' ? query.finished : undefined;
 					const favoritesOnly = query?.favoritesOnly === '1' || query?.favoritesOnly === 'true';
+					const readingStatus = query?.readingStatus && (VALID_READING_STATUSES as readonly string[]).includes(query.readingStatus)
+						? query.readingStatus
+						: undefined;
 					const { data, maxPage, total } = await listUserList(organizationId, user.id, {
 						page: query?.page,
 						limit: query?.limit,
 						search: query?.search,
 						status: query?.status,
+						readingStatus,
 						type,
 						scanSlug: query?.scanSlug,
 						sort,
@@ -40,6 +45,7 @@ export const router = () =>
 							limit: t.Optional(t.String()),
 							search: t.Optional(t.String()),
 							status: t.Optional(t.String()),
+							readingStatus: t.Optional(t.String()),
 							type: t.Optional(t.String()),
 							scanSlug: t.Optional(t.String()),
 							sort: t.Optional(t.String()),
@@ -139,6 +145,20 @@ export const router = () =>
 					{
 						params: t.Object({ id: t.String() }),
 						body: t.Object({ finished: t.Boolean() }),
+						response: t.Object({ status: t.Boolean(), data: t.Any() }),
+					},
+				)
+				.patch(
+					"/api/user-list/:id/reading-status",
+					async ({ user, params, body }) => {
+						const id = Number.parseInt(params.id);
+						if (Number.isNaN(id)) throw new Error("Id inválido.");
+						const data = await setUserListReadingStatus(user.id, id, body.status as any);
+						return { status: true, data };
+					},
+					{
+						params: t.Object({ id: t.String() }),
+						body: t.Object({ status: t.String() }),
 						response: t.Object({ status: t.Boolean(), data: t.Any() }),
 					},
 				),
