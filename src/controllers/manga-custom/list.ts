@@ -134,6 +134,9 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 						}
 					}
 				} : {}),
+				...(filters.author ? {
+					manga: { authors: { some: { slug: filters.author } } }
+				} : {}),
 				...idsFilter,
 			},
 			include: {
@@ -305,6 +308,9 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 					}
 				}
 			}
+		} : {}),
+		...(filters.author ? {
+			manga: { authors: { some: { slug: filters.author } } }
 		} : {}),
 		...idsFilter,
 	};

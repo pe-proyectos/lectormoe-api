@@ -17,6 +17,7 @@ import { router as emailUnsubscribeRouter } from "./email/unsubscribe";
 import { router as emailCronRouter } from "./email/cron";
 import { router as authorCreateRouter } from "./author/create";
 import { router as authorListRouter } from "./author/list";
+import { router as authorGetRouter } from "./author/get";
 import { router as bookTypeListRouter } from "./book_type/list";
 import { router as chapterCreateRouter } from "./chapter/create";
 import { router as chapterEditRouter } from "./chapter/edit";
@@ -137,6 +138,7 @@ export const router = () => async (app: Elysia) => {
 	// Author
 	app.use(authorCreateRouter());
 	app.use(authorListRouter());
+	app.use(authorGetRouter());
 
 	// Book Type
 	app.use(bookTypeListRouter());

@@ -21,6 +21,8 @@ export const MangaCustomListQuery = t.Object({
     search: t.Optional(t.String()),
     status: t.Optional(t.String()),
     genre: t.Optional(t.String()),
+    author: t.Optional(t.String()), // author slug — matches mangaCustom.manga.authors[].slug
+
     order: t.Optional(t.Enum(OrderEnum)),
     type: t.Optional(t.Enum(BookTypeCodeEnum)),
     // 'writing' = only novel/light-novel/book/short-story; 'manga' = exclude those four; omitted = all.
