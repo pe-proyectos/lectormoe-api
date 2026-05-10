@@ -7,6 +7,7 @@ import { searchUsers, createScan } from '../../controllers/superadmin/scan';
 import { listUsersAdmin, resendVerificationEmail, setUserHideAds } from '../../controllers/superadmin/users';
 import { listAllSubscriptions, listAnySubscriptionPayments } from '../../controllers/superadmin/subscriptions';
 import { computeMonthlyAdRevenue, persistMonthlyAdRevenue } from '../../services/ad-revenue';
+import { generatePresignedUploadUrl, getContentType } from '../../services/files';
 
 export const router = () =>
 	new Elysia()
@@ -32,6 +33,34 @@ export const router = () =>
 		)
 		// ── Protected routes ─────────────────────────────────────────────────────
 		.use(superadminAuth())
+		.post(
+			'/api/superadmin/files/presigned-url',
+			async ({ body }) => {
+				const { filename, contentType, expiresIn, contentFolder } = body;
+				if (!filename) throw new Error('Filename is required.');
+				if (filename.includes('..') || filename.includes('/') || filename.includes('\\')) {
+					throw new Error('Invalid filename.');
+				}
+				const finalContentType = contentType || getContentType(filename);
+				const { uploadUrl, fileKey } = await generatePresignedUploadUrl(
+					filename,
+					finalContentType,
+					expiresIn || 3600,
+					'superadmin',
+					undefined,
+					contentFolder,
+				);
+				return { status: true, data: { uploadUrl, fileKey } };
+			},
+			{
+				body: t.Object({
+					filename: t.String(),
+					contentType: t.Optional(t.String()),
+					expiresIn: t.Optional(t.Number()),
+					contentFolder: t.Optional(t.String()),
+				}),
+			}
+		)
 		.get('/api/superadmin/stats', async () => {
 			const data = await getGlobalStats();
 			return { status: true, data };
