@@ -1,31 +1,39 @@
 import { prisma } from '../../models/prisma';
 
-const FREE_BOOKMARK_LIMIT = 5;
-
-async function enforceLimit(userId: number) {
-  const hasSub = await prisma.subscription.findFirst({
-    where: { userId, active: true },
-    select: { id: true },
+/**
+ * Save a bookmark for a position in a chapter. Each user can have AT MOST ONE
+ * bookmark per work (mangaCustom or joint) — saving a new one automatically
+ * replaces any previous bookmark on the same work.
+ *
+ * `pageNumber` semantics depend on the work type:
+ *   - manga / image-based: actual page number (1..N)
+ *   - novel / writing:     scroll percentage (1..100)
+ */
+export const savePageBookmark = async (
+  userId: number,
+  chapterId: number,
+  pageNumber: number,
+  note?: string,
+) => {
+  // Find the chapter to identify which work it belongs to.
+  const chapter = await prisma.chapter.findUnique({
+    where: { id: chapterId },
+    select: { id: true, mangaCustomId: true, jointId: true, deletedAt: true },
   });
-  if (!hasSub) {
-    const count = await prisma.userPageBookmark.count({ where: { userId } });
-    if (count >= FREE_BOOKMARK_LIMIT) {
-      throw new Error(`Límite de ${FREE_BOOKMARK_LIMIT} marcadores alcanzado. Suscríbete para marcadores ilimitados.`);
-    }
+  if (!chapter || chapter.deletedAt) throw new Error('Capítulo no encontrado.');
+
+  // Wipe any previous bookmark this user has on the same work — there can be
+  // only one. We scope by mangaCustomId OR jointId depending on what the
+  // chapter belongs to.
+  if (chapter.mangaCustomId) {
+    await prisma.userPageBookmark.deleteMany({
+      where: { userId, chapter: { mangaCustomId: chapter.mangaCustomId } },
+    });
+  } else if (chapter.jointId) {
+    await prisma.userPageBookmark.deleteMany({
+      where: { userId, chapter: { jointId: chapter.jointId } },
+    });
   }
-}
-
-export const savePageBookmark = async (userId: number, chapterId: number, pageNumber: number, note?: string) => {
-  const existing = await prisma.userPageBookmark.findUnique({
-    where: { userId_chapterId_pageNumber: { userId, chapterId, pageNumber } },
-  });
-
-  if (existing) {
-    await prisma.userPageBookmark.delete({ where: { id: existing.id } });
-    return { action: 'removed', id: existing.id };
-  }
-
-  await enforceLimit(userId);
 
   const maxOrder = await prisma.userPageBookmark.aggregate({
     where: { userId },
@@ -42,5 +50,5 @@ export const savePageBookmark = async (userId: number, chapterId: number, pageNu
     },
   });
 
-  return { action: 'added', bookmark };
+  return { action: 'saved', bookmark };
 };
