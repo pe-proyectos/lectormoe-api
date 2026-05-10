@@ -5,6 +5,7 @@ export enum OrderEnum {
     FEATURED = 'featured',
     POPULAR = 'popular',
     LATEST = 'latest',
+    ALPHABETICAL = 'alphabetical',
 }
 
 export enum BookTypeCodeEnum {

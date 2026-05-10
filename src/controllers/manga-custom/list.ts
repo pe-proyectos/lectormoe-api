@@ -25,6 +25,8 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 				nulls: Prisma.NullsOrder.last,
 			}
 		};
+	} else if (filters.order === OrderEnum.ALPHABETICAL) {
+		order.orderBy = { title: Prisma.SortOrder.asc };
 	} else if (filters.order === OrderEnum.POPULAR) {
 		// Optimized popular query: Get manga IDs with view counts first, then fetch only needed mangas
 		const whereCondition = {
