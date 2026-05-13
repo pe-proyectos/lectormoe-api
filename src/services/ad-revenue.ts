@@ -156,7 +156,10 @@ export async function persistMonthlyAdRevenue(
   breakdown: MonthlyAdRevenueBreakdown,
 ): Promise<PersistResult> {
   const { year, monthIndex, perOrg, totalGoogle, totalAdsterra, platformCut, scanPool } = breakdown;
-  const txDate = new Date(year, monthIndex + 1, 0); // last day of month
+  // Use the actual run date so the transaction appears on the day the cron
+  // executed (2nd of each month), not backdated to the last day of the covered
+  // period. This makes the finance panel unambiguous.
+  const txDate = new Date();
   const monthLabel = `${year}-${(monthIndex + 1).toString().padStart(2, '0')}`;
 
   let inserted = 0;
