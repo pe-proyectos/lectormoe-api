@@ -526,13 +526,33 @@ async function injectMemberJointEntries(
 		},
 	});
 
+	// Fetch display titles/covers from existing MangaCustom records for the
+	// same manga (any org). The MangaCustom title (e.g. "Adicto a Lilim") is
+	// the localized/scan name and takes priority over the joint or manga title.
+	const jointMangaIds = joints.map((j) => j.mangaId);
+	const existingCustoms = jointMangaIds.length
+		? await prisma.mangaCustom.findMany({
+				where: { mangaId: { in: jointMangaIds }, deletedAt: null },
+				select: { mangaId: true, title: true, imageUrl: true },
+		  })
+		: [];
+	const customMetaByMangaId = new Map<number, { title: string; imageUrl: string | null }>();
+	for (const mc of existingCustoms) {
+		if (!customMetaByMangaId.has(mc.mangaId) && mc.title) {
+			customMetaByMangaId.set(mc.mangaId, { title: mc.title, imageUrl: mc.imageUrl });
+		}
+	}
+
 	for (const joint of joints) {
+		const customMeta = customMetaByMangaId.get(joint.mangaId);
+		const displayTitle = customMeta?.title || joint.title || joint.manga?.title || '';
+		const displayImage = customMeta?.imageUrl || joint.imageUrl || joint.manga?.imageUrl || '';
+
 		// Basic title/search filter so catalog search still works for joints
 		const searchTerm = filters?.search || filters?.title;
 		if (searchTerm) {
 			const q = searchTerm.toLowerCase();
-			const jTitle = (joint.title || joint.manga?.title || '').toLowerCase();
-			if (!jTitle.includes(q)) continue;
+			if (!displayTitle.toLowerCase().includes(q)) continue;
 		}
 
 		const org = joint.members[0]?.organization;
@@ -542,8 +562,8 @@ async function injectMemberJointEntries(
 
 		mangasCustoms.push({
 			id: `joint-${joint.id}`,
-			title: joint.title || joint.manga?.title || '',
-			imageUrl: joint.imageUrl || joint.manga?.imageUrl || '',
+			title: displayTitle,
+			imageUrl: displayImage,
 			slug: joint.slug,
 			status: 'Ongoing',
 			isNSFW: false,
