@@ -387,6 +387,13 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 	// stale per-org top-2.
 	await mergeJointChaptersIntoMangaCustoms(mangasCustoms);
 
+	// Inject synthetic joint entries for orgs that are ACCEPTED members of a
+	// joint but have no MangaCustom for that manga (guest/invited orgs). Without
+	// this, invited orgs never see the joint on their landing page or catalog.
+	if (organizationId) {
+		await injectMemberJointEntries(mangasCustoms, organizationId, filters);
+	}
+
 	// Hide unreleased chapter previews on cards where the flag is set.
 	const now = new Date();
 	for (const mc of mangasCustoms) {
@@ -400,7 +407,7 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 	return {
 		data: mangasCustoms,
 		maxPage: Math.ceil(total / Number.parseInt(filters?.limit || "10")),
-		total,
+		total: total + (mangasCustoms.length > total ? mangasCustoms.length - total : 0),
 	};
 };
 
@@ -462,5 +469,93 @@ async function mergeJointChaptersIntoMangaCustoms(mangaCustoms: any[]): Promise<
 				.sort((a, b) => b.number - a.number)
 				.slice(0, 2);
 		}
+	}
+}
+
+// Appends synthetic MangaCustom-shaped entries for every active joint where
+// `organizationId` is an ACCEPTED member but the manga is not already present
+// in `mangasCustoms` (i.e., the org has no own MangaCustom for that manga).
+// This ensures invited/guest orgs see the joint on their landing page and catalog.
+async function injectMemberJointEntries(
+	mangasCustoms: any[],
+	organizationId: number,
+	filters: any,
+): Promise<void> {
+	const coveredMangaIds = new Set(mangasCustoms.map((mc) => mc.manga?.id).filter(Boolean));
+
+	const joints = await prisma.mangaJoint.findMany({
+		where: {
+			deletedAt: null,
+			members: { some: { organizationId, status: 'ACCEPTED' } },
+			...(coveredMangaIds.size > 0 ? { mangaId: { notIn: [...coveredMangaIds] } } : {}),
+		},
+		select: {
+			id: true,
+			slug: true,
+			title: true,
+			imageUrl: true,
+			mangaId: true,
+			manga: {
+				include: {
+					demography: { select: { name: true, slug: true } },
+					bookType: { select: { code: true, name: true } },
+				},
+			},
+			members: {
+				where: { organizationId, status: 'ACCEPTED' },
+				select: {
+					organization: {
+						select: { id: true, name: true, slug: true, title: true, isNSFW: true, isPublic: true },
+					},
+				},
+				take: 1,
+			},
+			chapters: {
+				where: { deletedAt: null },
+				orderBy: { number: Prisma.SortOrder.desc },
+				take: 2,
+				select: {
+					id: true,
+					number: true,
+					title: true,
+					releasedAt: true,
+					isUnreleased: true,
+					views: true,
+				},
+			},
+		},
+	});
+
+	for (const joint of joints) {
+		// Basic title/search filter so catalog search still works for joints
+		const searchTerm = filters?.search || filters?.title;
+		if (searchTerm) {
+			const q = searchTerm.toLowerCase();
+			const jTitle = (joint.title || joint.manga?.title || '').toLowerCase();
+			if (!jTitle.includes(q)) continue;
+		}
+
+		const org = joint.members[0]?.organization;
+		if (!org) continue;
+
+		const taggedChapters = joint.chapters.map((c: any) => ({ ...c, _jointSlug: joint.slug }));
+
+		mangasCustoms.push({
+			id: `joint-${joint.id}`,
+			title: joint.title || joint.manga?.title || '',
+			imageUrl: joint.imageUrl || joint.manga?.imageUrl || '',
+			slug: joint.slug,
+			status: 'Ongoing',
+			isNSFW: false,
+			hideUnreleasedChapters: false,
+			deletedAt: null,
+			organization: org,
+			manga: joint.manga,
+			chapters: taggedChapters,
+			genres: [],
+			subscriptionPlansCanReadUnreleased: [],
+			subscriptionPlansCanReadReleased: [],
+			_jointSlug: joint.slug,
+		});
 	}
 }
