@@ -419,6 +419,7 @@ async function mergeJointChaptersIntoMangaCustoms(mangaCustoms: any[]): Promise<
 		where: { mangaId: { in: mangaIds }, deletedAt: null },
 		select: {
 			id: true,
+			slug: true,
 			mangaId: true,
 			members: {
 				where: { status: "ACCEPTED" },
@@ -444,8 +445,10 @@ async function mergeJointChaptersIntoMangaCustoms(mangaCustoms: any[]): Promise<
 			const mc = orgMcByKey.get(`${member.organizationId}-${joint.mangaId}`);
 			if (!mc) continue;
 			const existing: any[] = Array.isArray(mc.chapters) ? mc.chapters : [];
+			// Tag joint chapters so the frontend can build the correct /joint/manga/<slug>/chapters/<n> URL.
+			const taggedJointChapters = joint.chapters.map((c: any) => ({ ...c, _jointSlug: joint.slug }));
 			const merged = new Map<number, any>();
-			for (const c of [...existing, ...joint.chapters]) {
+			for (const c of [...existing, ...taggedJointChapters]) {
 				const prev = merged.get(c.number);
 				if (!prev) {
 					merged.set(c.number, c);
