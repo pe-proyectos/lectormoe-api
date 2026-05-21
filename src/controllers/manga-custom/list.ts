@@ -205,6 +205,11 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 		// chapters too, otherwise a leader org's card shows stale per-org top-2.
 		await mergeJointChaptersIntoMangaCustoms(sortedMangas);
 
+		// Inject joints for member orgs that have no MangaCustom for the manga.
+		if (organizationId) {
+			await injectMemberJointEntries(sortedMangas, organizationId, filters);
+		}
+
 		// Hide unreleased chapter previews on cards where the flag is set.
 		const nowPopular = new Date();
 		for (const mc of sortedMangas) {
