@@ -103,20 +103,16 @@ export const editChapter = async (organizationId: number, mangaSlug: string, cha
 				chapterId: chapter.id,
 			},
 		});
-		await Promise.all(params.pages.map(async (page, index) => {
-			// Las páginas son fileKeys o URLs que vienen del frontend
-			const pageUrl = page.startsWith('http') 
-				? page 
-				: `${r2PublicUrl}/${page}`;
-			
-			// Buscar página existente para preservar dimensiones si es posible
-			const existingPage = chapterExists.pages.find(p => {
-				if (!p.imageUrl) return false;
-				return p.imageUrl === pageUrl || p.imageUrl.endsWith(page);
-			});
-			
-			await prisma.page.create({
-				data: {
+		await prisma.page.createMany({
+			data: params.pages.map((page, index) => {
+				const pageUrl = page.startsWith('http')
+					? page
+					: `${r2PublicUrl}/${page}`;
+				const existingPage = chapterExists.pages.find(p => {
+					if (!p.imageUrl) return false;
+					return p.imageUrl === pageUrl || p.imageUrl.endsWith(page);
+				});
+				return {
 					imageUrl: pageUrl,
 					number: index + 1,
 					chapterId: chapter.id,
@@ -124,9 +120,9 @@ export const editChapter = async (organizationId: number, mangaSlug: string, cha
 					imageWidth: existingPage?.imageWidth || 100,
 					imageType: existingPage?.imageType || "any",
 					isSinglePage: params.singlePages?.includes(index) ?? false,
-				},
-			});
-		}));
+				};
+			}),
+		});
 	}
 
 	return chapter;

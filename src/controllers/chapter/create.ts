@@ -99,26 +99,22 @@ export const createChapter = async (organizationId: number, mangaSlug: string, p
 	});
 
 	if (params.pages) {
-		await Promise.all(params.pages.map(async (page, index) => {
-			// Las páginas son fileKeys o URLs que vienen del frontend
-			const pageUrl = page.startsWith('http') 
-				? page 
-				: `${r2PublicUrl}/${page}`;
-			
-			// Crear página con URL - dimensiones por defecto
-			await prisma.page.create({
-				data: {
+		await prisma.page.createMany({
+			data: params.pages.map((page, index) => {
+				const pageUrl = page.startsWith('http')
+					? page
+					: `${r2PublicUrl}/${page}`;
+				return {
 					imageUrl: pageUrl,
 					number: index + 1,
 					chapterId: chapter.id,
-					imageHeight: 100, // Dimensiones por defecto
+					imageHeight: 100,
 					imageWidth: 100,
 					imageType: "any",
-					//@ts-ignore
 					isSinglePage: params.singlePages?.includes(index) ?? false,
-				},
-			})
-		}));
+				};
+			}),
+		});
 	}
 
 	await prisma.mangaCustom.update({
