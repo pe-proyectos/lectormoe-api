@@ -66,6 +66,7 @@ import { router as mangaCustomUpdateUsersAlsoReadRouter } from "./manga-custom/u
 import { router as organizationCheckRouter } from "./organization/check";
 import { router as organizationEditRouter } from "./organization/edit";
 import { router as organizationFollowRouter } from "./organization/follow";
+import { router as organizationFrequentReadsRouter } from "./organization/frequent-reads";
 import { router as organizationListFollowedRouter } from "./organization/list-followed";
 import { router as organizationRequestRegistrationRouter } from "./organization/request-registration";
 import { router as organizationTopCommentersRouter } from "./organization/top-commenters";
@@ -213,6 +214,7 @@ export const router = () => async (app: Elysia) => {
 	app.use(organizationCheckRouter());
 	app.use(organizationEditRouter());
 	app.use(organizationFollowRouter());
+	app.use(organizationFrequentReadsRouter());
 	app.use(organizationListFollowedRouter());
 	app.use(organizationRequestRegistrationRouter());
 	app.use(organizationTopCommentersRouter());

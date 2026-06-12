@@ -8,7 +8,7 @@ export const router = () => new Elysia()
 			const includeNSFW = query?.includeNSFW === 'true';
 			const page = query?.page ? Number.parseInt(query.page) || 1 : 1;
 			const limit = query?.limit ? Number.parseInt(query.limit) || 20 : 20;
-			const sort = (query?.sort === 'name' || query?.sort === 'mangas' || query?.sort === 'followers')
+			const sort = (query?.sort === 'name' || query?.sort === 'mangas' || query?.sort === 'followers' || query?.sort === 'followers_7d')
 				? query.sort
 				: 'followers';
 			const search = query?.search || '';
