@@ -397,6 +397,23 @@ export const listMangaCustom = async (organizationId: number | null, filters: Ma
 	// this, invited orgs never see the joint on their landing page or catalog.
 	if (organizationId) {
 		await injectMemberJointEntries(mangasCustoms, organizationId, filters);
+	} else {
+		// Global listing (no org context): inject active joints whose manga is NOT
+		// represented by any MangaCustom in the current page. This covers the case
+		// where the joint leader org has no MangaCustom for the manga, so the joint
+		// would be completely invisible on the main landing / global search.
+		await injectGlobalJointEntries(mangasCustoms, filters);
+		// Re-sort by lastChapterAt so injected entries appear in the right position,
+		// then trim back to the original limit.
+		if (filters.order === OrderEnum.LATEST) {
+			const take = Number.parseInt(filters?.limit || "10");
+			(mangasCustoms as any[]).sort((a, b) => {
+				const aTs = a.lastChapterAt ? new Date(a.lastChapterAt).getTime() : 0;
+				const bTs = b.lastChapterAt ? new Date(b.lastChapterAt).getTime() : 0;
+				return bTs - aTs;
+			});
+			mangasCustoms.splice(take);
+		}
 	}
 
 	// Hide unreleased chapter previews on cards where the flag is set.
@@ -570,6 +587,105 @@ async function injectMemberJointEntries(
 			title: displayTitle,
 			imageUrl: displayImage,
 			slug: joint.slug,
+			status: 'Ongoing',
+			isNSFW: false,
+			hideUnreleasedChapters: false,
+			deletedAt: null,
+			organization: org,
+			manga: joint.manga,
+			chapters: taggedChapters,
+			genres: [],
+			subscriptionPlansCanReadUnreleased: [],
+			subscriptionPlansCanReadReleased: [],
+			_jointSlug: joint.slug,
+		});
+	}
+}
+
+// Injects synthetic MangaCustom-shaped entries for active joints whose manga
+// is NOT already covered by any MangaCustom in `mangasCustoms`. Used for the
+// global listing (no org context) so joints appear on the main landing page
+// even when none of their member orgs has a standalone MangaCustom for the manga.
+async function injectGlobalJointEntries(mangasCustoms: any[], filters: any): Promise<void> {
+	const coveredMangaIds = new Set(mangasCustoms.map((mc) => mc.mangaId).filter(Boolean));
+
+	const joints = await prisma.mangaJoint.findMany({
+		where: {
+			deletedAt: null,
+			...(coveredMangaIds.size > 0 ? { mangaId: { notIn: [...coveredMangaIds] } } : {}),
+		},
+		select: {
+			id: true,
+			slug: true,
+			title: true,
+			imageUrl: true,
+			mangaId: true,
+			lastChapterAt: true,
+			manga: {
+				include: {
+					demography: { select: { name: true, slug: true } },
+					bookType: { select: { code: true, name: true } },
+				},
+			},
+			members: {
+				where: { status: 'ACCEPTED' },
+				select: {
+					organization: {
+						select: { id: true, name: true, slug: true, title: true, isNSFW: true, isPublic: true },
+					},
+				},
+				take: 1,
+			},
+			chapters: {
+				where: { deletedAt: null },
+				orderBy: { number: Prisma.SortOrder.desc },
+				take: 2,
+				select: {
+					id: true,
+					number: true,
+					title: true,
+					releasedAt: true,
+					isUnreleased: true,
+					views: true,
+				},
+			},
+		},
+	});
+
+	const jointMangaIds = joints.map((j) => j.mangaId);
+	const existingCustoms = jointMangaIds.length
+		? await prisma.mangaCustom.findMany({
+				where: { mangaId: { in: jointMangaIds }, deletedAt: null },
+				select: { mangaId: true, title: true, imageUrl: true },
+		  })
+		: [];
+	const customMetaByMangaId = new Map<number, { title: string; imageUrl: string | null }>();
+	for (const mc of existingCustoms) {
+		if (!customMetaByMangaId.has(mc.mangaId) && mc.title) {
+			customMetaByMangaId.set(mc.mangaId, { title: mc.title, imageUrl: mc.imageUrl });
+		}
+	}
+
+	for (const joint of joints) {
+		const org = joint.members[0]?.organization;
+		if (!org || org.isPublic === false) continue;
+
+		const customMeta = customMetaByMangaId.get(joint.mangaId);
+		const displayTitle = customMeta?.title || joint.title || joint.manga?.title || '';
+		const displayImage = customMeta?.imageUrl || joint.imageUrl || null;
+
+		const searchTerm = filters?.search || filters?.title;
+		if (searchTerm && !displayTitle.toLowerCase().includes(searchTerm.toLowerCase())) continue;
+
+		const taggedChapters = joint.chapters.map((c: any) => ({ ...c, _jointSlug: joint.slug }));
+
+		mangasCustoms.push({
+			id: `joint-${joint.id}`,
+			title: displayTitle,
+			imageUrl: displayImage,
+			slug: joint.slug,
+			mangaId: joint.mangaId,
+			lastChapterAt: joint.lastChapterAt,
 			status: 'Ongoing',
 			isNSFW: false,
 			hideUnreleasedChapters: false,
