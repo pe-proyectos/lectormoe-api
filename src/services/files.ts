@@ -17,7 +17,12 @@ const s3Client = new S3Client({
         accessKeyId: Bun.env.R2_ACCESS_KEY_ID || "",
         secretAccessKey: Bun.env.R2_SECRET_ACCESS_KEY || "",
     },
-    forcePathStyle: false, // Use virtual-hosted-style (bucket.domain.com)
+    forcePathStyle: false,
+    // Prevent the SDK from embedding CRC32 checksums in presigned URLs.
+    // The default "WHEN_SUPPORTED" generates a placeholder checksum that R2
+    // then validates against the uploaded content, causing 504/400 errors.
+    requestChecksumCalculation: "WHEN_REQUIRED",
+    responseChecksumValidation: "WHEN_REQUIRED",
 });
 
 const bucket = Bun.env.R2_BUCKET_NAME || "";
