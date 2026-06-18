@@ -401,6 +401,7 @@ export type UserWhereInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenListRelationFilter
   favorites?: Prisma.FavoriteListRelationFilter
   userList?: Prisma.UserListListRelationFilter
+  pageBookmarks?: Prisma.UserPageBookmarkListRelationFilter
   organizationFollows?: Prisma.OrganizationFollowerListRelationFilter
   passwordResetTokens?: Prisma.PasswordResetTokenListRelationFilter
   permissions?: Prisma.PermissionListRelationFilter
@@ -414,6 +415,8 @@ export type UserWhereInput = {
   notifications?: Prisma.NotificationListRelationFilter
   raffleTickets?: Prisma.RaffleTicketListRelationFilter
   raffleComments?: Prisma.RaffleCommentListRelationFilter
+  bansReceived?: Prisma.UserBanListRelationFilter
+  bansIssued?: Prisma.UserBanListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -453,6 +456,7 @@ export type UserOrderByWithRelationInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenOrderByRelationAggregateInput
   favorites?: Prisma.FavoriteOrderByRelationAggregateInput
   userList?: Prisma.UserListOrderByRelationAggregateInput
+  pageBookmarks?: Prisma.UserPageBookmarkOrderByRelationAggregateInput
   organizationFollows?: Prisma.OrganizationFollowerOrderByRelationAggregateInput
   passwordResetTokens?: Prisma.PasswordResetTokenOrderByRelationAggregateInput
   permissions?: Prisma.PermissionOrderByRelationAggregateInput
@@ -466,6 +470,8 @@ export type UserOrderByWithRelationInput = {
   notifications?: Prisma.NotificationOrderByRelationAggregateInput
   raffleTickets?: Prisma.RaffleTicketOrderByRelationAggregateInput
   raffleComments?: Prisma.RaffleCommentOrderByRelationAggregateInput
+  bansReceived?: Prisma.UserBanOrderByRelationAggregateInput
+  bansIssued?: Prisma.UserBanOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -508,6 +514,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   emailVerificationTokens?: Prisma.EmailVerificationTokenListRelationFilter
   favorites?: Prisma.FavoriteListRelationFilter
   userList?: Prisma.UserListListRelationFilter
+  pageBookmarks?: Prisma.UserPageBookmarkListRelationFilter
   organizationFollows?: Prisma.OrganizationFollowerListRelationFilter
   passwordResetTokens?: Prisma.PasswordResetTokenListRelationFilter
   permissions?: Prisma.PermissionListRelationFilter
@@ -521,6 +528,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   notifications?: Prisma.NotificationListRelationFilter
   raffleTickets?: Prisma.RaffleTicketListRelationFilter
   raffleComments?: Prisma.RaffleCommentListRelationFilter
+  bansReceived?: Prisma.UserBanListRelationFilter
+  bansIssued?: Prisma.UserBanListRelationFilter
 }, "id" | "username" | "slug" | "email" | "discordId">
 
 export type UserOrderByWithAggregationInput = {
@@ -627,6 +636,7 @@ export type UserCreateInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
@@ -640,6 +650,8 @@ export type UserCreateInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -679,6 +691,7 @@ export type UserUncheckedCreateInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
@@ -692,6 +705,8 @@ export type UserUncheckedCreateInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanUncheckedCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserUpdateInput = {
@@ -730,6 +745,7 @@ export type UserUpdateInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
@@ -743,6 +759,8 @@ export type UserUpdateInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -782,6 +800,7 @@ export type UserUncheckedUpdateInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
@@ -795,6 +814,8 @@ export type UserUncheckedUpdateInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUncheckedUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -1144,6 +1165,20 @@ export type UserUpdateOneRequiredWithoutUserListNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUserListInput, Prisma.UserUpdateWithoutUserListInput>, Prisma.UserUncheckedUpdateWithoutUserListInput>
 }
 
+export type UserCreateNestedOneWithoutPageBookmarksInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPageBookmarksInput, Prisma.UserUncheckedCreateWithoutPageBookmarksInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPageBookmarksInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutPageBookmarksNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPageBookmarksInput, Prisma.UserUncheckedCreateWithoutPageBookmarksInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPageBookmarksInput
+  upsert?: Prisma.UserUpsertWithoutPageBookmarksInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPageBookmarksInput, Prisma.UserUpdateWithoutPageBookmarksInput>, Prisma.UserUncheckedUpdateWithoutPageBookmarksInput>
+}
+
 export type UserCreateNestedOneWithoutAuditsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutAuditsInput, Prisma.UserUncheckedCreateWithoutAuditsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutAuditsInput
@@ -1314,6 +1349,34 @@ export type UserUpdateOneRequiredWithoutRaffleCommentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRaffleCommentsInput, Prisma.UserUpdateWithoutRaffleCommentsInput>, Prisma.UserUncheckedUpdateWithoutRaffleCommentsInput>
 }
 
+export type UserCreateNestedOneWithoutBansReceivedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBansReceivedInput, Prisma.UserUncheckedCreateWithoutBansReceivedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBansReceivedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutBansIssuedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBansIssuedInput, Prisma.UserUncheckedCreateWithoutBansIssuedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBansIssuedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutBansReceivedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBansReceivedInput, Prisma.UserUncheckedCreateWithoutBansReceivedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBansReceivedInput
+  upsert?: Prisma.UserUpsertWithoutBansReceivedInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBansReceivedInput, Prisma.UserUpdateWithoutBansReceivedInput>, Prisma.UserUncheckedUpdateWithoutBansReceivedInput>
+}
+
+export type UserUpdateOneRequiredWithoutBansIssuedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBansIssuedInput, Prisma.UserUncheckedCreateWithoutBansIssuedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBansIssuedInput
+  upsert?: Prisma.UserUpsertWithoutBansIssuedInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBansIssuedInput, Prisma.UserUpdateWithoutBansIssuedInput>, Prisma.UserUncheckedUpdateWithoutBansIssuedInput>
+}
+
 export type UserCreateWithoutTokensInput = {
   username: string
   slug: string
@@ -1350,6 +1413,7 @@ export type UserCreateWithoutTokensInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
@@ -1362,6 +1426,8 @@ export type UserCreateWithoutTokensInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserUncheckedCreateWithoutTokensInput = {
@@ -1401,6 +1467,7 @@ export type UserUncheckedCreateWithoutTokensInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
@@ -1413,6 +1480,8 @@ export type UserUncheckedCreateWithoutTokensInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanUncheckedCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserCreateOrConnectWithoutTokensInput = {
@@ -1467,6 +1536,7 @@ export type UserUpdateWithoutTokensInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
@@ -1479,6 +1549,8 @@ export type UserUpdateWithoutTokensInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTokensInput = {
@@ -1518,6 +1590,7 @@ export type UserUncheckedUpdateWithoutTokensInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
@@ -1530,6 +1603,8 @@ export type UserUncheckedUpdateWithoutTokensInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUncheckedUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserCreateWithoutPermissionsInput = {
@@ -1568,6 +1643,7 @@ export type UserCreateWithoutPermissionsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -1580,6 +1656,8 @@ export type UserCreateWithoutPermissionsInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserUncheckedCreateWithoutPermissionsInput = {
@@ -1619,6 +1697,7 @@ export type UserUncheckedCreateWithoutPermissionsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -1631,6 +1710,8 @@ export type UserUncheckedCreateWithoutPermissionsInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanUncheckedCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserCreateOrConnectWithoutPermissionsInput = {
@@ -1685,6 +1766,7 @@ export type UserUpdateWithoutPermissionsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -1697,6 +1779,8 @@ export type UserUpdateWithoutPermissionsInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPermissionsInput = {
@@ -1736,6 +1820,7 @@ export type UserUncheckedUpdateWithoutPermissionsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -1748,6 +1833,8 @@ export type UserUncheckedUpdateWithoutPermissionsInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUncheckedUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserCreateWithoutPasswordResetTokensInput = {
@@ -1786,6 +1873,7 @@ export type UserCreateWithoutPasswordResetTokensInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -1798,6 +1886,8 @@ export type UserCreateWithoutPasswordResetTokensInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserUncheckedCreateWithoutPasswordResetTokensInput = {
@@ -1837,6 +1927,7 @@ export type UserUncheckedCreateWithoutPasswordResetTokensInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -1849,6 +1940,8 @@ export type UserUncheckedCreateWithoutPasswordResetTokensInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanUncheckedCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserCreateOrConnectWithoutPasswordResetTokensInput = {
@@ -1903,6 +1996,7 @@ export type UserUpdateWithoutPasswordResetTokensInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -1915,6 +2009,8 @@ export type UserUpdateWithoutPasswordResetTokensInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
@@ -1954,6 +2050,7 @@ export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -1966,6 +2063,8 @@ export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUncheckedUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserCreateWithoutCommentInput = {
@@ -2003,6 +2102,7 @@ export type UserCreateWithoutCommentInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
@@ -2016,6 +2116,8 @@ export type UserCreateWithoutCommentInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserUncheckedCreateWithoutCommentInput = {
@@ -2054,6 +2156,7 @@ export type UserUncheckedCreateWithoutCommentInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
@@ -2067,6 +2170,8 @@ export type UserUncheckedCreateWithoutCommentInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanUncheckedCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserCreateOrConnectWithoutCommentInput = {
@@ -2109,6 +2214,7 @@ export type UserCreateWithoutCommentsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
@@ -2122,6 +2228,8 @@ export type UserCreateWithoutCommentsInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserUncheckedCreateWithoutCommentsInput = {
@@ -2160,6 +2268,7 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
@@ -2173,6 +2282,8 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanUncheckedCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserCreateOrConnectWithoutCommentsInput = {
@@ -2226,6 +2337,7 @@ export type UserUpdateWithoutCommentInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
@@ -2239,6 +2351,8 @@ export type UserUpdateWithoutCommentInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCommentInput = {
@@ -2277,6 +2391,7 @@ export type UserUncheckedUpdateWithoutCommentInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
@@ -2290,6 +2405,8 @@ export type UserUncheckedUpdateWithoutCommentInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUncheckedUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserUpsertWithoutCommentsInput = {
@@ -2338,6 +2455,7 @@ export type UserUpdateWithoutCommentsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
@@ -2351,6 +2469,8 @@ export type UserUpdateWithoutCommentsInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCommentsInput = {
@@ -2389,6 +2509,7 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
@@ -2402,6 +2523,8 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUncheckedUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserCreateWithoutRankingsInput = {
@@ -2440,6 +2563,7 @@ export type UserCreateWithoutRankingsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
@@ -2452,6 +2576,8 @@ export type UserCreateWithoutRankingsInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserUncheckedCreateWithoutRankingsInput = {
@@ -2491,6 +2617,7 @@ export type UserUncheckedCreateWithoutRankingsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
@@ -2503,6 +2630,8 @@ export type UserUncheckedCreateWithoutRankingsInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanUncheckedCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserCreateOrConnectWithoutRankingsInput = {
@@ -2557,6 +2686,7 @@ export type UserUpdateWithoutRankingsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
@@ -2569,6 +2699,8 @@ export type UserUpdateWithoutRankingsInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRankingsInput = {
@@ -2608,6 +2740,7 @@ export type UserUncheckedUpdateWithoutRankingsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
@@ -2620,6 +2753,8 @@ export type UserUncheckedUpdateWithoutRankingsInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUncheckedUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserCreateWithoutAnalyticsInput = {
@@ -2657,6 +2792,7 @@ export type UserCreateWithoutAnalyticsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
@@ -2670,6 +2806,8 @@ export type UserCreateWithoutAnalyticsInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserUncheckedCreateWithoutAnalyticsInput = {
@@ -2708,6 +2846,7 @@ export type UserUncheckedCreateWithoutAnalyticsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
@@ -2721,6 +2860,8 @@ export type UserUncheckedCreateWithoutAnalyticsInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanUncheckedCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserCreateOrConnectWithoutAnalyticsInput = {
@@ -2774,6 +2915,7 @@ export type UserUpdateWithoutAnalyticsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
@@ -2787,6 +2929,8 @@ export type UserUpdateWithoutAnalyticsInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAnalyticsInput = {
@@ -2825,6 +2969,7 @@ export type UserUncheckedUpdateWithoutAnalyticsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
@@ -2838,6 +2983,8 @@ export type UserUncheckedUpdateWithoutAnalyticsInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUncheckedUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserCreateWithoutHistoryInput = {
@@ -2876,6 +3023,7 @@ export type UserCreateWithoutHistoryInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
@@ -2888,6 +3036,8 @@ export type UserCreateWithoutHistoryInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserUncheckedCreateWithoutHistoryInput = {
@@ -2927,6 +3077,7 @@ export type UserUncheckedCreateWithoutHistoryInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
@@ -2939,6 +3090,8 @@ export type UserUncheckedCreateWithoutHistoryInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanUncheckedCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserCreateOrConnectWithoutHistoryInput = {
@@ -2993,6 +3146,7 @@ export type UserUpdateWithoutHistoryInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
@@ -3005,6 +3159,8 @@ export type UserUpdateWithoutHistoryInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutHistoryInput = {
@@ -3044,6 +3200,7 @@ export type UserUncheckedUpdateWithoutHistoryInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
@@ -3056,6 +3213,8 @@ export type UserUncheckedUpdateWithoutHistoryInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUncheckedUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserCreateWithoutFavoritesInput = {
@@ -3093,6 +3252,7 @@ export type UserCreateWithoutFavoritesInput = {
   emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
   emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
@@ -3106,6 +3266,8 @@ export type UserCreateWithoutFavoritesInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserUncheckedCreateWithoutFavoritesInput = {
@@ -3144,6 +3306,7 @@ export type UserUncheckedCreateWithoutFavoritesInput = {
   emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
@@ -3157,6 +3320,8 @@ export type UserUncheckedCreateWithoutFavoritesInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanUncheckedCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserCreateOrConnectWithoutFavoritesInput = {
@@ -3210,6 +3375,7 @@ export type UserUpdateWithoutFavoritesInput = {
   emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
   emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
@@ -3223,6 +3389,8 @@ export type UserUpdateWithoutFavoritesInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFavoritesInput = {
@@ -3261,6 +3429,7 @@ export type UserUncheckedUpdateWithoutFavoritesInput = {
   emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
@@ -3274,6 +3443,8 @@ export type UserUncheckedUpdateWithoutFavoritesInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUncheckedUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserCreateWithoutUserListInput = {
@@ -3311,6 +3482,7 @@ export type UserCreateWithoutUserListInput = {
   emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
   emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
@@ -3324,6 +3496,8 @@ export type UserCreateWithoutUserListInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserUncheckedCreateWithoutUserListInput = {
@@ -3362,6 +3536,7 @@ export type UserUncheckedCreateWithoutUserListInput = {
   emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
@@ -3375,6 +3550,8 @@ export type UserUncheckedCreateWithoutUserListInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanUncheckedCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserCreateOrConnectWithoutUserListInput = {
@@ -3428,6 +3605,7 @@ export type UserUpdateWithoutUserListInput = {
   emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
   emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
@@ -3441,6 +3619,8 @@ export type UserUpdateWithoutUserListInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserListInput = {
@@ -3479,6 +3659,7 @@ export type UserUncheckedUpdateWithoutUserListInput = {
   emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
@@ -3492,6 +3673,238 @@ export type UserUncheckedUpdateWithoutUserListInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUncheckedUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
+}
+
+export type UserCreateWithoutPageBookmarksInput = {
+  username: string
+  slug: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  description?: string | null
+  imageUrl?: string | null
+  birthdate?: Date | string | null
+  bannerUrl?: string | null
+  bannerUrlChangedAt?: Date | string | null
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
+  emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
+  pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
+  hideAds?: boolean
+  theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
+  analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
+  audits?: Prisma.AuditCreateNestedManyWithoutUserInput
+  Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  userList?: Prisma.UserListCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
+  rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenCreateNestedManyWithoutUserInput
+  achievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
+}
+
+export type UserUncheckedCreateWithoutPageBookmarksInput = {
+  id?: number
+  username: string
+  slug: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  description?: string | null
+  imageUrl?: string | null
+  birthdate?: Date | string | null
+  bannerUrl?: string | null
+  bannerUrlChangedAt?: Date | string | null
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
+  emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
+  pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
+  hideAds?: boolean
+  theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
+  analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
+  audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
+  Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
+  rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedCreateNestedManyWithoutUserInput
+  achievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanUncheckedCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
+}
+
+export type UserCreateOrConnectWithoutPageBookmarksInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutPageBookmarksInput, Prisma.UserUncheckedCreateWithoutPageBookmarksInput>
+}
+
+export type UserUpsertWithoutPageBookmarksInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPageBookmarksInput, Prisma.UserUncheckedUpdateWithoutPageBookmarksInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPageBookmarksInput, Prisma.UserUncheckedCreateWithoutPageBookmarksInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutPageBookmarksInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPageBookmarksInput, Prisma.UserUncheckedUpdateWithoutPageBookmarksInput>
+}
+
+export type UserUpdateWithoutPageBookmarksInput = {
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
+  audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
+  Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
+  rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenUpdateManyWithoutUserNestedInput
+  achievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPageBookmarksInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
+  audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
+  Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
+  rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedUpdateManyWithoutUserNestedInput
+  achievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUncheckedUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserCreateWithoutAuditsInput = {
@@ -3529,6 +3942,7 @@ export type UserCreateWithoutAuditsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
@@ -3542,6 +3956,8 @@ export type UserCreateWithoutAuditsInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserUncheckedCreateWithoutAuditsInput = {
@@ -3580,6 +3996,7 @@ export type UserUncheckedCreateWithoutAuditsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
@@ -3593,6 +4010,8 @@ export type UserUncheckedCreateWithoutAuditsInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanUncheckedCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserCreateOrConnectWithoutAuditsInput = {
@@ -3646,6 +4065,7 @@ export type UserUpdateWithoutAuditsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
@@ -3659,6 +4079,8 @@ export type UserUpdateWithoutAuditsInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuditsInput = {
@@ -3697,6 +4119,7 @@ export type UserUncheckedUpdateWithoutAuditsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
@@ -3710,6 +4133,8 @@ export type UserUncheckedUpdateWithoutAuditsInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUncheckedUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserCreateWithoutSubscriptionsInput = {
@@ -3748,6 +4173,7 @@ export type UserCreateWithoutSubscriptionsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
@@ -3760,6 +4186,8 @@ export type UserCreateWithoutSubscriptionsInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserUncheckedCreateWithoutSubscriptionsInput = {
@@ -3799,6 +4227,7 @@ export type UserUncheckedCreateWithoutSubscriptionsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
@@ -3811,6 +4240,8 @@ export type UserUncheckedCreateWithoutSubscriptionsInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanUncheckedCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserCreateOrConnectWithoutSubscriptionsInput = {
@@ -3865,6 +4296,7 @@ export type UserUpdateWithoutSubscriptionsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
@@ -3877,6 +4309,8 @@ export type UserUpdateWithoutSubscriptionsInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSubscriptionsInput = {
@@ -3916,6 +4350,7 @@ export type UserUncheckedUpdateWithoutSubscriptionsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
@@ -3928,6 +4363,8 @@ export type UserUncheckedUpdateWithoutSubscriptionsInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUncheckedUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserCreateWithoutOrganizationFollowsInput = {
@@ -3966,6 +4403,7 @@ export type UserCreateWithoutOrganizationFollowsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -3978,6 +4416,8 @@ export type UserCreateWithoutOrganizationFollowsInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserUncheckedCreateWithoutOrganizationFollowsInput = {
@@ -4017,6 +4457,7 @@ export type UserUncheckedCreateWithoutOrganizationFollowsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -4029,6 +4470,8 @@ export type UserUncheckedCreateWithoutOrganizationFollowsInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanUncheckedCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserCreateOrConnectWithoutOrganizationFollowsInput = {
@@ -4083,6 +4526,7 @@ export type UserUpdateWithoutOrganizationFollowsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -4095,6 +4539,8 @@ export type UserUpdateWithoutOrganizationFollowsInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOrganizationFollowsInput = {
@@ -4134,6 +4580,7 @@ export type UserUncheckedUpdateWithoutOrganizationFollowsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -4146,6 +4593,8 @@ export type UserUncheckedUpdateWithoutOrganizationFollowsInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUncheckedUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserCreateWithoutEmailPreferenceInput = {
@@ -4183,6 +4632,7 @@ export type UserCreateWithoutEmailPreferenceInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
@@ -4196,6 +4646,8 @@ export type UserCreateWithoutEmailPreferenceInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserUncheckedCreateWithoutEmailPreferenceInput = {
@@ -4234,6 +4686,7 @@ export type UserUncheckedCreateWithoutEmailPreferenceInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
@@ -4247,6 +4700,8 @@ export type UserUncheckedCreateWithoutEmailPreferenceInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanUncheckedCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserCreateOrConnectWithoutEmailPreferenceInput = {
@@ -4300,6 +4755,7 @@ export type UserUpdateWithoutEmailPreferenceInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
@@ -4313,6 +4769,8 @@ export type UserUpdateWithoutEmailPreferenceInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEmailPreferenceInput = {
@@ -4351,6 +4809,7 @@ export type UserUncheckedUpdateWithoutEmailPreferenceInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
@@ -4364,6 +4823,8 @@ export type UserUncheckedUpdateWithoutEmailPreferenceInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUncheckedUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserCreateWithoutEmailLogsInput = {
@@ -4401,6 +4862,7 @@ export type UserCreateWithoutEmailLogsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
@@ -4414,6 +4876,8 @@ export type UserCreateWithoutEmailLogsInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserUncheckedCreateWithoutEmailLogsInput = {
@@ -4452,6 +4916,7 @@ export type UserUncheckedCreateWithoutEmailLogsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
@@ -4465,6 +4930,8 @@ export type UserUncheckedCreateWithoutEmailLogsInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanUncheckedCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserCreateOrConnectWithoutEmailLogsInput = {
@@ -4518,6 +4985,7 @@ export type UserUpdateWithoutEmailLogsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
@@ -4531,6 +4999,8 @@ export type UserUpdateWithoutEmailLogsInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEmailLogsInput = {
@@ -4569,6 +5039,7 @@ export type UserUncheckedUpdateWithoutEmailLogsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
@@ -4582,6 +5053,8 @@ export type UserUncheckedUpdateWithoutEmailLogsInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUncheckedUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserCreateWithoutUnsubscribeTokensInput = {
@@ -4620,6 +5093,7 @@ export type UserCreateWithoutUnsubscribeTokensInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
@@ -4632,6 +5106,8 @@ export type UserCreateWithoutUnsubscribeTokensInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserUncheckedCreateWithoutUnsubscribeTokensInput = {
@@ -4671,6 +5147,7 @@ export type UserUncheckedCreateWithoutUnsubscribeTokensInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
@@ -4683,6 +5160,8 @@ export type UserUncheckedCreateWithoutUnsubscribeTokensInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanUncheckedCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserCreateOrConnectWithoutUnsubscribeTokensInput = {
@@ -4737,6 +5216,7 @@ export type UserUpdateWithoutUnsubscribeTokensInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
@@ -4749,6 +5229,8 @@ export type UserUpdateWithoutUnsubscribeTokensInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUnsubscribeTokensInput = {
@@ -4788,6 +5270,7 @@ export type UserUncheckedUpdateWithoutUnsubscribeTokensInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
@@ -4800,6 +5283,8 @@ export type UserUncheckedUpdateWithoutUnsubscribeTokensInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUncheckedUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserCreateWithoutEmailVerificationTokensInput = {
@@ -4837,6 +5322,7 @@ export type UserCreateWithoutEmailVerificationTokensInput = {
   emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
@@ -4850,6 +5336,8 @@ export type UserCreateWithoutEmailVerificationTokensInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserUncheckedCreateWithoutEmailVerificationTokensInput = {
@@ -4888,6 +5376,7 @@ export type UserUncheckedCreateWithoutEmailVerificationTokensInput = {
   emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
@@ -4901,6 +5390,8 @@ export type UserUncheckedCreateWithoutEmailVerificationTokensInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanUncheckedCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserCreateOrConnectWithoutEmailVerificationTokensInput = {
@@ -4954,6 +5445,7 @@ export type UserUpdateWithoutEmailVerificationTokensInput = {
   emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
@@ -4967,6 +5459,8 @@ export type UserUpdateWithoutEmailVerificationTokensInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEmailVerificationTokensInput = {
@@ -5005,6 +5499,7 @@ export type UserUncheckedUpdateWithoutEmailVerificationTokensInput = {
   emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
@@ -5018,6 +5513,8 @@ export type UserUncheckedUpdateWithoutEmailVerificationTokensInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUncheckedUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserCreateWithoutDailyActivitiesInput = {
@@ -5056,6 +5553,7 @@ export type UserCreateWithoutDailyActivitiesInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
@@ -5068,6 +5566,8 @@ export type UserCreateWithoutDailyActivitiesInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserUncheckedCreateWithoutDailyActivitiesInput = {
@@ -5107,6 +5607,7 @@ export type UserUncheckedCreateWithoutDailyActivitiesInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
@@ -5119,6 +5620,8 @@ export type UserUncheckedCreateWithoutDailyActivitiesInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanUncheckedCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserCreateOrConnectWithoutDailyActivitiesInput = {
@@ -5173,6 +5676,7 @@ export type UserUpdateWithoutDailyActivitiesInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
@@ -5185,6 +5689,8 @@ export type UserUpdateWithoutDailyActivitiesInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDailyActivitiesInput = {
@@ -5224,6 +5730,7 @@ export type UserUncheckedUpdateWithoutDailyActivitiesInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
@@ -5236,6 +5743,8 @@ export type UserUncheckedUpdateWithoutDailyActivitiesInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUncheckedUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserCreateWithoutAchievementsInput = {
@@ -5274,6 +5783,7 @@ export type UserCreateWithoutAchievementsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
@@ -5286,6 +5796,8 @@ export type UserCreateWithoutAchievementsInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserUncheckedCreateWithoutAchievementsInput = {
@@ -5325,6 +5837,7 @@ export type UserUncheckedCreateWithoutAchievementsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
@@ -5337,6 +5850,8 @@ export type UserUncheckedCreateWithoutAchievementsInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanUncheckedCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserCreateOrConnectWithoutAchievementsInput = {
@@ -5391,6 +5906,7 @@ export type UserUpdateWithoutAchievementsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
@@ -5403,6 +5919,8 @@ export type UserUpdateWithoutAchievementsInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAchievementsInput = {
@@ -5442,6 +5960,7 @@ export type UserUncheckedUpdateWithoutAchievementsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
@@ -5454,6 +5973,8 @@ export type UserUncheckedUpdateWithoutAchievementsInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUncheckedUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserCreateWithoutNotificationsInput = {
@@ -5492,6 +6013,7 @@ export type UserCreateWithoutNotificationsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
@@ -5504,6 +6026,8 @@ export type UserCreateWithoutNotificationsInput = {
   dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -5543,6 +6067,7 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
@@ -5555,6 +6080,8 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanUncheckedCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -5609,6 +6136,7 @@ export type UserUpdateWithoutNotificationsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
@@ -5621,6 +6149,8 @@ export type UserUpdateWithoutNotificationsInput = {
   dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -5660,6 +6190,7 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
@@ -5672,6 +6203,8 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUncheckedUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserCreateWithoutRaffleTicketsInput = {
@@ -5710,6 +6243,7 @@ export type UserCreateWithoutRaffleTicketsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
@@ -5722,6 +6256,8 @@ export type UserCreateWithoutRaffleTicketsInput = {
   dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserUncheckedCreateWithoutRaffleTicketsInput = {
@@ -5761,6 +6297,7 @@ export type UserUncheckedCreateWithoutRaffleTicketsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
@@ -5773,6 +6310,8 @@ export type UserUncheckedCreateWithoutRaffleTicketsInput = {
   dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanUncheckedCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserCreateOrConnectWithoutRaffleTicketsInput = {
@@ -5827,6 +6366,7 @@ export type UserUpdateWithoutRaffleTicketsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
@@ -5839,6 +6379,8 @@ export type UserUpdateWithoutRaffleTicketsInput = {
   dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRaffleTicketsInput = {
@@ -5878,6 +6420,7 @@ export type UserUncheckedUpdateWithoutRaffleTicketsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
@@ -5890,6 +6433,8 @@ export type UserUncheckedUpdateWithoutRaffleTicketsInput = {
   dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUncheckedUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserCreateWithoutRaffleCommentsInput = {
@@ -5928,6 +6473,7 @@ export type UserCreateWithoutRaffleCommentsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
@@ -5940,6 +6486,8 @@ export type UserCreateWithoutRaffleCommentsInput = {
   dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserUncheckedCreateWithoutRaffleCommentsInput = {
@@ -5979,6 +6527,7 @@ export type UserUncheckedCreateWithoutRaffleCommentsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
@@ -5991,6 +6540,8 @@ export type UserUncheckedCreateWithoutRaffleCommentsInput = {
   dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanUncheckedCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
 }
 
 export type UserCreateOrConnectWithoutRaffleCommentsInput = {
@@ -6045,6 +6596,7 @@ export type UserUpdateWithoutRaffleCommentsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
@@ -6057,6 +6609,8 @@ export type UserUpdateWithoutRaffleCommentsInput = {
   dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRaffleCommentsInput = {
@@ -6096,6 +6650,7 @@ export type UserUncheckedUpdateWithoutRaffleCommentsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
@@ -6108,6 +6663,468 @@ export type UserUncheckedUpdateWithoutRaffleCommentsInput = {
   dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUncheckedUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
+}
+
+export type UserCreateWithoutBansReceivedInput = {
+  username: string
+  slug: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  description?: string | null
+  imageUrl?: string | null
+  birthdate?: Date | string | null
+  bannerUrl?: string | null
+  bannerUrlChangedAt?: Date | string | null
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
+  emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
+  pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
+  hideAds?: boolean
+  theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
+  analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
+  audits?: Prisma.AuditCreateNestedManyWithoutUserInput
+  Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  userList?: Prisma.UserListCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
+  rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenCreateNestedManyWithoutUserInput
+  achievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
+}
+
+export type UserUncheckedCreateWithoutBansReceivedInput = {
+  id?: number
+  username: string
+  slug: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  description?: string | null
+  imageUrl?: string | null
+  birthdate?: Date | string | null
+  bannerUrl?: string | null
+  bannerUrlChangedAt?: Date | string | null
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
+  emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
+  pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
+  hideAds?: boolean
+  theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
+  analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
+  audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
+  Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
+  rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedCreateNestedManyWithoutUserInput
+  achievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
+}
+
+export type UserCreateOrConnectWithoutBansReceivedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutBansReceivedInput, Prisma.UserUncheckedCreateWithoutBansReceivedInput>
+}
+
+export type UserCreateWithoutBansIssuedInput = {
+  username: string
+  slug: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  description?: string | null
+  imageUrl?: string | null
+  birthdate?: Date | string | null
+  bannerUrl?: string | null
+  bannerUrlChangedAt?: Date | string | null
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
+  emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
+  pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
+  hideAds?: boolean
+  theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
+  analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
+  audits?: Prisma.AuditCreateNestedManyWithoutUserInput
+  Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  userList?: Prisma.UserListCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
+  rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenCreateNestedManyWithoutUserInput
+  achievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutBansIssuedInput = {
+  id?: number
+  username: string
+  slug: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  description?: string | null
+  imageUrl?: string | null
+  birthdate?: Date | string | null
+  bannerUrl?: string | null
+  bannerUrlChangedAt?: Date | string | null
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
+  emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
+  pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
+  hideAds?: boolean
+  theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
+  analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
+  audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
+  Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
+  rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedCreateNestedManyWithoutUserInput
+  achievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutBansIssuedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutBansIssuedInput, Prisma.UserUncheckedCreateWithoutBansIssuedInput>
+}
+
+export type UserUpsertWithoutBansReceivedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutBansReceivedInput, Prisma.UserUncheckedUpdateWithoutBansReceivedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutBansReceivedInput, Prisma.UserUncheckedCreateWithoutBansReceivedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutBansReceivedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutBansReceivedInput, Prisma.UserUncheckedUpdateWithoutBansReceivedInput>
+}
+
+export type UserUpdateWithoutBansReceivedInput = {
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
+  audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
+  Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
+  rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenUpdateManyWithoutUserNestedInput
+  achievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutBansReceivedInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
+  audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
+  Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
+  rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedUpdateManyWithoutUserNestedInput
+  achievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
+}
+
+export type UserUpsertWithoutBansIssuedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutBansIssuedInput, Prisma.UserUncheckedUpdateWithoutBansIssuedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutBansIssuedInput, Prisma.UserUncheckedCreateWithoutBansIssuedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutBansIssuedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutBansIssuedInput, Prisma.UserUncheckedUpdateWithoutBansIssuedInput>
+}
+
+export type UserUpdateWithoutBansIssuedInput = {
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
+  audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
+  Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
+  rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenUpdateManyWithoutUserNestedInput
+  achievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutBansIssuedInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
+  audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
+  Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
+  rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedUpdateManyWithoutUserNestedInput
+  achievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -6124,6 +7141,7 @@ export type UserCountOutputType = {
   emailVerificationTokens: number
   favorites: number
   userList: number
+  pageBookmarks: number
   organizationFollows: number
   passwordResetTokens: number
   permissions: number
@@ -6137,6 +7155,8 @@ export type UserCountOutputType = {
   notifications: number
   raffleTickets: number
   raffleComments: number
+  bansReceived: number
+  bansIssued: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -6148,6 +7168,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   emailVerificationTokens?: boolean | UserCountOutputTypeCountEmailVerificationTokensArgs
   favorites?: boolean | UserCountOutputTypeCountFavoritesArgs
   userList?: boolean | UserCountOutputTypeCountUserListArgs
+  pageBookmarks?: boolean | UserCountOutputTypeCountPageBookmarksArgs
   organizationFollows?: boolean | UserCountOutputTypeCountOrganizationFollowsArgs
   passwordResetTokens?: boolean | UserCountOutputTypeCountPasswordResetTokensArgs
   permissions?: boolean | UserCountOutputTypeCountPermissionsArgs
@@ -6161,6 +7182,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
   raffleTickets?: boolean | UserCountOutputTypeCountRaffleTicketsArgs
   raffleComments?: boolean | UserCountOutputTypeCountRaffleCommentsArgs
+  bansReceived?: boolean | UserCountOutputTypeCountBansReceivedArgs
+  bansIssued?: boolean | UserCountOutputTypeCountBansIssuedArgs
 }
 
 /**
@@ -6227,6 +7250,13 @@ export type UserCountOutputTypeCountFavoritesArgs<ExtArgs extends runtime.Types.
  */
 export type UserCountOutputTypeCountUserListArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.UserListWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountPageBookmarksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserPageBookmarkWhereInput
 }
 
 /**
@@ -6320,6 +7350,20 @@ export type UserCountOutputTypeCountRaffleCommentsArgs<ExtArgs extends runtime.T
   where?: Prisma.RaffleCommentWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountBansReceivedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserBanWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountBansIssuedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserBanWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -6358,6 +7402,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   emailVerificationTokens?: boolean | Prisma.User$emailVerificationTokensArgs<ExtArgs>
   favorites?: boolean | Prisma.User$favoritesArgs<ExtArgs>
   userList?: boolean | Prisma.User$userListArgs<ExtArgs>
+  pageBookmarks?: boolean | Prisma.User$pageBookmarksArgs<ExtArgs>
   organizationFollows?: boolean | Prisma.User$organizationFollowsArgs<ExtArgs>
   passwordResetTokens?: boolean | Prisma.User$passwordResetTokensArgs<ExtArgs>
   permissions?: boolean | Prisma.User$permissionsArgs<ExtArgs>
@@ -6371,6 +7416,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   raffleTickets?: boolean | Prisma.User$raffleTicketsArgs<ExtArgs>
   raffleComments?: boolean | Prisma.User$raffleCommentsArgs<ExtArgs>
+  bansReceived?: boolean | Prisma.User$bansReceivedArgs<ExtArgs>
+  bansIssued?: boolean | Prisma.User$bansIssuedArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -6475,6 +7522,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   emailVerificationTokens?: boolean | Prisma.User$emailVerificationTokensArgs<ExtArgs>
   favorites?: boolean | Prisma.User$favoritesArgs<ExtArgs>
   userList?: boolean | Prisma.User$userListArgs<ExtArgs>
+  pageBookmarks?: boolean | Prisma.User$pageBookmarksArgs<ExtArgs>
   organizationFollows?: boolean | Prisma.User$organizationFollowsArgs<ExtArgs>
   passwordResetTokens?: boolean | Prisma.User$passwordResetTokensArgs<ExtArgs>
   permissions?: boolean | Prisma.User$permissionsArgs<ExtArgs>
@@ -6488,6 +7536,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   raffleTickets?: boolean | Prisma.User$raffleTicketsArgs<ExtArgs>
   raffleComments?: boolean | Prisma.User$raffleCommentsArgs<ExtArgs>
+  bansReceived?: boolean | Prisma.User$bansReceivedArgs<ExtArgs>
+  bansIssued?: boolean | Prisma.User$bansIssuedArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -6505,6 +7555,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     emailVerificationTokens: Prisma.$EmailVerificationTokenPayload<ExtArgs>[]
     favorites: Prisma.$FavoritePayload<ExtArgs>[]
     userList: Prisma.$UserListPayload<ExtArgs>[]
+    pageBookmarks: Prisma.$UserPageBookmarkPayload<ExtArgs>[]
     organizationFollows: Prisma.$OrganizationFollowerPayload<ExtArgs>[]
     passwordResetTokens: Prisma.$PasswordResetTokenPayload<ExtArgs>[]
     permissions: Prisma.$PermissionPayload<ExtArgs>[]
@@ -6518,6 +7569,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     notifications: Prisma.$NotificationPayload<ExtArgs>[]
     raffleTickets: Prisma.$RaffleTicketPayload<ExtArgs>[]
     raffleComments: Prisma.$RaffleCommentPayload<ExtArgs>[]
+    bansReceived: Prisma.$UserBanPayload<ExtArgs>[]
+    bansIssued: Prisma.$UserBanPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -6950,6 +8003,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   emailVerificationTokens<T extends Prisma.User$emailVerificationTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$emailVerificationTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmailVerificationTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   favorites<T extends Prisma.User$favoritesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$favoritesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FavoritePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   userList<T extends Prisma.User$userListArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$userListArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserListPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  pageBookmarks<T extends Prisma.User$pageBookmarksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$pageBookmarksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPageBookmarkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   organizationFollows<T extends Prisma.User$organizationFollowsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$organizationFollowsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrganizationFollowerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   passwordResetTokens<T extends Prisma.User$passwordResetTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$passwordResetTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PasswordResetTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   permissions<T extends Prisma.User$permissionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$permissionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PermissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -6963,6 +8017,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   notifications<T extends Prisma.User$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   raffleTickets<T extends Prisma.User$raffleTicketsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$raffleTicketsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RaffleTicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   raffleComments<T extends Prisma.User$raffleCommentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$raffleCommentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RaffleCommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  bansReceived<T extends Prisma.User$bansReceivedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$bansReceivedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserBanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  bansIssued<T extends Prisma.User$bansIssuedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$bansIssuedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserBanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7618,6 +8674,30 @@ export type User$userListArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 }
 
 /**
+ * User.pageBookmarks
+ */
+export type User$pageBookmarksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserPageBookmark
+   */
+  select?: Prisma.UserPageBookmarkSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserPageBookmark
+   */
+  omit?: Prisma.UserPageBookmarkOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserPageBookmarkInclude<ExtArgs> | null
+  where?: Prisma.UserPageBookmarkWhereInput
+  orderBy?: Prisma.UserPageBookmarkOrderByWithRelationInput | Prisma.UserPageBookmarkOrderByWithRelationInput[]
+  cursor?: Prisma.UserPageBookmarkWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserPageBookmarkScalarFieldEnum | Prisma.UserPageBookmarkScalarFieldEnum[]
+}
+
+/**
  * User.organizationFollows
  */
 export type User$organizationFollowsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -7927,6 +9007,54 @@ export type User$raffleCommentsArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.RaffleCommentScalarFieldEnum | Prisma.RaffleCommentScalarFieldEnum[]
+}
+
+/**
+ * User.bansReceived
+ */
+export type User$bansReceivedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserBan
+   */
+  select?: Prisma.UserBanSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserBan
+   */
+  omit?: Prisma.UserBanOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserBanInclude<ExtArgs> | null
+  where?: Prisma.UserBanWhereInput
+  orderBy?: Prisma.UserBanOrderByWithRelationInput | Prisma.UserBanOrderByWithRelationInput[]
+  cursor?: Prisma.UserBanWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserBanScalarFieldEnum | Prisma.UserBanScalarFieldEnum[]
+}
+
+/**
+ * User.bansIssued
+ */
+export type User$bansIssuedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserBan
+   */
+  select?: Prisma.UserBanSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserBan
+   */
+  omit?: Prisma.UserBanOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserBanInclude<ExtArgs> | null
+  where?: Prisma.UserBanWhereInput
+  orderBy?: Prisma.UserBanOrderByWithRelationInput | Prisma.UserBanOrderByWithRelationInput[]
+  cursor?: Prisma.UserBanWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserBanScalarFieldEnum | Prisma.UserBanScalarFieldEnum[]
 }
 
 /**

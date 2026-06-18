@@ -405,6 +405,7 @@ export const ModelName = {
   UserChapterHistory: 'UserChapterHistory',
   Favorite: 'Favorite',
   UserList: 'UserList',
+  UserPageBookmark: 'UserPageBookmark',
   Audit: 'Audit',
   ViewsHistory: 'ViewsHistory',
   SubscriptionPlan: 'SubscriptionPlan',
@@ -426,7 +427,8 @@ export const ModelName = {
   Raffle: 'Raffle',
   RaffleTicket: 'RaffleTicket',
   RaffleComment: 'RaffleComment',
-  RaffleRefund: 'RaffleRefund'
+  RaffleRefund: 'RaffleRefund',
+  UserBan: 'UserBan'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -442,7 +444,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "token" | "organization" | "user" | "permission" | "passwordResetToken" | "countryOptions" | "author" | "bookType" | "manga" | "mangaCustom" | "chapter" | "page" | "comment" | "commentLike" | "ranking" | "demography" | "genre" | "analytics" | "userChapterHistory" | "favorite" | "userList" | "audit" | "viewsHistory" | "subscriptionPlan" | "subscription" | "organizationTransaction" | "organizationFollower" | "organizationRequest" | "emailPreference" | "emailLog" | "unsubscribeToken" | "emailVerificationToken" | "userDailyActivity" | "achievement" | "userAchievement" | "mangaJoint" | "jointMember" | "jointMemberHistory" | "notification" | "raffle" | "raffleTicket" | "raffleComment" | "raffleRefund"
+    modelProps: "token" | "organization" | "user" | "permission" | "passwordResetToken" | "countryOptions" | "author" | "bookType" | "manga" | "mangaCustom" | "chapter" | "page" | "comment" | "commentLike" | "ranking" | "demography" | "genre" | "analytics" | "userChapterHistory" | "favorite" | "userList" | "userPageBookmark" | "audit" | "viewsHistory" | "subscriptionPlan" | "subscription" | "organizationTransaction" | "organizationFollower" | "organizationRequest" | "emailPreference" | "emailLog" | "unsubscribeToken" | "emailVerificationToken" | "userDailyActivity" | "achievement" | "userAchievement" | "mangaJoint" | "jointMember" | "jointMemberHistory" | "notification" | "raffle" | "raffleTicket" | "raffleComment" | "raffleRefund" | "userBan"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1997,6 +1999,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.UserListCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.UserListCountAggregateOutputType> | number
+        }
+      }
+    }
+    UserPageBookmark: {
+      payload: Prisma.$UserPageBookmarkPayload<ExtArgs>
+      fields: Prisma.UserPageBookmarkFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.UserPageBookmarkFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPageBookmarkPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.UserPageBookmarkFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPageBookmarkPayload>
+        }
+        findFirst: {
+          args: Prisma.UserPageBookmarkFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPageBookmarkPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.UserPageBookmarkFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPageBookmarkPayload>
+        }
+        findMany: {
+          args: Prisma.UserPageBookmarkFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPageBookmarkPayload>[]
+        }
+        create: {
+          args: Prisma.UserPageBookmarkCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPageBookmarkPayload>
+        }
+        createMany: {
+          args: Prisma.UserPageBookmarkCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.UserPageBookmarkCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPageBookmarkPayload>[]
+        }
+        delete: {
+          args: Prisma.UserPageBookmarkDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPageBookmarkPayload>
+        }
+        update: {
+          args: Prisma.UserPageBookmarkUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPageBookmarkPayload>
+        }
+        deleteMany: {
+          args: Prisma.UserPageBookmarkDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.UserPageBookmarkUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.UserPageBookmarkUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPageBookmarkPayload>[]
+        }
+        upsert: {
+          args: Prisma.UserPageBookmarkUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPageBookmarkPayload>
+        }
+        aggregate: {
+          args: Prisma.UserPageBookmarkAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUserPageBookmark>
+        }
+        groupBy: {
+          args: Prisma.UserPageBookmarkGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserPageBookmarkGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.UserPageBookmarkCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserPageBookmarkCountAggregateOutputType> | number
         }
       }
     }
@@ -3628,6 +3704,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    UserBan: {
+      payload: Prisma.$UserBanPayload<ExtArgs>
+      fields: Prisma.UserBanFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.UserBanFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserBanPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.UserBanFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserBanPayload>
+        }
+        findFirst: {
+          args: Prisma.UserBanFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserBanPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.UserBanFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserBanPayload>
+        }
+        findMany: {
+          args: Prisma.UserBanFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserBanPayload>[]
+        }
+        create: {
+          args: Prisma.UserBanCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserBanPayload>
+        }
+        createMany: {
+          args: Prisma.UserBanCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.UserBanCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserBanPayload>[]
+        }
+        delete: {
+          args: Prisma.UserBanDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserBanPayload>
+        }
+        update: {
+          args: Prisma.UserBanUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserBanPayload>
+        }
+        deleteMany: {
+          args: Prisma.UserBanDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.UserBanUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.UserBanUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserBanPayload>[]
+        }
+        upsert: {
+          args: Prisma.UserBanUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserBanPayload>
+        }
+        aggregate: {
+          args: Prisma.UserBanAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUserBan>
+        }
+        groupBy: {
+          args: Prisma.UserBanGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserBanGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.UserBanCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserBanCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -3796,6 +3946,7 @@ export const PermissionScalarFieldEnum = {
   canDeleteComment: 'canDeleteComment',
   canEditComment: 'canEditComment',
   canHideComment: 'canHideComment',
+  canBanUser: 'canBanUser',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -3896,6 +4047,7 @@ export const MangaCustomScalarFieldEnum = {
   workType: 'workType',
   deletedAt: 'deletedAt',
   nextChapterAtMessage: 'nextChapterAtMessage',
+  hideUnreleasedChapters: 'hideUnreleasedChapters',
   usersAlsoReadMangaCustomIds: 'usersAlsoReadMangaCustomIds'
 } as const
 
@@ -4069,11 +4221,26 @@ export const UserListScalarFieldEnum = {
   jointId: 'jointId',
   order: 'order',
   finishedAt: 'finishedAt',
+  readingStatus: 'readingStatus',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type UserListScalarFieldEnum = (typeof UserListScalarFieldEnum)[keyof typeof UserListScalarFieldEnum]
+
+
+export const UserPageBookmarkScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  chapterId: 'chapterId',
+  pageNumber: 'pageNumber',
+  note: 'note',
+  order: 'order',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserPageBookmarkScalarFieldEnum = (typeof UserPageBookmarkScalarFieldEnum)[keyof typeof UserPageBookmarkScalarFieldEnum]
 
 
 export const AuditScalarFieldEnum = {
@@ -4460,6 +4627,22 @@ export const RaffleRefundScalarFieldEnum = {
 export type RaffleRefundScalarFieldEnum = (typeof RaffleRefundScalarFieldEnum)[keyof typeof RaffleRefundScalarFieldEnum]
 
 
+export const UserBanScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  organizationId: 'organizationId',
+  bannedByUserId: 'bannedByUserId',
+  type: 'type',
+  reason: 'reason',
+  expiresAt: 'expiresAt',
+  revokedAt: 'revokedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserBanScalarFieldEnum = (typeof UserBanScalarFieldEnum)[keyof typeof UserBanScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -4611,6 +4794,20 @@ export type EnumJointMemberStatusFieldRefInput<$PrismaModel> = FieldRefInputType
 export type ListEnumJointMemberStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'JointMemberStatus[]'>
     
 
+
+/**
+ * Reference to a field of type 'BanType'
+ */
+export type EnumBanTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BanType'>
+    
+
+
+/**
+ * Reference to a field of type 'BanType[]'
+ */
+export type ListEnumBanTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BanType[]'>
+    
+
 /**
  * Batch Payload for updateMany & deleteMany & createMany
  */
@@ -4727,6 +4924,7 @@ export type GlobalOmitConfig = {
   userChapterHistory?: Prisma.UserChapterHistoryOmit
   favorite?: Prisma.FavoriteOmit
   userList?: Prisma.UserListOmit
+  userPageBookmark?: Prisma.UserPageBookmarkOmit
   audit?: Prisma.AuditOmit
   viewsHistory?: Prisma.ViewsHistoryOmit
   subscriptionPlan?: Prisma.SubscriptionPlanOmit
@@ -4749,6 +4947,7 @@ export type GlobalOmitConfig = {
   raffleTicket?: Prisma.RaffleTicketOmit
   raffleComment?: Prisma.RaffleCommentOmit
   raffleRefund?: Prisma.RaffleRefundOmit
+  userBan?: Prisma.UserBanOmit
 }
 
 /* Types for Logging */

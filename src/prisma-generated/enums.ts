@@ -27,3 +27,12 @@ export const JointMemberStatus = {
 } as const
 
 export type JointMemberStatus = (typeof JointMemberStatus)[keyof typeof JointMemberStatus]
+
+
+export const BanType = {
+  TEMPORARY: 'TEMPORARY',
+  PERMANENT: 'PERMANENT',
+  RESTRICTED: 'RESTRICTED'
+} as const
+
+export type BanType = (typeof BanType)[keyof typeof BanType]

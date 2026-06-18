@@ -22,6 +22,7 @@ import { router as bookTypeListRouter } from "./book_type/list";
 import { router as chapterCreateRouter } from "./chapter/create";
 import { router as chapterEditRouter } from "./chapter/edit";
 import { router as chapterGetRouter } from "./chapter/get";
+import { router as commentBanRouter } from "./comment/ban";
 import { router as commentCreateRouter } from "./comment/create";
 import { router as commentDeleteRouter } from "./comment/delete";
 import { router as commentEditRouter } from "./comment/edit";
@@ -150,6 +151,7 @@ export const router = () => async (app: Elysia) => {
 	app.use(chapterGetRouter());
 
 	// Comment
+	app.use(commentBanRouter());
 	app.use(commentCreateRouter());
 	app.use(commentDeleteRouter());
 	app.use(commentEditRouter());

@@ -375,6 +375,23 @@ export type EnumJointRoleNullableWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumJointRoleNullableFilter<$PrismaModel>
 }
 
+export type EnumBanTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.BanType | Prisma.EnumBanTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.BanType[] | Prisma.ListEnumBanTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BanType[] | Prisma.ListEnumBanTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBanTypeFilter<$PrismaModel> | $Enums.BanType
+}
+
+export type EnumBanTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.BanType | Prisma.EnumBanTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.BanType[] | Prisma.ListEnumBanTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BanType[] | Prisma.ListEnumBanTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBanTypeWithAggregatesFilter<$PrismaModel> | $Enums.BanType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumBanTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumBanTypeFilter<$PrismaModel>
+}
+
 export type NestedIntFilter<$PrismaModel = never> = {
   equals?: number | Prisma.IntFieldRefInput<$PrismaModel>
   in?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel>
@@ -698,6 +715,23 @@ export type NestedEnumJointRoleNullableWithAggregatesFilter<$PrismaModel = never
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _min?: Prisma.NestedEnumJointRoleNullableFilter<$PrismaModel>
   _max?: Prisma.NestedEnumJointRoleNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumBanTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.BanType | Prisma.EnumBanTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.BanType[] | Prisma.ListEnumBanTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BanType[] | Prisma.ListEnumBanTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBanTypeFilter<$PrismaModel> | $Enums.BanType
+}
+
+export type NestedEnumBanTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.BanType | Prisma.EnumBanTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.BanType[] | Prisma.ListEnumBanTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BanType[] | Prisma.ListEnumBanTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBanTypeWithAggregatesFilter<$PrismaModel> | $Enums.BanType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumBanTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumBanTypeFilter<$PrismaModel>
 }
 
 

@@ -72,6 +72,7 @@ export const ModelName = {
   UserChapterHistory: 'UserChapterHistory',
   Favorite: 'Favorite',
   UserList: 'UserList',
+  UserPageBookmark: 'UserPageBookmark',
   Audit: 'Audit',
   ViewsHistory: 'ViewsHistory',
   SubscriptionPlan: 'SubscriptionPlan',
@@ -93,7 +94,8 @@ export const ModelName = {
   Raffle: 'Raffle',
   RaffleTicket: 'RaffleTicket',
   RaffleComment: 'RaffleComment',
-  RaffleRefund: 'RaffleRefund'
+  RaffleRefund: 'RaffleRefund',
+  UserBan: 'UserBan'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -241,6 +243,7 @@ export const PermissionScalarFieldEnum = {
   canDeleteComment: 'canDeleteComment',
   canEditComment: 'canEditComment',
   canHideComment: 'canHideComment',
+  canBanUser: 'canBanUser',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -341,6 +344,7 @@ export const MangaCustomScalarFieldEnum = {
   workType: 'workType',
   deletedAt: 'deletedAt',
   nextChapterAtMessage: 'nextChapterAtMessage',
+  hideUnreleasedChapters: 'hideUnreleasedChapters',
   usersAlsoReadMangaCustomIds: 'usersAlsoReadMangaCustomIds'
 } as const
 
@@ -514,11 +518,26 @@ export const UserListScalarFieldEnum = {
   jointId: 'jointId',
   order: 'order',
   finishedAt: 'finishedAt',
+  readingStatus: 'readingStatus',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type UserListScalarFieldEnum = (typeof UserListScalarFieldEnum)[keyof typeof UserListScalarFieldEnum]
+
+
+export const UserPageBookmarkScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  chapterId: 'chapterId',
+  pageNumber: 'pageNumber',
+  note: 'note',
+  order: 'order',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserPageBookmarkScalarFieldEnum = (typeof UserPageBookmarkScalarFieldEnum)[keyof typeof UserPageBookmarkScalarFieldEnum]
 
 
 export const AuditScalarFieldEnum = {
@@ -903,6 +922,22 @@ export const RaffleRefundScalarFieldEnum = {
 } as const
 
 export type RaffleRefundScalarFieldEnum = (typeof RaffleRefundScalarFieldEnum)[keyof typeof RaffleRefundScalarFieldEnum]
+
+
+export const UserBanScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  organizationId: 'organizationId',
+  bannedByUserId: 'bannedByUserId',
+  type: 'type',
+  reason: 'reason',
+  expiresAt: 'expiresAt',
+  revokedAt: 'revokedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserBanScalarFieldEnum = (typeof UserBanScalarFieldEnum)[keyof typeof UserBanScalarFieldEnum]
 
 
 export const SortOrder = {

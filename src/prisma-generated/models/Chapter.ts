@@ -314,6 +314,7 @@ export type ChapterWhereInput = {
   workedByOrganizations?: Prisma.OrganizationListRelationFilter
   pages?: Prisma.PageListRelationFilter
   userHistory?: Prisma.UserChapterHistoryListRelationFilter
+  pageBookmarks?: Prisma.UserPageBookmarkListRelationFilter
   viewsHistory?: Prisma.ViewsHistoryListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
 }
@@ -339,6 +340,7 @@ export type ChapterOrderByWithRelationInput = {
   workedByOrganizations?: Prisma.OrganizationOrderByRelationAggregateInput
   pages?: Prisma.PageOrderByRelationAggregateInput
   userHistory?: Prisma.UserChapterHistoryOrderByRelationAggregateInput
+  pageBookmarks?: Prisma.UserPageBookmarkOrderByRelationAggregateInput
   viewsHistory?: Prisma.ViewsHistoryOrderByRelationAggregateInput
   notifications?: Prisma.NotificationOrderByRelationAggregateInput
 }
@@ -369,6 +371,7 @@ export type ChapterWhereUniqueInput = Prisma.AtLeast<{
   workedByOrganizations?: Prisma.OrganizationListRelationFilter
   pages?: Prisma.PageListRelationFilter
   userHistory?: Prisma.UserChapterHistoryListRelationFilter
+  pageBookmarks?: Prisma.UserPageBookmarkListRelationFilter
   viewsHistory?: Prisma.ViewsHistoryListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
 }, "id" | "number_mangaCustomId" | "number_jointId">
@@ -432,6 +435,7 @@ export type ChapterCreateInput = {
   workedByOrganizations?: Prisma.OrganizationCreateNestedManyWithoutWorkedOnJointChaptersInput
   pages?: Prisma.PageCreateNestedManyWithoutChapterInput
   userHistory?: Prisma.UserChapterHistoryCreateNestedManyWithoutChapterInput
+  pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutChapterInput
   viewsHistory?: Prisma.ViewsHistoryCreateNestedManyWithoutChapterInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutChapterInput
 }
@@ -454,6 +458,7 @@ export type ChapterUncheckedCreateInput = {
   workedByOrganizations?: Prisma.OrganizationUncheckedCreateNestedManyWithoutWorkedOnJointChaptersInput
   pages?: Prisma.PageUncheckedCreateNestedManyWithoutChapterInput
   userHistory?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutChapterInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutChapterInput
   viewsHistory?: Prisma.ViewsHistoryUncheckedCreateNestedManyWithoutChapterInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutChapterInput
 }
@@ -475,6 +480,7 @@ export type ChapterUpdateInput = {
   workedByOrganizations?: Prisma.OrganizationUpdateManyWithoutWorkedOnJointChaptersNestedInput
   pages?: Prisma.PageUpdateManyWithoutChapterNestedInput
   userHistory?: Prisma.UserChapterHistoryUpdateManyWithoutChapterNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutChapterNestedInput
   viewsHistory?: Prisma.ViewsHistoryUpdateManyWithoutChapterNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutChapterNestedInput
 }
@@ -497,6 +503,7 @@ export type ChapterUncheckedUpdateInput = {
   workedByOrganizations?: Prisma.OrganizationUncheckedUpdateManyWithoutWorkedOnJointChaptersNestedInput
   pages?: Prisma.PageUncheckedUpdateManyWithoutChapterNestedInput
   userHistory?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutChapterNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutChapterNestedInput
   viewsHistory?: Prisma.ViewsHistoryUncheckedUpdateManyWithoutChapterNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutChapterNestedInput
 }
@@ -805,6 +812,20 @@ export type ChapterUpdateOneRequiredWithoutUserHistoryNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ChapterUpdateToOneWithWhereWithoutUserHistoryInput, Prisma.ChapterUpdateWithoutUserHistoryInput>, Prisma.ChapterUncheckedUpdateWithoutUserHistoryInput>
 }
 
+export type ChapterCreateNestedOneWithoutPageBookmarksInput = {
+  create?: Prisma.XOR<Prisma.ChapterCreateWithoutPageBookmarksInput, Prisma.ChapterUncheckedCreateWithoutPageBookmarksInput>
+  connectOrCreate?: Prisma.ChapterCreateOrConnectWithoutPageBookmarksInput
+  connect?: Prisma.ChapterWhereUniqueInput
+}
+
+export type ChapterUpdateOneRequiredWithoutPageBookmarksNestedInput = {
+  create?: Prisma.XOR<Prisma.ChapterCreateWithoutPageBookmarksInput, Prisma.ChapterUncheckedCreateWithoutPageBookmarksInput>
+  connectOrCreate?: Prisma.ChapterCreateOrConnectWithoutPageBookmarksInput
+  upsert?: Prisma.ChapterUpsertWithoutPageBookmarksInput
+  connect?: Prisma.ChapterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ChapterUpdateToOneWithWhereWithoutPageBookmarksInput, Prisma.ChapterUpdateWithoutPageBookmarksInput>, Prisma.ChapterUncheckedUpdateWithoutPageBookmarksInput>
+}
+
 export type ChapterCreateNestedOneWithoutViewsHistoryInput = {
   create?: Prisma.XOR<Prisma.ChapterCreateWithoutViewsHistoryInput, Prisma.ChapterUncheckedCreateWithoutViewsHistoryInput>
   connectOrCreate?: Prisma.ChapterCreateOrConnectWithoutViewsHistoryInput
@@ -895,6 +916,7 @@ export type ChapterCreateWithoutUploadedByOrganizationInput = {
   workedByOrganizations?: Prisma.OrganizationCreateNestedManyWithoutWorkedOnJointChaptersInput
   pages?: Prisma.PageCreateNestedManyWithoutChapterInput
   userHistory?: Prisma.UserChapterHistoryCreateNestedManyWithoutChapterInput
+  pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutChapterInput
   viewsHistory?: Prisma.ViewsHistoryCreateNestedManyWithoutChapterInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutChapterInput
 }
@@ -916,6 +938,7 @@ export type ChapterUncheckedCreateWithoutUploadedByOrganizationInput = {
   workedByOrganizations?: Prisma.OrganizationUncheckedCreateNestedManyWithoutWorkedOnJointChaptersInput
   pages?: Prisma.PageUncheckedCreateNestedManyWithoutChapterInput
   userHistory?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutChapterInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutChapterInput
   viewsHistory?: Prisma.ViewsHistoryUncheckedCreateNestedManyWithoutChapterInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutChapterInput
 }
@@ -946,6 +969,7 @@ export type ChapterCreateWithoutWorkedByOrganizationsInput = {
   uploadedByOrganization?: Prisma.OrganizationCreateNestedOneWithoutUploadedJointChaptersInput
   pages?: Prisma.PageCreateNestedManyWithoutChapterInput
   userHistory?: Prisma.UserChapterHistoryCreateNestedManyWithoutChapterInput
+  pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutChapterInput
   viewsHistory?: Prisma.ViewsHistoryCreateNestedManyWithoutChapterInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutChapterInput
 }
@@ -967,6 +991,7 @@ export type ChapterUncheckedCreateWithoutWorkedByOrganizationsInput = {
   bodyMarkdown?: string | null
   pages?: Prisma.PageUncheckedCreateNestedManyWithoutChapterInput
   userHistory?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutChapterInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutChapterInput
   viewsHistory?: Prisma.ViewsHistoryUncheckedCreateNestedManyWithoutChapterInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutChapterInput
 }
@@ -1044,6 +1069,7 @@ export type ChapterCreateWithoutMangaCustomInput = {
   workedByOrganizations?: Prisma.OrganizationCreateNestedManyWithoutWorkedOnJointChaptersInput
   pages?: Prisma.PageCreateNestedManyWithoutChapterInput
   userHistory?: Prisma.UserChapterHistoryCreateNestedManyWithoutChapterInput
+  pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutChapterInput
   viewsHistory?: Prisma.ViewsHistoryCreateNestedManyWithoutChapterInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutChapterInput
 }
@@ -1065,6 +1091,7 @@ export type ChapterUncheckedCreateWithoutMangaCustomInput = {
   workedByOrganizations?: Prisma.OrganizationUncheckedCreateNestedManyWithoutWorkedOnJointChaptersInput
   pages?: Prisma.PageUncheckedCreateNestedManyWithoutChapterInput
   userHistory?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutChapterInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutChapterInput
   viewsHistory?: Prisma.ViewsHistoryUncheckedCreateNestedManyWithoutChapterInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutChapterInput
 }
@@ -1111,6 +1138,7 @@ export type ChapterCreateWithoutPagesInput = {
   uploadedByOrganization?: Prisma.OrganizationCreateNestedOneWithoutUploadedJointChaptersInput
   workedByOrganizations?: Prisma.OrganizationCreateNestedManyWithoutWorkedOnJointChaptersInput
   userHistory?: Prisma.UserChapterHistoryCreateNestedManyWithoutChapterInput
+  pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutChapterInput
   viewsHistory?: Prisma.ViewsHistoryCreateNestedManyWithoutChapterInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutChapterInput
 }
@@ -1132,6 +1160,7 @@ export type ChapterUncheckedCreateWithoutPagesInput = {
   bodyMarkdown?: string | null
   workedByOrganizations?: Prisma.OrganizationUncheckedCreateNestedManyWithoutWorkedOnJointChaptersInput
   userHistory?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutChapterInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutChapterInput
   viewsHistory?: Prisma.ViewsHistoryUncheckedCreateNestedManyWithoutChapterInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutChapterInput
 }
@@ -1168,6 +1197,7 @@ export type ChapterUpdateWithoutPagesInput = {
   uploadedByOrganization?: Prisma.OrganizationUpdateOneWithoutUploadedJointChaptersNestedInput
   workedByOrganizations?: Prisma.OrganizationUpdateManyWithoutWorkedOnJointChaptersNestedInput
   userHistory?: Prisma.UserChapterHistoryUpdateManyWithoutChapterNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutChapterNestedInput
   viewsHistory?: Prisma.ViewsHistoryUpdateManyWithoutChapterNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutChapterNestedInput
 }
@@ -1189,6 +1219,7 @@ export type ChapterUncheckedUpdateWithoutPagesInput = {
   bodyMarkdown?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workedByOrganizations?: Prisma.OrganizationUncheckedUpdateManyWithoutWorkedOnJointChaptersNestedInput
   userHistory?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutChapterNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutChapterNestedInput
   viewsHistory?: Prisma.ViewsHistoryUncheckedUpdateManyWithoutChapterNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutChapterNestedInput
 }
@@ -1209,6 +1240,7 @@ export type ChapterCreateWithoutUserHistoryInput = {
   uploadedByOrganization?: Prisma.OrganizationCreateNestedOneWithoutUploadedJointChaptersInput
   workedByOrganizations?: Prisma.OrganizationCreateNestedManyWithoutWorkedOnJointChaptersInput
   pages?: Prisma.PageCreateNestedManyWithoutChapterInput
+  pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutChapterInput
   viewsHistory?: Prisma.ViewsHistoryCreateNestedManyWithoutChapterInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutChapterInput
 }
@@ -1230,6 +1262,7 @@ export type ChapterUncheckedCreateWithoutUserHistoryInput = {
   bodyMarkdown?: string | null
   workedByOrganizations?: Prisma.OrganizationUncheckedCreateNestedManyWithoutWorkedOnJointChaptersInput
   pages?: Prisma.PageUncheckedCreateNestedManyWithoutChapterInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutChapterInput
   viewsHistory?: Prisma.ViewsHistoryUncheckedCreateNestedManyWithoutChapterInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutChapterInput
 }
@@ -1266,6 +1299,7 @@ export type ChapterUpdateWithoutUserHistoryInput = {
   uploadedByOrganization?: Prisma.OrganizationUpdateOneWithoutUploadedJointChaptersNestedInput
   workedByOrganizations?: Prisma.OrganizationUpdateManyWithoutWorkedOnJointChaptersNestedInput
   pages?: Prisma.PageUpdateManyWithoutChapterNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutChapterNestedInput
   viewsHistory?: Prisma.ViewsHistoryUpdateManyWithoutChapterNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutChapterNestedInput
 }
@@ -1287,6 +1321,109 @@ export type ChapterUncheckedUpdateWithoutUserHistoryInput = {
   bodyMarkdown?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workedByOrganizations?: Prisma.OrganizationUncheckedUpdateManyWithoutWorkedOnJointChaptersNestedInput
   pages?: Prisma.PageUncheckedUpdateManyWithoutChapterNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutChapterNestedInput
+  viewsHistory?: Prisma.ViewsHistoryUncheckedUpdateManyWithoutChapterNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutChapterNestedInput
+}
+
+export type ChapterCreateWithoutPageBookmarksInput = {
+  number: number
+  title: string
+  imageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  views?: number
+  releasedAt?: Date | string | null
+  isUnreleased?: boolean
+  deletedAt?: Date | string | null
+  bodyMarkdown?: string | null
+  mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutChaptersInput
+  joint?: Prisma.MangaJointCreateNestedOneWithoutChaptersInput
+  uploadedByOrganization?: Prisma.OrganizationCreateNestedOneWithoutUploadedJointChaptersInput
+  workedByOrganizations?: Prisma.OrganizationCreateNestedManyWithoutWorkedOnJointChaptersInput
+  pages?: Prisma.PageCreateNestedManyWithoutChapterInput
+  userHistory?: Prisma.UserChapterHistoryCreateNestedManyWithoutChapterInput
+  viewsHistory?: Prisma.ViewsHistoryCreateNestedManyWithoutChapterInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutChapterInput
+}
+
+export type ChapterUncheckedCreateWithoutPageBookmarksInput = {
+  id?: number
+  number: number
+  title: string
+  imageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  mangaCustomId?: number | null
+  jointId?: number | null
+  uploadedByOrganizationId?: number | null
+  views?: number
+  releasedAt?: Date | string | null
+  isUnreleased?: boolean
+  deletedAt?: Date | string | null
+  bodyMarkdown?: string | null
+  workedByOrganizations?: Prisma.OrganizationUncheckedCreateNestedManyWithoutWorkedOnJointChaptersInput
+  pages?: Prisma.PageUncheckedCreateNestedManyWithoutChapterInput
+  userHistory?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutChapterInput
+  viewsHistory?: Prisma.ViewsHistoryUncheckedCreateNestedManyWithoutChapterInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutChapterInput
+}
+
+export type ChapterCreateOrConnectWithoutPageBookmarksInput = {
+  where: Prisma.ChapterWhereUniqueInput
+  create: Prisma.XOR<Prisma.ChapterCreateWithoutPageBookmarksInput, Prisma.ChapterUncheckedCreateWithoutPageBookmarksInput>
+}
+
+export type ChapterUpsertWithoutPageBookmarksInput = {
+  update: Prisma.XOR<Prisma.ChapterUpdateWithoutPageBookmarksInput, Prisma.ChapterUncheckedUpdateWithoutPageBookmarksInput>
+  create: Prisma.XOR<Prisma.ChapterCreateWithoutPageBookmarksInput, Prisma.ChapterUncheckedCreateWithoutPageBookmarksInput>
+  where?: Prisma.ChapterWhereInput
+}
+
+export type ChapterUpdateToOneWithWhereWithoutPageBookmarksInput = {
+  where?: Prisma.ChapterWhereInput
+  data: Prisma.XOR<Prisma.ChapterUpdateWithoutPageBookmarksInput, Prisma.ChapterUncheckedUpdateWithoutPageBookmarksInput>
+}
+
+export type ChapterUpdateWithoutPageBookmarksInput = {
+  number?: Prisma.FloatFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  views?: Prisma.IntFieldUpdateOperationsInput | number
+  releasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bodyMarkdown?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mangaCustom?: Prisma.MangaCustomUpdateOneWithoutChaptersNestedInput
+  joint?: Prisma.MangaJointUpdateOneWithoutChaptersNestedInput
+  uploadedByOrganization?: Prisma.OrganizationUpdateOneWithoutUploadedJointChaptersNestedInput
+  workedByOrganizations?: Prisma.OrganizationUpdateManyWithoutWorkedOnJointChaptersNestedInput
+  pages?: Prisma.PageUpdateManyWithoutChapterNestedInput
+  userHistory?: Prisma.UserChapterHistoryUpdateManyWithoutChapterNestedInput
+  viewsHistory?: Prisma.ViewsHistoryUpdateManyWithoutChapterNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutChapterNestedInput
+}
+
+export type ChapterUncheckedUpdateWithoutPageBookmarksInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  number?: Prisma.FloatFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  uploadedByOrganizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  views?: Prisma.IntFieldUpdateOperationsInput | number
+  releasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bodyMarkdown?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workedByOrganizations?: Prisma.OrganizationUncheckedUpdateManyWithoutWorkedOnJointChaptersNestedInput
+  pages?: Prisma.PageUncheckedUpdateManyWithoutChapterNestedInput
+  userHistory?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutChapterNestedInput
   viewsHistory?: Prisma.ViewsHistoryUncheckedUpdateManyWithoutChapterNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutChapterNestedInput
 }
@@ -1308,6 +1445,7 @@ export type ChapterCreateWithoutViewsHistoryInput = {
   workedByOrganizations?: Prisma.OrganizationCreateNestedManyWithoutWorkedOnJointChaptersInput
   pages?: Prisma.PageCreateNestedManyWithoutChapterInput
   userHistory?: Prisma.UserChapterHistoryCreateNestedManyWithoutChapterInput
+  pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutChapterInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutChapterInput
 }
 
@@ -1329,6 +1467,7 @@ export type ChapterUncheckedCreateWithoutViewsHistoryInput = {
   workedByOrganizations?: Prisma.OrganizationUncheckedCreateNestedManyWithoutWorkedOnJointChaptersInput
   pages?: Prisma.PageUncheckedCreateNestedManyWithoutChapterInput
   userHistory?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutChapterInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutChapterInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutChapterInput
 }
 
@@ -1365,6 +1504,7 @@ export type ChapterUpdateWithoutViewsHistoryInput = {
   workedByOrganizations?: Prisma.OrganizationUpdateManyWithoutWorkedOnJointChaptersNestedInput
   pages?: Prisma.PageUpdateManyWithoutChapterNestedInput
   userHistory?: Prisma.UserChapterHistoryUpdateManyWithoutChapterNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutChapterNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutChapterNestedInput
 }
 
@@ -1386,6 +1526,7 @@ export type ChapterUncheckedUpdateWithoutViewsHistoryInput = {
   workedByOrganizations?: Prisma.OrganizationUncheckedUpdateManyWithoutWorkedOnJointChaptersNestedInput
   pages?: Prisma.PageUncheckedUpdateManyWithoutChapterNestedInput
   userHistory?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutChapterNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutChapterNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutChapterNestedInput
 }
 
@@ -1405,6 +1546,7 @@ export type ChapterCreateWithoutJointInput = {
   workedByOrganizations?: Prisma.OrganizationCreateNestedManyWithoutWorkedOnJointChaptersInput
   pages?: Prisma.PageCreateNestedManyWithoutChapterInput
   userHistory?: Prisma.UserChapterHistoryCreateNestedManyWithoutChapterInput
+  pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutChapterInput
   viewsHistory?: Prisma.ViewsHistoryCreateNestedManyWithoutChapterInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutChapterInput
 }
@@ -1426,6 +1568,7 @@ export type ChapterUncheckedCreateWithoutJointInput = {
   workedByOrganizations?: Prisma.OrganizationUncheckedCreateNestedManyWithoutWorkedOnJointChaptersInput
   pages?: Prisma.PageUncheckedCreateNestedManyWithoutChapterInput
   userHistory?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutChapterInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutChapterInput
   viewsHistory?: Prisma.ViewsHistoryUncheckedCreateNestedManyWithoutChapterInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutChapterInput
 }
@@ -1473,6 +1616,7 @@ export type ChapterCreateWithoutNotificationsInput = {
   workedByOrganizations?: Prisma.OrganizationCreateNestedManyWithoutWorkedOnJointChaptersInput
   pages?: Prisma.PageCreateNestedManyWithoutChapterInput
   userHistory?: Prisma.UserChapterHistoryCreateNestedManyWithoutChapterInput
+  pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutChapterInput
   viewsHistory?: Prisma.ViewsHistoryCreateNestedManyWithoutChapterInput
 }
 
@@ -1494,6 +1638,7 @@ export type ChapterUncheckedCreateWithoutNotificationsInput = {
   workedByOrganizations?: Prisma.OrganizationUncheckedCreateNestedManyWithoutWorkedOnJointChaptersInput
   pages?: Prisma.PageUncheckedCreateNestedManyWithoutChapterInput
   userHistory?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutChapterInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutChapterInput
   viewsHistory?: Prisma.ViewsHistoryUncheckedCreateNestedManyWithoutChapterInput
 }
 
@@ -1530,6 +1675,7 @@ export type ChapterUpdateWithoutNotificationsInput = {
   workedByOrganizations?: Prisma.OrganizationUpdateManyWithoutWorkedOnJointChaptersNestedInput
   pages?: Prisma.PageUpdateManyWithoutChapterNestedInput
   userHistory?: Prisma.UserChapterHistoryUpdateManyWithoutChapterNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutChapterNestedInput
   viewsHistory?: Prisma.ViewsHistoryUpdateManyWithoutChapterNestedInput
 }
 
@@ -1551,6 +1697,7 @@ export type ChapterUncheckedUpdateWithoutNotificationsInput = {
   workedByOrganizations?: Prisma.OrganizationUncheckedUpdateManyWithoutWorkedOnJointChaptersNestedInput
   pages?: Prisma.PageUncheckedUpdateManyWithoutChapterNestedInput
   userHistory?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutChapterNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutChapterNestedInput
   viewsHistory?: Prisma.ViewsHistoryUncheckedUpdateManyWithoutChapterNestedInput
 }
 
@@ -1586,6 +1733,7 @@ export type ChapterUpdateWithoutUploadedByOrganizationInput = {
   workedByOrganizations?: Prisma.OrganizationUpdateManyWithoutWorkedOnJointChaptersNestedInput
   pages?: Prisma.PageUpdateManyWithoutChapterNestedInput
   userHistory?: Prisma.UserChapterHistoryUpdateManyWithoutChapterNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutChapterNestedInput
   viewsHistory?: Prisma.ViewsHistoryUpdateManyWithoutChapterNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutChapterNestedInput
 }
@@ -1607,6 +1755,7 @@ export type ChapterUncheckedUpdateWithoutUploadedByOrganizationInput = {
   workedByOrganizations?: Prisma.OrganizationUncheckedUpdateManyWithoutWorkedOnJointChaptersNestedInput
   pages?: Prisma.PageUncheckedUpdateManyWithoutChapterNestedInput
   userHistory?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutChapterNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutChapterNestedInput
   viewsHistory?: Prisma.ViewsHistoryUncheckedUpdateManyWithoutChapterNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutChapterNestedInput
 }
@@ -1643,6 +1792,7 @@ export type ChapterUpdateWithoutWorkedByOrganizationsInput = {
   uploadedByOrganization?: Prisma.OrganizationUpdateOneWithoutUploadedJointChaptersNestedInput
   pages?: Prisma.PageUpdateManyWithoutChapterNestedInput
   userHistory?: Prisma.UserChapterHistoryUpdateManyWithoutChapterNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutChapterNestedInput
   viewsHistory?: Prisma.ViewsHistoryUpdateManyWithoutChapterNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutChapterNestedInput
 }
@@ -1664,6 +1814,7 @@ export type ChapterUncheckedUpdateWithoutWorkedByOrganizationsInput = {
   bodyMarkdown?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pages?: Prisma.PageUncheckedUpdateManyWithoutChapterNestedInput
   userHistory?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutChapterNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutChapterNestedInput
   viewsHistory?: Prisma.ViewsHistoryUncheckedUpdateManyWithoutChapterNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutChapterNestedInput
 }
@@ -1717,6 +1868,7 @@ export type ChapterUpdateWithoutMangaCustomInput = {
   workedByOrganizations?: Prisma.OrganizationUpdateManyWithoutWorkedOnJointChaptersNestedInput
   pages?: Prisma.PageUpdateManyWithoutChapterNestedInput
   userHistory?: Prisma.UserChapterHistoryUpdateManyWithoutChapterNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutChapterNestedInput
   viewsHistory?: Prisma.ViewsHistoryUpdateManyWithoutChapterNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutChapterNestedInput
 }
@@ -1738,6 +1890,7 @@ export type ChapterUncheckedUpdateWithoutMangaCustomInput = {
   workedByOrganizations?: Prisma.OrganizationUncheckedUpdateManyWithoutWorkedOnJointChaptersNestedInput
   pages?: Prisma.PageUncheckedUpdateManyWithoutChapterNestedInput
   userHistory?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutChapterNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutChapterNestedInput
   viewsHistory?: Prisma.ViewsHistoryUncheckedUpdateManyWithoutChapterNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutChapterNestedInput
 }
@@ -1790,6 +1943,7 @@ export type ChapterUpdateWithoutJointInput = {
   workedByOrganizations?: Prisma.OrganizationUpdateManyWithoutWorkedOnJointChaptersNestedInput
   pages?: Prisma.PageUpdateManyWithoutChapterNestedInput
   userHistory?: Prisma.UserChapterHistoryUpdateManyWithoutChapterNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutChapterNestedInput
   viewsHistory?: Prisma.ViewsHistoryUpdateManyWithoutChapterNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutChapterNestedInput
 }
@@ -1811,6 +1965,7 @@ export type ChapterUncheckedUpdateWithoutJointInput = {
   workedByOrganizations?: Prisma.OrganizationUncheckedUpdateManyWithoutWorkedOnJointChaptersNestedInput
   pages?: Prisma.PageUncheckedUpdateManyWithoutChapterNestedInput
   userHistory?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutChapterNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutChapterNestedInput
   viewsHistory?: Prisma.ViewsHistoryUncheckedUpdateManyWithoutChapterNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutChapterNestedInput
 }
@@ -1840,6 +1995,7 @@ export type ChapterCountOutputType = {
   workedByOrganizations: number
   pages: number
   userHistory: number
+  pageBookmarks: number
   viewsHistory: number
   notifications: number
 }
@@ -1848,6 +2004,7 @@ export type ChapterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extension
   workedByOrganizations?: boolean | ChapterCountOutputTypeCountWorkedByOrganizationsArgs
   pages?: boolean | ChapterCountOutputTypeCountPagesArgs
   userHistory?: boolean | ChapterCountOutputTypeCountUserHistoryArgs
+  pageBookmarks?: boolean | ChapterCountOutputTypeCountPageBookmarksArgs
   viewsHistory?: boolean | ChapterCountOutputTypeCountViewsHistoryArgs
   notifications?: boolean | ChapterCountOutputTypeCountNotificationsArgs
 }
@@ -1886,6 +2043,13 @@ export type ChapterCountOutputTypeCountUserHistoryArgs<ExtArgs extends runtime.T
 /**
  * ChapterCountOutputType without action
  */
+export type ChapterCountOutputTypeCountPageBookmarksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserPageBookmarkWhereInput
+}
+
+/**
+ * ChapterCountOutputType without action
+ */
 export type ChapterCountOutputTypeCountViewsHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ViewsHistoryWhereInput
 }
@@ -1919,6 +2083,7 @@ export type ChapterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   workedByOrganizations?: boolean | Prisma.Chapter$workedByOrganizationsArgs<ExtArgs>
   pages?: boolean | Prisma.Chapter$pagesArgs<ExtArgs>
   userHistory?: boolean | Prisma.Chapter$userHistoryArgs<ExtArgs>
+  pageBookmarks?: boolean | Prisma.Chapter$pageBookmarksArgs<ExtArgs>
   viewsHistory?: boolean | Prisma.Chapter$viewsHistoryArgs<ExtArgs>
   notifications?: boolean | Prisma.Chapter$notificationsArgs<ExtArgs>
   _count?: boolean | Prisma.ChapterCountOutputTypeDefaultArgs<ExtArgs>
@@ -1989,6 +2154,7 @@ export type ChapterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   workedByOrganizations?: boolean | Prisma.Chapter$workedByOrganizationsArgs<ExtArgs>
   pages?: boolean | Prisma.Chapter$pagesArgs<ExtArgs>
   userHistory?: boolean | Prisma.Chapter$userHistoryArgs<ExtArgs>
+  pageBookmarks?: boolean | Prisma.Chapter$pageBookmarksArgs<ExtArgs>
   viewsHistory?: boolean | Prisma.Chapter$viewsHistoryArgs<ExtArgs>
   notifications?: boolean | Prisma.Chapter$notificationsArgs<ExtArgs>
   _count?: boolean | Prisma.ChapterCountOutputTypeDefaultArgs<ExtArgs>
@@ -2013,6 +2179,7 @@ export type $ChapterPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     workedByOrganizations: Prisma.$OrganizationPayload<ExtArgs>[]
     pages: Prisma.$PagePayload<ExtArgs>[]
     userHistory: Prisma.$UserChapterHistoryPayload<ExtArgs>[]
+    pageBookmarks: Prisma.$UserPageBookmarkPayload<ExtArgs>[]
     viewsHistory: Prisma.$ViewsHistoryPayload<ExtArgs>[]
     notifications: Prisma.$NotificationPayload<ExtArgs>[]
   }
@@ -2431,6 +2598,7 @@ export interface Prisma__ChapterClient<T, Null = never, ExtArgs extends runtime.
   workedByOrganizations<T extends Prisma.Chapter$workedByOrganizationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Chapter$workedByOrganizationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   pages<T extends Prisma.Chapter$pagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Chapter$pagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   userHistory<T extends Prisma.Chapter$userHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Chapter$userHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserChapterHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  pageBookmarks<T extends Prisma.Chapter$pageBookmarksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Chapter$pageBookmarksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPageBookmarkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   viewsHistory<T extends Prisma.Chapter$viewsHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Chapter$viewsHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ViewsHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   notifications<T extends Prisma.Chapter$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Chapter$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -2998,6 +3166,30 @@ export type Chapter$userHistoryArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.UserChapterHistoryScalarFieldEnum | Prisma.UserChapterHistoryScalarFieldEnum[]
+}
+
+/**
+ * Chapter.pageBookmarks
+ */
+export type Chapter$pageBookmarksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserPageBookmark
+   */
+  select?: Prisma.UserPageBookmarkSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserPageBookmark
+   */
+  omit?: Prisma.UserPageBookmarkOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserPageBookmarkInclude<ExtArgs> | null
+  where?: Prisma.UserPageBookmarkWhereInput
+  orderBy?: Prisma.UserPageBookmarkOrderByWithRelationInput | Prisma.UserPageBookmarkOrderByWithRelationInput[]
+  cursor?: Prisma.UserPageBookmarkWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserPageBookmarkScalarFieldEnum | Prisma.UserPageBookmarkScalarFieldEnum[]
 }
 
 /**

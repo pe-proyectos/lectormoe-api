@@ -74,6 +74,7 @@ export type PermissionMinAggregateOutputType = {
   canDeleteComment: boolean | null
   canEditComment: boolean | null
   canHideComment: boolean | null
+  canBanUser: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -112,6 +113,7 @@ export type PermissionMaxAggregateOutputType = {
   canDeleteComment: boolean | null
   canEditComment: boolean | null
   canHideComment: boolean | null
+  canBanUser: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -150,6 +152,7 @@ export type PermissionCountAggregateOutputType = {
   canDeleteComment: number
   canEditComment: number
   canHideComment: number
+  canBanUser: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -204,6 +207,7 @@ export type PermissionMinAggregateInputType = {
   canDeleteComment?: true
   canEditComment?: true
   canHideComment?: true
+  canBanUser?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -242,6 +246,7 @@ export type PermissionMaxAggregateInputType = {
   canDeleteComment?: true
   canEditComment?: true
   canHideComment?: true
+  canBanUser?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -280,6 +285,7 @@ export type PermissionCountAggregateInputType = {
   canDeleteComment?: true
   canEditComment?: true
   canHideComment?: true
+  canBanUser?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -405,6 +411,7 @@ export type PermissionGroupByOutputType = {
   canDeleteComment: boolean
   canEditComment: boolean
   canHideComment: boolean
+  canBanUser: boolean
   createdAt: Date
   updatedAt: Date
   _count: PermissionCountAggregateOutputType | null
@@ -466,6 +473,7 @@ export type PermissionWhereInput = {
   canDeleteComment?: Prisma.BoolFilter<"Permission"> | boolean
   canEditComment?: Prisma.BoolFilter<"Permission"> | boolean
   canHideComment?: Prisma.BoolFilter<"Permission"> | boolean
+  canBanUser?: Prisma.BoolFilter<"Permission"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Permission"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Permission"> | Date | string
   organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
@@ -506,6 +514,7 @@ export type PermissionOrderByWithRelationInput = {
   canDeleteComment?: Prisma.SortOrder
   canEditComment?: Prisma.SortOrder
   canHideComment?: Prisma.SortOrder
+  canBanUser?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   organization?: Prisma.OrganizationOrderByWithRelationInput
@@ -550,6 +559,7 @@ export type PermissionWhereUniqueInput = Prisma.AtLeast<{
   canDeleteComment?: Prisma.BoolFilter<"Permission"> | boolean
   canEditComment?: Prisma.BoolFilter<"Permission"> | boolean
   canHideComment?: Prisma.BoolFilter<"Permission"> | boolean
+  canBanUser?: Prisma.BoolFilter<"Permission"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Permission"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Permission"> | Date | string
   organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
@@ -590,6 +600,7 @@ export type PermissionOrderByWithAggregationInput = {
   canDeleteComment?: Prisma.SortOrder
   canEditComment?: Prisma.SortOrder
   canHideComment?: Prisma.SortOrder
+  canBanUser?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.PermissionCountOrderByAggregateInput
@@ -636,6 +647,7 @@ export type PermissionScalarWhereWithAggregatesInput = {
   canDeleteComment?: Prisma.BoolWithAggregatesFilter<"Permission"> | boolean
   canEditComment?: Prisma.BoolWithAggregatesFilter<"Permission"> | boolean
   canHideComment?: Prisma.BoolWithAggregatesFilter<"Permission"> | boolean
+  canBanUser?: Prisma.BoolWithAggregatesFilter<"Permission"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Permission"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Permission"> | Date | string
 }
@@ -671,6 +683,7 @@ export type PermissionCreateInput = {
   canDeleteComment?: boolean
   canEditComment?: boolean
   canHideComment?: boolean
+  canBanUser?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutPermissionsInput
@@ -711,6 +724,7 @@ export type PermissionUncheckedCreateInput = {
   canDeleteComment?: boolean
   canEditComment?: boolean
   canHideComment?: boolean
+  canBanUser?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -746,6 +760,7 @@ export type PermissionUpdateInput = {
   canDeleteComment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   canEditComment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   canHideComment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  canBanUser?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutPermissionsNestedInput
@@ -786,6 +801,7 @@ export type PermissionUncheckedUpdateInput = {
   canDeleteComment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   canEditComment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   canHideComment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  canBanUser?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -824,6 +840,7 @@ export type PermissionCreateManyInput = {
   canDeleteComment?: boolean
   canEditComment?: boolean
   canHideComment?: boolean
+  canBanUser?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -859,6 +876,7 @@ export type PermissionUpdateManyMutationInput = {
   canDeleteComment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   canEditComment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   canHideComment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  canBanUser?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -897,6 +915,7 @@ export type PermissionUncheckedUpdateManyInput = {
   canDeleteComment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   canEditComment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   canHideComment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  canBanUser?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -950,6 +969,7 @@ export type PermissionCountOrderByAggregateInput = {
   canDeleteComment?: Prisma.SortOrder
   canEditComment?: Prisma.SortOrder
   canHideComment?: Prisma.SortOrder
+  canBanUser?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -995,6 +1015,7 @@ export type PermissionMaxOrderByAggregateInput = {
   canDeleteComment?: Prisma.SortOrder
   canEditComment?: Prisma.SortOrder
   canHideComment?: Prisma.SortOrder
+  canBanUser?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -1033,6 +1054,7 @@ export type PermissionMinOrderByAggregateInput = {
   canDeleteComment?: Prisma.SortOrder
   canEditComment?: Prisma.SortOrder
   canHideComment?: Prisma.SortOrder
+  canBanUser?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -1159,6 +1181,7 @@ export type PermissionCreateWithoutOrganizationInput = {
   canDeleteComment?: boolean
   canEditComment?: boolean
   canHideComment?: boolean
+  canBanUser?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutPermissionsInput
@@ -1197,6 +1220,7 @@ export type PermissionUncheckedCreateWithoutOrganizationInput = {
   canDeleteComment?: boolean
   canEditComment?: boolean
   canHideComment?: boolean
+  canBanUser?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1264,6 +1288,7 @@ export type PermissionScalarWhereInput = {
   canDeleteComment?: Prisma.BoolFilter<"Permission"> | boolean
   canEditComment?: Prisma.BoolFilter<"Permission"> | boolean
   canHideComment?: Prisma.BoolFilter<"Permission"> | boolean
+  canBanUser?: Prisma.BoolFilter<"Permission"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Permission"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Permission"> | Date | string
 }
@@ -1299,6 +1324,7 @@ export type PermissionCreateWithoutUserInput = {
   canDeleteComment?: boolean
   canEditComment?: boolean
   canHideComment?: boolean
+  canBanUser?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutPermissionsInput
@@ -1337,6 +1363,7 @@ export type PermissionUncheckedCreateWithoutUserInput = {
   canDeleteComment?: boolean
   canEditComment?: boolean
   canHideComment?: boolean
+  canBanUser?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1400,6 +1427,7 @@ export type PermissionCreateManyOrganizationInput = {
   canDeleteComment?: boolean
   canEditComment?: boolean
   canHideComment?: boolean
+  canBanUser?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1435,6 +1463,7 @@ export type PermissionUpdateWithoutOrganizationInput = {
   canDeleteComment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   canEditComment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   canHideComment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  canBanUser?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutPermissionsNestedInput
@@ -1473,6 +1502,7 @@ export type PermissionUncheckedUpdateWithoutOrganizationInput = {
   canDeleteComment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   canEditComment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   canHideComment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  canBanUser?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1510,6 +1540,7 @@ export type PermissionUncheckedUpdateManyWithoutOrganizationInput = {
   canDeleteComment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   canEditComment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   canHideComment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  canBanUser?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1547,6 +1578,7 @@ export type PermissionCreateManyUserInput = {
   canDeleteComment?: boolean
   canEditComment?: boolean
   canHideComment?: boolean
+  canBanUser?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1582,6 +1614,7 @@ export type PermissionUpdateWithoutUserInput = {
   canDeleteComment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   canEditComment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   canHideComment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  canBanUser?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutPermissionsNestedInput
@@ -1620,6 +1653,7 @@ export type PermissionUncheckedUpdateWithoutUserInput = {
   canDeleteComment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   canEditComment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   canHideComment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  canBanUser?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1657,6 +1691,7 @@ export type PermissionUncheckedUpdateManyWithoutUserInput = {
   canDeleteComment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   canEditComment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   canHideComment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  canBanUser?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1697,6 +1732,7 @@ export type PermissionSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   canDeleteComment?: boolean
   canEditComment?: boolean
   canHideComment?: boolean
+  canBanUser?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
@@ -1737,6 +1773,7 @@ export type PermissionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   canDeleteComment?: boolean
   canEditComment?: boolean
   canHideComment?: boolean
+  canBanUser?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
@@ -1777,6 +1814,7 @@ export type PermissionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   canDeleteComment?: boolean
   canEditComment?: boolean
   canHideComment?: boolean
+  canBanUser?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
@@ -1817,11 +1855,12 @@ export type PermissionSelectScalar = {
   canDeleteComment?: boolean
   canEditComment?: boolean
   canHideComment?: boolean
+  canBanUser?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type PermissionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "organizationId" | "canCreateAuthor" | "canCreateChapter" | "canCreateGenre" | "canCreateMangaCustom" | "canCreateMangaProfile" | "canCreatePage" | "canDeleteChapter" | "canDeleteGenre" | "canDeleteMangaCustom" | "canDeleteOrganization" | "canDeletePage" | "canEditChapter" | "canEditGenre" | "canEditMangaCustom" | "canEditOrganization" | "canEditPage" | "canSeeAdminPanel" | "hierarchyLevel" | "role" | "canDeleteUser" | "canEditUser" | "canCreateSubscriptionPlan" | "canDeleteSubscriptionPlan" | "canEditSubscriptionPlan" | "canDownload" | "canReadUnreleased" | "hideAds" | "canDeleteComment" | "canEditComment" | "canHideComment" | "createdAt" | "updatedAt", ExtArgs["result"]["permission"]>
+export type PermissionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "organizationId" | "canCreateAuthor" | "canCreateChapter" | "canCreateGenre" | "canCreateMangaCustom" | "canCreateMangaProfile" | "canCreatePage" | "canDeleteChapter" | "canDeleteGenre" | "canDeleteMangaCustom" | "canDeleteOrganization" | "canDeletePage" | "canEditChapter" | "canEditGenre" | "canEditMangaCustom" | "canEditOrganization" | "canEditPage" | "canSeeAdminPanel" | "hierarchyLevel" | "role" | "canDeleteUser" | "canEditUser" | "canCreateSubscriptionPlan" | "canDeleteSubscriptionPlan" | "canEditSubscriptionPlan" | "canDownload" | "canReadUnreleased" | "hideAds" | "canDeleteComment" | "canEditComment" | "canHideComment" | "canBanUser" | "createdAt" | "updatedAt", ExtArgs["result"]["permission"]>
 export type PermissionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1875,6 +1914,7 @@ export type $PermissionPayload<ExtArgs extends runtime.Types.Extensions.Internal
     canDeleteComment: boolean
     canEditComment: boolean
     canHideComment: boolean
+    canBanUser: boolean
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["permission"]>
@@ -2335,6 +2375,7 @@ export interface PermissionFieldRefs {
   readonly canDeleteComment: Prisma.FieldRef<"Permission", 'Boolean'>
   readonly canEditComment: Prisma.FieldRef<"Permission", 'Boolean'>
   readonly canHideComment: Prisma.FieldRef<"Permission", 'Boolean'>
+  readonly canBanUser: Prisma.FieldRef<"Permission", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Permission", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Permission", 'DateTime'>
 }

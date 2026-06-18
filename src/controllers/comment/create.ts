@@ -2,8 +2,17 @@ import { prisma } from "../../models/prisma";
 import { CreateCommentRequest } from "../../types/comment/create";
 import { uploadFile } from "../../util/upload-file";
 import { notifyComment } from "../../services/notify-new-chapter";
+import { getActiveBan } from "./ban-user";
+import { BanType } from "../../prisma-generated/enums";
 
 export const createComment = async (organizationId: number, userId: number, params: CreateCommentRequest) => {
+  const activeBan = await getActiveBan(userId, organizationId);
+  if (activeBan) {
+    const banLabel = activeBan.type === BanType.TEMPORARY ? "temporalmente baneado" :
+      activeBan.type === BanType.RESTRICTED ? "restringido" : "baneado permanentemente";
+    throw new Error(`No puedes comentar: estás ${banLabel} en este scan.${activeBan.reason ? ` Motivo: ${activeBan.reason}` : ""}`);
+  }
+
   const comment = await prisma.comment.create({
     data: {
       userId,

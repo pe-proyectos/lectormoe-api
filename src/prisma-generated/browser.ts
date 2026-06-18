@@ -123,6 +123,11 @@ export type Favorite = Prisma.FavoriteModel
  */
 export type UserList = Prisma.UserListModel
 /**
+ * Model UserPageBookmark
+ * 
+ */
+export type UserPageBookmark = Prisma.UserPageBookmarkModel
+/**
  * Model Audit
  * 
  */
@@ -232,3 +237,8 @@ export type RaffleComment = Prisma.RaffleCommentModel
  * 
  */
 export type RaffleRefund = Prisma.RaffleRefundModel
+/**
+ * Model UserBan
+ * 
+ */
+export type UserBan = Prisma.UserBanModel
