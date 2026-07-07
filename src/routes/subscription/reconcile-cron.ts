@@ -2,6 +2,7 @@ import { cron } from '@elysiajs/cron'
 import { Elysia } from 'elysia'
 import { prisma } from '../../models/prisma'
 import { reconcileTransactionsForSubscription } from '../../services/subscription-reconcile'
+import { wrapCron } from '../../util/cron-alert'
 import { getSubscriptionByPaypalId } from '../../util/paypal'
 import { computePaidPeriodEnd } from '../../util/subscription-period'
 
@@ -103,6 +104,9 @@ export const router = () =>
     cron({
       name: 'subscription-reconcile-daily',
       pattern: '0 2 * * *',
-      run: processSubscriptionReconcile
+      run: wrapCron(
+        'subscription-reconcile-daily',
+        processSubscriptionReconcile
+      )
     })
   )

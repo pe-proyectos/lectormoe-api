@@ -1,5 +1,9 @@
 # latmanga
 
+## Alertas de crons
+
+Configura `DISCORD_ALERTS_WEBHOOK_URL` en el `.env` de producción (webhook de un canal de Discord) para recibir un aviso cuando cualquier cron falle. Sin la variable, los fallos solo salen por `console.error`. Las alertas por cron tienen cooldown de 30 minutos para no inundar el canal.
+
 To install dependencies:
 
 ```bash

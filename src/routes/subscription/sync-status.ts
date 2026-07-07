@@ -1,6 +1,7 @@
 import { cron, Patterns } from '@elysiajs/cron'
 import { Elysia } from 'elysia'
 import { prisma } from '../../models/prisma'
+import { wrapCron } from '../../util/cron-alert'
 import { getSubscriptionByPaypalId } from '../../util/paypal'
 import { computePaidPeriodEnd } from '../../util/subscription-period'
 
@@ -167,12 +168,6 @@ export const router = () =>
     cron({
       name: 'sync-subscription-statuses',
       pattern: Patterns.everyHours(3), // Sincronizar cada 3 horas como respaldo de los webhooks
-      run: async () => {
-        try {
-          await syncSubscriptionStatuses()
-        } catch (error) {
-          console.error('❌ [CRON] Error in sync-subscription-statuses:', error)
-        }
-      }
+      run: wrapCron('sync-subscription-statuses', syncSubscriptionStatuses)
     })
   )
