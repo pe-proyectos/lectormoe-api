@@ -62,6 +62,7 @@ export const ModelName = {
   Manga: 'Manga',
   MangaCustom: 'MangaCustom',
   Chapter: 'Chapter',
+  ChapterReaction: 'ChapterReaction',
   Page: 'Page',
   Comment: 'Comment',
   CommentLike: 'CommentLike',
@@ -345,7 +346,8 @@ export const MangaCustomScalarFieldEnum = {
   deletedAt: 'deletedAt',
   nextChapterAtMessage: 'nextChapterAtMessage',
   hideUnreleasedChapters: 'hideUnreleasedChapters',
-  usersAlsoReadMangaCustomIds: 'usersAlsoReadMangaCustomIds'
+  usersAlsoReadMangaCustomIds: 'usersAlsoReadMangaCustomIds',
+  finalChapterNumber: 'finalChapterNumber'
 } as const
 
 export type MangaCustomScalarFieldEnum = (typeof MangaCustomScalarFieldEnum)[keyof typeof MangaCustomScalarFieldEnum]
@@ -369,6 +371,18 @@ export const ChapterScalarFieldEnum = {
 } as const
 
 export type ChapterScalarFieldEnum = (typeof ChapterScalarFieldEnum)[keyof typeof ChapterScalarFieldEnum]
+
+
+export const ChapterReactionScalarFieldEnum = {
+  id: 'id',
+  chapterId: 'chapterId',
+  userId: 'userId',
+  emoji: 'emoji',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ChapterReactionScalarFieldEnum = (typeof ChapterReactionScalarFieldEnum)[keyof typeof ChapterReactionScalarFieldEnum]
 
 
 export const PageScalarFieldEnum = {
@@ -773,6 +787,7 @@ export const MangaJointScalarFieldEnum = {
   workType: 'workType',
   lastChapterAt: 'lastChapterAt',
   views: 'views',
+  finalChapterNumber: 'finalChapterNumber',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   deletedAt: 'deletedAt'

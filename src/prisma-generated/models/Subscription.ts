@@ -785,14 +785,6 @@ export type SubscriptionUncheckedUpdateManyWithoutSubscriptionPlanNestedInput = 
   deleteMany?: Prisma.SubscriptionScalarWhereInput | Prisma.SubscriptionScalarWhereInput[]
 }
 
-export type NullableFloatFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type SubscriptionCreateNestedOneWithoutTransactionsInput = {
   create?: Prisma.XOR<Prisma.SubscriptionCreateWithoutTransactionsInput, Prisma.SubscriptionUncheckedCreateWithoutTransactionsInput>
   connectOrCreate?: Prisma.SubscriptionCreateOrConnectWithoutTransactionsInput

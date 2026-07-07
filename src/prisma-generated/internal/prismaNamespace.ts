@@ -395,6 +395,7 @@ export const ModelName = {
   Manga: 'Manga',
   MangaCustom: 'MangaCustom',
   Chapter: 'Chapter',
+  ChapterReaction: 'ChapterReaction',
   Page: 'Page',
   Comment: 'Comment',
   CommentLike: 'CommentLike',
@@ -444,7 +445,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "token" | "organization" | "user" | "permission" | "passwordResetToken" | "countryOptions" | "author" | "bookType" | "manga" | "mangaCustom" | "chapter" | "page" | "comment" | "commentLike" | "ranking" | "demography" | "genre" | "analytics" | "userChapterHistory" | "favorite" | "userList" | "userPageBookmark" | "audit" | "viewsHistory" | "subscriptionPlan" | "subscription" | "organizationTransaction" | "organizationFollower" | "organizationRequest" | "emailPreference" | "emailLog" | "unsubscribeToken" | "emailVerificationToken" | "userDailyActivity" | "achievement" | "userAchievement" | "mangaJoint" | "jointMember" | "jointMemberHistory" | "notification" | "raffle" | "raffleTicket" | "raffleComment" | "raffleRefund" | "userBan"
+    modelProps: "token" | "organization" | "user" | "permission" | "passwordResetToken" | "countryOptions" | "author" | "bookType" | "manga" | "mangaCustom" | "chapter" | "chapterReaction" | "page" | "comment" | "commentLike" | "ranking" | "demography" | "genre" | "analytics" | "userChapterHistory" | "favorite" | "userList" | "userPageBookmark" | "audit" | "viewsHistory" | "subscriptionPlan" | "subscription" | "organizationTransaction" | "organizationFollower" | "organizationRequest" | "emailPreference" | "emailLog" | "unsubscribeToken" | "emailVerificationToken" | "userDailyActivity" | "achievement" | "userAchievement" | "mangaJoint" | "jointMember" | "jointMemberHistory" | "notification" | "raffle" | "raffleTicket" | "raffleComment" | "raffleRefund" | "userBan"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1259,6 +1260,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.ChapterCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ChapterCountAggregateOutputType> | number
+        }
+      }
+    }
+    ChapterReaction: {
+      payload: Prisma.$ChapterReactionPayload<ExtArgs>
+      fields: Prisma.ChapterReactionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ChapterReactionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChapterReactionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ChapterReactionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChapterReactionPayload>
+        }
+        findFirst: {
+          args: Prisma.ChapterReactionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChapterReactionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ChapterReactionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChapterReactionPayload>
+        }
+        findMany: {
+          args: Prisma.ChapterReactionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChapterReactionPayload>[]
+        }
+        create: {
+          args: Prisma.ChapterReactionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChapterReactionPayload>
+        }
+        createMany: {
+          args: Prisma.ChapterReactionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ChapterReactionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChapterReactionPayload>[]
+        }
+        delete: {
+          args: Prisma.ChapterReactionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChapterReactionPayload>
+        }
+        update: {
+          args: Prisma.ChapterReactionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChapterReactionPayload>
+        }
+        deleteMany: {
+          args: Prisma.ChapterReactionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ChapterReactionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ChapterReactionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChapterReactionPayload>[]
+        }
+        upsert: {
+          args: Prisma.ChapterReactionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChapterReactionPayload>
+        }
+        aggregate: {
+          args: Prisma.ChapterReactionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateChapterReaction>
+        }
+        groupBy: {
+          args: Prisma.ChapterReactionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ChapterReactionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ChapterReactionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ChapterReactionCountAggregateOutputType> | number
         }
       }
     }
@@ -4048,7 +4123,8 @@ export const MangaCustomScalarFieldEnum = {
   deletedAt: 'deletedAt',
   nextChapterAtMessage: 'nextChapterAtMessage',
   hideUnreleasedChapters: 'hideUnreleasedChapters',
-  usersAlsoReadMangaCustomIds: 'usersAlsoReadMangaCustomIds'
+  usersAlsoReadMangaCustomIds: 'usersAlsoReadMangaCustomIds',
+  finalChapterNumber: 'finalChapterNumber'
 } as const
 
 export type MangaCustomScalarFieldEnum = (typeof MangaCustomScalarFieldEnum)[keyof typeof MangaCustomScalarFieldEnum]
@@ -4072,6 +4148,18 @@ export const ChapterScalarFieldEnum = {
 } as const
 
 export type ChapterScalarFieldEnum = (typeof ChapterScalarFieldEnum)[keyof typeof ChapterScalarFieldEnum]
+
+
+export const ChapterReactionScalarFieldEnum = {
+  id: 'id',
+  chapterId: 'chapterId',
+  userId: 'userId',
+  emoji: 'emoji',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ChapterReactionScalarFieldEnum = (typeof ChapterReactionScalarFieldEnum)[keyof typeof ChapterReactionScalarFieldEnum]
 
 
 export const PageScalarFieldEnum = {
@@ -4476,6 +4564,7 @@ export const MangaJointScalarFieldEnum = {
   workType: 'workType',
   lastChapterAt: 'lastChapterAt',
   views: 'views',
+  finalChapterNumber: 'finalChapterNumber',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   deletedAt: 'deletedAt'
@@ -4914,6 +5003,7 @@ export type GlobalOmitConfig = {
   manga?: Prisma.MangaOmit
   mangaCustom?: Prisma.MangaCustomOmit
   chapter?: Prisma.ChapterOmit
+  chapterReaction?: Prisma.ChapterReactionOmit
   page?: Prisma.PageOmit
   comment?: Prisma.CommentOmit
   commentLike?: Prisma.CommentLikeOmit

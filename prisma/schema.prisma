@@ -146,6 +146,7 @@ model User {
   raffleComments          RaffleComment[]
   bansReceived            UserBan[]            @relation("BannedUser")
   bansIssued              UserBan[]            @relation("BannedByUser")
+  chapterReactions        ChapterReaction[]
 
   @@map("user")
 }
@@ -343,10 +344,26 @@ model Chapter {
   pageBookmarks             UserPageBookmark[]
   viewsHistory              ViewsHistory[]
   notifications             Notification[]
+  reactions                 ChapterReaction[]
 
   @@unique([number, mangaCustomId])
   @@unique([number, jointId])
   @@map("chapter")
+}
+
+model ChapterReaction {
+  id        Int      @id @default(autoincrement())
+  chapterId Int
+  userId    Int
+  emoji     String   @db.VarChar(8)
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  updatedAt DateTime @updatedAt
+  chapter   Chapter  @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([chapterId, userId])
+  @@index([chapterId])
+  @@map("chapter_reaction")
 }
 
 model Page {

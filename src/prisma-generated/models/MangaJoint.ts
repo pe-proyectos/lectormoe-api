@@ -30,12 +30,14 @@ export type MangaJointAvgAggregateOutputType = {
   id: number | null
   mangaId: number | null
   views: number | null
+  finalChapterNumber: number | null
 }
 
 export type MangaJointSumAggregateOutputType = {
   id: number | null
   mangaId: number | null
   views: number | null
+  finalChapterNumber: number | null
 }
 
 export type MangaJointMinAggregateOutputType = {
@@ -51,6 +53,7 @@ export type MangaJointMinAggregateOutputType = {
   workType: string | null
   lastChapterAt: Date | null
   views: number | null
+  finalChapterNumber: number | null
   createdAt: Date | null
   updatedAt: Date | null
   deletedAt: Date | null
@@ -69,6 +72,7 @@ export type MangaJointMaxAggregateOutputType = {
   workType: string | null
   lastChapterAt: Date | null
   views: number | null
+  finalChapterNumber: number | null
   createdAt: Date | null
   updatedAt: Date | null
   deletedAt: Date | null
@@ -87,6 +91,7 @@ export type MangaJointCountAggregateOutputType = {
   workType: number
   lastChapterAt: number
   views: number
+  finalChapterNumber: number
   createdAt: number
   updatedAt: number
   deletedAt: number
@@ -98,12 +103,14 @@ export type MangaJointAvgAggregateInputType = {
   id?: true
   mangaId?: true
   views?: true
+  finalChapterNumber?: true
 }
 
 export type MangaJointSumAggregateInputType = {
   id?: true
   mangaId?: true
   views?: true
+  finalChapterNumber?: true
 }
 
 export type MangaJointMinAggregateInputType = {
@@ -119,6 +126,7 @@ export type MangaJointMinAggregateInputType = {
   workType?: true
   lastChapterAt?: true
   views?: true
+  finalChapterNumber?: true
   createdAt?: true
   updatedAt?: true
   deletedAt?: true
@@ -137,6 +145,7 @@ export type MangaJointMaxAggregateInputType = {
   workType?: true
   lastChapterAt?: true
   views?: true
+  finalChapterNumber?: true
   createdAt?: true
   updatedAt?: true
   deletedAt?: true
@@ -155,6 +164,7 @@ export type MangaJointCountAggregateInputType = {
   workType?: true
   lastChapterAt?: true
   views?: true
+  finalChapterNumber?: true
   createdAt?: true
   updatedAt?: true
   deletedAt?: true
@@ -260,6 +270,7 @@ export type MangaJointGroupByOutputType = {
   workType: string
   lastChapterAt: Date | null
   views: number
+  finalChapterNumber: number | null
   createdAt: Date
   updatedAt: Date
   deletedAt: Date | null
@@ -301,6 +312,7 @@ export type MangaJointWhereInput = {
   workType?: Prisma.StringFilter<"MangaJoint"> | string
   lastChapterAt?: Prisma.DateTimeNullableFilter<"MangaJoint"> | Date | string | null
   views?: Prisma.IntFilter<"MangaJoint"> | number
+  finalChapterNumber?: Prisma.FloatNullableFilter<"MangaJoint"> | number | null
   createdAt?: Prisma.DateTimeFilter<"MangaJoint"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"MangaJoint"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"MangaJoint"> | Date | string | null
@@ -327,6 +339,7 @@ export type MangaJointOrderByWithRelationInput = {
   workType?: Prisma.SortOrder
   lastChapterAt?: Prisma.SortOrderInput | Prisma.SortOrder
   views?: Prisma.SortOrder
+  finalChapterNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -356,6 +369,7 @@ export type MangaJointWhereUniqueInput = Prisma.AtLeast<{
   workType?: Prisma.StringFilter<"MangaJoint"> | string
   lastChapterAt?: Prisma.DateTimeNullableFilter<"MangaJoint"> | Date | string | null
   views?: Prisma.IntFilter<"MangaJoint"> | number
+  finalChapterNumber?: Prisma.FloatNullableFilter<"MangaJoint"> | number | null
   createdAt?: Prisma.DateTimeFilter<"MangaJoint"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"MangaJoint"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"MangaJoint"> | Date | string | null
@@ -382,6 +396,7 @@ export type MangaJointOrderByWithAggregationInput = {
   workType?: Prisma.SortOrder
   lastChapterAt?: Prisma.SortOrderInput | Prisma.SortOrder
   views?: Prisma.SortOrder
+  finalChapterNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -408,6 +423,7 @@ export type MangaJointScalarWhereWithAggregatesInput = {
   workType?: Prisma.StringWithAggregatesFilter<"MangaJoint"> | string
   lastChapterAt?: Prisma.DateTimeNullableWithAggregatesFilter<"MangaJoint"> | Date | string | null
   views?: Prisma.IntWithAggregatesFilter<"MangaJoint"> | number
+  finalChapterNumber?: Prisma.FloatNullableWithAggregatesFilter<"MangaJoint"> | number | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"MangaJoint"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"MangaJoint"> | Date | string
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"MangaJoint"> | Date | string | null
@@ -424,6 +440,7 @@ export type MangaJointCreateInput = {
   workType?: string
   lastChapterAt?: Date | string | null
   views?: number
+  finalChapterNumber?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -450,6 +467,7 @@ export type MangaJointUncheckedCreateInput = {
   workType?: string
   lastChapterAt?: Date | string | null
   views?: number
+  finalChapterNumber?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -473,6 +491,7 @@ export type MangaJointUpdateInput = {
   workType?: Prisma.StringFieldUpdateOperationsInput | string
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
+  finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -499,6 +518,7 @@ export type MangaJointUncheckedUpdateInput = {
   workType?: Prisma.StringFieldUpdateOperationsInput | string
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
+  finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -524,6 +544,7 @@ export type MangaJointCreateManyInput = {
   workType?: string
   lastChapterAt?: Date | string | null
   views?: number
+  finalChapterNumber?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -540,6 +561,7 @@ export type MangaJointUpdateManyMutationInput = {
   workType?: Prisma.StringFieldUpdateOperationsInput | string
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
+  finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -558,6 +580,7 @@ export type MangaJointUncheckedUpdateManyInput = {
   workType?: Prisma.StringFieldUpdateOperationsInput | string
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
+  finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -591,6 +614,7 @@ export type MangaJointCountOrderByAggregateInput = {
   workType?: Prisma.SortOrder
   lastChapterAt?: Prisma.SortOrder
   views?: Prisma.SortOrder
+  finalChapterNumber?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
@@ -600,6 +624,7 @@ export type MangaJointAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   mangaId?: Prisma.SortOrder
   views?: Prisma.SortOrder
+  finalChapterNumber?: Prisma.SortOrder
 }
 
 export type MangaJointMaxOrderByAggregateInput = {
@@ -615,6 +640,7 @@ export type MangaJointMaxOrderByAggregateInput = {
   workType?: Prisma.SortOrder
   lastChapterAt?: Prisma.SortOrder
   views?: Prisma.SortOrder
+  finalChapterNumber?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
@@ -633,6 +659,7 @@ export type MangaJointMinOrderByAggregateInput = {
   workType?: Prisma.SortOrder
   lastChapterAt?: Prisma.SortOrder
   views?: Prisma.SortOrder
+  finalChapterNumber?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
@@ -642,6 +669,7 @@ export type MangaJointSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   mangaId?: Prisma.SortOrder
   views?: Prisma.SortOrder
+  finalChapterNumber?: Prisma.SortOrder
 }
 
 export type MangaJointScalarRelationFilter = {
@@ -810,6 +838,7 @@ export type MangaJointCreateWithoutMangaInput = {
   workType?: string
   lastChapterAt?: Date | string | null
   views?: number
+  finalChapterNumber?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -834,6 +863,7 @@ export type MangaJointUncheckedCreateWithoutMangaInput = {
   workType?: string
   lastChapterAt?: Date | string | null
   views?: number
+  finalChapterNumber?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -888,6 +918,7 @@ export type MangaJointScalarWhereInput = {
   workType?: Prisma.StringFilter<"MangaJoint"> | string
   lastChapterAt?: Prisma.DateTimeNullableFilter<"MangaJoint"> | Date | string | null
   views?: Prisma.IntFilter<"MangaJoint"> | number
+  finalChapterNumber?: Prisma.FloatNullableFilter<"MangaJoint"> | number | null
   createdAt?: Prisma.DateTimeFilter<"MangaJoint"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"MangaJoint"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"MangaJoint"> | Date | string | null
@@ -904,6 +935,7 @@ export type MangaJointCreateWithoutChaptersInput = {
   workType?: string
   lastChapterAt?: Date | string | null
   views?: number
+  finalChapterNumber?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -929,6 +961,7 @@ export type MangaJointUncheckedCreateWithoutChaptersInput = {
   workType?: string
   lastChapterAt?: Date | string | null
   views?: number
+  finalChapterNumber?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -967,6 +1000,7 @@ export type MangaJointUpdateWithoutChaptersInput = {
   workType?: Prisma.StringFieldUpdateOperationsInput | string
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
+  finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -992,6 +1026,7 @@ export type MangaJointUncheckedUpdateWithoutChaptersInput = {
   workType?: Prisma.StringFieldUpdateOperationsInput | string
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
+  finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1014,6 +1049,7 @@ export type MangaJointCreateWithoutFavoritesInput = {
   workType?: string
   lastChapterAt?: Date | string | null
   views?: number
+  finalChapterNumber?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1039,6 +1075,7 @@ export type MangaJointUncheckedCreateWithoutFavoritesInput = {
   workType?: string
   lastChapterAt?: Date | string | null
   views?: number
+  finalChapterNumber?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1077,6 +1114,7 @@ export type MangaJointUpdateWithoutFavoritesInput = {
   workType?: Prisma.StringFieldUpdateOperationsInput | string
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
+  finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1102,6 +1140,7 @@ export type MangaJointUncheckedUpdateWithoutFavoritesInput = {
   workType?: Prisma.StringFieldUpdateOperationsInput | string
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
+  finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1124,6 +1163,7 @@ export type MangaJointCreateWithoutUserListEntriesInput = {
   workType?: string
   lastChapterAt?: Date | string | null
   views?: number
+  finalChapterNumber?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1149,6 +1189,7 @@ export type MangaJointUncheckedCreateWithoutUserListEntriesInput = {
   workType?: string
   lastChapterAt?: Date | string | null
   views?: number
+  finalChapterNumber?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1187,6 +1228,7 @@ export type MangaJointUpdateWithoutUserListEntriesInput = {
   workType?: Prisma.StringFieldUpdateOperationsInput | string
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
+  finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1212,6 +1254,7 @@ export type MangaJointUncheckedUpdateWithoutUserListEntriesInput = {
   workType?: Prisma.StringFieldUpdateOperationsInput | string
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
+  finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1234,6 +1277,7 @@ export type MangaJointCreateWithoutViewsHistoryInput = {
   workType?: string
   lastChapterAt?: Date | string | null
   views?: number
+  finalChapterNumber?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1259,6 +1303,7 @@ export type MangaJointUncheckedCreateWithoutViewsHistoryInput = {
   workType?: string
   lastChapterAt?: Date | string | null
   views?: number
+  finalChapterNumber?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1297,6 +1342,7 @@ export type MangaJointUpdateWithoutViewsHistoryInput = {
   workType?: Prisma.StringFieldUpdateOperationsInput | string
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
+  finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1322,6 +1368,7 @@ export type MangaJointUncheckedUpdateWithoutViewsHistoryInput = {
   workType?: Prisma.StringFieldUpdateOperationsInput | string
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
+  finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1344,6 +1391,7 @@ export type MangaJointCreateWithoutMembersInput = {
   workType?: string
   lastChapterAt?: Date | string | null
   views?: number
+  finalChapterNumber?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1369,6 +1417,7 @@ export type MangaJointUncheckedCreateWithoutMembersInput = {
   workType?: string
   lastChapterAt?: Date | string | null
   views?: number
+  finalChapterNumber?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1407,6 +1456,7 @@ export type MangaJointUpdateWithoutMembersInput = {
   workType?: Prisma.StringFieldUpdateOperationsInput | string
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
+  finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1432,6 +1482,7 @@ export type MangaJointUncheckedUpdateWithoutMembersInput = {
   workType?: Prisma.StringFieldUpdateOperationsInput | string
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
+  finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1454,6 +1505,7 @@ export type MangaJointCreateWithoutMemberHistoryInput = {
   workType?: string
   lastChapterAt?: Date | string | null
   views?: number
+  finalChapterNumber?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1479,6 +1531,7 @@ export type MangaJointUncheckedCreateWithoutMemberHistoryInput = {
   workType?: string
   lastChapterAt?: Date | string | null
   views?: number
+  finalChapterNumber?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1517,6 +1570,7 @@ export type MangaJointUpdateWithoutMemberHistoryInput = {
   workType?: Prisma.StringFieldUpdateOperationsInput | string
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
+  finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1542,6 +1596,7 @@ export type MangaJointUncheckedUpdateWithoutMemberHistoryInput = {
   workType?: Prisma.StringFieldUpdateOperationsInput | string
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
+  finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1564,6 +1619,7 @@ export type MangaJointCreateWithoutNotificationsInput = {
   workType?: string
   lastChapterAt?: Date | string | null
   views?: number
+  finalChapterNumber?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1589,6 +1645,7 @@ export type MangaJointUncheckedCreateWithoutNotificationsInput = {
   workType?: string
   lastChapterAt?: Date | string | null
   views?: number
+  finalChapterNumber?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1627,6 +1684,7 @@ export type MangaJointUpdateWithoutNotificationsInput = {
   workType?: Prisma.StringFieldUpdateOperationsInput | string
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
+  finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1652,6 +1710,7 @@ export type MangaJointUncheckedUpdateWithoutNotificationsInput = {
   workType?: Prisma.StringFieldUpdateOperationsInput | string
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
+  finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1675,6 +1734,7 @@ export type MangaJointCreateManyMangaInput = {
   workType?: string
   lastChapterAt?: Date | string | null
   views?: number
+  finalChapterNumber?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1691,6 +1751,7 @@ export type MangaJointUpdateWithoutMangaInput = {
   workType?: Prisma.StringFieldUpdateOperationsInput | string
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
+  finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1715,6 +1776,7 @@ export type MangaJointUncheckedUpdateWithoutMangaInput = {
   workType?: Prisma.StringFieldUpdateOperationsInput | string
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
+  finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1739,6 +1801,7 @@ export type MangaJointUncheckedUpdateManyWithoutMangaInput = {
   workType?: Prisma.StringFieldUpdateOperationsInput | string
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
+  finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1842,6 +1905,7 @@ export type MangaJointSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   workType?: boolean
   lastChapterAt?: boolean
   views?: boolean
+  finalChapterNumber?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
@@ -1869,6 +1933,7 @@ export type MangaJointSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   workType?: boolean
   lastChapterAt?: boolean
   views?: boolean
+  finalChapterNumber?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
@@ -1888,6 +1953,7 @@ export type MangaJointSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   workType?: boolean
   lastChapterAt?: boolean
   views?: boolean
+  finalChapterNumber?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
@@ -1907,12 +1973,13 @@ export type MangaJointSelectScalar = {
   workType?: boolean
   lastChapterAt?: boolean
   views?: boolean
+  finalChapterNumber?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
 }
 
-export type MangaJointOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "mangaId" | "title" | "shortDescription" | "description" | "imageUrl" | "bannerUrl" | "status" | "workType" | "lastChapterAt" | "views" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["mangaJoint"]>
+export type MangaJointOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "mangaId" | "title" | "shortDescription" | "description" | "imageUrl" | "bannerUrl" | "status" | "workType" | "lastChapterAt" | "views" | "finalChapterNumber" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["mangaJoint"]>
 export type MangaJointInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   manga?: boolean | Prisma.MangaDefaultArgs<ExtArgs>
   members?: boolean | Prisma.MangaJoint$membersArgs<ExtArgs>
@@ -1956,6 +2023,7 @@ export type $MangaJointPayload<ExtArgs extends runtime.Types.Extensions.Internal
     workType: string
     lastChapterAt: Date | null
     views: number
+    finalChapterNumber: number | null
     createdAt: Date
     updatedAt: Date
     deletedAt: Date | null
@@ -2402,6 +2470,7 @@ export interface MangaJointFieldRefs {
   readonly workType: Prisma.FieldRef<"MangaJoint", 'String'>
   readonly lastChapterAt: Prisma.FieldRef<"MangaJoint", 'DateTime'>
   readonly views: Prisma.FieldRef<"MangaJoint", 'Int'>
+  readonly finalChapterNumber: Prisma.FieldRef<"MangaJoint", 'Float'>
   readonly createdAt: Prisma.FieldRef<"MangaJoint", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"MangaJoint", 'DateTime'>
   readonly deletedAt: Prisma.FieldRef<"MangaJoint", 'DateTime'>
