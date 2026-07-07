@@ -1,47 +1,44 @@
-import { prisma } from "../../models/prisma";
-
-const FREE_FAVORITES_LIMIT = 50;
+import { prisma } from '../../models/prisma'
+import { FREE_FAVORITES_LIMIT, FREE_FAVORITES_LIMIT_MESSAGE } from './constants'
 
 export const saveJointFavorite = async (userId: number, jointSlug: string) => {
-	const joint = await prisma.mangaJoint.findFirst({
-		where: { slug: jointSlug, deletedAt: null },
-		select: { id: true },
-	});
+  const joint = await prisma.mangaJoint.findFirst({
+    where: { slug: jointSlug, deletedAt: null },
+    select: { id: true }
+  })
 
-	if (!joint) return false;
+  if (!joint) return false
 
-	const existing = await prisma.favorite.findFirst({
-		where: { userId, jointId: joint.id },
-	});
+  const existing = await prisma.favorite.findFirst({
+    where: { userId, jointId: joint.id }
+  })
 
-	if (existing) return true;
+  if (existing) return true
 
-	// Gratis: 50. Suscriptores activos: ilimitado.
-	const hasActiveSubscription = await prisma.subscription.findFirst({
-		where: { userId, active: true },
-		select: { id: true },
-	});
+  // Gratis: FREE_FAVORITES_LIMIT. Suscriptores activos: ilimitado.
+  const hasActiveSubscription = await prisma.subscription.findFirst({
+    where: { userId, active: true },
+    select: { id: true }
+  })
 
-	if (!hasActiveSubscription) {
-		const currentCount = await prisma.favorite.count({ where: { userId } });
-		if (currentCount >= FREE_FAVORITES_LIMIT) {
-			throw new Error(
-				`Has alcanzado el límite de ${FREE_FAVORITES_LIMIT} favoritos del plan gratuito. Suscríbete para tener favoritos ilimitados.`
-			);
-		}
-	}
+  if (!hasActiveSubscription) {
+    const currentCount = await prisma.favorite.count({ where: { userId } })
+    if (currentCount >= FREE_FAVORITES_LIMIT) {
+      throw new Error(FREE_FAVORITES_LIMIT_MESSAGE)
+    }
+  }
 
-	const maxOrder = await prisma.favorite.aggregate({
-		where: { userId },
-		_max: { order: true },
-	});
-	await prisma.favorite.create({
-		data: {
-			userId,
-			jointId: joint.id,
-			order: (maxOrder._max.order ?? 0) + 1,
-		},
-	});
+  const maxOrder = await prisma.favorite.aggregate({
+    where: { userId },
+    _max: { order: true }
+  })
+  await prisma.favorite.create({
+    data: {
+      userId,
+      jointId: joint.id,
+      order: (maxOrder._max.order ?? 0) + 1
+    }
+  })
 
-	return true;
-};
+  return true
+}
