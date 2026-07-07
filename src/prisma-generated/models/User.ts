@@ -62,6 +62,7 @@ export type UserMinAggregateOutputType = {
   discordAvatar: string | null
   discordVerifiedAt: Date | null
   discordLastCheckAt: Date | null
+  listIsPublic: boolean | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -92,6 +93,7 @@ export type UserMaxAggregateOutputType = {
   discordAvatar: string | null
   discordVerifiedAt: Date | null
   discordLastCheckAt: Date | null
+  listIsPublic: boolean | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -122,6 +124,7 @@ export type UserCountAggregateOutputType = {
   discordAvatar: number
   discordVerifiedAt: number
   discordLastCheckAt: number
+  listIsPublic: number
   _all: number
 }
 
@@ -162,6 +165,7 @@ export type UserMinAggregateInputType = {
   discordAvatar?: true
   discordVerifiedAt?: true
   discordLastCheckAt?: true
+  listIsPublic?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -192,6 +196,7 @@ export type UserMaxAggregateInputType = {
   discordAvatar?: true
   discordVerifiedAt?: true
   discordLastCheckAt?: true
+  listIsPublic?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -222,6 +227,7 @@ export type UserCountAggregateInputType = {
   discordAvatar?: true
   discordVerifiedAt?: true
   discordLastCheckAt?: true
+  listIsPublic?: true
   _all?: true
 }
 
@@ -339,6 +345,7 @@ export type UserGroupByOutputType = {
   discordAvatar: string | null
   discordVerifiedAt: Date | null
   discordLastCheckAt: Date | null
+  listIsPublic: boolean
   _count: UserCountAggregateOutputType | null
   _avg: UserAvgAggregateOutputType | null
   _sum: UserSumAggregateOutputType | null
@@ -392,6 +399,7 @@ export type UserWhereInput = {
   discordAvatar?: Prisma.StringNullableFilter<"User"> | string | null
   discordVerifiedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   discordLastCheckAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  listIsPublic?: Prisma.BoolFilter<"User"> | boolean
   analytics?: Prisma.AnalyticsListRelationFilter
   audits?: Prisma.AuditListRelationFilter
   Comment?: Prisma.CommentListRelationFilter
@@ -422,6 +430,7 @@ export type UserWhereInput = {
   reviews?: Prisma.MangaReviewListRelationFilter
   reviewsHidden?: Prisma.MangaReviewListRelationFilter
   contentReports?: Prisma.ContentReportListRelationFilter
+  customLists?: Prisma.CustomListListRelationFilter
   contentReportsReviewed?: Prisma.ContentReportListRelationFilter
 }
 
@@ -453,6 +462,7 @@ export type UserOrderByWithRelationInput = {
   discordAvatar?: Prisma.SortOrderInput | Prisma.SortOrder
   discordVerifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   discordLastCheckAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  listIsPublic?: Prisma.SortOrder
   analytics?: Prisma.AnalyticsOrderByRelationAggregateInput
   audits?: Prisma.AuditOrderByRelationAggregateInput
   Comment?: Prisma.CommentOrderByRelationAggregateInput
@@ -483,6 +493,7 @@ export type UserOrderByWithRelationInput = {
   reviews?: Prisma.MangaReviewOrderByRelationAggregateInput
   reviewsHidden?: Prisma.MangaReviewOrderByRelationAggregateInput
   contentReports?: Prisma.ContentReportOrderByRelationAggregateInput
+  customLists?: Prisma.CustomListOrderByRelationAggregateInput
   contentReportsReviewed?: Prisma.ContentReportOrderByRelationAggregateInput
 }
 
@@ -517,6 +528,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   discordAvatar?: Prisma.StringNullableFilter<"User"> | string | null
   discordVerifiedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   discordLastCheckAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  listIsPublic?: Prisma.BoolFilter<"User"> | boolean
   analytics?: Prisma.AnalyticsListRelationFilter
   audits?: Prisma.AuditListRelationFilter
   Comment?: Prisma.CommentListRelationFilter
@@ -547,6 +559,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   reviews?: Prisma.MangaReviewListRelationFilter
   reviewsHidden?: Prisma.MangaReviewListRelationFilter
   contentReports?: Prisma.ContentReportListRelationFilter
+  customLists?: Prisma.CustomListListRelationFilter
   contentReportsReviewed?: Prisma.ContentReportListRelationFilter
 }, "id" | "username" | "slug" | "email" | "discordId">
 
@@ -578,6 +591,7 @@ export type UserOrderByWithAggregationInput = {
   discordAvatar?: Prisma.SortOrderInput | Prisma.SortOrder
   discordVerifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   discordLastCheckAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  listIsPublic?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
@@ -616,6 +630,7 @@ export type UserScalarWhereWithAggregatesInput = {
   discordAvatar?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   discordVerifiedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   discordLastCheckAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  listIsPublic?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
 }
 
 export type UserCreateInput = {
@@ -645,6 +660,7 @@ export type UserCreateInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -675,6 +691,7 @@ export type UserCreateInput = {
   reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
 }
 
@@ -706,6 +723,7 @@ export type UserUncheckedCreateInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -736,6 +754,7 @@ export type UserUncheckedCreateInput = {
   reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
@@ -766,6 +785,7 @@ export type UserUpdateInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -796,6 +816,7 @@ export type UserUpdateInput = {
   reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -827,6 +848,7 @@ export type UserUncheckedUpdateInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -857,6 +879,7 @@ export type UserUncheckedUpdateInput = {
   reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -888,6 +911,7 @@ export type UserCreateManyInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
 }
 
 export type UserUpdateManyMutationInput = {
@@ -917,6 +941,7 @@ export type UserUpdateManyMutationInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -947,6 +972,7 @@ export type UserUncheckedUpdateManyInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type UserScalarRelationFilter = {
@@ -982,6 +1008,7 @@ export type UserCountOrderByAggregateInput = {
   discordAvatar?: Prisma.SortOrder
   discordVerifiedAt?: Prisma.SortOrder
   discordLastCheckAt?: Prisma.SortOrder
+  listIsPublic?: Prisma.SortOrder
 }
 
 export type UserAvgOrderByAggregateInput = {
@@ -1016,6 +1043,7 @@ export type UserMaxOrderByAggregateInput = {
   discordAvatar?: Prisma.SortOrder
   discordVerifiedAt?: Prisma.SortOrder
   discordLastCheckAt?: Prisma.SortOrder
+  listIsPublic?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -1046,6 +1074,7 @@ export type UserMinOrderByAggregateInput = {
   discordAvatar?: Prisma.SortOrder
   discordVerifiedAt?: Prisma.SortOrder
   discordLastCheckAt?: Prisma.SortOrder
+  listIsPublic?: Prisma.SortOrder
 }
 
 export type UserSumOrderByAggregateInput = {
@@ -1101,6 +1130,20 @@ export type UserUpdateOneRequiredWithoutPasswordResetTokensNestedInput = {
   upsert?: Prisma.UserUpsertWithoutPasswordResetTokensInput
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPasswordResetTokensInput, Prisma.UserUpdateWithoutPasswordResetTokensInput>, Prisma.UserUncheckedUpdateWithoutPasswordResetTokensInput>
+}
+
+export type UserCreateNestedOneWithoutCustomListsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCustomListsInput, Prisma.UserUncheckedCreateWithoutCustomListsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCustomListsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutCustomListsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCustomListsInput, Prisma.UserUncheckedCreateWithoutCustomListsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCustomListsInput
+  upsert?: Prisma.UserUpsertWithoutCustomListsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCustomListsInput, Prisma.UserUpdateWithoutCustomListsInput>, Prisma.UserUncheckedUpdateWithoutCustomListsInput>
 }
 
 export type UserCreateNestedOneWithoutContentReportsInput = {
@@ -1534,6 +1577,7 @@ export type UserCreateWithoutTokensInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -1563,6 +1607,7 @@ export type UserCreateWithoutTokensInput = {
   reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
 }
 
@@ -1594,6 +1639,7 @@ export type UserUncheckedCreateWithoutTokensInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -1623,6 +1669,7 @@ export type UserUncheckedCreateWithoutTokensInput = {
   reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
@@ -1669,6 +1716,7 @@ export type UserUpdateWithoutTokensInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -1698,6 +1746,7 @@ export type UserUpdateWithoutTokensInput = {
   reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -1729,6 +1778,7 @@ export type UserUncheckedUpdateWithoutTokensInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -1758,6 +1808,7 @@ export type UserUncheckedUpdateWithoutTokensInput = {
   reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -1788,6 +1839,7 @@ export type UserCreateWithoutPermissionsInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -1817,6 +1869,7 @@ export type UserCreateWithoutPermissionsInput = {
   reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
 }
 
@@ -1848,6 +1901,7 @@ export type UserUncheckedCreateWithoutPermissionsInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -1877,6 +1931,7 @@ export type UserUncheckedCreateWithoutPermissionsInput = {
   reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
@@ -1923,6 +1978,7 @@ export type UserUpdateWithoutPermissionsInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -1952,6 +2008,7 @@ export type UserUpdateWithoutPermissionsInput = {
   reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -1983,6 +2040,7 @@ export type UserUncheckedUpdateWithoutPermissionsInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -2012,6 +2070,7 @@ export type UserUncheckedUpdateWithoutPermissionsInput = {
   reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -2042,6 +2101,7 @@ export type UserCreateWithoutPasswordResetTokensInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -2071,6 +2131,7 @@ export type UserCreateWithoutPasswordResetTokensInput = {
   reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
 }
 
@@ -2102,6 +2163,7 @@ export type UserUncheckedCreateWithoutPasswordResetTokensInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -2131,6 +2193,7 @@ export type UserUncheckedCreateWithoutPasswordResetTokensInput = {
   reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
@@ -2177,6 +2240,7 @@ export type UserUpdateWithoutPasswordResetTokensInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -2206,6 +2270,7 @@ export type UserUpdateWithoutPasswordResetTokensInput = {
   reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -2237,6 +2302,7 @@ export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -2248,6 +2314,269 @@ export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
+  rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedUpdateManyWithoutUserNestedInput
+  achievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUncheckedUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
+  chapterReactions?: Prisma.ChapterReactionUncheckedUpdateManyWithoutUserNestedInput
+  milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
+  contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
+  contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
+}
+
+export type UserCreateWithoutCustomListsInput = {
+  username: string
+  slug: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  description?: string | null
+  imageUrl?: string | null
+  birthdate?: Date | string | null
+  bannerUrl?: string | null
+  bannerUrlChangedAt?: Date | string | null
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
+  emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
+  pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
+  hideAds?: boolean
+  theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
+  analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
+  audits?: Prisma.AuditCreateNestedManyWithoutUserInput
+  Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  userList?: Prisma.UserListCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
+  rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenCreateNestedManyWithoutUserInput
+  achievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
+  chapterReactions?: Prisma.ChapterReactionCreateNestedManyWithoutUserInput
+  milestoneAlerts?: Prisma.ChapterMilestoneAlertCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
+  contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
+  contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
+}
+
+export type UserUncheckedCreateWithoutCustomListsInput = {
+  id?: number
+  username: string
+  slug: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  description?: string | null
+  imageUrl?: string | null
+  birthdate?: Date | string | null
+  bannerUrl?: string | null
+  bannerUrlChangedAt?: Date | string | null
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
+  emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
+  pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
+  hideAds?: boolean
+  theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
+  analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
+  audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
+  Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
+  rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedCreateNestedManyWithoutUserInput
+  achievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanUncheckedCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
+  chapterReactions?: Prisma.ChapterReactionUncheckedCreateNestedManyWithoutUserInput
+  milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
+  contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
+  contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
+}
+
+export type UserCreateOrConnectWithoutCustomListsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCustomListsInput, Prisma.UserUncheckedCreateWithoutCustomListsInput>
+}
+
+export type UserUpsertWithoutCustomListsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCustomListsInput, Prisma.UserUncheckedUpdateWithoutCustomListsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCustomListsInput, Prisma.UserUncheckedCreateWithoutCustomListsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCustomListsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCustomListsInput, Prisma.UserUncheckedUpdateWithoutCustomListsInput>
+}
+
+export type UserUpdateWithoutCustomListsInput = {
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
+  audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
+  Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
+  rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenUpdateManyWithoutUserNestedInput
+  achievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
+  chapterReactions?: Prisma.ChapterReactionUpdateManyWithoutUserNestedInput
+  milestoneAlerts?: Prisma.ChapterMilestoneAlertUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
+  contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
+  contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCustomListsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
+  audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
+  Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
@@ -2296,6 +2625,7 @@ export type UserCreateWithoutContentReportsInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -2325,6 +2655,7 @@ export type UserCreateWithoutContentReportsInput = {
   milestoneAlerts?: Prisma.ChapterMilestoneAlertCreateNestedManyWithoutUserInput
   reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
+  customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
 }
 
@@ -2356,6 +2687,7 @@ export type UserUncheckedCreateWithoutContentReportsInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -2385,6 +2717,7 @@ export type UserUncheckedCreateWithoutContentReportsInput = {
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedCreateNestedManyWithoutUserInput
   reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
+  customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
@@ -2420,6 +2753,7 @@ export type UserCreateWithoutContentReportsReviewedInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -2450,6 +2784,7 @@ export type UserCreateWithoutContentReportsReviewedInput = {
   reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutContentReportsReviewedInput = {
@@ -2480,6 +2815,7 @@ export type UserUncheckedCreateWithoutContentReportsReviewedInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -2510,6 +2846,7 @@ export type UserUncheckedCreateWithoutContentReportsReviewedInput = {
   reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutContentReportsReviewedInput = {
@@ -2555,6 +2892,7 @@ export type UserUpdateWithoutContentReportsInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -2584,6 +2922,7 @@ export type UserUpdateWithoutContentReportsInput = {
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUpdateManyWithoutUserNestedInput
   reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
+  customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -2615,6 +2954,7 @@ export type UserUncheckedUpdateWithoutContentReportsInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -2644,6 +2984,7 @@ export type UserUncheckedUpdateWithoutContentReportsInput = {
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedUpdateManyWithoutUserNestedInput
   reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
+  customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -2685,6 +3026,7 @@ export type UserUpdateWithoutContentReportsReviewedInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -2715,6 +3057,7 @@ export type UserUpdateWithoutContentReportsReviewedInput = {
   reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutContentReportsReviewedInput = {
@@ -2745,6 +3088,7 @@ export type UserUncheckedUpdateWithoutContentReportsReviewedInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -2775,6 +3119,7 @@ export type UserUncheckedUpdateWithoutContentReportsReviewedInput = {
   reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutReviewsInput = {
@@ -2804,6 +3149,7 @@ export type UserCreateWithoutReviewsInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -2833,6 +3179,7 @@ export type UserCreateWithoutReviewsInput = {
   milestoneAlerts?: Prisma.ChapterMilestoneAlertCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
 }
 
@@ -2864,6 +3211,7 @@ export type UserUncheckedCreateWithoutReviewsInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -2893,6 +3241,7 @@ export type UserUncheckedCreateWithoutReviewsInput = {
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
@@ -2928,6 +3277,7 @@ export type UserCreateWithoutReviewsHiddenInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -2957,6 +3307,7 @@ export type UserCreateWithoutReviewsHiddenInput = {
   milestoneAlerts?: Prisma.ChapterMilestoneAlertCreateNestedManyWithoutUserInput
   reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
 }
 
@@ -2988,6 +3339,7 @@ export type UserUncheckedCreateWithoutReviewsHiddenInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -3017,6 +3369,7 @@ export type UserUncheckedCreateWithoutReviewsHiddenInput = {
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedCreateNestedManyWithoutUserInput
   reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
@@ -3063,6 +3416,7 @@ export type UserUpdateWithoutReviewsInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -3092,6 +3446,7 @@ export type UserUpdateWithoutReviewsInput = {
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -3123,6 +3478,7 @@ export type UserUncheckedUpdateWithoutReviewsInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -3152,6 +3508,7 @@ export type UserUncheckedUpdateWithoutReviewsInput = {
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -3193,6 +3550,7 @@ export type UserUpdateWithoutReviewsHiddenInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -3222,6 +3580,7 @@ export type UserUpdateWithoutReviewsHiddenInput = {
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUpdateManyWithoutUserNestedInput
   reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -3253,6 +3612,7 @@ export type UserUncheckedUpdateWithoutReviewsHiddenInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -3282,6 +3642,7 @@ export type UserUncheckedUpdateWithoutReviewsHiddenInput = {
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedUpdateManyWithoutUserNestedInput
   reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -3312,6 +3673,7 @@ export type UserCreateWithoutMilestoneAlertsInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -3341,6 +3703,7 @@ export type UserCreateWithoutMilestoneAlertsInput = {
   reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
 }
 
@@ -3372,6 +3735,7 @@ export type UserUncheckedCreateWithoutMilestoneAlertsInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -3401,6 +3765,7 @@ export type UserUncheckedCreateWithoutMilestoneAlertsInput = {
   reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
@@ -3447,6 +3812,7 @@ export type UserUpdateWithoutMilestoneAlertsInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -3476,6 +3842,7 @@ export type UserUpdateWithoutMilestoneAlertsInput = {
   reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -3507,6 +3874,7 @@ export type UserUncheckedUpdateWithoutMilestoneAlertsInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -3536,6 +3904,7 @@ export type UserUncheckedUpdateWithoutMilestoneAlertsInput = {
   reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -3566,6 +3935,7 @@ export type UserCreateWithoutChapterReactionsInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -3595,6 +3965,7 @@ export type UserCreateWithoutChapterReactionsInput = {
   reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
 }
 
@@ -3626,6 +3997,7 @@ export type UserUncheckedCreateWithoutChapterReactionsInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -3655,6 +4027,7 @@ export type UserUncheckedCreateWithoutChapterReactionsInput = {
   reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
@@ -3701,6 +4074,7 @@ export type UserUpdateWithoutChapterReactionsInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -3730,6 +4104,7 @@ export type UserUpdateWithoutChapterReactionsInput = {
   reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -3761,6 +4136,7 @@ export type UserUncheckedUpdateWithoutChapterReactionsInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -3790,6 +4166,7 @@ export type UserUncheckedUpdateWithoutChapterReactionsInput = {
   reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -3820,6 +4197,7 @@ export type UserCreateWithoutCommentInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
@@ -3849,6 +4227,7 @@ export type UserCreateWithoutCommentInput = {
   reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
 }
 
@@ -3880,6 +4259,7 @@ export type UserUncheckedCreateWithoutCommentInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
@@ -3909,6 +4289,7 @@ export type UserUncheckedCreateWithoutCommentInput = {
   reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
@@ -3944,6 +4325,7 @@ export type UserCreateWithoutCommentsInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -3973,6 +4355,7 @@ export type UserCreateWithoutCommentsInput = {
   reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
 }
 
@@ -4004,6 +4387,7 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -4033,6 +4417,7 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
@@ -4079,6 +4464,7 @@ export type UserUpdateWithoutCommentInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
@@ -4108,6 +4494,7 @@ export type UserUpdateWithoutCommentInput = {
   reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -4139,6 +4526,7 @@ export type UserUncheckedUpdateWithoutCommentInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
@@ -4168,6 +4556,7 @@ export type UserUncheckedUpdateWithoutCommentInput = {
   reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -4209,6 +4598,7 @@ export type UserUpdateWithoutCommentsInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -4238,6 +4628,7 @@ export type UserUpdateWithoutCommentsInput = {
   reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -4269,6 +4660,7 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -4298,6 +4690,7 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -4328,6 +4721,7 @@ export type UserCreateWithoutRankingsInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -4357,6 +4751,7 @@ export type UserCreateWithoutRankingsInput = {
   reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
 }
 
@@ -4388,6 +4783,7 @@ export type UserUncheckedCreateWithoutRankingsInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -4417,6 +4813,7 @@ export type UserUncheckedCreateWithoutRankingsInput = {
   reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
@@ -4463,6 +4860,7 @@ export type UserUpdateWithoutRankingsInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -4492,6 +4890,7 @@ export type UserUpdateWithoutRankingsInput = {
   reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -4523,6 +4922,7 @@ export type UserUncheckedUpdateWithoutRankingsInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -4552,6 +4952,7 @@ export type UserUncheckedUpdateWithoutRankingsInput = {
   reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -4582,6 +4983,7 @@ export type UserCreateWithoutAnalyticsInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
@@ -4611,6 +5013,7 @@ export type UserCreateWithoutAnalyticsInput = {
   reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
 }
 
@@ -4642,6 +5045,7 @@ export type UserUncheckedCreateWithoutAnalyticsInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
@@ -4671,6 +5075,7 @@ export type UserUncheckedCreateWithoutAnalyticsInput = {
   reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
@@ -4717,6 +5122,7 @@ export type UserUpdateWithoutAnalyticsInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
@@ -4746,6 +5152,7 @@ export type UserUpdateWithoutAnalyticsInput = {
   reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -4777,6 +5184,7 @@ export type UserUncheckedUpdateWithoutAnalyticsInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
@@ -4806,6 +5214,7 @@ export type UserUncheckedUpdateWithoutAnalyticsInput = {
   reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -4836,6 +5245,7 @@ export type UserCreateWithoutHistoryInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -4865,6 +5275,7 @@ export type UserCreateWithoutHistoryInput = {
   reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
 }
 
@@ -4896,6 +5307,7 @@ export type UserUncheckedCreateWithoutHistoryInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -4925,6 +5337,7 @@ export type UserUncheckedCreateWithoutHistoryInput = {
   reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
@@ -4971,6 +5384,7 @@ export type UserUpdateWithoutHistoryInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -5000,6 +5414,7 @@ export type UserUpdateWithoutHistoryInput = {
   reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -5031,6 +5446,7 @@ export type UserUncheckedUpdateWithoutHistoryInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -5060,6 +5476,7 @@ export type UserUncheckedUpdateWithoutHistoryInput = {
   reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -5090,6 +5507,7 @@ export type UserCreateWithoutFavoritesInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -5119,6 +5537,7 @@ export type UserCreateWithoutFavoritesInput = {
   reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
 }
 
@@ -5150,6 +5569,7 @@ export type UserUncheckedCreateWithoutFavoritesInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -5179,6 +5599,7 @@ export type UserUncheckedCreateWithoutFavoritesInput = {
   reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
@@ -5225,6 +5646,7 @@ export type UserUpdateWithoutFavoritesInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -5254,6 +5676,7 @@ export type UserUpdateWithoutFavoritesInput = {
   reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -5285,6 +5708,7 @@ export type UserUncheckedUpdateWithoutFavoritesInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -5314,6 +5738,7 @@ export type UserUncheckedUpdateWithoutFavoritesInput = {
   reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -5344,6 +5769,7 @@ export type UserCreateWithoutUserListInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -5373,6 +5799,7 @@ export type UserCreateWithoutUserListInput = {
   reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
 }
 
@@ -5404,6 +5831,7 @@ export type UserUncheckedCreateWithoutUserListInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -5433,6 +5861,7 @@ export type UserUncheckedCreateWithoutUserListInput = {
   reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
@@ -5479,6 +5908,7 @@ export type UserUpdateWithoutUserListInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -5508,6 +5938,7 @@ export type UserUpdateWithoutUserListInput = {
   reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -5539,6 +5970,7 @@ export type UserUncheckedUpdateWithoutUserListInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -5568,6 +6000,7 @@ export type UserUncheckedUpdateWithoutUserListInput = {
   reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -5598,6 +6031,7 @@ export type UserCreateWithoutPageBookmarksInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -5627,6 +6061,7 @@ export type UserCreateWithoutPageBookmarksInput = {
   reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
 }
 
@@ -5658,6 +6093,7 @@ export type UserUncheckedCreateWithoutPageBookmarksInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -5687,6 +6123,7 @@ export type UserUncheckedCreateWithoutPageBookmarksInput = {
   reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
@@ -5733,6 +6170,7 @@ export type UserUpdateWithoutPageBookmarksInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -5762,6 +6200,7 @@ export type UserUpdateWithoutPageBookmarksInput = {
   reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -5793,6 +6232,7 @@ export type UserUncheckedUpdateWithoutPageBookmarksInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -5822,6 +6262,7 @@ export type UserUncheckedUpdateWithoutPageBookmarksInput = {
   reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -5852,6 +6293,7 @@ export type UserCreateWithoutAuditsInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
@@ -5881,6 +6323,7 @@ export type UserCreateWithoutAuditsInput = {
   reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
 }
 
@@ -5912,6 +6355,7 @@ export type UserUncheckedCreateWithoutAuditsInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
@@ -5941,6 +6385,7 @@ export type UserUncheckedCreateWithoutAuditsInput = {
   reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
@@ -5987,6 +6432,7 @@ export type UserUpdateWithoutAuditsInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
@@ -6016,6 +6462,7 @@ export type UserUpdateWithoutAuditsInput = {
   reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -6047,6 +6494,7 @@ export type UserUncheckedUpdateWithoutAuditsInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
@@ -6076,6 +6524,7 @@ export type UserUncheckedUpdateWithoutAuditsInput = {
   reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -6106,6 +6555,7 @@ export type UserCreateWithoutSubscriptionsInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -6135,6 +6585,7 @@ export type UserCreateWithoutSubscriptionsInput = {
   reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
 }
 
@@ -6166,6 +6617,7 @@ export type UserUncheckedCreateWithoutSubscriptionsInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -6195,6 +6647,7 @@ export type UserUncheckedCreateWithoutSubscriptionsInput = {
   reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
@@ -6241,6 +6694,7 @@ export type UserUpdateWithoutSubscriptionsInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -6270,6 +6724,7 @@ export type UserUpdateWithoutSubscriptionsInput = {
   reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -6301,6 +6756,7 @@ export type UserUncheckedUpdateWithoutSubscriptionsInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -6330,6 +6786,7 @@ export type UserUncheckedUpdateWithoutSubscriptionsInput = {
   reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -6360,6 +6817,7 @@ export type UserCreateWithoutOrganizationFollowsInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -6389,6 +6847,7 @@ export type UserCreateWithoutOrganizationFollowsInput = {
   reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
 }
 
@@ -6420,6 +6879,7 @@ export type UserUncheckedCreateWithoutOrganizationFollowsInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -6449,6 +6909,7 @@ export type UserUncheckedCreateWithoutOrganizationFollowsInput = {
   reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
@@ -6495,6 +6956,7 @@ export type UserUpdateWithoutOrganizationFollowsInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -6524,6 +6986,7 @@ export type UserUpdateWithoutOrganizationFollowsInput = {
   reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -6555,6 +7018,7 @@ export type UserUncheckedUpdateWithoutOrganizationFollowsInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -6584,6 +7048,7 @@ export type UserUncheckedUpdateWithoutOrganizationFollowsInput = {
   reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -6614,6 +7079,7 @@ export type UserCreateWithoutEmailPreferenceInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -6643,6 +7109,7 @@ export type UserCreateWithoutEmailPreferenceInput = {
   reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
 }
 
@@ -6674,6 +7141,7 @@ export type UserUncheckedCreateWithoutEmailPreferenceInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -6703,6 +7171,7 @@ export type UserUncheckedCreateWithoutEmailPreferenceInput = {
   reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
@@ -6749,6 +7218,7 @@ export type UserUpdateWithoutEmailPreferenceInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -6778,6 +7248,7 @@ export type UserUpdateWithoutEmailPreferenceInput = {
   reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -6809,6 +7280,7 @@ export type UserUncheckedUpdateWithoutEmailPreferenceInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -6838,6 +7310,7 @@ export type UserUncheckedUpdateWithoutEmailPreferenceInput = {
   reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -6868,6 +7341,7 @@ export type UserCreateWithoutEmailLogsInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -6897,6 +7371,7 @@ export type UserCreateWithoutEmailLogsInput = {
   reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
 }
 
@@ -6928,6 +7403,7 @@ export type UserUncheckedCreateWithoutEmailLogsInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -6957,6 +7433,7 @@ export type UserUncheckedCreateWithoutEmailLogsInput = {
   reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
@@ -7003,6 +7480,7 @@ export type UserUpdateWithoutEmailLogsInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -7032,6 +7510,7 @@ export type UserUpdateWithoutEmailLogsInput = {
   reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -7063,6 +7542,7 @@ export type UserUncheckedUpdateWithoutEmailLogsInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -7092,6 +7572,7 @@ export type UserUncheckedUpdateWithoutEmailLogsInput = {
   reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -7122,6 +7603,7 @@ export type UserCreateWithoutUnsubscribeTokensInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -7151,6 +7633,7 @@ export type UserCreateWithoutUnsubscribeTokensInput = {
   reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
 }
 
@@ -7182,6 +7665,7 @@ export type UserUncheckedCreateWithoutUnsubscribeTokensInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -7211,6 +7695,7 @@ export type UserUncheckedCreateWithoutUnsubscribeTokensInput = {
   reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
@@ -7257,6 +7742,7 @@ export type UserUpdateWithoutUnsubscribeTokensInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -7286,6 +7772,7 @@ export type UserUpdateWithoutUnsubscribeTokensInput = {
   reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -7317,6 +7804,7 @@ export type UserUncheckedUpdateWithoutUnsubscribeTokensInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -7346,6 +7834,7 @@ export type UserUncheckedUpdateWithoutUnsubscribeTokensInput = {
   reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -7376,6 +7865,7 @@ export type UserCreateWithoutEmailVerificationTokensInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -7405,6 +7895,7 @@ export type UserCreateWithoutEmailVerificationTokensInput = {
   reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
 }
 
@@ -7436,6 +7927,7 @@ export type UserUncheckedCreateWithoutEmailVerificationTokensInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -7465,6 +7957,7 @@ export type UserUncheckedCreateWithoutEmailVerificationTokensInput = {
   reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
@@ -7511,6 +8004,7 @@ export type UserUpdateWithoutEmailVerificationTokensInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -7540,6 +8034,7 @@ export type UserUpdateWithoutEmailVerificationTokensInput = {
   reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -7571,6 +8066,7 @@ export type UserUncheckedUpdateWithoutEmailVerificationTokensInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -7600,6 +8096,7 @@ export type UserUncheckedUpdateWithoutEmailVerificationTokensInput = {
   reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -7630,6 +8127,7 @@ export type UserCreateWithoutDailyActivitiesInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -7659,6 +8157,7 @@ export type UserCreateWithoutDailyActivitiesInput = {
   reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
 }
 
@@ -7690,6 +8189,7 @@ export type UserUncheckedCreateWithoutDailyActivitiesInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -7719,6 +8219,7 @@ export type UserUncheckedCreateWithoutDailyActivitiesInput = {
   reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
@@ -7765,6 +8266,7 @@ export type UserUpdateWithoutDailyActivitiesInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -7794,6 +8296,7 @@ export type UserUpdateWithoutDailyActivitiesInput = {
   reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -7825,6 +8328,7 @@ export type UserUncheckedUpdateWithoutDailyActivitiesInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -7854,6 +8358,7 @@ export type UserUncheckedUpdateWithoutDailyActivitiesInput = {
   reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -7884,6 +8389,7 @@ export type UserCreateWithoutAchievementsInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -7913,6 +8419,7 @@ export type UserCreateWithoutAchievementsInput = {
   reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
 }
 
@@ -7944,6 +8451,7 @@ export type UserUncheckedCreateWithoutAchievementsInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -7973,6 +8481,7 @@ export type UserUncheckedCreateWithoutAchievementsInput = {
   reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
@@ -8019,6 +8528,7 @@ export type UserUpdateWithoutAchievementsInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -8048,6 +8558,7 @@ export type UserUpdateWithoutAchievementsInput = {
   reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -8079,6 +8590,7 @@ export type UserUncheckedUpdateWithoutAchievementsInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -8108,6 +8620,7 @@ export type UserUncheckedUpdateWithoutAchievementsInput = {
   reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -8138,6 +8651,7 @@ export type UserCreateWithoutNotificationsInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -8167,6 +8681,7 @@ export type UserCreateWithoutNotificationsInput = {
   reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
 }
 
@@ -8198,6 +8713,7 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -8227,6 +8743,7 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
@@ -8273,6 +8790,7 @@ export type UserUpdateWithoutNotificationsInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -8302,6 +8820,7 @@ export type UserUpdateWithoutNotificationsInput = {
   reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -8333,6 +8852,7 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -8362,6 +8882,7 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -8392,6 +8913,7 @@ export type UserCreateWithoutRaffleTicketsInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -8421,6 +8943,7 @@ export type UserCreateWithoutRaffleTicketsInput = {
   reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
 }
 
@@ -8452,6 +8975,7 @@ export type UserUncheckedCreateWithoutRaffleTicketsInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -8481,6 +9005,7 @@ export type UserUncheckedCreateWithoutRaffleTicketsInput = {
   reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
@@ -8527,6 +9052,7 @@ export type UserUpdateWithoutRaffleTicketsInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -8556,6 +9082,7 @@ export type UserUpdateWithoutRaffleTicketsInput = {
   reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -8587,6 +9114,7 @@ export type UserUncheckedUpdateWithoutRaffleTicketsInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -8616,6 +9144,7 @@ export type UserUncheckedUpdateWithoutRaffleTicketsInput = {
   reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -8646,6 +9175,7 @@ export type UserCreateWithoutRaffleCommentsInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -8675,6 +9205,7 @@ export type UserCreateWithoutRaffleCommentsInput = {
   reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
 }
 
@@ -8706,6 +9237,7 @@ export type UserUncheckedCreateWithoutRaffleCommentsInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -8735,6 +9267,7 @@ export type UserUncheckedCreateWithoutRaffleCommentsInput = {
   reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
@@ -8781,6 +9314,7 @@ export type UserUpdateWithoutRaffleCommentsInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -8810,6 +9344,7 @@ export type UserUpdateWithoutRaffleCommentsInput = {
   reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -8841,6 +9376,7 @@ export type UserUncheckedUpdateWithoutRaffleCommentsInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -8870,6 +9406,7 @@ export type UserUncheckedUpdateWithoutRaffleCommentsInput = {
   reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -8900,6 +9437,7 @@ export type UserCreateWithoutBansReceivedInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -8929,6 +9467,7 @@ export type UserCreateWithoutBansReceivedInput = {
   reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
 }
 
@@ -8960,6 +9499,7 @@ export type UserUncheckedCreateWithoutBansReceivedInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -8989,6 +9529,7 @@ export type UserUncheckedCreateWithoutBansReceivedInput = {
   reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
@@ -9024,6 +9565,7 @@ export type UserCreateWithoutBansIssuedInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -9053,6 +9595,7 @@ export type UserCreateWithoutBansIssuedInput = {
   reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
 }
 
@@ -9084,6 +9627,7 @@ export type UserUncheckedCreateWithoutBansIssuedInput = {
   discordAvatar?: string | null
   discordVerifiedAt?: Date | string | null
   discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -9113,6 +9657,7 @@ export type UserUncheckedCreateWithoutBansIssuedInput = {
   reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
   reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
@@ -9159,6 +9704,7 @@ export type UserUpdateWithoutBansReceivedInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -9188,6 +9734,7 @@ export type UserUpdateWithoutBansReceivedInput = {
   reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -9219,6 +9766,7 @@ export type UserUncheckedUpdateWithoutBansReceivedInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -9248,6 +9796,7 @@ export type UserUncheckedUpdateWithoutBansReceivedInput = {
   reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -9289,6 +9838,7 @@ export type UserUpdateWithoutBansIssuedInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -9318,6 +9868,7 @@ export type UserUpdateWithoutBansIssuedInput = {
   reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -9349,6 +9900,7 @@ export type UserUncheckedUpdateWithoutBansIssuedInput = {
   discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -9378,6 +9930,7 @@ export type UserUncheckedUpdateWithoutBansIssuedInput = {
   reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
   reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
@@ -9416,6 +9969,7 @@ export type UserCountOutputType = {
   reviews: number
   reviewsHidden: number
   contentReports: number
+  customLists: number
   contentReportsReviewed: number
 }
 
@@ -9449,6 +10003,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   reviews?: boolean | UserCountOutputTypeCountReviewsArgs
   reviewsHidden?: boolean | UserCountOutputTypeCountReviewsHiddenArgs
   contentReports?: boolean | UserCountOutputTypeCountContentReportsArgs
+  customLists?: boolean | UserCountOutputTypeCountCustomListsArgs
   contentReportsReviewed?: boolean | UserCountOutputTypeCountContentReportsReviewedArgs
 }
 
@@ -9668,6 +10223,13 @@ export type UserCountOutputTypeCountContentReportsArgs<ExtArgs extends runtime.T
 /**
  * UserCountOutputType without action
  */
+export type UserCountOutputTypeCountCustomListsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CustomListWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
 export type UserCountOutputTypeCountContentReportsReviewedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ContentReportWhereInput
 }
@@ -9701,6 +10263,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   discordAvatar?: boolean
   discordVerifiedAt?: boolean
   discordLastCheckAt?: boolean
+  listIsPublic?: boolean
   analytics?: boolean | Prisma.User$analyticsArgs<ExtArgs>
   audits?: boolean | Prisma.User$auditsArgs<ExtArgs>
   Comment?: boolean | Prisma.User$CommentArgs<ExtArgs>
@@ -9731,6 +10294,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   reviews?: boolean | Prisma.User$reviewsArgs<ExtArgs>
   reviewsHidden?: boolean | Prisma.User$reviewsHiddenArgs<ExtArgs>
   contentReports?: boolean | Prisma.User$contentReportsArgs<ExtArgs>
+  customLists?: boolean | Prisma.User$customListsArgs<ExtArgs>
   contentReportsReviewed?: boolean | Prisma.User$contentReportsReviewedArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
@@ -9763,6 +10327,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   discordAvatar?: boolean
   discordVerifiedAt?: boolean
   discordLastCheckAt?: boolean
+  listIsPublic?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -9793,6 +10358,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   discordAvatar?: boolean
   discordVerifiedAt?: boolean
   discordLastCheckAt?: boolean
+  listIsPublic?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -9823,9 +10389,10 @@ export type UserSelectScalar = {
   discordAvatar?: boolean
   discordVerifiedAt?: boolean
   discordLastCheckAt?: boolean
+  listIsPublic?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "slug" | "email" | "password" | "createdAt" | "updatedAt" | "description" | "imageUrl" | "birthdate" | "bannerUrl" | "bannerUrlChangedAt" | "imageUrlChangedAt" | "usernameChangedAt" | "emailNotifications" | "emailVerified" | "isPrivateHistory" | "isPublicProfile" | "pushNotifications" | "notifyCommentsOnOwnedContent" | "hideAds" | "theme" | "discordId" | "discordUsername" | "discordAvatar" | "discordVerifiedAt" | "discordLastCheckAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "slug" | "email" | "password" | "createdAt" | "updatedAt" | "description" | "imageUrl" | "birthdate" | "bannerUrl" | "bannerUrlChangedAt" | "imageUrlChangedAt" | "usernameChangedAt" | "emailNotifications" | "emailVerified" | "isPrivateHistory" | "isPublicProfile" | "pushNotifications" | "notifyCommentsOnOwnedContent" | "hideAds" | "theme" | "discordId" | "discordUsername" | "discordAvatar" | "discordVerifiedAt" | "discordLastCheckAt" | "listIsPublic", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   analytics?: boolean | Prisma.User$analyticsArgs<ExtArgs>
   audits?: boolean | Prisma.User$auditsArgs<ExtArgs>
@@ -9857,6 +10424,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   reviews?: boolean | Prisma.User$reviewsArgs<ExtArgs>
   reviewsHidden?: boolean | Prisma.User$reviewsHiddenArgs<ExtArgs>
   contentReports?: boolean | Prisma.User$contentReportsArgs<ExtArgs>
+  customLists?: boolean | Prisma.User$customListsArgs<ExtArgs>
   contentReportsReviewed?: boolean | Prisma.User$contentReportsReviewedArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -9896,6 +10464,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     reviews: Prisma.$MangaReviewPayload<ExtArgs>[]
     reviewsHidden: Prisma.$MangaReviewPayload<ExtArgs>[]
     contentReports: Prisma.$ContentReportPayload<ExtArgs>[]
+    customLists: Prisma.$CustomListPayload<ExtArgs>[]
     contentReportsReviewed: Prisma.$ContentReportPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -9926,6 +10495,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     discordAvatar: string | null
     discordVerifiedAt: Date | null
     discordLastCheckAt: Date | null
+    listIsPublic: boolean
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -10350,6 +10920,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   reviews<T extends Prisma.User$reviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MangaReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reviewsHidden<T extends Prisma.User$reviewsHiddenArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reviewsHiddenArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MangaReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   contentReports<T extends Prisma.User$contentReportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$contentReportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContentReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  customLists<T extends Prisma.User$customListsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$customListsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CustomListPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   contentReportsReviewed<T extends Prisma.User$contentReportsReviewedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$contentReportsReviewedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContentReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -10407,6 +10978,7 @@ export interface UserFieldRefs {
   readonly discordAvatar: Prisma.FieldRef<"User", 'String'>
   readonly discordVerifiedAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly discordLastCheckAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly listIsPublic: Prisma.FieldRef<"User", 'Boolean'>
 }
     
 
@@ -11507,6 +12079,30 @@ export type User$contentReportsArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.ContentReportScalarFieldEnum | Prisma.ContentReportScalarFieldEnum[]
+}
+
+/**
+ * User.customLists
+ */
+export type User$customListsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CustomList
+   */
+  select?: Prisma.CustomListSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CustomList
+   */
+  omit?: Prisma.CustomListOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CustomListInclude<ExtArgs> | null
+  where?: Prisma.CustomListWhereInput
+  orderBy?: Prisma.CustomListOrderByWithRelationInput | Prisma.CustomListOrderByWithRelationInput[]
+  cursor?: Prisma.CustomListWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CustomListScalarFieldEnum | Prisma.CustomListScalarFieldEnum[]
 }
 
 /**

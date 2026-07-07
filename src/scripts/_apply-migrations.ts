@@ -79,7 +79,32 @@ const statements: string[] = [
     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT now()
   );`,
   `CREATE INDEX IF NOT EXISTS "content_report_status_createdAt_idx" ON "content_report"("status", "createdAt");`,
-  `CREATE INDEX IF NOT EXISTS "content_report_reporterUserId_createdAt_idx" ON "content_report"("reporterUserId", "createdAt");`
+  `CREATE INDEX IF NOT EXISTS "content_report_reporterUserId_createdAt_idx" ON "content_report"("reporterUserId", "createdAt");`,
+  // Tarea 27: listas públicas
+  `ALTER TABLE "user" ADD COLUMN IF NOT EXISTS "listIsPublic" BOOLEAN NOT NULL DEFAULT true;`,
+  `CREATE TABLE IF NOT EXISTS "custom_list" (
+    "id" SERIAL PRIMARY KEY,
+    "userId" INTEGER NOT NULL REFERENCES "user"("id") ON DELETE CASCADE,
+    "name" VARCHAR(60) NOT NULL,
+    "slug" VARCHAR(80) NOT NULL,
+    "description" VARCHAR(500),
+    "isPublic" BOOLEAN NOT NULL DEFAULT true,
+    "createdAt" TIMESTAMP(6) NOT NULL DEFAULT now(),
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT now()
+  );`,
+  `CREATE UNIQUE INDEX IF NOT EXISTS "custom_list_userId_slug_key" ON "custom_list"("userId", "slug");`,
+  `CREATE INDEX IF NOT EXISTS "custom_list_isPublic_updatedAt_idx" ON "custom_list"("isPublic", "updatedAt");`,
+  `CREATE TABLE IF NOT EXISTS "custom_list_item" (
+    "id" SERIAL PRIMARY KEY,
+    "listId" INTEGER NOT NULL REFERENCES "custom_list"("id") ON DELETE CASCADE,
+    "mangaCustomId" INTEGER REFERENCES "manga_custom"("id") ON DELETE CASCADE,
+    "jointId" INTEGER REFERENCES "manga_joint"("id") ON DELETE CASCADE,
+    "order" INTEGER NOT NULL DEFAULT 0,
+    "createdAt" TIMESTAMP(6) NOT NULL DEFAULT now()
+  );`,
+  `CREATE UNIQUE INDEX IF NOT EXISTS "custom_list_item_listId_mangaCustomId_key" ON "custom_list_item"("listId", "mangaCustomId");`,
+  `CREATE UNIQUE INDEX IF NOT EXISTS "custom_list_item_listId_jointId_key" ON "custom_list_item"("listId", "jointId");`,
+  `CREATE INDEX IF NOT EXISTS "custom_list_item_listId_order_idx" ON "custom_list_item"("listId", "order");`
 ]
 
 for (const sql of statements) {

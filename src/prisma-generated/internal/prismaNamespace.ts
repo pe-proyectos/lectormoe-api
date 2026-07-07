@@ -395,6 +395,8 @@ export const ModelName = {
   Manga: 'Manga',
   MangaCustom: 'MangaCustom',
   Chapter: 'Chapter',
+  CustomList: 'CustomList',
+  CustomListItem: 'CustomListItem',
   ContentReport: 'ContentReport',
   MangaReview: 'MangaReview',
   ChapterMilestoneAlert: 'ChapterMilestoneAlert',
@@ -449,7 +451,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "token" | "organization" | "user" | "permission" | "passwordResetToken" | "countryOptions" | "author" | "bookType" | "manga" | "mangaCustom" | "chapter" | "contentReport" | "mangaReview" | "chapterMilestoneAlert" | "mangaVolume" | "chapterReaction" | "page" | "comment" | "commentLike" | "ranking" | "demography" | "genre" | "analytics" | "userChapterHistory" | "favorite" | "userList" | "userPageBookmark" | "audit" | "viewsHistory" | "subscriptionPlan" | "subscription" | "organizationTransaction" | "organizationFollower" | "organizationRequest" | "emailPreference" | "emailLog" | "unsubscribeToken" | "emailVerificationToken" | "userDailyActivity" | "achievement" | "userAchievement" | "mangaJoint" | "jointMember" | "jointMemberHistory" | "notification" | "raffle" | "raffleTicket" | "raffleComment" | "raffleRefund" | "userBan"
+    modelProps: "token" | "organization" | "user" | "permission" | "passwordResetToken" | "countryOptions" | "author" | "bookType" | "manga" | "mangaCustom" | "chapter" | "customList" | "customListItem" | "contentReport" | "mangaReview" | "chapterMilestoneAlert" | "mangaVolume" | "chapterReaction" | "page" | "comment" | "commentLike" | "ranking" | "demography" | "genre" | "analytics" | "userChapterHistory" | "favorite" | "userList" | "userPageBookmark" | "audit" | "viewsHistory" | "subscriptionPlan" | "subscription" | "organizationTransaction" | "organizationFollower" | "organizationRequest" | "emailPreference" | "emailLog" | "unsubscribeToken" | "emailVerificationToken" | "userDailyActivity" | "achievement" | "userAchievement" | "mangaJoint" | "jointMember" | "jointMemberHistory" | "notification" | "raffle" | "raffleTicket" | "raffleComment" | "raffleRefund" | "userBan"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1264,6 +1266,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.ChapterCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ChapterCountAggregateOutputType> | number
+        }
+      }
+    }
+    CustomList: {
+      payload: Prisma.$CustomListPayload<ExtArgs>
+      fields: Prisma.CustomListFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CustomListFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomListPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CustomListFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomListPayload>
+        }
+        findFirst: {
+          args: Prisma.CustomListFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomListPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CustomListFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomListPayload>
+        }
+        findMany: {
+          args: Prisma.CustomListFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomListPayload>[]
+        }
+        create: {
+          args: Prisma.CustomListCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomListPayload>
+        }
+        createMany: {
+          args: Prisma.CustomListCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CustomListCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomListPayload>[]
+        }
+        delete: {
+          args: Prisma.CustomListDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomListPayload>
+        }
+        update: {
+          args: Prisma.CustomListUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomListPayload>
+        }
+        deleteMany: {
+          args: Prisma.CustomListDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CustomListUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CustomListUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomListPayload>[]
+        }
+        upsert: {
+          args: Prisma.CustomListUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomListPayload>
+        }
+        aggregate: {
+          args: Prisma.CustomListAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCustomList>
+        }
+        groupBy: {
+          args: Prisma.CustomListGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CustomListGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CustomListCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CustomListCountAggregateOutputType> | number
+        }
+      }
+    }
+    CustomListItem: {
+      payload: Prisma.$CustomListItemPayload<ExtArgs>
+      fields: Prisma.CustomListItemFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CustomListItemFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomListItemPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CustomListItemFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomListItemPayload>
+        }
+        findFirst: {
+          args: Prisma.CustomListItemFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomListItemPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CustomListItemFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomListItemPayload>
+        }
+        findMany: {
+          args: Prisma.CustomListItemFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomListItemPayload>[]
+        }
+        create: {
+          args: Prisma.CustomListItemCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomListItemPayload>
+        }
+        createMany: {
+          args: Prisma.CustomListItemCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CustomListItemCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomListItemPayload>[]
+        }
+        delete: {
+          args: Prisma.CustomListItemDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomListItemPayload>
+        }
+        update: {
+          args: Prisma.CustomListItemUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomListItemPayload>
+        }
+        deleteMany: {
+          args: Prisma.CustomListItemDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CustomListItemUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CustomListItemUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomListItemPayload>[]
+        }
+        upsert: {
+          args: Prisma.CustomListItemUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomListItemPayload>
+        }
+        aggregate: {
+          args: Prisma.CustomListItemAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCustomListItem>
+        }
+        groupBy: {
+          args: Prisma.CustomListItemGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CustomListItemGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CustomListItemCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CustomListItemCountAggregateOutputType> | number
         }
       }
     }
@@ -4281,7 +4431,8 @@ export const UserScalarFieldEnum = {
   discordUsername: 'discordUsername',
   discordAvatar: 'discordAvatar',
   discordVerifiedAt: 'discordVerifiedAt',
-  discordLastCheckAt: 'discordLastCheckAt'
+  discordLastCheckAt: 'discordLastCheckAt',
+  listIsPublic: 'listIsPublic'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -4450,6 +4601,32 @@ export const ChapterScalarFieldEnum = {
 } as const
 
 export type ChapterScalarFieldEnum = (typeof ChapterScalarFieldEnum)[keyof typeof ChapterScalarFieldEnum]
+
+
+export const CustomListScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  slug: 'slug',
+  description: 'description',
+  isPublic: 'isPublic',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CustomListScalarFieldEnum = (typeof CustomListScalarFieldEnum)[keyof typeof CustomListScalarFieldEnum]
+
+
+export const CustomListItemScalarFieldEnum = {
+  id: 'id',
+  listId: 'listId',
+  mangaCustomId: 'mangaCustomId',
+  jointId: 'jointId',
+  order: 'order',
+  createdAt: 'createdAt'
+} as const
+
+export type CustomListItemScalarFieldEnum = (typeof CustomListItemScalarFieldEnum)[keyof typeof CustomListItemScalarFieldEnum]
 
 
 export const ContentReportScalarFieldEnum = {
@@ -5367,6 +5544,8 @@ export type GlobalOmitConfig = {
   manga?: Prisma.MangaOmit
   mangaCustom?: Prisma.MangaCustomOmit
   chapter?: Prisma.ChapterOmit
+  customList?: Prisma.CustomListOmit
+  customListItem?: Prisma.CustomListItemOmit
   contentReport?: Prisma.ContentReportOmit
   mangaReview?: Prisma.MangaReviewOmit
   chapterMilestoneAlert?: Prisma.ChapterMilestoneAlertOmit

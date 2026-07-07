@@ -151,6 +151,8 @@ model User {
   reviews                 MangaReview[]           @relation("MangaReviewUser")
   reviewsHidden           MangaReview[]           @relation("MangaReviewHiddenBy")
   contentReports          ContentReport[]         @relation("ContentReportReporter")
+  customLists             CustomList[]
+  listIsPublic            Boolean                  @default(true)
   contentReportsReviewed  ContentReport[]         @relation("ContentReportReviewer")
 
   @@map("user")
@@ -308,6 +310,7 @@ model MangaCustom {
   milestoneAlerts                    ChapterMilestoneAlert[]
   reviews                            MangaReview[]
   contentReports                     ContentReport[]
+  customListItems                    CustomListItem[]
   favorites                          Favorite[]
   userListEntries                    UserList[]
   manga                              Manga              @relation(fields: [mangaId], references: [id])
@@ -360,6 +363,40 @@ model Chapter {
   @@unique([number, mangaCustomId])
   @@unique([number, jointId])
   @@map("chapter")
+}
+
+model CustomList {
+  id          Int              @id @default(autoincrement())
+  userId      Int
+  name        String           @db.VarChar(60)
+  slug        String           @db.VarChar(80)
+  description String?          @db.VarChar(500)
+  isPublic    Boolean          @default(true)
+  createdAt   DateTime         @default(now()) @db.Timestamp(6)
+  updatedAt   DateTime         @updatedAt
+  user        User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items       CustomListItem[]
+
+  @@unique([userId, slug])
+  @@index([isPublic, updatedAt])
+  @@map("custom_list")
+}
+
+model CustomListItem {
+  id            Int          @id @default(autoincrement())
+  listId        Int
+  mangaCustomId Int?
+  jointId       Int?
+  order         Int          @default(0)
+  createdAt     DateTime     @default(now()) @db.Timestamp(6)
+  list          CustomList   @relation(fields: [listId], references: [id], onDelete: Cascade)
+  mangaCustom   MangaCustom? @relation(fields: [mangaCustomId], references: [id], onDelete: Cascade)
+  joint         MangaJoint?  @relation(fields: [jointId], references: [id], onDelete: Cascade)
+
+  @@unique([listId, mangaCustomId])
+  @@unique([listId, jointId])
+  @@index([listId, order])
+  @@map("custom_list_item")
 }
 
 model ContentReport {
@@ -948,6 +985,7 @@ model MangaJoint {
   milestoneAlerts  ChapterMilestoneAlert[]
   reviews          MangaReview[]
   contentReports   ContentReport[]
+  customListItems  CustomListItem[]
   members          JointMember[]
   chapters         Chapter[]
   viewsHistory     ViewsHistory[]

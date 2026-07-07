@@ -62,6 +62,8 @@ export const ModelName = {
   Manga: 'Manga',
   MangaCustom: 'MangaCustom',
   Chapter: 'Chapter',
+  CustomList: 'CustomList',
+  CustomListItem: 'CustomListItem',
   ContentReport: 'ContentReport',
   MangaReview: 'MangaReview',
   ChapterMilestoneAlert: 'ChapterMilestoneAlert',
@@ -208,7 +210,8 @@ export const UserScalarFieldEnum = {
   discordUsername: 'discordUsername',
   discordAvatar: 'discordAvatar',
   discordVerifiedAt: 'discordVerifiedAt',
-  discordLastCheckAt: 'discordLastCheckAt'
+  discordLastCheckAt: 'discordLastCheckAt',
+  listIsPublic: 'listIsPublic'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -377,6 +380,32 @@ export const ChapterScalarFieldEnum = {
 } as const
 
 export type ChapterScalarFieldEnum = (typeof ChapterScalarFieldEnum)[keyof typeof ChapterScalarFieldEnum]
+
+
+export const CustomListScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  slug: 'slug',
+  description: 'description',
+  isPublic: 'isPublic',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CustomListScalarFieldEnum = (typeof CustomListScalarFieldEnum)[keyof typeof CustomListScalarFieldEnum]
+
+
+export const CustomListItemScalarFieldEnum = {
+  id: 'id',
+  listId: 'listId',
+  mangaCustomId: 'mangaCustomId',
+  jointId: 'jointId',
+  order: 'order',
+  createdAt: 'createdAt'
+} as const
+
+export type CustomListItemScalarFieldEnum = (typeof CustomListItemScalarFieldEnum)[keyof typeof CustomListItemScalarFieldEnum]
 
 
 export const ContentReportScalarFieldEnum = {

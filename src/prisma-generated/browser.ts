@@ -73,6 +73,16 @@ export type MangaCustom = Prisma.MangaCustomModel
  */
 export type Chapter = Prisma.ChapterModel
 /**
+ * Model CustomList
+ * 
+ */
+export type CustomList = Prisma.CustomListModel
+/**
+ * Model CustomListItem
+ * 
+ */
+export type CustomListItem = Prisma.CustomListItemModel
+/**
  * Model ContentReport
  * 
  */
