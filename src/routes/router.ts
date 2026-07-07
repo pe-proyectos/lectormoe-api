@@ -59,6 +59,7 @@ import { router as landingPerOrgPopularRouter } from './landing/per-org-popular'
 import { router as landingPopularTodayRouter } from './landing/popular-today'
 import { router as landingTrendingRouter } from './landing/trending'
 import { router as landingRecentlyAddedRouter } from './landing/recently-added'
+import { router as landingSitemapDataRouter } from './landing/sitemap-data'
 import { router as landingScansRouter } from './landing/scans'
 import { router as landingTopCommentersRouter } from './landing/top-commenters'
 import { router as landingTopReadersRouter } from './landing/top-readers'
@@ -214,6 +215,7 @@ export const router = () => async (app: Elysia) => {
   app.use(landingPopularTodayRouter())
   app.use(landingTrendingRouter())
   app.use(landingRecentlyAddedRouter())
+  app.use(landingSitemapDataRouter())
   app.use(landingPerOrgPopularRouter())
   app.use(landingScansRouter())
   app.use(landingTopCommentersRouter())
