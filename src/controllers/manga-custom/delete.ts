@@ -1,6 +1,7 @@
 import { prisma } from "../../models/prisma";
+import { logModeration } from "../../util/moderation-log";
 
-export const deleteMangaCustom = async (organizationId: number, mangaSlug: string) => {
+export const deleteMangaCustom = async (organizationId: number, mangaSlug: string, actorUserId?: number) => {
 	const mangaCustom = await prisma.mangaCustom.findFirst({
 		where: {
 			organizationId,
@@ -41,4 +42,6 @@ export const deleteMangaCustom = async (organizationId: number, mangaSlug: strin
 			deletedAt: new Date(),
 		},
 	});
+
+	logModeration(actorUserId ?? null, 'manga_delete', 'manga_custom', mangaCustom.id, `org ${organizationId} · ${mangaSlug}`);
 };

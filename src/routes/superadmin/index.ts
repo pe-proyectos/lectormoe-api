@@ -1,5 +1,6 @@
 import jwt from '@elysiajs/jwt'
 import { Elysia, t } from 'elysia'
+import { logModeration } from '../../util/moderation-log'
 import {
   listRequests,
   reviewRequest
@@ -169,6 +170,7 @@ export const router = () =>
               reviewedAt: new Date()
             }
           })
+          logModeration(null, 'report_hide_content', 'report', report.id, `superadmin · target ${report.mangaCustomId ? `mc:${report.mangaCustomId}` : `j:${report.jointId}`}${body.resolutionNote ? ` · ${body.resolutionNote}` : ''}`)
         } else {
           await prisma.contentReport.update({
             where: { id: report.id },
@@ -178,6 +180,7 @@ export const router = () =>
               reviewedAt: new Date()
             }
           })
+          logModeration(null, 'report_dismiss', 'report', report.id, body.resolutionNote ? `superadmin · ${body.resolutionNote}` : 'superadmin')
         }
         return { status: true, data: true }
       },
@@ -198,6 +201,25 @@ export const router = () =>
       {
         query: t.Object({ status: t.Optional(t.String()) })
       }
+    )
+    .get(
+      '/api/superadmin/moderation-log',
+      async ({ query }) => {
+        const page = query?.page ? Number.parseInt(query.page) : 1
+        const where = query?.action ? { action: query.action } : {}
+        const [rows, total] = await Promise.all([
+          prisma.moderationLog.findMany({
+            where,
+            orderBy: { createdAt: 'desc' },
+            skip: (page - 1) * 30,
+            take: 30,
+            include: { actor: { select: { username: true, slug: true } } }
+          }),
+          prisma.moderationLog.count({ where })
+        ])
+        return { status: true, data: { rows, total, page, pageSize: 30 } }
+      },
+      { query: t.Optional(t.Object({ page: t.Optional(t.String()), action: t.Optional(t.String()) })) }
     )
     .patch(
       '/api/superadmin/requests/:id/review',

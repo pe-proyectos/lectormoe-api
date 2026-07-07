@@ -36,6 +36,33 @@ R2_BUCKET_NAME=your_bucket_name
 
 **Note:** All images are stored with full URLs in the database using the R2 public endpoint format: `https://pub-{R2_ACCOUNT_ID}.r2.dev/{fileKey}`
 
+## Variables de entorno
+
+```env
+# Base de datos (apunta a PRODUCCIÓN en el .env local)
+DATABASE_URL=postgresql://user:pass@host:5432/db
+
+# Cloudflare R2 (obligatorias, ver arriba)
+R2_ACCOUNT_ID=...
+R2_ACCESS_KEY_ID=...
+R2_SECRET_ACCESS_KEY=...
+R2_BUCKET_NAME=...
+R2_PUBLIC_URL=https://r2.capibaratraductor.com   # base pública de los archivos
+
+# Alertas de crons a Discord (opcional; sin ella los fallos solo salen por console.error)
+DISCORD_ALERTS_WEBHOOK_URL=https://discord.com/api/webhooks/...
+
+# PayPal (suscripciones)
+PAYPAL_CLIENT_ID=...
+PAYPAL_CLIENT_SECRET=...
+
+# Superadmin (login del panel global)
+SUPERADMIN_SECRET=...        # secreto JWT del superadmin
+```
+
+El frontend define además `PUBLIC_API_URL`, `PUBLIC_R2_PUBLIC_URL` y las zonas
+de Adsterra/AdSense; ver `lectormoe-frontend`.
+
 ### Setting up CORS
 
 After configuring your R2 bucket, run the CORS configuration script:

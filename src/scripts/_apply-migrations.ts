@@ -144,7 +144,21 @@ const statements: string[] = [
     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT now()
   );`,
   `CREATE INDEX IF NOT EXISTS "recruitment_post_status_urgent_updated_idx" ON "recruitment_post"("status", "urgent", "updatedAt");`,
-  `CREATE INDEX IF NOT EXISTS "recruitment_post_org_status_idx" ON "recruitment_post"("organizationId", "status");`
+  `CREATE INDEX IF NOT EXISTS "recruitment_post_org_status_idx" ON "recruitment_post"("organizationId", "status");`,
+  // Tarea 30: log de auditoría de moderación
+  `CREATE TABLE IF NOT EXISTS "moderation_log" (
+    "id" SERIAL PRIMARY KEY,
+    "actorUserId" INTEGER NOT NULL REFERENCES "user"("id"),
+    "action" VARCHAR(64) NOT NULL,
+    "targetType" VARCHAR(32) NOT NULL,
+    "targetId" INTEGER NOT NULL,
+    "details" VARCHAR(1000),
+    "createdAt" TIMESTAMP(6) NOT NULL DEFAULT now()
+  );`,
+  `CREATE INDEX IF NOT EXISTS "moderation_log_target_idx" ON "moderation_log"("targetType", "targetId");`,
+  `CREATE INDEX IF NOT EXISTS "moderation_log_actor_created_idx" ON "moderation_log"("actorUserId", "createdAt");`,
+  // actorUserId nullable: acciones del superadmin/sistema no tienen fila en user.
+  `ALTER TABLE "moderation_log" ALTER COLUMN "actorUserId" DROP NOT NULL;`
 ]
 
 for (const sql of statements) {

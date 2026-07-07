@@ -55,6 +55,7 @@ export const ModelName = {
   Organization: 'Organization',
   RecruitmentPost: 'RecruitmentPost',
   User: 'User',
+  ModerationLog: 'ModerationLog',
   Permission: 'Permission',
   PasswordResetToken: 'PasswordResetToken',
   CountryOptions: 'CountryOptions',
@@ -235,6 +236,19 @@ export const UserScalarFieldEnum = {
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const ModerationLogScalarFieldEnum = {
+  id: 'id',
+  actorUserId: 'actorUserId',
+  action: 'action',
+  targetType: 'targetType',
+  targetId: 'targetId',
+  details: 'details',
+  createdAt: 'createdAt'
+} as const
+
+export type ModerationLogScalarFieldEnum = (typeof ModerationLogScalarFieldEnum)[keyof typeof ModerationLogScalarFieldEnum]
 
 
 export const PermissionScalarFieldEnum = {

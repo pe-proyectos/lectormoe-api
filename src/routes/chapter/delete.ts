@@ -12,7 +12,7 @@ export const router = () => new Elysia()
             if (!permissions?.canDeleteChapter) {
                 throw new Error("No tiene permisos para eliminar capítulos.");
             }
-            const chapter = await deleteChapter(organizationId, mangaSlug, chapterNumber);
+            const chapter = await deleteChapter(organizationId, mangaSlug, chapterNumber, user.id);
 
             if (!chapter) {
                 throw new Error("Capitulo no encontrado.");

@@ -13,7 +13,7 @@ export const router = () => new Elysia()
                 throw new Error("No tiene permisos para eliminar mangas custom.");
             }
 
-            await deleteMangaCustom(organizationId, mangaSlug);
+            await deleteMangaCustom(organizationId, mangaSlug, user.id);
 
             return {
                 status: true,

@@ -177,8 +177,24 @@ model User {
   organizationMessages    OrganizationMessage[]
   listIsPublic            Boolean                  @default(true)
   contentReportsReviewed  ContentReport[]         @relation("ContentReportReviewer")
+  moderationLogs          ModerationLog[]
 
   @@map("user")
+}
+
+model ModerationLog {
+  id          Int      @id @default(autoincrement())
+  actorUserId Int?
+  action      String   @db.VarChar(64)
+  targetType  String   @db.VarChar(32)
+  targetId    Int
+  details     String?  @db.VarChar(1000)
+  createdAt   DateTime @default(now()) @db.Timestamp(6)
+  actor       User?    @relation(fields: [actorUserId], references: [id])
+
+  @@index([targetType, targetId])
+  @@index([actorUserId, createdAt])
+  @@map("moderation_log")
 }
 
 model Permission {

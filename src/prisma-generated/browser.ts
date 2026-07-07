@@ -38,6 +38,11 @@ export type RecruitmentPost = Prisma.RecruitmentPostModel
  */
 export type User = Prisma.UserModel
 /**
+ * Model ModerationLog
+ * 
+ */
+export type ModerationLog = Prisma.ModerationLogModel
+/**
  * Model Permission
  * 
  */

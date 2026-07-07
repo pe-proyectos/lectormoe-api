@@ -2,6 +2,7 @@ import { Elysia, t } from 'elysia'
 import { prisma } from '../../models/prisma'
 import { loggedOptional, loggedUserOnly } from '../../plugins/auth'
 import { assertNotBanned } from '../../util/ban-check'
+import { logModeration } from '../../util/moderation-log'
 import { assertRateLimit } from '../../util/rate-limit'
 
 async function resolveMc(organizationId: number, mangaSlug: string) {
@@ -162,10 +163,12 @@ export const router = () =>
         )
         if (!perm?.canHideComment)
           throw new Error('No tienes permisos para moderar reseñas.')
+        const reviewId = Number.parseInt(params.id)
         await prisma.mangaReview.update({
-          where: { id: Number.parseInt(params.id) },
+          where: { id: reviewId },
           data: { hiddenAt: new Date(), hiddenByUserId: user.id }
         })
+        logModeration(user.id, 'review_hide', 'review', reviewId)
         return { status: true, data: true }
       },
       {
