@@ -61,11 +61,15 @@ export const listFollowedOrganizations = async (userId: number) => {
       const orgId = sub.subscriptionPlan?.organizationId
       if (orgId != null) {
         acc[orgId] = {
+          id: sub.id,
           rank: sub.subscriptionPlan.name,
           price: sub.subscriptionPlan.price,
           currency: sub.subscriptionPlan.currency,
           interval: sub.subscriptionPlan.interval,
-          status: sub.active ? ('active' as const) : ('paused' as const)
+          // 'paused' = renovación suspendida en PayPal (el acceso sigue activo
+          // hasta endDate); todo lo demás con active=true se muestra 'active'.
+          status:
+            sub.status === 'SUSPENDED' ? ('paused' as const) : ('active' as const)
         }
       }
       return acc
@@ -73,6 +77,7 @@ export const listFollowedOrganizations = async (userId: number) => {
     {} as Record<
       number,
       {
+        id: number
         rank: string
         price: number
         currency: string

@@ -22,8 +22,10 @@ export const router = () => new Elysia()
                     name: t.String(),
                     slug: t.String(),
                     logoUrl: t.Union([t.String(), t.Null()]),
+                    isNSFW: t.Optional(t.Boolean()),
                     subscription: t.Union([
                         t.Object({
+                            id: t.Number(),
                             rank: t.String(),
                             price: t.Number(),
                             currency: t.String(),

@@ -38,12 +38,7 @@ export const router = () =>
         status: t.Boolean(),
         data: t.Any(),
       }),
-      transform({ params, body }) {
-        if (params.subscriptionId) {
-          params.subscriptionId = Number.parseInt(
-            params.subscriptionId.toString()
-          );
-        }
+      transform({ body }) {
         if (body.userId) {
           body.userId = Number.parseInt(body.userId.toString());
         }
