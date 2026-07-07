@@ -31,10 +31,10 @@ const corsConfig = {
   CORSRules: [
     {
       AllowedOrigins: [
-        "http://localhost:4321", // Astro default port
+        "http://localhost:4321",
         "http://localhost:3000",
-        // Add your production domains here
-        // "https://yourdomain.com",
+        "https://capibaratraductor.com",
+        "https://www.capibaratraductor.com",
       ],
       AllowedMethods: ["GET", "PUT", "POST", "DELETE", "HEAD"],
       AllowedHeaders: [
