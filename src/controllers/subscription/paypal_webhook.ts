@@ -6,8 +6,9 @@ import { getSubscriptionByPaypalId } from '../../util/paypal'
 import { computePaidPeriodEnd } from '../../util/subscription-period'
 
 export const handlePaypalWebhook = async (webhookEvent: PaypalWebhookEvent) => {
-  console.log('webhookEvent')
-  console.log(webhookEvent)
+  console.log(
+    `[paypal webhook] ${webhookEvent.event_type} resource=${webhookEvent.resource?.id} billing_agreement=${webhookEvent.resource?.billing_agreement_id ?? '-'}`
+  )
 
   let subscription = await prisma.subscription.findFirst({
     where: {
@@ -208,7 +209,7 @@ export const handlePaypalWebhook = async (webhookEvent: PaypalWebhookEvent) => {
   })
 
   console.log(
-    `Subscription ${subscription.id} updated with status: ${updateData.subscriptionStatus || 'N/A'}`
+    `[paypal webhook] subscription ${subscription.id} updated (${webhookEvent.event_type})`
   )
   return true
 }
