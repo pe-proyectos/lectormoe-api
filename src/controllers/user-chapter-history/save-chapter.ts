@@ -47,11 +47,11 @@ export const saveUserChapterHistoryChapter = async (organizationId: number, user
         return null;
     }
 
+    // Novelas y capítulos de texto no tienen filas en Page (usan bodyMarkdown):
+    // antes salíamos con `return true` sin registrar nada. Ahora los marcamos
+    // terminados igual, con pageNumber 1.
     const page = chapter.pages[chapter.pages.length - 1];
-
-    if (!page) {
-        return true;
-    }
+    const finishedPage = page ? page.number : 1;
 
     await prisma.userChapterHistory.upsert({
         where: {
@@ -61,14 +61,14 @@ export const saveUserChapterHistoryChapter = async (organizationId: number, user
             }
         },
         update: {
-            pageNumber: page.number,
+            pageNumber: finishedPage,
             lastReadAt: new Date(),
             finishedAt: new Date(),
         },
         create: {
             userId,
             chapterId: chapter.id,
-            pageNumber: page.number,
+            pageNumber: finishedPage,
             lastReadAt: new Date(),
             finishedAt: new Date(),
         },
