@@ -26,6 +26,7 @@ import { router as milestoneAlertRouter } from './milestone-alert/index'
 import { router as mangaReviewRouter } from './manga-review/index'
 import { router as reportsRouter } from './reports/index'
 import { router as customListRouter } from './custom-list/index'
+import { router as orgMessagesRouter, adminRouter as orgMessagesAdminRouter } from './organization-messages/index'
 import { router as commentBanRouter } from './comment/ban'
 import { router as commentCreateRouter } from './comment/create'
 import { router as commentDeleteRouter } from './comment/delete'
@@ -169,6 +170,8 @@ export const router = () => async (app: Elysia) => {
   app.use(mangaReviewRouter())
   app.use(reportsRouter())
   app.use(customListRouter())
+  app.use(orgMessagesRouter())
+  app.use(orgMessagesAdminRouter())
 
   // Comment
   app.use(commentBanRouter())

@@ -62,6 +62,8 @@ export const ModelName = {
   Manga: 'Manga',
   MangaCustom: 'MangaCustom',
   Chapter: 'Chapter',
+  OrganizationMessageThread: 'OrganizationMessageThread',
+  OrganizationMessage: 'OrganizationMessage',
   CustomList: 'CustomList',
   CustomListItem: 'CustomListItem',
   ContentReport: 'ContentReport',
@@ -380,6 +382,34 @@ export const ChapterScalarFieldEnum = {
 } as const
 
 export type ChapterScalarFieldEnum = (typeof ChapterScalarFieldEnum)[keyof typeof ChapterScalarFieldEnum]
+
+
+export const OrganizationMessageThreadScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  userId: 'userId',
+  category: 'category',
+  subject: 'subject',
+  status: 'status',
+  lastMessageAt: 'lastMessageAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OrganizationMessageThreadScalarFieldEnum = (typeof OrganizationMessageThreadScalarFieldEnum)[keyof typeof OrganizationMessageThreadScalarFieldEnum]
+
+
+export const OrganizationMessageScalarFieldEnum = {
+  id: 'id',
+  threadId: 'threadId',
+  senderUserId: 'senderUserId',
+  isStaffReply: 'isStaffReply',
+  body: 'body',
+  readAt: 'readAt',
+  createdAt: 'createdAt'
+} as const
+
+export type OrganizationMessageScalarFieldEnum = (typeof OrganizationMessageScalarFieldEnum)[keyof typeof OrganizationMessageScalarFieldEnum]
 
 
 export const CustomListScalarFieldEnum = {

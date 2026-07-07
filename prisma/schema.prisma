@@ -87,6 +87,7 @@ model Organization {
   notifications                                Notification[]
   jointMemberHistory                           JointMemberHistory[]
   userBans                                     UserBan[]
+  messageThreads                               OrganizationMessageThread[]
 
   @@map("organization")
 }
@@ -152,6 +153,8 @@ model User {
   reviewsHidden           MangaReview[]           @relation("MangaReviewHiddenBy")
   contentReports          ContentReport[]         @relation("ContentReportReporter")
   customLists             CustomList[]
+  messageThreads          OrganizationMessageThread[]
+  organizationMessages    OrganizationMessage[]
   listIsPublic            Boolean                  @default(true)
   contentReportsReviewed  ContentReport[]         @relation("ContentReportReviewer")
 
@@ -363,6 +366,40 @@ model Chapter {
   @@unique([number, mangaCustomId])
   @@unique([number, jointId])
   @@map("chapter")
+}
+
+model OrganizationMessageThread {
+  id             Int                   @id @default(autoincrement())
+  organizationId Int
+  userId         Int
+  category       String                @db.VarChar(32)
+  subject        String                @db.VarChar(200)
+  status         String                @default("open") @db.VarChar(16)
+  lastMessageAt  DateTime              @default(now())
+  createdAt      DateTime              @default(now()) @db.Timestamp(6)
+  updatedAt      DateTime              @updatedAt
+  organization   Organization          @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user           User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages       OrganizationMessage[]
+
+  @@index([organizationId, status, lastMessageAt])
+  @@index([userId, lastMessageAt])
+  @@map("organization_message_thread")
+}
+
+model OrganizationMessage {
+  id           Int                        @id @default(autoincrement())
+  threadId     Int
+  senderUserId Int
+  isStaffReply Boolean                    @default(false)
+  body         String
+  readAt       DateTime?
+  createdAt    DateTime                   @default(now()) @db.Timestamp(6)
+  thread       OrganizationMessageThread  @relation(fields: [threadId], references: [id], onDelete: Cascade)
+  sender       User                       @relation(fields: [senderUserId], references: [id], onDelete: Cascade)
+
+  @@index([threadId, createdAt])
+  @@map("organization_message")
 }
 
 model CustomList {

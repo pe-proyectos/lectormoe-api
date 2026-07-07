@@ -395,6 +395,8 @@ export const ModelName = {
   Manga: 'Manga',
   MangaCustom: 'MangaCustom',
   Chapter: 'Chapter',
+  OrganizationMessageThread: 'OrganizationMessageThread',
+  OrganizationMessage: 'OrganizationMessage',
   CustomList: 'CustomList',
   CustomListItem: 'CustomListItem',
   ContentReport: 'ContentReport',
@@ -451,7 +453,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "token" | "organization" | "user" | "permission" | "passwordResetToken" | "countryOptions" | "author" | "bookType" | "manga" | "mangaCustom" | "chapter" | "customList" | "customListItem" | "contentReport" | "mangaReview" | "chapterMilestoneAlert" | "mangaVolume" | "chapterReaction" | "page" | "comment" | "commentLike" | "ranking" | "demography" | "genre" | "analytics" | "userChapterHistory" | "favorite" | "userList" | "userPageBookmark" | "audit" | "viewsHistory" | "subscriptionPlan" | "subscription" | "organizationTransaction" | "organizationFollower" | "organizationRequest" | "emailPreference" | "emailLog" | "unsubscribeToken" | "emailVerificationToken" | "userDailyActivity" | "achievement" | "userAchievement" | "mangaJoint" | "jointMember" | "jointMemberHistory" | "notification" | "raffle" | "raffleTicket" | "raffleComment" | "raffleRefund" | "userBan"
+    modelProps: "token" | "organization" | "user" | "permission" | "passwordResetToken" | "countryOptions" | "author" | "bookType" | "manga" | "mangaCustom" | "chapter" | "organizationMessageThread" | "organizationMessage" | "customList" | "customListItem" | "contentReport" | "mangaReview" | "chapterMilestoneAlert" | "mangaVolume" | "chapterReaction" | "page" | "comment" | "commentLike" | "ranking" | "demography" | "genre" | "analytics" | "userChapterHistory" | "favorite" | "userList" | "userPageBookmark" | "audit" | "viewsHistory" | "subscriptionPlan" | "subscription" | "organizationTransaction" | "organizationFollower" | "organizationRequest" | "emailPreference" | "emailLog" | "unsubscribeToken" | "emailVerificationToken" | "userDailyActivity" | "achievement" | "userAchievement" | "mangaJoint" | "jointMember" | "jointMemberHistory" | "notification" | "raffle" | "raffleTicket" | "raffleComment" | "raffleRefund" | "userBan"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1266,6 +1268,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.ChapterCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ChapterCountAggregateOutputType> | number
+        }
+      }
+    }
+    OrganizationMessageThread: {
+      payload: Prisma.$OrganizationMessageThreadPayload<ExtArgs>
+      fields: Prisma.OrganizationMessageThreadFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.OrganizationMessageThreadFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationMessageThreadPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.OrganizationMessageThreadFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationMessageThreadPayload>
+        }
+        findFirst: {
+          args: Prisma.OrganizationMessageThreadFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationMessageThreadPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.OrganizationMessageThreadFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationMessageThreadPayload>
+        }
+        findMany: {
+          args: Prisma.OrganizationMessageThreadFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationMessageThreadPayload>[]
+        }
+        create: {
+          args: Prisma.OrganizationMessageThreadCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationMessageThreadPayload>
+        }
+        createMany: {
+          args: Prisma.OrganizationMessageThreadCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.OrganizationMessageThreadCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationMessageThreadPayload>[]
+        }
+        delete: {
+          args: Prisma.OrganizationMessageThreadDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationMessageThreadPayload>
+        }
+        update: {
+          args: Prisma.OrganizationMessageThreadUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationMessageThreadPayload>
+        }
+        deleteMany: {
+          args: Prisma.OrganizationMessageThreadDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.OrganizationMessageThreadUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.OrganizationMessageThreadUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationMessageThreadPayload>[]
+        }
+        upsert: {
+          args: Prisma.OrganizationMessageThreadUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationMessageThreadPayload>
+        }
+        aggregate: {
+          args: Prisma.OrganizationMessageThreadAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOrganizationMessageThread>
+        }
+        groupBy: {
+          args: Prisma.OrganizationMessageThreadGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OrganizationMessageThreadGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.OrganizationMessageThreadCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OrganizationMessageThreadCountAggregateOutputType> | number
+        }
+      }
+    }
+    OrganizationMessage: {
+      payload: Prisma.$OrganizationMessagePayload<ExtArgs>
+      fields: Prisma.OrganizationMessageFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.OrganizationMessageFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationMessagePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.OrganizationMessageFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationMessagePayload>
+        }
+        findFirst: {
+          args: Prisma.OrganizationMessageFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationMessagePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.OrganizationMessageFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationMessagePayload>
+        }
+        findMany: {
+          args: Prisma.OrganizationMessageFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationMessagePayload>[]
+        }
+        create: {
+          args: Prisma.OrganizationMessageCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationMessagePayload>
+        }
+        createMany: {
+          args: Prisma.OrganizationMessageCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.OrganizationMessageCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationMessagePayload>[]
+        }
+        delete: {
+          args: Prisma.OrganizationMessageDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationMessagePayload>
+        }
+        update: {
+          args: Prisma.OrganizationMessageUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationMessagePayload>
+        }
+        deleteMany: {
+          args: Prisma.OrganizationMessageDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.OrganizationMessageUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.OrganizationMessageUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationMessagePayload>[]
+        }
+        upsert: {
+          args: Prisma.OrganizationMessageUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationMessagePayload>
+        }
+        aggregate: {
+          args: Prisma.OrganizationMessageAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOrganizationMessage>
+        }
+        groupBy: {
+          args: Prisma.OrganizationMessageGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OrganizationMessageGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.OrganizationMessageCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OrganizationMessageCountAggregateOutputType> | number
         }
       }
     }
@@ -4603,6 +4753,34 @@ export const ChapterScalarFieldEnum = {
 export type ChapterScalarFieldEnum = (typeof ChapterScalarFieldEnum)[keyof typeof ChapterScalarFieldEnum]
 
 
+export const OrganizationMessageThreadScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  userId: 'userId',
+  category: 'category',
+  subject: 'subject',
+  status: 'status',
+  lastMessageAt: 'lastMessageAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OrganizationMessageThreadScalarFieldEnum = (typeof OrganizationMessageThreadScalarFieldEnum)[keyof typeof OrganizationMessageThreadScalarFieldEnum]
+
+
+export const OrganizationMessageScalarFieldEnum = {
+  id: 'id',
+  threadId: 'threadId',
+  senderUserId: 'senderUserId',
+  isStaffReply: 'isStaffReply',
+  body: 'body',
+  readAt: 'readAt',
+  createdAt: 'createdAt'
+} as const
+
+export type OrganizationMessageScalarFieldEnum = (typeof OrganizationMessageScalarFieldEnum)[keyof typeof OrganizationMessageScalarFieldEnum]
+
+
 export const CustomListScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -5544,6 +5722,8 @@ export type GlobalOmitConfig = {
   manga?: Prisma.MangaOmit
   mangaCustom?: Prisma.MangaCustomOmit
   chapter?: Prisma.ChapterOmit
+  organizationMessageThread?: Prisma.OrganizationMessageThreadOmit
+  organizationMessage?: Prisma.OrganizationMessageOmit
   customList?: Prisma.CustomListOmit
   customListItem?: Prisma.CustomListItemOmit
   contentReport?: Prisma.ContentReportOmit

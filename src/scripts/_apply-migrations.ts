@@ -104,7 +104,31 @@ const statements: string[] = [
   );`,
   `CREATE UNIQUE INDEX IF NOT EXISTS "custom_list_item_listId_mangaCustomId_key" ON "custom_list_item"("listId", "mangaCustomId");`,
   `CREATE UNIQUE INDEX IF NOT EXISTS "custom_list_item_listId_jointId_key" ON "custom_list_item"("listId", "jointId");`,
-  `CREATE INDEX IF NOT EXISTS "custom_list_item_listId_order_idx" ON "custom_list_item"("listId", "order");`
+  `CREATE INDEX IF NOT EXISTS "custom_list_item_listId_order_idx" ON "custom_list_item"("listId", "order");`,
+  // Tarea 7: mensajería lector-scan
+  `CREATE TABLE IF NOT EXISTS "organization_message_thread" (
+    "id" SERIAL PRIMARY KEY,
+    "organizationId" INTEGER NOT NULL REFERENCES "organization"("id") ON DELETE CASCADE,
+    "userId" INTEGER NOT NULL REFERENCES "user"("id") ON DELETE CASCADE,
+    "category" VARCHAR(32) NOT NULL,
+    "subject" VARCHAR(200) NOT NULL,
+    "status" VARCHAR(16) NOT NULL DEFAULT 'open',
+    "lastMessageAt" TIMESTAMP(3) NOT NULL DEFAULT now(),
+    "createdAt" TIMESTAMP(6) NOT NULL DEFAULT now(),
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT now()
+  );`,
+  `CREATE INDEX IF NOT EXISTS "omt_org_status_last_idx" ON "organization_message_thread"("organizationId", "status", "lastMessageAt");`,
+  `CREATE INDEX IF NOT EXISTS "omt_user_last_idx" ON "organization_message_thread"("userId", "lastMessageAt");`,
+  `CREATE TABLE IF NOT EXISTS "organization_message" (
+    "id" SERIAL PRIMARY KEY,
+    "threadId" INTEGER NOT NULL REFERENCES "organization_message_thread"("id") ON DELETE CASCADE,
+    "senderUserId" INTEGER NOT NULL REFERENCES "user"("id") ON DELETE CASCADE,
+    "isStaffReply" BOOLEAN NOT NULL DEFAULT false,
+    "body" TEXT NOT NULL,
+    "readAt" TIMESTAMP(3),
+    "createdAt" TIMESTAMP(6) NOT NULL DEFAULT now()
+  );`,
+  `CREATE INDEX IF NOT EXISTS "om_thread_created_idx" ON "organization_message"("threadId", "createdAt");`
 ]
 
 for (const sql of statements) {

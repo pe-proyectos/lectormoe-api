@@ -95,6 +95,16 @@ export type MangaCustom = Prisma.MangaCustomModel
  */
 export type Chapter = Prisma.ChapterModel
 /**
+ * Model OrganizationMessageThread
+ * 
+ */
+export type OrganizationMessageThread = Prisma.OrganizationMessageThreadModel
+/**
+ * Model OrganizationMessage
+ * 
+ */
+export type OrganizationMessage = Prisma.OrganizationMessageModel
+/**
  * Model CustomList
  * 
  */
