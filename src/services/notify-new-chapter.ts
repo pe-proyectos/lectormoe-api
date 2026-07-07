@@ -114,10 +114,11 @@ export const notifyComment = async (commentId: number) => {
   // Resolve owner userIds for the content the comment is on.
   let ownerUserIds: number[] = [];
   if (isJoint) {
-    // Strip the leading "joint_" then strip a trailing "_<digits>" if present.
+    // Strip the leading "joint_" then strip a trailing "_<number>" if present
+    // (decimal chapters like 10.5 included).
     let jointSlug = identifier.slice('joint_'.length);
     const lastUnderscore = jointSlug.lastIndexOf('_');
-    if (lastUnderscore > 0 && /^\d+$/.test(jointSlug.slice(lastUnderscore + 1))) {
+    if (lastUnderscore > 0 && /^\d+(\.\d+)?$/.test(jointSlug.slice(lastUnderscore + 1))) {
       jointSlug = jointSlug.slice(0, lastUnderscore);
     }
     const joint = await prisma.mangaJoint.findFirst({

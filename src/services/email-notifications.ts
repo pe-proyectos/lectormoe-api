@@ -534,7 +534,8 @@ export async function sendCommentReplyNotification(
   const lastUnderscore = identifier.lastIndexOf('_');
   let threadUrl: string;
 
-  if (lastUnderscore > 0 && /^\d+$/.test(identifier.slice(lastUnderscore + 1))) {
+  // \d+(\.\d+)? y no \d+: los capítulos decimales (10.5) rompían el link
+  if (lastUnderscore > 0 && /^\d+(\.\d+)?$/.test(identifier.slice(lastUnderscore + 1))) {
     const mangaSlug = identifier.slice(0, lastUnderscore);
     const chapterNumber = identifier.slice(lastUnderscore + 1);
     threadUrl = `${BASE_URL}/${reply.organization.slug}/manga/${mangaSlug}/chapters/${chapterNumber}`;
