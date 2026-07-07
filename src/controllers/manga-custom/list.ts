@@ -537,6 +537,22 @@ export const listMangaCustom = async (
     }
   }
 
+  // En el line-up de "últimas actualizaciones", una obra con la opción de
+  // ocultar programados NO debe aparecer si tras el filtro se quedó sin capítulos
+  // (su único capítulo reciente está programado): entraría con card vacía. Solo
+  // aparece cuando ya tiene un capítulo publicado.
+  if (filters.order === OrderEnum.LATEST) {
+    for (let i = mangasCustoms.length - 1; i >= 0; i--) {
+      const mc: any = mangasCustoms[i]
+      if (
+        mc.hideUnreleasedChapters &&
+        (!mc.chapters || mc.chapters.length === 0)
+      ) {
+        mangasCustoms.splice(i, 1)
+      }
+    }
+  }
+
   // Relevancia en búsqueda: empieza-con > contiene como palabra > contiene >
   // match por autor. Ordena la página en memoria (acentos ignorados).
   if (searchNorm) {
