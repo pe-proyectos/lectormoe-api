@@ -62,7 +62,24 @@ const statements: string[] = [
   );`,
   `CREATE UNIQUE INDEX IF NOT EXISTS "manga_review_userId_mangaCustomId_key" ON "manga_review"("userId", "mangaCustomId");`,
   `CREATE UNIQUE INDEX IF NOT EXISTS "manga_review_userId_jointId_key" ON "manga_review"("userId", "jointId");`,
-  `CREATE INDEX IF NOT EXISTS "manga_review_mangaCustomId_hiddenAt_idx" ON "manga_review"("mangaCustomId", "hiddenAt");`
+  `CREATE INDEX IF NOT EXISTS "manga_review_mangaCustomId_hiddenAt_idx" ON "manga_review"("mangaCustomId", "hiddenAt");`,
+  // Tarea 13: reportes de contenido
+  `CREATE TABLE IF NOT EXISTS "content_report" (
+    "id" SERIAL PRIMARY KEY,
+    "reporterUserId" INTEGER NOT NULL REFERENCES "user"("id") ON DELETE CASCADE,
+    "mangaCustomId" INTEGER REFERENCES "manga_custom"("id") ON DELETE CASCADE,
+    "jointId" INTEGER REFERENCES "manga_joint"("id") ON DELETE CASCADE,
+    "category" VARCHAR(40) NOT NULL,
+    "details" VARCHAR(2000),
+    "status" VARCHAR(16) NOT NULL DEFAULT 'pending',
+    "resolutionNote" VARCHAR(1000),
+    "reviewedByUserId" INTEGER REFERENCES "user"("id"),
+    "reviewedAt" TIMESTAMP(3),
+    "createdAt" TIMESTAMP(6) NOT NULL DEFAULT now(),
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT now()
+  );`,
+  `CREATE INDEX IF NOT EXISTS "content_report_status_createdAt_idx" ON "content_report"("status", "createdAt");`,
+  `CREATE INDEX IF NOT EXISTS "content_report_reporterUserId_createdAt_idx" ON "content_report"("reporterUserId", "createdAt");`
 ]
 
 for (const sql of statements) {

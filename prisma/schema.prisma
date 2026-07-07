@@ -150,6 +150,8 @@ model User {
   milestoneAlerts         ChapterMilestoneAlert[]
   reviews                 MangaReview[]           @relation("MangaReviewUser")
   reviewsHidden           MangaReview[]           @relation("MangaReviewHiddenBy")
+  contentReports          ContentReport[]         @relation("ContentReportReporter")
+  contentReportsReviewed  ContentReport[]         @relation("ContentReportReviewer")
 
   @@map("user")
 }
@@ -305,6 +307,7 @@ model MangaCustom {
   volumes                            MangaVolume[]
   milestoneAlerts                    ChapterMilestoneAlert[]
   reviews                            MangaReview[]
+  contentReports                     ContentReport[]
   favorites                          Favorite[]
   userListEntries                    UserList[]
   manga                              Manga              @relation(fields: [mangaId], references: [id])
@@ -357,6 +360,29 @@ model Chapter {
   @@unique([number, mangaCustomId])
   @@unique([number, jointId])
   @@map("chapter")
+}
+
+model ContentReport {
+  id               Int          @id @default(autoincrement())
+  reporterUserId   Int
+  mangaCustomId    Int?
+  jointId          Int?
+  category         String       @db.VarChar(40)
+  details          String?      @db.VarChar(2000)
+  status           String       @default("pending") @db.VarChar(16)
+  resolutionNote   String?      @db.VarChar(1000)
+  reviewedByUserId Int?
+  reviewedAt       DateTime?
+  createdAt        DateTime     @default(now()) @db.Timestamp(6)
+  updatedAt        DateTime     @updatedAt
+  reporter         User         @relation("ContentReportReporter", fields: [reporterUserId], references: [id], onDelete: Cascade)
+  reviewedBy       User?        @relation("ContentReportReviewer", fields: [reviewedByUserId], references: [id])
+  mangaCustom      MangaCustom? @relation(fields: [mangaCustomId], references: [id], onDelete: Cascade)
+  joint            MangaJoint?  @relation(fields: [jointId], references: [id], onDelete: Cascade)
+
+  @@index([status, createdAt])
+  @@index([reporterUserId, createdAt])
+  @@map("content_report")
 }
 
 model MangaReview {
@@ -921,6 +947,7 @@ model MangaJoint {
   volumes          MangaVolume[]
   milestoneAlerts  ChapterMilestoneAlert[]
   reviews          MangaReview[]
+  contentReports   ContentReport[]
   members          JointMember[]
   chapters         Chapter[]
   viewsHistory     ViewsHistory[]
