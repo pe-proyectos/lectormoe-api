@@ -39,6 +39,8 @@ export const router = () =>
             scanUrl: t.String(),
             mangaSlug: t.String(),
             mangaUrl: t.String(),
+            firstChapterNumber: t.Union([t.Number(), t.Null()]),
+            firstChapterUrl: t.Union([t.String(), t.Null()]),
             badgeColor: t.String(),
             createdAt: t.Date(),
             organizationId: t.Number(),
