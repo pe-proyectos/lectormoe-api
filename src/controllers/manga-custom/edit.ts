@@ -41,6 +41,9 @@ export const editMangaCustom = async (
       : {}),
     ...(params.finalChapterNumber !== undefined
       ? { finalChapterNumber: params.finalChapterNumber }
+      : {}),
+    ...(params.groupChaptersByVolume !== undefined
+      ? { groupChaptersByVolume: params.groupChaptersByVolume }
       : {})
   }
 

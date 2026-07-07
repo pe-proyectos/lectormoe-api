@@ -37,6 +37,9 @@ export const getMangaCustomBySlug = async (
           number: Prisma.SortOrder.desc
         }
       },
+      volumes: {
+        orderBy: { number: Prisma.SortOrder.asc }
+      },
       genres: {
         select: {
           id: true,

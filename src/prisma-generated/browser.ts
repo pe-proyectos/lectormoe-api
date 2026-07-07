@@ -73,6 +73,11 @@ export type MangaCustom = Prisma.MangaCustomModel
  */
 export type Chapter = Prisma.ChapterModel
 /**
+ * Model MangaVolume
+ * 
+ */
+export type MangaVolume = Prisma.MangaVolumeModel
+/**
  * Model ChapterReaction
  * 
  */

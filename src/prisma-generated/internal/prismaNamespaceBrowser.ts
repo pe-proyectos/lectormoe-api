@@ -62,6 +62,7 @@ export const ModelName = {
   Manga: 'Manga',
   MangaCustom: 'MangaCustom',
   Chapter: 'Chapter',
+  MangaVolume: 'MangaVolume',
   ChapterReaction: 'ChapterReaction',
   Page: 'Page',
   Comment: 'Comment',
@@ -347,7 +348,8 @@ export const MangaCustomScalarFieldEnum = {
   nextChapterAtMessage: 'nextChapterAtMessage',
   hideUnreleasedChapters: 'hideUnreleasedChapters',
   usersAlsoReadMangaCustomIds: 'usersAlsoReadMangaCustomIds',
-  finalChapterNumber: 'finalChapterNumber'
+  finalChapterNumber: 'finalChapterNumber',
+  groupChaptersByVolume: 'groupChaptersByVolume'
 } as const
 
 export type MangaCustomScalarFieldEnum = (typeof MangaCustomScalarFieldEnum)[keyof typeof MangaCustomScalarFieldEnum]
@@ -367,10 +369,25 @@ export const ChapterScalarFieldEnum = {
   releasedAt: 'releasedAt',
   isUnreleased: 'isUnreleased',
   deletedAt: 'deletedAt',
-  bodyMarkdown: 'bodyMarkdown'
+  bodyMarkdown: 'bodyMarkdown',
+  volumeNumber: 'volumeNumber'
 } as const
 
 export type ChapterScalarFieldEnum = (typeof ChapterScalarFieldEnum)[keyof typeof ChapterScalarFieldEnum]
+
+
+export const MangaVolumeScalarFieldEnum = {
+  id: 'id',
+  mangaCustomId: 'mangaCustomId',
+  jointId: 'jointId',
+  number: 'number',
+  title: 'title',
+  coverUrl: 'coverUrl',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MangaVolumeScalarFieldEnum = (typeof MangaVolumeScalarFieldEnum)[keyof typeof MangaVolumeScalarFieldEnum]
 
 
 export const ChapterReactionScalarFieldEnum = {

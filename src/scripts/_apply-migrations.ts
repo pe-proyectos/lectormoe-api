@@ -17,7 +17,22 @@ const statements: string[] = [
     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT now()
   );`,
   `CREATE UNIQUE INDEX IF NOT EXISTS "chapter_reaction_chapterId_userId_key" ON "chapter_reaction"("chapterId", "userId");`,
-  `CREATE INDEX IF NOT EXISTS "chapter_reaction_chapterId_idx" ON "chapter_reaction"("chapterId");`
+  `CREATE INDEX IF NOT EXISTS "chapter_reaction_chapterId_idx" ON "chapter_reaction"("chapterId");`,
+  // Tarea 8: volúmenes
+  `ALTER TABLE "chapter" ADD COLUMN IF NOT EXISTS "volumeNumber" INTEGER;`,
+  `ALTER TABLE "manga_custom" ADD COLUMN IF NOT EXISTS "groupChaptersByVolume" BOOLEAN NOT NULL DEFAULT false;`,
+  `CREATE TABLE IF NOT EXISTS "manga_volume" (
+    "id" SERIAL PRIMARY KEY,
+    "mangaCustomId" INTEGER REFERENCES "manga_custom"("id") ON DELETE CASCADE,
+    "jointId" INTEGER REFERENCES "manga_joint"("id") ON DELETE CASCADE,
+    "number" INTEGER NOT NULL,
+    "title" VARCHAR(256),
+    "coverUrl" TEXT,
+    "createdAt" TIMESTAMP(6) NOT NULL DEFAULT now(),
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT now()
+  );`,
+  `CREATE UNIQUE INDEX IF NOT EXISTS "manga_volume_mangaCustomId_number_key" ON "manga_volume"("mangaCustomId", "number");`,
+  `CREATE UNIQUE INDEX IF NOT EXISTS "manga_volume_jointId_number_key" ON "manga_volume"("jointId", "number");`
 ]
 
 for (const sql of statements) {

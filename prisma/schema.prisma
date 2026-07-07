@@ -297,7 +297,9 @@ model MangaCustom {
   hideUnreleasedChapters             Boolean            @default(false)
   usersAlsoReadMangaCustomIds        String?
   finalChapterNumber                 Float?
+  groupChaptersByVolume              Boolean            @default(false)
   chapters                           Chapter[]
+  volumes                            MangaVolume[]
   favorites                          Favorite[]
   userListEntries                    UserList[]
   manga                              Manga              @relation(fields: [mangaId], references: [id])
@@ -335,6 +337,7 @@ model Chapter {
   // Markdown body for text-based chapters (novels, books, etc.). When set,
   // the chapter is rendered by NovelReader and `pages` should be empty.
   bodyMarkdown              String?              @db.Text
+  volumeNumber              Int?
   mangaCustom               MangaCustom?         @relation(fields: [mangaCustomId], references: [id])
   joint                     MangaJoint?          @relation(fields: [jointId], references: [id])
   uploadedByOrganization    Organization?        @relation("ChapterUploader", fields: [uploadedByOrganizationId], references: [id])
@@ -349,6 +352,23 @@ model Chapter {
   @@unique([number, mangaCustomId])
   @@unique([number, jointId])
   @@map("chapter")
+}
+
+model MangaVolume {
+  id            Int          @id @default(autoincrement())
+  mangaCustomId Int?
+  jointId       Int?
+  number        Int
+  title         String?      @db.VarChar(256)
+  coverUrl      String?
+  createdAt     DateTime     @default(now()) @db.Timestamp(6)
+  updatedAt     DateTime     @updatedAt
+  mangaCustom   MangaCustom? @relation(fields: [mangaCustomId], references: [id], onDelete: Cascade)
+  joint         MangaJoint?  @relation(fields: [jointId], references: [id], onDelete: Cascade)
+
+  @@unique([mangaCustomId, number])
+  @@unique([jointId, number])
+  @@map("manga_volume")
 }
 
 model ChapterReaction {
@@ -852,6 +872,7 @@ model MangaJoint {
   createdAt        DateTime      @default(now()) @db.Timestamp(6)
   updatedAt        DateTime      @updatedAt
   deletedAt        DateTime?
+  volumes          MangaVolume[]
   members          JointMember[]
   chapters         Chapter[]
   viewsHistory     ViewsHistory[]

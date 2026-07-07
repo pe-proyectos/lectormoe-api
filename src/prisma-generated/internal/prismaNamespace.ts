@@ -395,6 +395,7 @@ export const ModelName = {
   Manga: 'Manga',
   MangaCustom: 'MangaCustom',
   Chapter: 'Chapter',
+  MangaVolume: 'MangaVolume',
   ChapterReaction: 'ChapterReaction',
   Page: 'Page',
   Comment: 'Comment',
@@ -445,7 +446,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "token" | "organization" | "user" | "permission" | "passwordResetToken" | "countryOptions" | "author" | "bookType" | "manga" | "mangaCustom" | "chapter" | "chapterReaction" | "page" | "comment" | "commentLike" | "ranking" | "demography" | "genre" | "analytics" | "userChapterHistory" | "favorite" | "userList" | "userPageBookmark" | "audit" | "viewsHistory" | "subscriptionPlan" | "subscription" | "organizationTransaction" | "organizationFollower" | "organizationRequest" | "emailPreference" | "emailLog" | "unsubscribeToken" | "emailVerificationToken" | "userDailyActivity" | "achievement" | "userAchievement" | "mangaJoint" | "jointMember" | "jointMemberHistory" | "notification" | "raffle" | "raffleTicket" | "raffleComment" | "raffleRefund" | "userBan"
+    modelProps: "token" | "organization" | "user" | "permission" | "passwordResetToken" | "countryOptions" | "author" | "bookType" | "manga" | "mangaCustom" | "chapter" | "mangaVolume" | "chapterReaction" | "page" | "comment" | "commentLike" | "ranking" | "demography" | "genre" | "analytics" | "userChapterHistory" | "favorite" | "userList" | "userPageBookmark" | "audit" | "viewsHistory" | "subscriptionPlan" | "subscription" | "organizationTransaction" | "organizationFollower" | "organizationRequest" | "emailPreference" | "emailLog" | "unsubscribeToken" | "emailVerificationToken" | "userDailyActivity" | "achievement" | "userAchievement" | "mangaJoint" | "jointMember" | "jointMemberHistory" | "notification" | "raffle" | "raffleTicket" | "raffleComment" | "raffleRefund" | "userBan"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1260,6 +1261,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.ChapterCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ChapterCountAggregateOutputType> | number
+        }
+      }
+    }
+    MangaVolume: {
+      payload: Prisma.$MangaVolumePayload<ExtArgs>
+      fields: Prisma.MangaVolumeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MangaVolumeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MangaVolumePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MangaVolumeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MangaVolumePayload>
+        }
+        findFirst: {
+          args: Prisma.MangaVolumeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MangaVolumePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MangaVolumeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MangaVolumePayload>
+        }
+        findMany: {
+          args: Prisma.MangaVolumeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MangaVolumePayload>[]
+        }
+        create: {
+          args: Prisma.MangaVolumeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MangaVolumePayload>
+        }
+        createMany: {
+          args: Prisma.MangaVolumeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.MangaVolumeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MangaVolumePayload>[]
+        }
+        delete: {
+          args: Prisma.MangaVolumeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MangaVolumePayload>
+        }
+        update: {
+          args: Prisma.MangaVolumeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MangaVolumePayload>
+        }
+        deleteMany: {
+          args: Prisma.MangaVolumeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MangaVolumeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.MangaVolumeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MangaVolumePayload>[]
+        }
+        upsert: {
+          args: Prisma.MangaVolumeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MangaVolumePayload>
+        }
+        aggregate: {
+          args: Prisma.MangaVolumeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMangaVolume>
+        }
+        groupBy: {
+          args: Prisma.MangaVolumeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MangaVolumeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MangaVolumeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MangaVolumeCountAggregateOutputType> | number
         }
       }
     }
@@ -4124,7 +4199,8 @@ export const MangaCustomScalarFieldEnum = {
   nextChapterAtMessage: 'nextChapterAtMessage',
   hideUnreleasedChapters: 'hideUnreleasedChapters',
   usersAlsoReadMangaCustomIds: 'usersAlsoReadMangaCustomIds',
-  finalChapterNumber: 'finalChapterNumber'
+  finalChapterNumber: 'finalChapterNumber',
+  groupChaptersByVolume: 'groupChaptersByVolume'
 } as const
 
 export type MangaCustomScalarFieldEnum = (typeof MangaCustomScalarFieldEnum)[keyof typeof MangaCustomScalarFieldEnum]
@@ -4144,10 +4220,25 @@ export const ChapterScalarFieldEnum = {
   releasedAt: 'releasedAt',
   isUnreleased: 'isUnreleased',
   deletedAt: 'deletedAt',
-  bodyMarkdown: 'bodyMarkdown'
+  bodyMarkdown: 'bodyMarkdown',
+  volumeNumber: 'volumeNumber'
 } as const
 
 export type ChapterScalarFieldEnum = (typeof ChapterScalarFieldEnum)[keyof typeof ChapterScalarFieldEnum]
+
+
+export const MangaVolumeScalarFieldEnum = {
+  id: 'id',
+  mangaCustomId: 'mangaCustomId',
+  jointId: 'jointId',
+  number: 'number',
+  title: 'title',
+  coverUrl: 'coverUrl',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MangaVolumeScalarFieldEnum = (typeof MangaVolumeScalarFieldEnum)[keyof typeof MangaVolumeScalarFieldEnum]
 
 
 export const ChapterReactionScalarFieldEnum = {
@@ -5003,6 +5094,7 @@ export type GlobalOmitConfig = {
   manga?: Prisma.MangaOmit
   mangaCustom?: Prisma.MangaCustomOmit
   chapter?: Prisma.ChapterOmit
+  mangaVolume?: Prisma.MangaVolumeOmit
   chapterReaction?: Prisma.ChapterReactionOmit
   page?: Prisma.PageOmit
   comment?: Prisma.CommentOmit
