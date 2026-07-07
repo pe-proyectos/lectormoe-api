@@ -1,42 +1,30 @@
-import { prisma, Prisma } from "../../models/prisma";
+import { prisma } from '../../models/prisma'
+import {
+  getSiblingChapterIds,
+  resolveChapterAndBase
+} from '../../services/chapter-siblings'
 
-export const unreadUserChapterHistoryChapter = async (organizationId: number, userId: number, mangaSlug: string, chapterNumber: number) => {
-    const chapter = await prisma.chapter.findFirst({
-        select: {
-            id: true,
-            pages: {
-                orderBy: {
-                    number: Prisma.SortOrder.desc,
-                },
-                take: 1,
-                select: {
-                    number: true,
-                }
-            },
-        },
-        where: {
-            mangaCustom: {
-                organization: {
-                    id: organizationId,
-                },
-                manga: {
-                    slug: mangaSlug,
-                }
-            },
-            number: chapterNumber,
-        },
-    });
+// Desmarca un capítulo como leído en TODAS sus versiones (fan-out multi-scan).
+export const unreadUserChapterHistoryChapter = async (
+  organizationId: number | null,
+  userId: number,
+  mangaSlug: string,
+  chapterNumber: number
+) => {
+  const resolved = await resolveChapterAndBase(
+    organizationId,
+    mangaSlug,
+    chapterNumber
+  )
+  if (!resolved) return false
 
-    if (!chapter) {
-        return false;
-    }
+  const siblingIds = await getSiblingChapterIds(
+    resolved.baseMangaId,
+    chapterNumber
+  )
+  await prisma.userChapterHistory.deleteMany({
+    where: { userId, chapterId: { in: siblingIds } }
+  })
 
-    await prisma.userChapterHistory.deleteMany({
-        where: {
-            chapterId: chapter.id,
-            userId,
-        }
-    });
-
-    return true;
+  return true
 }
