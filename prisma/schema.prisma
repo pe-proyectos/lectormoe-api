@@ -148,6 +148,8 @@ model User {
   bansIssued              UserBan[]            @relation("BannedByUser")
   chapterReactions        ChapterReaction[]
   milestoneAlerts         ChapterMilestoneAlert[]
+  reviews                 MangaReview[]           @relation("MangaReviewUser")
+  reviewsHidden           MangaReview[]           @relation("MangaReviewHiddenBy")
 
   @@map("user")
 }
@@ -302,6 +304,7 @@ model MangaCustom {
   chapters                           Chapter[]
   volumes                            MangaVolume[]
   milestoneAlerts                    ChapterMilestoneAlert[]
+  reviews                            MangaReview[]
   favorites                          Favorite[]
   userListEntries                    UserList[]
   manga                              Manga              @relation(fields: [mangaId], references: [id])
@@ -354,6 +357,28 @@ model Chapter {
   @@unique([number, mangaCustomId])
   @@unique([number, jointId])
   @@map("chapter")
+}
+
+model MangaReview {
+  id             Int          @id @default(autoincrement())
+  userId         Int
+  mangaCustomId  Int?
+  jointId        Int?
+  rating         Int
+  body           String?      @db.VarChar(500)
+  hiddenAt       DateTime?
+  hiddenByUserId Int?
+  createdAt      DateTime     @default(now()) @db.Timestamp(6)
+  updatedAt      DateTime     @updatedAt
+  user           User         @relation("MangaReviewUser", fields: [userId], references: [id], onDelete: Cascade)
+  hiddenByUser   User?        @relation("MangaReviewHiddenBy", fields: [hiddenByUserId], references: [id])
+  mangaCustom    MangaCustom? @relation(fields: [mangaCustomId], references: [id], onDelete: Cascade)
+  joint          MangaJoint?  @relation(fields: [jointId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, mangaCustomId])
+  @@unique([userId, jointId])
+  @@index([mangaCustomId, hiddenAt])
+  @@map("manga_review")
 }
 
 model ChapterMilestoneAlert {
@@ -895,6 +920,7 @@ model MangaJoint {
   deletedAt        DateTime?
   volumes          MangaVolume[]
   milestoneAlerts  ChapterMilestoneAlert[]
+  reviews          MangaReview[]
   members          JointMember[]
   chapters         Chapter[]
   viewsHistory     ViewsHistory[]

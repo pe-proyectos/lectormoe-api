@@ -395,6 +395,7 @@ export const ModelName = {
   Manga: 'Manga',
   MangaCustom: 'MangaCustom',
   Chapter: 'Chapter',
+  MangaReview: 'MangaReview',
   ChapterMilestoneAlert: 'ChapterMilestoneAlert',
   MangaVolume: 'MangaVolume',
   ChapterReaction: 'ChapterReaction',
@@ -447,7 +448,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "token" | "organization" | "user" | "permission" | "passwordResetToken" | "countryOptions" | "author" | "bookType" | "manga" | "mangaCustom" | "chapter" | "chapterMilestoneAlert" | "mangaVolume" | "chapterReaction" | "page" | "comment" | "commentLike" | "ranking" | "demography" | "genre" | "analytics" | "userChapterHistory" | "favorite" | "userList" | "userPageBookmark" | "audit" | "viewsHistory" | "subscriptionPlan" | "subscription" | "organizationTransaction" | "organizationFollower" | "organizationRequest" | "emailPreference" | "emailLog" | "unsubscribeToken" | "emailVerificationToken" | "userDailyActivity" | "achievement" | "userAchievement" | "mangaJoint" | "jointMember" | "jointMemberHistory" | "notification" | "raffle" | "raffleTicket" | "raffleComment" | "raffleRefund" | "userBan"
+    modelProps: "token" | "organization" | "user" | "permission" | "passwordResetToken" | "countryOptions" | "author" | "bookType" | "manga" | "mangaCustom" | "chapter" | "mangaReview" | "chapterMilestoneAlert" | "mangaVolume" | "chapterReaction" | "page" | "comment" | "commentLike" | "ranking" | "demography" | "genre" | "analytics" | "userChapterHistory" | "favorite" | "userList" | "userPageBookmark" | "audit" | "viewsHistory" | "subscriptionPlan" | "subscription" | "organizationTransaction" | "organizationFollower" | "organizationRequest" | "emailPreference" | "emailLog" | "unsubscribeToken" | "emailVerificationToken" | "userDailyActivity" | "achievement" | "userAchievement" | "mangaJoint" | "jointMember" | "jointMemberHistory" | "notification" | "raffle" | "raffleTicket" | "raffleComment" | "raffleRefund" | "userBan"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1262,6 +1263,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.ChapterCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ChapterCountAggregateOutputType> | number
+        }
+      }
+    }
+    MangaReview: {
+      payload: Prisma.$MangaReviewPayload<ExtArgs>
+      fields: Prisma.MangaReviewFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MangaReviewFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MangaReviewPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MangaReviewFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MangaReviewPayload>
+        }
+        findFirst: {
+          args: Prisma.MangaReviewFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MangaReviewPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MangaReviewFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MangaReviewPayload>
+        }
+        findMany: {
+          args: Prisma.MangaReviewFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MangaReviewPayload>[]
+        }
+        create: {
+          args: Prisma.MangaReviewCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MangaReviewPayload>
+        }
+        createMany: {
+          args: Prisma.MangaReviewCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.MangaReviewCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MangaReviewPayload>[]
+        }
+        delete: {
+          args: Prisma.MangaReviewDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MangaReviewPayload>
+        }
+        update: {
+          args: Prisma.MangaReviewUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MangaReviewPayload>
+        }
+        deleteMany: {
+          args: Prisma.MangaReviewDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MangaReviewUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.MangaReviewUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MangaReviewPayload>[]
+        }
+        upsert: {
+          args: Prisma.MangaReviewUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MangaReviewPayload>
+        }
+        aggregate: {
+          args: Prisma.MangaReviewAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMangaReview>
+        }
+        groupBy: {
+          args: Prisma.MangaReviewGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MangaReviewGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MangaReviewCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MangaReviewCountAggregateOutputType> | number
         }
       }
     }
@@ -4302,6 +4377,22 @@ export const ChapterScalarFieldEnum = {
 export type ChapterScalarFieldEnum = (typeof ChapterScalarFieldEnum)[keyof typeof ChapterScalarFieldEnum]
 
 
+export const MangaReviewScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  mangaCustomId: 'mangaCustomId',
+  jointId: 'jointId',
+  rating: 'rating',
+  body: 'body',
+  hiddenAt: 'hiddenAt',
+  hiddenByUserId: 'hiddenByUserId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MangaReviewScalarFieldEnum = (typeof MangaReviewScalarFieldEnum)[keyof typeof MangaReviewScalarFieldEnum]
+
+
 export const ChapterMilestoneAlertScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -5183,6 +5274,7 @@ export type GlobalOmitConfig = {
   manga?: Prisma.MangaOmit
   mangaCustom?: Prisma.MangaCustomOmit
   chapter?: Prisma.ChapterOmit
+  mangaReview?: Prisma.MangaReviewOmit
   chapterMilestoneAlert?: Prisma.ChapterMilestoneAlertOmit
   mangaVolume?: Prisma.MangaVolumeOmit
   chapterReaction?: Prisma.ChapterReactionOmit

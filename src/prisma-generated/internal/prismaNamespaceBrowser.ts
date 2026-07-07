@@ -62,6 +62,7 @@ export const ModelName = {
   Manga: 'Manga',
   MangaCustom: 'MangaCustom',
   Chapter: 'Chapter',
+  MangaReview: 'MangaReview',
   ChapterMilestoneAlert: 'ChapterMilestoneAlert',
   MangaVolume: 'MangaVolume',
   ChapterReaction: 'ChapterReaction',
@@ -375,6 +376,22 @@ export const ChapterScalarFieldEnum = {
 } as const
 
 export type ChapterScalarFieldEnum = (typeof ChapterScalarFieldEnum)[keyof typeof ChapterScalarFieldEnum]
+
+
+export const MangaReviewScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  mangaCustomId: 'mangaCustomId',
+  jointId: 'jointId',
+  rating: 'rating',
+  body: 'body',
+  hiddenAt: 'hiddenAt',
+  hiddenByUserId: 'hiddenByUserId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MangaReviewScalarFieldEnum = (typeof MangaReviewScalarFieldEnum)[keyof typeof MangaReviewScalarFieldEnum]
 
 
 export const ChapterMilestoneAlertScalarFieldEnum = {

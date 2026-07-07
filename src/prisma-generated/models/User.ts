@@ -419,6 +419,8 @@ export type UserWhereInput = {
   bansIssued?: Prisma.UserBanListRelationFilter
   chapterReactions?: Prisma.ChapterReactionListRelationFilter
   milestoneAlerts?: Prisma.ChapterMilestoneAlertListRelationFilter
+  reviews?: Prisma.MangaReviewListRelationFilter
+  reviewsHidden?: Prisma.MangaReviewListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -476,6 +478,8 @@ export type UserOrderByWithRelationInput = {
   bansIssued?: Prisma.UserBanOrderByRelationAggregateInput
   chapterReactions?: Prisma.ChapterReactionOrderByRelationAggregateInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertOrderByRelationAggregateInput
+  reviews?: Prisma.MangaReviewOrderByRelationAggregateInput
+  reviewsHidden?: Prisma.MangaReviewOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -536,6 +540,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   bansIssued?: Prisma.UserBanListRelationFilter
   chapterReactions?: Prisma.ChapterReactionListRelationFilter
   milestoneAlerts?: Prisma.ChapterMilestoneAlertListRelationFilter
+  reviews?: Prisma.MangaReviewListRelationFilter
+  reviewsHidden?: Prisma.MangaReviewListRelationFilter
 }, "id" | "username" | "slug" | "email" | "discordId">
 
 export type UserOrderByWithAggregationInput = {
@@ -660,6 +666,8 @@ export type UserCreateInput = {
   bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -717,6 +725,8 @@ export type UserUncheckedCreateInput = {
   bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionUncheckedCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserUpdateInput = {
@@ -773,6 +783,8 @@ export type UserUpdateInput = {
   bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -830,6 +842,8 @@ export type UserUncheckedUpdateInput = {
   bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUncheckedUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -1073,6 +1087,36 @@ export type UserUpdateOneRequiredWithoutPasswordResetTokensNestedInput = {
   upsert?: Prisma.UserUpsertWithoutPasswordResetTokensInput
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPasswordResetTokensInput, Prisma.UserUpdateWithoutPasswordResetTokensInput>, Prisma.UserUncheckedUpdateWithoutPasswordResetTokensInput>
+}
+
+export type UserCreateNestedOneWithoutReviewsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReviewsInput, Prisma.UserUncheckedCreateWithoutReviewsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReviewsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutReviewsHiddenInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReviewsHiddenInput, Prisma.UserUncheckedCreateWithoutReviewsHiddenInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReviewsHiddenInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutReviewsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReviewsInput, Prisma.UserUncheckedCreateWithoutReviewsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReviewsInput
+  upsert?: Prisma.UserUpsertWithoutReviewsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReviewsInput, Prisma.UserUpdateWithoutReviewsInput>, Prisma.UserUncheckedUpdateWithoutReviewsInput>
+}
+
+export type UserUpdateOneWithoutReviewsHiddenNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReviewsHiddenInput, Prisma.UserUncheckedCreateWithoutReviewsHiddenInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReviewsHiddenInput
+  upsert?: Prisma.UserUpsertWithoutReviewsHiddenInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReviewsHiddenInput, Prisma.UserUpdateWithoutReviewsHiddenInput>, Prisma.UserUncheckedUpdateWithoutReviewsHiddenInput>
 }
 
 export type UserCreateNestedOneWithoutMilestoneAlertsInput = {
@@ -1472,6 +1516,8 @@ export type UserCreateWithoutTokensInput = {
   bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserUncheckedCreateWithoutTokensInput = {
@@ -1528,6 +1574,8 @@ export type UserUncheckedCreateWithoutTokensInput = {
   bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionUncheckedCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserCreateOrConnectWithoutTokensInput = {
@@ -1599,6 +1647,8 @@ export type UserUpdateWithoutTokensInput = {
   bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTokensInput = {
@@ -1655,6 +1705,8 @@ export type UserUncheckedUpdateWithoutTokensInput = {
   bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUncheckedUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserCreateWithoutPermissionsInput = {
@@ -1710,6 +1762,8 @@ export type UserCreateWithoutPermissionsInput = {
   bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserUncheckedCreateWithoutPermissionsInput = {
@@ -1766,6 +1820,8 @@ export type UserUncheckedCreateWithoutPermissionsInput = {
   bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionUncheckedCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserCreateOrConnectWithoutPermissionsInput = {
@@ -1837,6 +1893,8 @@ export type UserUpdateWithoutPermissionsInput = {
   bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPermissionsInput = {
@@ -1893,6 +1951,8 @@ export type UserUncheckedUpdateWithoutPermissionsInput = {
   bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUncheckedUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserCreateWithoutPasswordResetTokensInput = {
@@ -1948,6 +2008,8 @@ export type UserCreateWithoutPasswordResetTokensInput = {
   bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserUncheckedCreateWithoutPasswordResetTokensInput = {
@@ -2004,6 +2066,8 @@ export type UserUncheckedCreateWithoutPasswordResetTokensInput = {
   bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionUncheckedCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserCreateOrConnectWithoutPasswordResetTokensInput = {
@@ -2075,6 +2139,8 @@ export type UserUpdateWithoutPasswordResetTokensInput = {
   bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
@@ -2131,6 +2197,500 @@ export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
   bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUncheckedUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
+}
+
+export type UserCreateWithoutReviewsInput = {
+  username: string
+  slug: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  description?: string | null
+  imageUrl?: string | null
+  birthdate?: Date | string | null
+  bannerUrl?: string | null
+  bannerUrlChangedAt?: Date | string | null
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
+  emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
+  pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
+  hideAds?: boolean
+  theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
+  analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
+  audits?: Prisma.AuditCreateNestedManyWithoutUserInput
+  Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  userList?: Prisma.UserListCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
+  rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenCreateNestedManyWithoutUserInput
+  achievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
+  chapterReactions?: Prisma.ChapterReactionCreateNestedManyWithoutUserInput
+  milestoneAlerts?: Prisma.ChapterMilestoneAlertCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
+}
+
+export type UserUncheckedCreateWithoutReviewsInput = {
+  id?: number
+  username: string
+  slug: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  description?: string | null
+  imageUrl?: string | null
+  birthdate?: Date | string | null
+  bannerUrl?: string | null
+  bannerUrlChangedAt?: Date | string | null
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
+  emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
+  pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
+  hideAds?: boolean
+  theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
+  analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
+  audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
+  Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
+  rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedCreateNestedManyWithoutUserInput
+  achievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanUncheckedCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
+  chapterReactions?: Prisma.ChapterReactionUncheckedCreateNestedManyWithoutUserInput
+  milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
+}
+
+export type UserCreateOrConnectWithoutReviewsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutReviewsInput, Prisma.UserUncheckedCreateWithoutReviewsInput>
+}
+
+export type UserCreateWithoutReviewsHiddenInput = {
+  username: string
+  slug: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  description?: string | null
+  imageUrl?: string | null
+  birthdate?: Date | string | null
+  bannerUrl?: string | null
+  bannerUrlChangedAt?: Date | string | null
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
+  emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
+  pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
+  hideAds?: boolean
+  theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
+  analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
+  audits?: Prisma.AuditCreateNestedManyWithoutUserInput
+  Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  userList?: Prisma.UserListCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
+  rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenCreateNestedManyWithoutUserInput
+  achievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
+  chapterReactions?: Prisma.ChapterReactionCreateNestedManyWithoutUserInput
+  milestoneAlerts?: Prisma.ChapterMilestoneAlertCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutReviewsHiddenInput = {
+  id?: number
+  username: string
+  slug: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  description?: string | null
+  imageUrl?: string | null
+  birthdate?: Date | string | null
+  bannerUrl?: string | null
+  bannerUrlChangedAt?: Date | string | null
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
+  emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
+  pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
+  hideAds?: boolean
+  theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
+  analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
+  audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
+  Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
+  rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedCreateNestedManyWithoutUserInput
+  achievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanUncheckedCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
+  chapterReactions?: Prisma.ChapterReactionUncheckedCreateNestedManyWithoutUserInput
+  milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutReviewsHiddenInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutReviewsHiddenInput, Prisma.UserUncheckedCreateWithoutReviewsHiddenInput>
+}
+
+export type UserUpsertWithoutReviewsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutReviewsInput, Prisma.UserUncheckedUpdateWithoutReviewsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutReviewsInput, Prisma.UserUncheckedCreateWithoutReviewsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutReviewsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutReviewsInput, Prisma.UserUncheckedUpdateWithoutReviewsInput>
+}
+
+export type UserUpdateWithoutReviewsInput = {
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
+  audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
+  Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
+  rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenUpdateManyWithoutUserNestedInput
+  achievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
+  chapterReactions?: Prisma.ChapterReactionUpdateManyWithoutUserNestedInput
+  milestoneAlerts?: Prisma.ChapterMilestoneAlertUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutReviewsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
+  audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
+  Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
+  rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedUpdateManyWithoutUserNestedInput
+  achievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUncheckedUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
+  chapterReactions?: Prisma.ChapterReactionUncheckedUpdateManyWithoutUserNestedInput
+  milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
+}
+
+export type UserUpsertWithoutReviewsHiddenInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutReviewsHiddenInput, Prisma.UserUncheckedUpdateWithoutReviewsHiddenInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutReviewsHiddenInput, Prisma.UserUncheckedCreateWithoutReviewsHiddenInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutReviewsHiddenInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutReviewsHiddenInput, Prisma.UserUncheckedUpdateWithoutReviewsHiddenInput>
+}
+
+export type UserUpdateWithoutReviewsHiddenInput = {
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
+  audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
+  Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
+  rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenUpdateManyWithoutUserNestedInput
+  achievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
+  chapterReactions?: Prisma.ChapterReactionUpdateManyWithoutUserNestedInput
+  milestoneAlerts?: Prisma.ChapterMilestoneAlertUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutReviewsHiddenInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
+  audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
+  Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
+  rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedUpdateManyWithoutUserNestedInput
+  achievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUncheckedUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
+  chapterReactions?: Prisma.ChapterReactionUncheckedUpdateManyWithoutUserNestedInput
+  milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutMilestoneAlertsInput = {
@@ -2186,6 +2746,8 @@ export type UserCreateWithoutMilestoneAlertsInput = {
   bansReceived?: Prisma.UserBanCreateNestedManyWithoutUserInput
   bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserUncheckedCreateWithoutMilestoneAlertsInput = {
@@ -2242,6 +2804,8 @@ export type UserUncheckedCreateWithoutMilestoneAlertsInput = {
   bansReceived?: Prisma.UserBanUncheckedCreateNestedManyWithoutUserInput
   bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionUncheckedCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserCreateOrConnectWithoutMilestoneAlertsInput = {
@@ -2313,6 +2877,8 @@ export type UserUpdateWithoutMilestoneAlertsInput = {
   bansReceived?: Prisma.UserBanUpdateManyWithoutUserNestedInput
   bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMilestoneAlertsInput = {
@@ -2369,6 +2935,8 @@ export type UserUncheckedUpdateWithoutMilestoneAlertsInput = {
   bansReceived?: Prisma.UserBanUncheckedUpdateManyWithoutUserNestedInput
   bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUncheckedUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserCreateWithoutChapterReactionsInput = {
@@ -2424,6 +2992,8 @@ export type UserCreateWithoutChapterReactionsInput = {
   bansReceived?: Prisma.UserBanCreateNestedManyWithoutUserInput
   bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserUncheckedCreateWithoutChapterReactionsInput = {
@@ -2480,6 +3050,8 @@ export type UserUncheckedCreateWithoutChapterReactionsInput = {
   bansReceived?: Prisma.UserBanUncheckedCreateNestedManyWithoutUserInput
   bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserCreateOrConnectWithoutChapterReactionsInput = {
@@ -2551,6 +3123,8 @@ export type UserUpdateWithoutChapterReactionsInput = {
   bansReceived?: Prisma.UserBanUpdateManyWithoutUserNestedInput
   bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutChapterReactionsInput = {
@@ -2607,6 +3181,8 @@ export type UserUncheckedUpdateWithoutChapterReactionsInput = {
   bansReceived?: Prisma.UserBanUncheckedUpdateManyWithoutUserNestedInput
   bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserCreateWithoutCommentInput = {
@@ -2662,6 +3238,8 @@ export type UserCreateWithoutCommentInput = {
   bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserUncheckedCreateWithoutCommentInput = {
@@ -2718,6 +3296,8 @@ export type UserUncheckedCreateWithoutCommentInput = {
   bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionUncheckedCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserCreateOrConnectWithoutCommentInput = {
@@ -2778,6 +3358,8 @@ export type UserCreateWithoutCommentsInput = {
   bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserUncheckedCreateWithoutCommentsInput = {
@@ -2834,6 +3416,8 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionUncheckedCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserCreateOrConnectWithoutCommentsInput = {
@@ -2905,6 +3489,8 @@ export type UserUpdateWithoutCommentInput = {
   bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCommentInput = {
@@ -2961,6 +3547,8 @@ export type UserUncheckedUpdateWithoutCommentInput = {
   bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUncheckedUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserUpsertWithoutCommentsInput = {
@@ -3027,6 +3615,8 @@ export type UserUpdateWithoutCommentsInput = {
   bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCommentsInput = {
@@ -3083,6 +3673,8 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUncheckedUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserCreateWithoutRankingsInput = {
@@ -3138,6 +3730,8 @@ export type UserCreateWithoutRankingsInput = {
   bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserUncheckedCreateWithoutRankingsInput = {
@@ -3194,6 +3788,8 @@ export type UserUncheckedCreateWithoutRankingsInput = {
   bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionUncheckedCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserCreateOrConnectWithoutRankingsInput = {
@@ -3265,6 +3861,8 @@ export type UserUpdateWithoutRankingsInput = {
   bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRankingsInput = {
@@ -3321,6 +3919,8 @@ export type UserUncheckedUpdateWithoutRankingsInput = {
   bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUncheckedUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserCreateWithoutAnalyticsInput = {
@@ -3376,6 +3976,8 @@ export type UserCreateWithoutAnalyticsInput = {
   bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserUncheckedCreateWithoutAnalyticsInput = {
@@ -3432,6 +4034,8 @@ export type UserUncheckedCreateWithoutAnalyticsInput = {
   bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionUncheckedCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserCreateOrConnectWithoutAnalyticsInput = {
@@ -3503,6 +4107,8 @@ export type UserUpdateWithoutAnalyticsInput = {
   bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAnalyticsInput = {
@@ -3559,6 +4165,8 @@ export type UserUncheckedUpdateWithoutAnalyticsInput = {
   bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUncheckedUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserCreateWithoutHistoryInput = {
@@ -3614,6 +4222,8 @@ export type UserCreateWithoutHistoryInput = {
   bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserUncheckedCreateWithoutHistoryInput = {
@@ -3670,6 +4280,8 @@ export type UserUncheckedCreateWithoutHistoryInput = {
   bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionUncheckedCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserCreateOrConnectWithoutHistoryInput = {
@@ -3741,6 +4353,8 @@ export type UserUpdateWithoutHistoryInput = {
   bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutHistoryInput = {
@@ -3797,6 +4411,8 @@ export type UserUncheckedUpdateWithoutHistoryInput = {
   bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUncheckedUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserCreateWithoutFavoritesInput = {
@@ -3852,6 +4468,8 @@ export type UserCreateWithoutFavoritesInput = {
   bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserUncheckedCreateWithoutFavoritesInput = {
@@ -3908,6 +4526,8 @@ export type UserUncheckedCreateWithoutFavoritesInput = {
   bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionUncheckedCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserCreateOrConnectWithoutFavoritesInput = {
@@ -3979,6 +4599,8 @@ export type UserUpdateWithoutFavoritesInput = {
   bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFavoritesInput = {
@@ -4035,6 +4657,8 @@ export type UserUncheckedUpdateWithoutFavoritesInput = {
   bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUncheckedUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserCreateWithoutUserListInput = {
@@ -4090,6 +4714,8 @@ export type UserCreateWithoutUserListInput = {
   bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserUncheckedCreateWithoutUserListInput = {
@@ -4146,6 +4772,8 @@ export type UserUncheckedCreateWithoutUserListInput = {
   bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionUncheckedCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserCreateOrConnectWithoutUserListInput = {
@@ -4217,6 +4845,8 @@ export type UserUpdateWithoutUserListInput = {
   bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserListInput = {
@@ -4273,6 +4903,8 @@ export type UserUncheckedUpdateWithoutUserListInput = {
   bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUncheckedUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserCreateWithoutPageBookmarksInput = {
@@ -4328,6 +4960,8 @@ export type UserCreateWithoutPageBookmarksInput = {
   bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserUncheckedCreateWithoutPageBookmarksInput = {
@@ -4384,6 +5018,8 @@ export type UserUncheckedCreateWithoutPageBookmarksInput = {
   bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionUncheckedCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserCreateOrConnectWithoutPageBookmarksInput = {
@@ -4455,6 +5091,8 @@ export type UserUpdateWithoutPageBookmarksInput = {
   bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPageBookmarksInput = {
@@ -4511,6 +5149,8 @@ export type UserUncheckedUpdateWithoutPageBookmarksInput = {
   bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUncheckedUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserCreateWithoutAuditsInput = {
@@ -4566,6 +5206,8 @@ export type UserCreateWithoutAuditsInput = {
   bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserUncheckedCreateWithoutAuditsInput = {
@@ -4622,6 +5264,8 @@ export type UserUncheckedCreateWithoutAuditsInput = {
   bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionUncheckedCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserCreateOrConnectWithoutAuditsInput = {
@@ -4693,6 +5337,8 @@ export type UserUpdateWithoutAuditsInput = {
   bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuditsInput = {
@@ -4749,6 +5395,8 @@ export type UserUncheckedUpdateWithoutAuditsInput = {
   bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUncheckedUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserCreateWithoutSubscriptionsInput = {
@@ -4804,6 +5452,8 @@ export type UserCreateWithoutSubscriptionsInput = {
   bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserUncheckedCreateWithoutSubscriptionsInput = {
@@ -4860,6 +5510,8 @@ export type UserUncheckedCreateWithoutSubscriptionsInput = {
   bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionUncheckedCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserCreateOrConnectWithoutSubscriptionsInput = {
@@ -4931,6 +5583,8 @@ export type UserUpdateWithoutSubscriptionsInput = {
   bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSubscriptionsInput = {
@@ -4987,6 +5641,8 @@ export type UserUncheckedUpdateWithoutSubscriptionsInput = {
   bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUncheckedUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserCreateWithoutOrganizationFollowsInput = {
@@ -5042,6 +5698,8 @@ export type UserCreateWithoutOrganizationFollowsInput = {
   bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserUncheckedCreateWithoutOrganizationFollowsInput = {
@@ -5098,6 +5756,8 @@ export type UserUncheckedCreateWithoutOrganizationFollowsInput = {
   bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionUncheckedCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserCreateOrConnectWithoutOrganizationFollowsInput = {
@@ -5169,6 +5829,8 @@ export type UserUpdateWithoutOrganizationFollowsInput = {
   bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOrganizationFollowsInput = {
@@ -5225,6 +5887,8 @@ export type UserUncheckedUpdateWithoutOrganizationFollowsInput = {
   bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUncheckedUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserCreateWithoutEmailPreferenceInput = {
@@ -5280,6 +5944,8 @@ export type UserCreateWithoutEmailPreferenceInput = {
   bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserUncheckedCreateWithoutEmailPreferenceInput = {
@@ -5336,6 +6002,8 @@ export type UserUncheckedCreateWithoutEmailPreferenceInput = {
   bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionUncheckedCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserCreateOrConnectWithoutEmailPreferenceInput = {
@@ -5407,6 +6075,8 @@ export type UserUpdateWithoutEmailPreferenceInput = {
   bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEmailPreferenceInput = {
@@ -5463,6 +6133,8 @@ export type UserUncheckedUpdateWithoutEmailPreferenceInput = {
   bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUncheckedUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserCreateWithoutEmailLogsInput = {
@@ -5518,6 +6190,8 @@ export type UserCreateWithoutEmailLogsInput = {
   bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserUncheckedCreateWithoutEmailLogsInput = {
@@ -5574,6 +6248,8 @@ export type UserUncheckedCreateWithoutEmailLogsInput = {
   bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionUncheckedCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserCreateOrConnectWithoutEmailLogsInput = {
@@ -5645,6 +6321,8 @@ export type UserUpdateWithoutEmailLogsInput = {
   bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEmailLogsInput = {
@@ -5701,6 +6379,8 @@ export type UserUncheckedUpdateWithoutEmailLogsInput = {
   bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUncheckedUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserCreateWithoutUnsubscribeTokensInput = {
@@ -5756,6 +6436,8 @@ export type UserCreateWithoutUnsubscribeTokensInput = {
   bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserUncheckedCreateWithoutUnsubscribeTokensInput = {
@@ -5812,6 +6494,8 @@ export type UserUncheckedCreateWithoutUnsubscribeTokensInput = {
   bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionUncheckedCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserCreateOrConnectWithoutUnsubscribeTokensInput = {
@@ -5883,6 +6567,8 @@ export type UserUpdateWithoutUnsubscribeTokensInput = {
   bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUnsubscribeTokensInput = {
@@ -5939,6 +6625,8 @@ export type UserUncheckedUpdateWithoutUnsubscribeTokensInput = {
   bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUncheckedUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserCreateWithoutEmailVerificationTokensInput = {
@@ -5994,6 +6682,8 @@ export type UserCreateWithoutEmailVerificationTokensInput = {
   bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserUncheckedCreateWithoutEmailVerificationTokensInput = {
@@ -6050,6 +6740,8 @@ export type UserUncheckedCreateWithoutEmailVerificationTokensInput = {
   bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionUncheckedCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserCreateOrConnectWithoutEmailVerificationTokensInput = {
@@ -6121,6 +6813,8 @@ export type UserUpdateWithoutEmailVerificationTokensInput = {
   bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEmailVerificationTokensInput = {
@@ -6177,6 +6871,8 @@ export type UserUncheckedUpdateWithoutEmailVerificationTokensInput = {
   bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUncheckedUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserCreateWithoutDailyActivitiesInput = {
@@ -6232,6 +6928,8 @@ export type UserCreateWithoutDailyActivitiesInput = {
   bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserUncheckedCreateWithoutDailyActivitiesInput = {
@@ -6288,6 +6986,8 @@ export type UserUncheckedCreateWithoutDailyActivitiesInput = {
   bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionUncheckedCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserCreateOrConnectWithoutDailyActivitiesInput = {
@@ -6359,6 +7059,8 @@ export type UserUpdateWithoutDailyActivitiesInput = {
   bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDailyActivitiesInput = {
@@ -6415,6 +7117,8 @@ export type UserUncheckedUpdateWithoutDailyActivitiesInput = {
   bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUncheckedUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserCreateWithoutAchievementsInput = {
@@ -6470,6 +7174,8 @@ export type UserCreateWithoutAchievementsInput = {
   bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserUncheckedCreateWithoutAchievementsInput = {
@@ -6526,6 +7232,8 @@ export type UserUncheckedCreateWithoutAchievementsInput = {
   bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionUncheckedCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserCreateOrConnectWithoutAchievementsInput = {
@@ -6597,6 +7305,8 @@ export type UserUpdateWithoutAchievementsInput = {
   bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAchievementsInput = {
@@ -6653,6 +7363,8 @@ export type UserUncheckedUpdateWithoutAchievementsInput = {
   bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUncheckedUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserCreateWithoutNotificationsInput = {
@@ -6708,6 +7420,8 @@ export type UserCreateWithoutNotificationsInput = {
   bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -6764,6 +7478,8 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionUncheckedCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -6835,6 +7551,8 @@ export type UserUpdateWithoutNotificationsInput = {
   bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -6891,6 +7609,8 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUncheckedUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserCreateWithoutRaffleTicketsInput = {
@@ -6946,6 +7666,8 @@ export type UserCreateWithoutRaffleTicketsInput = {
   bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserUncheckedCreateWithoutRaffleTicketsInput = {
@@ -7002,6 +7724,8 @@ export type UserUncheckedCreateWithoutRaffleTicketsInput = {
   bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionUncheckedCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserCreateOrConnectWithoutRaffleTicketsInput = {
@@ -7073,6 +7797,8 @@ export type UserUpdateWithoutRaffleTicketsInput = {
   bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRaffleTicketsInput = {
@@ -7129,6 +7855,8 @@ export type UserUncheckedUpdateWithoutRaffleTicketsInput = {
   bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUncheckedUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserCreateWithoutRaffleCommentsInput = {
@@ -7184,6 +7912,8 @@ export type UserCreateWithoutRaffleCommentsInput = {
   bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserUncheckedCreateWithoutRaffleCommentsInput = {
@@ -7240,6 +7970,8 @@ export type UserUncheckedCreateWithoutRaffleCommentsInput = {
   bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionUncheckedCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserCreateOrConnectWithoutRaffleCommentsInput = {
@@ -7311,6 +8043,8 @@ export type UserUpdateWithoutRaffleCommentsInput = {
   bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRaffleCommentsInput = {
@@ -7367,6 +8101,8 @@ export type UserUncheckedUpdateWithoutRaffleCommentsInput = {
   bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUncheckedUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserCreateWithoutBansReceivedInput = {
@@ -7422,6 +8158,8 @@ export type UserCreateWithoutBansReceivedInput = {
   bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserUncheckedCreateWithoutBansReceivedInput = {
@@ -7478,6 +8216,8 @@ export type UserUncheckedCreateWithoutBansReceivedInput = {
   bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
   chapterReactions?: Prisma.ChapterReactionUncheckedCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserCreateOrConnectWithoutBansReceivedInput = {
@@ -7538,6 +8278,8 @@ export type UserCreateWithoutBansIssuedInput = {
   bansReceived?: Prisma.UserBanCreateNestedManyWithoutUserInput
   chapterReactions?: Prisma.ChapterReactionCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserUncheckedCreateWithoutBansIssuedInput = {
@@ -7594,6 +8336,8 @@ export type UserUncheckedCreateWithoutBansIssuedInput = {
   bansReceived?: Prisma.UserBanUncheckedCreateNestedManyWithoutUserInput
   chapterReactions?: Prisma.ChapterReactionUncheckedCreateNestedManyWithoutUserInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
 }
 
 export type UserCreateOrConnectWithoutBansIssuedInput = {
@@ -7665,6 +8409,8 @@ export type UserUpdateWithoutBansReceivedInput = {
   bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBansReceivedInput = {
@@ -7721,6 +8467,8 @@ export type UserUncheckedUpdateWithoutBansReceivedInput = {
   bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUncheckedUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserUpsertWithoutBansIssuedInput = {
@@ -7787,6 +8535,8 @@ export type UserUpdateWithoutBansIssuedInput = {
   bansReceived?: Prisma.UserBanUpdateManyWithoutUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBansIssuedInput = {
@@ -7843,6 +8593,8 @@ export type UserUncheckedUpdateWithoutBansIssuedInput = {
   bansReceived?: Prisma.UserBanUncheckedUpdateManyWithoutUserNestedInput
   chapterReactions?: Prisma.ChapterReactionUncheckedUpdateManyWithoutUserNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
 }
 
 
@@ -7877,6 +8629,8 @@ export type UserCountOutputType = {
   bansIssued: number
   chapterReactions: number
   milestoneAlerts: number
+  reviews: number
+  reviewsHidden: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -7906,6 +8660,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   bansIssued?: boolean | UserCountOutputTypeCountBansIssuedArgs
   chapterReactions?: boolean | UserCountOutputTypeCountChapterReactionsArgs
   milestoneAlerts?: boolean | UserCountOutputTypeCountMilestoneAlertsArgs
+  reviews?: boolean | UserCountOutputTypeCountReviewsArgs
+  reviewsHidden?: boolean | UserCountOutputTypeCountReviewsHiddenArgs
 }
 
 /**
@@ -8100,6 +8856,20 @@ export type UserCountOutputTypeCountMilestoneAlertsArgs<ExtArgs extends runtime.
   where?: Prisma.ChapterMilestoneAlertWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountReviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MangaReviewWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountReviewsHiddenArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MangaReviewWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -8156,6 +8926,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   bansIssued?: boolean | Prisma.User$bansIssuedArgs<ExtArgs>
   chapterReactions?: boolean | Prisma.User$chapterReactionsArgs<ExtArgs>
   milestoneAlerts?: boolean | Prisma.User$milestoneAlertsArgs<ExtArgs>
+  reviews?: boolean | Prisma.User$reviewsArgs<ExtArgs>
+  reviewsHidden?: boolean | Prisma.User$reviewsHiddenArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -8278,6 +9050,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   bansIssued?: boolean | Prisma.User$bansIssuedArgs<ExtArgs>
   chapterReactions?: boolean | Prisma.User$chapterReactionsArgs<ExtArgs>
   milestoneAlerts?: boolean | Prisma.User$milestoneAlertsArgs<ExtArgs>
+  reviews?: boolean | Prisma.User$reviewsArgs<ExtArgs>
+  reviewsHidden?: boolean | Prisma.User$reviewsHiddenArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -8313,6 +9087,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     bansIssued: Prisma.$UserBanPayload<ExtArgs>[]
     chapterReactions: Prisma.$ChapterReactionPayload<ExtArgs>[]
     milestoneAlerts: Prisma.$ChapterMilestoneAlertPayload<ExtArgs>[]
+    reviews: Prisma.$MangaReviewPayload<ExtArgs>[]
+    reviewsHidden: Prisma.$MangaReviewPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -8763,6 +9539,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   bansIssued<T extends Prisma.User$bansIssuedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$bansIssuedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserBanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   chapterReactions<T extends Prisma.User$chapterReactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$chapterReactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChapterReactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   milestoneAlerts<T extends Prisma.User$milestoneAlertsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$milestoneAlertsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChapterMilestoneAlertPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reviews<T extends Prisma.User$reviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MangaReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reviewsHidden<T extends Prisma.User$reviewsHiddenArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reviewsHiddenArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MangaReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9847,6 +10625,54 @@ export type User$milestoneAlertsArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.ChapterMilestoneAlertScalarFieldEnum | Prisma.ChapterMilestoneAlertScalarFieldEnum[]
+}
+
+/**
+ * User.reviews
+ */
+export type User$reviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MangaReview
+   */
+  select?: Prisma.MangaReviewSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MangaReview
+   */
+  omit?: Prisma.MangaReviewOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MangaReviewInclude<ExtArgs> | null
+  where?: Prisma.MangaReviewWhereInput
+  orderBy?: Prisma.MangaReviewOrderByWithRelationInput | Prisma.MangaReviewOrderByWithRelationInput[]
+  cursor?: Prisma.MangaReviewWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MangaReviewScalarFieldEnum | Prisma.MangaReviewScalarFieldEnum[]
+}
+
+/**
+ * User.reviewsHidden
+ */
+export type User$reviewsHiddenArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MangaReview
+   */
+  select?: Prisma.MangaReviewSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MangaReview
+   */
+  omit?: Prisma.MangaReviewOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MangaReviewInclude<ExtArgs> | null
+  where?: Prisma.MangaReviewWhereInput
+  orderBy?: Prisma.MangaReviewOrderByWithRelationInput | Prisma.MangaReviewOrderByWithRelationInput[]
+  cursor?: Prisma.MangaReviewWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MangaReviewScalarFieldEnum | Prisma.MangaReviewScalarFieldEnum[]
 }
 
 /**
