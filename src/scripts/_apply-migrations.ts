@@ -32,7 +32,21 @@ const statements: string[] = [
     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT now()
   );`,
   `CREATE UNIQUE INDEX IF NOT EXISTS "manga_volume_mangaCustomId_number_key" ON "manga_volume"("mangaCustomId", "number");`,
-  `CREATE UNIQUE INDEX IF NOT EXISTS "manga_volume_jointId_number_key" ON "manga_volume"("jointId", "number");`
+  `CREATE UNIQUE INDEX IF NOT EXISTS "manga_volume_jointId_number_key" ON "manga_volume"("jointId", "number");`,
+  // Tarea 18: avisos de capítulo
+  `CREATE TABLE IF NOT EXISTS "chapter_milestone_alert" (
+    "id" SERIAL PRIMARY KEY,
+    "userId" INTEGER NOT NULL REFERENCES "user"("id") ON DELETE CASCADE,
+    "mangaCustomId" INTEGER REFERENCES "manga_custom"("id") ON DELETE CASCADE,
+    "jointId" INTEGER REFERENCES "manga_joint"("id") ON DELETE CASCADE,
+    "targetNumber" DOUBLE PRECISION NOT NULL,
+    "triggeredAt" TIMESTAMP(3),
+    "createdAt" TIMESTAMP(6) NOT NULL DEFAULT now(),
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT now()
+  );`,
+  `CREATE UNIQUE INDEX IF NOT EXISTS "chapter_milestone_alert_userId_mangaCustomId_key" ON "chapter_milestone_alert"("userId", "mangaCustomId");`,
+  `CREATE UNIQUE INDEX IF NOT EXISTS "chapter_milestone_alert_userId_jointId_key" ON "chapter_milestone_alert"("userId", "jointId");`,
+  `CREATE INDEX IF NOT EXISTS "chapter_milestone_alert_mangaCustomId_triggeredAt_idx" ON "chapter_milestone_alert"("mangaCustomId", "triggeredAt");`
 ]
 
 for (const sql of statements) {

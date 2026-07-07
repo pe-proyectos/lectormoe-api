@@ -22,6 +22,7 @@ import { router as chapterEditRouter } from './chapter/edit'
 import { router as chapterGetRouter } from './chapter/get'
 import { router as chapterReactionRouter } from './chapter-reaction/index'
 import { router as mangaVolumeRouter } from './manga-volume/index'
+import { router as milestoneAlertRouter } from './milestone-alert/index'
 import { router as commentBanRouter } from './comment/ban'
 import { router as commentCreateRouter } from './comment/create'
 import { router as commentDeleteRouter } from './comment/delete'
@@ -160,6 +161,7 @@ export const router = () => async (app: Elysia) => {
   app.use(chapterGetRouter())
   app.use(chapterReactionRouter())
   app.use(mangaVolumeRouter())
+  app.use(milestoneAlertRouter())
 
   // Comment
   app.use(commentBanRouter())

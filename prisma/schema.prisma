@@ -147,6 +147,7 @@ model User {
   bansReceived            UserBan[]            @relation("BannedUser")
   bansIssued              UserBan[]            @relation("BannedByUser")
   chapterReactions        ChapterReaction[]
+  milestoneAlerts         ChapterMilestoneAlert[]
 
   @@map("user")
 }
@@ -300,6 +301,7 @@ model MangaCustom {
   groupChaptersByVolume              Boolean            @default(false)
   chapters                           Chapter[]
   volumes                            MangaVolume[]
+  milestoneAlerts                    ChapterMilestoneAlert[]
   favorites                          Favorite[]
   userListEntries                    UserList[]
   manga                              Manga              @relation(fields: [mangaId], references: [id])
@@ -352,6 +354,25 @@ model Chapter {
   @@unique([number, mangaCustomId])
   @@unique([number, jointId])
   @@map("chapter")
+}
+
+model ChapterMilestoneAlert {
+  id            Int          @id @default(autoincrement())
+  userId        Int
+  mangaCustomId Int?
+  jointId       Int?
+  targetNumber  Float
+  triggeredAt   DateTime?
+  createdAt     DateTime     @default(now()) @db.Timestamp(6)
+  updatedAt     DateTime     @updatedAt
+  user          User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  mangaCustom   MangaCustom? @relation(fields: [mangaCustomId], references: [id], onDelete: Cascade)
+  joint         MangaJoint?  @relation(fields: [jointId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, mangaCustomId])
+  @@unique([userId, jointId])
+  @@index([mangaCustomId, triggeredAt])
+  @@map("chapter_milestone_alert")
 }
 
 model MangaVolume {
@@ -873,6 +894,7 @@ model MangaJoint {
   updatedAt        DateTime      @updatedAt
   deletedAt        DateTime?
   volumes          MangaVolume[]
+  milestoneAlerts  ChapterMilestoneAlert[]
   members          JointMember[]
   chapters         Chapter[]
   viewsHistory     ViewsHistory[]

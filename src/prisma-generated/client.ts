@@ -95,6 +95,11 @@ export type MangaCustom = Prisma.MangaCustomModel
  */
 export type Chapter = Prisma.ChapterModel
 /**
+ * Model ChapterMilestoneAlert
+ * 
+ */
+export type ChapterMilestoneAlert = Prisma.ChapterMilestoneAlertModel
+/**
  * Model MangaVolume
  * 
  */

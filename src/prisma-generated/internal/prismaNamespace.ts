@@ -395,6 +395,7 @@ export const ModelName = {
   Manga: 'Manga',
   MangaCustom: 'MangaCustom',
   Chapter: 'Chapter',
+  ChapterMilestoneAlert: 'ChapterMilestoneAlert',
   MangaVolume: 'MangaVolume',
   ChapterReaction: 'ChapterReaction',
   Page: 'Page',
@@ -446,7 +447,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "token" | "organization" | "user" | "permission" | "passwordResetToken" | "countryOptions" | "author" | "bookType" | "manga" | "mangaCustom" | "chapter" | "mangaVolume" | "chapterReaction" | "page" | "comment" | "commentLike" | "ranking" | "demography" | "genre" | "analytics" | "userChapterHistory" | "favorite" | "userList" | "userPageBookmark" | "audit" | "viewsHistory" | "subscriptionPlan" | "subscription" | "organizationTransaction" | "organizationFollower" | "organizationRequest" | "emailPreference" | "emailLog" | "unsubscribeToken" | "emailVerificationToken" | "userDailyActivity" | "achievement" | "userAchievement" | "mangaJoint" | "jointMember" | "jointMemberHistory" | "notification" | "raffle" | "raffleTicket" | "raffleComment" | "raffleRefund" | "userBan"
+    modelProps: "token" | "organization" | "user" | "permission" | "passwordResetToken" | "countryOptions" | "author" | "bookType" | "manga" | "mangaCustom" | "chapter" | "chapterMilestoneAlert" | "mangaVolume" | "chapterReaction" | "page" | "comment" | "commentLike" | "ranking" | "demography" | "genre" | "analytics" | "userChapterHistory" | "favorite" | "userList" | "userPageBookmark" | "audit" | "viewsHistory" | "subscriptionPlan" | "subscription" | "organizationTransaction" | "organizationFollower" | "organizationRequest" | "emailPreference" | "emailLog" | "unsubscribeToken" | "emailVerificationToken" | "userDailyActivity" | "achievement" | "userAchievement" | "mangaJoint" | "jointMember" | "jointMemberHistory" | "notification" | "raffle" | "raffleTicket" | "raffleComment" | "raffleRefund" | "userBan"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1261,6 +1262,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.ChapterCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ChapterCountAggregateOutputType> | number
+        }
+      }
+    }
+    ChapterMilestoneAlert: {
+      payload: Prisma.$ChapterMilestoneAlertPayload<ExtArgs>
+      fields: Prisma.ChapterMilestoneAlertFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ChapterMilestoneAlertFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChapterMilestoneAlertPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ChapterMilestoneAlertFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChapterMilestoneAlertPayload>
+        }
+        findFirst: {
+          args: Prisma.ChapterMilestoneAlertFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChapterMilestoneAlertPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ChapterMilestoneAlertFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChapterMilestoneAlertPayload>
+        }
+        findMany: {
+          args: Prisma.ChapterMilestoneAlertFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChapterMilestoneAlertPayload>[]
+        }
+        create: {
+          args: Prisma.ChapterMilestoneAlertCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChapterMilestoneAlertPayload>
+        }
+        createMany: {
+          args: Prisma.ChapterMilestoneAlertCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ChapterMilestoneAlertCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChapterMilestoneAlertPayload>[]
+        }
+        delete: {
+          args: Prisma.ChapterMilestoneAlertDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChapterMilestoneAlertPayload>
+        }
+        update: {
+          args: Prisma.ChapterMilestoneAlertUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChapterMilestoneAlertPayload>
+        }
+        deleteMany: {
+          args: Prisma.ChapterMilestoneAlertDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ChapterMilestoneAlertUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ChapterMilestoneAlertUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChapterMilestoneAlertPayload>[]
+        }
+        upsert: {
+          args: Prisma.ChapterMilestoneAlertUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChapterMilestoneAlertPayload>
+        }
+        aggregate: {
+          args: Prisma.ChapterMilestoneAlertAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateChapterMilestoneAlert>
+        }
+        groupBy: {
+          args: Prisma.ChapterMilestoneAlertGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ChapterMilestoneAlertGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ChapterMilestoneAlertCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ChapterMilestoneAlertCountAggregateOutputType> | number
         }
       }
     }
@@ -4227,6 +4302,20 @@ export const ChapterScalarFieldEnum = {
 export type ChapterScalarFieldEnum = (typeof ChapterScalarFieldEnum)[keyof typeof ChapterScalarFieldEnum]
 
 
+export const ChapterMilestoneAlertScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  mangaCustomId: 'mangaCustomId',
+  jointId: 'jointId',
+  targetNumber: 'targetNumber',
+  triggeredAt: 'triggeredAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ChapterMilestoneAlertScalarFieldEnum = (typeof ChapterMilestoneAlertScalarFieldEnum)[keyof typeof ChapterMilestoneAlertScalarFieldEnum]
+
+
 export const MangaVolumeScalarFieldEnum = {
   id: 'id',
   mangaCustomId: 'mangaCustomId',
@@ -5094,6 +5183,7 @@ export type GlobalOmitConfig = {
   manga?: Prisma.MangaOmit
   mangaCustom?: Prisma.MangaCustomOmit
   chapter?: Prisma.ChapterOmit
+  chapterMilestoneAlert?: Prisma.ChapterMilestoneAlertOmit
   mangaVolume?: Prisma.MangaVolumeOmit
   chapterReaction?: Prisma.ChapterReactionOmit
   page?: Prisma.PageOmit
