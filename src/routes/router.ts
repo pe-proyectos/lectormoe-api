@@ -51,6 +51,8 @@ import { router as jointRouter } from './joint/index'
 import { router as landingFeaturedMangaRouter } from './landing/featured-manga'
 import { router as landingPerOrgPopularRouter } from './landing/per-org-popular'
 import { router as landingPopularTodayRouter } from './landing/popular-today'
+import { router as landingTrendingRouter } from './landing/trending'
+import { router as landingRecentlyAddedRouter } from './landing/recently-added'
 import { router as landingScansRouter } from './landing/scans'
 import { router as landingTopCommentersRouter } from './landing/top-commenters'
 import { router as landingTopReadersRouter } from './landing/top-readers'
@@ -198,6 +200,8 @@ export const router = () => async (app: Elysia) => {
   // Landing
   app.use(landingFeaturedMangaRouter())
   app.use(landingPopularTodayRouter())
+  app.use(landingTrendingRouter())
+  app.use(landingRecentlyAddedRouter())
   app.use(landingPerOrgPopularRouter())
   app.use(landingScansRouter())
   app.use(landingTopCommentersRouter())
