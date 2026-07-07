@@ -53,6 +53,7 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   Token: 'Token',
   Organization: 'Organization',
+  RecruitmentPost: 'RecruitmentPost',
   User: 'User',
   Permission: 'Permission',
   PasswordResetToken: 'PasswordResetToken',
@@ -183,6 +184,23 @@ export const OrganizationScalarFieldEnum = {
 } as const
 
 export type OrganizationScalarFieldEnum = (typeof OrganizationScalarFieldEnum)[keyof typeof OrganizationScalarFieldEnum]
+
+
+export const RecruitmentPostScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  title: 'title',
+  description: 'description',
+  requirements: 'requirements',
+  roles: 'roles',
+  language: 'language',
+  urgent: 'urgent',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RecruitmentPostScalarFieldEnum = (typeof RecruitmentPostScalarFieldEnum)[keyof typeof RecruitmentPostScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {

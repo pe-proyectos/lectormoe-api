@@ -88,8 +88,28 @@ model Organization {
   jointMemberHistory                           JointMemberHistory[]
   userBans                                     UserBan[]
   messageThreads                               OrganizationMessageThread[]
+  recruitmentPosts                             RecruitmentPost[]
 
   @@map("organization")
+}
+
+model RecruitmentPost {
+  id             Int          @id @default(autoincrement())
+  organizationId Int
+  title          String       @db.VarChar(200)
+  description    String       @db.VarChar(4000)
+  requirements   String?      @db.VarChar(2000)
+  roles          String       @db.VarChar(300)
+  language       String       @default("es") @db.VarChar(8)
+  urgent         Boolean      @default(false)
+  status         String       @default("open") @db.VarChar(16)
+  createdAt      DateTime     @default(now()) @db.Timestamp(6)
+  updatedAt      DateTime     @updatedAt
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([status, urgent, updatedAt])
+  @@index([organizationId, status])
+  @@map("recruitment_post")
 }
 
 model User {

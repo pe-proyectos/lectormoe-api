@@ -386,6 +386,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   Token: 'Token',
   Organization: 'Organization',
+  RecruitmentPost: 'RecruitmentPost',
   User: 'User',
   Permission: 'Permission',
   PasswordResetToken: 'PasswordResetToken',
@@ -453,7 +454,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "token" | "organization" | "user" | "permission" | "passwordResetToken" | "countryOptions" | "author" | "bookType" | "manga" | "mangaCustom" | "chapter" | "organizationMessageThread" | "organizationMessage" | "customList" | "customListItem" | "contentReport" | "mangaReview" | "chapterMilestoneAlert" | "mangaVolume" | "chapterReaction" | "page" | "comment" | "commentLike" | "ranking" | "demography" | "genre" | "analytics" | "userChapterHistory" | "favorite" | "userList" | "userPageBookmark" | "audit" | "viewsHistory" | "subscriptionPlan" | "subscription" | "organizationTransaction" | "organizationFollower" | "organizationRequest" | "emailPreference" | "emailLog" | "unsubscribeToken" | "emailVerificationToken" | "userDailyActivity" | "achievement" | "userAchievement" | "mangaJoint" | "jointMember" | "jointMemberHistory" | "notification" | "raffle" | "raffleTicket" | "raffleComment" | "raffleRefund" | "userBan"
+    modelProps: "token" | "organization" | "recruitmentPost" | "user" | "permission" | "passwordResetToken" | "countryOptions" | "author" | "bookType" | "manga" | "mangaCustom" | "chapter" | "organizationMessageThread" | "organizationMessage" | "customList" | "customListItem" | "contentReport" | "mangaReview" | "chapterMilestoneAlert" | "mangaVolume" | "chapterReaction" | "page" | "comment" | "commentLike" | "ranking" | "demography" | "genre" | "analytics" | "userChapterHistory" | "favorite" | "userList" | "userPageBookmark" | "audit" | "viewsHistory" | "subscriptionPlan" | "subscription" | "organizationTransaction" | "organizationFollower" | "organizationRequest" | "emailPreference" | "emailLog" | "unsubscribeToken" | "emailVerificationToken" | "userDailyActivity" | "achievement" | "userAchievement" | "mangaJoint" | "jointMember" | "jointMemberHistory" | "notification" | "raffle" | "raffleTicket" | "raffleComment" | "raffleRefund" | "userBan"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -602,6 +603,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.OrganizationCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.OrganizationCountAggregateOutputType> | number
+        }
+      }
+    }
+    RecruitmentPost: {
+      payload: Prisma.$RecruitmentPostPayload<ExtArgs>
+      fields: Prisma.RecruitmentPostFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RecruitmentPostFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecruitmentPostPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RecruitmentPostFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecruitmentPostPayload>
+        }
+        findFirst: {
+          args: Prisma.RecruitmentPostFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecruitmentPostPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RecruitmentPostFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecruitmentPostPayload>
+        }
+        findMany: {
+          args: Prisma.RecruitmentPostFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecruitmentPostPayload>[]
+        }
+        create: {
+          args: Prisma.RecruitmentPostCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecruitmentPostPayload>
+        }
+        createMany: {
+          args: Prisma.RecruitmentPostCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RecruitmentPostCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecruitmentPostPayload>[]
+        }
+        delete: {
+          args: Prisma.RecruitmentPostDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecruitmentPostPayload>
+        }
+        update: {
+          args: Prisma.RecruitmentPostUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecruitmentPostPayload>
+        }
+        deleteMany: {
+          args: Prisma.RecruitmentPostDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RecruitmentPostUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RecruitmentPostUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecruitmentPostPayload>[]
+        }
+        upsert: {
+          args: Prisma.RecruitmentPostUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecruitmentPostPayload>
+        }
+        aggregate: {
+          args: Prisma.RecruitmentPostAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRecruitmentPost>
+        }
+        groupBy: {
+          args: Prisma.RecruitmentPostGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RecruitmentPostGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RecruitmentPostCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RecruitmentPostCountAggregateOutputType> | number
         }
       }
     }
@@ -4554,6 +4629,23 @@ export const OrganizationScalarFieldEnum = {
 export type OrganizationScalarFieldEnum = (typeof OrganizationScalarFieldEnum)[keyof typeof OrganizationScalarFieldEnum]
 
 
+export const RecruitmentPostScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  title: 'title',
+  description: 'description',
+  requirements: 'requirements',
+  roles: 'roles',
+  language: 'language',
+  urgent: 'urgent',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RecruitmentPostScalarFieldEnum = (typeof RecruitmentPostScalarFieldEnum)[keyof typeof RecruitmentPostScalarFieldEnum]
+
+
 export const UserScalarFieldEnum = {
   id: 'id',
   username: 'username',
@@ -5713,6 +5805,7 @@ export type PrismaClientOptions = ({
 export type GlobalOmitConfig = {
   token?: Prisma.TokenOmit
   organization?: Prisma.OrganizationOmit
+  recruitmentPost?: Prisma.RecruitmentPostOmit
   user?: Prisma.UserOmit
   permission?: Prisma.PermissionOmit
   passwordResetToken?: Prisma.PasswordResetTokenOmit

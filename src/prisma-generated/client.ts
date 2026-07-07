@@ -50,6 +50,11 @@ export type Token = Prisma.TokenModel
  */
 export type Organization = Prisma.OrganizationModel
 /**
+ * Model RecruitmentPost
+ * 
+ */
+export type RecruitmentPost = Prisma.RecruitmentPostModel
+/**
  * Model User
  * 
  */

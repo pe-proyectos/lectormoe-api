@@ -10,6 +10,7 @@
  */
 export type * from './models/Token.ts'
 export type * from './models/Organization.ts'
+export type * from './models/RecruitmentPost.ts'
 export type * from './models/User.ts'
 export type * from './models/Permission.ts'
 export type * from './models/PasswordResetToken.ts'

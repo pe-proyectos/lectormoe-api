@@ -128,7 +128,23 @@ const statements: string[] = [
     "readAt" TIMESTAMP(3),
     "createdAt" TIMESTAMP(6) NOT NULL DEFAULT now()
   );`,
-  `CREATE INDEX IF NOT EXISTS "om_thread_created_idx" ON "organization_message"("threadId", "createdAt");`
+  `CREATE INDEX IF NOT EXISTS "om_thread_created_idx" ON "organization_message"("threadId", "createdAt");`,
+  // Tarea 16: mural de reclutamiento
+  `CREATE TABLE IF NOT EXISTS "recruitment_post" (
+    "id" SERIAL PRIMARY KEY,
+    "organizationId" INTEGER NOT NULL REFERENCES "organization"("id") ON DELETE CASCADE,
+    "title" VARCHAR(200) NOT NULL,
+    "description" VARCHAR(4000) NOT NULL,
+    "requirements" VARCHAR(2000),
+    "roles" VARCHAR(300) NOT NULL,
+    "language" VARCHAR(8) NOT NULL DEFAULT 'es',
+    "urgent" BOOLEAN NOT NULL DEFAULT false,
+    "status" VARCHAR(16) NOT NULL DEFAULT 'open',
+    "createdAt" TIMESTAMP(6) NOT NULL DEFAULT now(),
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT now()
+  );`,
+  `CREATE INDEX IF NOT EXISTS "recruitment_post_status_urgent_updated_idx" ON "recruitment_post"("status", "urgent", "updatedAt");`,
+  `CREATE INDEX IF NOT EXISTS "recruitment_post_org_status_idx" ON "recruitment_post"("organizationId", "status");`
 ]
 
 for (const sql of statements) {

@@ -557,6 +557,7 @@ export type OrganizationWhereInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryListRelationFilter
   userBans?: Prisma.UserBanListRelationFilter
   messageThreads?: Prisma.OrganizationMessageThreadListRelationFilter
+  recruitmentPosts?: Prisma.RecruitmentPostListRelationFilter
 }
 
 export type OrganizationOrderByWithRelationInput = {
@@ -626,6 +627,7 @@ export type OrganizationOrderByWithRelationInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryOrderByRelationAggregateInput
   userBans?: Prisma.UserBanOrderByRelationAggregateInput
   messageThreads?: Prisma.OrganizationMessageThreadOrderByRelationAggregateInput
+  recruitmentPosts?: Prisma.RecruitmentPostOrderByRelationAggregateInput
 }
 
 export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
@@ -698,6 +700,7 @@ export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
   jointMemberHistory?: Prisma.JointMemberHistoryListRelationFilter
   userBans?: Prisma.UserBanListRelationFilter
   messageThreads?: Prisma.OrganizationMessageThreadListRelationFilter
+  recruitmentPosts?: Prisma.RecruitmentPostListRelationFilter
 }, "id" | "domain" | "slug">
 
 export type OrganizationOrderByWithAggregationInput = {
@@ -870,6 +873,7 @@ export type OrganizationCreateInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateInput = {
@@ -939,6 +943,7 @@ export type OrganizationUncheckedCreateInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanUncheckedCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUpdateInput = {
@@ -1007,6 +1012,7 @@ export type OrganizationUpdateInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateInput = {
@@ -1076,6 +1082,7 @@ export type OrganizationUncheckedUpdateInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUncheckedUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateManyInput = {
@@ -1399,6 +1406,20 @@ export type NullableStringFieldUpdateOperationsInput = {
 
 export type BoolFieldUpdateOperationsInput = {
   set?: boolean
+}
+
+export type OrganizationCreateNestedOneWithoutRecruitmentPostsInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutRecruitmentPostsInput, Prisma.OrganizationUncheckedCreateWithoutRecruitmentPostsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutRecruitmentPostsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneRequiredWithoutRecruitmentPostsNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutRecruitmentPostsInput, Prisma.OrganizationUncheckedCreateWithoutRecruitmentPostsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutRecruitmentPostsInput
+  upsert?: Prisma.OrganizationUpsertWithoutRecruitmentPostsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutRecruitmentPostsInput, Prisma.OrganizationUpdateWithoutRecruitmentPostsInput>, Prisma.OrganizationUncheckedUpdateWithoutRecruitmentPostsInput>
 }
 
 export type OrganizationCreateNestedOneWithoutPermissionsInput = {
@@ -1733,6 +1754,296 @@ export type OrganizationUpdateOneRequiredWithoutUserBansNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutUserBansInput, Prisma.OrganizationUpdateWithoutUserBansInput>, Prisma.OrganizationUncheckedUpdateWithoutUserBansInput>
 }
 
+export type OrganizationCreateWithoutRecruitmentPostsInput = {
+  name: string
+  title: string
+  domain: string
+  slug: string
+  description?: string | null
+  imageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  googleAdsMetaContent?: string | null
+  googleAdsAdsTxtContent?: string | null
+  bannerUrl?: string | null
+  discordUrl?: string | null
+  facebookUrl?: string | null
+  instagramUrl?: string | null
+  logoUrl?: string | null
+  patreonUrl?: string | null
+  tiktokUrl?: string | null
+  twitchUrl?: string | null
+  twitterUrl?: string | null
+  youtubeUrl?: string | null
+  enableGoogleAds?: boolean
+  faviconUrl?: string | null
+  enableMangaSection?: boolean
+  enableManhuaSection?: boolean
+  enableManhwaSection?: boolean
+  language?: string
+  monitorWebsiteId?: string | null
+  useAllowedCountries?: boolean
+  useBlockedCountries?: boolean
+  adsterraAdSource?: string | null
+  enableAdsterraAds?: boolean
+  enableMainBanner?: boolean
+  enableMainSlider?: boolean
+  enableSubscriptionSection?: boolean
+  discordWebhookUrlNewChapter?: string | null
+  discordWebhookUrlNewSubscription?: string | null
+  enableDiscordWebhookNewChapter?: boolean
+  enableDiscordWebhookNewSubscription?: boolean
+  discordWebhookMessageTemplateNewChapter?: string | null
+  discordWebhookMessageTemplateNewSubscription?: string | null
+  isPublic?: boolean
+  isNSFW?: boolean
+  isDeleted?: boolean
+  enableAds?: boolean
+  analytics?: Prisma.AnalyticsCreateNestedManyWithoutOrganizationInput
+  audits?: Prisma.AuditCreateNestedManyWithoutOrganizationInput
+  comments?: Prisma.CommentCreateNestedManyWithoutOrganizationInput
+  commentLikes?: Prisma.CommentLikeCreateNestedManyWithoutOrganizationInput
+  countryOptions?: Prisma.CountryOptionsCreateNestedManyWithoutOrganizationInput
+  genres?: Prisma.GenreCreateNestedManyWithoutOrganizationInput
+  mangaCustoms?: Prisma.MangaCustomCreateNestedManyWithoutOrganizationInput
+  followers?: Prisma.OrganizationFollowerCreateNestedManyWithoutOrganizationInput
+  OrganizationTransaction?: Prisma.OrganizationTransactionCreateNestedManyWithoutOrganizationInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutOrganizationInput
+  permissions?: Prisma.PermissionCreateNestedManyWithoutOrganizationInput
+  rankings?: Prisma.RankingCreateNestedManyWithoutOrganizationInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutOrganizationInput
+  subscriptionPlans?: Prisma.SubscriptionPlanCreateNestedManyWithoutOrganizationInput
+  jointMembers?: Prisma.JointMemberCreateNestedManyWithoutOrganizationInput
+  uploadedJointChapters?: Prisma.ChapterCreateNestedManyWithoutUploadedByOrganizationInput
+  workedOnJointChapters?: Prisma.ChapterCreateNestedManyWithoutWorkedByOrganizationsInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
+  jointMemberHistory?: Prisma.JointMemberHistoryCreateNestedManyWithoutOrganizationInput
+  userBans?: Prisma.UserBanCreateNestedManyWithoutOrganizationInput
+  messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutRecruitmentPostsInput = {
+  id?: number
+  name: string
+  title: string
+  domain: string
+  slug: string
+  description?: string | null
+  imageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  googleAdsMetaContent?: string | null
+  googleAdsAdsTxtContent?: string | null
+  bannerUrl?: string | null
+  discordUrl?: string | null
+  facebookUrl?: string | null
+  instagramUrl?: string | null
+  logoUrl?: string | null
+  patreonUrl?: string | null
+  tiktokUrl?: string | null
+  twitchUrl?: string | null
+  twitterUrl?: string | null
+  youtubeUrl?: string | null
+  enableGoogleAds?: boolean
+  faviconUrl?: string | null
+  enableMangaSection?: boolean
+  enableManhuaSection?: boolean
+  enableManhwaSection?: boolean
+  language?: string
+  monitorWebsiteId?: string | null
+  useAllowedCountries?: boolean
+  useBlockedCountries?: boolean
+  adsterraAdSource?: string | null
+  enableAdsterraAds?: boolean
+  enableMainBanner?: boolean
+  enableMainSlider?: boolean
+  enableSubscriptionSection?: boolean
+  discordWebhookUrlNewChapter?: string | null
+  discordWebhookUrlNewSubscription?: string | null
+  enableDiscordWebhookNewChapter?: boolean
+  enableDiscordWebhookNewSubscription?: boolean
+  discordWebhookMessageTemplateNewChapter?: string | null
+  discordWebhookMessageTemplateNewSubscription?: string | null
+  isPublic?: boolean
+  isNSFW?: boolean
+  isDeleted?: boolean
+  enableAds?: boolean
+  analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutOrganizationInput
+  audits?: Prisma.AuditUncheckedCreateNestedManyWithoutOrganizationInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutOrganizationInput
+  commentLikes?: Prisma.CommentLikeUncheckedCreateNestedManyWithoutOrganizationInput
+  countryOptions?: Prisma.CountryOptionsUncheckedCreateNestedManyWithoutOrganizationInput
+  genres?: Prisma.GenreUncheckedCreateNestedManyWithoutOrganizationInput
+  mangaCustoms?: Prisma.MangaCustomUncheckedCreateNestedManyWithoutOrganizationInput
+  followers?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutOrganizationInput
+  OrganizationTransaction?: Prisma.OrganizationTransactionUncheckedCreateNestedManyWithoutOrganizationInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutOrganizationInput
+  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutOrganizationInput
+  rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutOrganizationInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutOrganizationInput
+  subscriptionPlans?: Prisma.SubscriptionPlanUncheckedCreateNestedManyWithoutOrganizationInput
+  jointMembers?: Prisma.JointMemberUncheckedCreateNestedManyWithoutOrganizationInput
+  uploadedJointChapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutUploadedByOrganizationInput
+  workedOnJointChapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutWorkedByOrganizationsInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
+  jointMemberHistory?: Prisma.JointMemberHistoryUncheckedCreateNestedManyWithoutOrganizationInput
+  userBans?: Prisma.UserBanUncheckedCreateNestedManyWithoutOrganizationInput
+  messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutRecruitmentPostsInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutRecruitmentPostsInput, Prisma.OrganizationUncheckedCreateWithoutRecruitmentPostsInput>
+}
+
+export type OrganizationUpsertWithoutRecruitmentPostsInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutRecruitmentPostsInput, Prisma.OrganizationUncheckedUpdateWithoutRecruitmentPostsInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutRecruitmentPostsInput, Prisma.OrganizationUncheckedCreateWithoutRecruitmentPostsInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutRecruitmentPostsInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutRecruitmentPostsInput, Prisma.OrganizationUncheckedUpdateWithoutRecruitmentPostsInput>
+}
+
+export type OrganizationUpdateWithoutRecruitmentPostsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  domain?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  googleAdsMetaContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleAdsAdsTxtContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  facebookUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagramUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  patreonUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tiktokUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  twitchUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableGoogleAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  faviconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableMangaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  enableManhuaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  enableManhwaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  monitorWebsiteId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  useAllowedCountries?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  useBlockedCountries?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  adsterraAdSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableAdsterraAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  enableMainBanner?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  enableMainSlider?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  enableSubscriptionSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  discordWebhookUrlNewChapter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordWebhookUrlNewSubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableDiscordWebhookNewChapter?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  enableDiscordWebhookNewSubscription?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  discordWebhookMessageTemplateNewChapter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordWebhookMessageTemplateNewSubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  enableAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  analytics?: Prisma.AnalyticsUpdateManyWithoutOrganizationNestedInput
+  audits?: Prisma.AuditUpdateManyWithoutOrganizationNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutOrganizationNestedInput
+  commentLikes?: Prisma.CommentLikeUpdateManyWithoutOrganizationNestedInput
+  countryOptions?: Prisma.CountryOptionsUpdateManyWithoutOrganizationNestedInput
+  genres?: Prisma.GenreUpdateManyWithoutOrganizationNestedInput
+  mangaCustoms?: Prisma.MangaCustomUpdateManyWithoutOrganizationNestedInput
+  followers?: Prisma.OrganizationFollowerUpdateManyWithoutOrganizationNestedInput
+  OrganizationTransaction?: Prisma.OrganizationTransactionUpdateManyWithoutOrganizationNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutOrganizationNestedInput
+  permissions?: Prisma.PermissionUpdateManyWithoutOrganizationNestedInput
+  rankings?: Prisma.RankingUpdateManyWithoutOrganizationNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutOrganizationNestedInput
+  subscriptionPlans?: Prisma.SubscriptionPlanUpdateManyWithoutOrganizationNestedInput
+  jointMembers?: Prisma.JointMemberUpdateManyWithoutOrganizationNestedInput
+  uploadedJointChapters?: Prisma.ChapterUpdateManyWithoutUploadedByOrganizationNestedInput
+  workedOnJointChapters?: Prisma.ChapterUpdateManyWithoutWorkedByOrganizationsNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
+  jointMemberHistory?: Prisma.JointMemberHistoryUpdateManyWithoutOrganizationNestedInput
+  userBans?: Prisma.UserBanUpdateManyWithoutOrganizationNestedInput
+  messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutRecruitmentPostsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  domain?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  googleAdsMetaContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleAdsAdsTxtContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  facebookUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagramUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  patreonUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tiktokUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  twitchUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableGoogleAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  faviconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableMangaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  enableManhuaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  enableManhwaSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  monitorWebsiteId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  useAllowedCountries?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  useBlockedCountries?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  adsterraAdSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableAdsterraAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  enableMainBanner?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  enableMainSlider?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  enableSubscriptionSection?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  discordWebhookUrlNewChapter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordWebhookUrlNewSubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enableDiscordWebhookNewChapter?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  enableDiscordWebhookNewSubscription?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  discordWebhookMessageTemplateNewChapter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordWebhookMessageTemplateNewSubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  enableAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutOrganizationNestedInput
+  audits?: Prisma.AuditUncheckedUpdateManyWithoutOrganizationNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutOrganizationNestedInput
+  commentLikes?: Prisma.CommentLikeUncheckedUpdateManyWithoutOrganizationNestedInput
+  countryOptions?: Prisma.CountryOptionsUncheckedUpdateManyWithoutOrganizationNestedInput
+  genres?: Prisma.GenreUncheckedUpdateManyWithoutOrganizationNestedInput
+  mangaCustoms?: Prisma.MangaCustomUncheckedUpdateManyWithoutOrganizationNestedInput
+  followers?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutOrganizationNestedInput
+  OrganizationTransaction?: Prisma.OrganizationTransactionUncheckedUpdateManyWithoutOrganizationNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutOrganizationNestedInput
+  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutOrganizationNestedInput
+  rankings?: Prisma.RankingUncheckedUpdateManyWithoutOrganizationNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutOrganizationNestedInput
+  subscriptionPlans?: Prisma.SubscriptionPlanUncheckedUpdateManyWithoutOrganizationNestedInput
+  jointMembers?: Prisma.JointMemberUncheckedUpdateManyWithoutOrganizationNestedInput
+  uploadedJointChapters?: Prisma.ChapterUncheckedUpdateManyWithoutUploadedByOrganizationNestedInput
+  workedOnJointChapters?: Prisma.ChapterUncheckedUpdateManyWithoutWorkedByOrganizationsNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
+  jointMemberHistory?: Prisma.JointMemberHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  userBans?: Prisma.UserBanUncheckedUpdateManyWithoutOrganizationNestedInput
+  messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
 export type OrganizationCreateWithoutPermissionsInput = {
   name: string
   title: string
@@ -1798,6 +2109,7 @@ export type OrganizationCreateWithoutPermissionsInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutPermissionsInput = {
@@ -1866,6 +2178,7 @@ export type OrganizationUncheckedCreateWithoutPermissionsInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanUncheckedCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutPermissionsInput = {
@@ -1949,6 +2262,7 @@ export type OrganizationUpdateWithoutPermissionsInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutPermissionsInput = {
@@ -2017,6 +2331,7 @@ export type OrganizationUncheckedUpdateWithoutPermissionsInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUncheckedUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutPasswordResetTokensInput = {
@@ -2084,6 +2399,7 @@ export type OrganizationCreateWithoutPasswordResetTokensInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutPasswordResetTokensInput = {
@@ -2152,6 +2468,7 @@ export type OrganizationUncheckedCreateWithoutPasswordResetTokensInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanUncheckedCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutPasswordResetTokensInput = {
@@ -2235,6 +2552,7 @@ export type OrganizationUpdateWithoutPasswordResetTokensInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutPasswordResetTokensInput = {
@@ -2303,6 +2621,7 @@ export type OrganizationUncheckedUpdateWithoutPasswordResetTokensInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUncheckedUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutCountryOptionsInput = {
@@ -2370,6 +2689,7 @@ export type OrganizationCreateWithoutCountryOptionsInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutCountryOptionsInput = {
@@ -2438,6 +2758,7 @@ export type OrganizationUncheckedCreateWithoutCountryOptionsInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanUncheckedCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutCountryOptionsInput = {
@@ -2521,6 +2842,7 @@ export type OrganizationUpdateWithoutCountryOptionsInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutCountryOptionsInput = {
@@ -2589,6 +2911,7 @@ export type OrganizationUncheckedUpdateWithoutCountryOptionsInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUncheckedUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutMangaCustomsInput = {
@@ -2656,6 +2979,7 @@ export type OrganizationCreateWithoutMangaCustomsInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutMangaCustomsInput = {
@@ -2724,6 +3048,7 @@ export type OrganizationUncheckedCreateWithoutMangaCustomsInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanUncheckedCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutMangaCustomsInput = {
@@ -2807,6 +3132,7 @@ export type OrganizationUpdateWithoutMangaCustomsInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutMangaCustomsInput = {
@@ -2875,6 +3201,7 @@ export type OrganizationUncheckedUpdateWithoutMangaCustomsInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUncheckedUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutUploadedJointChaptersInput = {
@@ -2942,6 +3269,7 @@ export type OrganizationCreateWithoutUploadedJointChaptersInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutUploadedJointChaptersInput = {
@@ -3010,6 +3338,7 @@ export type OrganizationUncheckedCreateWithoutUploadedJointChaptersInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanUncheckedCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutUploadedJointChaptersInput = {
@@ -3082,6 +3411,7 @@ export type OrganizationCreateWithoutWorkedOnJointChaptersInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutWorkedOnJointChaptersInput = {
@@ -3150,6 +3480,7 @@ export type OrganizationUncheckedCreateWithoutWorkedOnJointChaptersInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanUncheckedCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutWorkedOnJointChaptersInput = {
@@ -3233,6 +3564,7 @@ export type OrganizationUpdateWithoutUploadedJointChaptersInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutUploadedJointChaptersInput = {
@@ -3301,6 +3633,7 @@ export type OrganizationUncheckedUpdateWithoutUploadedJointChaptersInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUncheckedUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUpsertWithWhereUniqueWithoutWorkedOnJointChaptersInput = {
@@ -3435,6 +3768,7 @@ export type OrganizationCreateWithoutMessageThreadsInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
   jointMemberHistory?: Prisma.JointMemberHistoryCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutMessageThreadsInput = {
@@ -3503,6 +3837,7 @@ export type OrganizationUncheckedCreateWithoutMessageThreadsInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanUncheckedCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutMessageThreadsInput = {
@@ -3586,6 +3921,7 @@ export type OrganizationUpdateWithoutMessageThreadsInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
   jointMemberHistory?: Prisma.JointMemberHistoryUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutMessageThreadsInput = {
@@ -3654,6 +3990,7 @@ export type OrganizationUncheckedUpdateWithoutMessageThreadsInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUncheckedUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutCommentsInput = {
@@ -3721,6 +4058,7 @@ export type OrganizationCreateWithoutCommentsInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutCommentsInput = {
@@ -3789,6 +4127,7 @@ export type OrganizationUncheckedCreateWithoutCommentsInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanUncheckedCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutCommentsInput = {
@@ -3872,6 +4211,7 @@ export type OrganizationUpdateWithoutCommentsInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutCommentsInput = {
@@ -3940,6 +4280,7 @@ export type OrganizationUncheckedUpdateWithoutCommentsInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUncheckedUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutCommentLikesInput = {
@@ -4007,6 +4348,7 @@ export type OrganizationCreateWithoutCommentLikesInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutCommentLikesInput = {
@@ -4075,6 +4417,7 @@ export type OrganizationUncheckedCreateWithoutCommentLikesInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanUncheckedCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutCommentLikesInput = {
@@ -4158,6 +4501,7 @@ export type OrganizationUpdateWithoutCommentLikesInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutCommentLikesInput = {
@@ -4226,6 +4570,7 @@ export type OrganizationUncheckedUpdateWithoutCommentLikesInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUncheckedUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutRankingsInput = {
@@ -4293,6 +4638,7 @@ export type OrganizationCreateWithoutRankingsInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutRankingsInput = {
@@ -4361,6 +4707,7 @@ export type OrganizationUncheckedCreateWithoutRankingsInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanUncheckedCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutRankingsInput = {
@@ -4444,6 +4791,7 @@ export type OrganizationUpdateWithoutRankingsInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutRankingsInput = {
@@ -4512,6 +4860,7 @@ export type OrganizationUncheckedUpdateWithoutRankingsInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUncheckedUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutGenresInput = {
@@ -4579,6 +4928,7 @@ export type OrganizationCreateWithoutGenresInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutGenresInput = {
@@ -4647,6 +4997,7 @@ export type OrganizationUncheckedCreateWithoutGenresInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanUncheckedCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutGenresInput = {
@@ -4730,6 +5081,7 @@ export type OrganizationUpdateWithoutGenresInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutGenresInput = {
@@ -4798,6 +5150,7 @@ export type OrganizationUncheckedUpdateWithoutGenresInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUncheckedUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutAnalyticsInput = {
@@ -4865,6 +5218,7 @@ export type OrganizationCreateWithoutAnalyticsInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutAnalyticsInput = {
@@ -4933,6 +5287,7 @@ export type OrganizationUncheckedCreateWithoutAnalyticsInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanUncheckedCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutAnalyticsInput = {
@@ -5016,6 +5371,7 @@ export type OrganizationUpdateWithoutAnalyticsInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutAnalyticsInput = {
@@ -5084,6 +5440,7 @@ export type OrganizationUncheckedUpdateWithoutAnalyticsInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUncheckedUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutAuditsInput = {
@@ -5151,6 +5508,7 @@ export type OrganizationCreateWithoutAuditsInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutAuditsInput = {
@@ -5219,6 +5577,7 @@ export type OrganizationUncheckedCreateWithoutAuditsInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanUncheckedCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutAuditsInput = {
@@ -5302,6 +5661,7 @@ export type OrganizationUpdateWithoutAuditsInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutAuditsInput = {
@@ -5370,6 +5730,7 @@ export type OrganizationUncheckedUpdateWithoutAuditsInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUncheckedUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutSubscriptionPlansInput = {
@@ -5437,6 +5798,7 @@ export type OrganizationCreateWithoutSubscriptionPlansInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutSubscriptionPlansInput = {
@@ -5505,6 +5867,7 @@ export type OrganizationUncheckedCreateWithoutSubscriptionPlansInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanUncheckedCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutSubscriptionPlansInput = {
@@ -5588,6 +5951,7 @@ export type OrganizationUpdateWithoutSubscriptionPlansInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutSubscriptionPlansInput = {
@@ -5656,6 +6020,7 @@ export type OrganizationUncheckedUpdateWithoutSubscriptionPlansInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUncheckedUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutSubscriptionsInput = {
@@ -5723,6 +6088,7 @@ export type OrganizationCreateWithoutSubscriptionsInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutSubscriptionsInput = {
@@ -5791,6 +6157,7 @@ export type OrganizationUncheckedCreateWithoutSubscriptionsInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanUncheckedCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutSubscriptionsInput = {
@@ -5874,6 +6241,7 @@ export type OrganizationUpdateWithoutSubscriptionsInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutSubscriptionsInput = {
@@ -5942,6 +6310,7 @@ export type OrganizationUncheckedUpdateWithoutSubscriptionsInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUncheckedUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutOrganizationTransactionInput = {
@@ -6009,6 +6378,7 @@ export type OrganizationCreateWithoutOrganizationTransactionInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutOrganizationTransactionInput = {
@@ -6077,6 +6447,7 @@ export type OrganizationUncheckedCreateWithoutOrganizationTransactionInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanUncheckedCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutOrganizationTransactionInput = {
@@ -6160,6 +6531,7 @@ export type OrganizationUpdateWithoutOrganizationTransactionInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutOrganizationTransactionInput = {
@@ -6228,6 +6600,7 @@ export type OrganizationUncheckedUpdateWithoutOrganizationTransactionInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUncheckedUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutFollowersInput = {
@@ -6295,6 +6668,7 @@ export type OrganizationCreateWithoutFollowersInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutFollowersInput = {
@@ -6363,6 +6737,7 @@ export type OrganizationUncheckedCreateWithoutFollowersInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanUncheckedCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutFollowersInput = {
@@ -6446,6 +6821,7 @@ export type OrganizationUpdateWithoutFollowersInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutFollowersInput = {
@@ -6514,6 +6890,7 @@ export type OrganizationUncheckedUpdateWithoutFollowersInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUncheckedUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutJointMembersInput = {
@@ -6581,6 +6958,7 @@ export type OrganizationCreateWithoutJointMembersInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutJointMembersInput = {
@@ -6649,6 +7027,7 @@ export type OrganizationUncheckedCreateWithoutJointMembersInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanUncheckedCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutJointMembersInput = {
@@ -6732,6 +7111,7 @@ export type OrganizationUpdateWithoutJointMembersInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutJointMembersInput = {
@@ -6800,6 +7180,7 @@ export type OrganizationUncheckedUpdateWithoutJointMembersInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUncheckedUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutJointMemberHistoryInput = {
@@ -6867,6 +7248,7 @@ export type OrganizationCreateWithoutJointMemberHistoryInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutJointMemberHistoryInput = {
@@ -6935,6 +7317,7 @@ export type OrganizationUncheckedCreateWithoutJointMemberHistoryInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanUncheckedCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutJointMemberHistoryInput = {
@@ -7018,6 +7401,7 @@ export type OrganizationUpdateWithoutJointMemberHistoryInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutJointMemberHistoryInput = {
@@ -7086,6 +7470,7 @@ export type OrganizationUncheckedUpdateWithoutJointMemberHistoryInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUncheckedUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutNotificationsInput = {
@@ -7153,6 +7538,7 @@ export type OrganizationCreateWithoutNotificationsInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutNotificationsInput = {
@@ -7221,6 +7607,7 @@ export type OrganizationUncheckedCreateWithoutNotificationsInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedCreateNestedManyWithoutOrganizationInput
   userBans?: Prisma.UserBanUncheckedCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutNotificationsInput = {
@@ -7304,6 +7691,7 @@ export type OrganizationUpdateWithoutNotificationsInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutNotificationsInput = {
@@ -7372,6 +7760,7 @@ export type OrganizationUncheckedUpdateWithoutNotificationsInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUncheckedUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutUserBansInput = {
@@ -7439,6 +7828,7 @@ export type OrganizationCreateWithoutUserBansInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
   jointMemberHistory?: Prisma.JointMemberHistoryCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutUserBansInput = {
@@ -7507,6 +7897,7 @@ export type OrganizationUncheckedCreateWithoutUserBansInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedCreateNestedManyWithoutOrganizationInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutOrganizationInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutUserBansInput = {
@@ -7590,6 +7981,7 @@ export type OrganizationUpdateWithoutUserBansInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
   jointMemberHistory?: Prisma.JointMemberHistoryUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutUserBansInput = {
@@ -7658,6 +8050,7 @@ export type OrganizationUncheckedUpdateWithoutUserBansInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUpdateWithoutWorkedOnJointChaptersInput = {
@@ -7725,6 +8118,7 @@ export type OrganizationUpdateWithoutWorkedOnJointChaptersInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutWorkedOnJointChaptersInput = {
@@ -7793,6 +8187,7 @@ export type OrganizationUncheckedUpdateWithoutWorkedOnJointChaptersInput = {
   jointMemberHistory?: Prisma.JointMemberHistoryUncheckedUpdateManyWithoutOrganizationNestedInput
   userBans?: Prisma.UserBanUncheckedUpdateManyWithoutOrganizationNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutOrganizationNestedInput
+  recruitmentPosts?: Prisma.RecruitmentPostUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateManyWithoutWorkedOnJointChaptersInput = {
@@ -7870,6 +8265,7 @@ export type OrganizationCountOutputType = {
   jointMemberHistory: number
   userBans: number
   messageThreads: number
+  recruitmentPosts: number
 }
 
 export type OrganizationCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -7894,6 +8290,7 @@ export type OrganizationCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   jointMemberHistory?: boolean | OrganizationCountOutputTypeCountJointMemberHistoryArgs
   userBans?: boolean | OrganizationCountOutputTypeCountUserBansArgs
   messageThreads?: boolean | OrganizationCountOutputTypeCountMessageThreadsArgs
+  recruitmentPosts?: boolean | OrganizationCountOutputTypeCountRecruitmentPostsArgs
 }
 
 /**
@@ -8053,6 +8450,13 @@ export type OrganizationCountOutputTypeCountMessageThreadsArgs<ExtArgs extends r
   where?: Prisma.OrganizationMessageThreadWhereInput
 }
 
+/**
+ * OrganizationCountOutputType without action
+ */
+export type OrganizationCountOutputTypeCountRecruitmentPostsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RecruitmentPostWhereInput
+}
+
 
 export type OrganizationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -8121,6 +8525,7 @@ export type OrganizationSelect<ExtArgs extends runtime.Types.Extensions.Internal
   jointMemberHistory?: boolean | Prisma.Organization$jointMemberHistoryArgs<ExtArgs>
   userBans?: boolean | Prisma.Organization$userBansArgs<ExtArgs>
   messageThreads?: boolean | Prisma.Organization$messageThreadsArgs<ExtArgs>
+  recruitmentPosts?: boolean | Prisma.Organization$recruitmentPostsArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["organization"]>
 
@@ -8291,6 +8696,7 @@ export type OrganizationInclude<ExtArgs extends runtime.Types.Extensions.Interna
   jointMemberHistory?: boolean | Prisma.Organization$jointMemberHistoryArgs<ExtArgs>
   userBans?: boolean | Prisma.Organization$userBansArgs<ExtArgs>
   messageThreads?: boolean | Prisma.Organization$messageThreadsArgs<ExtArgs>
+  recruitmentPosts?: boolean | Prisma.Organization$recruitmentPostsArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type OrganizationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -8320,6 +8726,7 @@ export type $OrganizationPayload<ExtArgs extends runtime.Types.Extensions.Intern
     jointMemberHistory: Prisma.$JointMemberHistoryPayload<ExtArgs>[]
     userBans: Prisma.$UserBanPayload<ExtArgs>[]
     messageThreads: Prisma.$OrganizationMessageThreadPayload<ExtArgs>[]
+    recruitmentPosts: Prisma.$RecruitmentPostPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -8782,6 +9189,7 @@ export interface Prisma__OrganizationClient<T, Null = never, ExtArgs extends run
   jointMemberHistory<T extends Prisma.Organization$jointMemberHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$jointMemberHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JointMemberHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   userBans<T extends Prisma.Organization$userBansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$userBansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserBanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   messageThreads<T extends Prisma.Organization$messageThreadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$messageThreadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrganizationMessageThreadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  recruitmentPosts<T extends Prisma.Organization$recruitmentPostsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$recruitmentPostsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RecruitmentPostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9745,6 +10153,30 @@ export type Organization$messageThreadsArgs<ExtArgs extends runtime.Types.Extens
   take?: number
   skip?: number
   distinct?: Prisma.OrganizationMessageThreadScalarFieldEnum | Prisma.OrganizationMessageThreadScalarFieldEnum[]
+}
+
+/**
+ * Organization.recruitmentPosts
+ */
+export type Organization$recruitmentPostsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RecruitmentPost
+   */
+  select?: Prisma.RecruitmentPostSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RecruitmentPost
+   */
+  omit?: Prisma.RecruitmentPostOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RecruitmentPostInclude<ExtArgs> | null
+  where?: Prisma.RecruitmentPostWhereInput
+  orderBy?: Prisma.RecruitmentPostOrderByWithRelationInput | Prisma.RecruitmentPostOrderByWithRelationInput[]
+  cursor?: Prisma.RecruitmentPostWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RecruitmentPostScalarFieldEnum | Prisma.RecruitmentPostScalarFieldEnum[]
 }
 
 /**
