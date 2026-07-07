@@ -295,6 +295,7 @@ model MangaCustom {
   nextChapterAtMessage               String?
   hideUnreleasedChapters             Boolean            @default(false)
   usersAlsoReadMangaCustomIds        String?
+  finalChapterNumber                 Float?
   chapters                           Chapter[]
   favorites                          Favorite[]
   userListEntries                    UserList[]
@@ -830,6 +831,7 @@ model MangaJoint {
   workType         String        @default("manga") @db.VarChar(64)
   lastChapterAt    DateTime?
   views            Int           @default(0)
+  finalChapterNumber Float?
   createdAt        DateTime      @default(now()) @db.Timestamp(6)
   updatedAt        DateTime      @updatedAt
   deletedAt        DateTime?
