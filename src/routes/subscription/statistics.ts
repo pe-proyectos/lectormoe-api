@@ -24,15 +24,17 @@ export const router = () => new Elysia()
                     }
                 });
 
-                // Calculate statistics
-                const activeSubscriptions = subscriptions.filter(sub => 
-                    sub.active && sub.status === 'ACTIVE' && 
+                // Calculate statistics.
+                // A subscription is "active" if active=true AND (no endDate OR endDate in future).
+                // We do NOT require status='ACTIVE' because cancelled-but-paid subs keep access.
+                const activeSubscriptions = subscriptions.filter(sub =>
+                    sub.active &&
                     (!sub.endDate || sub.endDate > now)
                 );
 
-                const inactiveSubscriptions = subscriptions.filter(sub => 
-                    !sub.active || sub.status !== 'ACTIVE' || 
-                    (sub.endDate && sub.endDate <= now)
+                const inactiveSubscriptions = subscriptions.filter(sub =>
+                    !sub.active ||
+                    (sub.endDate !== null && sub.endDate <= now)
                 );
 
                 // Debug: Find subscriptions that are active but not counted in activeSubscriptions
@@ -170,7 +172,6 @@ export const router = () => new Elysia()
                     where: {
                         organizationId: organizationId,
                         active: true,
-                        status: 'ACTIVE'
                     },
                     _count: {
                         id: true

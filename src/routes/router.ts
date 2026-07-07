@@ -83,6 +83,7 @@ import { router as subscriptionListRouter } from "./subscription/list";
 import { router as subscriptionMeListRouter } from "./subscription/me-list";
 import { router as subscriptionMePaymentsRouter } from "./subscription/me-payments";
 import { router as subscriptionMeActiveRouter } from "./subscription/me-active";
+import { router as subscriptionMeCancelRouter } from "./subscription/me-cancel";
 import { router as subscriptionMonthlyRevenueRouter } from "./subscription/monthly-revenue";
 import { router as subscriptionPaypalWebhookRouter } from "./subscription/paypal_webhook";
 import { router as subscriptionStatisticsRouter } from "./subscription/statistics";
@@ -236,6 +237,7 @@ export const router = () => async (app: Elysia) => {
 	app.use(subscriptionMeListRouter());
 	app.use(subscriptionMePaymentsRouter());
 	app.use(subscriptionMeActiveRouter());
+	app.use(subscriptionMeCancelRouter());
 	app.use(subscriptionMonthlyRevenueRouter());
 	app.use(subscriptionPaypalWebhookRouter());
 	app.use(subscriptionStatisticsRouter());

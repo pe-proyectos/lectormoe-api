@@ -206,6 +206,47 @@ export async function updatePlan(
   return updatedPlan;
 }
 
+export async function updatePlanPricing(
+  planId: string,
+  price: number,
+  currency: string
+) {
+  const token = await getAccessToken();
+
+  const response = await fetch(
+    `${environment.url}/billing/plans/${planId}/update-pricing-schemes`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        pricing_schemes: [
+          {
+            billing_cycle_sequence: 1,
+            pricing_scheme: {
+              fixed_price: {
+                value: price.toFixed(2),
+                currency_code: currency,
+              },
+            },
+          },
+        ],
+      }),
+    }
+  );
+
+  if (!response.ok) {
+    const error = await response.json();
+    console.error("Error al actualizar precio del plan:", error);
+    throw new Error("Failed to update PayPal plan pricing.");
+  }
+
+  // 204 No Content on success
+  return true;
+}
+
 export async function getPlanById(planId: string) {
   const token = await getAccessToken();
 
@@ -288,6 +329,27 @@ export async function getTransactionsOfSubscription(paypalSubscriptionId: string
   const { transactions } = await response.json();
   console.log("Transacciones obtenidas:", transactions);
   return transactions;
+}
+
+export async function cancelSubscriptionByPaypalId(paypalSubscriptionId: string, reason?: string) {
+  const token = await getAccessToken();
+
+  const response = await fetch(`${environment.url}/billing/subscriptions/${paypalSubscriptionId}/cancel`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ reason: reason ?? "Customer requested cancellation" }),
+  });
+
+  if (!response.ok && response.status !== 204) {
+    const error = await response.json().catch(() => ({}));
+    console.error("Error al cancelar la suscripción:", error);
+    throw new Error("Failed to cancel PayPal subscription.");
+  }
+
+  return true;
 }
 
 export async function suspendSubscriptionByPaypalId(paypalSubscriptionId: string) {

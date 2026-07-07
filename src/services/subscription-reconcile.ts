@@ -22,17 +22,36 @@ export const reconcileSubscriptionFromPaypal = async (paypalSubscriptionId: stri
   if (!ps) return null;
 
   const email = ps.subscriber?.email_address?.toLowerCase();
-  if (!email) {
-    console.warn(`[reconcile] sub ${paypalSubscriptionId}: no subscriber email on PayPal payload`);
-    return null;
+  const customId = ps.custom_id; // userId embebido al crear la suscripción desde el frontend
+
+  // Estrategia 1: custom_id contiene nuestro userId (el flow normal del frontend lo incluye)
+  let user: { id: number; email: string; slug: string } | null = null;
+  if (customId) {
+    const customIdNum = parseInt(customId, 10);
+    if (!isNaN(customIdNum)) {
+      user = await prisma.user.findFirst({
+        where: { id: customIdNum },
+        select: { id: true, email: true, slug: true },
+      });
+      if (user) {
+        console.log(`[reconcile] sub ${paypalSubscriptionId}: matched via custom_id=${customId} → user=${user.slug}`);
+      }
+    }
   }
 
-  const user = await prisma.user.findFirst({
-    where: { email: { equals: email, mode: 'insensitive' } },
-    select: { id: true, email: true, slug: true },
-  });
+  // Estrategia 2: fallback por email PayPal (puede diferir del email registrado)
+  if (!user && email) {
+    user = await prisma.user.findFirst({
+      where: { email: { equals: email, mode: 'insensitive' } },
+      select: { id: true, email: true, slug: true },
+    });
+    if (user) {
+      console.log(`[reconcile] sub ${paypalSubscriptionId}: matched via email=${email} → user=${user.slug}`);
+    }
+  }
+
   if (!user) {
-    console.warn(`[reconcile] sub ${paypalSubscriptionId}: no user with email=${email}`);
+    console.warn(`[reconcile] sub ${paypalSubscriptionId}: no user found. custom_id=${customId}, email=${email}`);
     return null;
   }
 
@@ -78,7 +97,7 @@ export const reconcileTransactionsForSubscription = async (subscriptionId: numbe
       subscriptionPlan: { select: { name: true } },
     },
   });
-  if (!sub || !sub.paypalSubscriptionId) return { inserted: 0, skipped: 0 };
+  if (!sub || !sub.paypalSubscriptionId || !sub.organizationId) return { inserted: 0, skipped: 0 };
 
   let txs: any[] = [];
   try {

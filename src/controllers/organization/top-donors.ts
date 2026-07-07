@@ -3,21 +3,20 @@ import { prisma } from "../../models/prisma";
 export const getTopDonors = async (organizationId: number) => {
 	const now = new Date();
 	
-	// Solo considerar suscripciones que están activas:
-	// 1. active = true (campo booleano que indica si está activa) - OBLIGATORIO
-	// 2. status = 'ACTIVE' (estado de la suscripción debe ser ACTIVE)
-	// 3. endDate es null (sin fecha de fin) O endDate es mayor que ahora (aún no ha expirado)
-	// Esto asegura que solo se incluyan suscripciones realmente activas y vigentes
+	// Solo considerar suscripciones con acceso vigente:
+	// - active = true (fuente de verdad de nuestra plataforma)
+	// - endDate es null (sin vencimiento) O endDate > now (período de gracia tras cancelar)
+	// No filtramos por status de PayPal porque usuarios que cancelaron el cobro recurrente
+	// pero ya pagaron el mes pueden tener status='CANCELLED' y aún tener active=true.
 	const subscriptions = await prisma.subscription.findMany({
 		where: {
 			AND: [
 				{ organizationId: organizationId },
-				{ active: true }, // CRÍTICO: Solo suscripciones con active = true
-				{ status: 'ACTIVE' }, // Solo suscripciones con status = 'ACTIVE'
+				{ active: true },
 				{
 					OR: [
-						{ endDate: null }, // Sin fecha de fin (suscripción permanente)
-						{ endDate: { gt: now } } // Fecha de fin mayor que ahora (aún vigente)
+						{ endDate: null },
+						{ endDate: { gt: now } }
 					]
 				}
 			]
