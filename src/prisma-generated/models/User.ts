@@ -435,6 +435,7 @@ export type UserWhereInput = {
   organizationMessages?: Prisma.OrganizationMessageListRelationFilter
   contentReportsReviewed?: Prisma.ContentReportListRelationFilter
   moderationLogs?: Prisma.ModerationLogListRelationFilter
+  organizationRequests?: Prisma.OrganizationRequestListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -501,6 +502,7 @@ export type UserOrderByWithRelationInput = {
   organizationMessages?: Prisma.OrganizationMessageOrderByRelationAggregateInput
   contentReportsReviewed?: Prisma.ContentReportOrderByRelationAggregateInput
   moderationLogs?: Prisma.ModerationLogOrderByRelationAggregateInput
+  organizationRequests?: Prisma.OrganizationRequestOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -570,6 +572,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   organizationMessages?: Prisma.OrganizationMessageListRelationFilter
   contentReportsReviewed?: Prisma.ContentReportListRelationFilter
   moderationLogs?: Prisma.ModerationLogListRelationFilter
+  organizationRequests?: Prisma.OrganizationRequestListRelationFilter
 }, "id" | "username" | "slug" | "email" | "discordId">
 
 export type UserOrderByWithAggregationInput = {
@@ -705,6 +708,7 @@ export type UserCreateInput = {
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -771,6 +775,7 @@ export type UserUncheckedCreateInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -836,6 +841,7 @@ export type UserUpdateInput = {
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -902,6 +908,7 @@ export type UserUncheckedUpdateInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUncheckedUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -1461,6 +1468,22 @@ export type UserUpdateOneRequiredWithoutOrganizationFollowsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutOrganizationFollowsInput, Prisma.UserUpdateWithoutOrganizationFollowsInput>, Prisma.UserUncheckedUpdateWithoutOrganizationFollowsInput>
 }
 
+export type UserCreateNestedOneWithoutOrganizationRequestsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutOrganizationRequestsInput, Prisma.UserUncheckedCreateWithoutOrganizationRequestsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutOrganizationRequestsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutOrganizationRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutOrganizationRequestsInput, Prisma.UserUncheckedCreateWithoutOrganizationRequestsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutOrganizationRequestsInput
+  upsert?: Prisma.UserUpsertWithoutOrganizationRequestsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutOrganizationRequestsInput, Prisma.UserUpdateWithoutOrganizationRequestsInput>, Prisma.UserUncheckedUpdateWithoutOrganizationRequestsInput>
+}
+
 export type UserCreateNestedOneWithoutEmailPreferenceInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutEmailPreferenceInput, Prisma.UserUncheckedCreateWithoutEmailPreferenceInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutEmailPreferenceInput
@@ -1677,6 +1700,7 @@ export type UserCreateWithoutTokensInput = {
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutTokensInput = {
@@ -1742,6 +1766,7 @@ export type UserUncheckedCreateWithoutTokensInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutTokensInput = {
@@ -1822,6 +1847,7 @@ export type UserUpdateWithoutTokensInput = {
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTokensInput = {
@@ -1887,6 +1913,7 @@ export type UserUncheckedUpdateWithoutTokensInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUncheckedUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutModerationLogsInput = {
@@ -1951,6 +1978,7 @@ export type UserCreateWithoutModerationLogsInput = {
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
+  organizationRequests?: Prisma.OrganizationRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutModerationLogsInput = {
@@ -2016,6 +2044,7 @@ export type UserUncheckedCreateWithoutModerationLogsInput = {
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutModerationLogsInput = {
@@ -2096,6 +2125,7 @@ export type UserUpdateWithoutModerationLogsInput = {
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutModerationLogsInput = {
@@ -2161,6 +2191,7 @@ export type UserUncheckedUpdateWithoutModerationLogsInput = {
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPermissionsInput = {
@@ -2225,6 +2256,7 @@ export type UserCreateWithoutPermissionsInput = {
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPermissionsInput = {
@@ -2290,6 +2322,7 @@ export type UserUncheckedCreateWithoutPermissionsInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPermissionsInput = {
@@ -2370,6 +2403,7 @@ export type UserUpdateWithoutPermissionsInput = {
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPermissionsInput = {
@@ -2435,6 +2469,7 @@ export type UserUncheckedUpdateWithoutPermissionsInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUncheckedUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPasswordResetTokensInput = {
@@ -2499,6 +2534,7 @@ export type UserCreateWithoutPasswordResetTokensInput = {
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPasswordResetTokensInput = {
@@ -2564,6 +2600,7 @@ export type UserUncheckedCreateWithoutPasswordResetTokensInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPasswordResetTokensInput = {
@@ -2644,6 +2681,7 @@ export type UserUpdateWithoutPasswordResetTokensInput = {
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
@@ -2709,6 +2747,7 @@ export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUncheckedUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutMessageThreadsInput = {
@@ -2773,6 +2812,7 @@ export type UserCreateWithoutMessageThreadsInput = {
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutMessageThreadsInput = {
@@ -2838,6 +2878,7 @@ export type UserUncheckedCreateWithoutMessageThreadsInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutMessageThreadsInput = {
@@ -2918,6 +2959,7 @@ export type UserUpdateWithoutMessageThreadsInput = {
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMessageThreadsInput = {
@@ -2983,6 +3025,7 @@ export type UserUncheckedUpdateWithoutMessageThreadsInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUncheckedUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutOrganizationMessagesInput = {
@@ -3047,6 +3090,7 @@ export type UserCreateWithoutOrganizationMessagesInput = {
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutOrganizationMessagesInput = {
@@ -3112,6 +3156,7 @@ export type UserUncheckedCreateWithoutOrganizationMessagesInput = {
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutOrganizationMessagesInput = {
@@ -3192,6 +3237,7 @@ export type UserUpdateWithoutOrganizationMessagesInput = {
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOrganizationMessagesInput = {
@@ -3257,6 +3303,7 @@ export type UserUncheckedUpdateWithoutOrganizationMessagesInput = {
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUncheckedUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCustomListsInput = {
@@ -3321,6 +3368,7 @@ export type UserCreateWithoutCustomListsInput = {
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCustomListsInput = {
@@ -3386,6 +3434,7 @@ export type UserUncheckedCreateWithoutCustomListsInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCustomListsInput = {
@@ -3466,6 +3515,7 @@ export type UserUpdateWithoutCustomListsInput = {
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCustomListsInput = {
@@ -3531,6 +3581,7 @@ export type UserUncheckedUpdateWithoutCustomListsInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUncheckedUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutContentReportsInput = {
@@ -3595,6 +3646,7 @@ export type UserCreateWithoutContentReportsInput = {
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutContentReportsInput = {
@@ -3660,6 +3712,7 @@ export type UserUncheckedCreateWithoutContentReportsInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutContentReportsInput = {
@@ -3729,6 +3782,7 @@ export type UserCreateWithoutContentReportsReviewedInput = {
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutContentReportsReviewedInput = {
@@ -3794,6 +3848,7 @@ export type UserUncheckedCreateWithoutContentReportsReviewedInput = {
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutContentReportsReviewedInput = {
@@ -3874,6 +3929,7 @@ export type UserUpdateWithoutContentReportsInput = {
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutContentReportsInput = {
@@ -3939,6 +3995,7 @@ export type UserUncheckedUpdateWithoutContentReportsInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUncheckedUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutContentReportsReviewedInput = {
@@ -4014,6 +4071,7 @@ export type UserUpdateWithoutContentReportsReviewedInput = {
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutContentReportsReviewedInput = {
@@ -4079,6 +4137,7 @@ export type UserUncheckedUpdateWithoutContentReportsReviewedInput = {
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   moderationLogs?: Prisma.ModerationLogUncheckedUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutReviewsInput = {
@@ -4143,6 +4202,7 @@ export type UserCreateWithoutReviewsInput = {
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReviewsInput = {
@@ -4208,6 +4268,7 @@ export type UserUncheckedCreateWithoutReviewsInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutReviewsInput = {
@@ -4277,6 +4338,7 @@ export type UserCreateWithoutReviewsHiddenInput = {
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReviewsHiddenInput = {
@@ -4342,6 +4404,7 @@ export type UserUncheckedCreateWithoutReviewsHiddenInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutReviewsHiddenInput = {
@@ -4422,6 +4485,7 @@ export type UserUpdateWithoutReviewsInput = {
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReviewsInput = {
@@ -4487,6 +4551,7 @@ export type UserUncheckedUpdateWithoutReviewsInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUncheckedUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutReviewsHiddenInput = {
@@ -4562,6 +4627,7 @@ export type UserUpdateWithoutReviewsHiddenInput = {
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReviewsHiddenInput = {
@@ -4627,6 +4693,7 @@ export type UserUncheckedUpdateWithoutReviewsHiddenInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUncheckedUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutMilestoneAlertsInput = {
@@ -4691,6 +4758,7 @@ export type UserCreateWithoutMilestoneAlertsInput = {
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutMilestoneAlertsInput = {
@@ -4756,6 +4824,7 @@ export type UserUncheckedCreateWithoutMilestoneAlertsInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutMilestoneAlertsInput = {
@@ -4836,6 +4905,7 @@ export type UserUpdateWithoutMilestoneAlertsInput = {
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMilestoneAlertsInput = {
@@ -4901,6 +4971,7 @@ export type UserUncheckedUpdateWithoutMilestoneAlertsInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUncheckedUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutChapterReactionsInput = {
@@ -4965,6 +5036,7 @@ export type UserCreateWithoutChapterReactionsInput = {
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutChapterReactionsInput = {
@@ -5030,6 +5102,7 @@ export type UserUncheckedCreateWithoutChapterReactionsInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutChapterReactionsInput = {
@@ -5110,6 +5183,7 @@ export type UserUpdateWithoutChapterReactionsInput = {
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutChapterReactionsInput = {
@@ -5175,6 +5249,7 @@ export type UserUncheckedUpdateWithoutChapterReactionsInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUncheckedUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCommentInput = {
@@ -5239,6 +5314,7 @@ export type UserCreateWithoutCommentInput = {
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCommentInput = {
@@ -5304,6 +5380,7 @@ export type UserUncheckedCreateWithoutCommentInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCommentInput = {
@@ -5373,6 +5450,7 @@ export type UserCreateWithoutCommentsInput = {
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCommentsInput = {
@@ -5438,6 +5516,7 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCommentsInput = {
@@ -5518,6 +5597,7 @@ export type UserUpdateWithoutCommentInput = {
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCommentInput = {
@@ -5583,6 +5663,7 @@ export type UserUncheckedUpdateWithoutCommentInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUncheckedUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutCommentsInput = {
@@ -5658,6 +5739,7 @@ export type UserUpdateWithoutCommentsInput = {
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCommentsInput = {
@@ -5723,6 +5805,7 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUncheckedUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutRankingsInput = {
@@ -5787,6 +5870,7 @@ export type UserCreateWithoutRankingsInput = {
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRankingsInput = {
@@ -5852,6 +5936,7 @@ export type UserUncheckedCreateWithoutRankingsInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRankingsInput = {
@@ -5932,6 +6017,7 @@ export type UserUpdateWithoutRankingsInput = {
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRankingsInput = {
@@ -5997,6 +6083,7 @@ export type UserUncheckedUpdateWithoutRankingsInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUncheckedUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAnalyticsInput = {
@@ -6061,6 +6148,7 @@ export type UserCreateWithoutAnalyticsInput = {
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAnalyticsInput = {
@@ -6126,6 +6214,7 @@ export type UserUncheckedCreateWithoutAnalyticsInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAnalyticsInput = {
@@ -6206,6 +6295,7 @@ export type UserUpdateWithoutAnalyticsInput = {
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAnalyticsInput = {
@@ -6271,6 +6361,7 @@ export type UserUncheckedUpdateWithoutAnalyticsInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUncheckedUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutHistoryInput = {
@@ -6335,6 +6426,7 @@ export type UserCreateWithoutHistoryInput = {
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutHistoryInput = {
@@ -6400,6 +6492,7 @@ export type UserUncheckedCreateWithoutHistoryInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutHistoryInput = {
@@ -6480,6 +6573,7 @@ export type UserUpdateWithoutHistoryInput = {
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutHistoryInput = {
@@ -6545,6 +6639,7 @@ export type UserUncheckedUpdateWithoutHistoryInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUncheckedUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutFavoritesInput = {
@@ -6609,6 +6704,7 @@ export type UserCreateWithoutFavoritesInput = {
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutFavoritesInput = {
@@ -6674,6 +6770,7 @@ export type UserUncheckedCreateWithoutFavoritesInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutFavoritesInput = {
@@ -6754,6 +6851,7 @@ export type UserUpdateWithoutFavoritesInput = {
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFavoritesInput = {
@@ -6819,6 +6917,7 @@ export type UserUncheckedUpdateWithoutFavoritesInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUncheckedUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutUserListInput = {
@@ -6883,6 +6982,7 @@ export type UserCreateWithoutUserListInput = {
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutUserListInput = {
@@ -6948,6 +7048,7 @@ export type UserUncheckedCreateWithoutUserListInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutUserListInput = {
@@ -7028,6 +7129,7 @@ export type UserUpdateWithoutUserListInput = {
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserListInput = {
@@ -7093,6 +7195,7 @@ export type UserUncheckedUpdateWithoutUserListInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUncheckedUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPageBookmarksInput = {
@@ -7157,6 +7260,7 @@ export type UserCreateWithoutPageBookmarksInput = {
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPageBookmarksInput = {
@@ -7222,6 +7326,7 @@ export type UserUncheckedCreateWithoutPageBookmarksInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPageBookmarksInput = {
@@ -7302,6 +7407,7 @@ export type UserUpdateWithoutPageBookmarksInput = {
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPageBookmarksInput = {
@@ -7367,6 +7473,7 @@ export type UserUncheckedUpdateWithoutPageBookmarksInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUncheckedUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAuditsInput = {
@@ -7431,6 +7538,7 @@ export type UserCreateWithoutAuditsInput = {
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAuditsInput = {
@@ -7496,6 +7604,7 @@ export type UserUncheckedCreateWithoutAuditsInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAuditsInput = {
@@ -7576,6 +7685,7 @@ export type UserUpdateWithoutAuditsInput = {
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuditsInput = {
@@ -7641,6 +7751,7 @@ export type UserUncheckedUpdateWithoutAuditsInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUncheckedUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSubscriptionsInput = {
@@ -7705,6 +7816,7 @@ export type UserCreateWithoutSubscriptionsInput = {
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSubscriptionsInput = {
@@ -7770,6 +7882,7 @@ export type UserUncheckedCreateWithoutSubscriptionsInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSubscriptionsInput = {
@@ -7850,6 +7963,7 @@ export type UserUpdateWithoutSubscriptionsInput = {
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSubscriptionsInput = {
@@ -7915,6 +8029,7 @@ export type UserUncheckedUpdateWithoutSubscriptionsInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUncheckedUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutOrganizationFollowsInput = {
@@ -7979,6 +8094,7 @@ export type UserCreateWithoutOrganizationFollowsInput = {
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutOrganizationFollowsInput = {
@@ -8044,6 +8160,7 @@ export type UserUncheckedCreateWithoutOrganizationFollowsInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutOrganizationFollowsInput = {
@@ -8124,6 +8241,7 @@ export type UserUpdateWithoutOrganizationFollowsInput = {
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOrganizationFollowsInput = {
@@ -8165,6 +8283,285 @@ export type UserUncheckedUpdateWithoutOrganizationFollowsInput = {
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
+  rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedUpdateManyWithoutUserNestedInput
+  achievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUncheckedUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
+  chapterReactions?: Prisma.ChapterReactionUncheckedUpdateManyWithoutUserNestedInput
+  milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
+  contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
+  messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
+  organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
+  contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
+  moderationLogs?: Prisma.ModerationLogUncheckedUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutOrganizationRequestsInput = {
+  username: string
+  slug: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  description?: string | null
+  imageUrl?: string | null
+  birthdate?: Date | string | null
+  bannerUrl?: string | null
+  bannerUrlChangedAt?: Date | string | null
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
+  emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
+  pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
+  hideAds?: boolean
+  theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
+  analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
+  audits?: Prisma.AuditCreateNestedManyWithoutUserInput
+  Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  userList?: Prisma.UserListCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
+  rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenCreateNestedManyWithoutUserInput
+  achievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
+  chapterReactions?: Prisma.ChapterReactionCreateNestedManyWithoutUserInput
+  milestoneAlerts?: Prisma.ChapterMilestoneAlertCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
+  contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
+  messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
+  organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
+  contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
+  moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
+}
+
+export type UserUncheckedCreateWithoutOrganizationRequestsInput = {
+  id?: number
+  username: string
+  slug: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  description?: string | null
+  imageUrl?: string | null
+  birthdate?: Date | string | null
+  bannerUrl?: string | null
+  bannerUrlChangedAt?: Date | string | null
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
+  emailNotifications?: boolean
+  emailVerified?: boolean
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
+  pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
+  hideAds?: boolean
+  theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
+  analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
+  audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
+  Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
+  rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedCreateNestedManyWithoutUserInput
+  achievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanUncheckedCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
+  chapterReactions?: Prisma.ChapterReactionUncheckedCreateNestedManyWithoutUserInput
+  milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
+  contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
+  messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
+  organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
+  contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
+  moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
+}
+
+export type UserCreateOrConnectWithoutOrganizationRequestsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutOrganizationRequestsInput, Prisma.UserUncheckedCreateWithoutOrganizationRequestsInput>
+}
+
+export type UserUpsertWithoutOrganizationRequestsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutOrganizationRequestsInput, Prisma.UserUncheckedUpdateWithoutOrganizationRequestsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutOrganizationRequestsInput, Prisma.UserUncheckedCreateWithoutOrganizationRequestsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutOrganizationRequestsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutOrganizationRequestsInput, Prisma.UserUncheckedUpdateWithoutOrganizationRequestsInput>
+}
+
+export type UserUpdateWithoutOrganizationRequestsInput = {
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
+  audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
+  Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
+  rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenUpdateManyWithoutUserNestedInput
+  achievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
+  chapterReactions?: Prisma.ChapterReactionUpdateManyWithoutUserNestedInput
+  milestoneAlerts?: Prisma.ChapterMilestoneAlertUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
+  contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
+  messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
+  organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
+  contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
+  moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
+}
+
+export type UserUncheckedUpdateWithoutOrganizationRequestsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
+  audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
+  Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -8253,6 +8650,7 @@ export type UserCreateWithoutEmailPreferenceInput = {
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutEmailPreferenceInput = {
@@ -8318,6 +8716,7 @@ export type UserUncheckedCreateWithoutEmailPreferenceInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutEmailPreferenceInput = {
@@ -8398,6 +8797,7 @@ export type UserUpdateWithoutEmailPreferenceInput = {
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEmailPreferenceInput = {
@@ -8463,6 +8863,7 @@ export type UserUncheckedUpdateWithoutEmailPreferenceInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUncheckedUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutEmailLogsInput = {
@@ -8527,6 +8928,7 @@ export type UserCreateWithoutEmailLogsInput = {
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutEmailLogsInput = {
@@ -8592,6 +8994,7 @@ export type UserUncheckedCreateWithoutEmailLogsInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutEmailLogsInput = {
@@ -8672,6 +9075,7 @@ export type UserUpdateWithoutEmailLogsInput = {
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEmailLogsInput = {
@@ -8737,6 +9141,7 @@ export type UserUncheckedUpdateWithoutEmailLogsInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUncheckedUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutUnsubscribeTokensInput = {
@@ -8801,6 +9206,7 @@ export type UserCreateWithoutUnsubscribeTokensInput = {
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutUnsubscribeTokensInput = {
@@ -8866,6 +9272,7 @@ export type UserUncheckedCreateWithoutUnsubscribeTokensInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutUnsubscribeTokensInput = {
@@ -8946,6 +9353,7 @@ export type UserUpdateWithoutUnsubscribeTokensInput = {
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUnsubscribeTokensInput = {
@@ -9011,6 +9419,7 @@ export type UserUncheckedUpdateWithoutUnsubscribeTokensInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUncheckedUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutEmailVerificationTokensInput = {
@@ -9075,6 +9484,7 @@ export type UserCreateWithoutEmailVerificationTokensInput = {
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutEmailVerificationTokensInput = {
@@ -9140,6 +9550,7 @@ export type UserUncheckedCreateWithoutEmailVerificationTokensInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutEmailVerificationTokensInput = {
@@ -9220,6 +9631,7 @@ export type UserUpdateWithoutEmailVerificationTokensInput = {
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEmailVerificationTokensInput = {
@@ -9285,6 +9697,7 @@ export type UserUncheckedUpdateWithoutEmailVerificationTokensInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUncheckedUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutDailyActivitiesInput = {
@@ -9349,6 +9762,7 @@ export type UserCreateWithoutDailyActivitiesInput = {
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutDailyActivitiesInput = {
@@ -9414,6 +9828,7 @@ export type UserUncheckedCreateWithoutDailyActivitiesInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutDailyActivitiesInput = {
@@ -9494,6 +9909,7 @@ export type UserUpdateWithoutDailyActivitiesInput = {
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDailyActivitiesInput = {
@@ -9559,6 +9975,7 @@ export type UserUncheckedUpdateWithoutDailyActivitiesInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUncheckedUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAchievementsInput = {
@@ -9623,6 +10040,7 @@ export type UserCreateWithoutAchievementsInput = {
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAchievementsInput = {
@@ -9688,6 +10106,7 @@ export type UserUncheckedCreateWithoutAchievementsInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAchievementsInput = {
@@ -9768,6 +10187,7 @@ export type UserUpdateWithoutAchievementsInput = {
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAchievementsInput = {
@@ -9833,6 +10253,7 @@ export type UserUncheckedUpdateWithoutAchievementsInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUncheckedUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutNotificationsInput = {
@@ -9897,6 +10318,7 @@ export type UserCreateWithoutNotificationsInput = {
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -9962,6 +10384,7 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -10042,6 +10465,7 @@ export type UserUpdateWithoutNotificationsInput = {
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -10107,6 +10531,7 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUncheckedUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutRaffleTicketsInput = {
@@ -10171,6 +10596,7 @@ export type UserCreateWithoutRaffleTicketsInput = {
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRaffleTicketsInput = {
@@ -10236,6 +10662,7 @@ export type UserUncheckedCreateWithoutRaffleTicketsInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRaffleTicketsInput = {
@@ -10316,6 +10743,7 @@ export type UserUpdateWithoutRaffleTicketsInput = {
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRaffleTicketsInput = {
@@ -10381,6 +10809,7 @@ export type UserUncheckedUpdateWithoutRaffleTicketsInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUncheckedUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutRaffleCommentsInput = {
@@ -10445,6 +10874,7 @@ export type UserCreateWithoutRaffleCommentsInput = {
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRaffleCommentsInput = {
@@ -10510,6 +10940,7 @@ export type UserUncheckedCreateWithoutRaffleCommentsInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRaffleCommentsInput = {
@@ -10590,6 +11021,7 @@ export type UserUpdateWithoutRaffleCommentsInput = {
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRaffleCommentsInput = {
@@ -10655,6 +11087,7 @@ export type UserUncheckedUpdateWithoutRaffleCommentsInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUncheckedUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutBansReceivedInput = {
@@ -10719,6 +11152,7 @@ export type UserCreateWithoutBansReceivedInput = {
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBansReceivedInput = {
@@ -10784,6 +11218,7 @@ export type UserUncheckedCreateWithoutBansReceivedInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBansReceivedInput = {
@@ -10853,6 +11288,7 @@ export type UserCreateWithoutBansIssuedInput = {
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBansIssuedInput = {
@@ -10918,6 +11354,7 @@ export type UserUncheckedCreateWithoutBansIssuedInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBansIssuedInput = {
@@ -10998,6 +11435,7 @@ export type UserUpdateWithoutBansReceivedInput = {
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBansReceivedInput = {
@@ -11063,6 +11501,7 @@ export type UserUncheckedUpdateWithoutBansReceivedInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUncheckedUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutBansIssuedInput = {
@@ -11138,6 +11577,7 @@ export type UserUpdateWithoutBansIssuedInput = {
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBansIssuedInput = {
@@ -11203,6 +11643,7 @@ export type UserUncheckedUpdateWithoutBansIssuedInput = {
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUncheckedUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -11245,6 +11686,7 @@ export type UserCountOutputType = {
   organizationMessages: number
   contentReportsReviewed: number
   moderationLogs: number
+  organizationRequests: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -11282,6 +11724,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   organizationMessages?: boolean | UserCountOutputTypeCountOrganizationMessagesArgs
   contentReportsReviewed?: boolean | UserCountOutputTypeCountContentReportsReviewedArgs
   moderationLogs?: boolean | UserCountOutputTypeCountModerationLogsArgs
+  organizationRequests?: boolean | UserCountOutputTypeCountOrganizationRequestsArgs
 }
 
 /**
@@ -11532,6 +11975,13 @@ export type UserCountOutputTypeCountModerationLogsArgs<ExtArgs extends runtime.T
   where?: Prisma.ModerationLogWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountOrganizationRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OrganizationRequestWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -11597,6 +12047,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   organizationMessages?: boolean | Prisma.User$organizationMessagesArgs<ExtArgs>
   contentReportsReviewed?: boolean | Prisma.User$contentReportsReviewedArgs<ExtArgs>
   moderationLogs?: boolean | Prisma.User$moderationLogsArgs<ExtArgs>
+  organizationRequests?: boolean | Prisma.User$organizationRequestsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -11730,6 +12181,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   organizationMessages?: boolean | Prisma.User$organizationMessagesArgs<ExtArgs>
   contentReportsReviewed?: boolean | Prisma.User$contentReportsReviewedArgs<ExtArgs>
   moderationLogs?: boolean | Prisma.User$moderationLogsArgs<ExtArgs>
+  organizationRequests?: boolean | Prisma.User$organizationRequestsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -11773,6 +12225,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     organizationMessages: Prisma.$OrganizationMessagePayload<ExtArgs>[]
     contentReportsReviewed: Prisma.$ContentReportPayload<ExtArgs>[]
     moderationLogs: Prisma.$ModerationLogPayload<ExtArgs>[]
+    organizationRequests: Prisma.$OrganizationRequestPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -12232,6 +12685,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   organizationMessages<T extends Prisma.User$organizationMessagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$organizationMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrganizationMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   contentReportsReviewed<T extends Prisma.User$contentReportsReviewedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$contentReportsReviewedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContentReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   moderationLogs<T extends Prisma.User$moderationLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$moderationLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ModerationLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  organizationRequests<T extends Prisma.User$organizationRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$organizationRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrganizationRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -13509,6 +13963,30 @@ export type User$moderationLogsArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.ModerationLogScalarFieldEnum | Prisma.ModerationLogScalarFieldEnum[]
+}
+
+/**
+ * User.organizationRequests
+ */
+export type User$organizationRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OrganizationRequest
+   */
+  select?: Prisma.OrganizationRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OrganizationRequest
+   */
+  omit?: Prisma.OrganizationRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrganizationRequestInclude<ExtArgs> | null
+  where?: Prisma.OrganizationRequestWhereInput
+  orderBy?: Prisma.OrganizationRequestOrderByWithRelationInput | Prisma.OrganizationRequestOrderByWithRelationInput[]
+  cursor?: Prisma.OrganizationRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OrganizationRequestScalarFieldEnum | Prisma.OrganizationRequestScalarFieldEnum[]
 }
 
 /**

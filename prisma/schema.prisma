@@ -178,6 +178,7 @@ model User {
   listIsPublic            Boolean                  @default(true)
   contentReportsReviewed  ContentReport[]         @relation("ContentReportReviewer")
   moderationLogs          ModerationLog[]
+  organizationRequests    OrganizationRequest[]
 
   @@map("user")
 }
@@ -914,6 +915,8 @@ model OrganizationRequest {
   estimatedMonthlyReaders String   @db.VarChar(50)
   status                  String   @default("pending") @db.VarChar(50)
   reviewNotes             String?
+  userId                  Int?
+  user                    User?    @relation(fields: [userId], references: [id])
   createdAt               DateTime @default(now()) @db.Timestamp(6)
   updatedAt               DateTime @updatedAt
 

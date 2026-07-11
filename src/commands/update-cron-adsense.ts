@@ -171,7 +171,9 @@ export async function updateCronAdSense(targetMonth?: number, targetYear?: numbe
             organizationId: org.id,
             origin: 'ADSENSE',
             description: `${startDateStr}-${endDateStr} | adsense ${netAmount.toFixed(2)} ${orgRevenue.currency}`,
-            beforeFeesAmount: netAmount,
+            // beforeFees = bruto generado; la mitad de Capibara queda como
+            // capibaraFee para que el dashboard financiero la cuente.
+            beforeFeesAmount: orgRevenue.revenue,
             amount: netAmount,
             currency: orgRevenue.currency,
             type: 'EARNING',
@@ -185,7 +187,7 @@ export async function updateCronAdSense(targetMonth?: number, targetYear?: numbe
             }),
             transactionDate: new Date(),
             transactionId: transactionId,
-            capibaraFee: 0,
+            capibaraFee: capibaraCommission,
             paypalFee: 0
           };
 

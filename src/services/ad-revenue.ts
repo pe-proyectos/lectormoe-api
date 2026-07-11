@@ -181,7 +181,9 @@ export async function persistMonthlyAdRevenue(
         organizationId: row.organizationId,
         origin: 'AD_REVENUE',
         amount: row.payout,
-        beforeFeesAmount: row.payout,
+        // beforeFees = bruto generado por la obra (payout de la org + la mitad
+        // de Capibara, que va como capibaraFee para que el dashboard la cuente).
+        beforeFeesAmount: row.payout * 2,
         currency: 'USD',
         type: 'EARNING',
         status: 'COMPLETED',
@@ -197,7 +199,7 @@ export async function persistMonthlyAdRevenue(
         }),
         transactionDate: txDate,
         transactionId,
-        capibaraFee: 0,
+        capibaraFee: row.payout,
         paypalFee: 0,
       },
     });

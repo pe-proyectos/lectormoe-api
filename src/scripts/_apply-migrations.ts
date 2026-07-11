@@ -158,7 +158,9 @@ const statements: string[] = [
   `CREATE INDEX IF NOT EXISTS "moderation_log_target_idx" ON "moderation_log"("targetType", "targetId");`,
   `CREATE INDEX IF NOT EXISTS "moderation_log_actor_created_idx" ON "moderation_log"("actorUserId", "createdAt");`,
   // actorUserId nullable: acciones del superadmin/sistema no tienen fila en user.
-  `ALTER TABLE "moderation_log" ALTER COLUMN "actorUserId" DROP NOT NULL;`
+  `ALTER TABLE "moderation_log" ALTER COLUMN "actorUserId" DROP NOT NULL;`,
+  // Solicitudes de alta vinculadas a la cuenta del solicitante
+  `ALTER TABLE "organization_request" ADD COLUMN IF NOT EXISTS "userId" INTEGER REFERENCES "user"("id");`
 ]
 
 for (const sql of statements) {

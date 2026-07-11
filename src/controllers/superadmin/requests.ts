@@ -73,6 +73,7 @@ export const listRequests = async (status?: string) => {
 	return prisma.organizationRequest.findMany({
 		where,
 		orderBy: { createdAt: 'desc' },
+		include: { user: { select: { id: true, username: true, slug: true } } },
 	});
 };
 

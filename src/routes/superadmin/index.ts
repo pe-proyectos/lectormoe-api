@@ -107,6 +107,16 @@ export const router = () =>
       const data = await getOrgStats()
       return { status: true, data }
     })
+    // Últimos scans dados de alta (para copiar sus links tras crear uno)
+    .get('/api/superadmin/recent-scans', async () => {
+      const data = await prisma.organization.findMany({
+        where: { isDeleted: false },
+        orderBy: { createdAt: 'desc' },
+        take: 5,
+        select: { id: true, name: true, slug: true, logoUrl: true, isNSFW: true, createdAt: true }
+      })
+      return { status: true, data }
+    })
     // ── Reportes de contenido ──────────────────────────────────────────────
     .get(
       '/api/superadmin/reports',

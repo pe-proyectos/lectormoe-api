@@ -833,6 +833,7 @@ export const OrganizationRequestScalarFieldEnum = {
   estimatedMonthlyReaders: 'estimatedMonthlyReaders',
   status: 'status',
   reviewNotes: 'reviewNotes',
+  userId: 'userId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
