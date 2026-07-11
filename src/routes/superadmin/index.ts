@@ -1,6 +1,7 @@
 import jwt from '@elysiajs/jwt'
 import { Elysia, t } from 'elysia'
 import { logModeration } from '../../util/moderation-log'
+import { notifyContentRemoved } from '../../services/notify-content-removed'
 import {
   listRequests,
   reviewRequest
@@ -167,7 +168,10 @@ export const router = () =>
           where: { id: Number.parseInt(params.id) }
         })
         if (!report) throw new Error('Reporte no encontrado.')
-        if (body.action === 'hide_content') {
+        if (body.action === 'hide_content' || body.action === 'delete_notify') {
+          const reason = body.resolutionNote?.trim() || null
+          if (body.action === 'delete_notify' && !reason)
+            throw new Error('La razón es obligatoria para borrar y notificar.')
           // Ocultar el contenido: soft-delete (list/get filtran deletedAt: null).
           if (report.mangaCustomId)
             await prisma.mangaCustom.update({
@@ -189,11 +193,17 @@ export const router = () =>
             },
             data: {
               status: 'actioned',
-              resolutionNote: body.resolutionNote ?? null,
+              resolutionNote: reason,
               reviewedAt: new Date()
             }
           })
-          logModeration(null, 'report_hide_content', 'report', report.id, `superadmin · target ${report.mangaCustomId ? `mc:${report.mangaCustomId}` : `j:${report.jointId}`}${body.resolutionNote ? ` · ${body.resolutionNote}` : ''}`)
+          logModeration(null, body.action === 'delete_notify' ? 'report_delete_notify' : 'report_hide_content', 'report', report.id, `superadmin · target ${report.mangaCustomId ? `mc:${report.mangaCustomId}` : `j:${report.jointId}`}${reason ? ` · ${reason}` : ''}`)
+          // Borrar y notificar: aviso in-app a todo el staff del scan y correo a los dueños.
+          if (body.action === 'delete_notify' && report.mangaCustomId && reason) {
+            notifyContentRemoved(report.mangaCustomId, reason).catch((e) =>
+              console.error('notifyContentRemoved failed:', e?.message)
+            )
+          }
         } else {
           await prisma.contentReport.update({
             where: { id: report.id },
@@ -210,7 +220,7 @@ export const router = () =>
       {
         params: t.Object({ id: t.String() }),
         body: t.Object({
-          action: t.Union([t.Literal('dismiss'), t.Literal('hide_content')]),
+          action: t.Union([t.Literal('dismiss'), t.Literal('hide_content'), t.Literal('delete_notify')]),
           resolutionNote: t.Optional(t.Union([t.String(), t.Null()]))
         })
       }

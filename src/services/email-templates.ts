@@ -570,6 +570,28 @@ export function achievementsBatchTemplate(
   `, unsubscribeUrl);
 }
 
+export function contentRemovedTemplate(
+  orgName: string,
+  mangaTitle: string,
+  reason: string
+): string {
+  return baseTemplate(`
+    <h2 style="color:#ffffff;font-size:22px;font-weight:900;margin:0 0 16px 0;text-transform:uppercase;letter-spacing:-0.5px;">
+      Obra retirada de la plataforma
+    </h2>
+    <p>Hola equipo de <strong style="color:#ffffff;">${orgName}</strong>,</p>
+    <p>Les informamos que la siguiente obra fue retirada de CapibaraTraductor por el equipo de moderacion:</p>
+    <div style="background:#09090b;border:1px solid #27272a;border-radius:12px;padding:20px;margin:16px 0;">
+      <p style="color:#71717a;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;margin:0 0 8px 0;">Obra</p>
+      <p style="color:#ffffff;font-weight:700;font-size:18px;margin:0 0 16px 0;">${mangaTitle}</p>
+      <p style="color:#71717a;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;margin:0 0 8px 0;">Razon</p>
+      <p style="color:#f87171;font-weight:700;margin:0;">${reason}</p>
+    </div>
+    <p>La obra y sus capitulos dejaron de ser visibles para los lectores. Si consideran que se trata de un error, respondan a este correo o contacten al equipo de la plataforma.</p>
+    <p style="font-size:12px;color:#52525b;">Publicar contenido que infrinja las politicas de la plataforma de forma reiterada puede resultar en la suspension del scan.</p>
+  `);
+}
+
 export function organizationRegistrationTemplate(
   orgName: string,
   contactEmail: string,

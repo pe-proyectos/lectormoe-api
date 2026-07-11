@@ -58,6 +58,7 @@ export type NotificationMinAggregateOutputType = {
   jointId: number | null
   chapterId: number | null
   source: string | null
+  details: string | null
   readAt: Date | null
   createdAt: Date | null
   emailSentAt: Date | null
@@ -75,6 +76,7 @@ export type NotificationMaxAggregateOutputType = {
   jointId: number | null
   chapterId: number | null
   source: string | null
+  details: string | null
   readAt: Date | null
   createdAt: Date | null
   emailSentAt: Date | null
@@ -92,6 +94,7 @@ export type NotificationCountAggregateOutputType = {
   jointId: number
   chapterId: number
   source: number
+  details: number
   readAt: number
   createdAt: number
   emailSentAt: number
@@ -135,6 +138,7 @@ export type NotificationMinAggregateInputType = {
   jointId?: true
   chapterId?: true
   source?: true
+  details?: true
   readAt?: true
   createdAt?: true
   emailSentAt?: true
@@ -152,6 +156,7 @@ export type NotificationMaxAggregateInputType = {
   jointId?: true
   chapterId?: true
   source?: true
+  details?: true
   readAt?: true
   createdAt?: true
   emailSentAt?: true
@@ -169,6 +174,7 @@ export type NotificationCountAggregateInputType = {
   jointId?: true
   chapterId?: true
   source?: true
+  details?: true
   readAt?: true
   createdAt?: true
   emailSentAt?: true
@@ -273,6 +279,7 @@ export type NotificationGroupByOutputType = {
   jointId: number | null
   chapterId: number | null
   source: string
+  details: string | null
   readAt: Date | null
   createdAt: Date
   emailSentAt: Date | null
@@ -313,6 +320,7 @@ export type NotificationWhereInput = {
   jointId?: Prisma.IntNullableFilter<"Notification"> | number | null
   chapterId?: Prisma.IntNullableFilter<"Notification"> | number | null
   source?: Prisma.StringFilter<"Notification"> | string
+  details?: Prisma.StringNullableFilter<"Notification"> | string | null
   readAt?: Prisma.DateTimeNullableFilter<"Notification"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Notification"> | Date | string
   emailSentAt?: Prisma.DateTimeNullableFilter<"Notification"> | Date | string | null
@@ -338,6 +346,7 @@ export type NotificationOrderByWithRelationInput = {
   jointId?: Prisma.SortOrderInput | Prisma.SortOrder
   chapterId?: Prisma.SortOrderInput | Prisma.SortOrder
   source?: Prisma.SortOrder
+  details?: Prisma.SortOrderInput | Prisma.SortOrder
   readAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   emailSentAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -366,6 +375,7 @@ export type NotificationWhereUniqueInput = Prisma.AtLeast<{
   jointId?: Prisma.IntNullableFilter<"Notification"> | number | null
   chapterId?: Prisma.IntNullableFilter<"Notification"> | number | null
   source?: Prisma.StringFilter<"Notification"> | string
+  details?: Prisma.StringNullableFilter<"Notification"> | string | null
   readAt?: Prisma.DateTimeNullableFilter<"Notification"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Notification"> | Date | string
   emailSentAt?: Prisma.DateTimeNullableFilter<"Notification"> | Date | string | null
@@ -391,6 +401,7 @@ export type NotificationOrderByWithAggregationInput = {
   jointId?: Prisma.SortOrderInput | Prisma.SortOrder
   chapterId?: Prisma.SortOrderInput | Prisma.SortOrder
   source?: Prisma.SortOrder
+  details?: Prisma.SortOrderInput | Prisma.SortOrder
   readAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   emailSentAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -416,6 +427,7 @@ export type NotificationScalarWhereWithAggregatesInput = {
   jointId?: Prisma.IntNullableWithAggregatesFilter<"Notification"> | number | null
   chapterId?: Prisma.IntNullableWithAggregatesFilter<"Notification"> | number | null
   source?: Prisma.StringWithAggregatesFilter<"Notification"> | string
+  details?: Prisma.StringNullableWithAggregatesFilter<"Notification"> | string | null
   readAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Notification"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Notification"> | Date | string
   emailSentAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Notification"> | Date | string | null
@@ -428,6 +440,7 @@ export type NotificationScalarWhereWithAggregatesInput = {
 export type NotificationCreateInput = {
   type?: string
   source?: string
+  details?: string | null
   readAt?: Date | string | null
   createdAt?: Date | string
   emailSentAt?: Date | string | null
@@ -449,6 +462,7 @@ export type NotificationUncheckedCreateInput = {
   jointId?: number | null
   chapterId?: number | null
   source?: string
+  details?: string | null
   readAt?: Date | string | null
   createdAt?: Date | string
   emailSentAt?: Date | string | null
@@ -461,6 +475,7 @@ export type NotificationUncheckedCreateInput = {
 export type NotificationUpdateInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -482,6 +497,7 @@ export type NotificationUncheckedUpdateInput = {
   jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   chapterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -499,6 +515,7 @@ export type NotificationCreateManyInput = {
   jointId?: number | null
   chapterId?: number | null
   source?: string
+  details?: string | null
   readAt?: Date | string | null
   createdAt?: Date | string
   emailSentAt?: Date | string | null
@@ -511,6 +528,7 @@ export type NotificationCreateManyInput = {
 export type NotificationUpdateManyMutationInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -524,6 +542,7 @@ export type NotificationUncheckedUpdateManyInput = {
   jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   chapterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -551,6 +570,7 @@ export type NotificationCountOrderByAggregateInput = {
   jointId?: Prisma.SortOrder
   chapterId?: Prisma.SortOrder
   source?: Prisma.SortOrder
+  details?: Prisma.SortOrder
   readAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   emailSentAt?: Prisma.SortOrder
@@ -580,6 +600,7 @@ export type NotificationMaxOrderByAggregateInput = {
   jointId?: Prisma.SortOrder
   chapterId?: Prisma.SortOrder
   source?: Prisma.SortOrder
+  details?: Prisma.SortOrder
   readAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   emailSentAt?: Prisma.SortOrder
@@ -597,6 +618,7 @@ export type NotificationMinOrderByAggregateInput = {
   jointId?: Prisma.SortOrder
   chapterId?: Prisma.SortOrder
   source?: Prisma.SortOrder
+  details?: Prisma.SortOrder
   readAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   emailSentAt?: Prisma.SortOrder
@@ -957,6 +979,7 @@ export type NotificationUncheckedUpdateManyWithoutJointNestedInput = {
 export type NotificationCreateWithoutOrganizationInput = {
   type?: string
   source?: string
+  details?: string | null
   readAt?: Date | string | null
   createdAt?: Date | string
   emailSentAt?: Date | string | null
@@ -977,6 +1000,7 @@ export type NotificationUncheckedCreateWithoutOrganizationInput = {
   jointId?: number | null
   chapterId?: number | null
   source?: string
+  details?: string | null
   readAt?: Date | string | null
   createdAt?: Date | string
   emailSentAt?: Date | string | null
@@ -1022,6 +1046,7 @@ export type NotificationScalarWhereInput = {
   jointId?: Prisma.IntNullableFilter<"Notification"> | number | null
   chapterId?: Prisma.IntNullableFilter<"Notification"> | number | null
   source?: Prisma.StringFilter<"Notification"> | string
+  details?: Prisma.StringNullableFilter<"Notification"> | string | null
   readAt?: Prisma.DateTimeNullableFilter<"Notification"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Notification"> | Date | string
   emailSentAt?: Prisma.DateTimeNullableFilter<"Notification"> | Date | string | null
@@ -1034,6 +1059,7 @@ export type NotificationScalarWhereInput = {
 export type NotificationCreateWithoutUserInput = {
   type?: string
   source?: string
+  details?: string | null
   readAt?: Date | string | null
   createdAt?: Date | string
   emailSentAt?: Date | string | null
@@ -1053,6 +1079,7 @@ export type NotificationUncheckedCreateWithoutUserInput = {
   jointId?: number | null
   chapterId?: number | null
   source?: string
+  details?: string | null
   readAt?: Date | string | null
   createdAt?: Date | string
   emailSentAt?: Date | string | null
@@ -1091,6 +1118,7 @@ export type NotificationUpdateManyWithWhereWithoutUserInput = {
 export type NotificationCreateWithoutMangaCustomInput = {
   type?: string
   source?: string
+  details?: string | null
   readAt?: Date | string | null
   createdAt?: Date | string
   emailSentAt?: Date | string | null
@@ -1110,6 +1138,7 @@ export type NotificationUncheckedCreateWithoutMangaCustomInput = {
   jointId?: number | null
   chapterId?: number | null
   source?: string
+  details?: string | null
   readAt?: Date | string | null
   createdAt?: Date | string
   emailSentAt?: Date | string | null
@@ -1148,6 +1177,7 @@ export type NotificationUpdateManyWithWhereWithoutMangaCustomInput = {
 export type NotificationCreateWithoutChapterInput = {
   type?: string
   source?: string
+  details?: string | null
   readAt?: Date | string | null
   createdAt?: Date | string
   emailSentAt?: Date | string | null
@@ -1167,6 +1197,7 @@ export type NotificationUncheckedCreateWithoutChapterInput = {
   mangaCustomId?: number | null
   jointId?: number | null
   source?: string
+  details?: string | null
   readAt?: Date | string | null
   createdAt?: Date | string
   emailSentAt?: Date | string | null
@@ -1205,6 +1236,7 @@ export type NotificationUpdateManyWithWhereWithoutChapterInput = {
 export type NotificationCreateWithoutCommentInput = {
   type?: string
   source?: string
+  details?: string | null
   readAt?: Date | string | null
   createdAt?: Date | string
   emailSentAt?: Date | string | null
@@ -1225,6 +1257,7 @@ export type NotificationUncheckedCreateWithoutCommentInput = {
   jointId?: number | null
   chapterId?: number | null
   source?: string
+  details?: string | null
   readAt?: Date | string | null
   createdAt?: Date | string
   emailSentAt?: Date | string | null
@@ -1246,6 +1279,7 @@ export type NotificationCreateManyCommentInputEnvelope = {
 export type NotificationCreateWithoutParentCommentInput = {
   type?: string
   source?: string
+  details?: string | null
   readAt?: Date | string | null
   createdAt?: Date | string
   emailSentAt?: Date | string | null
@@ -1266,6 +1300,7 @@ export type NotificationUncheckedCreateWithoutParentCommentInput = {
   jointId?: number | null
   chapterId?: number | null
   source?: string
+  details?: string | null
   readAt?: Date | string | null
   createdAt?: Date | string
   emailSentAt?: Date | string | null
@@ -1319,6 +1354,7 @@ export type NotificationUpdateManyWithWhereWithoutParentCommentInput = {
 export type NotificationCreateWithoutSubscriptionInput = {
   type?: string
   source?: string
+  details?: string | null
   readAt?: Date | string | null
   createdAt?: Date | string
   emailSentAt?: Date | string | null
@@ -1339,6 +1375,7 @@ export type NotificationUncheckedCreateWithoutSubscriptionInput = {
   jointId?: number | null
   chapterId?: number | null
   source?: string
+  details?: string | null
   readAt?: Date | string | null
   createdAt?: Date | string
   emailSentAt?: Date | string | null
@@ -1376,6 +1413,7 @@ export type NotificationUpdateManyWithWhereWithoutSubscriptionInput = {
 export type NotificationCreateWithoutJointInput = {
   type?: string
   source?: string
+  details?: string | null
   readAt?: Date | string | null
   createdAt?: Date | string
   emailSentAt?: Date | string | null
@@ -1395,6 +1433,7 @@ export type NotificationUncheckedCreateWithoutJointInput = {
   mangaCustomId?: number | null
   chapterId?: number | null
   source?: string
+  details?: string | null
   readAt?: Date | string | null
   createdAt?: Date | string
   emailSentAt?: Date | string | null
@@ -1438,6 +1477,7 @@ export type NotificationCreateManyOrganizationInput = {
   jointId?: number | null
   chapterId?: number | null
   source?: string
+  details?: string | null
   readAt?: Date | string | null
   createdAt?: Date | string
   emailSentAt?: Date | string | null
@@ -1449,6 +1489,7 @@ export type NotificationCreateManyOrganizationInput = {
 export type NotificationUpdateWithoutOrganizationInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1469,6 +1510,7 @@ export type NotificationUncheckedUpdateWithoutOrganizationInput = {
   jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   chapterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1485,6 +1527,7 @@ export type NotificationUncheckedUpdateManyWithoutOrganizationInput = {
   jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   chapterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1500,6 +1543,7 @@ export type NotificationCreateManyUserInput = {
   jointId?: number | null
   chapterId?: number | null
   source?: string
+  details?: string | null
   readAt?: Date | string | null
   createdAt?: Date | string
   emailSentAt?: Date | string | null
@@ -1512,6 +1556,7 @@ export type NotificationCreateManyUserInput = {
 export type NotificationUpdateWithoutUserInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1531,6 +1576,7 @@ export type NotificationUncheckedUpdateWithoutUserInput = {
   jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   chapterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1547,6 +1593,7 @@ export type NotificationUncheckedUpdateManyWithoutUserInput = {
   jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   chapterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1563,6 +1610,7 @@ export type NotificationCreateManyMangaCustomInput = {
   jointId?: number | null
   chapterId?: number | null
   source?: string
+  details?: string | null
   readAt?: Date | string | null
   createdAt?: Date | string
   emailSentAt?: Date | string | null
@@ -1575,6 +1623,7 @@ export type NotificationCreateManyMangaCustomInput = {
 export type NotificationUpdateWithoutMangaCustomInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1594,6 +1643,7 @@ export type NotificationUncheckedUpdateWithoutMangaCustomInput = {
   jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   chapterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1610,6 +1660,7 @@ export type NotificationUncheckedUpdateManyWithoutMangaCustomInput = {
   jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   chapterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1626,6 +1677,7 @@ export type NotificationCreateManyChapterInput = {
   mangaCustomId?: number | null
   jointId?: number | null
   source?: string
+  details?: string | null
   readAt?: Date | string | null
   createdAt?: Date | string
   emailSentAt?: Date | string | null
@@ -1638,6 +1690,7 @@ export type NotificationCreateManyChapterInput = {
 export type NotificationUpdateWithoutChapterInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1657,6 +1710,7 @@ export type NotificationUncheckedUpdateWithoutChapterInput = {
   mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1673,6 +1727,7 @@ export type NotificationUncheckedUpdateManyWithoutChapterInput = {
   mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1690,6 +1745,7 @@ export type NotificationCreateManyCommentInput = {
   jointId?: number | null
   chapterId?: number | null
   source?: string
+  details?: string | null
   readAt?: Date | string | null
   createdAt?: Date | string
   emailSentAt?: Date | string | null
@@ -1706,6 +1762,7 @@ export type NotificationCreateManyParentCommentInput = {
   jointId?: number | null
   chapterId?: number | null
   source?: string
+  details?: string | null
   readAt?: Date | string | null
   createdAt?: Date | string
   emailSentAt?: Date | string | null
@@ -1717,6 +1774,7 @@ export type NotificationCreateManyParentCommentInput = {
 export type NotificationUpdateWithoutCommentInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1737,6 +1795,7 @@ export type NotificationUncheckedUpdateWithoutCommentInput = {
   jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   chapterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1753,6 +1812,7 @@ export type NotificationUncheckedUpdateManyWithoutCommentInput = {
   jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   chapterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1764,6 +1824,7 @@ export type NotificationUncheckedUpdateManyWithoutCommentInput = {
 export type NotificationUpdateWithoutParentCommentInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1784,6 +1845,7 @@ export type NotificationUncheckedUpdateWithoutParentCommentInput = {
   jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   chapterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1800,6 +1862,7 @@ export type NotificationUncheckedUpdateManyWithoutParentCommentInput = {
   jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   chapterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1816,6 +1879,7 @@ export type NotificationCreateManySubscriptionInput = {
   jointId?: number | null
   chapterId?: number | null
   source?: string
+  details?: string | null
   readAt?: Date | string | null
   createdAt?: Date | string
   emailSentAt?: Date | string | null
@@ -1827,6 +1891,7 @@ export type NotificationCreateManySubscriptionInput = {
 export type NotificationUpdateWithoutSubscriptionInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1847,6 +1912,7 @@ export type NotificationUncheckedUpdateWithoutSubscriptionInput = {
   jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   chapterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1863,6 +1929,7 @@ export type NotificationUncheckedUpdateManyWithoutSubscriptionInput = {
   jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   chapterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1878,6 +1945,7 @@ export type NotificationCreateManyJointInput = {
   mangaCustomId?: number | null
   chapterId?: number | null
   source?: string
+  details?: string | null
   readAt?: Date | string | null
   createdAt?: Date | string
   emailSentAt?: Date | string | null
@@ -1890,6 +1958,7 @@ export type NotificationCreateManyJointInput = {
 export type NotificationUpdateWithoutJointInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1909,6 +1978,7 @@ export type NotificationUncheckedUpdateWithoutJointInput = {
   mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   chapterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1925,6 +1995,7 @@ export type NotificationUncheckedUpdateManyWithoutJointInput = {
   mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   chapterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1944,6 +2015,7 @@ export type NotificationSelect<ExtArgs extends runtime.Types.Extensions.Internal
   jointId?: boolean
   chapterId?: boolean
   source?: boolean
+  details?: boolean
   readAt?: boolean
   createdAt?: boolean
   emailSentAt?: boolean
@@ -1969,6 +2041,7 @@ export type NotificationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   jointId?: boolean
   chapterId?: boolean
   source?: boolean
+  details?: boolean
   readAt?: boolean
   createdAt?: boolean
   emailSentAt?: boolean
@@ -1994,6 +2067,7 @@ export type NotificationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   jointId?: boolean
   chapterId?: boolean
   source?: boolean
+  details?: boolean
   readAt?: boolean
   createdAt?: boolean
   emailSentAt?: boolean
@@ -2019,6 +2093,7 @@ export type NotificationSelectScalar = {
   jointId?: boolean
   chapterId?: boolean
   source?: boolean
+  details?: boolean
   readAt?: boolean
   createdAt?: boolean
   emailSentAt?: boolean
@@ -2028,7 +2103,7 @@ export type NotificationSelectScalar = {
   organizationId?: boolean
 }
 
-export type NotificationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "type" | "mangaCustomId" | "jointId" | "chapterId" | "source" | "readAt" | "createdAt" | "emailSentAt" | "commentId" | "parentCommentId" | "subscriptionId" | "organizationId", ExtArgs["result"]["notification"]>
+export type NotificationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "type" | "mangaCustomId" | "jointId" | "chapterId" | "source" | "details" | "readAt" | "createdAt" | "emailSentAt" | "commentId" | "parentCommentId" | "subscriptionId" | "organizationId", ExtArgs["result"]["notification"]>
 export type NotificationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   mangaCustom?: boolean | Prisma.Notification$mangaCustomArgs<ExtArgs>
@@ -2080,6 +2155,7 @@ export type $NotificationPayload<ExtArgs extends runtime.Types.Extensions.Intern
     jointId: number | null
     chapterId: number | null
     source: string
+    details: string | null
     readAt: Date | null
     createdAt: Date
     emailSentAt: Date | null
@@ -2525,6 +2601,7 @@ export interface NotificationFieldRefs {
   readonly jointId: Prisma.FieldRef<"Notification", 'Int'>
   readonly chapterId: Prisma.FieldRef<"Notification", 'Int'>
   readonly source: Prisma.FieldRef<"Notification", 'String'>
+  readonly details: Prisma.FieldRef<"Notification", 'String'>
   readonly readAt: Prisma.FieldRef<"Notification", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Notification", 'DateTime'>
   readonly emailSentAt: Prisma.FieldRef<"Notification", 'DateTime'>

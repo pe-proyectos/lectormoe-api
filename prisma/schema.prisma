@@ -1131,6 +1131,8 @@ model Notification {
   // 'favorite' | 'user_list' | 'reply' | 'org_follower' | 'org_staff' — why this
   // user is being notified. For new_chapter: favorite wins over user_list.
   source        String       @default("favorite") @db.VarChar(32)
+  // Texto libre opcional (ej. razón de un content_removed).
+  details       String?      @db.VarChar(500)
   readAt        DateTime?
   createdAt     DateTime     @default(now()) @db.Timestamp(6)
 

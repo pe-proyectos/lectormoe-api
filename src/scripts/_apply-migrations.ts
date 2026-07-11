@@ -160,7 +160,9 @@ const statements: string[] = [
   // actorUserId nullable: acciones del superadmin/sistema no tienen fila en user.
   `ALTER TABLE "moderation_log" ALTER COLUMN "actorUserId" DROP NOT NULL;`,
   // Solicitudes de alta vinculadas a la cuenta del solicitante
-  `ALTER TABLE "organization_request" ADD COLUMN IF NOT EXISTS "userId" INTEGER REFERENCES "user"("id");`
+  `ALTER TABLE "organization_request" ADD COLUMN IF NOT EXISTS "userId" INTEGER REFERENCES "user"("id");`,
+  // Texto libre en notificaciones (razón de content_removed)
+  `ALTER TABLE "notification" ADD COLUMN IF NOT EXISTS "details" VARCHAR(500);`
 ]
 
 for (const sql of statements) {

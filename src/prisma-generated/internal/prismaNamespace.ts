@@ -5514,6 +5514,7 @@ export const NotificationScalarFieldEnum = {
   jointId: 'jointId',
   chapterId: 'chapterId',
   source: 'source',
+  details: 'details',
   readAt: 'readAt',
   createdAt: 'createdAt',
   emailSentAt: 'emailSentAt',
