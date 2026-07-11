@@ -86,10 +86,23 @@ export const router = () =>
         })
       }
     )
-    .get('/api/superadmin/stats', async () => {
-      const data = await getGlobalStats()
-      return { status: true, data }
-    })
+    .get(
+      '/api/superadmin/stats',
+      async ({ query }) => {
+        // from/to en formato YYYY-MM-DD; "to" incluye el día completo.
+        const parse = (s?: string) => {
+          if (!s || !/^\d{4}-\d{2}-\d{2}$/.test(s)) return undefined
+          const d = new Date(`${s}T00:00:00.000Z`)
+          return Number.isNaN(d.getTime()) ? undefined : d
+        }
+        const from = parse(query?.from)
+        let to = parse(query?.to)
+        if (to) to = new Date(to.getTime() + 24 * 60 * 60 * 1000 - 1)
+        const data = await getGlobalStats(from, to)
+        return { status: true, data }
+      },
+      { query: t.Optional(t.Object({ from: t.Optional(t.String()), to: t.Optional(t.String()) })) }
+    )
     .get('/api/superadmin/org-stats', async () => {
       const data = await getOrgStats()
       return { status: true, data }

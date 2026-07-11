@@ -1,11 +1,18 @@
 import { prisma } from '../../models/prisma'
 
-export const getGlobalStats = async () => {
+export const getGlobalStats = async (from?: Date, to?: Date) => {
   const startOfMonth = new Date(
     new Date().getFullYear(),
     new Date().getMonth(),
     1
   )
+
+  // Rango de fechas SOLO para las métricas de dinero; los conteos de la
+  // plataforma (usuarios, mangas, etc.) siguen siendo históricos.
+  const dateRange =
+    from || to
+      ? { createdAt: { ...(from ? { gte: from } : {}), ...(to ? { lte: to } : {}) } }
+      : {}
 
   const [
     totalUsers,
@@ -26,7 +33,7 @@ export const getGlobalStats = async () => {
     prisma.comment.count({ where: { hiddenAt: null } }),
     prisma.subscription.count({ where: { active: true } }),
     prisma.organizationTransaction.aggregate({
-      where: { status: 'COMPLETED', type: 'EARNING' },
+      where: { status: 'COMPLETED', type: 'EARNING', ...dateRange },
       // amount = neto de la org; beforeFeesAmount = bruto cobrado al lector.
       _sum: {
         amount: true,
@@ -36,7 +43,7 @@ export const getGlobalStats = async () => {
       }
     }),
     prisma.organizationTransaction.aggregate({
-      where: { status: 'COMPLETED', type: 'WITHDRAWAL' },
+      where: { status: 'COMPLETED', type: 'WITHDRAWAL', ...dateRange },
       _sum: { amount: true }
     }),
     prisma.user.count({ where: { createdAt: { gte: startOfMonth } } }),
