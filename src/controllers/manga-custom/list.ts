@@ -275,7 +275,11 @@ export const listMangaCustom = async (
     await mergeJointChaptersIntoMangaCustoms(sortedMangas)
 
     // Inject joints for member orgs that have no MangaCustom for the manga.
-    if (organizationId) {
+    // Solo en la página 1: la inyección no es consciente de la paginación y
+    // repetiría los mismos joints en cada página.
+    const popularFirstPage =
+      !filters?.page || Number.parseInt(filters.page) <= 1
+    if (organizationId && popularFirstPage) {
       await injectMemberJointEntries(sortedMangas, organizationId, filters)
     }
 
@@ -505,37 +509,38 @@ export const listMangaCustom = async (
   // Inject synthetic joint entries for orgs that are ACCEPTED members of a
   // joint but have no MangaCustom for that manga (guest/invited orgs). Without
   // this, invited orgs never see the joint on their landing page or catalog.
+  // La inyección no es consciente de la paginación: solo se hace en la página 1
+  // para no duplicar los mismos joints en cada página del catálogo.
+  const isFirstPage = !filters?.page || Number.parseInt(filters.page) <= 1
+  // Re-ordena por recencia y recorta al límite para que los entries inyectados
+  // (añadidos DESPUÉS del take de la query) no queden fuera cuando el frontend
+  // hace slice(limit). Solo aplica en order=latest y SIN búsqueda: con búsqueda
+  // manda el orden por relevancia y recortar podría eliminar un joint que
+  // coincide con lo buscado.
+  const resortLatestAndTrim = () => {
+    if (filters.order !== OrderEnum.LATEST || searchNorm) return
+    const take = Number.parseInt(filters?.limit || '10')
+    ;(mangasCustoms as any[]).sort((a, b) => {
+      const aTs = a.lastChapterAt ? new Date(a.lastChapterAt).getTime() : 0
+      const bTs = b.lastChapterAt ? new Date(b.lastChapterAt).getTime() : 0
+      return bTs - aTs
+    })
+    mangasCustoms.splice(take)
+  }
+
   if (organizationId) {
-    await injectMemberJointEntries(mangasCustoms, organizationId, filters)
-    // Los joints se inyectan DESPUÉS del take de la query, así que sin re-orden
-    // quedan al final y el slice(limit) del frontend los recorta siempre. En
-    // order=latest los reordenamos por recencia y recortamos al límite, igual
-    // que el branch global.
-    if (filters.order === OrderEnum.LATEST) {
-      const take = Number.parseInt(filters?.limit || '10')
-      ;(mangasCustoms as any[]).sort((a, b) => {
-        const aTs = a.lastChapterAt ? new Date(a.lastChapterAt).getTime() : 0
-        const bTs = b.lastChapterAt ? new Date(b.lastChapterAt).getTime() : 0
-        return bTs - aTs
-      })
-      mangasCustoms.splice(take)
+    if (isFirstPage) {
+      await injectMemberJointEntries(mangasCustoms, organizationId, filters)
+      resortLatestAndTrim()
     }
   } else {
     // Global listing (no org context): inject active joints whose manga is NOT
     // represented by any MangaCustom in the current page. This covers the case
     // where the joint leader org has no MangaCustom for the manga, so the joint
     // would be completely invisible on the main landing / global search.
-    await injectGlobalJointEntries(mangasCustoms, filters)
-    // Re-sort by lastChapterAt so injected entries appear in the right position,
-    // then trim back to the original limit.
-    if (filters.order === OrderEnum.LATEST) {
-      const take = Number.parseInt(filters?.limit || '10')
-      ;(mangasCustoms as any[]).sort((a, b) => {
-        const aTs = a.lastChapterAt ? new Date(a.lastChapterAt).getTime() : 0
-        const bTs = b.lastChapterAt ? new Date(b.lastChapterAt).getTime() : 0
-        return bTs - aTs
-      })
-      mangasCustoms.splice(take)
+    if (isFirstPage) {
+      await injectGlobalJointEntries(mangasCustoms, filters)
+      resortLatestAndTrim()
     }
   }
 
