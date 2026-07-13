@@ -507,6 +507,19 @@ export const listMangaCustom = async (
   // this, invited orgs never see the joint on their landing page or catalog.
   if (organizationId) {
     await injectMemberJointEntries(mangasCustoms, organizationId, filters)
+    // Los joints se inyectan DESPUÉS del take de la query, así que sin re-orden
+    // quedan al final y el slice(limit) del frontend los recorta siempre. En
+    // order=latest los reordenamos por recencia y recortamos al límite, igual
+    // que el branch global.
+    if (filters.order === OrderEnum.LATEST) {
+      const take = Number.parseInt(filters?.limit || '10')
+      ;(mangasCustoms as any[]).sort((a, b) => {
+        const aTs = a.lastChapterAt ? new Date(a.lastChapterAt).getTime() : 0
+        const bTs = b.lastChapterAt ? new Date(b.lastChapterAt).getTime() : 0
+        return bTs - aTs
+      })
+      mangasCustoms.splice(take)
+    }
   } else {
     // Global listing (no org context): inject active joints whose manga is NOT
     // represented by any MangaCustom in the current page. This covers the case
@@ -673,6 +686,7 @@ async function injectMemberJointEntries(
       title: true,
       imageUrl: true,
       mangaId: true,
+      lastChapterAt: true,
       manga: {
         include: {
           demography: { select: { name: true, slug: true } },
@@ -765,6 +779,7 @@ async function injectMemberJointEntries(
       isNSFW: false,
       hideUnreleasedChapters: false,
       deletedAt: null,
+      lastChapterAt: joint.lastChapterAt,
       organization: org,
       manga: joint.manga,
       chapters: taggedChapters,
