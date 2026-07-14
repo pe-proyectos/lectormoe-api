@@ -27,6 +27,7 @@ export const router = () =>
         const where: any = { status }
         if (query?.role && ROLES.includes(query.role)) where.roles = { contains: query.role }
         if (query?.language && LANGS.includes(query.language)) where.language = query.language
+        if (query?.org) where.organization = { slug: query.org }
         if (query?.search) where.OR = [{ title: { contains: query.search, mode: 'insensitive' } }, { description: { contains: query.search, mode: 'insensitive' } }]
         const posts = await prisma.recruitmentPost.findMany({
           where,
@@ -37,7 +38,7 @@ export const router = () =>
         })
         return { status: true, data: posts }
       },
-      { query: t.Optional(t.Object({ page: t.Optional(t.String()), status: t.Optional(t.String()), role: t.Optional(t.String()), language: t.Optional(t.String()), search: t.Optional(t.String()) })), response: t.Object({ status: t.Boolean(), data: t.Any() }) },
+      { query: t.Optional(t.Object({ page: t.Optional(t.String()), status: t.Optional(t.String()), role: t.Optional(t.String()), language: t.Optional(t.String()), search: t.Optional(t.String()), org: t.Optional(t.String()) })), response: t.Object({ status: t.Boolean(), data: t.Any() }) },
     )
 
 export const adminRouter = () =>

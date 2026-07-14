@@ -4,7 +4,7 @@ import { loggedOptional, loggedUserOnlyGlobal } from "../../plugins/auth";
 import { listUserList } from "../../controllers/user-list/list";
 import { saveUserListManga, saveUserListJoint } from "../../controllers/user-list/save";
 import { getUserListManga, getUserListJoint } from "../../controllers/user-list/get";
-import { deleteUserListManga, deleteUserListJoint } from "../../controllers/user-list/delete";
+import { deleteUserListManga, deleteUserListJoint, deleteAllUserList } from "../../controllers/user-list/delete";
 import { reorderUserList } from "../../controllers/user-list/reorder";
 import { toggleUserListFinished } from "../../controllers/user-list/toggle-finished";
 import { setUserListReadingStatus, VALID_READING_STATUSES } from "../../controllers/user-list/set-reading-status";
@@ -120,6 +120,14 @@ export const router = () =>
 					async ({ user, params: { slug } }) => {
 						const ok = await deleteUserListJoint(user.id, slug);
 						return { status: true, data: !!ok };
+					},
+					{ response: t.Object({ status: t.Boolean(), data: t.Any() }) },
+				)
+				.delete(
+					"/api/user-list/all",
+					async ({ user }) => {
+						const removed = await deleteAllUserList(user.id);
+						return { status: true, data: { removed } };
 					},
 					{ response: t.Object({ status: t.Boolean(), data: t.Any() }) },
 				)

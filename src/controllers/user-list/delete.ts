@@ -20,6 +20,13 @@ export const deleteUserListManga = async (
 	return true;
 };
 
+// Vacía la lista personal completa del usuario. Devuelve cuántas entradas
+// se eliminaron (las obras no se tocan; solo la relación de "mi lista").
+export const deleteAllUserList = async (userId: number) => {
+	const result = await prisma.userList.deleteMany({ where: { userId } });
+	return result.count;
+};
+
 export const deleteUserListJoint = async (userId: number, jointSlug: string) => {
 	const joint = await prisma.mangaJoint.findFirst({
 		where: { slug: jointSlug, deletedAt: null },
