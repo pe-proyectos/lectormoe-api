@@ -6,7 +6,44 @@ const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Juli
 
 const formatDateLabel = (d: Date) => `${daysNames[d.getDay()]} ${d.getDate()}, ${monthNames[d.getMonth()]}`;
 
+// Caché en memoria del dashboard. Cada carga dispara 9 agregaciones sobre
+// analytics (14M filas) y views (12.7M): ~6s y mucho I/O que desaloja el caché
+// de Postgres y frena al resto del sitio. Los datos son de panel, no necesitan
+// ser al segundo, así que se reutilizan durante ANALYTICS_CACHE_TTL_MS.
+// Solo cachea rangos que terminan "ahora" (los históricos cerrados no cambian
+// pero tampoco se piden a menudo; igual entran porque la clave incluye el rango).
+const ANALYTICS_CACHE_TTL_MS = Number(process.env.ANALYTICS_CACHE_TTL_MS ?? 5 * 60 * 1000);
+const ANALYTICS_CACHE_MAX_ENTRIES = 200;
+const analyticsCache = new Map<string, { expiresAt: number; data: Record<string, any> }>();
+const inFlight = new Map<string, Promise<Record<string, any>>>();
+
 export const getAnalytics = async (organizationId: number, request: GetAnalyticsQuery) => {
+    const cacheKey = `${organizationId}|${request.from ?? ''}|${request.to ?? ''}`;
+    const cached = analyticsCache.get(cacheKey);
+    if (cached && cached.expiresAt > Date.now()) return cached.data;
+
+    // Coalescing: si varios admins piden el mismo dashboard a la vez, se ejecuta
+    // UNA sola vez y todos esperan el mismo resultado (evita la estampida que
+    // agotaba el pool de conexiones).
+    const running = inFlight.get(cacheKey);
+    if (running) return running;
+
+    const promise = computeAnalytics(organizationId, request)
+        .then((data) => {
+            if (analyticsCache.size >= ANALYTICS_CACHE_MAX_ENTRIES) {
+                const oldest = analyticsCache.keys().next().value;
+                if (oldest) analyticsCache.delete(oldest);
+            }
+            analyticsCache.set(cacheKey, { expiresAt: Date.now() + ANALYTICS_CACHE_TTL_MS, data });
+            return data;
+        })
+        .finally(() => inFlight.delete(cacheKey));
+
+    inFlight.set(cacheKey, promise);
+    return promise;
+};
+
+const computeAnalytics = async (organizationId: number, request: GetAnalyticsQuery) => {
     const currentRange = {
         start: request.from ? new Date(request.from) : new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
         end: request.to ? new Date(request.to) : new Date(),
