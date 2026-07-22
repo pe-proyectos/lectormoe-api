@@ -121,6 +121,9 @@ export const getMangaCustomBySlug = async (
         isUnreleased: true,
         imageUrl: true,
         views: true,
+        // Sin esto el editor recibe undefined y al guardar borraba el volumen
+        // del capítulo de joint sin que el staff lo tocara.
+        volumeNumber: true,
         createdAt: true,
         updatedAt: true
       },
