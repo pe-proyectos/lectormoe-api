@@ -10,11 +10,17 @@ export const login = async (organizationId: number | null, email: string, passwo
         select: {
             id: true,
             password: true,
+            deletedAt: true,
         }
     });
 
     if (!userEmailExists) {
         throw new Error("El usuario/email/contraseña son incorrectos.");
+    }
+
+    // Cuenta eliminada por el propio usuario: no permitir el acceso.
+    if (userEmailExists.deletedAt) {
+        throw new Error("Esta cuenta fue eliminada.");
     }
 
     const isMatch = await Bun.password.verify(password, userEmailExists.password);
@@ -45,7 +51,7 @@ export const login = async (organizationId: number | null, email: string, passwo
         },
     });
 
-    delete user?.password;
+    if (user) delete (user as any).password;
 
     return user;
 };

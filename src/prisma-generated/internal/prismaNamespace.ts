@@ -4738,6 +4738,7 @@ export const UserScalarFieldEnum = {
   usernameChangedAt: 'usernameChangedAt',
   emailNotifications: 'emailNotifications',
   emailVerified: 'emailVerified',
+  deletedAt: 'deletedAt',
   isPrivateHistory: 'isPrivateHistory',
   isPublicProfile: 'isPublicProfile',
   pushNotifications: 'pushNotifications',

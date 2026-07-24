@@ -162,7 +162,9 @@ const statements: string[] = [
   // Solicitudes de alta vinculadas a la cuenta del solicitante
   `ALTER TABLE "organization_request" ADD COLUMN IF NOT EXISTS "userId" INTEGER REFERENCES "user"("id");`,
   // Texto libre en notificaciones (razón de content_removed)
-  `ALTER TABLE "notification" ADD COLUMN IF NOT EXISTS "details" VARCHAR(500);`
+  `ALTER TABLE "notification" ADD COLUMN IF NOT EXISTS "details" VARCHAR(500);`,
+  // Eliminación de cuenta (requisito de Google Play): marca de borrado.
+  `ALTER TABLE "user" ADD COLUMN IF NOT EXISTS "deletedAt" TIMESTAMP(3);`
 ]
 
 for (const sql of statements) {

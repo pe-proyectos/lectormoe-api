@@ -116,6 +116,7 @@ import { router as transactionsListRouter } from './transactions/list'
 import { router as userAchievementsRouter } from './user/achievements'
 import { router as userContinueReadingRouter } from './user/continue-reading'
 import { router as userEditRouter } from './user/edit'
+import { router as userDeleteAccountRouter } from './user/delete-account'
 import { router as userListRouter } from './user/list'
 import { router as userPublicProfileRouter } from './user/public-profile'
 import { router as userStatsRouter } from './user/stats'
@@ -289,6 +290,7 @@ export const router = () => async (app: Elysia) => {
   app.use(userContinueReadingRouter())
   app.use(userPageBookmarkRouter())
   app.use(userEditRouter())
+  app.use(userDeleteAccountRouter())
   app.use(userListRouter())
   app.use(userPublicProfileRouter())
   app.use(userStatsRouter())

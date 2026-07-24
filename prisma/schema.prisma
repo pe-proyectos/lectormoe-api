@@ -129,6 +129,7 @@ model User {
   usernameChangedAt       DateTime?
   emailNotifications      Boolean                  @default(true)
   emailVerified           Boolean                  @default(false)
+  deletedAt               DateTime?
   isPrivateHistory        Boolean                  @default(false)
   isPublicProfile         Boolean                  @default(true)
   pushNotifications       Boolean                  @default(true)

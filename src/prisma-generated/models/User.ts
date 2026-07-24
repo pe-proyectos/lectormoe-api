@@ -51,6 +51,7 @@ export type UserMinAggregateOutputType = {
   usernameChangedAt: Date | null
   emailNotifications: boolean | null
   emailVerified: boolean | null
+  deletedAt: Date | null
   isPrivateHistory: boolean | null
   isPublicProfile: boolean | null
   pushNotifications: boolean | null
@@ -82,6 +83,7 @@ export type UserMaxAggregateOutputType = {
   usernameChangedAt: Date | null
   emailNotifications: boolean | null
   emailVerified: boolean | null
+  deletedAt: Date | null
   isPrivateHistory: boolean | null
   isPublicProfile: boolean | null
   pushNotifications: boolean | null
@@ -113,6 +115,7 @@ export type UserCountAggregateOutputType = {
   usernameChangedAt: number
   emailNotifications: number
   emailVerified: number
+  deletedAt: number
   isPrivateHistory: number
   isPublicProfile: number
   pushNotifications: number
@@ -154,6 +157,7 @@ export type UserMinAggregateInputType = {
   usernameChangedAt?: true
   emailNotifications?: true
   emailVerified?: true
+  deletedAt?: true
   isPrivateHistory?: true
   isPublicProfile?: true
   pushNotifications?: true
@@ -185,6 +189,7 @@ export type UserMaxAggregateInputType = {
   usernameChangedAt?: true
   emailNotifications?: true
   emailVerified?: true
+  deletedAt?: true
   isPrivateHistory?: true
   isPublicProfile?: true
   pushNotifications?: true
@@ -216,6 +221,7 @@ export type UserCountAggregateInputType = {
   usernameChangedAt?: true
   emailNotifications?: true
   emailVerified?: true
+  deletedAt?: true
   isPrivateHistory?: true
   isPublicProfile?: true
   pushNotifications?: true
@@ -334,6 +340,7 @@ export type UserGroupByOutputType = {
   usernameChangedAt: Date | null
   emailNotifications: boolean
   emailVerified: boolean
+  deletedAt: Date | null
   isPrivateHistory: boolean
   isPublicProfile: boolean
   pushNotifications: boolean
@@ -388,6 +395,7 @@ export type UserWhereInput = {
   usernameChangedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   emailNotifications?: Prisma.BoolFilter<"User"> | boolean
   emailVerified?: Prisma.BoolFilter<"User"> | boolean
+  deletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   isPrivateHistory?: Prisma.BoolFilter<"User"> | boolean
   isPublicProfile?: Prisma.BoolFilter<"User"> | boolean
   pushNotifications?: Prisma.BoolFilter<"User"> | boolean
@@ -455,6 +463,7 @@ export type UserOrderByWithRelationInput = {
   usernameChangedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   emailNotifications?: Prisma.SortOrder
   emailVerified?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   isPrivateHistory?: Prisma.SortOrder
   isPublicProfile?: Prisma.SortOrder
   pushNotifications?: Prisma.SortOrder
@@ -526,6 +535,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   usernameChangedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   emailNotifications?: Prisma.BoolFilter<"User"> | boolean
   emailVerified?: Prisma.BoolFilter<"User"> | boolean
+  deletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   isPrivateHistory?: Prisma.BoolFilter<"User"> | boolean
   isPublicProfile?: Prisma.BoolFilter<"User"> | boolean
   pushNotifications?: Prisma.BoolFilter<"User"> | boolean
@@ -592,6 +602,7 @@ export type UserOrderByWithAggregationInput = {
   usernameChangedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   emailNotifications?: Prisma.SortOrder
   emailVerified?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   isPrivateHistory?: Prisma.SortOrder
   isPublicProfile?: Prisma.SortOrder
   pushNotifications?: Prisma.SortOrder
@@ -631,6 +642,7 @@ export type UserScalarWhereWithAggregatesInput = {
   usernameChangedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   emailNotifications?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   emailVerified?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   isPrivateHistory?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   isPublicProfile?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   pushNotifications?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
@@ -661,6 +673,7 @@ export type UserCreateInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -728,6 +741,7 @@ export type UserUncheckedCreateInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -794,6 +808,7 @@ export type UserUpdateInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -861,6 +876,7 @@ export type UserUncheckedUpdateInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -928,6 +944,7 @@ export type UserCreateManyInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -958,6 +975,7 @@ export type UserUpdateManyMutationInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -989,6 +1007,7 @@ export type UserUncheckedUpdateManyInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1025,6 +1044,7 @@ export type UserCountOrderByAggregateInput = {
   usernameChangedAt?: Prisma.SortOrder
   emailNotifications?: Prisma.SortOrder
   emailVerified?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
   isPrivateHistory?: Prisma.SortOrder
   isPublicProfile?: Prisma.SortOrder
   pushNotifications?: Prisma.SortOrder
@@ -1060,6 +1080,7 @@ export type UserMaxOrderByAggregateInput = {
   usernameChangedAt?: Prisma.SortOrder
   emailNotifications?: Prisma.SortOrder
   emailVerified?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
   isPrivateHistory?: Prisma.SortOrder
   isPublicProfile?: Prisma.SortOrder
   pushNotifications?: Prisma.SortOrder
@@ -1091,6 +1112,7 @@ export type UserMinOrderByAggregateInput = {
   usernameChangedAt?: Prisma.SortOrder
   emailNotifications?: Prisma.SortOrder
   emailVerified?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
   isPrivateHistory?: Prisma.SortOrder
   isPublicProfile?: Prisma.SortOrder
   pushNotifications?: Prisma.SortOrder
@@ -1654,6 +1676,7 @@ export type UserCreateWithoutTokensInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -1720,6 +1743,7 @@ export type UserUncheckedCreateWithoutTokensInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -1801,6 +1825,7 @@ export type UserUpdateWithoutTokensInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1867,6 +1892,7 @@ export type UserUncheckedUpdateWithoutTokensInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1932,6 +1958,7 @@ export type UserCreateWithoutModerationLogsInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -1998,6 +2025,7 @@ export type UserUncheckedCreateWithoutModerationLogsInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -2079,6 +2107,7 @@ export type UserUpdateWithoutModerationLogsInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2145,6 +2174,7 @@ export type UserUncheckedUpdateWithoutModerationLogsInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2210,6 +2240,7 @@ export type UserCreateWithoutPermissionsInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -2276,6 +2307,7 @@ export type UserUncheckedCreateWithoutPermissionsInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -2357,6 +2389,7 @@ export type UserUpdateWithoutPermissionsInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2423,6 +2456,7 @@ export type UserUncheckedUpdateWithoutPermissionsInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2488,6 +2522,7 @@ export type UserCreateWithoutPasswordResetTokensInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -2554,6 +2589,7 @@ export type UserUncheckedCreateWithoutPasswordResetTokensInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -2635,6 +2671,7 @@ export type UserUpdateWithoutPasswordResetTokensInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2701,6 +2738,7 @@ export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2766,6 +2804,7 @@ export type UserCreateWithoutMessageThreadsInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -2832,6 +2871,7 @@ export type UserUncheckedCreateWithoutMessageThreadsInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -2913,6 +2953,7 @@ export type UserUpdateWithoutMessageThreadsInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2979,6 +3020,7 @@ export type UserUncheckedUpdateWithoutMessageThreadsInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -3044,6 +3086,7 @@ export type UserCreateWithoutOrganizationMessagesInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -3110,6 +3153,7 @@ export type UserUncheckedCreateWithoutOrganizationMessagesInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -3191,6 +3235,7 @@ export type UserUpdateWithoutOrganizationMessagesInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -3257,6 +3302,7 @@ export type UserUncheckedUpdateWithoutOrganizationMessagesInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -3322,6 +3368,7 @@ export type UserCreateWithoutCustomListsInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -3388,6 +3435,7 @@ export type UserUncheckedCreateWithoutCustomListsInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -3469,6 +3517,7 @@ export type UserUpdateWithoutCustomListsInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -3535,6 +3584,7 @@ export type UserUncheckedUpdateWithoutCustomListsInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -3600,6 +3650,7 @@ export type UserCreateWithoutContentReportsInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -3666,6 +3717,7 @@ export type UserUncheckedCreateWithoutContentReportsInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -3736,6 +3788,7 @@ export type UserCreateWithoutContentReportsReviewedInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -3802,6 +3855,7 @@ export type UserUncheckedCreateWithoutContentReportsReviewedInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -3883,6 +3937,7 @@ export type UserUpdateWithoutContentReportsInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -3949,6 +4004,7 @@ export type UserUncheckedUpdateWithoutContentReportsInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -4025,6 +4081,7 @@ export type UserUpdateWithoutContentReportsReviewedInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -4091,6 +4148,7 @@ export type UserUncheckedUpdateWithoutContentReportsReviewedInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -4156,6 +4214,7 @@ export type UserCreateWithoutReviewsInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -4222,6 +4281,7 @@ export type UserUncheckedCreateWithoutReviewsInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -4292,6 +4352,7 @@ export type UserCreateWithoutReviewsHiddenInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -4358,6 +4419,7 @@ export type UserUncheckedCreateWithoutReviewsHiddenInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -4439,6 +4501,7 @@ export type UserUpdateWithoutReviewsInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -4505,6 +4568,7 @@ export type UserUncheckedUpdateWithoutReviewsInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -4581,6 +4645,7 @@ export type UserUpdateWithoutReviewsHiddenInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -4647,6 +4712,7 @@ export type UserUncheckedUpdateWithoutReviewsHiddenInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -4712,6 +4778,7 @@ export type UserCreateWithoutMilestoneAlertsInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -4778,6 +4845,7 @@ export type UserUncheckedCreateWithoutMilestoneAlertsInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -4859,6 +4927,7 @@ export type UserUpdateWithoutMilestoneAlertsInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -4925,6 +4994,7 @@ export type UserUncheckedUpdateWithoutMilestoneAlertsInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -4990,6 +5060,7 @@ export type UserCreateWithoutChapterReactionsInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -5056,6 +5127,7 @@ export type UserUncheckedCreateWithoutChapterReactionsInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -5137,6 +5209,7 @@ export type UserUpdateWithoutChapterReactionsInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -5203,6 +5276,7 @@ export type UserUncheckedUpdateWithoutChapterReactionsInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -5268,6 +5342,7 @@ export type UserCreateWithoutCommentInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -5334,6 +5409,7 @@ export type UserUncheckedCreateWithoutCommentInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -5404,6 +5480,7 @@ export type UserCreateWithoutCommentsInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -5470,6 +5547,7 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -5551,6 +5629,7 @@ export type UserUpdateWithoutCommentInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -5617,6 +5696,7 @@ export type UserUncheckedUpdateWithoutCommentInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -5693,6 +5773,7 @@ export type UserUpdateWithoutCommentsInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -5759,6 +5840,7 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -5824,6 +5906,7 @@ export type UserCreateWithoutRankingsInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -5890,6 +5973,7 @@ export type UserUncheckedCreateWithoutRankingsInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -5971,6 +6055,7 @@ export type UserUpdateWithoutRankingsInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -6037,6 +6122,7 @@ export type UserUncheckedUpdateWithoutRankingsInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -6102,6 +6188,7 @@ export type UserCreateWithoutAnalyticsInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -6168,6 +6255,7 @@ export type UserUncheckedCreateWithoutAnalyticsInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -6249,6 +6337,7 @@ export type UserUpdateWithoutAnalyticsInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -6315,6 +6404,7 @@ export type UserUncheckedUpdateWithoutAnalyticsInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -6380,6 +6470,7 @@ export type UserCreateWithoutHistoryInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -6446,6 +6537,7 @@ export type UserUncheckedCreateWithoutHistoryInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -6527,6 +6619,7 @@ export type UserUpdateWithoutHistoryInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -6593,6 +6686,7 @@ export type UserUncheckedUpdateWithoutHistoryInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -6658,6 +6752,7 @@ export type UserCreateWithoutFavoritesInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -6724,6 +6819,7 @@ export type UserUncheckedCreateWithoutFavoritesInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -6805,6 +6901,7 @@ export type UserUpdateWithoutFavoritesInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -6871,6 +6968,7 @@ export type UserUncheckedUpdateWithoutFavoritesInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -6936,6 +7034,7 @@ export type UserCreateWithoutUserListInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -7002,6 +7101,7 @@ export type UserUncheckedCreateWithoutUserListInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -7083,6 +7183,7 @@ export type UserUpdateWithoutUserListInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -7149,6 +7250,7 @@ export type UserUncheckedUpdateWithoutUserListInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -7214,6 +7316,7 @@ export type UserCreateWithoutPageBookmarksInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -7280,6 +7383,7 @@ export type UserUncheckedCreateWithoutPageBookmarksInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -7361,6 +7465,7 @@ export type UserUpdateWithoutPageBookmarksInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -7427,6 +7532,7 @@ export type UserUncheckedUpdateWithoutPageBookmarksInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -7492,6 +7598,7 @@ export type UserCreateWithoutAuditsInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -7558,6 +7665,7 @@ export type UserUncheckedCreateWithoutAuditsInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -7639,6 +7747,7 @@ export type UserUpdateWithoutAuditsInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -7705,6 +7814,7 @@ export type UserUncheckedUpdateWithoutAuditsInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -7770,6 +7880,7 @@ export type UserCreateWithoutSubscriptionsInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -7836,6 +7947,7 @@ export type UserUncheckedCreateWithoutSubscriptionsInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -7917,6 +8029,7 @@ export type UserUpdateWithoutSubscriptionsInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -7983,6 +8096,7 @@ export type UserUncheckedUpdateWithoutSubscriptionsInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -8048,6 +8162,7 @@ export type UserCreateWithoutOrganizationFollowsInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -8114,6 +8229,7 @@ export type UserUncheckedCreateWithoutOrganizationFollowsInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -8195,6 +8311,7 @@ export type UserUpdateWithoutOrganizationFollowsInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -8261,6 +8378,7 @@ export type UserUncheckedUpdateWithoutOrganizationFollowsInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -8326,6 +8444,7 @@ export type UserCreateWithoutOrganizationRequestsInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -8392,6 +8511,7 @@ export type UserUncheckedCreateWithoutOrganizationRequestsInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -8473,6 +8593,7 @@ export type UserUpdateWithoutOrganizationRequestsInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -8539,6 +8660,7 @@ export type UserUncheckedUpdateWithoutOrganizationRequestsInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -8604,6 +8726,7 @@ export type UserCreateWithoutEmailPreferenceInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -8670,6 +8793,7 @@ export type UserUncheckedCreateWithoutEmailPreferenceInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -8751,6 +8875,7 @@ export type UserUpdateWithoutEmailPreferenceInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -8817,6 +8942,7 @@ export type UserUncheckedUpdateWithoutEmailPreferenceInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -8882,6 +9008,7 @@ export type UserCreateWithoutEmailLogsInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -8948,6 +9075,7 @@ export type UserUncheckedCreateWithoutEmailLogsInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -9029,6 +9157,7 @@ export type UserUpdateWithoutEmailLogsInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -9095,6 +9224,7 @@ export type UserUncheckedUpdateWithoutEmailLogsInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -9160,6 +9290,7 @@ export type UserCreateWithoutUnsubscribeTokensInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -9226,6 +9357,7 @@ export type UserUncheckedCreateWithoutUnsubscribeTokensInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -9307,6 +9439,7 @@ export type UserUpdateWithoutUnsubscribeTokensInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -9373,6 +9506,7 @@ export type UserUncheckedUpdateWithoutUnsubscribeTokensInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -9438,6 +9572,7 @@ export type UserCreateWithoutEmailVerificationTokensInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -9504,6 +9639,7 @@ export type UserUncheckedCreateWithoutEmailVerificationTokensInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -9585,6 +9721,7 @@ export type UserUpdateWithoutEmailVerificationTokensInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -9651,6 +9788,7 @@ export type UserUncheckedUpdateWithoutEmailVerificationTokensInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -9716,6 +9854,7 @@ export type UserCreateWithoutDailyActivitiesInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -9782,6 +9921,7 @@ export type UserUncheckedCreateWithoutDailyActivitiesInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -9863,6 +10003,7 @@ export type UserUpdateWithoutDailyActivitiesInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -9929,6 +10070,7 @@ export type UserUncheckedUpdateWithoutDailyActivitiesInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -9994,6 +10136,7 @@ export type UserCreateWithoutAchievementsInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -10060,6 +10203,7 @@ export type UserUncheckedCreateWithoutAchievementsInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -10141,6 +10285,7 @@ export type UserUpdateWithoutAchievementsInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -10207,6 +10352,7 @@ export type UserUncheckedUpdateWithoutAchievementsInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -10272,6 +10418,7 @@ export type UserCreateWithoutNotificationsInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -10338,6 +10485,7 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -10419,6 +10567,7 @@ export type UserUpdateWithoutNotificationsInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -10485,6 +10634,7 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -10550,6 +10700,7 @@ export type UserCreateWithoutRaffleTicketsInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -10616,6 +10767,7 @@ export type UserUncheckedCreateWithoutRaffleTicketsInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -10697,6 +10849,7 @@ export type UserUpdateWithoutRaffleTicketsInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -10763,6 +10916,7 @@ export type UserUncheckedUpdateWithoutRaffleTicketsInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -10828,6 +10982,7 @@ export type UserCreateWithoutRaffleCommentsInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -10894,6 +11049,7 @@ export type UserUncheckedCreateWithoutRaffleCommentsInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -10975,6 +11131,7 @@ export type UserUpdateWithoutRaffleCommentsInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -11041,6 +11198,7 @@ export type UserUncheckedUpdateWithoutRaffleCommentsInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -11106,6 +11264,7 @@ export type UserCreateWithoutBansReceivedInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -11172,6 +11331,7 @@ export type UserUncheckedCreateWithoutBansReceivedInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -11242,6 +11402,7 @@ export type UserCreateWithoutBansIssuedInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -11308,6 +11469,7 @@ export type UserUncheckedCreateWithoutBansIssuedInput = {
   usernameChangedAt?: Date | string | null
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: Date | string | null
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -11389,6 +11551,7 @@ export type UserUpdateWithoutBansReceivedInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -11455,6 +11618,7 @@ export type UserUncheckedUpdateWithoutBansReceivedInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -11531,6 +11695,7 @@ export type UserUpdateWithoutBansIssuedInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -11597,6 +11762,7 @@ export type UserUncheckedUpdateWithoutBansIssuedInput = {
   usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -12000,6 +12166,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   usernameChangedAt?: boolean
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: boolean
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -12068,6 +12235,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   usernameChangedAt?: boolean
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: boolean
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -12099,6 +12267,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   usernameChangedAt?: boolean
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: boolean
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -12130,6 +12299,7 @@ export type UserSelectScalar = {
   usernameChangedAt?: boolean
   emailNotifications?: boolean
   emailVerified?: boolean
+  deletedAt?: boolean
   isPrivateHistory?: boolean
   isPublicProfile?: boolean
   pushNotifications?: boolean
@@ -12144,7 +12314,7 @@ export type UserSelectScalar = {
   listIsPublic?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "slug" | "email" | "password" | "createdAt" | "updatedAt" | "description" | "imageUrl" | "birthdate" | "bannerUrl" | "bannerUrlChangedAt" | "imageUrlChangedAt" | "usernameChangedAt" | "emailNotifications" | "emailVerified" | "isPrivateHistory" | "isPublicProfile" | "pushNotifications" | "notifyCommentsOnOwnedContent" | "hideAds" | "theme" | "discordId" | "discordUsername" | "discordAvatar" | "discordVerifiedAt" | "discordLastCheckAt" | "listIsPublic", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "slug" | "email" | "password" | "createdAt" | "updatedAt" | "description" | "imageUrl" | "birthdate" | "bannerUrl" | "bannerUrlChangedAt" | "imageUrlChangedAt" | "usernameChangedAt" | "emailNotifications" | "emailVerified" | "deletedAt" | "isPrivateHistory" | "isPublicProfile" | "pushNotifications" | "notifyCommentsOnOwnedContent" | "hideAds" | "theme" | "discordId" | "discordUsername" | "discordAvatar" | "discordVerifiedAt" | "discordLastCheckAt" | "listIsPublic", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   analytics?: boolean | Prisma.User$analyticsArgs<ExtArgs>
   audits?: boolean | Prisma.User$auditsArgs<ExtArgs>
@@ -12244,6 +12414,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     usernameChangedAt: Date | null
     emailNotifications: boolean
     emailVerified: boolean
+    deletedAt: Date | null
     isPrivateHistory: boolean
     isPublicProfile: boolean
     pushNotifications: boolean
@@ -12731,6 +12902,7 @@ export interface UserFieldRefs {
   readonly usernameChangedAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly emailNotifications: Prisma.FieldRef<"User", 'Boolean'>
   readonly emailVerified: Prisma.FieldRef<"User", 'Boolean'>
+  readonly deletedAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly isPrivateHistory: Prisma.FieldRef<"User", 'Boolean'>
   readonly isPublicProfile: Prisma.FieldRef<"User", 'Boolean'>
   readonly pushNotifications: Prisma.FieldRef<"User", 'Boolean'>
