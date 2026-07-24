@@ -135,11 +135,14 @@ export const router = () =>
                 title: true,
                 imageUrl: true,
                 isNSFW: true,
+                // deletedAt: permite mostrar el botón de reactivar solo cuando
+                // el contenido está efectivamente oculto.
+                deletedAt: true,
                 manga: { select: { slug: true } },
                 organization: { select: { name: true, slug: true } }
               }
             },
-            joint: { select: { title: true, imageUrl: true, slug: true } }
+            joint: { select: { title: true, imageUrl: true, slug: true, deletedAt: true } }
           }
         })
         // Conteo de reportes pendientes por objetivo (agrupar duplicados).
@@ -168,6 +171,37 @@ export const router = () =>
           where: { id: Number.parseInt(params.id) }
         })
         if (!report) throw new Error('Reporte no encontrado.')
+        if (body.action === 'restore') {
+          // Deshacer un ocultado: la obra vuelve a ser visible. Se usa cuando el
+          // reporte resultó falso o el tema se aclaró.
+          const note = body.resolutionNote?.trim() || 'Contenido reactivado por el administrador.'
+          if (report.mangaCustomId)
+            await prisma.mangaCustom.update({
+              where: { id: report.mangaCustomId },
+              data: { deletedAt: null }
+            })
+          if (report.jointId)
+            await prisma.mangaJoint.update({
+              where: { id: report.jointId },
+              data: { deletedAt: null }
+            })
+          await prisma.contentReport.updateMany({
+            where: {
+              ...(report.mangaCustomId
+                ? { mangaCustomId: report.mangaCustomId }
+                : { jointId: report.jointId })
+            },
+            data: { status: 'dismissed', resolutionNote: note, reviewedAt: new Date() }
+          })
+          logModeration(
+            null,
+            'content_restore',
+            'report',
+            report.id,
+            `superadmin · target ${report.mangaCustomId ? `mc:${report.mangaCustomId}` : `j:${report.jointId}`} · ${note}`
+          )
+          return { status: true, data: true }
+        }
         if (body.action === 'hide_content' || body.action === 'delete_notify') {
           const reason = body.resolutionNote?.trim() || null
           if (body.action === 'delete_notify' && !reason)
@@ -220,7 +254,7 @@ export const router = () =>
       {
         params: t.Object({ id: t.String() }),
         body: t.Object({
-          action: t.Union([t.Literal('dismiss'), t.Literal('hide_content'), t.Literal('delete_notify')]),
+          action: t.Union([t.Literal('dismiss'), t.Literal('hide_content'), t.Literal('delete_notify'), t.Literal('restore')]),
           resolutionNote: t.Optional(t.Union([t.String(), t.Null()]))
         })
       }
