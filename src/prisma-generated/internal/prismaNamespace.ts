@@ -388,6 +388,7 @@ export const ModelName = {
   Organization: 'Organization',
   RecruitmentPost: 'RecruitmentPost',
   User: 'User',
+  BetaTester: 'BetaTester',
   ModerationLog: 'ModerationLog',
   Permission: 'Permission',
   PasswordResetToken: 'PasswordResetToken',
@@ -455,7 +456,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "token" | "organization" | "recruitmentPost" | "user" | "moderationLog" | "permission" | "passwordResetToken" | "countryOptions" | "author" | "bookType" | "manga" | "mangaCustom" | "chapter" | "organizationMessageThread" | "organizationMessage" | "customList" | "customListItem" | "contentReport" | "mangaReview" | "chapterMilestoneAlert" | "mangaVolume" | "chapterReaction" | "page" | "comment" | "commentLike" | "ranking" | "demography" | "genre" | "analytics" | "userChapterHistory" | "favorite" | "userList" | "userPageBookmark" | "audit" | "viewsHistory" | "subscriptionPlan" | "subscription" | "organizationTransaction" | "organizationFollower" | "organizationRequest" | "emailPreference" | "emailLog" | "unsubscribeToken" | "emailVerificationToken" | "userDailyActivity" | "achievement" | "userAchievement" | "mangaJoint" | "jointMember" | "jointMemberHistory" | "notification" | "raffle" | "raffleTicket" | "raffleComment" | "raffleRefund" | "userBan"
+    modelProps: "token" | "organization" | "recruitmentPost" | "user" | "betaTester" | "moderationLog" | "permission" | "passwordResetToken" | "countryOptions" | "author" | "bookType" | "manga" | "mangaCustom" | "chapter" | "organizationMessageThread" | "organizationMessage" | "customList" | "customListItem" | "contentReport" | "mangaReview" | "chapterMilestoneAlert" | "mangaVolume" | "chapterReaction" | "page" | "comment" | "commentLike" | "ranking" | "demography" | "genre" | "analytics" | "userChapterHistory" | "favorite" | "userList" | "userPageBookmark" | "audit" | "viewsHistory" | "subscriptionPlan" | "subscription" | "organizationTransaction" | "organizationFollower" | "organizationRequest" | "emailPreference" | "emailLog" | "unsubscribeToken" | "emailVerificationToken" | "userDailyActivity" | "achievement" | "userAchievement" | "mangaJoint" | "jointMember" | "jointMemberHistory" | "notification" | "raffle" | "raffleTicket" | "raffleComment" | "raffleRefund" | "userBan"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -752,6 +753,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.UserCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.UserCountAggregateOutputType> | number
+        }
+      }
+    }
+    BetaTester: {
+      payload: Prisma.$BetaTesterPayload<ExtArgs>
+      fields: Prisma.BetaTesterFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BetaTesterFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BetaTesterPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BetaTesterFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BetaTesterPayload>
+        }
+        findFirst: {
+          args: Prisma.BetaTesterFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BetaTesterPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BetaTesterFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BetaTesterPayload>
+        }
+        findMany: {
+          args: Prisma.BetaTesterFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BetaTesterPayload>[]
+        }
+        create: {
+          args: Prisma.BetaTesterCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BetaTesterPayload>
+        }
+        createMany: {
+          args: Prisma.BetaTesterCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BetaTesterCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BetaTesterPayload>[]
+        }
+        delete: {
+          args: Prisma.BetaTesterDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BetaTesterPayload>
+        }
+        update: {
+          args: Prisma.BetaTesterUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BetaTesterPayload>
+        }
+        deleteMany: {
+          args: Prisma.BetaTesterDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BetaTesterUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BetaTesterUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BetaTesterPayload>[]
+        }
+        upsert: {
+          args: Prisma.BetaTesterUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BetaTesterPayload>
+        }
+        aggregate: {
+          args: Prisma.BetaTesterAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBetaTester>
+        }
+        groupBy: {
+          args: Prisma.BetaTesterGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BetaTesterGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BetaTesterCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BetaTesterCountAggregateOutputType> | number
         }
       }
     }
@@ -4756,6 +4831,20 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+export const BetaTesterScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  gmail: 'gmail',
+  status: 'status',
+  note: 'note',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BetaTesterScalarFieldEnum = (typeof BetaTesterScalarFieldEnum)[keyof typeof BetaTesterScalarFieldEnum]
+
+
 export const ModerationLogScalarFieldEnum = {
   id: 'id',
   actorUserId: 'actorUserId',
@@ -5898,6 +5987,7 @@ export type GlobalOmitConfig = {
   organization?: Prisma.OrganizationOmit
   recruitmentPost?: Prisma.RecruitmentPostOmit
   user?: Prisma.UserOmit
+  betaTester?: Prisma.BetaTesterOmit
   moderationLog?: Prisma.ModerationLogOmit
   permission?: Prisma.PermissionOmit
   passwordResetToken?: Prisma.PasswordResetTokenOmit

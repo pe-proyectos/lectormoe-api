@@ -38,6 +38,11 @@ export type RecruitmentPost = Prisma.RecruitmentPostModel
  */
 export type User = Prisma.UserModel
 /**
+ * Model BetaTester
+ * 
+ */
+export type BetaTester = Prisma.BetaTesterModel
+/**
  * Model ModerationLog
  * 
  */

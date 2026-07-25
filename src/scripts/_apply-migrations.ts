@@ -164,7 +164,19 @@ const statements: string[] = [
   // Texto libre en notificaciones (razón de content_removed)
   `ALTER TABLE "notification" ADD COLUMN IF NOT EXISTS "details" VARCHAR(500);`,
   // Eliminación de cuenta (requisito de Google Play): marca de borrado.
-  `ALTER TABLE "user" ADD COLUMN IF NOT EXISTS "deletedAt" TIMESTAMP(3);`
+  `ALTER TABLE "user" ADD COLUMN IF NOT EXISTS "deletedAt" TIMESTAMP(3);`,
+  // Programa de verificadores (testers) de Google Play: inscripción por usuario.
+  `CREATE TABLE IF NOT EXISTS "beta_tester" (
+    "id" SERIAL PRIMARY KEY,
+    "userId" INTEGER NOT NULL UNIQUE REFERENCES "user"("id") ON DELETE CASCADE,
+    "name" VARCHAR(256) NOT NULL,
+    "gmail" VARCHAR(256) NOT NULL,
+    "status" VARCHAR(20) NOT NULL DEFAULT 'pending',
+    "note" TEXT,
+    "createdAt" TIMESTAMP(6) NOT NULL DEFAULT now(),
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT now()
+  );`,
+  `CREATE INDEX IF NOT EXISTS "beta_tester_status_idx" ON "beta_tester"("status");`
 ]
 
 for (const sql of statements) {

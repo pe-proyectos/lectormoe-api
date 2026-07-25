@@ -180,8 +180,29 @@ model User {
   contentReportsReviewed  ContentReport[]         @relation("ContentReportReviewer")
   moderationLogs          ModerationLog[]
   organizationRequests    OrganizationRequest[]
+  betaTester              BetaTester?
 
   @@map("user")
+}
+
+// Inscripción al programa de pruebas cerradas de Google Play. Cada usuario
+// (logueado) se registra una vez con el correo de Google que usa en su celular
+// Android. El staff lo administra desde el superadmin y lo agrega a la lista de
+// verificadores de Play Console.
+model BetaTester {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name      String   @db.VarChar(256)
+  gmail     String   @db.VarChar(256)
+  // pending = registrado, aún no agregado a Play; added = ya en la lista;
+  // rejected = descartado.
+  status    String   @default("pending") @db.VarChar(20)
+  note      String?
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  updatedAt DateTime @updatedAt
+
+  @@map("beta_tester")
 }
 
 model ModerationLog {

@@ -15,6 +15,7 @@ import { router as authVerifyEmailRouter } from './auth/verify_email'
 import { router as authorCreateRouter } from './author/create'
 import { router as authorGetRouter } from './author/get'
 import { router as authorListRouter } from './author/list'
+import { router as betaRouter } from './beta/index'
 import { router as bookTypeListRouter } from './book_type/list'
 import { router as chapterCreateRouter } from './chapter/create'
 import { router as chapterDeleteRouter } from './chapter/delete'
@@ -322,6 +323,7 @@ export const router = () => async (app: Elysia) => {
 
   // Superadmin
   app.use(superadminRouter())
+  app.use(betaRouter())
 
   // Ad revenue (Google AdSense + Adsterra) — replaces legacy adsense-only cron.
   app.use(adRevenueCronRouter())

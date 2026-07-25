@@ -55,6 +55,7 @@ export const ModelName = {
   Organization: 'Organization',
   RecruitmentPost: 'RecruitmentPost',
   User: 'User',
+  BetaTester: 'BetaTester',
   ModerationLog: 'ModerationLog',
   Permission: 'Permission',
   PasswordResetToken: 'PasswordResetToken',
@@ -237,6 +238,20 @@ export const UserScalarFieldEnum = {
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const BetaTesterScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  gmail: 'gmail',
+  status: 'status',
+  note: 'note',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BetaTesterScalarFieldEnum = (typeof BetaTesterScalarFieldEnum)[keyof typeof BetaTesterScalarFieldEnum]
 
 
 export const ModerationLogScalarFieldEnum = {

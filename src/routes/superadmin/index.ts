@@ -416,6 +416,64 @@ export const router = () =>
       },
       { params: t.Object({ id: t.String() }) }
     )
+    // ── Verificadores de Google Play (closed testing) ───────────────────────
+    .get('/api/superadmin/beta-testers', async () => {
+      const testers = await prisma.betaTester.findMany({
+        orderBy: [{ status: 'asc' }, { createdAt: 'asc' }],
+        select: {
+          id: true,
+          name: true,
+          gmail: true,
+          status: true,
+          note: true,
+          createdAt: true,
+          user: { select: { id: true, username: true, slug: true, email: true } }
+        }
+      })
+      const counts = testers.reduce(
+        (acc: Record<string, number>, t2) => {
+          acc[t2.status] = (acc[t2.status] || 0) + 1
+          return acc
+        },
+        {}
+      )
+      return { status: true, data: { testers, counts } }
+    })
+    .patch(
+      '/api/superadmin/beta-testers/:id',
+      async ({ params, body }) => {
+        const id = Number(params.id)
+        const data: { status?: string; note?: string | null } = {}
+        if (body.status !== undefined) {
+          if (!['pending', 'added', 'rejected'].includes(body.status)) {
+            throw new Error('Estado inválido.')
+          }
+          data.status = body.status
+        }
+        if (body.note !== undefined) data.note = body.note
+        const updated = await prisma.betaTester.update({
+          where: { id },
+          data,
+          select: { id: true, status: true, note: true }
+        })
+        return { status: true, data: updated }
+      },
+      {
+        params: t.Object({ id: t.String() }),
+        body: t.Object({
+          status: t.Optional(t.String()),
+          note: t.Optional(t.String())
+        })
+      }
+    )
+    .delete(
+      '/api/superadmin/beta-testers/:id',
+      async ({ params }) => {
+        await prisma.betaTester.delete({ where: { id: Number(params.id) } })
+        return { status: true }
+      },
+      { params: t.Object({ id: t.String() }) }
+    )
     // Manual ad-revenue trigger (back-fills, re-runs). Idempotent: orgs that
     // already have an ad-revenue tx for the period are skipped.
     // `month` is 1-indexed in the query string (1 = January) for human-friendliness;
