@@ -5,6 +5,7 @@ import { loggedUserOnlyGlobal } from "../../plugins/auth";
 import { prisma } from "../../models/prisma";
 import {
   buildOauthUrl,
+  checkGuildMembershipViaBot,
   exchangeCodeForToken,
   fetchDiscordUser,
   fetchUserGuilds,
@@ -79,14 +80,33 @@ export const router = () =>
           if (!verified) return fail("invalid-or-expired-state");
 
           try {
-            const token = await exchangeCodeForToken(code);
-            const [me, guilds] = await Promise.all([
-              fetchDiscordUser(token.access_token),
-              fetchUserGuilds(token.access_token),
-            ]);
-
             const guildId = ourGuildId();
-            const inGuild = Array.isArray(guilds) && guilds.some((g) => g.id === guildId);
+            // Sin guild configurado no podemos verificar membresía: reportarlo
+            // explícito en vez de fallar como "join-required" y confundir.
+            if (!guildId) {
+              console.error("[discord/callback] DISCORD_GUILD_ID no está configurado en el entorno");
+              return fail("guild-not-configured");
+            }
+
+            const token = await exchangeCodeForToken(code);
+            const me = await fetchDiscordUser(token.access_token);
+
+            // Membresía: el bot es la fuente autoritativa (consulta directa del
+            // miembro en el guild). Si el bot falla (token/intent/no está en el
+            // server), caemos a la lista de guilds del OAuth del propio usuario.
+            let inGuild = false;
+            try {
+              inGuild = await checkGuildMembershipViaBot(me.id);
+            } catch (botErr: any) {
+              console.error("[discord/callback] chequeo por bot falló, fallback a OAuth guilds:", botErr?.message);
+              try {
+                const guilds = await fetchUserGuilds(token.access_token);
+                inGuild = Array.isArray(guilds) && guilds.some((g) => g.id === guildId);
+              } catch (guildsErr: any) {
+                console.error("[discord/callback] fetchUserGuilds también falló:", guildsErr?.message);
+                return fail("membership-check-failed");
+              }
+            }
 
             if (!inGuild) {
               // Don't write the link yet — they have to join first. The frontend
