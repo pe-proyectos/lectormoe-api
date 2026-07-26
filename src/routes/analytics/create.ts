@@ -4,10 +4,14 @@ import { getIP } from '../../util/get-ip';
 import { loggedOptional } from '../../plugins/auth';
 import { createAnalytics } from '../../controllers/analytics/create';
 import { CreateAnalyticsRequest } from '../../types/analytics/create';
-import { useOrganization } from '../../plugins/organization';
+import { useOrganizationOptional } from '../../plugins/organization';
 
 export const router = () => new Elysia()
-    .use(useOrganization())
+    // Opcional: el dominio principal (sin scan) no tiene organización. Antes
+    // lanzaba 500 y se perdía la telemetría global (p. ej. view_manga_search en
+    // /search). Con el plugin opcional, organizationId queda null (la columna
+    // Analytics.organizationId es nullable) y el evento se guarda igual.
+    .use(useOrganizationOptional())
     .use(loggedOptional())
     .post(
         '/api/analytics',

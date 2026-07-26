@@ -31,7 +31,7 @@ function extractBrowserFromUserAgent(userAgent: string): string {
 }
 
 export const createAnalytics = async (
-  organizationId: number,
+  organizationId: number | null,
   userId: number,
   request: CreateAnalyticsRequest,
   ip: string
