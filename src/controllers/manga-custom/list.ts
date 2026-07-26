@@ -184,7 +184,12 @@ export const listMangaCustom = async (
           : {}),
         ...(filters.status
           ? {
-              status: filters.status
+              // "completed" y "finished" son sinónimos en los datos (dos valores
+              // para "finalizado"): el filtro debe cubrir ambos.
+              status:
+                filters.status === 'completed' || filters.status === 'finished'
+                  ? { in: ['completed', 'finished'] }
+                  : filters.status
             }
           : {}),
         ...(filters.genre
@@ -408,7 +413,11 @@ export const listMangaCustom = async (
       : {}),
     ...(filters.status
       ? {
-          status: filters.status
+          // "completed" y "finished" son sinónimos (dos valores para "finalizado").
+          status:
+            filters.status === 'completed' || filters.status === 'finished'
+              ? { in: ['completed', 'finished'] }
+              : filters.status
         }
       : {}),
     ...(filters.genre
