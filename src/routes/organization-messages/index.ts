@@ -12,6 +12,23 @@ async function isStaff(userId: number, organizationId: number) {
   return !!p
 }
 
+// Notifica a TODO el staff del scan (canSeeAdminPanel) que hay un mensaje
+// entrante, excepto a quien lo envió. Antes solo se notificaba al lector cuando
+// el staff respondía; el scan nunca se enteraba de mensajes entrantes.
+async function notifyOrgStaff(organizationId: number, excludeUserId: number) {
+  const staff = await prisma.permission.findMany({
+    where: { organizationId, canSeeAdminPanel: true },
+    select: { userId: true },
+  })
+  const recipients = [...new Set(staff.map((s) => s.userId))].filter((id) => id !== excludeUserId)
+  if (recipients.length === 0) return
+  await prisma.notification
+    .createMany({
+      data: recipients.map((userId) => ({ userId, type: 'scan_message', organizationId, source: 'org_follower' })),
+    })
+    .catch(() => {})
+}
+
 export const router = () =>
   new Elysia()
     .use(loggedUserOnlyGlobal())
@@ -30,6 +47,8 @@ export const router = () =>
           await tx.organizationMessage.create({ data: { threadId: th.id, senderUserId: user.id, isStaffReply: false, body: body.body.trim() } })
           return th
         })
+        // Avisa al staff del scan que llegó un mensaje nuevo.
+        await notifyOrgStaff(org.id, user.id)
         return { status: true, data: thread }
       },
       {
@@ -103,9 +122,12 @@ export const router = () =>
           prisma.organizationMessage.create({ data: { threadId: thread.id, senderUserId: user.id, isStaffReply: staff, body: body.body.trim() } }),
           prisma.organizationMessageThread.update({ where: { id: thread.id }, data: { lastMessageAt: new Date(), ...(thread.status === 'closed' && staff ? { status: 'open' } : {}) } }),
         ])
-        // Notificar a la contraparte: si respondió el staff, avisa al lector.
+        // Notificar a la contraparte: si respondió el staff, avisa al lector;
+        // si respondió el lector, avisa a TODO el staff del scan.
         if (staff) {
           await prisma.notification.create({ data: { userId: thread.userId, type: 'scan_message_reply', organizationId: thread.organizationId, source: 'org_follower' } }).catch(() => {})
+        } else {
+          await notifyOrgStaff(thread.organizationId, user.id)
         }
         return { status: true, data: true }
       },
