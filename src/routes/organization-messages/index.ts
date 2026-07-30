@@ -171,3 +171,17 @@ export const adminRouter = () =>
     },
     { query: t.Optional(t.Object({ status: t.Optional(t.String()), category: t.Optional(t.String()) })), response: t.Object({ status: t.Boolean(), data: t.Any() }) },
   )
+    // Conteo de conversaciones con mensajes entrantes SIN LEER (para la burbuja
+    // del ítem "Mensajes" en el panel del scan). Barato: un count.
+    .get(
+      '/api/organization/messages/unread-count',
+      async ({ organizationId, user }) => {
+        const perm = user.permissions?.find((p: any) => p.organizationId === organizationId)
+        if (!perm?.canSeeAdminPanel) return { status: true, data: { count: 0 } }
+        const count = await prisma.organizationMessageThread.count({
+          where: { organizationId, messages: { some: { isStaffReply: false, readAt: null } } },
+        })
+        return { status: true, data: { count } }
+      },
+      { response: t.Object({ status: t.Boolean(), data: t.Any() }) },
+    )
