@@ -115,17 +115,30 @@ export const getJointChapter = async (slug: string, chapterNumber: number) => {
         }]),
       ],
     },
-    select: { number: true },
+    select: { number: true, releasedAt: true },
   });
   const numbers = [...new Set(candidates.map(c => c.number))].sort((a, b) => a - b);
+  // releasedAt representativo por número: el más temprano (o null = disponible ya),
+  // para que el lector pueda gatear correctamente capítulos programados.
+  const releasedByNumber = new Map<number, Date | null>();
+  for (const c of candidates) {
+    if (!releasedByNumber.has(c.number)) {
+      releasedByNumber.set(c.number, c.releasedAt);
+    } else {
+      const prev = releasedByNumber.get(c.number) ?? null;
+      if (c.releasedAt === null || (prev && c.releasedAt && c.releasedAt < prev)) {
+        releasedByNumber.set(c.number, c.releasedAt);
+      }
+    }
+  }
   const idx = numbers.findIndex(n => n === chapter.number);
   const prevNum = idx > 0 ? numbers[idx - 1] : null;
   const nextNum = idx >= 0 && idx < numbers.length - 1 ? numbers[idx + 1] : null;
 
   return {
     chapter,
-    prevChapter: prevNum !== null ? { number: prevNum } : null,
-    nextChapter: nextNum !== null ? { number: nextNum } : null,
+    prevChapter: prevNum !== null ? { number: prevNum, releasedAt: releasedByNumber.get(prevNum) ?? null } : null,
+    nextChapter: nextNum !== null ? { number: nextNum, releasedAt: releasedByNumber.get(nextNum) ?? null } : null,
     joint,
   };
 };
