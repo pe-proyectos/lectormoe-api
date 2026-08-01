@@ -1,81 +1,69 @@
 import { prisma } from '../../models/prisma';
 
+// Función (no const): `new Date()` debe evaluarse por petición, no al cargar el
+// módulo, o los capítulos publicados después del arranque no aparecerían.
+const releasedFilter = () => ({
+  deletedAt: null,
+  isUnreleased: false,
+  OR: [{ releasedAt: null }, { releasedAt: { lte: new Date() } }],
+});
+
+// "Continuar leyendo" a partir del HISTORIAL DE LECTURA (todo lo que el usuario
+// ha leído), no solo de su lista marcada. Antes salía de `userList`, así que un
+// manga leído pero no agregado a la lista nunca aparecía. Ahora agrupa el
+// historial por obra (la lectura más reciente de cada una) y sugiere el
+// siguiente capítulo disponible.
 export const getContinueReading = async (userId: number) => {
-  const listEntries = await prisma.userList.findMany({
-    where: { userId },
-    orderBy: { updatedAt: 'desc' },
-    take: 20,
+  const history = await prisma.userChapterHistory.findMany({
+    where: { userId, finishedAt: { not: null } },
+    orderBy: { finishedAt: 'desc' },
+    take: 100,
     select: {
-      mangaCustomId: true,
-      jointId: true,
-      mangaCustom: {
+      finishedAt: true,
+      chapter: { select: { number: true, mangaCustomId: true, jointId: true } },
+    },
+  });
+
+  // Agrupa por obra quedándose con la lectura MÁS RECIENTE de cada una.
+  type Last = { kind: 'mangaCustom' | 'joint'; id: number; lastNumber: number; finishedAt: Date | null };
+  const seen = new Set<string>();
+  const lasts: Last[] = [];
+  for (const h of history) {
+    const ch = h.chapter;
+    if (!ch) continue;
+    if (ch.mangaCustomId) {
+      const key = `m:${ch.mangaCustomId}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      lasts.push({ kind: 'mangaCustom', id: ch.mangaCustomId, lastNumber: ch.number, finishedAt: h.finishedAt });
+    } else if (ch.jointId) {
+      const key = `j:${ch.jointId}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      lasts.push({ kind: 'joint', id: ch.jointId, lastNumber: ch.number, finishedAt: h.finishedAt });
+    }
+    if (lasts.length >= 15) break;
+  }
+
+  const results: any[] = [];
+  for (const last of lasts) {
+    if (results.length >= 8) break;
+
+    if (last.kind === 'mangaCustom') {
+      const mc = await prisma.mangaCustom.findFirst({
+        where: { id: last.id, deletedAt: null },
         select: {
           id: true,
           title: true,
           imageUrl: true,
           organization: { select: { slug: true } },
           manga: { select: { slug: true } },
-          chapters: {
-            where: {
-              deletedAt: null,
-              isUnreleased: false,
-              OR: [{ releasedAt: null }, { releasedAt: { lte: new Date() } }],
-            },
-            orderBy: { number: 'asc' },
-            select: { id: true, number: true },
-          },
+          chapters: { where: releasedFilter(), orderBy: { number: 'asc' }, select: { number: true } },
         },
-      },
-      joint: {
-        select: {
-          id: true,
-          slug: true,
-          title: true,
-          imageUrl: true,
-          chapters: {
-            where: {
-              deletedAt: null,
-              isUnreleased: false,
-              OR: [{ releasedAt: null }, { releasedAt: { lte: new Date() } }],
-            },
-            orderBy: { number: 'asc' },
-            select: { id: true, number: true },
-          },
-        },
-      },
-    },
-  });
-
-  const results: any[] = [];
-
-  for (const entry of listEntries) {
-    if (results.length >= 5) break;
-
-    if (entry.mangaCustomId && entry.mangaCustom) {
-      const mc = entry.mangaCustom;
-      const chapters = mc.chapters;
-      if (chapters.length === 0) continue;
-
-      const lastHistory = await prisma.userChapterHistory.findFirst({
-        where: {
-          userId,
-          chapterId: { in: chapters.map((c) => c.id) },
-          finishedAt: { not: null },
-        },
-        orderBy: { finishedAt: 'desc' },
-        select: { chapterId: true, finishedAt: true },
       });
-
-      let nextChapter;
-      if (!lastHistory) {
-        nextChapter = chapters[0];
-      } else {
-        const lastChapter = chapters.find((c) => c.id === lastHistory.chapterId);
-        if (!lastChapter) continue;
-        nextChapter = chapters.find((c) => c.number > lastChapter.number);
-        if (!nextChapter) continue;
-      }
-
+      if (!mc || mc.chapters.length === 0) continue;
+      const next = mc.chapters.find((c) => c.number > last.lastNumber);
+      if (!next) continue; // ya está al día
       results.push({
         type: 'mangaCustom',
         mangaCustomId: mc.id,
@@ -83,42 +71,31 @@ export const getContinueReading = async (userId: number) => {
         imageUrl: mc.imageUrl,
         orgSlug: mc.organization.slug,
         mangaSlug: mc.manga?.slug,
-        nextChapterNumber: nextChapter.number,
-        lastReadAt: lastHistory?.finishedAt ?? null,
+        nextChapterNumber: next.number,
+        lastReadAt: last.finishedAt,
       });
-    } else if (entry.jointId && entry.joint) {
-      const joint = entry.joint;
-      const chapters = joint.chapters;
-      if (chapters.length === 0) continue;
-
-      const lastHistory = await prisma.userChapterHistory.findFirst({
-        where: {
-          userId,
-          chapterId: { in: chapters.map((c) => c.id) },
-          finishedAt: { not: null },
+    } else {
+      const joint = await prisma.mangaJoint.findFirst({
+        where: { id: last.id, deletedAt: null },
+        select: {
+          id: true,
+          slug: true,
+          title: true,
+          imageUrl: true,
+          chapters: { where: releasedFilter(), orderBy: { number: 'asc' }, select: { number: true } },
         },
-        orderBy: { finishedAt: 'desc' },
-        select: { chapterId: true, finishedAt: true },
       });
-
-      let nextChapter;
-      if (!lastHistory) {
-        nextChapter = chapters[0];
-      } else {
-        const lastChapter = chapters.find((c) => c.id === lastHistory.chapterId);
-        if (!lastChapter) continue;
-        nextChapter = chapters.find((c) => c.number > lastChapter.number);
-        if (!nextChapter) continue;
-      }
-
+      if (!joint || joint.chapters.length === 0) continue;
+      const next = joint.chapters.find((c) => c.number > last.lastNumber);
+      if (!next) continue;
       results.push({
         type: 'joint',
         jointId: joint.id,
         jointSlug: joint.slug,
         title: joint.title,
         imageUrl: joint.imageUrl,
-        nextChapterNumber: nextChapter.number,
-        lastReadAt: lastHistory?.finishedAt ?? null,
+        nextChapterNumber: next.number,
+        lastReadAt: last.finishedAt,
       });
     }
   }
