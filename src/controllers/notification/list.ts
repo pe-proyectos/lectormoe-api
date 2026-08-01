@@ -52,6 +52,7 @@ const INCLUDE = {
 			id: true,
 			name: true,
 			slug: true,
+			isNSFW: true,
 		},
 	},
 };
