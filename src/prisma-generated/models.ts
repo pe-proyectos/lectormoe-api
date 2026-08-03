@@ -11,6 +11,7 @@
 export type * from './models/Token.ts'
 export type * from './models/Organization.ts'
 export type * from './models/RecruitmentPost.ts'
+export type * from './models/OrganizationRecommendation.ts'
 export type * from './models/User.ts'
 export type * from './models/BetaTester.ts'
 export type * from './models/ModerationLog.ts'

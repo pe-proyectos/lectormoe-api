@@ -387,6 +387,7 @@ export const ModelName = {
   Token: 'Token',
   Organization: 'Organization',
   RecruitmentPost: 'RecruitmentPost',
+  OrganizationRecommendation: 'OrganizationRecommendation',
   User: 'User',
   BetaTester: 'BetaTester',
   ModerationLog: 'ModerationLog',
@@ -456,7 +457,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "token" | "organization" | "recruitmentPost" | "user" | "betaTester" | "moderationLog" | "permission" | "passwordResetToken" | "countryOptions" | "author" | "bookType" | "manga" | "mangaCustom" | "chapter" | "organizationMessageThread" | "organizationMessage" | "customList" | "customListItem" | "contentReport" | "mangaReview" | "chapterMilestoneAlert" | "mangaVolume" | "chapterReaction" | "page" | "comment" | "commentLike" | "ranking" | "demography" | "genre" | "analytics" | "userChapterHistory" | "favorite" | "userList" | "userPageBookmark" | "audit" | "viewsHistory" | "subscriptionPlan" | "subscription" | "organizationTransaction" | "organizationFollower" | "organizationRequest" | "emailPreference" | "emailLog" | "unsubscribeToken" | "emailVerificationToken" | "userDailyActivity" | "achievement" | "userAchievement" | "mangaJoint" | "jointMember" | "jointMemberHistory" | "notification" | "raffle" | "raffleTicket" | "raffleComment" | "raffleRefund" | "userBan"
+    modelProps: "token" | "organization" | "recruitmentPost" | "organizationRecommendation" | "user" | "betaTester" | "moderationLog" | "permission" | "passwordResetToken" | "countryOptions" | "author" | "bookType" | "manga" | "mangaCustom" | "chapter" | "organizationMessageThread" | "organizationMessage" | "customList" | "customListItem" | "contentReport" | "mangaReview" | "chapterMilestoneAlert" | "mangaVolume" | "chapterReaction" | "page" | "comment" | "commentLike" | "ranking" | "demography" | "genre" | "analytics" | "userChapterHistory" | "favorite" | "userList" | "userPageBookmark" | "audit" | "viewsHistory" | "subscriptionPlan" | "subscription" | "organizationTransaction" | "organizationFollower" | "organizationRequest" | "emailPreference" | "emailLog" | "unsubscribeToken" | "emailVerificationToken" | "userDailyActivity" | "achievement" | "userAchievement" | "mangaJoint" | "jointMember" | "jointMemberHistory" | "notification" | "raffle" | "raffleTicket" | "raffleComment" | "raffleRefund" | "userBan"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -679,6 +680,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.RecruitmentPostCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.RecruitmentPostCountAggregateOutputType> | number
+        }
+      }
+    }
+    OrganizationRecommendation: {
+      payload: Prisma.$OrganizationRecommendationPayload<ExtArgs>
+      fields: Prisma.OrganizationRecommendationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.OrganizationRecommendationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationRecommendationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.OrganizationRecommendationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationRecommendationPayload>
+        }
+        findFirst: {
+          args: Prisma.OrganizationRecommendationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationRecommendationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.OrganizationRecommendationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationRecommendationPayload>
+        }
+        findMany: {
+          args: Prisma.OrganizationRecommendationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationRecommendationPayload>[]
+        }
+        create: {
+          args: Prisma.OrganizationRecommendationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationRecommendationPayload>
+        }
+        createMany: {
+          args: Prisma.OrganizationRecommendationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.OrganizationRecommendationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationRecommendationPayload>[]
+        }
+        delete: {
+          args: Prisma.OrganizationRecommendationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationRecommendationPayload>
+        }
+        update: {
+          args: Prisma.OrganizationRecommendationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationRecommendationPayload>
+        }
+        deleteMany: {
+          args: Prisma.OrganizationRecommendationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.OrganizationRecommendationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.OrganizationRecommendationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationRecommendationPayload>[]
+        }
+        upsert: {
+          args: Prisma.OrganizationRecommendationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationRecommendationPayload>
+        }
+        aggregate: {
+          args: Prisma.OrganizationRecommendationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOrganizationRecommendation>
+        }
+        groupBy: {
+          args: Prisma.OrganizationRecommendationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OrganizationRecommendationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.OrganizationRecommendationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OrganizationRecommendationCountAggregateOutputType> | number
         }
       }
     }
@@ -4796,6 +4871,25 @@ export const RecruitmentPostScalarFieldEnum = {
 export type RecruitmentPostScalarFieldEnum = (typeof RecruitmentPostScalarFieldEnum)[keyof typeof RecruitmentPostScalarFieldEnum]
 
 
+export const OrganizationRecommendationScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  mangaCustomId: 'mangaCustomId',
+  jointId: 'jointId',
+  label: 'label',
+  note: 'note',
+  position: 'position',
+  isActive: 'isActive',
+  showOnGlobal: 'showOnGlobal',
+  startsAt: 'startsAt',
+  endsAt: 'endsAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OrganizationRecommendationScalarFieldEnum = (typeof OrganizationRecommendationScalarFieldEnum)[keyof typeof OrganizationRecommendationScalarFieldEnum]
+
+
 export const UserScalarFieldEnum = {
   id: 'id',
   username: 'username',
@@ -5986,6 +6080,7 @@ export type GlobalOmitConfig = {
   token?: Prisma.TokenOmit
   organization?: Prisma.OrganizationOmit
   recruitmentPost?: Prisma.RecruitmentPostOmit
+  organizationRecommendation?: Prisma.OrganizationRecommendationOmit
   user?: Prisma.UserOmit
   betaTester?: Prisma.BetaTesterOmit
   moderationLog?: Prisma.ModerationLogOmit

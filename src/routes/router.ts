@@ -29,6 +29,7 @@ import { router as reportsRouter } from './reports/index'
 import { router as customListRouter } from './custom-list/index'
 import { router as orgMessagesRouter, adminRouter as orgMessagesAdminRouter } from './organization-messages/index'
 import { router as recruitmentRouter, adminRouter as recruitmentAdminRouter } from './recruitment/index'
+import { router as recommendationRouter, adminRouter as recommendationAdminRouter } from './recommendation/index'
 import { router as commentBanRouter } from './comment/ban'
 import { router as commentCreateRouter } from './comment/create'
 import { router as commentDeleteRouter } from './comment/delete'
@@ -179,6 +180,8 @@ export const router = () => async (app: Elysia) => {
   app.use(orgMessagesAdminRouter())
   app.use(recruitmentRouter())
   app.use(recruitmentAdminRouter())
+  app.use(recommendationRouter())
+  app.use(recommendationAdminRouter())
 
   // Comment
   app.use(commentBanRouter())

@@ -33,6 +33,11 @@ export type Organization = Prisma.OrganizationModel
  */
 export type RecruitmentPost = Prisma.RecruitmentPostModel
 /**
+ * Model OrganizationRecommendation
+ * 
+ */
+export type OrganizationRecommendation = Prisma.OrganizationRecommendationModel
+/**
  * Model User
  * 
  */

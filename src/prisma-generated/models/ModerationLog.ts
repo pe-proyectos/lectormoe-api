@@ -456,14 +456,6 @@ export type ModerationLogUncheckedUpdateManyWithoutActorNestedInput = {
   deleteMany?: Prisma.ModerationLogScalarWhereInput | Prisma.ModerationLogScalarWhereInput[]
 }
 
-export type NullableIntFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type ModerationLogCreateWithoutActorInput = {
   action: string
   targetType: string

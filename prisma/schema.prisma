@@ -89,6 +89,7 @@ model Organization {
   userBans                                     UserBan[]
   messageThreads                               OrganizationMessageThread[]
   recruitmentPosts                             RecruitmentPost[]
+  organizationRecommendations                  OrganizationRecommendation[]
 
   @@map("organization")
 }
@@ -110,6 +111,33 @@ model RecruitmentPost {
   @@index([status, urgent, updatedAt])
   @@index([organizationId, status])
   @@map("recruitment_post")
+}
+
+// "Estante curado del scan": recomendaciones editoriales que el propio scan
+// pone en grande en su landing ("La recomendación de la casa"). Cada una apunta
+// a una obra (mangaCustom o joint), con etiqueta y nota libres, orden, activo,
+// y opción de aparecer en el home global. Ventana de fechas opcional.
+model OrganizationRecommendation {
+  id             Int          @id @default(autoincrement())
+  organizationId Int
+  mangaCustomId  Int?
+  jointId        Int?
+  label          String       @default("La recomendación de la casa") @db.VarChar(80)
+  note           String?      @db.VarChar(500)
+  position       Int          @default(0)
+  isActive       Boolean      @default(true)
+  showOnGlobal   Boolean      @default(false)
+  startsAt       DateTime?
+  endsAt         DateTime?
+  createdAt      DateTime     @default(now()) @db.Timestamp(6)
+  updatedAt      DateTime     @updatedAt
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  mangaCustom    MangaCustom? @relation(fields: [mangaCustomId], references: [id], onDelete: Cascade)
+  joint          MangaJoint?  @relation(fields: [jointId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, isActive, position])
+  @@index([showOnGlobal, isActive])
+  @@map("organization_recommendation")
 }
 
 model User {
@@ -383,6 +411,7 @@ model MangaCustom {
   subscriptionPlansCanReadReleased   SubscriptionPlan[] @relation("MangaCustomToSubscriptionPlanCanReadReleased")
   subscriptionPlansCanReadUnreleased SubscriptionPlan[] @relation("MangaCustomToSubscriptionPlanCanReadUnreleased")
   notifications                      Notification[]
+  organizationRecommendations        OrganizationRecommendation[]
 
   @@unique([mangaId, organizationId])
   @@index([organizationId])
@@ -1091,6 +1120,7 @@ model MangaJoint {
   userListEntries  UserList[]
   notifications    Notification[]
   memberHistory    JointMemberHistory[]
+  organizationRecommendations OrganizationRecommendation[]
 
   @@index([mangaId])
   @@index([lastChapterAt])

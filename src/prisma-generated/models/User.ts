@@ -1157,10 +1157,6 @@ export type UserUpdateOneRequiredWithoutTokensNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTokensInput, Prisma.UserUpdateWithoutTokensInput>, Prisma.UserUncheckedUpdateWithoutTokensInput>
 }
 
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
-}
-
 export type UserCreateNestedOneWithoutBetaTesterInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutBetaTesterInput, Prisma.UserUncheckedCreateWithoutBetaTesterInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutBetaTesterInput

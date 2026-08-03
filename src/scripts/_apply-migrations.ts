@@ -176,7 +176,25 @@ const statements: string[] = [
     "createdAt" TIMESTAMP(6) NOT NULL DEFAULT now(),
     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT now()
   );`,
-  `CREATE INDEX IF NOT EXISTS "beta_tester_status_idx" ON "beta_tester"("status");`
+  `CREATE INDEX IF NOT EXISTS "beta_tester_status_idx" ON "beta_tester"("status");`,
+  // Estante curado del scan: recomendaciones editoriales ("La recomendación de la casa").
+  `CREATE TABLE IF NOT EXISTS "organization_recommendation" (
+    "id" SERIAL PRIMARY KEY,
+    "organizationId" INTEGER NOT NULL REFERENCES "organization"("id") ON DELETE CASCADE,
+    "mangaCustomId" INTEGER REFERENCES "manga_custom"("id") ON DELETE CASCADE,
+    "jointId" INTEGER REFERENCES "manga_joint"("id") ON DELETE CASCADE,
+    "label" VARCHAR(80) NOT NULL DEFAULT 'La recomendación de la casa',
+    "note" VARCHAR(500),
+    "position" INTEGER NOT NULL DEFAULT 0,
+    "isActive" BOOLEAN NOT NULL DEFAULT true,
+    "showOnGlobal" BOOLEAN NOT NULL DEFAULT false,
+    "startsAt" TIMESTAMP(3),
+    "endsAt" TIMESTAMP(3),
+    "createdAt" TIMESTAMP(6) NOT NULL DEFAULT now(),
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT now()
+  );`,
+  `CREATE INDEX IF NOT EXISTS "org_reco_org_active_pos_idx" ON "organization_recommendation"("organizationId", "isActive", "position");`,
+  `CREATE INDEX IF NOT EXISTS "org_reco_global_active_idx" ON "organization_recommendation"("showOnGlobal", "isActive");`
 ]
 
 for (const sql of statements) {
