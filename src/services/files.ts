@@ -218,8 +218,12 @@ export function getContentType(filename: string): string {
         'png': 'image/png',
         'jpg': 'image/jpeg',
         'jpeg': 'image/jpeg',
+        'jfif': 'image/jpeg',
         'webp': 'image/webp',
         'gif': 'image/gif',
+        'avif': 'image/avif',
+        'bmp': 'image/bmp',
+        'apng': 'image/apng',
         'ico': 'image/x-icon',
     };
     return contentTypes[ext || ''] || 'application/octet-stream';
