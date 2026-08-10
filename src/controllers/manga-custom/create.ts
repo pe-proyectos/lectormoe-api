@@ -25,18 +25,23 @@ export const createMangaCustom = async (organizationId: number, params: CreateMa
 		throw new Error("No se encontró el manga");
 	}
 
-	const mangaCustomExists = await prisma.mangaCustom.findFirst({
+	// Buscar incluyendo BORRADOS: el índice único (mangaId, organizationId) no
+	// distingue por deletedAt, así que si el scan borró (borrado suave) un manga
+	// de esta misma obra, crear otro fallaría con "Unique constraint failed".
+	// Si existe uno activo -> error normal; si existe uno borrado -> se reactiva
+	// con los datos nuevos en vez de intentar crear un duplicado.
+	const existing = await prisma.mangaCustom.findFirst({
 		select: {
 			id: true,
+			deletedAt: true,
 		},
 		where: {
 			mangaId: params.mangaId,
 			organizationId: organization.id,
-			deletedAt: null,
 		},
 	});
 
-	if (mangaCustomExists) {
+	if (existing && !existing.deletedAt) {
 		throw new Error(`Tu organización ya tiene un manga basado en '${manga.title}'`);
 	}
 
@@ -57,24 +62,35 @@ export const createMangaCustom = async (organizationId: number, params: CreateMa
 			: `${r2PublicUrl}/${params.banner}`;
 	}
 
-	const mangaCustom = await prisma.mangaCustom.create({
-		data: {
-			mangaId: manga.id,
-			organizationId: organization.id,
-			status: params.status || 'ongoing',
-			title: params.title,
-			shortDescription: params.shortDescription,
-			description: params.description,
-			imageUrl,
-			bannerUrl,
-			releasedAt: params.releasedAt,
-			nextChapterAt: params.nextChapterAt,
-			nextChapterAtMessage: params.nextChapterAtMessage,
-			requireLogin: params.requireLogin,
-			isSimulRelease: params.isSimulRelease,
-			isNSFW: params.isNSFW,
-		}
-	});
+	const data = {
+		status: params.status || 'ongoing',
+		title: params.title,
+		shortDescription: params.shortDescription,
+		description: params.description,
+		imageUrl,
+		bannerUrl,
+		releasedAt: params.releasedAt,
+		nextChapterAt: params.nextChapterAt,
+		nextChapterAtMessage: params.nextChapterAtMessage,
+		requireLogin: params.requireLogin,
+		isSimulRelease: params.isSimulRelease,
+		isNSFW: params.isNSFW,
+	};
+
+	const mangaCustom = existing
+		? await prisma.mangaCustom.update({
+			// Reactiva el borrado suave con los datos nuevos (evita el choque con
+			// el índice único al recrear una obra que se había borrado).
+			where: { id: existing.id },
+			data: { ...data, deletedAt: null },
+		})
+		: await prisma.mangaCustom.create({
+			data: {
+				...data,
+				mangaId: manga.id,
+				organizationId: organization.id,
+			},
+		});
 
 	await prisma.mangaCustom.update({
 		where: {
