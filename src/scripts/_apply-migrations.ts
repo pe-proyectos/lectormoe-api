@@ -194,7 +194,9 @@ const statements: string[] = [
     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT now()
   );`,
   `CREATE INDEX IF NOT EXISTS "org_reco_org_active_pos_idx" ON "organization_recommendation"("organizationId", "isActive", "position");`,
-  `CREATE INDEX IF NOT EXISTS "org_reco_global_active_idx" ON "organization_recommendation"("showOnGlobal", "isActive");`
+  `CREATE INDEX IF NOT EXISTS "org_reco_global_active_idx" ON "organization_recommendation"("showOnGlobal", "isActive");`,
+  // Título alternativo/original por obra (SEO + búsqueda).
+  `ALTER TABLE "manga_custom" ADD COLUMN IF NOT EXISTS "alternativeTitle" VARCHAR(256);`
 ]
 
 for (const sql of statements) {

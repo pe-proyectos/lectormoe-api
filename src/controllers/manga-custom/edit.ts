@@ -27,6 +27,9 @@ export const editMangaCustom = async (
   const updateData: any = {
     status: params.status,
     title: params.title,
+    ...(params.alternativeTitle !== undefined
+      ? { alternativeTitle: params.alternativeTitle?.trim() || null }
+      : {}),
     shortDescription: params.shortDescription,
     description: params.description,
     releasedAt: params.releasedAt,

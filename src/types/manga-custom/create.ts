@@ -4,6 +4,7 @@ export const CreateMangaCustomRequest = t.Object({
     mangaId: t.Number(),
     status: t.Optional(t.String()),
     title: t.String(),
+    alternativeTitle: t.Optional(t.String()),
     shortDescription: t.Optional(t.String()),
     description: t.Optional(t.String()),
     genreIds: t.Optional(t.Array(t.Number())),

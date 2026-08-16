@@ -373,6 +373,10 @@ model MangaCustom {
   mangaId                            Int
   organizationId                     Int
   title                              String             @db.VarChar(256)
+  // Título alternativo/original (p. ej. el nombre en japonés/romaji) que el
+  // scan puede poner para SEO y para que se encuentre más fácil. Se muestra
+  // debajo del título custom en la ficha.
+  alternativeTitle                   String?            @db.VarChar(256)
   shortDescription                   String?            @db.VarChar(300)
   description                        String?
   imageUrl                           String?

@@ -404,6 +404,7 @@ export const MangaCustomScalarFieldEnum = {
   mangaId: 'mangaId',
   organizationId: 'organizationId',
   title: 'title',
+  alternativeTitle: 'alternativeTitle',
   shortDescription: 'shortDescription',
   description: 'description',
   imageUrl: 'imageUrl',

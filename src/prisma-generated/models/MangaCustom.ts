@@ -47,6 +47,7 @@ export type MangaCustomMinAggregateOutputType = {
   mangaId: number | null
   organizationId: number | null
   title: string | null
+  alternativeTitle: string | null
   shortDescription: string | null
   description: string | null
   imageUrl: string | null
@@ -76,6 +77,7 @@ export type MangaCustomMaxAggregateOutputType = {
   mangaId: number | null
   organizationId: number | null
   title: string | null
+  alternativeTitle: string | null
   shortDescription: string | null
   description: string | null
   imageUrl: string | null
@@ -105,6 +107,7 @@ export type MangaCustomCountAggregateOutputType = {
   mangaId: number
   organizationId: number
   title: number
+  alternativeTitle: number
   shortDescription: number
   description: number
   imageUrl: number
@@ -152,6 +155,7 @@ export type MangaCustomMinAggregateInputType = {
   mangaId?: true
   organizationId?: true
   title?: true
+  alternativeTitle?: true
   shortDescription?: true
   description?: true
   imageUrl?: true
@@ -181,6 +185,7 @@ export type MangaCustomMaxAggregateInputType = {
   mangaId?: true
   organizationId?: true
   title?: true
+  alternativeTitle?: true
   shortDescription?: true
   description?: true
   imageUrl?: true
@@ -210,6 +215,7 @@ export type MangaCustomCountAggregateInputType = {
   mangaId?: true
   organizationId?: true
   title?: true
+  alternativeTitle?: true
   shortDescription?: true
   description?: true
   imageUrl?: true
@@ -326,6 +332,7 @@ export type MangaCustomGroupByOutputType = {
   mangaId: number
   organizationId: number
   title: string
+  alternativeTitle: string | null
   shortDescription: string | null
   description: string | null
   imageUrl: string | null
@@ -378,6 +385,7 @@ export type MangaCustomWhereInput = {
   mangaId?: Prisma.IntFilter<"MangaCustom"> | number
   organizationId?: Prisma.IntFilter<"MangaCustom"> | number
   title?: Prisma.StringFilter<"MangaCustom"> | string
+  alternativeTitle?: Prisma.StringNullableFilter<"MangaCustom"> | string | null
   shortDescription?: Prisma.StringNullableFilter<"MangaCustom"> | string | null
   description?: Prisma.StringNullableFilter<"MangaCustom"> | string | null
   imageUrl?: Prisma.StringNullableFilter<"MangaCustom"> | string | null
@@ -424,6 +432,7 @@ export type MangaCustomOrderByWithRelationInput = {
   mangaId?: Prisma.SortOrder
   organizationId?: Prisma.SortOrder
   title?: Prisma.SortOrder
+  alternativeTitle?: Prisma.SortOrderInput | Prisma.SortOrder
   shortDescription?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   imageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -474,6 +483,7 @@ export type MangaCustomWhereUniqueInput = Prisma.AtLeast<{
   mangaId?: Prisma.IntFilter<"MangaCustom"> | number
   organizationId?: Prisma.IntFilter<"MangaCustom"> | number
   title?: Prisma.StringFilter<"MangaCustom"> | string
+  alternativeTitle?: Prisma.StringNullableFilter<"MangaCustom"> | string | null
   shortDescription?: Prisma.StringNullableFilter<"MangaCustom"> | string | null
   description?: Prisma.StringNullableFilter<"MangaCustom"> | string | null
   imageUrl?: Prisma.StringNullableFilter<"MangaCustom"> | string | null
@@ -520,6 +530,7 @@ export type MangaCustomOrderByWithAggregationInput = {
   mangaId?: Prisma.SortOrder
   organizationId?: Prisma.SortOrder
   title?: Prisma.SortOrder
+  alternativeTitle?: Prisma.SortOrderInput | Prisma.SortOrder
   shortDescription?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   imageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -557,6 +568,7 @@ export type MangaCustomScalarWhereWithAggregatesInput = {
   mangaId?: Prisma.IntWithAggregatesFilter<"MangaCustom"> | number
   organizationId?: Prisma.IntWithAggregatesFilter<"MangaCustom"> | number
   title?: Prisma.StringWithAggregatesFilter<"MangaCustom"> | string
+  alternativeTitle?: Prisma.StringNullableWithAggregatesFilter<"MangaCustom"> | string | null
   shortDescription?: Prisma.StringNullableWithAggregatesFilter<"MangaCustom"> | string | null
   description?: Prisma.StringNullableWithAggregatesFilter<"MangaCustom"> | string | null
   imageUrl?: Prisma.StringNullableWithAggregatesFilter<"MangaCustom"> | string | null
@@ -583,6 +595,7 @@ export type MangaCustomScalarWhereWithAggregatesInput = {
 
 export type MangaCustomCreateInput = {
   title: string
+  alternativeTitle?: string | null
   shortDescription?: string | null
   description?: string | null
   imageUrl?: string | null
@@ -629,6 +642,7 @@ export type MangaCustomUncheckedCreateInput = {
   mangaId: number
   organizationId: number
   title: string
+  alternativeTitle?: string | null
   shortDescription?: string | null
   description?: string | null
   imageUrl?: string | null
@@ -670,6 +684,7 @@ export type MangaCustomUncheckedCreateInput = {
 
 export type MangaCustomUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -716,6 +731,7 @@ export type MangaCustomUncheckedUpdateInput = {
   mangaId?: Prisma.IntFieldUpdateOperationsInput | number
   organizationId?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -760,6 +776,7 @@ export type MangaCustomCreateManyInput = {
   mangaId: number
   organizationId: number
   title: string
+  alternativeTitle?: string | null
   shortDescription?: string | null
   description?: string | null
   imageUrl?: string | null
@@ -786,6 +803,7 @@ export type MangaCustomCreateManyInput = {
 
 export type MangaCustomUpdateManyMutationInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -815,6 +833,7 @@ export type MangaCustomUncheckedUpdateManyInput = {
   mangaId?: Prisma.IntFieldUpdateOperationsInput | number
   organizationId?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -864,6 +883,7 @@ export type MangaCustomCountOrderByAggregateInput = {
   mangaId?: Prisma.SortOrder
   organizationId?: Prisma.SortOrder
   title?: Prisma.SortOrder
+  alternativeTitle?: Prisma.SortOrder
   shortDescription?: Prisma.SortOrder
   description?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
@@ -901,6 +921,7 @@ export type MangaCustomMaxOrderByAggregateInput = {
   mangaId?: Prisma.SortOrder
   organizationId?: Prisma.SortOrder
   title?: Prisma.SortOrder
+  alternativeTitle?: Prisma.SortOrder
   shortDescription?: Prisma.SortOrder
   description?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
@@ -930,6 +951,7 @@ export type MangaCustomMinOrderByAggregateInput = {
   mangaId?: Prisma.SortOrder
   organizationId?: Prisma.SortOrder
   title?: Prisma.SortOrder
+  alternativeTitle?: Prisma.SortOrder
   shortDescription?: Prisma.SortOrder
   description?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
@@ -1365,6 +1387,7 @@ export type MangaCustomUpdateOneWithoutNotificationsNestedInput = {
 
 export type MangaCustomCreateWithoutOrganizationInput = {
   title: string
+  alternativeTitle?: string | null
   shortDescription?: string | null
   description?: string | null
   imageUrl?: string | null
@@ -1409,6 +1432,7 @@ export type MangaCustomUncheckedCreateWithoutOrganizationInput = {
   id?: number
   mangaId: number
   title: string
+  alternativeTitle?: string | null
   shortDescription?: string | null
   description?: string | null
   imageUrl?: string | null
@@ -1482,6 +1506,7 @@ export type MangaCustomScalarWhereInput = {
   mangaId?: Prisma.IntFilter<"MangaCustom"> | number
   organizationId?: Prisma.IntFilter<"MangaCustom"> | number
   title?: Prisma.StringFilter<"MangaCustom"> | string
+  alternativeTitle?: Prisma.StringNullableFilter<"MangaCustom"> | string | null
   shortDescription?: Prisma.StringNullableFilter<"MangaCustom"> | string | null
   description?: Prisma.StringNullableFilter<"MangaCustom"> | string | null
   imageUrl?: Prisma.StringNullableFilter<"MangaCustom"> | string | null
@@ -1508,6 +1533,7 @@ export type MangaCustomScalarWhereInput = {
 
 export type MangaCustomCreateWithoutOrganizationRecommendationsInput = {
   title: string
+  alternativeTitle?: string | null
   shortDescription?: string | null
   description?: string | null
   imageUrl?: string | null
@@ -1553,6 +1579,7 @@ export type MangaCustomUncheckedCreateWithoutOrganizationRecommendationsInput = 
   mangaId: number
   organizationId: number
   title: string
+  alternativeTitle?: string | null
   shortDescription?: string | null
   description?: string | null
   imageUrl?: string | null
@@ -1609,6 +1636,7 @@ export type MangaCustomUpdateToOneWithWhereWithoutOrganizationRecommendationsInp
 
 export type MangaCustomUpdateWithoutOrganizationRecommendationsInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1654,6 +1682,7 @@ export type MangaCustomUncheckedUpdateWithoutOrganizationRecommendationsInput = 
   mangaId?: Prisma.IntFieldUpdateOperationsInput | number
   organizationId?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1694,6 +1723,7 @@ export type MangaCustomUncheckedUpdateWithoutOrganizationRecommendationsInput = 
 
 export type MangaCustomCreateWithoutMangaInput = {
   title: string
+  alternativeTitle?: string | null
   shortDescription?: string | null
   description?: string | null
   imageUrl?: string | null
@@ -1738,6 +1768,7 @@ export type MangaCustomUncheckedCreateWithoutMangaInput = {
   id?: number
   organizationId: number
   title: string
+  alternativeTitle?: string | null
   shortDescription?: string | null
   description?: string | null
   imageUrl?: string | null
@@ -1805,6 +1836,7 @@ export type MangaCustomUpdateManyWithWhereWithoutMangaInput = {
 
 export type MangaCustomCreateWithoutChaptersInput = {
   title: string
+  alternativeTitle?: string | null
   shortDescription?: string | null
   description?: string | null
   imageUrl?: string | null
@@ -1850,6 +1882,7 @@ export type MangaCustomUncheckedCreateWithoutChaptersInput = {
   mangaId: number
   organizationId: number
   title: string
+  alternativeTitle?: string | null
   shortDescription?: string | null
   description?: string | null
   imageUrl?: string | null
@@ -1906,6 +1939,7 @@ export type MangaCustomUpdateToOneWithWhereWithoutChaptersInput = {
 
 export type MangaCustomUpdateWithoutChaptersInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1951,6 +1985,7 @@ export type MangaCustomUncheckedUpdateWithoutChaptersInput = {
   mangaId?: Prisma.IntFieldUpdateOperationsInput | number
   organizationId?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1991,6 +2026,7 @@ export type MangaCustomUncheckedUpdateWithoutChaptersInput = {
 
 export type MangaCustomCreateWithoutCustomListItemsInput = {
   title: string
+  alternativeTitle?: string | null
   shortDescription?: string | null
   description?: string | null
   imageUrl?: string | null
@@ -2036,6 +2072,7 @@ export type MangaCustomUncheckedCreateWithoutCustomListItemsInput = {
   mangaId: number
   organizationId: number
   title: string
+  alternativeTitle?: string | null
   shortDescription?: string | null
   description?: string | null
   imageUrl?: string | null
@@ -2092,6 +2129,7 @@ export type MangaCustomUpdateToOneWithWhereWithoutCustomListItemsInput = {
 
 export type MangaCustomUpdateWithoutCustomListItemsInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2137,6 +2175,7 @@ export type MangaCustomUncheckedUpdateWithoutCustomListItemsInput = {
   mangaId?: Prisma.IntFieldUpdateOperationsInput | number
   organizationId?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2177,6 +2216,7 @@ export type MangaCustomUncheckedUpdateWithoutCustomListItemsInput = {
 
 export type MangaCustomCreateWithoutContentReportsInput = {
   title: string
+  alternativeTitle?: string | null
   shortDescription?: string | null
   description?: string | null
   imageUrl?: string | null
@@ -2222,6 +2262,7 @@ export type MangaCustomUncheckedCreateWithoutContentReportsInput = {
   mangaId: number
   organizationId: number
   title: string
+  alternativeTitle?: string | null
   shortDescription?: string | null
   description?: string | null
   imageUrl?: string | null
@@ -2278,6 +2319,7 @@ export type MangaCustomUpdateToOneWithWhereWithoutContentReportsInput = {
 
 export type MangaCustomUpdateWithoutContentReportsInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2323,6 +2365,7 @@ export type MangaCustomUncheckedUpdateWithoutContentReportsInput = {
   mangaId?: Prisma.IntFieldUpdateOperationsInput | number
   organizationId?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2363,6 +2406,7 @@ export type MangaCustomUncheckedUpdateWithoutContentReportsInput = {
 
 export type MangaCustomCreateWithoutReviewsInput = {
   title: string
+  alternativeTitle?: string | null
   shortDescription?: string | null
   description?: string | null
   imageUrl?: string | null
@@ -2408,6 +2452,7 @@ export type MangaCustomUncheckedCreateWithoutReviewsInput = {
   mangaId: number
   organizationId: number
   title: string
+  alternativeTitle?: string | null
   shortDescription?: string | null
   description?: string | null
   imageUrl?: string | null
@@ -2464,6 +2509,7 @@ export type MangaCustomUpdateToOneWithWhereWithoutReviewsInput = {
 
 export type MangaCustomUpdateWithoutReviewsInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2509,6 +2555,7 @@ export type MangaCustomUncheckedUpdateWithoutReviewsInput = {
   mangaId?: Prisma.IntFieldUpdateOperationsInput | number
   organizationId?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2549,6 +2596,7 @@ export type MangaCustomUncheckedUpdateWithoutReviewsInput = {
 
 export type MangaCustomCreateWithoutMilestoneAlertsInput = {
   title: string
+  alternativeTitle?: string | null
   shortDescription?: string | null
   description?: string | null
   imageUrl?: string | null
@@ -2594,6 +2642,7 @@ export type MangaCustomUncheckedCreateWithoutMilestoneAlertsInput = {
   mangaId: number
   organizationId: number
   title: string
+  alternativeTitle?: string | null
   shortDescription?: string | null
   description?: string | null
   imageUrl?: string | null
@@ -2650,6 +2699,7 @@ export type MangaCustomUpdateToOneWithWhereWithoutMilestoneAlertsInput = {
 
 export type MangaCustomUpdateWithoutMilestoneAlertsInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2695,6 +2745,7 @@ export type MangaCustomUncheckedUpdateWithoutMilestoneAlertsInput = {
   mangaId?: Prisma.IntFieldUpdateOperationsInput | number
   organizationId?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2735,6 +2786,7 @@ export type MangaCustomUncheckedUpdateWithoutMilestoneAlertsInput = {
 
 export type MangaCustomCreateWithoutVolumesInput = {
   title: string
+  alternativeTitle?: string | null
   shortDescription?: string | null
   description?: string | null
   imageUrl?: string | null
@@ -2780,6 +2832,7 @@ export type MangaCustomUncheckedCreateWithoutVolumesInput = {
   mangaId: number
   organizationId: number
   title: string
+  alternativeTitle?: string | null
   shortDescription?: string | null
   description?: string | null
   imageUrl?: string | null
@@ -2836,6 +2889,7 @@ export type MangaCustomUpdateToOneWithWhereWithoutVolumesInput = {
 
 export type MangaCustomUpdateWithoutVolumesInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2881,6 +2935,7 @@ export type MangaCustomUncheckedUpdateWithoutVolumesInput = {
   mangaId?: Prisma.IntFieldUpdateOperationsInput | number
   organizationId?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2921,6 +2976,7 @@ export type MangaCustomUncheckedUpdateWithoutVolumesInput = {
 
 export type MangaCustomCreateWithoutRankingsInput = {
   title: string
+  alternativeTitle?: string | null
   shortDescription?: string | null
   description?: string | null
   imageUrl?: string | null
@@ -2966,6 +3022,7 @@ export type MangaCustomUncheckedCreateWithoutRankingsInput = {
   mangaId: number
   organizationId: number
   title: string
+  alternativeTitle?: string | null
   shortDescription?: string | null
   description?: string | null
   imageUrl?: string | null
@@ -3022,6 +3079,7 @@ export type MangaCustomUpdateToOneWithWhereWithoutRankingsInput = {
 
 export type MangaCustomUpdateWithoutRankingsInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3067,6 +3125,7 @@ export type MangaCustomUncheckedUpdateWithoutRankingsInput = {
   mangaId?: Prisma.IntFieldUpdateOperationsInput | number
   organizationId?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3107,6 +3166,7 @@ export type MangaCustomUncheckedUpdateWithoutRankingsInput = {
 
 export type MangaCustomCreateWithoutGenresInput = {
   title: string
+  alternativeTitle?: string | null
   shortDescription?: string | null
   description?: string | null
   imageUrl?: string | null
@@ -3152,6 +3212,7 @@ export type MangaCustomUncheckedCreateWithoutGenresInput = {
   mangaId: number
   organizationId: number
   title: string
+  alternativeTitle?: string | null
   shortDescription?: string | null
   description?: string | null
   imageUrl?: string | null
@@ -3213,6 +3274,7 @@ export type MangaCustomUpdateManyWithWhereWithoutGenresInput = {
 
 export type MangaCustomCreateWithoutFavoritesInput = {
   title: string
+  alternativeTitle?: string | null
   shortDescription?: string | null
   description?: string | null
   imageUrl?: string | null
@@ -3258,6 +3320,7 @@ export type MangaCustomUncheckedCreateWithoutFavoritesInput = {
   mangaId: number
   organizationId: number
   title: string
+  alternativeTitle?: string | null
   shortDescription?: string | null
   description?: string | null
   imageUrl?: string | null
@@ -3314,6 +3377,7 @@ export type MangaCustomUpdateToOneWithWhereWithoutFavoritesInput = {
 
 export type MangaCustomUpdateWithoutFavoritesInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3359,6 +3423,7 @@ export type MangaCustomUncheckedUpdateWithoutFavoritesInput = {
   mangaId?: Prisma.IntFieldUpdateOperationsInput | number
   organizationId?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3399,6 +3464,7 @@ export type MangaCustomUncheckedUpdateWithoutFavoritesInput = {
 
 export type MangaCustomCreateWithoutUserListEntriesInput = {
   title: string
+  alternativeTitle?: string | null
   shortDescription?: string | null
   description?: string | null
   imageUrl?: string | null
@@ -3444,6 +3510,7 @@ export type MangaCustomUncheckedCreateWithoutUserListEntriesInput = {
   mangaId: number
   organizationId: number
   title: string
+  alternativeTitle?: string | null
   shortDescription?: string | null
   description?: string | null
   imageUrl?: string | null
@@ -3500,6 +3567,7 @@ export type MangaCustomUpdateToOneWithWhereWithoutUserListEntriesInput = {
 
 export type MangaCustomUpdateWithoutUserListEntriesInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3545,6 +3613,7 @@ export type MangaCustomUncheckedUpdateWithoutUserListEntriesInput = {
   mangaId?: Prisma.IntFieldUpdateOperationsInput | number
   organizationId?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3585,6 +3654,7 @@ export type MangaCustomUncheckedUpdateWithoutUserListEntriesInput = {
 
 export type MangaCustomCreateWithoutViewsHistoryInput = {
   title: string
+  alternativeTitle?: string | null
   shortDescription?: string | null
   description?: string | null
   imageUrl?: string | null
@@ -3630,6 +3700,7 @@ export type MangaCustomUncheckedCreateWithoutViewsHistoryInput = {
   mangaId: number
   organizationId: number
   title: string
+  alternativeTitle?: string | null
   shortDescription?: string | null
   description?: string | null
   imageUrl?: string | null
@@ -3686,6 +3757,7 @@ export type MangaCustomUpdateToOneWithWhereWithoutViewsHistoryInput = {
 
 export type MangaCustomUpdateWithoutViewsHistoryInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3731,6 +3803,7 @@ export type MangaCustomUncheckedUpdateWithoutViewsHistoryInput = {
   mangaId?: Prisma.IntFieldUpdateOperationsInput | number
   organizationId?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3771,6 +3844,7 @@ export type MangaCustomUncheckedUpdateWithoutViewsHistoryInput = {
 
 export type MangaCustomCreateWithoutSubscriptionPlansCanReadReleasedInput = {
   title: string
+  alternativeTitle?: string | null
   shortDescription?: string | null
   description?: string | null
   imageUrl?: string | null
@@ -3816,6 +3890,7 @@ export type MangaCustomUncheckedCreateWithoutSubscriptionPlansCanReadReleasedInp
   mangaId: number
   organizationId: number
   title: string
+  alternativeTitle?: string | null
   shortDescription?: string | null
   description?: string | null
   imageUrl?: string | null
@@ -3861,6 +3936,7 @@ export type MangaCustomCreateOrConnectWithoutSubscriptionPlansCanReadReleasedInp
 
 export type MangaCustomCreateWithoutSubscriptionPlansCanReadUnreleasedInput = {
   title: string
+  alternativeTitle?: string | null
   shortDescription?: string | null
   description?: string | null
   imageUrl?: string | null
@@ -3906,6 +3982,7 @@ export type MangaCustomUncheckedCreateWithoutSubscriptionPlansCanReadUnreleasedI
   mangaId: number
   organizationId: number
   title: string
+  alternativeTitle?: string | null
   shortDescription?: string | null
   description?: string | null
   imageUrl?: string | null
@@ -3983,6 +4060,7 @@ export type MangaCustomUpdateManyWithWhereWithoutSubscriptionPlansCanReadUnrelea
 
 export type MangaCustomCreateWithoutNotificationsInput = {
   title: string
+  alternativeTitle?: string | null
   shortDescription?: string | null
   description?: string | null
   imageUrl?: string | null
@@ -4028,6 +4106,7 @@ export type MangaCustomUncheckedCreateWithoutNotificationsInput = {
   mangaId: number
   organizationId: number
   title: string
+  alternativeTitle?: string | null
   shortDescription?: string | null
   description?: string | null
   imageUrl?: string | null
@@ -4084,6 +4163,7 @@ export type MangaCustomUpdateToOneWithWhereWithoutNotificationsInput = {
 
 export type MangaCustomUpdateWithoutNotificationsInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4129,6 +4209,7 @@ export type MangaCustomUncheckedUpdateWithoutNotificationsInput = {
   mangaId?: Prisma.IntFieldUpdateOperationsInput | number
   organizationId?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4171,6 +4252,7 @@ export type MangaCustomCreateManyOrganizationInput = {
   id?: number
   mangaId: number
   title: string
+  alternativeTitle?: string | null
   shortDescription?: string | null
   description?: string | null
   imageUrl?: string | null
@@ -4197,6 +4279,7 @@ export type MangaCustomCreateManyOrganizationInput = {
 
 export type MangaCustomUpdateWithoutOrganizationInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4241,6 +4324,7 @@ export type MangaCustomUncheckedUpdateWithoutOrganizationInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   mangaId?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4284,6 +4368,7 @@ export type MangaCustomUncheckedUpdateManyWithoutOrganizationInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   mangaId?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4312,6 +4397,7 @@ export type MangaCustomCreateManyMangaInput = {
   id?: number
   organizationId: number
   title: string
+  alternativeTitle?: string | null
   shortDescription?: string | null
   description?: string | null
   imageUrl?: string | null
@@ -4338,6 +4424,7 @@ export type MangaCustomCreateManyMangaInput = {
 
 export type MangaCustomUpdateWithoutMangaInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4382,6 +4469,7 @@ export type MangaCustomUncheckedUpdateWithoutMangaInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   organizationId?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4425,6 +4513,7 @@ export type MangaCustomUncheckedUpdateManyWithoutMangaInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   organizationId?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4451,6 +4540,7 @@ export type MangaCustomUncheckedUpdateManyWithoutMangaInput = {
 
 export type MangaCustomUpdateWithoutGenresInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4496,6 +4586,7 @@ export type MangaCustomUncheckedUpdateWithoutGenresInput = {
   mangaId?: Prisma.IntFieldUpdateOperationsInput | number
   organizationId?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4539,6 +4630,7 @@ export type MangaCustomUncheckedUpdateManyWithoutGenresInput = {
   mangaId?: Prisma.IntFieldUpdateOperationsInput | number
   organizationId?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4565,6 +4657,7 @@ export type MangaCustomUncheckedUpdateManyWithoutGenresInput = {
 
 export type MangaCustomUpdateWithoutSubscriptionPlansCanReadReleasedInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4610,6 +4703,7 @@ export type MangaCustomUncheckedUpdateWithoutSubscriptionPlansCanReadReleasedInp
   mangaId?: Prisma.IntFieldUpdateOperationsInput | number
   organizationId?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4653,6 +4747,7 @@ export type MangaCustomUncheckedUpdateManyWithoutSubscriptionPlansCanReadRelease
   mangaId?: Prisma.IntFieldUpdateOperationsInput | number
   organizationId?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4679,6 +4774,7 @@ export type MangaCustomUncheckedUpdateManyWithoutSubscriptionPlansCanReadRelease
 
 export type MangaCustomUpdateWithoutSubscriptionPlansCanReadUnreleasedInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4724,6 +4820,7 @@ export type MangaCustomUncheckedUpdateWithoutSubscriptionPlansCanReadUnreleasedI
   mangaId?: Prisma.IntFieldUpdateOperationsInput | number
   organizationId?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4767,6 +4864,7 @@ export type MangaCustomUncheckedUpdateManyWithoutSubscriptionPlansCanReadUnrelea
   mangaId?: Prisma.IntFieldUpdateOperationsInput | number
   organizationId?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  alternativeTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4953,6 +5051,7 @@ export type MangaCustomSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   mangaId?: boolean
   organizationId?: boolean
   title?: boolean
+  alternativeTitle?: boolean
   shortDescription?: boolean
   description?: boolean
   imageUrl?: boolean
@@ -5000,6 +5099,7 @@ export type MangaCustomSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   mangaId?: boolean
   organizationId?: boolean
   title?: boolean
+  alternativeTitle?: boolean
   shortDescription?: boolean
   description?: boolean
   imageUrl?: boolean
@@ -5031,6 +5131,7 @@ export type MangaCustomSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   mangaId?: boolean
   organizationId?: boolean
   title?: boolean
+  alternativeTitle?: boolean
   shortDescription?: boolean
   description?: boolean
   imageUrl?: boolean
@@ -5062,6 +5163,7 @@ export type MangaCustomSelectScalar = {
   mangaId?: boolean
   organizationId?: boolean
   title?: boolean
+  alternativeTitle?: boolean
   shortDescription?: boolean
   description?: boolean
   imageUrl?: boolean
@@ -5086,7 +5188,7 @@ export type MangaCustomSelectScalar = {
   groupChaptersByVolume?: boolean
 }
 
-export type MangaCustomOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "mangaId" | "organizationId" | "title" | "shortDescription" | "description" | "imageUrl" | "releasedAt" | "nextChapterAt" | "createdAt" | "updatedAt" | "views" | "lastChapterAt" | "status" | "visibility" | "bannerUrl" | "requireLogin" | "isSimulRelease" | "isNSFW" | "workType" | "deletedAt" | "nextChapterAtMessage" | "hideUnreleasedChapters" | "usersAlsoReadMangaCustomIds" | "finalChapterNumber" | "groupChaptersByVolume", ExtArgs["result"]["mangaCustom"]>
+export type MangaCustomOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "mangaId" | "organizationId" | "title" | "alternativeTitle" | "shortDescription" | "description" | "imageUrl" | "releasedAt" | "nextChapterAt" | "createdAt" | "updatedAt" | "views" | "lastChapterAt" | "status" | "visibility" | "bannerUrl" | "requireLogin" | "isSimulRelease" | "isNSFW" | "workType" | "deletedAt" | "nextChapterAtMessage" | "hideUnreleasedChapters" | "usersAlsoReadMangaCustomIds" | "finalChapterNumber" | "groupChaptersByVolume", ExtArgs["result"]["mangaCustom"]>
 export type MangaCustomInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   chapters?: boolean | Prisma.MangaCustom$chaptersArgs<ExtArgs>
   volumes?: boolean | Prisma.MangaCustom$volumesArgs<ExtArgs>
@@ -5142,6 +5244,7 @@ export type $MangaCustomPayload<ExtArgs extends runtime.Types.Extensions.Interna
     mangaId: number
     organizationId: number
     title: string
+    alternativeTitle: string | null
     shortDescription: string | null
     description: string | null
     imageUrl: string | null
@@ -5608,6 +5711,7 @@ export interface MangaCustomFieldRefs {
   readonly mangaId: Prisma.FieldRef<"MangaCustom", 'Int'>
   readonly organizationId: Prisma.FieldRef<"MangaCustom", 'Int'>
   readonly title: Prisma.FieldRef<"MangaCustom", 'String'>
+  readonly alternativeTitle: Prisma.FieldRef<"MangaCustom", 'String'>
   readonly shortDescription: Prisma.FieldRef<"MangaCustom", 'String'>
   readonly description: Prisma.FieldRef<"MangaCustom", 'String'>
   readonly imageUrl: Prisma.FieldRef<"MangaCustom", 'String'>
