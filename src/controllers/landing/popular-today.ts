@@ -34,11 +34,11 @@ export const getPopularToday = async (limit: number = 5, nsfw?: boolean, content
 	// /red can return fewer than `limit` rows when most of today's top views
 	// happen to be SFW (or vice versa).
 	const mangaCustomFilter: any = { deletedAt: null };
+	// Clasificación por MANGA: /red solo +18, azul solo no-+18.
 	if (nsfw === true) {
-		mangaCustomFilter.OR = [{ isNSFW: true }, { organization: { isNSFW: true } }];
+		mangaCustomFilter.isNSFW = true;
 	} else if (nsfw === false) {
 		mangaCustomFilter.isNSFW = false;
-		mangaCustomFilter.organization = { isNSFW: false };
 	}
 	if (contentKind === "writing") {
 		mangaCustomFilter.manga = { ...(mangaCustomFilter.manga || {}), bookType: { code: { in: WRITING_BOOK_TYPE_CODES } } };

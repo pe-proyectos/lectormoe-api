@@ -97,12 +97,11 @@ export const getTrending = async (
     OR: [{ imageUrl: { not: null } }, { manga: { imageUrl: { not: null } } }],
     AND: [{ organization: { isPublic: true, isDeleted: false } }]
   }
+  // Clasificación por MANGA: /red solo +18, azul solo no-+18.
   if (nsfw === true)
-    mangaFilter.AND.push({
-      OR: [{ isNSFW: true }, { organization: { isNSFW: true } }]
-    })
+    mangaFilter.AND.push({ isNSFW: true })
   else if (nsfw === false)
-    mangaFilter.AND.push({ isNSFW: false, organization: { isNSFW: false } })
+    mangaFilter.AND.push({ isNSFW: false })
   if (contentKind === 'writing')
     mangaFilter.manga = { bookType: { code: { in: WRITING_BOOK_TYPE_CODES } } }
   else if (contentKind === 'manga')

@@ -42,10 +42,11 @@ const buildContentKindFilter = (contentKind?: ContentKind): object[] => {
 export const getFeaturedManga = async (limit: number = 8, nsfw?: boolean, contentKind: ContentKind = "all") => {
 	// nsfw=false: excluir mangas con isNSFW=true o que pertenezcan a una org NSFW
 	// nsfw=true:  solo mangas marcados isNSFW=true o de una org NSFW
+	// Clasificación por MANGA: /red solo +18, azul solo no-+18.
 	const nsfwCondition: object[] = nsfw === true
-		? [{ OR: [{ isNSFW: true }, { organization: { isNSFW: true } }] }]
+		? [{ isNSFW: true }]
 		: nsfw === false
-		? [{ isNSFW: false }, { organization: { isNSFW: false } }]
+		? [{ isNSFW: false }]
 		: [];
 
 	const contentKindCondition = buildContentKindFilter(contentKind);

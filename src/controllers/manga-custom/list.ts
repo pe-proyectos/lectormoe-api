@@ -89,18 +89,14 @@ export const listMangaCustom = async (
       }
     : {}
 
-  // nsfw=false: excluir mangas NSFW
-  // nsfw=true + org específica: mostrar todo (la ruta /red/ ya valida adultos, no filtrar más)
-  // nsfw=true + sin org (global): mostrar mangas NSFW o de orgs NSFW
+  // Clasificación 100% por MANGA (ya no hay NSFW por-scan): /red (nsfw=true)
+  // muestra SOLO mangas +18; el azul (nsfw=false) muestra SOLO los que no son
+  // +18. Sirve igual dentro de un scan o en el listado global.
   const nsfwFilter =
     filters.nsfw === 'true'
-      ? organizationId
-        ? {} // En página de org /red/: sin filtro adicional, mostrar todo
-        : { OR: [{ isNSFW: true }, { organization: { isNSFW: true } }] }
+      ? { isNSFW: true }
       : filters.nsfw === 'false'
-        ? organizationId
-          ? { isNSFW: false }
-          : { isNSFW: false, organization: { isNSFW: false } }
+        ? { isNSFW: false }
         : {}
 
   // Build soft-delete filter

@@ -34,12 +34,11 @@ export const getRecentlyAdded = async (
     OR: [{ imageUrl: { not: null } }, { manga: { imageUrl: { not: null } } }],
     AND: [{ organization: { isPublic: true, isDeleted: false } }]
   }
+  // Clasificación por MANGA: /red solo +18, azul solo no-+18.
   if (nsfw === true)
-    where.AND.push({
-      OR: [{ isNSFW: true }, { organization: { isNSFW: true } }]
-    })
+    where.AND.push({ isNSFW: true })
   else if (nsfw === false)
-    where.AND.push({ isNSFW: false, organization: { isNSFW: false } })
+    where.AND.push({ isNSFW: false })
   if (contentKind === 'writing')
     where.manga = { bookType: { code: { in: WRITING_BOOK_TYPE_CODES } } }
   else if (contentKind === 'manga')

@@ -26,10 +26,9 @@ export const editOrganization = async (organizationId: number, params: EditOrgan
 			enableMainSlider: params.enableMainSlider,
 			enableMainBanner: params.enableMainBanner,
 			enableSubscriptionSection: params.enableSubscriptionSection,
-			enableAds: params.enableAds,
-			enableGoogleAds: params.enableGoogleAds,
-			enableAdsterraAds: params.enableAdsterraAds,
-			isNSFW: params.isNSFW,
+			// Anuncios y NSFW ya NO se controlan por scan: los gestiona la
+			// plataforma. Se ignoran aunque vengan en el body (no se actualizan
+			// aquí para no re-clasificar scans por error).
 			facebookUrl: params.facebookUrl,
 			twitterUrl: params.twitterUrl,
 			instagramUrl: params.instagramUrl,

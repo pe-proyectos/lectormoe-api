@@ -64,7 +64,7 @@ model Organization {
   discordWebhookMessageTemplateNewChapter      String?
   discordWebhookMessageTemplateNewSubscription String?
   isPublic                                     Boolean                   @default(true)
-  isNSFW                                       Boolean                   @default(true)
+  isNSFW                                       Boolean                   @default(false)
   isDeleted                                    Boolean                   @default(false)
   enableAds                                    Boolean                   @default(false)
   analytics                                    Analytics[]
