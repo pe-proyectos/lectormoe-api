@@ -55,6 +55,14 @@ const INCLUDE = {
 			isNSFW: true,
 		},
 	},
+	// Para type='list_updated': lista de comunidad actualizada (para enlazar).
+	customList: {
+		select: {
+			slug: true,
+			name: true,
+			user: { select: { slug: true } },
+		},
+	},
 };
 
 export interface NotificationListQuery {
