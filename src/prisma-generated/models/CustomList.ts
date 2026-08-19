@@ -247,6 +247,7 @@ export type CustomListWhereInput = {
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   items?: Prisma.CustomListItemListRelationFilter
   followers?: Prisma.CustomListFollowerListRelationFilter
+  followerItems?: Prisma.CustomListFollowerItemListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
 }
 
@@ -262,6 +263,7 @@ export type CustomListOrderByWithRelationInput = {
   user?: Prisma.UserOrderByWithRelationInput
   items?: Prisma.CustomListItemOrderByRelationAggregateInput
   followers?: Prisma.CustomListFollowerOrderByRelationAggregateInput
+  followerItems?: Prisma.CustomListFollowerItemOrderByRelationAggregateInput
   notifications?: Prisma.NotificationOrderByRelationAggregateInput
 }
 
@@ -281,6 +283,7 @@ export type CustomListWhereUniqueInput = Prisma.AtLeast<{
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   items?: Prisma.CustomListItemListRelationFilter
   followers?: Prisma.CustomListFollowerListRelationFilter
+  followerItems?: Prisma.CustomListFollowerItemListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
 }, "id" | "userId_slug">
 
@@ -324,6 +327,7 @@ export type CustomListCreateInput = {
   user: Prisma.UserCreateNestedOneWithoutCustomListsInput
   items?: Prisma.CustomListItemCreateNestedManyWithoutListInput
   followers?: Prisma.CustomListFollowerCreateNestedManyWithoutListInput
+  followerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutListInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutCustomListInput
 }
 
@@ -338,6 +342,7 @@ export type CustomListUncheckedCreateInput = {
   updatedAt?: Date | string
   items?: Prisma.CustomListItemUncheckedCreateNestedManyWithoutListInput
   followers?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutListInput
+  followerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutListInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutCustomListInput
 }
 
@@ -351,6 +356,7 @@ export type CustomListUpdateInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutCustomListsNestedInput
   items?: Prisma.CustomListItemUpdateManyWithoutListNestedInput
   followers?: Prisma.CustomListFollowerUpdateManyWithoutListNestedInput
+  followerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutListNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutCustomListNestedInput
 }
 
@@ -365,6 +371,7 @@ export type CustomListUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.CustomListItemUncheckedUpdateManyWithoutListNestedInput
   followers?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutListNestedInput
+  followerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutListNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutCustomListNestedInput
 }
 
@@ -523,6 +530,20 @@ export type CustomListUpdateOneRequiredWithoutFollowersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CustomListUpdateToOneWithWhereWithoutFollowersInput, Prisma.CustomListUpdateWithoutFollowersInput>, Prisma.CustomListUncheckedUpdateWithoutFollowersInput>
 }
 
+export type CustomListCreateNestedOneWithoutFollowerItemsInput = {
+  create?: Prisma.XOR<Prisma.CustomListCreateWithoutFollowerItemsInput, Prisma.CustomListUncheckedCreateWithoutFollowerItemsInput>
+  connectOrCreate?: Prisma.CustomListCreateOrConnectWithoutFollowerItemsInput
+  connect?: Prisma.CustomListWhereUniqueInput
+}
+
+export type CustomListUpdateOneRequiredWithoutFollowerItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.CustomListCreateWithoutFollowerItemsInput, Prisma.CustomListUncheckedCreateWithoutFollowerItemsInput>
+  connectOrCreate?: Prisma.CustomListCreateOrConnectWithoutFollowerItemsInput
+  upsert?: Prisma.CustomListUpsertWithoutFollowerItemsInput
+  connect?: Prisma.CustomListWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CustomListUpdateToOneWithWhereWithoutFollowerItemsInput, Prisma.CustomListUpdateWithoutFollowerItemsInput>, Prisma.CustomListUncheckedUpdateWithoutFollowerItemsInput>
+}
+
 export type CustomListCreateNestedOneWithoutItemsInput = {
   create?: Prisma.XOR<Prisma.CustomListCreateWithoutItemsInput, Prisma.CustomListUncheckedCreateWithoutItemsInput>
   connectOrCreate?: Prisma.CustomListCreateOrConnectWithoutItemsInput
@@ -562,6 +583,7 @@ export type CustomListCreateWithoutUserInput = {
   updatedAt?: Date | string
   items?: Prisma.CustomListItemCreateNestedManyWithoutListInput
   followers?: Prisma.CustomListFollowerCreateNestedManyWithoutListInput
+  followerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutListInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutCustomListInput
 }
 
@@ -575,6 +597,7 @@ export type CustomListUncheckedCreateWithoutUserInput = {
   updatedAt?: Date | string
   items?: Prisma.CustomListItemUncheckedCreateNestedManyWithoutListInput
   followers?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutListInput
+  followerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutListInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutCustomListInput
 }
 
@@ -627,6 +650,7 @@ export type CustomListCreateWithoutFollowersInput = {
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCustomListsInput
   items?: Prisma.CustomListItemCreateNestedManyWithoutListInput
+  followerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutListInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutCustomListInput
 }
 
@@ -640,6 +664,7 @@ export type CustomListUncheckedCreateWithoutFollowersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   items?: Prisma.CustomListItemUncheckedCreateNestedManyWithoutListInput
+  followerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutListInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutCustomListInput
 }
 
@@ -668,6 +693,7 @@ export type CustomListUpdateWithoutFollowersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCustomListsNestedInput
   items?: Prisma.CustomListItemUpdateManyWithoutListNestedInput
+  followerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutListNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutCustomListNestedInput
 }
 
@@ -681,6 +707,77 @@ export type CustomListUncheckedUpdateWithoutFollowersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.CustomListItemUncheckedUpdateManyWithoutListNestedInput
+  followerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutListNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutCustomListNestedInput
+}
+
+export type CustomListCreateWithoutFollowerItemsInput = {
+  name: string
+  slug: string
+  description?: string | null
+  isPublic?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutCustomListsInput
+  items?: Prisma.CustomListItemCreateNestedManyWithoutListInput
+  followers?: Prisma.CustomListFollowerCreateNestedManyWithoutListInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutCustomListInput
+}
+
+export type CustomListUncheckedCreateWithoutFollowerItemsInput = {
+  id?: number
+  userId: number
+  name: string
+  slug: string
+  description?: string | null
+  isPublic?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  items?: Prisma.CustomListItemUncheckedCreateNestedManyWithoutListInput
+  followers?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutListInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutCustomListInput
+}
+
+export type CustomListCreateOrConnectWithoutFollowerItemsInput = {
+  where: Prisma.CustomListWhereUniqueInput
+  create: Prisma.XOR<Prisma.CustomListCreateWithoutFollowerItemsInput, Prisma.CustomListUncheckedCreateWithoutFollowerItemsInput>
+}
+
+export type CustomListUpsertWithoutFollowerItemsInput = {
+  update: Prisma.XOR<Prisma.CustomListUpdateWithoutFollowerItemsInput, Prisma.CustomListUncheckedUpdateWithoutFollowerItemsInput>
+  create: Prisma.XOR<Prisma.CustomListCreateWithoutFollowerItemsInput, Prisma.CustomListUncheckedCreateWithoutFollowerItemsInput>
+  where?: Prisma.CustomListWhereInput
+}
+
+export type CustomListUpdateToOneWithWhereWithoutFollowerItemsInput = {
+  where?: Prisma.CustomListWhereInput
+  data: Prisma.XOR<Prisma.CustomListUpdateWithoutFollowerItemsInput, Prisma.CustomListUncheckedUpdateWithoutFollowerItemsInput>
+}
+
+export type CustomListUpdateWithoutFollowerItemsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutCustomListsNestedInput
+  items?: Prisma.CustomListItemUpdateManyWithoutListNestedInput
+  followers?: Prisma.CustomListFollowerUpdateManyWithoutListNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutCustomListNestedInput
+}
+
+export type CustomListUncheckedUpdateWithoutFollowerItemsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  items?: Prisma.CustomListItemUncheckedUpdateManyWithoutListNestedInput
+  followers?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutListNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutCustomListNestedInput
 }
 
@@ -693,6 +790,7 @@ export type CustomListCreateWithoutItemsInput = {
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCustomListsInput
   followers?: Prisma.CustomListFollowerCreateNestedManyWithoutListInput
+  followerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutListInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutCustomListInput
 }
 
@@ -706,6 +804,7 @@ export type CustomListUncheckedCreateWithoutItemsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   followers?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutListInput
+  followerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutListInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutCustomListInput
 }
 
@@ -734,6 +833,7 @@ export type CustomListUpdateWithoutItemsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCustomListsNestedInput
   followers?: Prisma.CustomListFollowerUpdateManyWithoutListNestedInput
+  followerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutListNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutCustomListNestedInput
 }
 
@@ -747,6 +847,7 @@ export type CustomListUncheckedUpdateWithoutItemsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   followers?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutListNestedInput
+  followerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutListNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutCustomListNestedInput
 }
 
@@ -760,6 +861,7 @@ export type CustomListCreateWithoutNotificationsInput = {
   user: Prisma.UserCreateNestedOneWithoutCustomListsInput
   items?: Prisma.CustomListItemCreateNestedManyWithoutListInput
   followers?: Prisma.CustomListFollowerCreateNestedManyWithoutListInput
+  followerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutListInput
 }
 
 export type CustomListUncheckedCreateWithoutNotificationsInput = {
@@ -773,6 +875,7 @@ export type CustomListUncheckedCreateWithoutNotificationsInput = {
   updatedAt?: Date | string
   items?: Prisma.CustomListItemUncheckedCreateNestedManyWithoutListInput
   followers?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutListInput
+  followerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutListInput
 }
 
 export type CustomListCreateOrConnectWithoutNotificationsInput = {
@@ -801,6 +904,7 @@ export type CustomListUpdateWithoutNotificationsInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutCustomListsNestedInput
   items?: Prisma.CustomListItemUpdateManyWithoutListNestedInput
   followers?: Prisma.CustomListFollowerUpdateManyWithoutListNestedInput
+  followerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutListNestedInput
 }
 
 export type CustomListUncheckedUpdateWithoutNotificationsInput = {
@@ -814,6 +918,7 @@ export type CustomListUncheckedUpdateWithoutNotificationsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.CustomListItemUncheckedUpdateManyWithoutListNestedInput
   followers?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutListNestedInput
+  followerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutListNestedInput
 }
 
 export type CustomListCreateManyUserInput = {
@@ -835,6 +940,7 @@ export type CustomListUpdateWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.CustomListItemUpdateManyWithoutListNestedInput
   followers?: Prisma.CustomListFollowerUpdateManyWithoutListNestedInput
+  followerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutListNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutCustomListNestedInput
 }
 
@@ -848,6 +954,7 @@ export type CustomListUncheckedUpdateWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.CustomListItemUncheckedUpdateManyWithoutListNestedInput
   followers?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutListNestedInput
+  followerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutListNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutCustomListNestedInput
 }
 
@@ -869,12 +976,14 @@ export type CustomListUncheckedUpdateManyWithoutUserInput = {
 export type CustomListCountOutputType = {
   items: number
   followers: number
+  followerItems: number
   notifications: number
 }
 
 export type CustomListCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   items?: boolean | CustomListCountOutputTypeCountItemsArgs
   followers?: boolean | CustomListCountOutputTypeCountFollowersArgs
+  followerItems?: boolean | CustomListCountOutputTypeCountFollowerItemsArgs
   notifications?: boolean | CustomListCountOutputTypeCountNotificationsArgs
 }
 
@@ -905,6 +1014,13 @@ export type CustomListCountOutputTypeCountFollowersArgs<ExtArgs extends runtime.
 /**
  * CustomListCountOutputType without action
  */
+export type CustomListCountOutputTypeCountFollowerItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CustomListFollowerItemWhereInput
+}
+
+/**
+ * CustomListCountOutputType without action
+ */
 export type CustomListCountOutputTypeCountNotificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.NotificationWhereInput
 }
@@ -922,6 +1038,7 @@ export type CustomListSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   items?: boolean | Prisma.CustomList$itemsArgs<ExtArgs>
   followers?: boolean | Prisma.CustomList$followersArgs<ExtArgs>
+  followerItems?: boolean | Prisma.CustomList$followerItemsArgs<ExtArgs>
   notifications?: boolean | Prisma.CustomList$notificationsArgs<ExtArgs>
   _count?: boolean | Prisma.CustomListCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["customList"]>
@@ -966,6 +1083,7 @@ export type CustomListInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   items?: boolean | Prisma.CustomList$itemsArgs<ExtArgs>
   followers?: boolean | Prisma.CustomList$followersArgs<ExtArgs>
+  followerItems?: boolean | Prisma.CustomList$followerItemsArgs<ExtArgs>
   notifications?: boolean | Prisma.CustomList$notificationsArgs<ExtArgs>
   _count?: boolean | Prisma.CustomListCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -982,6 +1100,7 @@ export type $CustomListPayload<ExtArgs extends runtime.Types.Extensions.Internal
     user: Prisma.$UserPayload<ExtArgs>
     items: Prisma.$CustomListItemPayload<ExtArgs>[]
     followers: Prisma.$CustomListFollowerPayload<ExtArgs>[]
+    followerItems: Prisma.$CustomListFollowerItemPayload<ExtArgs>[]
     notifications: Prisma.$NotificationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1390,6 +1509,7 @@ export interface Prisma__CustomListClient<T, Null = never, ExtArgs extends runti
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   items<T extends Prisma.CustomList$itemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CustomList$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CustomListItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   followers<T extends Prisma.CustomList$followersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CustomList$followersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CustomListFollowerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  followerItems<T extends Prisma.CustomList$followerItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CustomList$followerItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CustomListFollowerItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   notifications<T extends Prisma.CustomList$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CustomList$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1869,6 +1989,30 @@ export type CustomList$followersArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.CustomListFollowerScalarFieldEnum | Prisma.CustomListFollowerScalarFieldEnum[]
+}
+
+/**
+ * CustomList.followerItems
+ */
+export type CustomList$followerItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CustomListFollowerItem
+   */
+  select?: Prisma.CustomListFollowerItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CustomListFollowerItem
+   */
+  omit?: Prisma.CustomListFollowerItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CustomListFollowerItemInclude<ExtArgs> | null
+  where?: Prisma.CustomListFollowerItemWhereInput
+  orderBy?: Prisma.CustomListFollowerItemOrderByWithRelationInput | Prisma.CustomListFollowerItemOrderByWithRelationInput[]
+  cursor?: Prisma.CustomListFollowerItemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CustomListFollowerItemScalarFieldEnum | Prisma.CustomListFollowerItemScalarFieldEnum[]
 }
 
 /**

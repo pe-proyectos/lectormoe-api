@@ -70,6 +70,7 @@ export const ModelName = {
   OrganizationMessage: 'OrganizationMessage',
   CustomList: 'CustomList',
   CustomListFollower: 'CustomListFollower',
+  CustomListFollowerItem: 'CustomListFollowerItem',
   CustomListItem: 'CustomListItem',
   ContentReport: 'ContentReport',
   MangaReview: 'MangaReview',
@@ -504,6 +505,21 @@ export const CustomListFollowerScalarFieldEnum = {
 } as const
 
 export type CustomListFollowerScalarFieldEnum = (typeof CustomListFollowerScalarFieldEnum)[keyof typeof CustomListFollowerScalarFieldEnum]
+
+
+export const CustomListFollowerItemScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  listId: 'listId',
+  mangaCustomId: 'mangaCustomId',
+  jointId: 'jointId',
+  readingStatus: 'readingStatus',
+  order: 'order',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CustomListFollowerItemScalarFieldEnum = (typeof CustomListFollowerItemScalarFieldEnum)[keyof typeof CustomListFollowerItemScalarFieldEnum]
 
 
 export const CustomListItemScalarFieldEnum = {

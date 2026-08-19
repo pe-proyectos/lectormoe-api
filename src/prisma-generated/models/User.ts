@@ -440,6 +440,7 @@ export type UserWhereInput = {
   contentReports?: Prisma.ContentReportListRelationFilter
   customLists?: Prisma.CustomListListRelationFilter
   customListFollows?: Prisma.CustomListFollowerListRelationFilter
+  customListFollowerItems?: Prisma.CustomListFollowerItemListRelationFilter
   messageThreads?: Prisma.OrganizationMessageThreadListRelationFilter
   organizationMessages?: Prisma.OrganizationMessageListRelationFilter
   contentReportsReviewed?: Prisma.ContentReportListRelationFilter
@@ -510,6 +511,7 @@ export type UserOrderByWithRelationInput = {
   contentReports?: Prisma.ContentReportOrderByRelationAggregateInput
   customLists?: Prisma.CustomListOrderByRelationAggregateInput
   customListFollows?: Prisma.CustomListFollowerOrderByRelationAggregateInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemOrderByRelationAggregateInput
   messageThreads?: Prisma.OrganizationMessageThreadOrderByRelationAggregateInput
   organizationMessages?: Prisma.OrganizationMessageOrderByRelationAggregateInput
   contentReportsReviewed?: Prisma.ContentReportOrderByRelationAggregateInput
@@ -583,6 +585,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   contentReports?: Prisma.ContentReportListRelationFilter
   customLists?: Prisma.CustomListListRelationFilter
   customListFollows?: Prisma.CustomListFollowerListRelationFilter
+  customListFollowerItems?: Prisma.CustomListFollowerItemListRelationFilter
   messageThreads?: Prisma.OrganizationMessageThreadListRelationFilter
   organizationMessages?: Prisma.OrganizationMessageListRelationFilter
   contentReportsReviewed?: Prisma.ContentReportListRelationFilter
@@ -724,6 +727,7 @@ export type UserCreateInput = {
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
@@ -794,6 +798,7 @@ export type UserUncheckedCreateInput = {
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -863,6 +868,7 @@ export type UserUpdateInput = {
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
@@ -933,6 +939,7 @@ export type UserUncheckedUpdateInput = {
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -1276,6 +1283,20 @@ export type UserUpdateOneRequiredWithoutCustomListFollowsNestedInput = {
   upsert?: Prisma.UserUpsertWithoutCustomListFollowsInput
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCustomListFollowsInput, Prisma.UserUpdateWithoutCustomListFollowsInput>, Prisma.UserUncheckedUpdateWithoutCustomListFollowsInput>
+}
+
+export type UserCreateNestedOneWithoutCustomListFollowerItemsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCustomListFollowerItemsInput, Prisma.UserUncheckedCreateWithoutCustomListFollowerItemsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCustomListFollowerItemsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutCustomListFollowerItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCustomListFollowerItemsInput, Prisma.UserUncheckedCreateWithoutCustomListFollowerItemsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCustomListFollowerItemsInput
+  upsert?: Prisma.UserUpsertWithoutCustomListFollowerItemsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCustomListFollowerItemsInput, Prisma.UserUpdateWithoutCustomListFollowerItemsInput>, Prisma.UserUncheckedUpdateWithoutCustomListFollowerItemsInput>
 }
 
 export type UserCreateNestedOneWithoutContentReportsInput = {
@@ -1758,6 +1779,7 @@ export type UserCreateWithoutTokensInput = {
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
@@ -1827,6 +1849,7 @@ export type UserUncheckedCreateWithoutTokensInput = {
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -1911,6 +1934,7 @@ export type UserUpdateWithoutTokensInput = {
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
@@ -1980,6 +2004,7 @@ export type UserUncheckedUpdateWithoutTokensInput = {
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -2049,6 +2074,7 @@ export type UserCreateWithoutBetaTesterInput = {
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
@@ -2118,6 +2144,7 @@ export type UserUncheckedCreateWithoutBetaTesterInput = {
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -2202,6 +2229,7 @@ export type UserUpdateWithoutBetaTesterInput = {
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
@@ -2271,6 +2299,7 @@ export type UserUncheckedUpdateWithoutBetaTesterInput = {
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -2339,6 +2368,7 @@ export type UserCreateWithoutModerationLogsInput = {
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
@@ -2408,6 +2438,7 @@ export type UserUncheckedCreateWithoutModerationLogsInput = {
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -2492,6 +2523,7 @@ export type UserUpdateWithoutModerationLogsInput = {
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
@@ -2561,6 +2593,7 @@ export type UserUncheckedUpdateWithoutModerationLogsInput = {
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -2628,6 +2661,7 @@ export type UserCreateWithoutPermissionsInput = {
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
@@ -2697,6 +2731,7 @@ export type UserUncheckedCreateWithoutPermissionsInput = {
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -2781,6 +2816,7 @@ export type UserUpdateWithoutPermissionsInput = {
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
@@ -2850,6 +2886,7 @@ export type UserUncheckedUpdateWithoutPermissionsInput = {
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -2918,6 +2955,7 @@ export type UserCreateWithoutPasswordResetTokensInput = {
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
@@ -2987,6 +3025,7 @@ export type UserUncheckedCreateWithoutPasswordResetTokensInput = {
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -3071,6 +3110,7 @@ export type UserUpdateWithoutPasswordResetTokensInput = {
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
@@ -3140,6 +3180,7 @@ export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -3209,6 +3250,7 @@ export type UserCreateWithoutMessageThreadsInput = {
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
@@ -3278,6 +3320,7 @@ export type UserUncheckedCreateWithoutMessageThreadsInput = {
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
@@ -3362,6 +3405,7 @@ export type UserUpdateWithoutMessageThreadsInput = {
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
@@ -3431,6 +3475,7 @@ export type UserUncheckedUpdateWithoutMessageThreadsInput = {
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUncheckedUpdateManyWithoutActorNestedInput
@@ -3499,6 +3544,7 @@ export type UserCreateWithoutOrganizationMessagesInput = {
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
@@ -3568,6 +3614,7 @@ export type UserUncheckedCreateWithoutOrganizationMessagesInput = {
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
   moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
@@ -3652,6 +3699,7 @@ export type UserUpdateWithoutOrganizationMessagesInput = {
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
@@ -3721,6 +3769,7 @@ export type UserUncheckedUpdateWithoutOrganizationMessagesInput = {
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
   moderationLogs?: Prisma.ModerationLogUncheckedUpdateManyWithoutActorNestedInput
@@ -3788,6 +3837,7 @@ export type UserCreateWithoutCustomListsInput = {
   reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
   customListFollows?: Prisma.CustomListFollowerCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
@@ -3857,6 +3907,7 @@ export type UserUncheckedCreateWithoutCustomListsInput = {
   reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
   customListFollows?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -3941,6 +3992,7 @@ export type UserUpdateWithoutCustomListsInput = {
   reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
   customListFollows?: Prisma.CustomListFollowerUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
@@ -4010,6 +4062,7 @@ export type UserUncheckedUpdateWithoutCustomListsInput = {
   reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
   customListFollows?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -4078,6 +4131,7 @@ export type UserCreateWithoutCustomListFollowsInput = {
   reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
@@ -4147,6 +4201,7 @@ export type UserUncheckedCreateWithoutCustomListFollowsInput = {
   reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -4231,6 +4286,7 @@ export type UserUpdateWithoutCustomListFollowsInput = {
   reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
@@ -4300,6 +4356,301 @@ export type UserUncheckedUpdateWithoutCustomListFollowsInput = {
   reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutUserNestedInput
+  messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
+  organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
+  contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
+  moderationLogs?: Prisma.ModerationLogUncheckedUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedUpdateManyWithoutUserNestedInput
+  betaTester?: Prisma.BetaTesterUncheckedUpdateOneWithoutUserNestedInput
+}
+
+export type UserCreateWithoutCustomListFollowerItemsInput = {
+  username: string
+  slug: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  description?: string | null
+  imageUrl?: string | null
+  birthdate?: Date | string | null
+  bannerUrl?: string | null
+  bannerUrlChangedAt?: Date | string | null
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
+  emailNotifications?: boolean
+  emailVerified?: boolean
+  deletedAt?: Date | string | null
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
+  pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
+  hideAds?: boolean
+  theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
+  analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
+  audits?: Prisma.AuditCreateNestedManyWithoutUserInput
+  Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  userList?: Prisma.UserListCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
+  rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenCreateNestedManyWithoutUserInput
+  achievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
+  chapterReactions?: Prisma.ChapterReactionCreateNestedManyWithoutUserInput
+  milestoneAlerts?: Prisma.ChapterMilestoneAlertCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
+  contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
+  customListFollows?: Prisma.CustomListFollowerCreateNestedManyWithoutUserInput
+  messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
+  organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
+  contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
+  moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestCreateNestedManyWithoutUserInput
+  betaTester?: Prisma.BetaTesterCreateNestedOneWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutCustomListFollowerItemsInput = {
+  id?: number
+  username: string
+  slug: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  description?: string | null
+  imageUrl?: string | null
+  birthdate?: Date | string | null
+  bannerUrl?: string | null
+  bannerUrlChangedAt?: Date | string | null
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
+  emailNotifications?: boolean
+  emailVerified?: boolean
+  deletedAt?: Date | string | null
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
+  pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
+  hideAds?: boolean
+  theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
+  analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
+  audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
+  Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
+  rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedCreateNestedManyWithoutUserInput
+  achievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanUncheckedCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
+  chapterReactions?: Prisma.ChapterReactionUncheckedCreateNestedManyWithoutUserInput
+  milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
+  contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
+  customListFollows?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutUserInput
+  messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
+  organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
+  contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
+  moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedCreateNestedManyWithoutUserInput
+  betaTester?: Prisma.BetaTesterUncheckedCreateNestedOneWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutCustomListFollowerItemsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCustomListFollowerItemsInput, Prisma.UserUncheckedCreateWithoutCustomListFollowerItemsInput>
+}
+
+export type UserUpsertWithoutCustomListFollowerItemsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCustomListFollowerItemsInput, Prisma.UserUncheckedUpdateWithoutCustomListFollowerItemsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCustomListFollowerItemsInput, Prisma.UserUncheckedCreateWithoutCustomListFollowerItemsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCustomListFollowerItemsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCustomListFollowerItemsInput, Prisma.UserUncheckedUpdateWithoutCustomListFollowerItemsInput>
+}
+
+export type UserUpdateWithoutCustomListFollowerItemsInput = {
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
+  audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
+  Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
+  rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenUpdateManyWithoutUserNestedInput
+  achievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
+  chapterReactions?: Prisma.ChapterReactionUpdateManyWithoutUserNestedInput
+  milestoneAlerts?: Prisma.ChapterMilestoneAlertUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
+  contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
+  customListFollows?: Prisma.CustomListFollowerUpdateManyWithoutUserNestedInput
+  messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
+  organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
+  contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
+  moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUpdateManyWithoutUserNestedInput
+  betaTester?: Prisma.BetaTesterUpdateOneWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCustomListFollowerItemsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
+  audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
+  Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
+  rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedUpdateManyWithoutUserNestedInput
+  achievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUncheckedUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
+  chapterReactions?: Prisma.ChapterReactionUncheckedUpdateManyWithoutUserNestedInput
+  milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
+  contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
+  customListFollows?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -4368,6 +4719,7 @@ export type UserCreateWithoutContentReportsInput = {
   reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
   customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
@@ -4437,6 +4789,7 @@ export type UserUncheckedCreateWithoutContentReportsInput = {
   reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
   customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -4511,6 +4864,7 @@ export type UserCreateWithoutContentReportsReviewedInput = {
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
@@ -4580,6 +4934,7 @@ export type UserUncheckedCreateWithoutContentReportsReviewedInput = {
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
@@ -4663,6 +5018,7 @@ export type UserUpdateWithoutContentReportsInput = {
   reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
   customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
@@ -4732,6 +5088,7 @@ export type UserUncheckedUpdateWithoutContentReportsInput = {
   reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
   customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -4812,6 +5169,7 @@ export type UserUpdateWithoutContentReportsReviewedInput = {
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
@@ -4881,6 +5239,7 @@ export type UserUncheckedUpdateWithoutContentReportsReviewedInput = {
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   moderationLogs?: Prisma.ModerationLogUncheckedUpdateManyWithoutActorNestedInput
@@ -4948,6 +5307,7 @@ export type UserCreateWithoutReviewsInput = {
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
@@ -5017,6 +5377,7 @@ export type UserUncheckedCreateWithoutReviewsInput = {
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -5090,6 +5451,7 @@ export type UserCreateWithoutReviewsHiddenInput = {
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
@@ -5159,6 +5521,7 @@ export type UserUncheckedCreateWithoutReviewsHiddenInput = {
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -5243,6 +5606,7 @@ export type UserUpdateWithoutReviewsInput = {
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
@@ -5312,6 +5676,7 @@ export type UserUncheckedUpdateWithoutReviewsInput = {
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -5391,6 +5756,7 @@ export type UserUpdateWithoutReviewsHiddenInput = {
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
@@ -5460,6 +5826,7 @@ export type UserUncheckedUpdateWithoutReviewsHiddenInput = {
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -5528,6 +5895,7 @@ export type UserCreateWithoutMilestoneAlertsInput = {
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
@@ -5597,6 +5965,7 @@ export type UserUncheckedCreateWithoutMilestoneAlertsInput = {
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -5681,6 +6050,7 @@ export type UserUpdateWithoutMilestoneAlertsInput = {
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
@@ -5750,6 +6120,7 @@ export type UserUncheckedUpdateWithoutMilestoneAlertsInput = {
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -5818,6 +6189,7 @@ export type UserCreateWithoutChapterReactionsInput = {
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
@@ -5887,6 +6259,7 @@ export type UserUncheckedCreateWithoutChapterReactionsInput = {
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -5971,6 +6344,7 @@ export type UserUpdateWithoutChapterReactionsInput = {
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
@@ -6040,6 +6414,7 @@ export type UserUncheckedUpdateWithoutChapterReactionsInput = {
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -6108,6 +6483,7 @@ export type UserCreateWithoutCommentInput = {
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
@@ -6177,6 +6553,7 @@ export type UserUncheckedCreateWithoutCommentInput = {
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -6250,6 +6627,7 @@ export type UserCreateWithoutCommentsInput = {
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
@@ -6319,6 +6697,7 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -6403,6 +6782,7 @@ export type UserUpdateWithoutCommentInput = {
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
@@ -6472,6 +6852,7 @@ export type UserUncheckedUpdateWithoutCommentInput = {
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -6551,6 +6932,7 @@ export type UserUpdateWithoutCommentsInput = {
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
@@ -6620,6 +7002,7 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -6688,6 +7071,7 @@ export type UserCreateWithoutRankingsInput = {
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
@@ -6757,6 +7141,7 @@ export type UserUncheckedCreateWithoutRankingsInput = {
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -6841,6 +7226,7 @@ export type UserUpdateWithoutRankingsInput = {
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
@@ -6910,6 +7296,7 @@ export type UserUncheckedUpdateWithoutRankingsInput = {
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -6978,6 +7365,7 @@ export type UserCreateWithoutAnalyticsInput = {
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
@@ -7047,6 +7435,7 @@ export type UserUncheckedCreateWithoutAnalyticsInput = {
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -7131,6 +7520,7 @@ export type UserUpdateWithoutAnalyticsInput = {
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
@@ -7200,6 +7590,7 @@ export type UserUncheckedUpdateWithoutAnalyticsInput = {
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -7268,6 +7659,7 @@ export type UserCreateWithoutHistoryInput = {
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
@@ -7337,6 +7729,7 @@ export type UserUncheckedCreateWithoutHistoryInput = {
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -7421,6 +7814,7 @@ export type UserUpdateWithoutHistoryInput = {
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
@@ -7490,6 +7884,7 @@ export type UserUncheckedUpdateWithoutHistoryInput = {
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -7558,6 +7953,7 @@ export type UserCreateWithoutFavoritesInput = {
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
@@ -7627,6 +8023,7 @@ export type UserUncheckedCreateWithoutFavoritesInput = {
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -7711,6 +8108,7 @@ export type UserUpdateWithoutFavoritesInput = {
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
@@ -7780,6 +8178,7 @@ export type UserUncheckedUpdateWithoutFavoritesInput = {
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -7848,6 +8247,7 @@ export type UserCreateWithoutUserListInput = {
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
@@ -7917,6 +8317,7 @@ export type UserUncheckedCreateWithoutUserListInput = {
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -8001,6 +8402,7 @@ export type UserUpdateWithoutUserListInput = {
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
@@ -8070,6 +8472,7 @@ export type UserUncheckedUpdateWithoutUserListInput = {
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -8138,6 +8541,7 @@ export type UserCreateWithoutPageBookmarksInput = {
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
@@ -8207,6 +8611,7 @@ export type UserUncheckedCreateWithoutPageBookmarksInput = {
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -8291,6 +8696,7 @@ export type UserUpdateWithoutPageBookmarksInput = {
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
@@ -8360,6 +8766,7 @@ export type UserUncheckedUpdateWithoutPageBookmarksInput = {
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -8428,6 +8835,7 @@ export type UserCreateWithoutAuditsInput = {
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
@@ -8497,6 +8905,7 @@ export type UserUncheckedCreateWithoutAuditsInput = {
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -8581,6 +8990,7 @@ export type UserUpdateWithoutAuditsInput = {
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
@@ -8650,6 +9060,7 @@ export type UserUncheckedUpdateWithoutAuditsInput = {
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -8718,6 +9129,7 @@ export type UserCreateWithoutSubscriptionsInput = {
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
@@ -8787,6 +9199,7 @@ export type UserUncheckedCreateWithoutSubscriptionsInput = {
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -8871,6 +9284,7 @@ export type UserUpdateWithoutSubscriptionsInput = {
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
@@ -8940,6 +9354,7 @@ export type UserUncheckedUpdateWithoutSubscriptionsInput = {
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -9008,6 +9423,7 @@ export type UserCreateWithoutOrganizationFollowsInput = {
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
@@ -9077,6 +9493,7 @@ export type UserUncheckedCreateWithoutOrganizationFollowsInput = {
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -9161,6 +9578,7 @@ export type UserUpdateWithoutOrganizationFollowsInput = {
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
@@ -9230,6 +9648,7 @@ export type UserUncheckedUpdateWithoutOrganizationFollowsInput = {
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -9299,6 +9718,7 @@ export type UserCreateWithoutOrganizationRequestsInput = {
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
@@ -9368,6 +9788,7 @@ export type UserUncheckedCreateWithoutOrganizationRequestsInput = {
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -9452,6 +9873,7 @@ export type UserUpdateWithoutOrganizationRequestsInput = {
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
@@ -9521,6 +9943,7 @@ export type UserUncheckedUpdateWithoutOrganizationRequestsInput = {
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -9588,6 +10011,7 @@ export type UserCreateWithoutEmailPreferenceInput = {
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
@@ -9657,6 +10081,7 @@ export type UserUncheckedCreateWithoutEmailPreferenceInput = {
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -9741,6 +10166,7 @@ export type UserUpdateWithoutEmailPreferenceInput = {
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
@@ -9810,6 +10236,7 @@ export type UserUncheckedUpdateWithoutEmailPreferenceInput = {
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -9878,6 +10305,7 @@ export type UserCreateWithoutEmailLogsInput = {
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
@@ -9947,6 +10375,7 @@ export type UserUncheckedCreateWithoutEmailLogsInput = {
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -10031,6 +10460,7 @@ export type UserUpdateWithoutEmailLogsInput = {
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
@@ -10100,6 +10530,7 @@ export type UserUncheckedUpdateWithoutEmailLogsInput = {
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -10168,6 +10599,7 @@ export type UserCreateWithoutUnsubscribeTokensInput = {
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
@@ -10237,6 +10669,7 @@ export type UserUncheckedCreateWithoutUnsubscribeTokensInput = {
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -10321,6 +10754,7 @@ export type UserUpdateWithoutUnsubscribeTokensInput = {
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
@@ -10390,6 +10824,7 @@ export type UserUncheckedUpdateWithoutUnsubscribeTokensInput = {
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -10458,6 +10893,7 @@ export type UserCreateWithoutEmailVerificationTokensInput = {
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
@@ -10527,6 +10963,7 @@ export type UserUncheckedCreateWithoutEmailVerificationTokensInput = {
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -10611,6 +11048,7 @@ export type UserUpdateWithoutEmailVerificationTokensInput = {
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
@@ -10680,6 +11118,7 @@ export type UserUncheckedUpdateWithoutEmailVerificationTokensInput = {
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -10748,6 +11187,7 @@ export type UserCreateWithoutDailyActivitiesInput = {
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
@@ -10817,6 +11257,7 @@ export type UserUncheckedCreateWithoutDailyActivitiesInput = {
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -10901,6 +11342,7 @@ export type UserUpdateWithoutDailyActivitiesInput = {
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
@@ -10970,6 +11412,7 @@ export type UserUncheckedUpdateWithoutDailyActivitiesInput = {
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -11038,6 +11481,7 @@ export type UserCreateWithoutAchievementsInput = {
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
@@ -11107,6 +11551,7 @@ export type UserUncheckedCreateWithoutAchievementsInput = {
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -11191,6 +11636,7 @@ export type UserUpdateWithoutAchievementsInput = {
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
@@ -11260,6 +11706,7 @@ export type UserUncheckedUpdateWithoutAchievementsInput = {
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -11328,6 +11775,7 @@ export type UserCreateWithoutNotificationsInput = {
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
@@ -11397,6 +11845,7 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -11481,6 +11930,7 @@ export type UserUpdateWithoutNotificationsInput = {
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
@@ -11550,6 +12000,7 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -11618,6 +12069,7 @@ export type UserCreateWithoutRaffleTicketsInput = {
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
@@ -11687,6 +12139,7 @@ export type UserUncheckedCreateWithoutRaffleTicketsInput = {
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -11771,6 +12224,7 @@ export type UserUpdateWithoutRaffleTicketsInput = {
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
@@ -11840,6 +12294,7 @@ export type UserUncheckedUpdateWithoutRaffleTicketsInput = {
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -11908,6 +12363,7 @@ export type UserCreateWithoutRaffleCommentsInput = {
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
@@ -11977,6 +12433,7 @@ export type UserUncheckedCreateWithoutRaffleCommentsInput = {
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -12061,6 +12518,7 @@ export type UserUpdateWithoutRaffleCommentsInput = {
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
@@ -12130,6 +12588,7 @@ export type UserUncheckedUpdateWithoutRaffleCommentsInput = {
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -12198,6 +12657,7 @@ export type UserCreateWithoutBansReceivedInput = {
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
@@ -12267,6 +12727,7 @@ export type UserUncheckedCreateWithoutBansReceivedInput = {
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -12340,6 +12801,7 @@ export type UserCreateWithoutBansIssuedInput = {
   contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
@@ -12409,6 +12871,7 @@ export type UserUncheckedCreateWithoutBansIssuedInput = {
   contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
   customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
   customListFollows?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutUserInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
@@ -12493,6 +12956,7 @@ export type UserUpdateWithoutBansReceivedInput = {
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
@@ -12562,6 +13026,7 @@ export type UserUncheckedUpdateWithoutBansReceivedInput = {
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -12641,6 +13106,7 @@ export type UserUpdateWithoutBansIssuedInput = {
   contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
@@ -12710,6 +13176,7 @@ export type UserUncheckedUpdateWithoutBansIssuedInput = {
   contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
   customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
   customListFollows?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutUserNestedInput
   messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
   organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
   contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -12755,6 +13222,7 @@ export type UserCountOutputType = {
   contentReports: number
   customLists: number
   customListFollows: number
+  customListFollowerItems: number
   messageThreads: number
   organizationMessages: number
   contentReportsReviewed: number
@@ -12794,6 +13262,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   contentReports?: boolean | UserCountOutputTypeCountContentReportsArgs
   customLists?: boolean | UserCountOutputTypeCountCustomListsArgs
   customListFollows?: boolean | UserCountOutputTypeCountCustomListFollowsArgs
+  customListFollowerItems?: boolean | UserCountOutputTypeCountCustomListFollowerItemsArgs
   messageThreads?: boolean | UserCountOutputTypeCountMessageThreadsArgs
   organizationMessages?: boolean | UserCountOutputTypeCountOrganizationMessagesArgs
   contentReportsReviewed?: boolean | UserCountOutputTypeCountContentReportsReviewedArgs
@@ -13031,6 +13500,13 @@ export type UserCountOutputTypeCountCustomListFollowsArgs<ExtArgs extends runtim
 /**
  * UserCountOutputType without action
  */
+export type UserCountOutputTypeCountCustomListFollowerItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CustomListFollowerItemWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
 export type UserCountOutputTypeCountMessageThreadsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.OrganizationMessageThreadWhereInput
 }
@@ -13126,6 +13602,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   contentReports?: boolean | Prisma.User$contentReportsArgs<ExtArgs>
   customLists?: boolean | Prisma.User$customListsArgs<ExtArgs>
   customListFollows?: boolean | Prisma.User$customListFollowsArgs<ExtArgs>
+  customListFollowerItems?: boolean | Prisma.User$customListFollowerItemsArgs<ExtArgs>
   messageThreads?: boolean | Prisma.User$messageThreadsArgs<ExtArgs>
   organizationMessages?: boolean | Prisma.User$organizationMessagesArgs<ExtArgs>
   contentReportsReviewed?: boolean | Prisma.User$contentReportsReviewedArgs<ExtArgs>
@@ -13265,6 +13742,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   contentReports?: boolean | Prisma.User$contentReportsArgs<ExtArgs>
   customLists?: boolean | Prisma.User$customListsArgs<ExtArgs>
   customListFollows?: boolean | Prisma.User$customListFollowsArgs<ExtArgs>
+  customListFollowerItems?: boolean | Prisma.User$customListFollowerItemsArgs<ExtArgs>
   messageThreads?: boolean | Prisma.User$messageThreadsArgs<ExtArgs>
   organizationMessages?: boolean | Prisma.User$organizationMessagesArgs<ExtArgs>
   contentReportsReviewed?: boolean | Prisma.User$contentReportsReviewedArgs<ExtArgs>
@@ -13311,6 +13789,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     contentReports: Prisma.$ContentReportPayload<ExtArgs>[]
     customLists: Prisma.$CustomListPayload<ExtArgs>[]
     customListFollows: Prisma.$CustomListFollowerPayload<ExtArgs>[]
+    customListFollowerItems: Prisma.$CustomListFollowerItemPayload<ExtArgs>[]
     messageThreads: Prisma.$OrganizationMessageThreadPayload<ExtArgs>[]
     organizationMessages: Prisma.$OrganizationMessagePayload<ExtArgs>[]
     contentReportsReviewed: Prisma.$ContentReportPayload<ExtArgs>[]
@@ -13774,6 +14253,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   contentReports<T extends Prisma.User$contentReportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$contentReportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContentReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   customLists<T extends Prisma.User$customListsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$customListsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CustomListPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   customListFollows<T extends Prisma.User$customListFollowsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$customListFollowsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CustomListFollowerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  customListFollowerItems<T extends Prisma.User$customListFollowerItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$customListFollowerItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CustomListFollowerItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   messageThreads<T extends Prisma.User$messageThreadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$messageThreadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrganizationMessageThreadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   organizationMessages<T extends Prisma.User$organizationMessagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$organizationMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrganizationMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   contentReportsReviewed<T extends Prisma.User$contentReportsReviewedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$contentReportsReviewedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContentReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -14986,6 +15466,30 @@ export type User$customListFollowsArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   distinct?: Prisma.CustomListFollowerScalarFieldEnum | Prisma.CustomListFollowerScalarFieldEnum[]
+}
+
+/**
+ * User.customListFollowerItems
+ */
+export type User$customListFollowerItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CustomListFollowerItem
+   */
+  select?: Prisma.CustomListFollowerItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CustomListFollowerItem
+   */
+  omit?: Prisma.CustomListFollowerItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CustomListFollowerItemInclude<ExtArgs> | null
+  where?: Prisma.CustomListFollowerItemWhereInput
+  orderBy?: Prisma.CustomListFollowerItemOrderByWithRelationInput | Prisma.CustomListFollowerItemOrderByWithRelationInput[]
+  cursor?: Prisma.CustomListFollowerItemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CustomListFollowerItemScalarFieldEnum | Prisma.CustomListFollowerItemScalarFieldEnum[]
 }
 
 /**

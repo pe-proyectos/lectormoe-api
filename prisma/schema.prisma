@@ -203,6 +203,7 @@ model User {
   contentReports          ContentReport[]         @relation("ContentReportReporter")
   customLists             CustomList[]
   customListFollows       CustomListFollower[]
+  customListFollowerItems CustomListFollowerItem[]
   messageThreads          OrganizationMessageThread[]
   organizationMessages    OrganizationMessage[]
   listIsPublic            Boolean                  @default(true)
@@ -507,6 +508,7 @@ model CustomList {
   user        User             @relation(fields: [userId], references: [id], onDelete: Cascade)
   items       CustomListItem[]
   followers   CustomListFollower[]
+  followerItems CustomListFollowerItem[]
   notifications Notification[]
 
   @@unique([userId, slug])
@@ -530,6 +532,29 @@ model CustomListFollower {
   @@index([userId, createdAt])
   @@index([listId])
   @@map("custom_list_follower")
+}
+
+// Overlay por-usuario sobre los items de una lista SEGUIDA: el follower no puede
+// agregar/quitar obras (la membresía la manda el dueño), pero en "su versión"
+// marca su estado de lectura y reordena. Solo existe fila si el follower tocó ese
+// item; al renderizar se hace merge con los items de la lista original.
+model CustomListFollowerItem {
+  id            Int        @id @default(autoincrement())
+  userId        Int
+  listId        Int
+  mangaCustomId Int?
+  jointId       Int?
+  readingStatus String?    @db.VarChar(32)
+  order         Int        @default(0)
+  createdAt     DateTime   @default(now()) @db.Timestamp(6)
+  updatedAt     DateTime   @updatedAt
+  user          User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  list          CustomList @relation(fields: [listId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, listId, mangaCustomId])
+  @@unique([userId, listId, jointId])
+  @@index([userId, listId, order])
+  @@map("custom_list_follower_item")
 }
 
 model CustomListItem {

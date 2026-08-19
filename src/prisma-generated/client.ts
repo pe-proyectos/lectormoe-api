@@ -135,6 +135,11 @@ export type CustomList = Prisma.CustomListModel
  */
 export type CustomListFollower = Prisma.CustomListFollowerModel
 /**
+ * Model CustomListFollowerItem
+ * 
+ */
+export type CustomListFollowerItem = Prisma.CustomListFollowerItemModel
+/**
  * Model CustomListItem
  * 
  */

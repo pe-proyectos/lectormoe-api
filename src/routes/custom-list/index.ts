@@ -229,14 +229,48 @@ export const router = () =>
           return { status: false, data: null }
         const isOwner = user?.id === owner.id
         const following = await followedSet(user?.id, [list.id])
+        const isFollowing = following.has(list.id)
         const canEdit = isOwner && !!user && (await isSubscriber(user.id))
+
+        // "Su versión": para un viewer logueado que NO es el dueño, se hace merge
+        // con su overlay (estado de lectura + orden) sin tocar la membresía.
+        let items: any[] = list.items
+        if (user && !isOwner) {
+          const overlay = await prisma.customListFollowerItem.findMany({
+            where: { userId: user.id, listId: list.id },
+            select: {
+              mangaCustomId: true,
+              jointId: true,
+              readingStatus: true,
+              order: true
+            }
+          })
+          const keyOf = (mc: number | null, j: number | null) =>
+            mc ? `m${mc}` : `j${j}`
+          const byKey = new Map(
+            overlay.map((o) => [keyOf(o.mangaCustomId, o.jointId), o])
+          )
+          items = list.items
+            .map((it: any) => {
+              const o = byKey.get(keyOf(it.mangaCustomId, it.jointId))
+              return {
+                ...it,
+                myStatus: o?.readingStatus ?? null,
+                myOrder: o?.order ?? it.order
+              }
+            })
+            .sort((a: any, b: any) => a.myOrder - b.myOrder)
+        }
+
         return {
           status: true,
           data: {
             ...list,
+            items,
             owner,
             isOwner,
-            isFollowing: following.has(list.id),
+            isFollowing,
+            viewerIsFollower: isFollowing && !isOwner,
             canEdit
           }
         }
@@ -619,6 +653,124 @@ export const router = () =>
       {
         params: t.Object({ id: t.String() }),
         body: t.Object({ ids: t.Array(t.Number()) }),
+        response: t.Object({ status: t.Boolean(), data: t.Any() })
+      }
+    )
+    // Follower: marca su estado de lectura para una obra de una lista seguida
+    // (su versión). No cambia la membresía. readingStatus null limpia la marca.
+    .patch(
+      '/api/lists/:id/my-item',
+      async ({ user, params, body }) => {
+        const listId = Number.parseInt(params.id)
+        const list = await prisma.customList.findUnique({
+          where: { id: listId },
+          select: { isPublic: true, userId: true }
+        })
+        if (!list || (!list.isPublic && list.userId !== user.id))
+          throw new Error('Lista no encontrada.')
+        const item = await prisma.customListItem.findFirst({
+          where: {
+            listId,
+            ...(body.mangaCustomId
+              ? { mangaCustomId: body.mangaCustomId }
+              : { jointId: body.jointId })
+          },
+          select: { order: true }
+        })
+        if (!item) throw new Error('La obra no está en esta lista.')
+        const where = body.mangaCustomId
+          ? {
+              userId_listId_mangaCustomId: {
+                userId: user.id,
+                listId,
+                mangaCustomId: body.mangaCustomId
+              }
+            }
+          : {
+              userId_listId_jointId: {
+                userId: user.id,
+                listId,
+                jointId: body.jointId!
+              }
+            }
+        await prisma.customListFollowerItem.upsert({
+          where: where as any,
+          update: { readingStatus: body.readingStatus ?? null },
+          create: {
+            userId: user.id,
+            listId,
+            mangaCustomId: body.mangaCustomId ?? null,
+            jointId: body.jointId ?? null,
+            readingStatus: body.readingStatus ?? null,
+            order: item.order
+          }
+        })
+        return { status: true, data: true }
+      },
+      {
+        params: t.Object({ id: t.String() }),
+        body: t.Object({
+          mangaCustomId: t.Optional(t.Number()),
+          jointId: t.Optional(t.Number()),
+          readingStatus: t.Optional(t.Union([t.String(), t.Null()]))
+        }),
+        response: t.Object({ status: t.Boolean(), data: t.Any() })
+      }
+    )
+    // Follower: reordena SU versión de la lista. body.items = obras en el nuevo
+    // orden ({mangaCustomId?} | {jointId?}). Upsert del overlay con order=index.
+    .patch(
+      '/api/lists/:id/my-reorder',
+      async ({ user, params, body }) => {
+        const listId = Number.parseInt(params.id)
+        const list = await prisma.customList.findUnique({
+          where: { id: listId },
+          select: { isPublic: true, userId: true }
+        })
+        if (!list || (!list.isPublic && list.userId !== user.id))
+          throw new Error('Lista no encontrada.')
+        await prisma.$transaction(
+          body.items.map((k, index) => {
+            const where = k.mangaCustomId
+              ? {
+                  userId_listId_mangaCustomId: {
+                    userId: user.id,
+                    listId,
+                    mangaCustomId: k.mangaCustomId
+                  }
+                }
+              : {
+                  userId_listId_jointId: {
+                    userId: user.id,
+                    listId,
+                    jointId: k.jointId!
+                  }
+                }
+            return prisma.customListFollowerItem.upsert({
+              where: where as any,
+              update: { order: index },
+              create: {
+                userId: user.id,
+                listId,
+                mangaCustomId: k.mangaCustomId ?? null,
+                jointId: k.jointId ?? null,
+                order: index
+              }
+            })
+          })
+        )
+        return { status: true, data: true }
+      },
+      {
+        params: t.Object({ id: t.String() }),
+        body: t.Object({
+          items: t.Array(
+            t.Object({
+              mangaCustomId: t.Optional(t.Number()),
+              jointId: t.Optional(t.Number())
+            })
+          )
+        }),
         response: t.Object({ status: t.Boolean(), data: t.Any() })
       }
     )

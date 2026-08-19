@@ -212,7 +212,22 @@ const statements: string[] = [
   `CREATE INDEX IF NOT EXISTS "custom_list_follower_user_created_idx" ON "custom_list_follower"("userId", "createdAt");`,
   `CREATE INDEX IF NOT EXISTS "custom_list_follower_list_idx" ON "custom_list_follower"("listId");`,
   // Aviso cuando el dueño actualiza una lista seguida (type='list_updated').
-  `ALTER TABLE "notification" ADD COLUMN IF NOT EXISTS "listId" INTEGER REFERENCES "custom_list"("id");`
+  `ALTER TABLE "notification" ADD COLUMN IF NOT EXISTS "listId" INTEGER REFERENCES "custom_list"("id");`,
+  // Overlay por-usuario sobre items de una lista seguida (estado de lectura + orden).
+  `CREATE TABLE IF NOT EXISTS "custom_list_follower_item" (
+    "id" SERIAL PRIMARY KEY,
+    "userId" INTEGER NOT NULL REFERENCES "user"("id") ON DELETE CASCADE,
+    "listId" INTEGER NOT NULL REFERENCES "custom_list"("id") ON DELETE CASCADE,
+    "mangaCustomId" INTEGER,
+    "jointId" INTEGER,
+    "readingStatus" VARCHAR(32),
+    "order" INTEGER NOT NULL DEFAULT 0,
+    "createdAt" TIMESTAMP(6) NOT NULL DEFAULT now(),
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT now()
+  );`,
+  `CREATE UNIQUE INDEX IF NOT EXISTS "clfi_user_list_manga_key" ON "custom_list_follower_item"("userId", "listId", "mangaCustomId");`,
+  `CREATE UNIQUE INDEX IF NOT EXISTS "clfi_user_list_joint_key" ON "custom_list_follower_item"("userId", "listId", "jointId");`,
+  `CREATE INDEX IF NOT EXISTS "clfi_user_list_order_idx" ON "custom_list_follower_item"("userId", "listId", "order");`
 ]
 
 for (const sql of statements) {
