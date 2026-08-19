@@ -202,6 +202,7 @@ model User {
   reviewsHidden           MangaReview[]           @relation("MangaReviewHiddenBy")
   contentReports          ContentReport[]         @relation("ContentReportReporter")
   customLists             CustomList[]
+  customListFollows       CustomListFollower[]
   messageThreads          OrganizationMessageThread[]
   organizationMessages    OrganizationMessage[]
   listIsPublic            Boolean                  @default(true)
@@ -505,10 +506,30 @@ model CustomList {
   updatedAt   DateTime         @updatedAt
   user        User             @relation(fields: [userId], references: [id], onDelete: Cascade)
   items       CustomListItem[]
+  followers   CustomListFollower[]
+  notifications Notification[]
 
   @@unique([userId, slug])
   @@index([isPublic, updatedAt])
   @@map("custom_list")
+}
+
+// "Seguir/suscribirse" a una lista pública: la lista se guarda como lista hija
+// del usuario (bookmark) para volver a ella y recibir avisos cuando el dueño la
+// actualiza. Gratis para todos (con límite en la capa de aplicación para no
+// suscriptores). Crear una lista auto-inserta una fila aquí para el dueño.
+model CustomListFollower {
+  id        Int        @id @default(autoincrement())
+  userId    Int
+  listId    Int
+  createdAt DateTime   @default(now()) @db.Timestamp(6)
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  list      CustomList @relation(fields: [listId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, listId])
+  @@index([userId, createdAt])
+  @@index([listId])
+  @@map("custom_list_follower")
 }
 
 model CustomListItem {
@@ -1184,6 +1205,9 @@ model Notification {
   joint         MangaJoint?  @relation(fields: [jointId], references: [id])
   chapterId     Int?
   chapter       Chapter?     @relation(fields: [chapterId], references: [id])
+  // Para type='list_updated': la lista de comunidad que se actualizó.
+  listId        Int?
+  customList    CustomList?  @relation(fields: [listId], references: [id])
   // 'favorite' | 'user_list' | 'reply' | 'org_follower' | 'org_staff' — why this
   // user is being notified. For new_chapter: favorite wins over user_list.
   source        String       @default("favorite") @db.VarChar(32)

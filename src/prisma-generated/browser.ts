@@ -108,6 +108,11 @@ export type OrganizationMessage = Prisma.OrganizationMessageModel
  */
 export type CustomList = Prisma.CustomListModel
 /**
+ * Model CustomListFollower
+ * 
+ */
+export type CustomListFollower = Prisma.CustomListFollowerModel
+/**
  * Model CustomListItem
  * 
  */

@@ -402,6 +402,7 @@ export const ModelName = {
   OrganizationMessageThread: 'OrganizationMessageThread',
   OrganizationMessage: 'OrganizationMessage',
   CustomList: 'CustomList',
+  CustomListFollower: 'CustomListFollower',
   CustomListItem: 'CustomListItem',
   ContentReport: 'ContentReport',
   MangaReview: 'MangaReview',
@@ -457,7 +458,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "token" | "organization" | "recruitmentPost" | "organizationRecommendation" | "user" | "betaTester" | "moderationLog" | "permission" | "passwordResetToken" | "countryOptions" | "author" | "bookType" | "manga" | "mangaCustom" | "chapter" | "organizationMessageThread" | "organizationMessage" | "customList" | "customListItem" | "contentReport" | "mangaReview" | "chapterMilestoneAlert" | "mangaVolume" | "chapterReaction" | "page" | "comment" | "commentLike" | "ranking" | "demography" | "genre" | "analytics" | "userChapterHistory" | "favorite" | "userList" | "userPageBookmark" | "audit" | "viewsHistory" | "subscriptionPlan" | "subscription" | "organizationTransaction" | "organizationFollower" | "organizationRequest" | "emailPreference" | "emailLog" | "unsubscribeToken" | "emailVerificationToken" | "userDailyActivity" | "achievement" | "userAchievement" | "mangaJoint" | "jointMember" | "jointMemberHistory" | "notification" | "raffle" | "raffleTicket" | "raffleComment" | "raffleRefund" | "userBan"
+    modelProps: "token" | "organization" | "recruitmentPost" | "organizationRecommendation" | "user" | "betaTester" | "moderationLog" | "permission" | "passwordResetToken" | "countryOptions" | "author" | "bookType" | "manga" | "mangaCustom" | "chapter" | "organizationMessageThread" | "organizationMessage" | "customList" | "customListFollower" | "customListItem" | "contentReport" | "mangaReview" | "chapterMilestoneAlert" | "mangaVolume" | "chapterReaction" | "page" | "comment" | "commentLike" | "ranking" | "demography" | "genre" | "analytics" | "userChapterHistory" | "favorite" | "userList" | "userPageBookmark" | "audit" | "viewsHistory" | "subscriptionPlan" | "subscription" | "organizationTransaction" | "organizationFollower" | "organizationRequest" | "emailPreference" | "emailLog" | "unsubscribeToken" | "emailVerificationToken" | "userDailyActivity" | "achievement" | "userAchievement" | "mangaJoint" | "jointMember" | "jointMemberHistory" | "notification" | "raffle" | "raffleTicket" | "raffleComment" | "raffleRefund" | "userBan"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1790,6 +1791,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.CustomListCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.CustomListCountAggregateOutputType> | number
+        }
+      }
+    }
+    CustomListFollower: {
+      payload: Prisma.$CustomListFollowerPayload<ExtArgs>
+      fields: Prisma.CustomListFollowerFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CustomListFollowerFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomListFollowerPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CustomListFollowerFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomListFollowerPayload>
+        }
+        findFirst: {
+          args: Prisma.CustomListFollowerFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomListFollowerPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CustomListFollowerFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomListFollowerPayload>
+        }
+        findMany: {
+          args: Prisma.CustomListFollowerFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomListFollowerPayload>[]
+        }
+        create: {
+          args: Prisma.CustomListFollowerCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomListFollowerPayload>
+        }
+        createMany: {
+          args: Prisma.CustomListFollowerCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CustomListFollowerCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomListFollowerPayload>[]
+        }
+        delete: {
+          args: Prisma.CustomListFollowerDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomListFollowerPayload>
+        }
+        update: {
+          args: Prisma.CustomListFollowerUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomListFollowerPayload>
+        }
+        deleteMany: {
+          args: Prisma.CustomListFollowerDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CustomListFollowerUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CustomListFollowerUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomListFollowerPayload>[]
+        }
+        upsert: {
+          args: Prisma.CustomListFollowerUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomListFollowerPayload>
+        }
+        aggregate: {
+          args: Prisma.CustomListFollowerAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCustomListFollower>
+        }
+        groupBy: {
+          args: Prisma.CustomListFollowerGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CustomListFollowerGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CustomListFollowerCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CustomListFollowerCountAggregateOutputType> | number
         }
       }
     }
@@ -5160,6 +5235,16 @@ export const CustomListScalarFieldEnum = {
 export type CustomListScalarFieldEnum = (typeof CustomListScalarFieldEnum)[keyof typeof CustomListScalarFieldEnum]
 
 
+export const CustomListFollowerScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  listId: 'listId',
+  createdAt: 'createdAt'
+} as const
+
+export type CustomListFollowerScalarFieldEnum = (typeof CustomListFollowerScalarFieldEnum)[keyof typeof CustomListFollowerScalarFieldEnum]
+
+
 export const CustomListItemScalarFieldEnum = {
   id: 'id',
   listId: 'listId',
@@ -5698,6 +5783,7 @@ export const NotificationScalarFieldEnum = {
   mangaCustomId: 'mangaCustomId',
   jointId: 'jointId',
   chapterId: 'chapterId',
+  listId: 'listId',
   source: 'source',
   details: 'details',
   readAt: 'readAt',
@@ -6096,6 +6182,7 @@ export type GlobalOmitConfig = {
   organizationMessageThread?: Prisma.OrganizationMessageThreadOmit
   organizationMessage?: Prisma.OrganizationMessageOmit
   customList?: Prisma.CustomListOmit
+  customListFollower?: Prisma.CustomListFollowerOmit
   customListItem?: Prisma.CustomListItemOmit
   contentReport?: Prisma.ContentReportOmit
   mangaReview?: Prisma.MangaReviewOmit

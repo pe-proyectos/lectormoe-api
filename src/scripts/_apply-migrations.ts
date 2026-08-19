@@ -199,7 +199,20 @@ const statements: string[] = [
   `ALTER TABLE "manga_custom" ADD COLUMN IF NOT EXISTS "alternativeTitle" VARCHAR(256);`,
   // NSFW deja de ser control del scan: el default pasa a false (un scan nuevo NO
   // es +18). La clasificación es por manga. Las filas existentes no cambian.
-  `ALTER TABLE "organization" ALTER COLUMN "isNSFW" SET DEFAULT false;`
+  `ALTER TABLE "organization" ALTER COLUMN "isNSFW" SET DEFAULT false;`,
+  // Seguir/suscribirse a una lista pública (bookmark + avisos). Gratis para todos
+  // (límite de 5 para no suscriptores en la capa de aplicación).
+  `CREATE TABLE IF NOT EXISTS "custom_list_follower" (
+    "id" SERIAL PRIMARY KEY,
+    "userId" INTEGER NOT NULL REFERENCES "user"("id") ON DELETE CASCADE,
+    "listId" INTEGER NOT NULL REFERENCES "custom_list"("id") ON DELETE CASCADE,
+    "createdAt" TIMESTAMP(6) NOT NULL DEFAULT now()
+  );`,
+  `CREATE UNIQUE INDEX IF NOT EXISTS "custom_list_follower_userId_listId_key" ON "custom_list_follower"("userId", "listId");`,
+  `CREATE INDEX IF NOT EXISTS "custom_list_follower_user_created_idx" ON "custom_list_follower"("userId", "createdAt");`,
+  `CREATE INDEX IF NOT EXISTS "custom_list_follower_list_idx" ON "custom_list_follower"("listId");`,
+  // Aviso cuando el dueño actualiza una lista seguida (type='list_updated').
+  `ALTER TABLE "notification" ADD COLUMN IF NOT EXISTS "listId" INTEGER REFERENCES "custom_list"("id");`
 ]
 
 for (const sql of statements) {

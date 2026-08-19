@@ -32,6 +32,7 @@ export type NotificationAvgAggregateOutputType = {
   mangaCustomId: number | null
   jointId: number | null
   chapterId: number | null
+  listId: number | null
   commentId: number | null
   parentCommentId: number | null
   subscriptionId: number | null
@@ -44,6 +45,7 @@ export type NotificationSumAggregateOutputType = {
   mangaCustomId: number | null
   jointId: number | null
   chapterId: number | null
+  listId: number | null
   commentId: number | null
   parentCommentId: number | null
   subscriptionId: number | null
@@ -57,6 +59,7 @@ export type NotificationMinAggregateOutputType = {
   mangaCustomId: number | null
   jointId: number | null
   chapterId: number | null
+  listId: number | null
   source: string | null
   details: string | null
   readAt: Date | null
@@ -75,6 +78,7 @@ export type NotificationMaxAggregateOutputType = {
   mangaCustomId: number | null
   jointId: number | null
   chapterId: number | null
+  listId: number | null
   source: string | null
   details: string | null
   readAt: Date | null
@@ -93,6 +97,7 @@ export type NotificationCountAggregateOutputType = {
   mangaCustomId: number
   jointId: number
   chapterId: number
+  listId: number
   source: number
   details: number
   readAt: number
@@ -112,6 +117,7 @@ export type NotificationAvgAggregateInputType = {
   mangaCustomId?: true
   jointId?: true
   chapterId?: true
+  listId?: true
   commentId?: true
   parentCommentId?: true
   subscriptionId?: true
@@ -124,6 +130,7 @@ export type NotificationSumAggregateInputType = {
   mangaCustomId?: true
   jointId?: true
   chapterId?: true
+  listId?: true
   commentId?: true
   parentCommentId?: true
   subscriptionId?: true
@@ -137,6 +144,7 @@ export type NotificationMinAggregateInputType = {
   mangaCustomId?: true
   jointId?: true
   chapterId?: true
+  listId?: true
   source?: true
   details?: true
   readAt?: true
@@ -155,6 +163,7 @@ export type NotificationMaxAggregateInputType = {
   mangaCustomId?: true
   jointId?: true
   chapterId?: true
+  listId?: true
   source?: true
   details?: true
   readAt?: true
@@ -173,6 +182,7 @@ export type NotificationCountAggregateInputType = {
   mangaCustomId?: true
   jointId?: true
   chapterId?: true
+  listId?: true
   source?: true
   details?: true
   readAt?: true
@@ -278,6 +288,7 @@ export type NotificationGroupByOutputType = {
   mangaCustomId: number | null
   jointId: number | null
   chapterId: number | null
+  listId: number | null
   source: string
   details: string | null
   readAt: Date | null
@@ -319,6 +330,7 @@ export type NotificationWhereInput = {
   mangaCustomId?: Prisma.IntNullableFilter<"Notification"> | number | null
   jointId?: Prisma.IntNullableFilter<"Notification"> | number | null
   chapterId?: Prisma.IntNullableFilter<"Notification"> | number | null
+  listId?: Prisma.IntNullableFilter<"Notification"> | number | null
   source?: Prisma.StringFilter<"Notification"> | string
   details?: Prisma.StringNullableFilter<"Notification"> | string | null
   readAt?: Prisma.DateTimeNullableFilter<"Notification"> | Date | string | null
@@ -332,6 +344,7 @@ export type NotificationWhereInput = {
   mangaCustom?: Prisma.XOR<Prisma.MangaCustomNullableScalarRelationFilter, Prisma.MangaCustomWhereInput> | null
   joint?: Prisma.XOR<Prisma.MangaJointNullableScalarRelationFilter, Prisma.MangaJointWhereInput> | null
   chapter?: Prisma.XOR<Prisma.ChapterNullableScalarRelationFilter, Prisma.ChapterWhereInput> | null
+  customList?: Prisma.XOR<Prisma.CustomListNullableScalarRelationFilter, Prisma.CustomListWhereInput> | null
   comment?: Prisma.XOR<Prisma.CommentNullableScalarRelationFilter, Prisma.CommentWhereInput> | null
   parentComment?: Prisma.XOR<Prisma.CommentNullableScalarRelationFilter, Prisma.CommentWhereInput> | null
   subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
@@ -345,6 +358,7 @@ export type NotificationOrderByWithRelationInput = {
   mangaCustomId?: Prisma.SortOrderInput | Prisma.SortOrder
   jointId?: Prisma.SortOrderInput | Prisma.SortOrder
   chapterId?: Prisma.SortOrderInput | Prisma.SortOrder
+  listId?: Prisma.SortOrderInput | Prisma.SortOrder
   source?: Prisma.SortOrder
   details?: Prisma.SortOrderInput | Prisma.SortOrder
   readAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -358,6 +372,7 @@ export type NotificationOrderByWithRelationInput = {
   mangaCustom?: Prisma.MangaCustomOrderByWithRelationInput
   joint?: Prisma.MangaJointOrderByWithRelationInput
   chapter?: Prisma.ChapterOrderByWithRelationInput
+  customList?: Prisma.CustomListOrderByWithRelationInput
   comment?: Prisma.CommentOrderByWithRelationInput
   parentComment?: Prisma.CommentOrderByWithRelationInput
   subscription?: Prisma.SubscriptionOrderByWithRelationInput
@@ -374,6 +389,7 @@ export type NotificationWhereUniqueInput = Prisma.AtLeast<{
   mangaCustomId?: Prisma.IntNullableFilter<"Notification"> | number | null
   jointId?: Prisma.IntNullableFilter<"Notification"> | number | null
   chapterId?: Prisma.IntNullableFilter<"Notification"> | number | null
+  listId?: Prisma.IntNullableFilter<"Notification"> | number | null
   source?: Prisma.StringFilter<"Notification"> | string
   details?: Prisma.StringNullableFilter<"Notification"> | string | null
   readAt?: Prisma.DateTimeNullableFilter<"Notification"> | Date | string | null
@@ -387,6 +403,7 @@ export type NotificationWhereUniqueInput = Prisma.AtLeast<{
   mangaCustom?: Prisma.XOR<Prisma.MangaCustomNullableScalarRelationFilter, Prisma.MangaCustomWhereInput> | null
   joint?: Prisma.XOR<Prisma.MangaJointNullableScalarRelationFilter, Prisma.MangaJointWhereInput> | null
   chapter?: Prisma.XOR<Prisma.ChapterNullableScalarRelationFilter, Prisma.ChapterWhereInput> | null
+  customList?: Prisma.XOR<Prisma.CustomListNullableScalarRelationFilter, Prisma.CustomListWhereInput> | null
   comment?: Prisma.XOR<Prisma.CommentNullableScalarRelationFilter, Prisma.CommentWhereInput> | null
   parentComment?: Prisma.XOR<Prisma.CommentNullableScalarRelationFilter, Prisma.CommentWhereInput> | null
   subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
@@ -400,6 +417,7 @@ export type NotificationOrderByWithAggregationInput = {
   mangaCustomId?: Prisma.SortOrderInput | Prisma.SortOrder
   jointId?: Prisma.SortOrderInput | Prisma.SortOrder
   chapterId?: Prisma.SortOrderInput | Prisma.SortOrder
+  listId?: Prisma.SortOrderInput | Prisma.SortOrder
   source?: Prisma.SortOrder
   details?: Prisma.SortOrderInput | Prisma.SortOrder
   readAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -426,6 +444,7 @@ export type NotificationScalarWhereWithAggregatesInput = {
   mangaCustomId?: Prisma.IntNullableWithAggregatesFilter<"Notification"> | number | null
   jointId?: Prisma.IntNullableWithAggregatesFilter<"Notification"> | number | null
   chapterId?: Prisma.IntNullableWithAggregatesFilter<"Notification"> | number | null
+  listId?: Prisma.IntNullableWithAggregatesFilter<"Notification"> | number | null
   source?: Prisma.StringWithAggregatesFilter<"Notification"> | string
   details?: Prisma.StringNullableWithAggregatesFilter<"Notification"> | string | null
   readAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Notification"> | Date | string | null
@@ -448,6 +467,7 @@ export type NotificationCreateInput = {
   mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutNotificationsInput
   joint?: Prisma.MangaJointCreateNestedOneWithoutNotificationsInput
   chapter?: Prisma.ChapterCreateNestedOneWithoutNotificationsInput
+  customList?: Prisma.CustomListCreateNestedOneWithoutNotificationsInput
   comment?: Prisma.CommentCreateNestedOneWithoutNotificationsInput
   parentComment?: Prisma.CommentCreateNestedOneWithoutParentNotificationsInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutNotificationsInput
@@ -461,6 +481,7 @@ export type NotificationUncheckedCreateInput = {
   mangaCustomId?: number | null
   jointId?: number | null
   chapterId?: number | null
+  listId?: number | null
   source?: string
   details?: string | null
   readAt?: Date | string | null
@@ -483,6 +504,7 @@ export type NotificationUpdateInput = {
   mangaCustom?: Prisma.MangaCustomUpdateOneWithoutNotificationsNestedInput
   joint?: Prisma.MangaJointUpdateOneWithoutNotificationsNestedInput
   chapter?: Prisma.ChapterUpdateOneWithoutNotificationsNestedInput
+  customList?: Prisma.CustomListUpdateOneWithoutNotificationsNestedInput
   comment?: Prisma.CommentUpdateOneWithoutNotificationsNestedInput
   parentComment?: Prisma.CommentUpdateOneWithoutParentNotificationsNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutNotificationsNestedInput
@@ -496,6 +518,7 @@ export type NotificationUncheckedUpdateInput = {
   mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   chapterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
   details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -514,6 +537,7 @@ export type NotificationCreateManyInput = {
   mangaCustomId?: number | null
   jointId?: number | null
   chapterId?: number | null
+  listId?: number | null
   source?: string
   details?: string | null
   readAt?: Date | string | null
@@ -541,6 +565,7 @@ export type NotificationUncheckedUpdateManyInput = {
   mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   chapterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
   details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -569,6 +594,7 @@ export type NotificationCountOrderByAggregateInput = {
   mangaCustomId?: Prisma.SortOrder
   jointId?: Prisma.SortOrder
   chapterId?: Prisma.SortOrder
+  listId?: Prisma.SortOrder
   source?: Prisma.SortOrder
   details?: Prisma.SortOrder
   readAt?: Prisma.SortOrder
@@ -586,6 +612,7 @@ export type NotificationAvgOrderByAggregateInput = {
   mangaCustomId?: Prisma.SortOrder
   jointId?: Prisma.SortOrder
   chapterId?: Prisma.SortOrder
+  listId?: Prisma.SortOrder
   commentId?: Prisma.SortOrder
   parentCommentId?: Prisma.SortOrder
   subscriptionId?: Prisma.SortOrder
@@ -599,6 +626,7 @@ export type NotificationMaxOrderByAggregateInput = {
   mangaCustomId?: Prisma.SortOrder
   jointId?: Prisma.SortOrder
   chapterId?: Prisma.SortOrder
+  listId?: Prisma.SortOrder
   source?: Prisma.SortOrder
   details?: Prisma.SortOrder
   readAt?: Prisma.SortOrder
@@ -617,6 +645,7 @@ export type NotificationMinOrderByAggregateInput = {
   mangaCustomId?: Prisma.SortOrder
   jointId?: Prisma.SortOrder
   chapterId?: Prisma.SortOrder
+  listId?: Prisma.SortOrder
   source?: Prisma.SortOrder
   details?: Prisma.SortOrder
   readAt?: Prisma.SortOrder
@@ -634,6 +663,7 @@ export type NotificationSumOrderByAggregateInput = {
   mangaCustomId?: Prisma.SortOrder
   jointId?: Prisma.SortOrder
   chapterId?: Prisma.SortOrder
+  listId?: Prisma.SortOrder
   commentId?: Prisma.SortOrder
   parentCommentId?: Prisma.SortOrder
   subscriptionId?: Prisma.SortOrder
@@ -805,6 +835,48 @@ export type NotificationUncheckedUpdateManyWithoutChapterNestedInput = {
   connect?: Prisma.NotificationWhereUniqueInput | Prisma.NotificationWhereUniqueInput[]
   update?: Prisma.NotificationUpdateWithWhereUniqueWithoutChapterInput | Prisma.NotificationUpdateWithWhereUniqueWithoutChapterInput[]
   updateMany?: Prisma.NotificationUpdateManyWithWhereWithoutChapterInput | Prisma.NotificationUpdateManyWithWhereWithoutChapterInput[]
+  deleteMany?: Prisma.NotificationScalarWhereInput | Prisma.NotificationScalarWhereInput[]
+}
+
+export type NotificationCreateNestedManyWithoutCustomListInput = {
+  create?: Prisma.XOR<Prisma.NotificationCreateWithoutCustomListInput, Prisma.NotificationUncheckedCreateWithoutCustomListInput> | Prisma.NotificationCreateWithoutCustomListInput[] | Prisma.NotificationUncheckedCreateWithoutCustomListInput[]
+  connectOrCreate?: Prisma.NotificationCreateOrConnectWithoutCustomListInput | Prisma.NotificationCreateOrConnectWithoutCustomListInput[]
+  createMany?: Prisma.NotificationCreateManyCustomListInputEnvelope
+  connect?: Prisma.NotificationWhereUniqueInput | Prisma.NotificationWhereUniqueInput[]
+}
+
+export type NotificationUncheckedCreateNestedManyWithoutCustomListInput = {
+  create?: Prisma.XOR<Prisma.NotificationCreateWithoutCustomListInput, Prisma.NotificationUncheckedCreateWithoutCustomListInput> | Prisma.NotificationCreateWithoutCustomListInput[] | Prisma.NotificationUncheckedCreateWithoutCustomListInput[]
+  connectOrCreate?: Prisma.NotificationCreateOrConnectWithoutCustomListInput | Prisma.NotificationCreateOrConnectWithoutCustomListInput[]
+  createMany?: Prisma.NotificationCreateManyCustomListInputEnvelope
+  connect?: Prisma.NotificationWhereUniqueInput | Prisma.NotificationWhereUniqueInput[]
+}
+
+export type NotificationUpdateManyWithoutCustomListNestedInput = {
+  create?: Prisma.XOR<Prisma.NotificationCreateWithoutCustomListInput, Prisma.NotificationUncheckedCreateWithoutCustomListInput> | Prisma.NotificationCreateWithoutCustomListInput[] | Prisma.NotificationUncheckedCreateWithoutCustomListInput[]
+  connectOrCreate?: Prisma.NotificationCreateOrConnectWithoutCustomListInput | Prisma.NotificationCreateOrConnectWithoutCustomListInput[]
+  upsert?: Prisma.NotificationUpsertWithWhereUniqueWithoutCustomListInput | Prisma.NotificationUpsertWithWhereUniqueWithoutCustomListInput[]
+  createMany?: Prisma.NotificationCreateManyCustomListInputEnvelope
+  set?: Prisma.NotificationWhereUniqueInput | Prisma.NotificationWhereUniqueInput[]
+  disconnect?: Prisma.NotificationWhereUniqueInput | Prisma.NotificationWhereUniqueInput[]
+  delete?: Prisma.NotificationWhereUniqueInput | Prisma.NotificationWhereUniqueInput[]
+  connect?: Prisma.NotificationWhereUniqueInput | Prisma.NotificationWhereUniqueInput[]
+  update?: Prisma.NotificationUpdateWithWhereUniqueWithoutCustomListInput | Prisma.NotificationUpdateWithWhereUniqueWithoutCustomListInput[]
+  updateMany?: Prisma.NotificationUpdateManyWithWhereWithoutCustomListInput | Prisma.NotificationUpdateManyWithWhereWithoutCustomListInput[]
+  deleteMany?: Prisma.NotificationScalarWhereInput | Prisma.NotificationScalarWhereInput[]
+}
+
+export type NotificationUncheckedUpdateManyWithoutCustomListNestedInput = {
+  create?: Prisma.XOR<Prisma.NotificationCreateWithoutCustomListInput, Prisma.NotificationUncheckedCreateWithoutCustomListInput> | Prisma.NotificationCreateWithoutCustomListInput[] | Prisma.NotificationUncheckedCreateWithoutCustomListInput[]
+  connectOrCreate?: Prisma.NotificationCreateOrConnectWithoutCustomListInput | Prisma.NotificationCreateOrConnectWithoutCustomListInput[]
+  upsert?: Prisma.NotificationUpsertWithWhereUniqueWithoutCustomListInput | Prisma.NotificationUpsertWithWhereUniqueWithoutCustomListInput[]
+  createMany?: Prisma.NotificationCreateManyCustomListInputEnvelope
+  set?: Prisma.NotificationWhereUniqueInput | Prisma.NotificationWhereUniqueInput[]
+  disconnect?: Prisma.NotificationWhereUniqueInput | Prisma.NotificationWhereUniqueInput[]
+  delete?: Prisma.NotificationWhereUniqueInput | Prisma.NotificationWhereUniqueInput[]
+  connect?: Prisma.NotificationWhereUniqueInput | Prisma.NotificationWhereUniqueInput[]
+  update?: Prisma.NotificationUpdateWithWhereUniqueWithoutCustomListInput | Prisma.NotificationUpdateWithWhereUniqueWithoutCustomListInput[]
+  updateMany?: Prisma.NotificationUpdateManyWithWhereWithoutCustomListInput | Prisma.NotificationUpdateManyWithWhereWithoutCustomListInput[]
   deleteMany?: Prisma.NotificationScalarWhereInput | Prisma.NotificationScalarWhereInput[]
 }
 
@@ -987,6 +1059,7 @@ export type NotificationCreateWithoutOrganizationInput = {
   mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutNotificationsInput
   joint?: Prisma.MangaJointCreateNestedOneWithoutNotificationsInput
   chapter?: Prisma.ChapterCreateNestedOneWithoutNotificationsInput
+  customList?: Prisma.CustomListCreateNestedOneWithoutNotificationsInput
   comment?: Prisma.CommentCreateNestedOneWithoutNotificationsInput
   parentComment?: Prisma.CommentCreateNestedOneWithoutParentNotificationsInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutNotificationsInput
@@ -999,6 +1072,7 @@ export type NotificationUncheckedCreateWithoutOrganizationInput = {
   mangaCustomId?: number | null
   jointId?: number | null
   chapterId?: number | null
+  listId?: number | null
   source?: string
   details?: string | null
   readAt?: Date | string | null
@@ -1045,6 +1119,7 @@ export type NotificationScalarWhereInput = {
   mangaCustomId?: Prisma.IntNullableFilter<"Notification"> | number | null
   jointId?: Prisma.IntNullableFilter<"Notification"> | number | null
   chapterId?: Prisma.IntNullableFilter<"Notification"> | number | null
+  listId?: Prisma.IntNullableFilter<"Notification"> | number | null
   source?: Prisma.StringFilter<"Notification"> | string
   details?: Prisma.StringNullableFilter<"Notification"> | string | null
   readAt?: Prisma.DateTimeNullableFilter<"Notification"> | Date | string | null
@@ -1066,6 +1141,7 @@ export type NotificationCreateWithoutUserInput = {
   mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutNotificationsInput
   joint?: Prisma.MangaJointCreateNestedOneWithoutNotificationsInput
   chapter?: Prisma.ChapterCreateNestedOneWithoutNotificationsInput
+  customList?: Prisma.CustomListCreateNestedOneWithoutNotificationsInput
   comment?: Prisma.CommentCreateNestedOneWithoutNotificationsInput
   parentComment?: Prisma.CommentCreateNestedOneWithoutParentNotificationsInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutNotificationsInput
@@ -1078,6 +1154,7 @@ export type NotificationUncheckedCreateWithoutUserInput = {
   mangaCustomId?: number | null
   jointId?: number | null
   chapterId?: number | null
+  listId?: number | null
   source?: string
   details?: string | null
   readAt?: Date | string | null
@@ -1125,6 +1202,7 @@ export type NotificationCreateWithoutMangaCustomInput = {
   user: Prisma.UserCreateNestedOneWithoutNotificationsInput
   joint?: Prisma.MangaJointCreateNestedOneWithoutNotificationsInput
   chapter?: Prisma.ChapterCreateNestedOneWithoutNotificationsInput
+  customList?: Prisma.CustomListCreateNestedOneWithoutNotificationsInput
   comment?: Prisma.CommentCreateNestedOneWithoutNotificationsInput
   parentComment?: Prisma.CommentCreateNestedOneWithoutParentNotificationsInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutNotificationsInput
@@ -1137,6 +1215,7 @@ export type NotificationUncheckedCreateWithoutMangaCustomInput = {
   type?: string
   jointId?: number | null
   chapterId?: number | null
+  listId?: number | null
   source?: string
   details?: string | null
   readAt?: Date | string | null
@@ -1184,6 +1263,7 @@ export type NotificationCreateWithoutChapterInput = {
   user: Prisma.UserCreateNestedOneWithoutNotificationsInput
   mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutNotificationsInput
   joint?: Prisma.MangaJointCreateNestedOneWithoutNotificationsInput
+  customList?: Prisma.CustomListCreateNestedOneWithoutNotificationsInput
   comment?: Prisma.CommentCreateNestedOneWithoutNotificationsInput
   parentComment?: Prisma.CommentCreateNestedOneWithoutParentNotificationsInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutNotificationsInput
@@ -1196,6 +1276,7 @@ export type NotificationUncheckedCreateWithoutChapterInput = {
   type?: string
   mangaCustomId?: number | null
   jointId?: number | null
+  listId?: number | null
   source?: string
   details?: string | null
   readAt?: Date | string | null
@@ -1233,6 +1314,67 @@ export type NotificationUpdateManyWithWhereWithoutChapterInput = {
   data: Prisma.XOR<Prisma.NotificationUpdateManyMutationInput, Prisma.NotificationUncheckedUpdateManyWithoutChapterInput>
 }
 
+export type NotificationCreateWithoutCustomListInput = {
+  type?: string
+  source?: string
+  details?: string | null
+  readAt?: Date | string | null
+  createdAt?: Date | string
+  emailSentAt?: Date | string | null
+  user: Prisma.UserCreateNestedOneWithoutNotificationsInput
+  mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutNotificationsInput
+  joint?: Prisma.MangaJointCreateNestedOneWithoutNotificationsInput
+  chapter?: Prisma.ChapterCreateNestedOneWithoutNotificationsInput
+  comment?: Prisma.CommentCreateNestedOneWithoutNotificationsInput
+  parentComment?: Prisma.CommentCreateNestedOneWithoutParentNotificationsInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutNotificationsInput
+  organization?: Prisma.OrganizationCreateNestedOneWithoutNotificationsInput
+}
+
+export type NotificationUncheckedCreateWithoutCustomListInput = {
+  id?: number
+  userId: number
+  type?: string
+  mangaCustomId?: number | null
+  jointId?: number | null
+  chapterId?: number | null
+  source?: string
+  details?: string | null
+  readAt?: Date | string | null
+  createdAt?: Date | string
+  emailSentAt?: Date | string | null
+  commentId?: number | null
+  parentCommentId?: number | null
+  subscriptionId?: number | null
+  organizationId?: number | null
+}
+
+export type NotificationCreateOrConnectWithoutCustomListInput = {
+  where: Prisma.NotificationWhereUniqueInput
+  create: Prisma.XOR<Prisma.NotificationCreateWithoutCustomListInput, Prisma.NotificationUncheckedCreateWithoutCustomListInput>
+}
+
+export type NotificationCreateManyCustomListInputEnvelope = {
+  data: Prisma.NotificationCreateManyCustomListInput | Prisma.NotificationCreateManyCustomListInput[]
+  skipDuplicates?: boolean
+}
+
+export type NotificationUpsertWithWhereUniqueWithoutCustomListInput = {
+  where: Prisma.NotificationWhereUniqueInput
+  update: Prisma.XOR<Prisma.NotificationUpdateWithoutCustomListInput, Prisma.NotificationUncheckedUpdateWithoutCustomListInput>
+  create: Prisma.XOR<Prisma.NotificationCreateWithoutCustomListInput, Prisma.NotificationUncheckedCreateWithoutCustomListInput>
+}
+
+export type NotificationUpdateWithWhereUniqueWithoutCustomListInput = {
+  where: Prisma.NotificationWhereUniqueInput
+  data: Prisma.XOR<Prisma.NotificationUpdateWithoutCustomListInput, Prisma.NotificationUncheckedUpdateWithoutCustomListInput>
+}
+
+export type NotificationUpdateManyWithWhereWithoutCustomListInput = {
+  where: Prisma.NotificationScalarWhereInput
+  data: Prisma.XOR<Prisma.NotificationUpdateManyMutationInput, Prisma.NotificationUncheckedUpdateManyWithoutCustomListInput>
+}
+
 export type NotificationCreateWithoutCommentInput = {
   type?: string
   source?: string
@@ -1244,6 +1386,7 @@ export type NotificationCreateWithoutCommentInput = {
   mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutNotificationsInput
   joint?: Prisma.MangaJointCreateNestedOneWithoutNotificationsInput
   chapter?: Prisma.ChapterCreateNestedOneWithoutNotificationsInput
+  customList?: Prisma.CustomListCreateNestedOneWithoutNotificationsInput
   parentComment?: Prisma.CommentCreateNestedOneWithoutParentNotificationsInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutNotificationsInput
   organization?: Prisma.OrganizationCreateNestedOneWithoutNotificationsInput
@@ -1256,6 +1399,7 @@ export type NotificationUncheckedCreateWithoutCommentInput = {
   mangaCustomId?: number | null
   jointId?: number | null
   chapterId?: number | null
+  listId?: number | null
   source?: string
   details?: string | null
   readAt?: Date | string | null
@@ -1287,6 +1431,7 @@ export type NotificationCreateWithoutParentCommentInput = {
   mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutNotificationsInput
   joint?: Prisma.MangaJointCreateNestedOneWithoutNotificationsInput
   chapter?: Prisma.ChapterCreateNestedOneWithoutNotificationsInput
+  customList?: Prisma.CustomListCreateNestedOneWithoutNotificationsInput
   comment?: Prisma.CommentCreateNestedOneWithoutNotificationsInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutNotificationsInput
   organization?: Prisma.OrganizationCreateNestedOneWithoutNotificationsInput
@@ -1299,6 +1444,7 @@ export type NotificationUncheckedCreateWithoutParentCommentInput = {
   mangaCustomId?: number | null
   jointId?: number | null
   chapterId?: number | null
+  listId?: number | null
   source?: string
   details?: string | null
   readAt?: Date | string | null
@@ -1362,6 +1508,7 @@ export type NotificationCreateWithoutSubscriptionInput = {
   mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutNotificationsInput
   joint?: Prisma.MangaJointCreateNestedOneWithoutNotificationsInput
   chapter?: Prisma.ChapterCreateNestedOneWithoutNotificationsInput
+  customList?: Prisma.CustomListCreateNestedOneWithoutNotificationsInput
   comment?: Prisma.CommentCreateNestedOneWithoutNotificationsInput
   parentComment?: Prisma.CommentCreateNestedOneWithoutParentNotificationsInput
   organization?: Prisma.OrganizationCreateNestedOneWithoutNotificationsInput
@@ -1374,6 +1521,7 @@ export type NotificationUncheckedCreateWithoutSubscriptionInput = {
   mangaCustomId?: number | null
   jointId?: number | null
   chapterId?: number | null
+  listId?: number | null
   source?: string
   details?: string | null
   readAt?: Date | string | null
@@ -1420,6 +1568,7 @@ export type NotificationCreateWithoutJointInput = {
   user: Prisma.UserCreateNestedOneWithoutNotificationsInput
   mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutNotificationsInput
   chapter?: Prisma.ChapterCreateNestedOneWithoutNotificationsInput
+  customList?: Prisma.CustomListCreateNestedOneWithoutNotificationsInput
   comment?: Prisma.CommentCreateNestedOneWithoutNotificationsInput
   parentComment?: Prisma.CommentCreateNestedOneWithoutParentNotificationsInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutNotificationsInput
@@ -1432,6 +1581,7 @@ export type NotificationUncheckedCreateWithoutJointInput = {
   type?: string
   mangaCustomId?: number | null
   chapterId?: number | null
+  listId?: number | null
   source?: string
   details?: string | null
   readAt?: Date | string | null
@@ -1476,6 +1626,7 @@ export type NotificationCreateManyOrganizationInput = {
   mangaCustomId?: number | null
   jointId?: number | null
   chapterId?: number | null
+  listId?: number | null
   source?: string
   details?: string | null
   readAt?: Date | string | null
@@ -1497,6 +1648,7 @@ export type NotificationUpdateWithoutOrganizationInput = {
   mangaCustom?: Prisma.MangaCustomUpdateOneWithoutNotificationsNestedInput
   joint?: Prisma.MangaJointUpdateOneWithoutNotificationsNestedInput
   chapter?: Prisma.ChapterUpdateOneWithoutNotificationsNestedInput
+  customList?: Prisma.CustomListUpdateOneWithoutNotificationsNestedInput
   comment?: Prisma.CommentUpdateOneWithoutNotificationsNestedInput
   parentComment?: Prisma.CommentUpdateOneWithoutParentNotificationsNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutNotificationsNestedInput
@@ -1509,6 +1661,7 @@ export type NotificationUncheckedUpdateWithoutOrganizationInput = {
   mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   chapterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
   details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1526,6 +1679,7 @@ export type NotificationUncheckedUpdateManyWithoutOrganizationInput = {
   mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   chapterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
   details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1542,6 +1696,7 @@ export type NotificationCreateManyUserInput = {
   mangaCustomId?: number | null
   jointId?: number | null
   chapterId?: number | null
+  listId?: number | null
   source?: string
   details?: string | null
   readAt?: Date | string | null
@@ -1563,6 +1718,7 @@ export type NotificationUpdateWithoutUserInput = {
   mangaCustom?: Prisma.MangaCustomUpdateOneWithoutNotificationsNestedInput
   joint?: Prisma.MangaJointUpdateOneWithoutNotificationsNestedInput
   chapter?: Prisma.ChapterUpdateOneWithoutNotificationsNestedInput
+  customList?: Prisma.CustomListUpdateOneWithoutNotificationsNestedInput
   comment?: Prisma.CommentUpdateOneWithoutNotificationsNestedInput
   parentComment?: Prisma.CommentUpdateOneWithoutParentNotificationsNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutNotificationsNestedInput
@@ -1575,6 +1731,7 @@ export type NotificationUncheckedUpdateWithoutUserInput = {
   mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   chapterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
   details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1592,6 +1749,7 @@ export type NotificationUncheckedUpdateManyWithoutUserInput = {
   mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   chapterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
   details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1609,6 +1767,7 @@ export type NotificationCreateManyMangaCustomInput = {
   type?: string
   jointId?: number | null
   chapterId?: number | null
+  listId?: number | null
   source?: string
   details?: string | null
   readAt?: Date | string | null
@@ -1630,6 +1789,7 @@ export type NotificationUpdateWithoutMangaCustomInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutNotificationsNestedInput
   joint?: Prisma.MangaJointUpdateOneWithoutNotificationsNestedInput
   chapter?: Prisma.ChapterUpdateOneWithoutNotificationsNestedInput
+  customList?: Prisma.CustomListUpdateOneWithoutNotificationsNestedInput
   comment?: Prisma.CommentUpdateOneWithoutNotificationsNestedInput
   parentComment?: Prisma.CommentUpdateOneWithoutParentNotificationsNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutNotificationsNestedInput
@@ -1642,6 +1802,7 @@ export type NotificationUncheckedUpdateWithoutMangaCustomInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   chapterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
   details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1659,6 +1820,7 @@ export type NotificationUncheckedUpdateManyWithoutMangaCustomInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   chapterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
   details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1676,6 +1838,7 @@ export type NotificationCreateManyChapterInput = {
   type?: string
   mangaCustomId?: number | null
   jointId?: number | null
+  listId?: number | null
   source?: string
   details?: string | null
   readAt?: Date | string | null
@@ -1697,6 +1860,7 @@ export type NotificationUpdateWithoutChapterInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutNotificationsNestedInput
   mangaCustom?: Prisma.MangaCustomUpdateOneWithoutNotificationsNestedInput
   joint?: Prisma.MangaJointUpdateOneWithoutNotificationsNestedInput
+  customList?: Prisma.CustomListUpdateOneWithoutNotificationsNestedInput
   comment?: Prisma.CommentUpdateOneWithoutNotificationsNestedInput
   parentComment?: Prisma.CommentUpdateOneWithoutParentNotificationsNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutNotificationsNestedInput
@@ -1709,6 +1873,7 @@ export type NotificationUncheckedUpdateWithoutChapterInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
   details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1726,6 +1891,78 @@ export type NotificationUncheckedUpdateManyWithoutChapterInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  commentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  parentCommentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subscriptionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type NotificationCreateManyCustomListInput = {
+  id?: number
+  userId: number
+  type?: string
+  mangaCustomId?: number | null
+  jointId?: number | null
+  chapterId?: number | null
+  source?: string
+  details?: string | null
+  readAt?: Date | string | null
+  createdAt?: Date | string
+  emailSentAt?: Date | string | null
+  commentId?: number | null
+  parentCommentId?: number | null
+  subscriptionId?: number | null
+  organizationId?: number | null
+}
+
+export type NotificationUpdateWithoutCustomListInput = {
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  user?: Prisma.UserUpdateOneRequiredWithoutNotificationsNestedInput
+  mangaCustom?: Prisma.MangaCustomUpdateOneWithoutNotificationsNestedInput
+  joint?: Prisma.MangaJointUpdateOneWithoutNotificationsNestedInput
+  chapter?: Prisma.ChapterUpdateOneWithoutNotificationsNestedInput
+  comment?: Prisma.CommentUpdateOneWithoutNotificationsNestedInput
+  parentComment?: Prisma.CommentUpdateOneWithoutParentNotificationsNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutNotificationsNestedInput
+  organization?: Prisma.OrganizationUpdateOneWithoutNotificationsNestedInput
+}
+
+export type NotificationUncheckedUpdateWithoutCustomListInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  chapterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  commentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  parentCommentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subscriptionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type NotificationUncheckedUpdateManyWithoutCustomListInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  chapterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
   details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1744,6 +1981,7 @@ export type NotificationCreateManyCommentInput = {
   mangaCustomId?: number | null
   jointId?: number | null
   chapterId?: number | null
+  listId?: number | null
   source?: string
   details?: string | null
   readAt?: Date | string | null
@@ -1761,6 +1999,7 @@ export type NotificationCreateManyParentCommentInput = {
   mangaCustomId?: number | null
   jointId?: number | null
   chapterId?: number | null
+  listId?: number | null
   source?: string
   details?: string | null
   readAt?: Date | string | null
@@ -1782,6 +2021,7 @@ export type NotificationUpdateWithoutCommentInput = {
   mangaCustom?: Prisma.MangaCustomUpdateOneWithoutNotificationsNestedInput
   joint?: Prisma.MangaJointUpdateOneWithoutNotificationsNestedInput
   chapter?: Prisma.ChapterUpdateOneWithoutNotificationsNestedInput
+  customList?: Prisma.CustomListUpdateOneWithoutNotificationsNestedInput
   parentComment?: Prisma.CommentUpdateOneWithoutParentNotificationsNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutNotificationsNestedInput
   organization?: Prisma.OrganizationUpdateOneWithoutNotificationsNestedInput
@@ -1794,6 +2034,7 @@ export type NotificationUncheckedUpdateWithoutCommentInput = {
   mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   chapterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
   details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1811,6 +2052,7 @@ export type NotificationUncheckedUpdateManyWithoutCommentInput = {
   mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   chapterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
   details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1832,6 +2074,7 @@ export type NotificationUpdateWithoutParentCommentInput = {
   mangaCustom?: Prisma.MangaCustomUpdateOneWithoutNotificationsNestedInput
   joint?: Prisma.MangaJointUpdateOneWithoutNotificationsNestedInput
   chapter?: Prisma.ChapterUpdateOneWithoutNotificationsNestedInput
+  customList?: Prisma.CustomListUpdateOneWithoutNotificationsNestedInput
   comment?: Prisma.CommentUpdateOneWithoutNotificationsNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutNotificationsNestedInput
   organization?: Prisma.OrganizationUpdateOneWithoutNotificationsNestedInput
@@ -1844,6 +2087,7 @@ export type NotificationUncheckedUpdateWithoutParentCommentInput = {
   mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   chapterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
   details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1861,6 +2105,7 @@ export type NotificationUncheckedUpdateManyWithoutParentCommentInput = {
   mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   chapterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
   details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1878,6 +2123,7 @@ export type NotificationCreateManySubscriptionInput = {
   mangaCustomId?: number | null
   jointId?: number | null
   chapterId?: number | null
+  listId?: number | null
   source?: string
   details?: string | null
   readAt?: Date | string | null
@@ -1899,6 +2145,7 @@ export type NotificationUpdateWithoutSubscriptionInput = {
   mangaCustom?: Prisma.MangaCustomUpdateOneWithoutNotificationsNestedInput
   joint?: Prisma.MangaJointUpdateOneWithoutNotificationsNestedInput
   chapter?: Prisma.ChapterUpdateOneWithoutNotificationsNestedInput
+  customList?: Prisma.CustomListUpdateOneWithoutNotificationsNestedInput
   comment?: Prisma.CommentUpdateOneWithoutNotificationsNestedInput
   parentComment?: Prisma.CommentUpdateOneWithoutParentNotificationsNestedInput
   organization?: Prisma.OrganizationUpdateOneWithoutNotificationsNestedInput
@@ -1911,6 +2158,7 @@ export type NotificationUncheckedUpdateWithoutSubscriptionInput = {
   mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   chapterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
   details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1928,6 +2176,7 @@ export type NotificationUncheckedUpdateManyWithoutSubscriptionInput = {
   mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   jointId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   chapterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
   details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1944,6 +2193,7 @@ export type NotificationCreateManyJointInput = {
   type?: string
   mangaCustomId?: number | null
   chapterId?: number | null
+  listId?: number | null
   source?: string
   details?: string | null
   readAt?: Date | string | null
@@ -1965,6 +2215,7 @@ export type NotificationUpdateWithoutJointInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutNotificationsNestedInput
   mangaCustom?: Prisma.MangaCustomUpdateOneWithoutNotificationsNestedInput
   chapter?: Prisma.ChapterUpdateOneWithoutNotificationsNestedInput
+  customList?: Prisma.CustomListUpdateOneWithoutNotificationsNestedInput
   comment?: Prisma.CommentUpdateOneWithoutNotificationsNestedInput
   parentComment?: Prisma.CommentUpdateOneWithoutParentNotificationsNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutNotificationsNestedInput
@@ -1977,6 +2228,7 @@ export type NotificationUncheckedUpdateWithoutJointInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   chapterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
   details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1994,6 +2246,7 @@ export type NotificationUncheckedUpdateManyWithoutJointInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   mangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   chapterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
   details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2014,6 +2267,7 @@ export type NotificationSelect<ExtArgs extends runtime.Types.Extensions.Internal
   mangaCustomId?: boolean
   jointId?: boolean
   chapterId?: boolean
+  listId?: boolean
   source?: boolean
   details?: boolean
   readAt?: boolean
@@ -2027,6 +2281,7 @@ export type NotificationSelect<ExtArgs extends runtime.Types.Extensions.Internal
   mangaCustom?: boolean | Prisma.Notification$mangaCustomArgs<ExtArgs>
   joint?: boolean | Prisma.Notification$jointArgs<ExtArgs>
   chapter?: boolean | Prisma.Notification$chapterArgs<ExtArgs>
+  customList?: boolean | Prisma.Notification$customListArgs<ExtArgs>
   comment?: boolean | Prisma.Notification$commentArgs<ExtArgs>
   parentComment?: boolean | Prisma.Notification$parentCommentArgs<ExtArgs>
   subscription?: boolean | Prisma.Notification$subscriptionArgs<ExtArgs>
@@ -2040,6 +2295,7 @@ export type NotificationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   mangaCustomId?: boolean
   jointId?: boolean
   chapterId?: boolean
+  listId?: boolean
   source?: boolean
   details?: boolean
   readAt?: boolean
@@ -2053,6 +2309,7 @@ export type NotificationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   mangaCustom?: boolean | Prisma.Notification$mangaCustomArgs<ExtArgs>
   joint?: boolean | Prisma.Notification$jointArgs<ExtArgs>
   chapter?: boolean | Prisma.Notification$chapterArgs<ExtArgs>
+  customList?: boolean | Prisma.Notification$customListArgs<ExtArgs>
   comment?: boolean | Prisma.Notification$commentArgs<ExtArgs>
   parentComment?: boolean | Prisma.Notification$parentCommentArgs<ExtArgs>
   subscription?: boolean | Prisma.Notification$subscriptionArgs<ExtArgs>
@@ -2066,6 +2323,7 @@ export type NotificationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   mangaCustomId?: boolean
   jointId?: boolean
   chapterId?: boolean
+  listId?: boolean
   source?: boolean
   details?: boolean
   readAt?: boolean
@@ -2079,6 +2337,7 @@ export type NotificationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   mangaCustom?: boolean | Prisma.Notification$mangaCustomArgs<ExtArgs>
   joint?: boolean | Prisma.Notification$jointArgs<ExtArgs>
   chapter?: boolean | Prisma.Notification$chapterArgs<ExtArgs>
+  customList?: boolean | Prisma.Notification$customListArgs<ExtArgs>
   comment?: boolean | Prisma.Notification$commentArgs<ExtArgs>
   parentComment?: boolean | Prisma.Notification$parentCommentArgs<ExtArgs>
   subscription?: boolean | Prisma.Notification$subscriptionArgs<ExtArgs>
@@ -2092,6 +2351,7 @@ export type NotificationSelectScalar = {
   mangaCustomId?: boolean
   jointId?: boolean
   chapterId?: boolean
+  listId?: boolean
   source?: boolean
   details?: boolean
   readAt?: boolean
@@ -2103,12 +2363,13 @@ export type NotificationSelectScalar = {
   organizationId?: boolean
 }
 
-export type NotificationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "type" | "mangaCustomId" | "jointId" | "chapterId" | "source" | "details" | "readAt" | "createdAt" | "emailSentAt" | "commentId" | "parentCommentId" | "subscriptionId" | "organizationId", ExtArgs["result"]["notification"]>
+export type NotificationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "type" | "mangaCustomId" | "jointId" | "chapterId" | "listId" | "source" | "details" | "readAt" | "createdAt" | "emailSentAt" | "commentId" | "parentCommentId" | "subscriptionId" | "organizationId", ExtArgs["result"]["notification"]>
 export type NotificationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   mangaCustom?: boolean | Prisma.Notification$mangaCustomArgs<ExtArgs>
   joint?: boolean | Prisma.Notification$jointArgs<ExtArgs>
   chapter?: boolean | Prisma.Notification$chapterArgs<ExtArgs>
+  customList?: boolean | Prisma.Notification$customListArgs<ExtArgs>
   comment?: boolean | Prisma.Notification$commentArgs<ExtArgs>
   parentComment?: boolean | Prisma.Notification$parentCommentArgs<ExtArgs>
   subscription?: boolean | Prisma.Notification$subscriptionArgs<ExtArgs>
@@ -2119,6 +2380,7 @@ export type NotificationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types
   mangaCustom?: boolean | Prisma.Notification$mangaCustomArgs<ExtArgs>
   joint?: boolean | Prisma.Notification$jointArgs<ExtArgs>
   chapter?: boolean | Prisma.Notification$chapterArgs<ExtArgs>
+  customList?: boolean | Prisma.Notification$customListArgs<ExtArgs>
   comment?: boolean | Prisma.Notification$commentArgs<ExtArgs>
   parentComment?: boolean | Prisma.Notification$parentCommentArgs<ExtArgs>
   subscription?: boolean | Prisma.Notification$subscriptionArgs<ExtArgs>
@@ -2129,6 +2391,7 @@ export type NotificationIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types
   mangaCustom?: boolean | Prisma.Notification$mangaCustomArgs<ExtArgs>
   joint?: boolean | Prisma.Notification$jointArgs<ExtArgs>
   chapter?: boolean | Prisma.Notification$chapterArgs<ExtArgs>
+  customList?: boolean | Prisma.Notification$customListArgs<ExtArgs>
   comment?: boolean | Prisma.Notification$commentArgs<ExtArgs>
   parentComment?: boolean | Prisma.Notification$parentCommentArgs<ExtArgs>
   subscription?: boolean | Prisma.Notification$subscriptionArgs<ExtArgs>
@@ -2142,6 +2405,7 @@ export type $NotificationPayload<ExtArgs extends runtime.Types.Extensions.Intern
     mangaCustom: Prisma.$MangaCustomPayload<ExtArgs> | null
     joint: Prisma.$MangaJointPayload<ExtArgs> | null
     chapter: Prisma.$ChapterPayload<ExtArgs> | null
+    customList: Prisma.$CustomListPayload<ExtArgs> | null
     comment: Prisma.$CommentPayload<ExtArgs> | null
     parentComment: Prisma.$CommentPayload<ExtArgs> | null
     subscription: Prisma.$SubscriptionPayload<ExtArgs> | null
@@ -2154,6 +2418,7 @@ export type $NotificationPayload<ExtArgs extends runtime.Types.Extensions.Intern
     mangaCustomId: number | null
     jointId: number | null
     chapterId: number | null
+    listId: number | null
     source: string
     details: string | null
     readAt: Date | null
@@ -2561,6 +2826,7 @@ export interface Prisma__NotificationClient<T, Null = never, ExtArgs extends run
   mangaCustom<T extends Prisma.Notification$mangaCustomArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Notification$mangaCustomArgs<ExtArgs>>): Prisma.Prisma__MangaCustomClient<runtime.Types.Result.GetResult<Prisma.$MangaCustomPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   joint<T extends Prisma.Notification$jointArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Notification$jointArgs<ExtArgs>>): Prisma.Prisma__MangaJointClient<runtime.Types.Result.GetResult<Prisma.$MangaJointPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   chapter<T extends Prisma.Notification$chapterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Notification$chapterArgs<ExtArgs>>): Prisma.Prisma__ChapterClient<runtime.Types.Result.GetResult<Prisma.$ChapterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  customList<T extends Prisma.Notification$customListArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Notification$customListArgs<ExtArgs>>): Prisma.Prisma__CustomListClient<runtime.Types.Result.GetResult<Prisma.$CustomListPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   comment<T extends Prisma.Notification$commentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Notification$commentArgs<ExtArgs>>): Prisma.Prisma__CommentClient<runtime.Types.Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   parentComment<T extends Prisma.Notification$parentCommentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Notification$parentCommentArgs<ExtArgs>>): Prisma.Prisma__CommentClient<runtime.Types.Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   subscription<T extends Prisma.Notification$subscriptionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Notification$subscriptionArgs<ExtArgs>>): Prisma.Prisma__SubscriptionClient<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -2600,6 +2866,7 @@ export interface NotificationFieldRefs {
   readonly mangaCustomId: Prisma.FieldRef<"Notification", 'Int'>
   readonly jointId: Prisma.FieldRef<"Notification", 'Int'>
   readonly chapterId: Prisma.FieldRef<"Notification", 'Int'>
+  readonly listId: Prisma.FieldRef<"Notification", 'Int'>
   readonly source: Prisma.FieldRef<"Notification", 'String'>
   readonly details: Prisma.FieldRef<"Notification", 'String'>
   readonly readAt: Prisma.FieldRef<"Notification", 'DateTime'>
@@ -3059,6 +3326,25 @@ export type Notification$chapterArgs<ExtArgs extends runtime.Types.Extensions.In
    */
   include?: Prisma.ChapterInclude<ExtArgs> | null
   where?: Prisma.ChapterWhereInput
+}
+
+/**
+ * Notification.customList
+ */
+export type Notification$customListArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CustomList
+   */
+  select?: Prisma.CustomListSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CustomList
+   */
+  omit?: Prisma.CustomListOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CustomListInclude<ExtArgs> | null
+  where?: Prisma.CustomListWhereInput
 }
 
 /**
