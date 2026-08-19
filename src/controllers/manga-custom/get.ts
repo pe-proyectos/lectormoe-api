@@ -101,7 +101,7 @@ export const getMangaCustomBySlug = async (
         }
       }
     },
-    select: { id: true, slug: true }
+    select: { id: true, slug: true, views: true }
   })
 
   // Merge joint chapters into the chapter list so members see joint-uploaded
@@ -178,6 +178,11 @@ export const getMangaCustomBySlug = async (
 
   return {
     ...mangaCustom,
+    // Vistas efectivas: cuando la obra está en un joint, sus lecturas se
+    // acumulan en MangaJoint.views (no en MangaCustom.views, que se quedaba
+    // "congelado"). Sumar ambos (fuentes disjuntas) da el total real que ve el
+    // scan sin doble conteo.
+    views: (mangaCustom.views || 0) + (activeJoint?.views || 0),
     chapters,
     jointSlug: activeJoint?.slug || null
   }

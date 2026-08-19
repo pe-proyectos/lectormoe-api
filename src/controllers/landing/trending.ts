@@ -70,7 +70,7 @@ export const getTrending = async (
           Prisma.sql`
           SELECT "jointId", COUNT(DISTINCT ip) AS readers
           FROM views
-          WHERE "viewedAt" >= ${since} AND "jointId" IS NOT NULL AND "chapterId" IS NULL
+          WHERE "viewedAt" >= ${since} AND "jointId" IS NOT NULL
           GROUP BY "jointId"
           ORDER BY readers DESC
           LIMIT 30

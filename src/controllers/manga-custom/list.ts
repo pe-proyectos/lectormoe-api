@@ -390,6 +390,7 @@ async function mergeJointChaptersIntoMangaCustoms(
       id: true,
       slug: true,
       mangaId: true,
+      views: true,
       members: {
         where: { status: 'ACCEPTED' },
         select: { organizationId: true }
@@ -413,6 +414,10 @@ async function mergeJointChaptersIntoMangaCustoms(
     for (const member of joint.members) {
       const mc = orgMcByKey.get(`${member.organizationId}-${joint.mangaId}`)
       if (!mc) continue
+      // Vistas efectivas: la obra en joint ya no acumula en MangaCustom.views
+      // (se "congela"); sus lecturas viven en MangaJoint.views. Sumamos el total
+      // del joint para que la tarjeta del scan muestre las vistas reales.
+      mc.views = (mc.views || 0) + (joint.views || 0)
       const existing: any[] = Array.isArray(mc.chapters) ? mc.chapters : []
       // Tag joint chapters so the frontend can build the correct /joint/manga/<slug>/chapters/<n> URL.
       const taggedJointChapters = joint.chapters.map((c: any) => ({
@@ -465,6 +470,7 @@ async function injectMemberJointEntries(
       imageUrl: true,
       mangaId: true,
       lastChapterAt: true,
+      views: true,
       manga: {
         include: {
           demography: { select: { name: true, slug: true } },
@@ -558,6 +564,7 @@ async function injectMemberJointEntries(
       hideUnreleasedChapters: false,
       deletedAt: null,
       lastChapterAt: joint.lastChapterAt,
+      views: joint.views || 0,
       organization: org,
       manga: joint.manga,
       chapters: taggedChapters,
@@ -595,6 +602,7 @@ async function injectGlobalJointEntries(
       imageUrl: true,
       mangaId: true,
       lastChapterAt: true,
+      views: true,
       manga: {
         include: {
           demography: { select: { name: true, slug: true } },
@@ -681,6 +689,7 @@ async function injectGlobalJointEntries(
       slug: joint.slug,
       mangaId: joint.mangaId,
       lastChapterAt: joint.lastChapterAt,
+      views: joint.views || 0,
       status: 'Ongoing',
       isNSFW: false,
       hideUnreleasedChapters: false,
