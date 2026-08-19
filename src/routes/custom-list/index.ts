@@ -91,6 +91,8 @@ export const router = () =>
                 mangaCustom: {
                   select: {
                     imageUrl: true,
+                    isNSFW: true,
+                    organization: { select: { isNSFW: true } },
                     manga: { select: { imageUrl: true } }
                   }
                 },
@@ -186,6 +188,8 @@ export const router = () =>
                 mangaCustom: {
                   select: {
                     imageUrl: true,
+                    isNSFW: true,
+                    organization: { select: { isNSFW: true } },
                     manga: { select: { imageUrl: true } }
                   }
                 },
