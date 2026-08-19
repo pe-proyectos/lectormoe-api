@@ -301,8 +301,19 @@ export const listMangaCustom = async (
     mangasCustoms.splice(take)
   }
 
+  // La inyección de joints NO respeta filtros estructurados (autor/género/estado):
+  // solo filtra por texto. Con un filtro activo (p. ej. ?author=), inyectar joints
+  // sin filtrar metía obras "que nada que ver". Solo inyectamos en el catálogo/
+  // landing sin filtro específico (o con búsqueda de texto, que sí se aplica).
+  const hasNarrowingFilter = !!(
+    filters.author ||
+    filters.genre ||
+    filters.status ||
+    filters.ids
+  )
+
   if (organizationId) {
-    if (isFirstPage) {
+    if (isFirstPage && !hasNarrowingFilter) {
       await injectMemberJointEntries(mangasCustoms, organizationId, filters)
       resortLatestAndTrim()
     }
@@ -311,7 +322,7 @@ export const listMangaCustom = async (
     // represented by any MangaCustom in the current page. This covers the case
     // where the joint leader org has no MangaCustom for the manga, so the joint
     // would be completely invisible on the main landing / global search.
-    if (isFirstPage) {
+    if (isFirstPage && !hasNarrowingFilter) {
       await injectGlobalJointEntries(mangasCustoms, filters)
       resortLatestAndTrim()
     }
