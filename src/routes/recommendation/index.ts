@@ -73,14 +73,18 @@ export const router = () =>
       async ({ query }) => {
         const now = new Date()
         const nsfw = query?.nsfw === 'true'
+        // Traemos TODAS las recos globales elegibles (no solo el top por
+        // position/updatedAt): con muchos scans marcando cross-promo, ordenar por
+        // position enterraba a los scans "viejos" y su reco no salía nunca. En su
+        // lugar rotamos de forma justa (ver abajo).
         const recs = await prisma.organizationRecommendation.findMany({
           where: {
             ...activeWindowWhere(now),
             showOnGlobal: true,
             OR: [{ mangaCustom: { deletedAt: null } }, { joint: { deletedAt: null } }],
           },
-          orderBy: [{ position: 'asc' }, { updatedAt: 'desc' }],
-          take: 30,
+          orderBy: [{ updatedAt: 'desc' }],
+          take: 300,
           include: {
             ...workInclude,
             organization: { select: { slug: true, name: true, logoUrl: true, isNSFW: true } },
@@ -90,8 +94,33 @@ export const router = () =>
         // Para joints (sin flag propio) se usa el scan que recomienda.
         const isNsfwRec = (r: any) =>
           !!(r.mangaCustom?.isNSFW || r.mangaCustom?.organization?.isNSFW || r.organization?.isNSFW)
-        const filtered = recs.filter(hasLiveWork).filter((r) => (nsfw ? true : !isNsfwRec(r)))
-        return { status: true, data: filtered.slice(0, 12) }
+        const pool = recs.filter(hasLiveWork).filter((r) => (nsfw ? true : !isNsfwRec(r)))
+
+        // Rotación JUSTA: barajado determinístico por franja de 10 min (estable
+        // para todos los usuarios y cacheable) para que cada scan tenga su turno
+        // en el home, más un tope de 2 por scan para que ninguno lo acapare.
+        const bucket = Math.floor(now.getTime() / (10 * 60 * 1000))
+        const rotationKey = (id: number) => {
+          let h = Math.imul((id ^ bucket) >>> 0, 2654435761) >>> 0
+          h ^= h >>> 15
+          return h >>> 0
+        }
+        pool.sort((a, b) => rotationKey(a.id) - rotationKey(b.id))
+        // 1 por scan para que TODOS los scans con reco global tengan su hueco en
+        // el home (si un scan marcó varias, rota cuál se muestra por franja). Tope
+        // alto para no cortar mientras haya pocos scans; rota si crecen mucho.
+        const MAX_GLOBAL = 20
+        const MAX_PER_SCAN_GLOBAL = 1
+        const perScan = new Map<number, number>()
+        const out: any[] = []
+        for (const r of pool) {
+          if (out.length >= MAX_GLOBAL) break
+          const c = perScan.get(r.organizationId) || 0
+          if (c >= MAX_PER_SCAN_GLOBAL) continue
+          perScan.set(r.organizationId, c + 1)
+          out.push(r)
+        }
+        return { status: true, data: out }
       },
       {
         query: t.Optional(t.Object({ nsfw: t.Optional(t.String()) })),
