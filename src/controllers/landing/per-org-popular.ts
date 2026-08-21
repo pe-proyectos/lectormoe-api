@@ -48,7 +48,7 @@ export const getPerOrgPopular = async (nsfw: boolean = false, contentKind: Conte
 
   // 3. Single fetch for all mangas with their org info — filter NSFW at manga level too
   const mangas = await prisma.mangaCustom.findMany({
-    where: { id: { in: mangaIds }, isNSFW: nsfw, deletedAt: null, ...writingFilterForViews },
+    where: { id: { in: mangaIds }, isNSFW: nsfw, deletedAt: null, isPublic: true, ...writingFilterForViews },
     select: {
       id: true,
       title: true,

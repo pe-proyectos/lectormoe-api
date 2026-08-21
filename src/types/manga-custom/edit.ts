@@ -22,6 +22,7 @@ export const EditMangaCustomRequest = t.Object({
   requireLogin: t.Optional(t.Union([t.Boolean(), t.Null()])),
   isSimulRelease: t.Optional(t.Union([t.Boolean(), t.Null()])),
   isNSFW: t.Optional(t.Union([t.Boolean(), t.Null()])),
+  isPublic: t.Optional(t.Union([t.Boolean(), t.Null()])),
   workType: t.Optional(t.Union([t.String(), t.Null()])),
   hideUnreleasedChapters: t.Optional(t.Boolean()),
   finalChapterNumber: t.Optional(t.Union([t.Number(), t.Null()])),

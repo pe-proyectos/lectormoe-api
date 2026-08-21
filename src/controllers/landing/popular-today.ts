@@ -33,7 +33,7 @@ export const getPopularToday = async (limit: number = 5, nsfw?: boolean, content
 	// pool only contains mangas that will survive the later filter — otherwise
 	// /red can return fewer than `limit` rows when most of today's top views
 	// happen to be SFW (or vice versa).
-	const mangaCustomFilter: any = { deletedAt: null };
+	const mangaCustomFilter: any = { deletedAt: null, isPublic: true };
 	// Clasificación por MANGA: /red solo +18, azul solo no-+18.
 	if (nsfw === true) {
 		mangaCustomFilter.isNSFW = true;

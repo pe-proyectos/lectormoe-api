@@ -6,8 +6,19 @@ import {
 
 export const listMangaCustom = async (
   organizationId: number | null,
-  filters: MangaCustomListQuery
+  filters: MangaCustomListQuery,
+  user?: any
 ) => {
+  // Obras privadas (isPublic=false) se ocultan de TODO listado público. Solo el
+  // STAFF del scan en contexto las ve (para su panel). En el catálogo global (sin
+  // org) nunca se muestran.
+  const isStaffOfOrg = !!(
+    organizationId &&
+    user?.permissions?.some(
+      (p: any) => p.organizationId === organizationId && p.canSeeAdminPanel
+    )
+  )
+  const publicFilter = isStaffOfOrg ? {} : { isPublic: true }
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   const order: any = {}
 
@@ -114,6 +125,7 @@ export const listMangaCustom = async (
   // Build common where clause
   const whereClause = {
     ...deletedFilter,
+    ...publicFilter,
     ...(filters.type
       ? {
           manga: {

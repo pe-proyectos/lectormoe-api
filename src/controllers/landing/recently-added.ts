@@ -31,6 +31,7 @@ export const getRecentlyAdded = async (
 ) => {
   const where: any = {
     deletedAt: null,
+    isPublic: true,
     OR: [{ imageUrl: { not: null } }, { manga: { imageUrl: { not: null } } }],
     AND: [{ organization: { isPublic: true, isDeleted: false } }]
   }

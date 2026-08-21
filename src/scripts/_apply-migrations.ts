@@ -230,7 +230,9 @@ const statements: string[] = [
   `CREATE INDEX IF NOT EXISTS "clfi_user_list_order_idx" ON "custom_list_follower_item"("userId", "listId", "order");`,
   // Caso copyright: manga solo-logueados + copia difuminada por página.
   `ALTER TABLE "manga_custom" ADD COLUMN IF NOT EXISTS "loggedInOnly" BOOLEAN NOT NULL DEFAULT false;`,
-  `ALTER TABLE "page" ADD COLUMN IF NOT EXISTS "blurUrl" TEXT;`
+  `ALTER TABLE "page" ADD COLUMN IF NOT EXISTS "blurUrl" TEXT;`,
+  // Obra pública / privada (retiro por copyright): privada = solo staff, sin anuncios.
+  `ALTER TABLE "manga_custom" ADD COLUMN IF NOT EXISTS "isPublic" BOOLEAN NOT NULL DEFAULT true;`
 ]
 
 for (const sql of statements) {

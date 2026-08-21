@@ -20,6 +20,7 @@ export const router = () =>
         prisma.mangaCustom.findMany({
           where: {
             deletedAt: null,
+            isPublic: true,
             isNSFW: false,
             organization: { isPublic: true, isDeleted: false, isNSFW: false }
           },

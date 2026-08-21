@@ -398,6 +398,10 @@ model MangaCustom {
   // páginas difuminadas (Page.blurUrl), nunca las originales. Se activa a mano
   // solo en obras con disputa de copyright para proteger los anuncios.
   loggedInOnly                       Boolean            @default(false)
+  // Obra pública. Si es false: se oculta de TODO listado/búsqueda/home público;
+  // solo el STAFF del scan puede verla (para retirar contenido con copyright); y
+  // se DESACTIVAN los anuncios en sus páginas mientras esté en privado.
+  isPublic                           Boolean            @default(true)
   workType                           String             @default("manga") @db.VarChar(32)
   deletedAt                          DateTime?
   nextChapterAtMessage               String?

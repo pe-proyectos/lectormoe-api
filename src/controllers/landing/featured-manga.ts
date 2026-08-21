@@ -55,6 +55,7 @@ export const getFeaturedManga = async (limit: number = 8, nsfw?: boolean, conten
 	const mangasCustoms = await prisma.mangaCustom.findMany({
 		where: {
 			deletedAt: null,
+			isPublic: true,
 			AND: [
 				...nsfwCondition,
 				...contentKindCondition,

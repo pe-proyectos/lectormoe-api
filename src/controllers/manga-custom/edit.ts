@@ -38,6 +38,9 @@ export const editMangaCustom = async (
     requireLogin: params.requireLogin,
     isSimulRelease: params.isSimulRelease,
     isNSFW: params.isNSFW,
+    ...((params as any).isPublic !== undefined
+      ? { isPublic: (params as any).isPublic }
+      : {}),
     workType: params.workType,
     ...(params.hideUnreleasedChapters !== undefined
       ? { hideUnreleasedChapters: params.hideUnreleasedChapters }

@@ -86,6 +86,15 @@ export const getMangaCustomBySlug = async (
     return null
   }
 
+  // Obra privada (isPublic=false): solo el STAFF del scan puede verla. Para el
+  // resto (incl. anónimos y Google) es como si no existiera → 404.
+  const isStaffHere = !!user?.permissions?.some(
+    (p: any) => p.organizationId === organizationId && p.canSeeAdminPanel
+  )
+  if ((mangaCustom as any).isPublic === false && !isStaffHere) {
+    return null
+  }
+
   // Only redirect to the joint page when the CURRENT org (the one whose
   // page the viewer is on) is an ACCEPTED member of the joint. A joint
   // owned by a different scan should not hijack other scans' manga pages

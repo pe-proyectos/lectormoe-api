@@ -52,6 +52,9 @@ export const router = () => new Elysia()
                 if(body.isNSFW !== undefined && body.isNSFW !== null){
                     body.isNSFW = body.isNSFW.toString() === "true";
                 }
+                if((body as any).isPublic !== undefined && (body as any).isPublic !== null){
+                    (body as any).isPublic = (body as any).isPublic.toString() === "true";
+                }
                 if(body.genreIds !== undefined) {
                     if (Array.isArray(body.genreIds)) {
                         body.genreIds = body.genreIds.map(genreId => Number.parseInt(genreId.toString()));

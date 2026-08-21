@@ -54,7 +54,7 @@ export const router = () =>
           where: {
             ...activeWindowWhere(now),
             organization: { slug: query.org },
-            OR: [{ mangaCustom: { deletedAt: null } }, { joint: { deletedAt: null } }],
+            OR: [{ mangaCustom: { deletedAt: null, isPublic: true } }, { joint: { deletedAt: null } }],
           },
           orderBy: [{ position: 'asc' }, { createdAt: 'asc' }],
           take: 12,
@@ -81,7 +81,7 @@ export const router = () =>
           where: {
             ...activeWindowWhere(now),
             showOnGlobal: true,
-            OR: [{ mangaCustom: { deletedAt: null } }, { joint: { deletedAt: null } }],
+            OR: [{ mangaCustom: { deletedAt: null, isPublic: true } }, { joint: { deletedAt: null } }],
           },
           orderBy: [{ updatedAt: 'desc' }],
           take: 300,

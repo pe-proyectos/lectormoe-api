@@ -20,7 +20,7 @@ export const router = () =>
       }) => {
         const permissions = user ? user.permissions.find((p: any) => p.organizationId === organizationId) : null;
         const [mangaCustom, chapter] = await Promise.all([
-          getMangaCustomBySlug(organizationId, mangaSlug),
+          getMangaCustomBySlug(organizationId, mangaSlug, user),
           getChapter(organizationId, mangaSlug, chapterNumber),
         ]);
 

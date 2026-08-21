@@ -5236,6 +5236,7 @@ export const MangaCustomScalarFieldEnum = {
   isSimulRelease: 'isSimulRelease',
   isNSFW: 'isNSFW',
   loggedInOnly: 'loggedInOnly',
+  isPublic: 'isPublic',
   workType: 'workType',
   deletedAt: 'deletedAt',
   nextChapterAtMessage: 'nextChapterAtMessage',
