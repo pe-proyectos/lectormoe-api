@@ -47,6 +47,7 @@ export type PageMinAggregateOutputType = {
   chapterId: number | null
   number: number | null
   imageUrl: string | null
+  blurUrl: string | null
   createdAt: Date | null
   updatedAt: Date | null
   imageHeight: number | null
@@ -60,6 +61,7 @@ export type PageMaxAggregateOutputType = {
   chapterId: number | null
   number: number | null
   imageUrl: string | null
+  blurUrl: string | null
   createdAt: Date | null
   updatedAt: Date | null
   imageHeight: number | null
@@ -73,6 +75,7 @@ export type PageCountAggregateOutputType = {
   chapterId: number
   number: number
   imageUrl: number
+  blurUrl: number
   createdAt: number
   updatedAt: number
   imageHeight: number
@@ -104,6 +107,7 @@ export type PageMinAggregateInputType = {
   chapterId?: true
   number?: true
   imageUrl?: true
+  blurUrl?: true
   createdAt?: true
   updatedAt?: true
   imageHeight?: true
@@ -117,6 +121,7 @@ export type PageMaxAggregateInputType = {
   chapterId?: true
   number?: true
   imageUrl?: true
+  blurUrl?: true
   createdAt?: true
   updatedAt?: true
   imageHeight?: true
@@ -130,6 +135,7 @@ export type PageCountAggregateInputType = {
   chapterId?: true
   number?: true
   imageUrl?: true
+  blurUrl?: true
   createdAt?: true
   updatedAt?: true
   imageHeight?: true
@@ -230,6 +236,7 @@ export type PageGroupByOutputType = {
   chapterId: number
   number: number
   imageUrl: string
+  blurUrl: string | null
   createdAt: Date
   updatedAt: Date
   imageHeight: number
@@ -266,6 +273,7 @@ export type PageWhereInput = {
   chapterId?: Prisma.IntFilter<"Page"> | number
   number?: Prisma.IntFilter<"Page"> | number
   imageUrl?: Prisma.StringFilter<"Page"> | string
+  blurUrl?: Prisma.StringNullableFilter<"Page"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Page"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Page"> | Date | string
   imageHeight?: Prisma.IntFilter<"Page"> | number
@@ -280,6 +288,7 @@ export type PageOrderByWithRelationInput = {
   chapterId?: Prisma.SortOrder
   number?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
+  blurUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   imageHeight?: Prisma.SortOrder
@@ -298,6 +307,7 @@ export type PageWhereUniqueInput = Prisma.AtLeast<{
   chapterId?: Prisma.IntFilter<"Page"> | number
   number?: Prisma.IntFilter<"Page"> | number
   imageUrl?: Prisma.StringFilter<"Page"> | string
+  blurUrl?: Prisma.StringNullableFilter<"Page"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Page"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Page"> | Date | string
   imageHeight?: Prisma.IntFilter<"Page"> | number
@@ -312,6 +322,7 @@ export type PageOrderByWithAggregationInput = {
   chapterId?: Prisma.SortOrder
   number?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
+  blurUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   imageHeight?: Prisma.SortOrder
@@ -333,6 +344,7 @@ export type PageScalarWhereWithAggregatesInput = {
   chapterId?: Prisma.IntWithAggregatesFilter<"Page"> | number
   number?: Prisma.IntWithAggregatesFilter<"Page"> | number
   imageUrl?: Prisma.StringWithAggregatesFilter<"Page"> | string
+  blurUrl?: Prisma.StringNullableWithAggregatesFilter<"Page"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Page"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Page"> | Date | string
   imageHeight?: Prisma.IntWithAggregatesFilter<"Page"> | number
@@ -344,6 +356,7 @@ export type PageScalarWhereWithAggregatesInput = {
 export type PageCreateInput = {
   number: number
   imageUrl: string
+  blurUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   imageHeight: number
@@ -358,6 +371,7 @@ export type PageUncheckedCreateInput = {
   chapterId: number
   number: number
   imageUrl: string
+  blurUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   imageHeight: number
@@ -369,6 +383,7 @@ export type PageUncheckedCreateInput = {
 export type PageUpdateInput = {
   number?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  blurUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   imageHeight?: Prisma.IntFieldUpdateOperationsInput | number
@@ -383,6 +398,7 @@ export type PageUncheckedUpdateInput = {
   chapterId?: Prisma.IntFieldUpdateOperationsInput | number
   number?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  blurUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   imageHeight?: Prisma.IntFieldUpdateOperationsInput | number
@@ -396,6 +412,7 @@ export type PageCreateManyInput = {
   chapterId: number
   number: number
   imageUrl: string
+  blurUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   imageHeight: number
@@ -407,6 +424,7 @@ export type PageCreateManyInput = {
 export type PageUpdateManyMutationInput = {
   number?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  blurUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   imageHeight?: Prisma.IntFieldUpdateOperationsInput | number
@@ -420,6 +438,7 @@ export type PageUncheckedUpdateManyInput = {
   chapterId?: Prisma.IntFieldUpdateOperationsInput | number
   number?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  blurUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   imageHeight?: Prisma.IntFieldUpdateOperationsInput | number
@@ -448,6 +467,7 @@ export type PageCountOrderByAggregateInput = {
   chapterId?: Prisma.SortOrder
   number?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
+  blurUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   imageHeight?: Prisma.SortOrder
@@ -469,6 +489,7 @@ export type PageMaxOrderByAggregateInput = {
   chapterId?: Prisma.SortOrder
   number?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
+  blurUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   imageHeight?: Prisma.SortOrder
@@ -482,6 +503,7 @@ export type PageMinOrderByAggregateInput = {
   chapterId?: Prisma.SortOrder
   number?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
+  blurUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   imageHeight?: Prisma.SortOrder
@@ -543,6 +565,7 @@ export type PageUncheckedUpdateManyWithoutChapterNestedInput = {
 export type PageCreateWithoutChapterInput = {
   number: number
   imageUrl: string
+  blurUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   imageHeight: number
@@ -555,6 +578,7 @@ export type PageUncheckedCreateWithoutChapterInput = {
   id?: number
   number: number
   imageUrl: string
+  blurUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   imageHeight: number
@@ -597,6 +621,7 @@ export type PageScalarWhereInput = {
   chapterId?: Prisma.IntFilter<"Page"> | number
   number?: Prisma.IntFilter<"Page"> | number
   imageUrl?: Prisma.StringFilter<"Page"> | string
+  blurUrl?: Prisma.StringNullableFilter<"Page"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Page"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Page"> | Date | string
   imageHeight?: Prisma.IntFilter<"Page"> | number
@@ -609,6 +634,7 @@ export type PageCreateManyChapterInput = {
   id?: number
   number: number
   imageUrl: string
+  blurUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   imageHeight: number
@@ -620,6 +646,7 @@ export type PageCreateManyChapterInput = {
 export type PageUpdateWithoutChapterInput = {
   number?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  blurUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   imageHeight?: Prisma.IntFieldUpdateOperationsInput | number
@@ -632,6 +659,7 @@ export type PageUncheckedUpdateWithoutChapterInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   number?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  blurUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   imageHeight?: Prisma.IntFieldUpdateOperationsInput | number
@@ -644,6 +672,7 @@ export type PageUncheckedUpdateManyWithoutChapterInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   number?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  blurUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   imageHeight?: Prisma.IntFieldUpdateOperationsInput | number
@@ -659,6 +688,7 @@ export type PageSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   chapterId?: boolean
   number?: boolean
   imageUrl?: boolean
+  blurUrl?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   imageHeight?: boolean
@@ -673,6 +703,7 @@ export type PageSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   chapterId?: boolean
   number?: boolean
   imageUrl?: boolean
+  blurUrl?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   imageHeight?: boolean
@@ -687,6 +718,7 @@ export type PageSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   chapterId?: boolean
   number?: boolean
   imageUrl?: boolean
+  blurUrl?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   imageHeight?: boolean
@@ -701,6 +733,7 @@ export type PageSelectScalar = {
   chapterId?: boolean
   number?: boolean
   imageUrl?: boolean
+  blurUrl?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   imageHeight?: boolean
@@ -709,7 +742,7 @@ export type PageSelectScalar = {
   isSinglePage?: boolean
 }
 
-export type PageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "chapterId" | "number" | "imageUrl" | "createdAt" | "updatedAt" | "imageHeight" | "imageType" | "imageWidth" | "isSinglePage", ExtArgs["result"]["page"]>
+export type PageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "chapterId" | "number" | "imageUrl" | "blurUrl" | "createdAt" | "updatedAt" | "imageHeight" | "imageType" | "imageWidth" | "isSinglePage", ExtArgs["result"]["page"]>
 export type PageInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   chapter?: boolean | Prisma.ChapterDefaultArgs<ExtArgs>
 }
@@ -730,6 +763,7 @@ export type $PagePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     chapterId: number
     number: number
     imageUrl: string
+    blurUrl: string | null
     createdAt: Date
     updatedAt: Date
     imageHeight: number
@@ -1164,6 +1198,7 @@ export interface PageFieldRefs {
   readonly chapterId: Prisma.FieldRef<"Page", 'Int'>
   readonly number: Prisma.FieldRef<"Page", 'Int'>
   readonly imageUrl: Prisma.FieldRef<"Page", 'String'>
+  readonly blurUrl: Prisma.FieldRef<"Page", 'String'>
   readonly createdAt: Prisma.FieldRef<"Page", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Page", 'DateTime'>
   readonly imageHeight: Prisma.FieldRef<"Page", 'Int'>

@@ -394,6 +394,10 @@ model MangaCustom {
   requireLogin                       Boolean            @default(false)
   isSimulRelease                     Boolean            @default(false)
   isNSFW                             Boolean            @default(false)
+  // Caso copyright: si es true, los usuarios DESLOGUEADOS solo reciben las
+  // páginas difuminadas (Page.blurUrl), nunca las originales. Se activa a mano
+  // solo en obras con disputa de copyright para proteger los anuncios.
+  loggedInOnly                       Boolean            @default(false)
   workType                           String             @default("manga") @db.VarChar(32)
   deletedAt                          DateTime?
   nextChapterAtMessage               String?
@@ -675,6 +679,10 @@ model Page {
   chapterId    Int
   number       Int
   imageUrl     String
+  // Copia difuminada (70%) servida a usuarios DESLOGUEADOS cuando el manga tiene
+  // loggedInOnly=true (casos de copyright): así Google/anónimos nunca reciben la
+  // imagen original. El original (imageUrl) solo se sirve a usuarios logueados.
+  blurUrl      String?
   createdAt    DateTime @default(now()) @db.Timestamp(6)
   updatedAt    DateTime @updatedAt
   imageHeight  Int

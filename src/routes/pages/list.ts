@@ -47,9 +47,25 @@ export const router = () =>
 
         const pages = await listPages(organizationId, mangaSlug, chapterNumber);
 
+        // Caso copyright (loggedInOnly): a los usuarios DESLOGUEADOS se les sirve
+        // SOLO la copia difuminada (blurUrl) — nunca la imagen original. Así
+        // Google/anónimos jamás reciben el original y se corta el DMCA. Los
+        // usuarios logueados ven el original normal.
+        const servedPages =
+          (mangaCustom as any).loggedInOnly && !user
+            ? pages.map((p: any) => ({
+                ...p,
+                // NUNCA el original: si aún no hay copia difuminada, se sirve
+                // vacío (no se filtra el original a anónimos/Google).
+                imageUrl: p.blurUrl || '',
+                blurUrl: undefined,
+                blurred: !!p.blurUrl,
+              }))
+            : pages;
+
         return {
           status: true,
-          data: pages,
+          data: servedPages,
         };
       },
       {
