@@ -20,6 +20,7 @@ type UserWithSubscriptions = Pick<User, "id"> & {
 };
 
 type MangaCustomWithPlans = Pick<MangaCustom, "id" | "requireLogin"> & {
+  organizationId?: number;
   subscriptionPlansCanReadUnreleased?: Array<Pick<SubscriptionPlan, "id" | "canReadUnreleased" | "active" | "name">>;
   subscriptionPlansCanReadReleased?: Array<Pick<SubscriptionPlan, "id" | "canReadUnreleased" | "active" | "name">>;
 };
@@ -130,7 +131,32 @@ const userHasAccessToChapter = async (
 
       return false; // Usuario no tiene un plan permitido
     } else {
-      // subscriptionPlansCanReadUnreleased está vacío → Nadie puede leer antes de la fecha
+      // subscriptionPlansCanReadUnreleased está vacío → la obra NO restringe
+      // planes específicos para el adelanto. Se respeta el flag del plan: cualquier
+      // suscriptor con un plan ACTIVO del MISMO scan y con canReadUnreleased=true
+      // puede leer el adelanto. (Antes: nadie podía; el flag del plan se ignoraba,
+      // lo que dejaba a suscriptores pagados sin acceso al contenido anticipado.)
+      if (!user) return false;
+
+      const orgId = mangaWithPlans?.organizationId;
+
+      for (const subscription of user?.subscriptions || []) {
+        if (subscription.active === false) continue;
+        if (subscription.endDate && new Date(subscription.endDate) < new Date()) continue;
+
+        const subscriptionPlan = await prisma.subscriptionPlan.findUnique({
+          where: { id: subscription?.subscriptionPlan?.id },
+        });
+
+        if (!subscriptionPlan?.active) continue;
+        if (subscriptionPlan.canReadUnreleased !== true) continue;
+        // Seguridad: la suscripción debe ser del MISMO scan que la obra.
+        // Si no conocemos el org de la obra, fallar cerrado (no dar acceso cruzado).
+        if (!orgId || subscriptionPlan.organizationId !== orgId) continue;
+
+        return true;
+      }
+
       return false;
     }
   }
