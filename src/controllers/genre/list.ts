@@ -1,9 +1,11 @@
 import { prisma, Prisma } from "../../models/prisma";
 
-export const listGenre = async (organizationId: number) => {
+// Catálogo GLOBAL de géneros (organizationId = null). Deduplicado y curado,
+// compartido por todos los scans. Ya no se filtra por organización.
+export const listGenre = async () => {
 	return await prisma.genre.findMany({
 		where: {
-			organizationId,
+			organizationId: null,
 			display: true
 		},
 		orderBy: {

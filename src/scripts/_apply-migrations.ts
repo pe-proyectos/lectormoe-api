@@ -232,7 +232,12 @@ const statements: string[] = [
   `ALTER TABLE "manga_custom" ADD COLUMN IF NOT EXISTS "loggedInOnly" BOOLEAN NOT NULL DEFAULT false;`,
   `ALTER TABLE "page" ADD COLUMN IF NOT EXISTS "blurUrl" TEXT;`,
   // Obra pública / privada (retiro por copyright): privada = solo staff, sin anuncios.
-  `ALTER TABLE "manga_custom" ADD COLUMN IF NOT EXISTS "isPublic" BOOLEAN NOT NULL DEFAULT true;`
+  `ALTER TABLE "manga_custom" ADD COLUMN IF NOT EXISTS "isPublic" BOOLEAN NOT NULL DEFAULT true;`,
+  // Géneros globales: organizationId pasa a ser opcional (NULL = género global del
+  // catálogo curado, compartido por todos los scans). Índice único parcial sobre
+  // slug para los globales, para que no se dupliquen.
+  `ALTER TABLE "genre" ALTER COLUMN "organizationId" DROP NOT NULL;`,
+  `CREATE UNIQUE INDEX IF NOT EXISTS "genre_global_slug_key" ON "genre"("slug") WHERE "organizationId" IS NULL;`
 ]
 
 for (const sql of statements) {

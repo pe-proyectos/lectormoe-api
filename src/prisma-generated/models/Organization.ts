@@ -1619,10 +1619,12 @@ export type OrganizationCreateNestedOneWithoutGenresInput = {
   connect?: Prisma.OrganizationWhereUniqueInput
 }
 
-export type OrganizationUpdateOneRequiredWithoutGenresNestedInput = {
+export type OrganizationUpdateOneWithoutGenresNestedInput = {
   create?: Prisma.XOR<Prisma.OrganizationCreateWithoutGenresInput, Prisma.OrganizationUncheckedCreateWithoutGenresInput>
   connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutGenresInput
   upsert?: Prisma.OrganizationUpsertWithoutGenresInput
+  disconnect?: Prisma.OrganizationWhereInput | boolean
+  delete?: Prisma.OrganizationWhereInput | boolean
   connect?: Prisma.OrganizationWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutGenresInput, Prisma.OrganizationUpdateWithoutGenresInput>, Prisma.OrganizationUncheckedUpdateWithoutGenresInput>
 }

@@ -209,7 +209,7 @@ export type GenreGroupByOutputType = {
   display: boolean
   createdAt: Date
   updatedAt: Date
-  organizationId: number
+  organizationId: number | null
   _count: GenreCountAggregateOutputType | null
   _avg: GenreAvgAggregateOutputType | null
   _sum: GenreSumAggregateOutputType | null
@@ -243,8 +243,8 @@ export type GenreWhereInput = {
   display?: Prisma.BoolFilter<"Genre"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Genre"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Genre"> | Date | string
-  organizationId?: Prisma.IntFilter<"Genre"> | number
-  organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
+  organizationId?: Prisma.IntNullableFilter<"Genre"> | number | null
+  organization?: Prisma.XOR<Prisma.OrganizationNullableScalarRelationFilter, Prisma.OrganizationWhereInput> | null
   mangasCustom?: Prisma.MangaCustomListRelationFilter
 }
 
@@ -256,7 +256,7 @@ export type GenreOrderByWithRelationInput = {
   display?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  organizationId?: Prisma.SortOrder
+  organizationId?: Prisma.SortOrderInput | Prisma.SortOrder
   organization?: Prisma.OrganizationOrderByWithRelationInput
   mangasCustom?: Prisma.MangaCustomOrderByRelationAggregateInput
 }
@@ -273,8 +273,8 @@ export type GenreWhereUniqueInput = Prisma.AtLeast<{
   display?: Prisma.BoolFilter<"Genre"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Genre"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Genre"> | Date | string
-  organizationId?: Prisma.IntFilter<"Genre"> | number
-  organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
+  organizationId?: Prisma.IntNullableFilter<"Genre"> | number | null
+  organization?: Prisma.XOR<Prisma.OrganizationNullableScalarRelationFilter, Prisma.OrganizationWhereInput> | null
   mangasCustom?: Prisma.MangaCustomListRelationFilter
 }, "id" | "organizationId_slug">
 
@@ -286,7 +286,7 @@ export type GenreOrderByWithAggregationInput = {
   display?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  organizationId?: Prisma.SortOrder
+  organizationId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.GenreCountOrderByAggregateInput
   _avg?: Prisma.GenreAvgOrderByAggregateInput
   _max?: Prisma.GenreMaxOrderByAggregateInput
@@ -305,7 +305,7 @@ export type GenreScalarWhereWithAggregatesInput = {
   display?: Prisma.BoolWithAggregatesFilter<"Genre"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Genre"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Genre"> | Date | string
-  organizationId?: Prisma.IntWithAggregatesFilter<"Genre"> | number
+  organizationId?: Prisma.IntNullableWithAggregatesFilter<"Genre"> | number | null
 }
 
 export type GenreCreateInput = {
@@ -315,7 +315,7 @@ export type GenreCreateInput = {
   display?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  organization: Prisma.OrganizationCreateNestedOneWithoutGenresInput
+  organization?: Prisma.OrganizationCreateNestedOneWithoutGenresInput
   mangasCustom?: Prisma.MangaCustomCreateNestedManyWithoutGenresInput
 }
 
@@ -327,7 +327,7 @@ export type GenreUncheckedCreateInput = {
   display?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  organizationId: number
+  organizationId?: number | null
   mangasCustom?: Prisma.MangaCustomUncheckedCreateNestedManyWithoutGenresInput
 }
 
@@ -338,7 +338,7 @@ export type GenreUpdateInput = {
   display?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  organization?: Prisma.OrganizationUpdateOneRequiredWithoutGenresNestedInput
+  organization?: Prisma.OrganizationUpdateOneWithoutGenresNestedInput
   mangasCustom?: Prisma.MangaCustomUpdateManyWithoutGenresNestedInput
 }
 
@@ -350,7 +350,7 @@ export type GenreUncheckedUpdateInput = {
   display?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  organizationId?: Prisma.IntFieldUpdateOperationsInput | number
+  organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   mangasCustom?: Prisma.MangaCustomUncheckedUpdateManyWithoutGenresNestedInput
 }
 
@@ -362,7 +362,7 @@ export type GenreCreateManyInput = {
   display?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  organizationId: number
+  organizationId?: number | null
 }
 
 export type GenreUpdateManyMutationInput = {
@@ -382,7 +382,7 @@ export type GenreUncheckedUpdateManyInput = {
   display?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  organizationId?: Prisma.IntFieldUpdateOperationsInput | number
+  organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type GenreListRelationFilter = {
@@ -581,7 +581,7 @@ export type GenreScalarWhereInput = {
   display?: Prisma.BoolFilter<"Genre"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Genre"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Genre"> | Date | string
-  organizationId?: Prisma.IntFilter<"Genre"> | number
+  organizationId?: Prisma.IntNullableFilter<"Genre"> | number | null
 }
 
 export type GenreCreateWithoutMangasCustomInput = {
@@ -591,7 +591,7 @@ export type GenreCreateWithoutMangasCustomInput = {
   display?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  organization: Prisma.OrganizationCreateNestedOneWithoutGenresInput
+  organization?: Prisma.OrganizationCreateNestedOneWithoutGenresInput
 }
 
 export type GenreUncheckedCreateWithoutMangasCustomInput = {
@@ -602,7 +602,7 @@ export type GenreUncheckedCreateWithoutMangasCustomInput = {
   display?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  organizationId: number
+  organizationId?: number | null
 }
 
 export type GenreCreateOrConnectWithoutMangasCustomInput = {
@@ -674,7 +674,7 @@ export type GenreUpdateWithoutMangasCustomInput = {
   display?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  organization?: Prisma.OrganizationUpdateOneRequiredWithoutGenresNestedInput
+  organization?: Prisma.OrganizationUpdateOneWithoutGenresNestedInput
 }
 
 export type GenreUncheckedUpdateWithoutMangasCustomInput = {
@@ -685,7 +685,7 @@ export type GenreUncheckedUpdateWithoutMangasCustomInput = {
   display?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  organizationId?: Prisma.IntFieldUpdateOperationsInput | number
+  organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type GenreUncheckedUpdateManyWithoutMangasCustomInput = {
@@ -696,7 +696,7 @@ export type GenreUncheckedUpdateManyWithoutMangasCustomInput = {
   display?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  organizationId?: Prisma.IntFieldUpdateOperationsInput | number
+  organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 
@@ -739,7 +739,7 @@ export type GenreSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   createdAt?: boolean
   updatedAt?: boolean
   organizationId?: boolean
-  organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
+  organization?: boolean | Prisma.Genre$organizationArgs<ExtArgs>
   mangasCustom?: boolean | Prisma.Genre$mangasCustomArgs<ExtArgs>
   _count?: boolean | Prisma.GenreCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["genre"]>
@@ -753,7 +753,7 @@ export type GenreSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   createdAt?: boolean
   updatedAt?: boolean
   organizationId?: boolean
-  organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
+  organization?: boolean | Prisma.Genre$organizationArgs<ExtArgs>
 }, ExtArgs["result"]["genre"]>
 
 export type GenreSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -765,7 +765,7 @@ export type GenreSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   createdAt?: boolean
   updatedAt?: boolean
   organizationId?: boolean
-  organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
+  organization?: boolean | Prisma.Genre$organizationArgs<ExtArgs>
 }, ExtArgs["result"]["genre"]>
 
 export type GenreSelectScalar = {
@@ -781,21 +781,21 @@ export type GenreSelectScalar = {
 
 export type GenreOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "slug" | "description" | "display" | "createdAt" | "updatedAt" | "organizationId", ExtArgs["result"]["genre"]>
 export type GenreInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
+  organization?: boolean | Prisma.Genre$organizationArgs<ExtArgs>
   mangasCustom?: boolean | Prisma.Genre$mangasCustomArgs<ExtArgs>
   _count?: boolean | Prisma.GenreCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type GenreIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
+  organization?: boolean | Prisma.Genre$organizationArgs<ExtArgs>
 }
 export type GenreIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
+  organization?: boolean | Prisma.Genre$organizationArgs<ExtArgs>
 }
 
 export type $GenrePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Genre"
   objects: {
-    organization: Prisma.$OrganizationPayload<ExtArgs>
+    organization: Prisma.$OrganizationPayload<ExtArgs> | null
     mangasCustom: Prisma.$MangaCustomPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -806,7 +806,7 @@ export type $GenrePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     display: boolean
     createdAt: Date
     updatedAt: Date
-    organizationId: number
+    organizationId: number | null
   }, ExtArgs["result"]["genre"]>
   composites: {}
 }
@@ -1201,7 +1201,7 @@ readonly fields: GenreFieldRefs;
  */
 export interface Prisma__GenreClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  organization<T extends Prisma.OrganizationDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationDefaultArgs<ExtArgs>>): Prisma.Prisma__OrganizationClient<runtime.Types.Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  organization<T extends Prisma.Genre$organizationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Genre$organizationArgs<ExtArgs>>): Prisma.Prisma__OrganizationClient<runtime.Types.Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   mangasCustom<T extends Prisma.Genre$mangasCustomArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Genre$mangasCustomArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MangaCustomPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1633,6 +1633,25 @@ export type GenreDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Limit how many Genres to delete.
    */
   limit?: number
+}
+
+/**
+ * Genre.organization
+ */
+export type Genre$organizationArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Organization
+   */
+  select?: Prisma.OrganizationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Organization
+   */
+  omit?: Prisma.OrganizationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrganizationInclude<ExtArgs> | null
+  where?: Prisma.OrganizationWhereInput
 }
 
 /**

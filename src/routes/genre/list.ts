@@ -1,14 +1,14 @@
 import { Elysia, t } from 'elysia';
 
 import { listGenre } from '../../controllers/genre/list';
-import { useOrganization } from '../../plugins/organization';
 
+// Catálogo global de géneros: público y sin requerir organización (se usa en la
+// búsqueda global y en el editor de manga de cualquier scan).
 export const router = () => new Elysia()
-    .use(useOrganization())
     .get(
         '/api/genre',
-        async ({ organizationId }) => {
-            const data = await listGenre(organizationId);
+        async () => {
+            const data = await listGenre();
             return { status: true, data };
         },
         {

@@ -781,8 +781,8 @@ model Genre {
   display        Boolean       @default(true)
   createdAt      DateTime      @default(now()) @db.Timestamp(6)
   updatedAt      DateTime      @updatedAt
-  organizationId Int
-  organization   Organization  @relation(fields: [organizationId], references: [id])
+  organizationId Int?
+  organization   Organization? @relation(fields: [organizationId], references: [id])
   mangasCustom   MangaCustom[] @relation("GenreToMangaCustom")
 
   @@unique([organizationId, slug])
