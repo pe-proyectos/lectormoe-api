@@ -198,6 +198,7 @@ export const getTrending = async (
         mangaUrl: `/joint/manga/${j.slug}`,
         badgeColor: 'bg-purple-600',
         readers: entry.readers,
+        views: j.views || 0,
         chapters: j.chapters.map((c: any) => ({
           id: c.id,
           number: c.number,
@@ -222,6 +223,7 @@ export const getTrending = async (
       mangaUrl: `/${mc.organization.slug}/manga/${mc.manga.slug}`,
       badgeColor: getBadgeColor(mc.organization.name),
       readers: entry.readers,
+      views: mc.views || 0,
       chapters: mc.chapters.map((c: any) => ({
         id: c.id,
         number: c.number,

@@ -84,6 +84,7 @@ export const getRecentlyAdded = async (
             : null,
         badgeColor: getBadgeColor(mc.organization.name),
         createdAt: mc.createdAt,
+        views: mc.views || 0,
         organizationId: mc.organization.id,
         isNSFW: mc.isNSFW || mc.organization.isNSFW
       }
