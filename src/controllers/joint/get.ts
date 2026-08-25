@@ -111,6 +111,7 @@ export const getJoint = async (slug: string) => {
         },
       },
       members: { where: { status: 'ACCEPTED' }, select: MEMBER_SELECT },
+      genres: { select: { id: true, name: true, category: true, nsfw: true, description: true } },
     },
   });
 
@@ -134,6 +135,7 @@ export const getJointForAdmin = async (slug: string) => {
         },
       },
       members: { select: MEMBER_SELECT },
+      genres: { select: { id: true, name: true, category: true, nsfw: true, description: true } },
     },
   });
 

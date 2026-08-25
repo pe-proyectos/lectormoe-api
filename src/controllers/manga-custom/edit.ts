@@ -21,6 +21,16 @@ export const editMangaCustom = async (
     throw new Error('Tu organización no tiene este manga')
   }
 
+  // No se puede marcar como one-shot si la obra tiene más de un capítulo.
+  if ((params as any).isOneShot === true) {
+    const chapterCount = await prisma.chapter.count({
+      where: { mangaCustomId: mangaCustom.id, deletedAt: null }
+    })
+    if (chapterCount > 1) {
+      throw new Error('No se puede marcar como one-shot: la obra tiene más de un capítulo.')
+    }
+  }
+
   // Construir URLs desde fileKeys
   const r2PublicUrl =
     Bun.env.R2_PUBLIC_URL || 'https://r2.capibaratraductor.com'

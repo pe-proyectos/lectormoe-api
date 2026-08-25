@@ -790,6 +790,7 @@ model Genre {
   organizationId Int?
   organization   Organization? @relation(fields: [organizationId], references: [id])
   mangasCustom   MangaCustom[] @relation("GenreToMangaCustom")
+  joints         MangaJoint[]  @relation("GenreToMangaJoint")
 
   @@unique([organizationId, slug])
   @@map("genre")
@@ -1183,6 +1184,7 @@ model MangaJoint {
   customListItems  CustomListItem[]
   members          JointMember[]
   chapters         Chapter[]
+  genres           Genre[]       @relation("GenreToMangaJoint")
   viewsHistory     ViewsHistory[]
   favorites        Favorite[]
   userListEntries  UserList[]

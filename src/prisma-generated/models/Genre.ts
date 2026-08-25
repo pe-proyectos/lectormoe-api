@@ -262,6 +262,7 @@ export type GenreWhereInput = {
   organizationId?: Prisma.IntNullableFilter<"Genre"> | number | null
   organization?: Prisma.XOR<Prisma.OrganizationNullableScalarRelationFilter, Prisma.OrganizationWhereInput> | null
   mangasCustom?: Prisma.MangaCustomListRelationFilter
+  joints?: Prisma.MangaJointListRelationFilter
 }
 
 export type GenreOrderByWithRelationInput = {
@@ -277,6 +278,7 @@ export type GenreOrderByWithRelationInput = {
   organizationId?: Prisma.SortOrderInput | Prisma.SortOrder
   organization?: Prisma.OrganizationOrderByWithRelationInput
   mangasCustom?: Prisma.MangaCustomOrderByRelationAggregateInput
+  joints?: Prisma.MangaJointOrderByRelationAggregateInput
 }
 
 export type GenreWhereUniqueInput = Prisma.AtLeast<{
@@ -296,6 +298,7 @@ export type GenreWhereUniqueInput = Prisma.AtLeast<{
   organizationId?: Prisma.IntNullableFilter<"Genre"> | number | null
   organization?: Prisma.XOR<Prisma.OrganizationNullableScalarRelationFilter, Prisma.OrganizationWhereInput> | null
   mangasCustom?: Prisma.MangaCustomListRelationFilter
+  joints?: Prisma.MangaJointListRelationFilter
 }, "id" | "organizationId_slug">
 
 export type GenreOrderByWithAggregationInput = {
@@ -343,6 +346,7 @@ export type GenreCreateInput = {
   updatedAt?: Date | string
   organization?: Prisma.OrganizationCreateNestedOneWithoutGenresInput
   mangasCustom?: Prisma.MangaCustomCreateNestedManyWithoutGenresInput
+  joints?: Prisma.MangaJointCreateNestedManyWithoutGenresInput
 }
 
 export type GenreUncheckedCreateInput = {
@@ -357,6 +361,7 @@ export type GenreUncheckedCreateInput = {
   updatedAt?: Date | string
   organizationId?: number | null
   mangasCustom?: Prisma.MangaCustomUncheckedCreateNestedManyWithoutGenresInput
+  joints?: Prisma.MangaJointUncheckedCreateNestedManyWithoutGenresInput
 }
 
 export type GenreUpdateInput = {
@@ -370,6 +375,7 @@ export type GenreUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneWithoutGenresNestedInput
   mangasCustom?: Prisma.MangaCustomUpdateManyWithoutGenresNestedInput
+  joints?: Prisma.MangaJointUpdateManyWithoutGenresNestedInput
 }
 
 export type GenreUncheckedUpdateInput = {
@@ -384,6 +390,7 @@ export type GenreUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   mangasCustom?: Prisma.MangaCustomUncheckedUpdateManyWithoutGenresNestedInput
+  joints?: Prisma.MangaJointUncheckedUpdateManyWithoutGenresNestedInput
 }
 
 export type GenreCreateManyInput = {
@@ -567,6 +574,44 @@ export type GenreUncheckedUpdateManyWithoutMangasCustomNestedInput = {
   deleteMany?: Prisma.GenreScalarWhereInput | Prisma.GenreScalarWhereInput[]
 }
 
+export type GenreCreateNestedManyWithoutJointsInput = {
+  create?: Prisma.XOR<Prisma.GenreCreateWithoutJointsInput, Prisma.GenreUncheckedCreateWithoutJointsInput> | Prisma.GenreCreateWithoutJointsInput[] | Prisma.GenreUncheckedCreateWithoutJointsInput[]
+  connectOrCreate?: Prisma.GenreCreateOrConnectWithoutJointsInput | Prisma.GenreCreateOrConnectWithoutJointsInput[]
+  connect?: Prisma.GenreWhereUniqueInput | Prisma.GenreWhereUniqueInput[]
+}
+
+export type GenreUncheckedCreateNestedManyWithoutJointsInput = {
+  create?: Prisma.XOR<Prisma.GenreCreateWithoutJointsInput, Prisma.GenreUncheckedCreateWithoutJointsInput> | Prisma.GenreCreateWithoutJointsInput[] | Prisma.GenreUncheckedCreateWithoutJointsInput[]
+  connectOrCreate?: Prisma.GenreCreateOrConnectWithoutJointsInput | Prisma.GenreCreateOrConnectWithoutJointsInput[]
+  connect?: Prisma.GenreWhereUniqueInput | Prisma.GenreWhereUniqueInput[]
+}
+
+export type GenreUpdateManyWithoutJointsNestedInput = {
+  create?: Prisma.XOR<Prisma.GenreCreateWithoutJointsInput, Prisma.GenreUncheckedCreateWithoutJointsInput> | Prisma.GenreCreateWithoutJointsInput[] | Prisma.GenreUncheckedCreateWithoutJointsInput[]
+  connectOrCreate?: Prisma.GenreCreateOrConnectWithoutJointsInput | Prisma.GenreCreateOrConnectWithoutJointsInput[]
+  upsert?: Prisma.GenreUpsertWithWhereUniqueWithoutJointsInput | Prisma.GenreUpsertWithWhereUniqueWithoutJointsInput[]
+  set?: Prisma.GenreWhereUniqueInput | Prisma.GenreWhereUniqueInput[]
+  disconnect?: Prisma.GenreWhereUniqueInput | Prisma.GenreWhereUniqueInput[]
+  delete?: Prisma.GenreWhereUniqueInput | Prisma.GenreWhereUniqueInput[]
+  connect?: Prisma.GenreWhereUniqueInput | Prisma.GenreWhereUniqueInput[]
+  update?: Prisma.GenreUpdateWithWhereUniqueWithoutJointsInput | Prisma.GenreUpdateWithWhereUniqueWithoutJointsInput[]
+  updateMany?: Prisma.GenreUpdateManyWithWhereWithoutJointsInput | Prisma.GenreUpdateManyWithWhereWithoutJointsInput[]
+  deleteMany?: Prisma.GenreScalarWhereInput | Prisma.GenreScalarWhereInput[]
+}
+
+export type GenreUncheckedUpdateManyWithoutJointsNestedInput = {
+  create?: Prisma.XOR<Prisma.GenreCreateWithoutJointsInput, Prisma.GenreUncheckedCreateWithoutJointsInput> | Prisma.GenreCreateWithoutJointsInput[] | Prisma.GenreUncheckedCreateWithoutJointsInput[]
+  connectOrCreate?: Prisma.GenreCreateOrConnectWithoutJointsInput | Prisma.GenreCreateOrConnectWithoutJointsInput[]
+  upsert?: Prisma.GenreUpsertWithWhereUniqueWithoutJointsInput | Prisma.GenreUpsertWithWhereUniqueWithoutJointsInput[]
+  set?: Prisma.GenreWhereUniqueInput | Prisma.GenreWhereUniqueInput[]
+  disconnect?: Prisma.GenreWhereUniqueInput | Prisma.GenreWhereUniqueInput[]
+  delete?: Prisma.GenreWhereUniqueInput | Prisma.GenreWhereUniqueInput[]
+  connect?: Prisma.GenreWhereUniqueInput | Prisma.GenreWhereUniqueInput[]
+  update?: Prisma.GenreUpdateWithWhereUniqueWithoutJointsInput | Prisma.GenreUpdateWithWhereUniqueWithoutJointsInput[]
+  updateMany?: Prisma.GenreUpdateManyWithWhereWithoutJointsInput | Prisma.GenreUpdateManyWithWhereWithoutJointsInput[]
+  deleteMany?: Prisma.GenreScalarWhereInput | Prisma.GenreScalarWhereInput[]
+}
+
 export type GenreCreateWithoutOrganizationInput = {
   name: string
   slug: string
@@ -577,6 +622,7 @@ export type GenreCreateWithoutOrganizationInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   mangasCustom?: Prisma.MangaCustomCreateNestedManyWithoutGenresInput
+  joints?: Prisma.MangaJointCreateNestedManyWithoutGenresInput
 }
 
 export type GenreUncheckedCreateWithoutOrganizationInput = {
@@ -590,6 +636,7 @@ export type GenreUncheckedCreateWithoutOrganizationInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   mangasCustom?: Prisma.MangaCustomUncheckedCreateNestedManyWithoutGenresInput
+  joints?: Prisma.MangaJointUncheckedCreateNestedManyWithoutGenresInput
 }
 
 export type GenreCreateOrConnectWithoutOrganizationInput = {
@@ -644,6 +691,7 @@ export type GenreCreateWithoutMangasCustomInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   organization?: Prisma.OrganizationCreateNestedOneWithoutGenresInput
+  joints?: Prisma.MangaJointCreateNestedManyWithoutGenresInput
 }
 
 export type GenreUncheckedCreateWithoutMangasCustomInput = {
@@ -657,6 +705,7 @@ export type GenreUncheckedCreateWithoutMangasCustomInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   organizationId?: number | null
+  joints?: Prisma.MangaJointUncheckedCreateNestedManyWithoutGenresInput
 }
 
 export type GenreCreateOrConnectWithoutMangasCustomInput = {
@@ -678,6 +727,54 @@ export type GenreUpdateWithWhereUniqueWithoutMangasCustomInput = {
 export type GenreUpdateManyWithWhereWithoutMangasCustomInput = {
   where: Prisma.GenreScalarWhereInput
   data: Prisma.XOR<Prisma.GenreUpdateManyMutationInput, Prisma.GenreUncheckedUpdateManyWithoutMangasCustomInput>
+}
+
+export type GenreCreateWithoutJointsInput = {
+  name: string
+  slug: string
+  description: string
+  display?: boolean
+  category?: string | null
+  nsfw?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization?: Prisma.OrganizationCreateNestedOneWithoutGenresInput
+  mangasCustom?: Prisma.MangaCustomCreateNestedManyWithoutGenresInput
+}
+
+export type GenreUncheckedCreateWithoutJointsInput = {
+  id?: number
+  name: string
+  slug: string
+  description: string
+  display?: boolean
+  category?: string | null
+  nsfw?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organizationId?: number | null
+  mangasCustom?: Prisma.MangaCustomUncheckedCreateNestedManyWithoutGenresInput
+}
+
+export type GenreCreateOrConnectWithoutJointsInput = {
+  where: Prisma.GenreWhereUniqueInput
+  create: Prisma.XOR<Prisma.GenreCreateWithoutJointsInput, Prisma.GenreUncheckedCreateWithoutJointsInput>
+}
+
+export type GenreUpsertWithWhereUniqueWithoutJointsInput = {
+  where: Prisma.GenreWhereUniqueInput
+  update: Prisma.XOR<Prisma.GenreUpdateWithoutJointsInput, Prisma.GenreUncheckedUpdateWithoutJointsInput>
+  create: Prisma.XOR<Prisma.GenreCreateWithoutJointsInput, Prisma.GenreUncheckedCreateWithoutJointsInput>
+}
+
+export type GenreUpdateWithWhereUniqueWithoutJointsInput = {
+  where: Prisma.GenreWhereUniqueInput
+  data: Prisma.XOR<Prisma.GenreUpdateWithoutJointsInput, Prisma.GenreUncheckedUpdateWithoutJointsInput>
+}
+
+export type GenreUpdateManyWithWhereWithoutJointsInput = {
+  where: Prisma.GenreScalarWhereInput
+  data: Prisma.XOR<Prisma.GenreUpdateManyMutationInput, Prisma.GenreUncheckedUpdateManyWithoutJointsInput>
 }
 
 export type GenreCreateManyOrganizationInput = {
@@ -702,6 +799,7 @@ export type GenreUpdateWithoutOrganizationInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mangasCustom?: Prisma.MangaCustomUpdateManyWithoutGenresNestedInput
+  joints?: Prisma.MangaJointUpdateManyWithoutGenresNestedInput
 }
 
 export type GenreUncheckedUpdateWithoutOrganizationInput = {
@@ -715,6 +813,7 @@ export type GenreUncheckedUpdateWithoutOrganizationInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mangasCustom?: Prisma.MangaCustomUncheckedUpdateManyWithoutGenresNestedInput
+  joints?: Prisma.MangaJointUncheckedUpdateManyWithoutGenresNestedInput
 }
 
 export type GenreUncheckedUpdateManyWithoutOrganizationInput = {
@@ -739,6 +838,7 @@ export type GenreUpdateWithoutMangasCustomInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneWithoutGenresNestedInput
+  joints?: Prisma.MangaJointUpdateManyWithoutGenresNestedInput
 }
 
 export type GenreUncheckedUpdateWithoutMangasCustomInput = {
@@ -752,9 +852,50 @@ export type GenreUncheckedUpdateWithoutMangasCustomInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  joints?: Prisma.MangaJointUncheckedUpdateManyWithoutGenresNestedInput
 }
 
 export type GenreUncheckedUpdateManyWithoutMangasCustomInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  display?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nsfw?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type GenreUpdateWithoutJointsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  display?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nsfw?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneWithoutGenresNestedInput
+  mangasCustom?: Prisma.MangaCustomUpdateManyWithoutGenresNestedInput
+}
+
+export type GenreUncheckedUpdateWithoutJointsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  display?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nsfw?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  mangasCustom?: Prisma.MangaCustomUncheckedUpdateManyWithoutGenresNestedInput
+}
+
+export type GenreUncheckedUpdateManyWithoutJointsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
@@ -774,10 +915,12 @@ export type GenreUncheckedUpdateManyWithoutMangasCustomInput = {
 
 export type GenreCountOutputType = {
   mangasCustom: number
+  joints: number
 }
 
 export type GenreCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   mangasCustom?: boolean | GenreCountOutputTypeCountMangasCustomArgs
+  joints?: boolean | GenreCountOutputTypeCountJointsArgs
 }
 
 /**
@@ -797,6 +940,13 @@ export type GenreCountOutputTypeCountMangasCustomArgs<ExtArgs extends runtime.Ty
   where?: Prisma.MangaCustomWhereInput
 }
 
+/**
+ * GenreCountOutputType without action
+ */
+export type GenreCountOutputTypeCountJointsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MangaJointWhereInput
+}
+
 
 export type GenreSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -811,6 +961,7 @@ export type GenreSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   organizationId?: boolean
   organization?: boolean | Prisma.Genre$organizationArgs<ExtArgs>
   mangasCustom?: boolean | Prisma.Genre$mangasCustomArgs<ExtArgs>
+  joints?: boolean | Prisma.Genre$jointsArgs<ExtArgs>
   _count?: boolean | Prisma.GenreCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["genre"]>
 
@@ -859,6 +1010,7 @@ export type GenreOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
 export type GenreInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   organization?: boolean | Prisma.Genre$organizationArgs<ExtArgs>
   mangasCustom?: boolean | Prisma.Genre$mangasCustomArgs<ExtArgs>
+  joints?: boolean | Prisma.Genre$jointsArgs<ExtArgs>
   _count?: boolean | Prisma.GenreCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type GenreIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -873,6 +1025,7 @@ export type $GenrePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   objects: {
     organization: Prisma.$OrganizationPayload<ExtArgs> | null
     mangasCustom: Prisma.$MangaCustomPayload<ExtArgs>[]
+    joints: Prisma.$MangaJointPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1281,6 +1434,7 @@ export interface Prisma__GenreClient<T, Null = never, ExtArgs extends runtime.Ty
   readonly [Symbol.toStringTag]: "PrismaPromise"
   organization<T extends Prisma.Genre$organizationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Genre$organizationArgs<ExtArgs>>): Prisma.Prisma__OrganizationClient<runtime.Types.Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   mangasCustom<T extends Prisma.Genre$mangasCustomArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Genre$mangasCustomArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MangaCustomPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  joints<T extends Prisma.Genre$jointsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Genre$jointsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MangaJointPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1756,6 +1910,30 @@ export type Genre$mangasCustomArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.MangaCustomScalarFieldEnum | Prisma.MangaCustomScalarFieldEnum[]
+}
+
+/**
+ * Genre.joints
+ */
+export type Genre$jointsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MangaJoint
+   */
+  select?: Prisma.MangaJointSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MangaJoint
+   */
+  omit?: Prisma.MangaJointOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MangaJointInclude<ExtArgs> | null
+  where?: Prisma.MangaJointWhereInput
+  orderBy?: Prisma.MangaJointOrderByWithRelationInput | Prisma.MangaJointOrderByWithRelationInput[]
+  cursor?: Prisma.MangaJointWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MangaJointScalarFieldEnum | Prisma.MangaJointScalarFieldEnum[]
 }
 
 /**

@@ -242,7 +242,14 @@ const statements: string[] = [
   `ALTER TABLE "genre" ADD COLUMN IF NOT EXISTS "category" VARCHAR(32);`,
   `ALTER TABLE "genre" ADD COLUMN IF NOT EXISTS "nsfw" BOOLEAN NOT NULL DEFAULT false;`,
   // One-shot como flag de la obra (no como genero).
-  `ALTER TABLE "manga_custom" ADD COLUMN IF NOT EXISTS "isOneShot" BOOLEAN NOT NULL DEFAULT false;`
+  `ALTER TABLE "manga_custom" ADD COLUMN IF NOT EXISTS "isOneShot" BOOLEAN NOT NULL DEFAULT false;`,
+  // Generos propios del joint (M2M implicito de Prisma para la relacion GenreToMangaJoint).
+  `CREATE TABLE IF NOT EXISTS "_GenreToMangaJoint" (
+    "A" INTEGER NOT NULL REFERENCES "genre"("id") ON DELETE CASCADE ON UPDATE CASCADE,
+    "B" INTEGER NOT NULL REFERENCES "manga_joint"("id") ON DELETE CASCADE ON UPDATE CASCADE
+  );`,
+  `CREATE UNIQUE INDEX IF NOT EXISTS "_GenreToMangaJoint_AB_unique" ON "_GenreToMangaJoint"("A", "B");`,
+  `CREATE INDEX IF NOT EXISTS "_GenreToMangaJoint_B_index" ON "_GenreToMangaJoint"("B");`
 ]
 
 for (const sql of statements) {

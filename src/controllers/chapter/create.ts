@@ -35,6 +35,16 @@ export const createChapter = async (
     throw new Error('No se encontró el manga')
   }
 
+  // One-shot = un solo capítulo. Si ya tiene uno, no se permite subir más.
+  if ((mangaCustom as any).isOneShot) {
+    const existingCount = await prisma.chapter.count({
+      where: { mangaCustomId: mangaCustom.id, deletedAt: null }
+    })
+    if (existingCount >= 1) {
+      throw new Error('Esta obra está marcada como one-shot: solo puede tener un capítulo. Desactiva "One-shot" para subir más.')
+    }
+  }
+
   // If this org is an ACCEPTED member of an active joint for this manga,
   // chapters must be uploaded via the joint admin so they reach every member.
   // INVITED (not yet accepted) orgs are not bound and can still upload solo.

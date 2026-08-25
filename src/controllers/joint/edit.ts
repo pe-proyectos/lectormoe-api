@@ -34,6 +34,13 @@ export const editJoint = async (
       : params.banner.startsWith('http') ? params.banner : `${r2PublicUrl}/${params.banner}`;
   }
 
+  // Generos propios del joint (M2M). Si vienen genreIds, se reemplaza la lista.
+  if ((params as any).genreIds !== undefined) {
+    updateData.genres = {
+      set: ((params as any).genreIds || []).map((id: number) => ({ id })),
+    };
+  }
+
   // Remove undefined keys so Prisma doesn't overwrite with undefined
   Object.keys(updateData).forEach(k => updateData[k] === undefined && delete updateData[k]);
 
@@ -49,6 +56,7 @@ export const editJoint = async (
         where: { status: 'ACCEPTED' },
         include: { organization: { select: { id: true, name: true, slug: true, logoUrl: true } } },
       },
+      genres: { select: { id: true, name: true, category: true, nsfw: true, description: true } },
     },
   });
 };
