@@ -74,8 +74,6 @@ const CATALOG: Entry[] = [
   { name: 'Harem', category: 'THEME', desc: 'Varios personajes se interesan en el protagonista.', syns: [] },
   { name: 'Harem inverso', category: 'THEME', desc: 'Una protagonista rodeada de varios pretendientes.', syns: ['haren inverso', 'reverse harem'] },
   { name: 'Incesto', category: 'THEME', nsfw: true, desc: 'Relaciones entre familiares.', syns: ['incest'] },
-  { name: 'Loli', category: 'THEME', nsfw: true, desc: 'Personajes de apariencia infantil femenina.', syns: ['lolicon'] },
-  { name: 'Shota', category: 'THEME', nsfw: true, desc: 'Personajes de apariencia infantil masculina.', syns: ['shotacon'] },
   { name: 'Mafia', category: 'THEME', desc: 'Crimen organizado.', syns: [] },
   { name: 'Magia', category: 'THEME', desc: 'La magia tiene un papel central.', syns: ['magic'] },
   { name: 'Mahjong', category: 'THEME', desc: 'El mahjong como eje de la historia.', syns: [] },
