@@ -26,7 +26,9 @@ export const EditMangaCustomRequest = t.Object({
   workType: t.Optional(t.Union([t.String(), t.Null()])),
   hideUnreleasedChapters: t.Optional(t.Boolean()),
   finalChapterNumber: t.Optional(t.Union([t.Number(), t.Null()])),
-  groupChaptersByVolume: t.Optional(t.Boolean())
+  groupChaptersByVolume: t.Optional(t.Boolean()),
+  isOneShot: t.Optional(t.Boolean()),
+  demographyId: t.Optional(t.Union([t.Number(), t.Null()]))
 })
 
 export type EditMangaCustomRequest = Static<typeof EditMangaCustomRequest>

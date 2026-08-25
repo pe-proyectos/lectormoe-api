@@ -50,6 +50,9 @@ export const editMangaCustom = async (
       : {}),
     ...(params.groupChaptersByVolume !== undefined
       ? { groupChaptersByVolume: params.groupChaptersByVolume }
+      : {}),
+    ...((params as any).isOneShot !== undefined
+      ? { isOneShot: (params as any).isOneShot }
       : {})
   }
 
@@ -81,6 +84,15 @@ export const editMangaCustom = async (
     },
     data: updateData
   })
+
+  // Demografía: vive en el Manga base (compartido). Si viene demographyId (o null
+  // para quitarla), se actualiza el Manga de esta obra.
+  if ((params as any).demographyId !== undefined) {
+    await prisma.manga.update({
+      where: { id: mangaCustom.mangaId },
+      data: { demographyId: (params as any).demographyId }
+    })
+  }
 
   await prisma.mangaCustom.update({
     where: {
