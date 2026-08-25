@@ -208,6 +208,9 @@ export const listMangaCustom = async (
           }
         }
       : {}),
+    ...((filters as any).isOneShot === 'true' || (filters as any).isOneShot === true
+      ? { isOneShot: true }
+      : {}),
     ...(filters.author
       ? {
           manga: { authors: { some: { slug: filters.author } } }
@@ -321,6 +324,7 @@ export const listMangaCustom = async (
     filters.author ||
     filters.genre ||
     filters.status ||
+    (filters as any).isOneShot === 'true' ||
     filters.ids
   )
 
