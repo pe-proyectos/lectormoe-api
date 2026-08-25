@@ -17,6 +17,8 @@ export const listGenre = async () => {
 			description: true,
 			slug: true,
 			display: true,
+			category: true,
+			nsfw: true,
 			createdAt: true,
 			updatedAt: true,
 			organizationId: true,

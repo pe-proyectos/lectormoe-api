@@ -430,7 +430,8 @@ export const MangaCustomScalarFieldEnum = {
   hideUnreleasedChapters: 'hideUnreleasedChapters',
   usersAlsoReadMangaCustomIds: 'usersAlsoReadMangaCustomIds',
   finalChapterNumber: 'finalChapterNumber',
-  groupChaptersByVolume: 'groupChaptersByVolume'
+  groupChaptersByVolume: 'groupChaptersByVolume',
+  isOneShot: 'isOneShot'
 } as const
 
 export type MangaCustomScalarFieldEnum = (typeof MangaCustomScalarFieldEnum)[keyof typeof MangaCustomScalarFieldEnum]
@@ -693,6 +694,8 @@ export const GenreScalarFieldEnum = {
   slug: 'slug',
   description: 'description',
   display: 'display',
+  category: 'category',
+  nsfw: 'nsfw',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   organizationId: 'organizationId'

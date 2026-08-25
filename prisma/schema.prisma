@@ -409,6 +409,8 @@ model MangaCustom {
   usersAlsoReadMangaCustomIds        String?
   finalChapterNumber                 Float?
   groupChaptersByVolume              Boolean            @default(false)
+  // Obra de un solo capítulo (one-shot). Es un flag de la obra, no un género.
+  isOneShot                          Boolean            @default(false)
   chapters                           Chapter[]
   volumes                            MangaVolume[]
   milestoneAlerts                    ChapterMilestoneAlert[]
@@ -779,6 +781,10 @@ model Genre {
   slug           String        @db.VarChar(256)
   description    String
   display        Boolean       @default(true)
+  // Agrupación tipo MangaDex: FORMAT | GENRE | THEME | CONTENT.
+  category       String?       @db.VarChar(32)
+  // +18: solo se muestra en el lado NSFW (/red) del buscador.
+  nsfw           Boolean       @default(false)
   createdAt      DateTime      @default(now()) @db.Timestamp(6)
   updatedAt      DateTime      @updatedAt
   organizationId Int?

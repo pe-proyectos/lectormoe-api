@@ -237,7 +237,12 @@ const statements: string[] = [
   // catálogo curado, compartido por todos los scans). Índice único parcial sobre
   // slug para los globales, para que no se dupliquen.
   `ALTER TABLE "genre" ALTER COLUMN "organizationId" DROP NOT NULL;`,
-  `CREATE UNIQUE INDEX IF NOT EXISTS "genre_global_slug_key" ON "genre"("slug") WHERE "organizationId" IS NULL;`
+  `CREATE UNIQUE INDEX IF NOT EXISTS "genre_global_slug_key" ON "genre"("slug") WHERE "organizationId" IS NULL;`,
+  // Taxonomia tipo MangaDex: categoria (FORMAT/GENRE/THEME/CONTENT) + flag +18.
+  `ALTER TABLE "genre" ADD COLUMN IF NOT EXISTS "category" VARCHAR(32);`,
+  `ALTER TABLE "genre" ADD COLUMN IF NOT EXISTS "nsfw" BOOLEAN NOT NULL DEFAULT false;`,
+  // One-shot como flag de la obra (no como genero).
+  `ALTER TABLE "manga_custom" ADD COLUMN IF NOT EXISTS "isOneShot" BOOLEAN NOT NULL DEFAULT false;`
 ]
 
 for (const sql of statements) {

@@ -42,6 +42,8 @@ export type GenreMinAggregateOutputType = {
   slug: string | null
   description: string | null
   display: boolean | null
+  category: string | null
+  nsfw: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
   organizationId: number | null
@@ -53,6 +55,8 @@ export type GenreMaxAggregateOutputType = {
   slug: string | null
   description: string | null
   display: boolean | null
+  category: string | null
+  nsfw: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
   organizationId: number | null
@@ -64,6 +68,8 @@ export type GenreCountAggregateOutputType = {
   slug: number
   description: number
   display: number
+  category: number
+  nsfw: number
   createdAt: number
   updatedAt: number
   organizationId: number
@@ -87,6 +93,8 @@ export type GenreMinAggregateInputType = {
   slug?: true
   description?: true
   display?: true
+  category?: true
+  nsfw?: true
   createdAt?: true
   updatedAt?: true
   organizationId?: true
@@ -98,6 +106,8 @@ export type GenreMaxAggregateInputType = {
   slug?: true
   description?: true
   display?: true
+  category?: true
+  nsfw?: true
   createdAt?: true
   updatedAt?: true
   organizationId?: true
@@ -109,6 +119,8 @@ export type GenreCountAggregateInputType = {
   slug?: true
   description?: true
   display?: true
+  category?: true
+  nsfw?: true
   createdAt?: true
   updatedAt?: true
   organizationId?: true
@@ -207,6 +219,8 @@ export type GenreGroupByOutputType = {
   slug: string
   description: string
   display: boolean
+  category: string | null
+  nsfw: boolean
   createdAt: Date
   updatedAt: Date
   organizationId: number | null
@@ -241,6 +255,8 @@ export type GenreWhereInput = {
   slug?: Prisma.StringFilter<"Genre"> | string
   description?: Prisma.StringFilter<"Genre"> | string
   display?: Prisma.BoolFilter<"Genre"> | boolean
+  category?: Prisma.StringNullableFilter<"Genre"> | string | null
+  nsfw?: Prisma.BoolFilter<"Genre"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Genre"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Genre"> | Date | string
   organizationId?: Prisma.IntNullableFilter<"Genre"> | number | null
@@ -254,6 +270,8 @@ export type GenreOrderByWithRelationInput = {
   slug?: Prisma.SortOrder
   description?: Prisma.SortOrder
   display?: Prisma.SortOrder
+  category?: Prisma.SortOrderInput | Prisma.SortOrder
+  nsfw?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   organizationId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -271,6 +289,8 @@ export type GenreWhereUniqueInput = Prisma.AtLeast<{
   slug?: Prisma.StringFilter<"Genre"> | string
   description?: Prisma.StringFilter<"Genre"> | string
   display?: Prisma.BoolFilter<"Genre"> | boolean
+  category?: Prisma.StringNullableFilter<"Genre"> | string | null
+  nsfw?: Prisma.BoolFilter<"Genre"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Genre"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Genre"> | Date | string
   organizationId?: Prisma.IntNullableFilter<"Genre"> | number | null
@@ -284,6 +304,8 @@ export type GenreOrderByWithAggregationInput = {
   slug?: Prisma.SortOrder
   description?: Prisma.SortOrder
   display?: Prisma.SortOrder
+  category?: Prisma.SortOrderInput | Prisma.SortOrder
+  nsfw?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   organizationId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -303,6 +325,8 @@ export type GenreScalarWhereWithAggregatesInput = {
   slug?: Prisma.StringWithAggregatesFilter<"Genre"> | string
   description?: Prisma.StringWithAggregatesFilter<"Genre"> | string
   display?: Prisma.BoolWithAggregatesFilter<"Genre"> | boolean
+  category?: Prisma.StringNullableWithAggregatesFilter<"Genre"> | string | null
+  nsfw?: Prisma.BoolWithAggregatesFilter<"Genre"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Genre"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Genre"> | Date | string
   organizationId?: Prisma.IntNullableWithAggregatesFilter<"Genre"> | number | null
@@ -313,6 +337,8 @@ export type GenreCreateInput = {
   slug: string
   description: string
   display?: boolean
+  category?: string | null
+  nsfw?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   organization?: Prisma.OrganizationCreateNestedOneWithoutGenresInput
@@ -325,6 +351,8 @@ export type GenreUncheckedCreateInput = {
   slug: string
   description: string
   display?: boolean
+  category?: string | null
+  nsfw?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   organizationId?: number | null
@@ -336,6 +364,8 @@ export type GenreUpdateInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   display?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nsfw?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneWithoutGenresNestedInput
@@ -348,6 +378,8 @@ export type GenreUncheckedUpdateInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   display?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nsfw?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -360,6 +392,8 @@ export type GenreCreateManyInput = {
   slug: string
   description: string
   display?: boolean
+  category?: string | null
+  nsfw?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   organizationId?: number | null
@@ -370,6 +404,8 @@ export type GenreUpdateManyMutationInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   display?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nsfw?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -380,6 +416,8 @@ export type GenreUncheckedUpdateManyInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   display?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nsfw?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -406,6 +444,8 @@ export type GenreCountOrderByAggregateInput = {
   slug?: Prisma.SortOrder
   description?: Prisma.SortOrder
   display?: Prisma.SortOrder
+  category?: Prisma.SortOrder
+  nsfw?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   organizationId?: Prisma.SortOrder
@@ -422,6 +462,8 @@ export type GenreMaxOrderByAggregateInput = {
   slug?: Prisma.SortOrder
   description?: Prisma.SortOrder
   display?: Prisma.SortOrder
+  category?: Prisma.SortOrder
+  nsfw?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   organizationId?: Prisma.SortOrder
@@ -433,6 +475,8 @@ export type GenreMinOrderByAggregateInput = {
   slug?: Prisma.SortOrder
   description?: Prisma.SortOrder
   display?: Prisma.SortOrder
+  category?: Prisma.SortOrder
+  nsfw?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   organizationId?: Prisma.SortOrder
@@ -528,6 +572,8 @@ export type GenreCreateWithoutOrganizationInput = {
   slug: string
   description: string
   display?: boolean
+  category?: string | null
+  nsfw?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   mangasCustom?: Prisma.MangaCustomCreateNestedManyWithoutGenresInput
@@ -539,6 +585,8 @@ export type GenreUncheckedCreateWithoutOrganizationInput = {
   slug: string
   description: string
   display?: boolean
+  category?: string | null
+  nsfw?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   mangasCustom?: Prisma.MangaCustomUncheckedCreateNestedManyWithoutGenresInput
@@ -579,6 +627,8 @@ export type GenreScalarWhereInput = {
   slug?: Prisma.StringFilter<"Genre"> | string
   description?: Prisma.StringFilter<"Genre"> | string
   display?: Prisma.BoolFilter<"Genre"> | boolean
+  category?: Prisma.StringNullableFilter<"Genre"> | string | null
+  nsfw?: Prisma.BoolFilter<"Genre"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Genre"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Genre"> | Date | string
   organizationId?: Prisma.IntNullableFilter<"Genre"> | number | null
@@ -589,6 +639,8 @@ export type GenreCreateWithoutMangasCustomInput = {
   slug: string
   description: string
   display?: boolean
+  category?: string | null
+  nsfw?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   organization?: Prisma.OrganizationCreateNestedOneWithoutGenresInput
@@ -600,6 +652,8 @@ export type GenreUncheckedCreateWithoutMangasCustomInput = {
   slug: string
   description: string
   display?: boolean
+  category?: string | null
+  nsfw?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   organizationId?: number | null
@@ -632,6 +686,8 @@ export type GenreCreateManyOrganizationInput = {
   slug: string
   description: string
   display?: boolean
+  category?: string | null
+  nsfw?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -641,6 +697,8 @@ export type GenreUpdateWithoutOrganizationInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   display?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nsfw?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mangasCustom?: Prisma.MangaCustomUpdateManyWithoutGenresNestedInput
@@ -652,6 +710,8 @@ export type GenreUncheckedUpdateWithoutOrganizationInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   display?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nsfw?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mangasCustom?: Prisma.MangaCustomUncheckedUpdateManyWithoutGenresNestedInput
@@ -663,6 +723,8 @@ export type GenreUncheckedUpdateManyWithoutOrganizationInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   display?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nsfw?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -672,6 +734,8 @@ export type GenreUpdateWithoutMangasCustomInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   display?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nsfw?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneWithoutGenresNestedInput
@@ -683,6 +747,8 @@ export type GenreUncheckedUpdateWithoutMangasCustomInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   display?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nsfw?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -694,6 +760,8 @@ export type GenreUncheckedUpdateManyWithoutMangasCustomInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   display?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nsfw?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -736,6 +804,8 @@ export type GenreSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   slug?: boolean
   description?: boolean
   display?: boolean
+  category?: boolean
+  nsfw?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   organizationId?: boolean
@@ -750,6 +820,8 @@ export type GenreSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   slug?: boolean
   description?: boolean
   display?: boolean
+  category?: boolean
+  nsfw?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   organizationId?: boolean
@@ -762,6 +834,8 @@ export type GenreSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   slug?: boolean
   description?: boolean
   display?: boolean
+  category?: boolean
+  nsfw?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   organizationId?: boolean
@@ -774,12 +848,14 @@ export type GenreSelectScalar = {
   slug?: boolean
   description?: boolean
   display?: boolean
+  category?: boolean
+  nsfw?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   organizationId?: boolean
 }
 
-export type GenreOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "slug" | "description" | "display" | "createdAt" | "updatedAt" | "organizationId", ExtArgs["result"]["genre"]>
+export type GenreOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "slug" | "description" | "display" | "category" | "nsfw" | "createdAt" | "updatedAt" | "organizationId", ExtArgs["result"]["genre"]>
 export type GenreInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   organization?: boolean | Prisma.Genre$organizationArgs<ExtArgs>
   mangasCustom?: boolean | Prisma.Genre$mangasCustomArgs<ExtArgs>
@@ -804,6 +880,8 @@ export type $GenrePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     slug: string
     description: string
     display: boolean
+    category: string | null
+    nsfw: boolean
     createdAt: Date
     updatedAt: Date
     organizationId: number | null
@@ -1237,6 +1315,8 @@ export interface GenreFieldRefs {
   readonly slug: Prisma.FieldRef<"Genre", 'String'>
   readonly description: Prisma.FieldRef<"Genre", 'String'>
   readonly display: Prisma.FieldRef<"Genre", 'Boolean'>
+  readonly category: Prisma.FieldRef<"Genre", 'String'>
+  readonly nsfw: Prisma.FieldRef<"Genre", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Genre", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Genre", 'DateTime'>
   readonly organizationId: Prisma.FieldRef<"Genre", 'Int'>
