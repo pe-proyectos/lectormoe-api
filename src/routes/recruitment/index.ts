@@ -34,7 +34,7 @@ export const router = () =>
           orderBy: [{ urgent: 'desc' }, { updatedAt: 'desc' }],
           skip: (page - 1) * 20,
           take: 20,
-          include: { organization: { select: { name: true, slug: true, logoUrl: true, _count: { select: { followers: true } } } } },
+          include: { organization: { select: { name: true, slug: true, logoUrl: true, discordUrl: true, _count: { select: { followers: true } } } } },
         })
         return { status: true, data: posts }
       },
