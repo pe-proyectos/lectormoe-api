@@ -1,6 +1,6 @@
 import { Elysia, t } from 'elysia'
 import { prisma } from '../../models/prisma'
-import { loggedUserOnly } from '../../plugins/auth'
+import { loggedOptional } from '../../plugins/auth'
 
 async function resolveMc(organizationId: number, mangaSlug: string) {
   return prisma.mangaCustom.findFirst({
@@ -28,10 +28,15 @@ async function lastPublishedNumber(mangaId: number): Promise<number> {
 
 export const router = () =>
   new Elysia()
-    .use(loggedUserOnly())
+    // loggedOptional (no loggedUserOnly): configurar un aviso NO es una accion de
+    // staff. Con loggedUserOnly un lector normal recibia "No autorizado, usuario no
+    // tiene permisos para esta organizacion" al intentar activar el aviso. Ahora
+    // basta con estar logueado; el gate real (suscriptor) se aplica en el PUT.
+    .use(loggedOptional())
     .get(
       '/api/manga-custom/:mangaSlug/milestone-alert',
       async ({ organizationId, user, params }) => {
+        if (!user || !organizationId) return { status: true, data: null }
         const mc = await resolveMc(organizationId, params.mangaSlug)
         if (!mc) return { status: true, data: null }
         const alert = await prisma.chapterMilestoneAlert.findFirst({
@@ -47,6 +52,8 @@ export const router = () =>
     .put(
       '/api/manga-custom/:mangaSlug/milestone-alert',
       async ({ organizationId, user, params, body }) => {
+        if (!user) throw new Error('Debes iniciar sesión para configurar avisos.')
+        if (!organizationId) throw new Error('No se pudo identificar el scan.')
         // Gate de suscriptor activo (cualquier scan).
         const hasSub = await prisma.subscription.findFirst({
           where: { userId: user.id, active: true },
@@ -89,6 +96,7 @@ export const router = () =>
     .delete(
       '/api/manga-custom/:mangaSlug/milestone-alert',
       async ({ organizationId, user, params }) => {
+        if (!user || !organizationId) return { status: true, data: true }
         const mc = await resolveMc(organizationId, params.mangaSlug)
         if (!mc) return { status: true, data: true }
         await prisma.chapterMilestoneAlert.deleteMany({
