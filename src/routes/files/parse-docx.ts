@@ -14,7 +14,7 @@ export const router = () =>
     .use(loggedUserOnlyGlobal())
     .post(
       "/api/files/parse-docx",
-      async ({ body }) => {
+      async ({ body, request }) => {
         const file = body.file as File | undefined;
         if (!file) throw new Error("Falta el archivo.");
         if (file.size > MAX_BYTES) throw new Error("Archivo .docx demasiado grande (máx 10MB).");
@@ -24,8 +24,11 @@ export const router = () =>
         const arrayBuf = await file.arrayBuffer();
         const bytes = new Uint8Array(arrayBuf);
         if (!isZipMagic(bytes)) throw new Error("El archivo no parece un .docx válido.");
-        const markdown = await docxToMarkdown(Buffer.from(bytes));
-        return { status: true, data: { markdown, chars: markdown.length } };
+        const organizationSlug = request.headers.get("x-organization") || undefined;
+        const { markdown, images, warnings } = await docxToMarkdown(Buffer.from(bytes), {
+          organizationSlug,
+        });
+        return { status: true, data: { markdown, chars: markdown.length, images, warnings } };
       },
       {
         body: t.Object({
@@ -36,6 +39,8 @@ export const router = () =>
           data: t.Object({
             markdown: t.String(),
             chars: t.Number(),
+            images: t.Number(),
+            warnings: t.Array(t.String()),
           }),
         }),
       }
