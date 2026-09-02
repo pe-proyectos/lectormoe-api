@@ -26,7 +26,8 @@ export const router = () =>
           },
           select: {
             updatedAt: true,
-            manga: { select: { slug: true } },
+            workType: true,
+            manga: { select: { slug: true, bookType: { select: { code: true } } } },
             organization: { select: { slug: true } }
           },
           take: 20000
@@ -42,12 +43,24 @@ export const router = () =>
         })
       ])
 
+      const isWriting = (m: any) =>
+        m.workType === 'text' ||
+        ['novel', 'light-novel', 'book', 'short-story'].includes(m.manga?.bookType?.code)
+      const valid = mangas.filter((m) => m.manga?.slug && m.organization?.slug)
       const data = {
         orgs: orgs.map((o) => ({ slug: o.slug, updatedAt: o.updatedAt })),
-        mangas: mangas
-          .filter((m) => m.manga?.slug && m.organization?.slug)
+        mangas: valid
+          .filter((m) => !isWriting(m))
           .map((m) => ({
             orgSlug: m.organization.slug,
+            mangaSlug: m.manga.slug,
+            updatedAt: m.updatedAt
+          })),
+        writings: valid
+          .filter((m) => isWriting(m))
+          .map((m) => ({
+            orgSlug: m.organization.slug,
+            type: m.manga?.bookType?.code || 'novel',
             mangaSlug: m.manga.slug,
             updatedAt: m.updatedAt
           })),
