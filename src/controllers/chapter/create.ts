@@ -1,6 +1,7 @@
 import { prisma } from '../../models/prisma'
 import { notifyNewChapter } from '../../services/notify-new-chapter'
 import type { CreateChapterRequest } from '../../types/chapter/create'
+import { sanitizeBodyMarkdown } from '../../services/markdown-pipeline'
 
 export const createChapter = async (
   organizationId: number,
@@ -119,7 +120,7 @@ export const createChapter = async (
         : {}),
       // Text-based chapters (novels, books) carry markdown instead of pages.
       ...(params.bodyMarkdown !== undefined
-        ? { bodyMarkdown: params.bodyMarkdown }
+        ? { bodyMarkdown: params.bodyMarkdown === null ? null : sanitizeBodyMarkdown(params.bodyMarkdown) }
         : {})
     }
   })

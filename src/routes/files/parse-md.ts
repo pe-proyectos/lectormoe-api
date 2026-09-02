@@ -1,6 +1,6 @@
 import { Elysia, t } from "elysia";
 import { loggedUserOnlyGlobal } from "../../plugins/auth";
-import { sanitizeMarkdownInput } from "../../services/markdown-pipeline";
+import { cleanMarkdownInput } from "../../services/markdown-pipeline";
 
 const MAX_BYTES = 2 * 1024 * 1024;
 const ALLOWED_MIMES = new Set(["text/markdown", "text/plain", "application/octet-stream", ""]);
@@ -19,8 +19,8 @@ export const router = () =>
           throw new Error("Tipo MIME inválido para .md.");
         }
         const text = await file.text();
-        const markdown = sanitizeMarkdownInput(text);
-        return { status: true, data: { markdown, chars: markdown.length } };
+        const { markdown, warnings } = cleanMarkdownInput(text);
+        return { status: true, data: { markdown, chars: markdown.length, warnings } };
       },
       {
         body: t.Object({
@@ -31,6 +31,7 @@ export const router = () =>
           data: t.Object({
             markdown: t.String(),
             chars: t.Number(),
+            warnings: t.Array(t.String()),
           }),
         }),
       }

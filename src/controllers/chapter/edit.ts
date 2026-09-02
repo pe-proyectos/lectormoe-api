@@ -1,5 +1,6 @@
 import { prisma } from '../../models/prisma'
 import type { EditChapterRequest } from '../../types/chapter/edit'
+import { sanitizeBodyMarkdown } from '../../services/markdown-pipeline'
 
 export const editChapter = async (
   organizationId: number,
@@ -78,7 +79,8 @@ export const editChapter = async (
   }
 
   if (params.bodyMarkdown !== undefined) {
-    updateData.bodyMarkdown = params.bodyMarkdown
+    updateData.bodyMarkdown =
+      params.bodyMarkdown === null ? null : sanitizeBodyMarkdown(params.bodyMarkdown)
   }
 
   // Si isUnreleased es true y releasedAt está en updateData como null,
