@@ -52,6 +52,7 @@ import { router as favoritesSaveRouter } from './favorites/save'
 import { router as favoritesToggleFinishedRouter } from './favorites/toggle-finished'
 import { router as filesParseDocxRouter } from './files/parse-docx'
 import { router as filesParseMdRouter } from './files/parse-md'
+import { router as filesParseEpubRouter } from './files/parse-epub'
 import { router as filesPresignedUrlRouter } from './files/presigned-url'
 import { router as genreCreateRouter } from './genre/create'
 import { router as genreDeleteRouter } from './genre/delete'
@@ -217,6 +218,7 @@ export const router = () => async (app: Elysia) => {
   app.use(filesPresignedUrlRouter())
   app.use(filesParseDocxRouter())
   app.use(filesParseMdRouter())
+  app.use(filesParseEpubRouter())
 
   // Genre
   app.use(genreCreateRouter())
