@@ -76,6 +76,7 @@ import { router as mangaCustomCreateRouter } from './manga-custom/create'
 import { router as mangaCustomDeleteRouter } from './manga-custom/delete'
 import { router as mangaCustomEditRouter } from './manga-custom/edit'
 import { router as mangaCustomGetRouter } from './manga-custom/get'
+import { router as mangaCustomEpubRouter } from './manga-custom/epub'
 import { router as mangaCustomListRouter } from './manga-custom/list'
 import { router as mangaCustomRankRouter } from './manga-custom/rank'
 import { router as mangaCustomRestoreRouter } from './manga-custom/restore'
@@ -245,6 +246,7 @@ export const router = () => async (app: Elysia) => {
 
   // Manga Custom
   app.use(mangaCustomCreateRouter())
+  app.use(mangaCustomEpubRouter())
   app.use(mangaCustomDeleteRouter())
   app.use(mangaCustomRestoreRouter())
   app.use(mangaCustomEditRouter())
