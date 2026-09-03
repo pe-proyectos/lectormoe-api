@@ -9,7 +9,8 @@ export const CreateChapterRequest = t.Object({
   singlePages: t.Optional(t.Union([t.Array(t.Number()), t.String()])),
   isUnreleased: t.Optional(t.Boolean()),
   volumeNumber: t.Optional(t.Union([t.Number(), t.Null()])),
-  bodyMarkdown: t.Optional(t.Union([t.String(), t.Null()]))
+  bodyMarkdown: t.Optional(t.Union([t.String(), t.Null()])),
+  displayNumber: t.Optional(t.Union([t.Number(), t.Null()]))
 })
 
 export type CreateChapterRequest = Static<typeof CreateChapterRequest>

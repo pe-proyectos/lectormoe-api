@@ -83,6 +83,10 @@ export const editChapter = async (
       params.bodyMarkdown === null ? null : sanitizeBodyMarkdown(params.bodyMarkdown)
   }
 
+  if (params.displayNumber !== undefined) {
+    updateData.displayNumber = params.displayNumber
+  }
+
   // Si isUnreleased es true y releasedAt está en updateData como null,
   // intentar la actualización. Si falla porque el schema no permite null,
   // reintentar sin incluir releasedAt

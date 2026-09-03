@@ -456,6 +456,9 @@ model Chapter {
   // the chapter is rendered by NovelReader and `pages` should be empty.
   bodyMarkdown              String?              @db.Text
   volumeNumber              Int?
+  // Numero mostrado (por tomo): permite reiniciar la numeracion por volumen
+  // sin romper la identidad global de `number`. Si es null, se muestra `number`.
+  displayNumber             Float?
   mangaCustom               MangaCustom?         @relation(fields: [mangaCustomId], references: [id])
   joint                     MangaJoint?          @relation(fields: [jointId], references: [id])
   uploadedByOrganization    Organization?        @relation("ChapterUploader", fields: [uploadedByOrganizationId], references: [id])

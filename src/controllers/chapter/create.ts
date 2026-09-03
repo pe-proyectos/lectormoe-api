@@ -118,6 +118,9 @@ export const createChapter = async (
       ...(params.volumeNumber !== undefined
         ? { volumeNumber: params.volumeNumber }
         : {}),
+      ...(params.displayNumber !== undefined
+        ? { displayNumber: params.displayNumber }
+        : {}),
       // Text-based chapters (novels, books) carry markdown instead of pages.
       ...(params.bodyMarkdown !== undefined
         ? { bodyMarkdown: params.bodyMarkdown === null ? null : sanitizeBodyMarkdown(params.bodyMarkdown) }
