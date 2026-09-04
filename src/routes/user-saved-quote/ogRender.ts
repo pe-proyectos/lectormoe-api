@@ -1,4 +1,20 @@
-import { createCanvas } from 'canvas'
+import { createCanvas, registerFont } from 'canvas'
+
+// Registra fuentes empaquetadas (el contenedor de prod no trae fuentes del
+// sistema, si no el canvas dibuja cajas/tofu). Se hace una sola vez.
+let fontsReady = false
+function ensureFonts() {
+  if (fontsReady) return
+  fontsReady = true
+  const dir = `${import.meta.dir}/fonts`
+  try {
+    registerFont(`${dir}/FreeSerif.ttf`, { family: 'CapiSerif' })
+    registerFont(`${dir}/FreeSerifBold.ttf`, { family: 'CapiSerif', weight: 'bold' })
+    registerFont(`${dir}/FreeSerifItalic.ttf`, { family: 'CapiSerif', style: 'italic' })
+    registerFont(`${dir}/FreeSans.ttf`, { family: 'CapiSans' })
+    registerFont(`${dir}/FreeSansBold.ttf`, { family: 'CapiSans', weight: 'bold' })
+  } catch { /* si ya estaban registradas o falta el archivo, seguimos */ }
+}
 
 // Render server-side de la tarjeta de cita para og:image (1200x630).
 // Espeja el dibujo del cliente (QuoteCard) con fuentes genericas del sistema.
@@ -19,9 +35,9 @@ const THEMES: Record<string, { bg1: string; bg2: string; text: string; sub: stri
   midnight: { bg1: '#1e1b4b', bg2: '#0b1020', text: '#eef2ff', sub: 'rgba(226,232,255,0.5)', frame: 'rgba(199,210,254,0.14)' },
 }
 const FONTS: Record<string, { body: string; head: string }> = {
-  serif: { body: 'serif', head: 'sans-serif' },
-  sans: { body: 'sans-serif', head: 'sans-serif' },
-  display: { body: 'serif', head: 'serif' },
+  serif: { body: 'CapiSerif', head: 'CapiSans' },
+  sans: { body: 'CapiSans', head: 'CapiSans' },
+  display: { body: 'CapiSerif', head: 'CapiSerif' },
 }
 
 function wrap(ctx: any, text: string, maxWidth: number): string[] {
@@ -47,6 +63,7 @@ export function renderOgPng(opts: {
   username?: string | null
   config?: CardConfig | null
 }): Buffer {
+  ensureFonts()
   const W = 1200, H = 630
   const cfg = opts.config || {}
   const pal = THEMES[cfg.theme || 'dark'] || THEMES.dark
@@ -65,7 +82,7 @@ export function renderOgPng(opts: {
 
   const qSize = Math.round(Math.min(W, H) * 0.26)
   ctx.fillStyle = accent; ctx.globalAlpha = 0.15
-  ctx.font = `700 ${qSize}px serif`; ctx.textBaseline = 'top'
+  ctx.font = `700 ${qSize}px CapiSerif`; ctx.textBaseline = 'top'
   ctx.fillText('“', PAD - qSize * 0.06, PAD - qSize * 0.14)
   ctx.globalAlpha = 1
 
