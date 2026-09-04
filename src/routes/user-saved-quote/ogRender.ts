@@ -127,18 +127,44 @@ export function renderOgPng(opts: {
   const fTop = footY + Math.round(footZone * 0.14)
   ctx.textAlign = 'left'; ctx.fillStyle = accent; ctx.fillRect(PAD, fTop, Math.round(PAD * 0.7), 5)
   const titleSize = Math.round(Math.min(W, H) * 0.045)
-  ctx.fillStyle = pal.text; ctx.font = `800 ${titleSize}px ${font.head}`
-  const tLine = wrap(ctx, opts.title, maxW * 0.72)[0] || opts.title
-  ctx.fillText(tLine, PAD, fTop + Math.round(titleSize * 0.7))
-  ctx.fillStyle = accent; ctx.font = `700 ${Math.round(titleSize * 0.68)}px ${font.head}`
-  ctx.fillText(opts.chapterLabel.toUpperCase(), PAD, fTop + Math.round(titleSize * 2.05))
+  const brandSize = Math.round(titleSize * 0.6)
+  const scanSize = Math.round(titleSize * 0.66)
+  const scan = (opts.scanName || '').trim()
 
   ctx.textAlign = 'right'
-  const brandSize = Math.round(titleSize * 0.6)
-  const scan = (opts.scanName || '').trim()
-  if (scan) { ctx.fillStyle = pal.text; ctx.font = `700 ${Math.round(titleSize * 0.66)}px ${font.head}`; ctx.fillText(scan, W - PAD, fTop + Math.round(titleSize * 0.75)) }
+  ctx.font = `700 ${scanSize}px ${font.head}`
+  const scanW = scan ? ctx.measureText(scan).width : 0
+  ctx.font = `600 ${brandSize}px ${font.head}`
+  const brandW = ctx.measureText('capibaratraductor.com').width
+  const rightW = Math.max(scanW, brandW)
+  const availLeft = (W - PAD * 2) - rightW - Math.round(PAD * 0.6)
+
+  let tSize = titleSize
+  let tLines: string[] = []
+  for (tSize = titleSize; tSize >= Math.round(titleSize * 0.62); tSize -= 2) {
+    ctx.font = `800 ${tSize}px ${font.head}`
+    tLines = wrap(ctx, opts.title, availLeft)
+    if (tLines.length <= 2) break
+  }
+  if (tLines.length > 2) {
+    tLines = tLines.slice(0, 2)
+    ctx.font = `800 ${tSize}px ${font.head}`
+    let last = tLines[1]
+    while (last.length > 1 && ctx.measureText(last + '…').width > availLeft) last = last.slice(0, -1)
+    tLines[1] = last.replace(/\s+$/, '') + '…'
+  }
+
+  ctx.textAlign = 'left'
+  ctx.fillStyle = pal.text; ctx.font = `800 ${tSize}px ${font.head}`
+  let ty = fTop + Math.round(tSize * 0.85)
+  for (const ln of tLines) { ctx.fillText(ln, PAD, ty); ty += Math.round(tSize * 1.16) }
+  ctx.fillStyle = accent; ctx.font = `700 ${Math.round(titleSize * 0.62)}px ${font.head}`
+  ctx.fillText(opts.chapterLabel.toUpperCase(), PAD, ty + Math.round(titleSize * 0.15))
+
+  ctx.textAlign = 'right'
+  if (scan) { ctx.fillStyle = pal.text; ctx.font = `700 ${scanSize}px ${font.head}`; ctx.fillText(scan, W - PAD, fTop + Math.round(titleSize * 0.85)) }
   ctx.fillStyle = pal.sub; ctx.font = `600 ${brandSize}px ${font.head}`
-  ctx.fillText('capibaratraductor.com', W - PAD, fTop + Math.round(titleSize * (scan ? 1.7 : 0.95)))
+  ctx.fillText('capibaratraductor.com', W - PAD, fTop + Math.round(titleSize * (scan ? 1.75 : 1.0)))
 
   return canvas.toBuffer('image/png')
 }
