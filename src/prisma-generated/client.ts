@@ -280,6 +280,11 @@ export type UnsubscribeToken = Prisma.UnsubscribeTokenModel
  */
 export type EmailVerificationToken = Prisma.EmailVerificationTokenModel
 /**
+ * Model UserSavedQuote
+ * 
+ */
+export type UserSavedQuote = Prisma.UserSavedQuoteModel
+/**
  * Model UserDailyActivity
  * 
  */

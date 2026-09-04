@@ -249,7 +249,12 @@ const statements: string[] = [
     "B" INTEGER NOT NULL REFERENCES "manga_joint"("id") ON DELETE CASCADE ON UPDATE CASCADE
   );`,
   `CREATE UNIQUE INDEX IF NOT EXISTS "_GenreToMangaJoint_AB_unique" ON "_GenreToMangaJoint"("A", "B");`,
-  `CREATE INDEX IF NOT EXISTS "_GenreToMangaJoint_B_index" ON "_GenreToMangaJoint"("B");`
+  `CREATE INDEX IF NOT EXISTS "_GenreToMangaJoint_B_index" ON "_GenreToMangaJoint"("B");`,
+  // Quote studio: nota personal, config de tarjeta y orden manual de frases guardadas.
+  `ALTER TABLE "user_saved_quote" ADD COLUMN IF NOT EXISTS "note" VARCHAR(500);`,
+  `ALTER TABLE "user_saved_quote" ADD COLUMN IF NOT EXISTS "cardConfig" JSONB;`,
+  `ALTER TABLE "user_saved_quote" ADD COLUMN IF NOT EXISTS "position" INTEGER;`,
+  `CREATE INDEX IF NOT EXISTS "user_saved_quote_userId_position_idx" ON "user_saved_quote"("userId", "position");`
 ]
 
 for (const sql of statements) {

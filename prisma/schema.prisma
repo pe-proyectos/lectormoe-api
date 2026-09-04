@@ -1120,10 +1120,14 @@ model UserSavedQuote {
   displayNumber Float?
   orgSlug       String?  @db.VarChar(256)
   workType      String?  @db.VarChar(32)
+  note          String?  @db.VarChar(500)
+  cardConfig    Json?
+  position      Int?
   createdAt     DateTime @default(now()) @db.Timestamp(6)
   user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId, createdAt])
+  @@index([userId, position])
   @@map("user_saved_quote")
 }
 

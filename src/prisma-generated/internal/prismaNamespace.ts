@@ -432,6 +432,7 @@ export const ModelName = {
   EmailLog: 'EmailLog',
   UnsubscribeToken: 'UnsubscribeToken',
   EmailVerificationToken: 'EmailVerificationToken',
+  UserSavedQuote: 'UserSavedQuote',
   UserDailyActivity: 'UserDailyActivity',
   Achievement: 'Achievement',
   UserAchievement: 'UserAchievement',
@@ -459,7 +460,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "token" | "organization" | "recruitmentPost" | "organizationRecommendation" | "user" | "betaTester" | "moderationLog" | "permission" | "passwordResetToken" | "countryOptions" | "author" | "bookType" | "manga" | "mangaCustom" | "chapter" | "organizationMessageThread" | "organizationMessage" | "customList" | "customListFollower" | "customListFollowerItem" | "customListItem" | "contentReport" | "mangaReview" | "chapterMilestoneAlert" | "mangaVolume" | "chapterReaction" | "page" | "comment" | "commentLike" | "ranking" | "demography" | "genre" | "analytics" | "userChapterHistory" | "favorite" | "userList" | "userPageBookmark" | "audit" | "viewsHistory" | "subscriptionPlan" | "subscription" | "organizationTransaction" | "organizationFollower" | "organizationRequest" | "emailPreference" | "emailLog" | "unsubscribeToken" | "emailVerificationToken" | "userDailyActivity" | "achievement" | "userAchievement" | "mangaJoint" | "jointMember" | "jointMemberHistory" | "notification" | "raffle" | "raffleTicket" | "raffleComment" | "raffleRefund" | "userBan"
+    modelProps: "token" | "organization" | "recruitmentPost" | "organizationRecommendation" | "user" | "betaTester" | "moderationLog" | "permission" | "passwordResetToken" | "countryOptions" | "author" | "bookType" | "manga" | "mangaCustom" | "chapter" | "organizationMessageThread" | "organizationMessage" | "customList" | "customListFollower" | "customListFollowerItem" | "customListItem" | "contentReport" | "mangaReview" | "chapterMilestoneAlert" | "mangaVolume" | "chapterReaction" | "page" | "comment" | "commentLike" | "ranking" | "demography" | "genre" | "analytics" | "userChapterHistory" | "favorite" | "userList" | "userPageBookmark" | "audit" | "viewsHistory" | "subscriptionPlan" | "subscription" | "organizationTransaction" | "organizationFollower" | "organizationRequest" | "emailPreference" | "emailLog" | "unsubscribeToken" | "emailVerificationToken" | "userSavedQuote" | "userDailyActivity" | "achievement" | "userAchievement" | "mangaJoint" | "jointMember" | "jointMemberHistory" | "notification" | "raffle" | "raffleTicket" | "raffleComment" | "raffleRefund" | "userBan"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -4015,6 +4016,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    UserSavedQuote: {
+      payload: Prisma.$UserSavedQuotePayload<ExtArgs>
+      fields: Prisma.UserSavedQuoteFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.UserSavedQuoteFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserSavedQuotePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.UserSavedQuoteFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserSavedQuotePayload>
+        }
+        findFirst: {
+          args: Prisma.UserSavedQuoteFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserSavedQuotePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.UserSavedQuoteFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserSavedQuotePayload>
+        }
+        findMany: {
+          args: Prisma.UserSavedQuoteFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserSavedQuotePayload>[]
+        }
+        create: {
+          args: Prisma.UserSavedQuoteCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserSavedQuotePayload>
+        }
+        createMany: {
+          args: Prisma.UserSavedQuoteCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.UserSavedQuoteCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserSavedQuotePayload>[]
+        }
+        delete: {
+          args: Prisma.UserSavedQuoteDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserSavedQuotePayload>
+        }
+        update: {
+          args: Prisma.UserSavedQuoteUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserSavedQuotePayload>
+        }
+        deleteMany: {
+          args: Prisma.UserSavedQuoteDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.UserSavedQuoteUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.UserSavedQuoteUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserSavedQuotePayload>[]
+        }
+        upsert: {
+          args: Prisma.UserSavedQuoteUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserSavedQuotePayload>
+        }
+        aggregate: {
+          args: Prisma.UserSavedQuoteAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUserSavedQuote>
+        }
+        groupBy: {
+          args: Prisma.UserSavedQuoteGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserSavedQuoteGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.UserSavedQuoteCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserSavedQuoteCountAggregateOutputType> | number
+        }
+      }
+    }
     UserDailyActivity: {
       payload: Prisma.$UserDailyActivityPayload<ExtArgs>
       fields: Prisma.UserDailyActivityFieldRefs
@@ -5069,7 +5144,8 @@ export const UserScalarFieldEnum = {
   discordAvatar: 'discordAvatar',
   discordVerifiedAt: 'discordVerifiedAt',
   discordLastCheckAt: 'discordLastCheckAt',
-  listIsPublic: 'listIsPublic'
+  listIsPublic: 'listIsPublic',
+  savedQuotesPublic: 'savedQuotesPublic'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -5265,7 +5341,8 @@ export const ChapterScalarFieldEnum = {
   isUnreleased: 'isUnreleased',
   deletedAt: 'deletedAt',
   bodyMarkdown: 'bodyMarkdown',
-  volumeNumber: 'volumeNumber'
+  volumeNumber: 'volumeNumber',
+  displayNumber: 'displayNumber'
 } as const
 
 export type ChapterScalarFieldEnum = (typeof ChapterScalarFieldEnum)[keyof typeof ChapterScalarFieldEnum]
@@ -5781,6 +5858,25 @@ export const EmailVerificationTokenScalarFieldEnum = {
 } as const
 
 export type EmailVerificationTokenScalarFieldEnum = (typeof EmailVerificationTokenScalarFieldEnum)[keyof typeof EmailVerificationTokenScalarFieldEnum]
+
+
+export const UserSavedQuoteScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  text: 'text',
+  mangaSlug: 'mangaSlug',
+  mangaTitle: 'mangaTitle',
+  chapterNumber: 'chapterNumber',
+  displayNumber: 'displayNumber',
+  orgSlug: 'orgSlug',
+  workType: 'workType',
+  note: 'note',
+  cardConfig: 'cardConfig',
+  position: 'position',
+  createdAt: 'createdAt'
+} as const
+
+export type UserSavedQuoteScalarFieldEnum = (typeof UserSavedQuoteScalarFieldEnum)[keyof typeof UserSavedQuoteScalarFieldEnum]
 
 
 export const UserDailyActivityScalarFieldEnum = {
@@ -6308,6 +6404,7 @@ export type GlobalOmitConfig = {
   emailLog?: Prisma.EmailLogOmit
   unsubscribeToken?: Prisma.UnsubscribeTokenOmit
   emailVerificationToken?: Prisma.EmailVerificationTokenOmit
+  userSavedQuote?: Prisma.UserSavedQuoteOmit
   userDailyActivity?: Prisma.UserDailyActivityOmit
   achievement?: Prisma.AchievementOmit
   userAchievement?: Prisma.UserAchievementOmit

@@ -99,6 +99,7 @@ export const ModelName = {
   EmailLog: 'EmailLog',
   UnsubscribeToken: 'UnsubscribeToken',
   EmailVerificationToken: 'EmailVerificationToken',
+  UserSavedQuote: 'UserSavedQuote',
   UserDailyActivity: 'UserDailyActivity',
   Achievement: 'Achievement',
   UserAchievement: 'UserAchievement',
@@ -256,7 +257,8 @@ export const UserScalarFieldEnum = {
   discordAvatar: 'discordAvatar',
   discordVerifiedAt: 'discordVerifiedAt',
   discordLastCheckAt: 'discordLastCheckAt',
-  listIsPublic: 'listIsPublic'
+  listIsPublic: 'listIsPublic',
+  savedQuotesPublic: 'savedQuotesPublic'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -452,7 +454,8 @@ export const ChapterScalarFieldEnum = {
   isUnreleased: 'isUnreleased',
   deletedAt: 'deletedAt',
   bodyMarkdown: 'bodyMarkdown',
-  volumeNumber: 'volumeNumber'
+  volumeNumber: 'volumeNumber',
+  displayNumber: 'displayNumber'
 } as const
 
 export type ChapterScalarFieldEnum = (typeof ChapterScalarFieldEnum)[keyof typeof ChapterScalarFieldEnum]
@@ -968,6 +971,25 @@ export const EmailVerificationTokenScalarFieldEnum = {
 } as const
 
 export type EmailVerificationTokenScalarFieldEnum = (typeof EmailVerificationTokenScalarFieldEnum)[keyof typeof EmailVerificationTokenScalarFieldEnum]
+
+
+export const UserSavedQuoteScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  text: 'text',
+  mangaSlug: 'mangaSlug',
+  mangaTitle: 'mangaTitle',
+  chapterNumber: 'chapterNumber',
+  displayNumber: 'displayNumber',
+  orgSlug: 'orgSlug',
+  workType: 'workType',
+  note: 'note',
+  cardConfig: 'cardConfig',
+  position: 'position',
+  createdAt: 'createdAt'
+} as const
+
+export type UserSavedQuoteScalarFieldEnum = (typeof UserSavedQuoteScalarFieldEnum)[keyof typeof UserSavedQuoteScalarFieldEnum]
 
 
 export const UserDailyActivityScalarFieldEnum = {
