@@ -207,12 +207,14 @@ model User {
   messageThreads          OrganizationMessageThread[]
   organizationMessages    OrganizationMessage[]
   listIsPublic            Boolean                  @default(true)
+  savedQuotesPublic       Boolean                  @default(true)
   contentReportsReviewed  ContentReport[]         @relation("ContentReportReviewer")
   moderationLogs          ModerationLog[]
   organizationRequests    OrganizationRequest[]
   betaTester              BetaTester?
 
   @@map("user")
+  savedQuotes             UserSavedQuote[]
 }
 
 // Inscripción al programa de pruebas cerradas de Google Play. Cada usuario
@@ -1106,6 +1108,23 @@ model EmailVerificationToken {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("email_verification_token")
+}
+
+model UserSavedQuote {
+  id            Int      @id @default(autoincrement())
+  userId        Int
+  text          String   @db.VarChar(600)
+  mangaSlug     String   @db.VarChar(256)
+  mangaTitle    String   @db.VarChar(256)
+  chapterNumber Float
+  displayNumber Float?
+  orgSlug       String?  @db.VarChar(256)
+  workType      String?  @db.VarChar(32)
+  createdAt     DateTime @default(now()) @db.Timestamp(6)
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+  @@map("user_saved_quote")
 }
 
 model UserDailyActivity {

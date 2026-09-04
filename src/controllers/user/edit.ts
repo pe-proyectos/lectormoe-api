@@ -70,6 +70,10 @@ export const editUser = async (
   if (params.isPublicProfile !== undefined) {
     userUpdateData.isPublicProfile = params.isPublicProfile;
   }
+
+  if (params.savedQuotesPublic !== undefined) {
+    userUpdateData.savedQuotesPublic = params.savedQuotesPublic;
+  }
   
   if (params.isPrivateHistory !== undefined) {
     userUpdateData.isPrivateHistory = params.isPrivateHistory;

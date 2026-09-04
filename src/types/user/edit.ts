@@ -11,6 +11,7 @@ export const EditUserRequest = t.Object({
   // Settings fields
   emailVerified: t.Optional(t.Boolean()),
   isPublicProfile: t.Optional(t.Boolean()),
+  savedQuotesPublic: t.Optional(t.Boolean()),
   isPrivateHistory: t.Optional(t.Boolean()),
   emailNotifications: t.Optional(t.Boolean()),
   pushNotifications: t.Optional(t.Boolean()),
