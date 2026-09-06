@@ -37,6 +37,7 @@ export type OrganizationPostAvgAggregateOutputType = {
   repostCount: number | null
   spoilerOfMangaCustomId: number | null
   spoilerChapter: number | null
+  workMangaCustomId: number | null
   reportsCount: number | null
   hiddenByUserId: number | null
 }
@@ -52,6 +53,7 @@ export type OrganizationPostSumAggregateOutputType = {
   repostCount: number | null
   spoilerOfMangaCustomId: number | null
   spoilerChapter: number | null
+  workMangaCustomId: number | null
   reportsCount: number | null
   hiddenByUserId: number | null
 }
@@ -71,6 +73,7 @@ export type OrganizationPostMinAggregateOutputType = {
   isSensitive: boolean | null
   spoilerOfMangaCustomId: number | null
   spoilerChapter: number | null
+  workMangaCustomId: number | null
   reportsCount: number | null
   hiddenReason: string | null
   hiddenByUserId: number | null
@@ -95,6 +98,7 @@ export type OrganizationPostMaxAggregateOutputType = {
   isSensitive: boolean | null
   spoilerOfMangaCustomId: number | null
   spoilerChapter: number | null
+  workMangaCustomId: number | null
   reportsCount: number | null
   hiddenReason: string | null
   hiddenByUserId: number | null
@@ -120,6 +124,7 @@ export type OrganizationPostCountAggregateOutputType = {
   isSensitive: number
   spoilerOfMangaCustomId: number
   spoilerChapter: number
+  workMangaCustomId: number
   reportsCount: number
   hiddenReason: number
   hiddenByUserId: number
@@ -142,6 +147,7 @@ export type OrganizationPostAvgAggregateInputType = {
   repostCount?: true
   spoilerOfMangaCustomId?: true
   spoilerChapter?: true
+  workMangaCustomId?: true
   reportsCount?: true
   hiddenByUserId?: true
 }
@@ -157,6 +163,7 @@ export type OrganizationPostSumAggregateInputType = {
   repostCount?: true
   spoilerOfMangaCustomId?: true
   spoilerChapter?: true
+  workMangaCustomId?: true
   reportsCount?: true
   hiddenByUserId?: true
 }
@@ -176,6 +183,7 @@ export type OrganizationPostMinAggregateInputType = {
   isSensitive?: true
   spoilerOfMangaCustomId?: true
   spoilerChapter?: true
+  workMangaCustomId?: true
   reportsCount?: true
   hiddenReason?: true
   hiddenByUserId?: true
@@ -200,6 +208,7 @@ export type OrganizationPostMaxAggregateInputType = {
   isSensitive?: true
   spoilerOfMangaCustomId?: true
   spoilerChapter?: true
+  workMangaCustomId?: true
   reportsCount?: true
   hiddenReason?: true
   hiddenByUserId?: true
@@ -225,6 +234,7 @@ export type OrganizationPostCountAggregateInputType = {
   isSensitive?: true
   spoilerOfMangaCustomId?: true
   spoilerChapter?: true
+  workMangaCustomId?: true
   reportsCount?: true
   hiddenReason?: true
   hiddenByUserId?: true
@@ -337,6 +347,7 @@ export type OrganizationPostGroupByOutputType = {
   isSensitive: boolean
   spoilerOfMangaCustomId: number | null
   spoilerChapter: number | null
+  workMangaCustomId: number | null
   reportsCount: number
   hiddenReason: string | null
   hiddenByUserId: number | null
@@ -385,6 +396,7 @@ export type OrganizationPostWhereInput = {
   isSensitive?: Prisma.BoolFilter<"OrganizationPost"> | boolean
   spoilerOfMangaCustomId?: Prisma.IntNullableFilter<"OrganizationPost"> | number | null
   spoilerChapter?: Prisma.FloatNullableFilter<"OrganizationPost"> | number | null
+  workMangaCustomId?: Prisma.IntNullableFilter<"OrganizationPost"> | number | null
   reportsCount?: Prisma.IntFilter<"OrganizationPost"> | number
   hiddenReason?: Prisma.StringNullableFilter<"OrganizationPost"> | string | null
   hiddenByUserId?: Prisma.IntNullableFilter<"OrganizationPost"> | number | null
@@ -420,6 +432,7 @@ export type OrganizationPostOrderByWithRelationInput = {
   isSensitive?: Prisma.SortOrder
   spoilerOfMangaCustomId?: Prisma.SortOrderInput | Prisma.SortOrder
   spoilerChapter?: Prisma.SortOrderInput | Prisma.SortOrder
+  workMangaCustomId?: Prisma.SortOrderInput | Prisma.SortOrder
   reportsCount?: Prisma.SortOrder
   hiddenReason?: Prisma.SortOrderInput | Prisma.SortOrder
   hiddenByUserId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -458,6 +471,7 @@ export type OrganizationPostWhereUniqueInput = Prisma.AtLeast<{
   isSensitive?: Prisma.BoolFilter<"OrganizationPost"> | boolean
   spoilerOfMangaCustomId?: Prisma.IntNullableFilter<"OrganizationPost"> | number | null
   spoilerChapter?: Prisma.FloatNullableFilter<"OrganizationPost"> | number | null
+  workMangaCustomId?: Prisma.IntNullableFilter<"OrganizationPost"> | number | null
   reportsCount?: Prisma.IntFilter<"OrganizationPost"> | number
   hiddenReason?: Prisma.StringNullableFilter<"OrganizationPost"> | string | null
   hiddenByUserId?: Prisma.IntNullableFilter<"OrganizationPost"> | number | null
@@ -493,6 +507,7 @@ export type OrganizationPostOrderByWithAggregationInput = {
   isSensitive?: Prisma.SortOrder
   spoilerOfMangaCustomId?: Prisma.SortOrderInput | Prisma.SortOrder
   spoilerChapter?: Prisma.SortOrderInput | Prisma.SortOrder
+  workMangaCustomId?: Prisma.SortOrderInput | Prisma.SortOrder
   reportsCount?: Prisma.SortOrder
   hiddenReason?: Prisma.SortOrderInput | Prisma.SortOrder
   hiddenByUserId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -526,6 +541,7 @@ export type OrganizationPostScalarWhereWithAggregatesInput = {
   isSensitive?: Prisma.BoolWithAggregatesFilter<"OrganizationPost"> | boolean
   spoilerOfMangaCustomId?: Prisma.IntNullableWithAggregatesFilter<"OrganizationPost"> | number | null
   spoilerChapter?: Prisma.FloatNullableWithAggregatesFilter<"OrganizationPost"> | number | null
+  workMangaCustomId?: Prisma.IntNullableWithAggregatesFilter<"OrganizationPost"> | number | null
   reportsCount?: Prisma.IntWithAggregatesFilter<"OrganizationPost"> | number
   hiddenReason?: Prisma.StringNullableWithAggregatesFilter<"OrganizationPost"> | string | null
   hiddenByUserId?: Prisma.IntNullableWithAggregatesFilter<"OrganizationPost"> | number | null
@@ -546,6 +562,7 @@ export type OrganizationPostCreateInput = {
   isSensitive?: boolean
   spoilerOfMangaCustomId?: number | null
   spoilerChapter?: number | null
+  workMangaCustomId?: number | null
   reportsCount?: number
   hiddenReason?: string | null
   hiddenByUserId?: number | null
@@ -581,6 +598,7 @@ export type OrganizationPostUncheckedCreateInput = {
   isSensitive?: boolean
   spoilerOfMangaCustomId?: number | null
   spoilerChapter?: number | null
+  workMangaCustomId?: number | null
   reportsCount?: number
   hiddenReason?: string | null
   hiddenByUserId?: number | null
@@ -607,6 +625,7 @@ export type OrganizationPostUpdateInput = {
   isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  workMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
   hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -642,6 +661,7 @@ export type OrganizationPostUncheckedUpdateInput = {
   isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  workMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
   hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -673,6 +693,7 @@ export type OrganizationPostCreateManyInput = {
   isSensitive?: boolean
   spoilerOfMangaCustomId?: number | null
   spoilerChapter?: number | null
+  workMangaCustomId?: number | null
   reportsCount?: number
   hiddenReason?: string | null
   hiddenByUserId?: number | null
@@ -693,6 +714,7 @@ export type OrganizationPostUpdateManyMutationInput = {
   isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  workMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
   hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -718,6 +740,7 @@ export type OrganizationPostUncheckedUpdateManyInput = {
   isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  workMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
   hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -758,6 +781,7 @@ export type OrganizationPostCountOrderByAggregateInput = {
   isSensitive?: Prisma.SortOrder
   spoilerOfMangaCustomId?: Prisma.SortOrder
   spoilerChapter?: Prisma.SortOrder
+  workMangaCustomId?: Prisma.SortOrder
   reportsCount?: Prisma.SortOrder
   hiddenReason?: Prisma.SortOrder
   hiddenByUserId?: Prisma.SortOrder
@@ -778,6 +802,7 @@ export type OrganizationPostAvgOrderByAggregateInput = {
   repostCount?: Prisma.SortOrder
   spoilerOfMangaCustomId?: Prisma.SortOrder
   spoilerChapter?: Prisma.SortOrder
+  workMangaCustomId?: Prisma.SortOrder
   reportsCount?: Prisma.SortOrder
   hiddenByUserId?: Prisma.SortOrder
 }
@@ -797,6 +822,7 @@ export type OrganizationPostMaxOrderByAggregateInput = {
   isSensitive?: Prisma.SortOrder
   spoilerOfMangaCustomId?: Prisma.SortOrder
   spoilerChapter?: Prisma.SortOrder
+  workMangaCustomId?: Prisma.SortOrder
   reportsCount?: Prisma.SortOrder
   hiddenReason?: Prisma.SortOrder
   hiddenByUserId?: Prisma.SortOrder
@@ -821,6 +847,7 @@ export type OrganizationPostMinOrderByAggregateInput = {
   isSensitive?: Prisma.SortOrder
   spoilerOfMangaCustomId?: Prisma.SortOrder
   spoilerChapter?: Prisma.SortOrder
+  workMangaCustomId?: Prisma.SortOrder
   reportsCount?: Prisma.SortOrder
   hiddenReason?: Prisma.SortOrder
   hiddenByUserId?: Prisma.SortOrder
@@ -841,6 +868,7 @@ export type OrganizationPostSumOrderByAggregateInput = {
   repostCount?: Prisma.SortOrder
   spoilerOfMangaCustomId?: Prisma.SortOrder
   spoilerChapter?: Prisma.SortOrder
+  workMangaCustomId?: Prisma.SortOrder
   reportsCount?: Prisma.SortOrder
   hiddenByUserId?: Prisma.SortOrder
 }
@@ -1137,6 +1165,7 @@ export type OrganizationPostCreateWithoutOrganizationInput = {
   isSensitive?: boolean
   spoilerOfMangaCustomId?: number | null
   spoilerChapter?: number | null
+  workMangaCustomId?: number | null
   reportsCount?: number
   hiddenReason?: string | null
   hiddenByUserId?: number | null
@@ -1170,6 +1199,7 @@ export type OrganizationPostUncheckedCreateWithoutOrganizationInput = {
   isSensitive?: boolean
   spoilerOfMangaCustomId?: number | null
   spoilerChapter?: number | null
+  workMangaCustomId?: number | null
   reportsCount?: number
   hiddenReason?: string | null
   hiddenByUserId?: number | null
@@ -1230,6 +1260,7 @@ export type OrganizationPostScalarWhereInput = {
   isSensitive?: Prisma.BoolFilter<"OrganizationPost"> | boolean
   spoilerOfMangaCustomId?: Prisma.IntNullableFilter<"OrganizationPost"> | number | null
   spoilerChapter?: Prisma.FloatNullableFilter<"OrganizationPost"> | number | null
+  workMangaCustomId?: Prisma.IntNullableFilter<"OrganizationPost"> | number | null
   reportsCount?: Prisma.IntFilter<"OrganizationPost"> | number
   hiddenReason?: Prisma.StringNullableFilter<"OrganizationPost"> | string | null
   hiddenByUserId?: Prisma.IntNullableFilter<"OrganizationPost"> | number | null
@@ -1250,6 +1281,7 @@ export type OrganizationPostCreateWithoutRepliesInput = {
   isSensitive?: boolean
   spoilerOfMangaCustomId?: number | null
   spoilerChapter?: number | null
+  workMangaCustomId?: number | null
   reportsCount?: number
   hiddenReason?: string | null
   hiddenByUserId?: number | null
@@ -1284,6 +1316,7 @@ export type OrganizationPostUncheckedCreateWithoutRepliesInput = {
   isSensitive?: boolean
   spoilerOfMangaCustomId?: number | null
   spoilerChapter?: number | null
+  workMangaCustomId?: number | null
   reportsCount?: number
   hiddenReason?: string | null
   hiddenByUserId?: number | null
@@ -1314,6 +1347,7 @@ export type OrganizationPostCreateWithoutParentInput = {
   isSensitive?: boolean
   spoilerOfMangaCustomId?: number | null
   spoilerChapter?: number | null
+  workMangaCustomId?: number | null
   reportsCount?: number
   hiddenReason?: string | null
   hiddenByUserId?: number | null
@@ -1347,6 +1381,7 @@ export type OrganizationPostUncheckedCreateWithoutParentInput = {
   isSensitive?: boolean
   spoilerOfMangaCustomId?: number | null
   spoilerChapter?: number | null
+  workMangaCustomId?: number | null
   reportsCount?: number
   hiddenReason?: string | null
   hiddenByUserId?: number | null
@@ -1383,6 +1418,7 @@ export type OrganizationPostCreateWithoutRepostsInput = {
   isSensitive?: boolean
   spoilerOfMangaCustomId?: number | null
   spoilerChapter?: number | null
+  workMangaCustomId?: number | null
   reportsCount?: number
   hiddenReason?: string | null
   hiddenByUserId?: number | null
@@ -1417,6 +1453,7 @@ export type OrganizationPostUncheckedCreateWithoutRepostsInput = {
   isSensitive?: boolean
   spoilerOfMangaCustomId?: number | null
   spoilerChapter?: number | null
+  workMangaCustomId?: number | null
   reportsCount?: number
   hiddenReason?: string | null
   hiddenByUserId?: number | null
@@ -1447,6 +1484,7 @@ export type OrganizationPostCreateWithoutRepostOfInput = {
   isSensitive?: boolean
   spoilerOfMangaCustomId?: number | null
   spoilerChapter?: number | null
+  workMangaCustomId?: number | null
   reportsCount?: number
   hiddenReason?: string | null
   hiddenByUserId?: number | null
@@ -1480,6 +1518,7 @@ export type OrganizationPostUncheckedCreateWithoutRepostOfInput = {
   isSensitive?: boolean
   spoilerOfMangaCustomId?: number | null
   spoilerChapter?: number | null
+  workMangaCustomId?: number | null
   reportsCount?: number
   hiddenReason?: string | null
   hiddenByUserId?: number | null
@@ -1527,6 +1566,7 @@ export type OrganizationPostUpdateWithoutRepliesInput = {
   isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  workMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
   hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1561,6 +1601,7 @@ export type OrganizationPostUncheckedUpdateWithoutRepliesInput = {
   isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  workMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
   hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1613,6 +1654,7 @@ export type OrganizationPostUpdateWithoutRepostsInput = {
   isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  workMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
   hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1647,6 +1689,7 @@ export type OrganizationPostUncheckedUpdateWithoutRepostsInput = {
   isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  workMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
   hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1688,6 +1731,7 @@ export type OrganizationPostCreateWithoutLikesInput = {
   isSensitive?: boolean
   spoilerOfMangaCustomId?: number | null
   spoilerChapter?: number | null
+  workMangaCustomId?: number | null
   reportsCount?: number
   hiddenReason?: string | null
   hiddenByUserId?: number | null
@@ -1722,6 +1766,7 @@ export type OrganizationPostUncheckedCreateWithoutLikesInput = {
   isSensitive?: boolean
   spoilerOfMangaCustomId?: number | null
   spoilerChapter?: number | null
+  workMangaCustomId?: number | null
   reportsCount?: number
   hiddenReason?: string | null
   hiddenByUserId?: number | null
@@ -1763,6 +1808,7 @@ export type OrganizationPostUpdateWithoutLikesInput = {
   isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  workMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
   hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1797,6 +1843,7 @@ export type OrganizationPostUncheckedUpdateWithoutLikesInput = {
   isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  workMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
   hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1822,6 +1869,7 @@ export type OrganizationPostCreateWithoutSavesInput = {
   isSensitive?: boolean
   spoilerOfMangaCustomId?: number | null
   spoilerChapter?: number | null
+  workMangaCustomId?: number | null
   reportsCount?: number
   hiddenReason?: string | null
   hiddenByUserId?: number | null
@@ -1856,6 +1904,7 @@ export type OrganizationPostUncheckedCreateWithoutSavesInput = {
   isSensitive?: boolean
   spoilerOfMangaCustomId?: number | null
   spoilerChapter?: number | null
+  workMangaCustomId?: number | null
   reportsCount?: number
   hiddenReason?: string | null
   hiddenByUserId?: number | null
@@ -1897,6 +1946,7 @@ export type OrganizationPostUpdateWithoutSavesInput = {
   isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  workMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
   hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1931,6 +1981,7 @@ export type OrganizationPostUncheckedUpdateWithoutSavesInput = {
   isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  workMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
   hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1956,6 +2007,7 @@ export type OrganizationPostCreateWithoutHashtagsInput = {
   isSensitive?: boolean
   spoilerOfMangaCustomId?: number | null
   spoilerChapter?: number | null
+  workMangaCustomId?: number | null
   reportsCount?: number
   hiddenReason?: string | null
   hiddenByUserId?: number | null
@@ -1990,6 +2042,7 @@ export type OrganizationPostUncheckedCreateWithoutHashtagsInput = {
   isSensitive?: boolean
   spoilerOfMangaCustomId?: number | null
   spoilerChapter?: number | null
+  workMangaCustomId?: number | null
   reportsCount?: number
   hiddenReason?: string | null
   hiddenByUserId?: number | null
@@ -2031,6 +2084,7 @@ export type OrganizationPostUpdateWithoutHashtagsInput = {
   isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  workMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
   hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2065,6 +2119,7 @@ export type OrganizationPostUncheckedUpdateWithoutHashtagsInput = {
   isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  workMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
   hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2090,6 +2145,7 @@ export type OrganizationPostCreateWithoutUserInput = {
   isSensitive?: boolean
   spoilerOfMangaCustomId?: number | null
   spoilerChapter?: number | null
+  workMangaCustomId?: number | null
   reportsCount?: number
   hiddenReason?: string | null
   hiddenByUserId?: number | null
@@ -2123,6 +2179,7 @@ export type OrganizationPostUncheckedCreateWithoutUserInput = {
   isSensitive?: boolean
   spoilerOfMangaCustomId?: number | null
   spoilerChapter?: number | null
+  workMangaCustomId?: number | null
   reportsCount?: number
   hiddenReason?: string | null
   hiddenByUserId?: number | null
@@ -2175,6 +2232,7 @@ export type OrganizationPostCreateWithoutPollInput = {
   isSensitive?: boolean
   spoilerOfMangaCustomId?: number | null
   spoilerChapter?: number | null
+  workMangaCustomId?: number | null
   reportsCount?: number
   hiddenReason?: string | null
   hiddenByUserId?: number | null
@@ -2209,6 +2267,7 @@ export type OrganizationPostUncheckedCreateWithoutPollInput = {
   isSensitive?: boolean
   spoilerOfMangaCustomId?: number | null
   spoilerChapter?: number | null
+  workMangaCustomId?: number | null
   reportsCount?: number
   hiddenReason?: string | null
   hiddenByUserId?: number | null
@@ -2250,6 +2309,7 @@ export type OrganizationPostUpdateWithoutPollInput = {
   isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  workMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
   hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2284,6 +2344,7 @@ export type OrganizationPostUncheckedUpdateWithoutPollInput = {
   isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  workMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
   hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2313,6 +2374,7 @@ export type OrganizationPostCreateManyOrganizationInput = {
   isSensitive?: boolean
   spoilerOfMangaCustomId?: number | null
   spoilerChapter?: number | null
+  workMangaCustomId?: number | null
   reportsCount?: number
   hiddenReason?: string | null
   hiddenByUserId?: number | null
@@ -2333,6 +2395,7 @@ export type OrganizationPostUpdateWithoutOrganizationInput = {
   isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  workMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
   hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2366,6 +2429,7 @@ export type OrganizationPostUncheckedUpdateWithoutOrganizationInput = {
   isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  workMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
   hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2396,6 +2460,7 @@ export type OrganizationPostUncheckedUpdateManyWithoutOrganizationInput = {
   isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  workMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
   hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2420,6 +2485,7 @@ export type OrganizationPostCreateManyParentInput = {
   isSensitive?: boolean
   spoilerOfMangaCustomId?: number | null
   spoilerChapter?: number | null
+  workMangaCustomId?: number | null
   reportsCount?: number
   hiddenReason?: string | null
   hiddenByUserId?: number | null
@@ -2444,6 +2510,7 @@ export type OrganizationPostCreateManyRepostOfInput = {
   isSensitive?: boolean
   spoilerOfMangaCustomId?: number | null
   spoilerChapter?: number | null
+  workMangaCustomId?: number | null
   reportsCount?: number
   hiddenReason?: string | null
   hiddenByUserId?: number | null
@@ -2464,6 +2531,7 @@ export type OrganizationPostUpdateWithoutParentInput = {
   isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  workMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
   hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2497,6 +2565,7 @@ export type OrganizationPostUncheckedUpdateWithoutParentInput = {
   isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  workMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
   hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2527,6 +2596,7 @@ export type OrganizationPostUncheckedUpdateManyWithoutParentInput = {
   isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  workMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
   hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2547,6 +2617,7 @@ export type OrganizationPostUpdateWithoutRepostOfInput = {
   isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  workMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
   hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2580,6 +2651,7 @@ export type OrganizationPostUncheckedUpdateWithoutRepostOfInput = {
   isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  workMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
   hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2610,6 +2682,7 @@ export type OrganizationPostUncheckedUpdateManyWithoutRepostOfInput = {
   isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  workMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
   hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2634,6 +2707,7 @@ export type OrganizationPostCreateManyUserInput = {
   isSensitive?: boolean
   spoilerOfMangaCustomId?: number | null
   spoilerChapter?: number | null
+  workMangaCustomId?: number | null
   reportsCount?: number
   hiddenReason?: string | null
   hiddenByUserId?: number | null
@@ -2654,6 +2728,7 @@ export type OrganizationPostUpdateWithoutUserInput = {
   isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  workMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
   hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2687,6 +2762,7 @@ export type OrganizationPostUncheckedUpdateWithoutUserInput = {
   isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  workMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
   hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2717,6 +2793,7 @@ export type OrganizationPostUncheckedUpdateManyWithoutUserInput = {
   isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  workMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
   hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2809,6 +2886,7 @@ export type OrganizationPostSelect<ExtArgs extends runtime.Types.Extensions.Inte
   isSensitive?: boolean
   spoilerOfMangaCustomId?: boolean
   spoilerChapter?: boolean
+  workMangaCustomId?: boolean
   reportsCount?: boolean
   hiddenReason?: boolean
   hiddenByUserId?: boolean
@@ -2845,6 +2923,7 @@ export type OrganizationPostSelectCreateManyAndReturn<ExtArgs extends runtime.Ty
   isSensitive?: boolean
   spoilerOfMangaCustomId?: boolean
   spoilerChapter?: boolean
+  workMangaCustomId?: boolean
   reportsCount?: boolean
   hiddenReason?: boolean
   hiddenByUserId?: boolean
@@ -2874,6 +2953,7 @@ export type OrganizationPostSelectUpdateManyAndReturn<ExtArgs extends runtime.Ty
   isSensitive?: boolean
   spoilerOfMangaCustomId?: boolean
   spoilerChapter?: boolean
+  workMangaCustomId?: boolean
   reportsCount?: boolean
   hiddenReason?: boolean
   hiddenByUserId?: boolean
@@ -2903,6 +2983,7 @@ export type OrganizationPostSelectScalar = {
   isSensitive?: boolean
   spoilerOfMangaCustomId?: boolean
   spoilerChapter?: boolean
+  workMangaCustomId?: boolean
   reportsCount?: boolean
   hiddenReason?: boolean
   hiddenByUserId?: boolean
@@ -2912,7 +2993,7 @@ export type OrganizationPostSelectScalar = {
   updatedAt?: boolean
 }
 
-export type OrganizationPostOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "userId" | "content" | "images" | "pinned" | "parentId" | "repostOfId" | "likesCount" | "commentsCount" | "repostCount" | "isSpoiler" | "isSensitive" | "spoilerOfMangaCustomId" | "spoilerChapter" | "reportsCount" | "hiddenReason" | "hiddenByUserId" | "deletedAt" | "hiddenAt" | "createdAt" | "updatedAt", ExtArgs["result"]["organizationPost"]>
+export type OrganizationPostOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "userId" | "content" | "images" | "pinned" | "parentId" | "repostOfId" | "likesCount" | "commentsCount" | "repostCount" | "isSpoiler" | "isSensitive" | "spoilerOfMangaCustomId" | "spoilerChapter" | "workMangaCustomId" | "reportsCount" | "hiddenReason" | "hiddenByUserId" | "deletedAt" | "hiddenAt" | "createdAt" | "updatedAt", ExtArgs["result"]["organizationPost"]>
 export type OrganizationPostInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   organization?: boolean | Prisma.OrganizationPost$organizationArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -2969,6 +3050,7 @@ export type $OrganizationPostPayload<ExtArgs extends runtime.Types.Extensions.In
     isSensitive: boolean
     spoilerOfMangaCustomId: number | null
     spoilerChapter: number | null
+    workMangaCustomId: number | null
     reportsCount: number
     hiddenReason: string | null
     hiddenByUserId: number | null
@@ -3424,6 +3506,7 @@ export interface OrganizationPostFieldRefs {
   readonly isSensitive: Prisma.FieldRef<"OrganizationPost", 'Boolean'>
   readonly spoilerOfMangaCustomId: Prisma.FieldRef<"OrganizationPost", 'Int'>
   readonly spoilerChapter: Prisma.FieldRef<"OrganizationPost", 'Float'>
+  readonly workMangaCustomId: Prisma.FieldRef<"OrganizationPost", 'Int'>
   readonly reportsCount: Prisma.FieldRef<"OrganizationPost", 'Int'>
   readonly hiddenReason: Prisma.FieldRef<"OrganizationPost", 'String'>
   readonly hiddenByUserId: Prisma.FieldRef<"OrganizationPost", 'Int'>

@@ -36,7 +36,7 @@ const authorInclude = {
 const postSelect = {
   id: true, content: true, images: true, pinned: true, parentId: true, repostOfId: true,
   likesCount: true, commentsCount: true, repostCount: true, createdAt: true, organizationId: true, userId: true,
-  isSpoiler: true, isSensitive: true, spoilerOfMangaCustomId: true, spoilerChapter: true,
+  isSpoiler: true, isSensitive: true, spoilerOfMangaCustomId: true, spoilerChapter: true, workMangaCustomId: true,
   poll: { select: { id: true, options: true, votesCount: true, endsAt: true } },
   ...authorInclude,
 }
@@ -72,7 +72,8 @@ function shape(p: any, v: ViewerSets, repostOf?: any): any {
     likesCount: p.likesCount, commentsCount: p.commentsCount, repostCount: p.repostCount,
     isSpoiler: !!p.isSpoiler, isSensitive: !!p.isSensitive,
     spoilerOfMangaCustomId: p.spoilerOfMangaCustomId ?? null, spoilerChapter: p.spoilerChapter ?? null,
-    spoilerSafe: false, spoilerWork: null,
+    spoilerSafe: false, spoilerWork: null, work: null,
+    _workId: p.workMangaCustomId ?? null,
     createdAt: p.createdAt,
     liked: v.likes.has(p.id), saved: v.saves.has(p.id), reposted: v.reposts.has(p.id),
     author: authorOf(p),
@@ -102,7 +103,22 @@ async function withReposts(rows: any[], v: ViewerSets, userId?: number): Promise
   }
   await hydratePolls(shaped, userId)
   await hydrateSpoilers(shaped, userId)
+  await hydrateWorks(shaped)
   return shaped
+}
+
+async function hydrateWorks(items: any[]) {
+  const ids = [...new Set(items.map((x) => x._workId).filter(Boolean))] as number[]
+  if (ids.length) {
+    const works = await prisma.mangaCustom.findMany({ where: { id: { in: ids } }, select: { id: true, title: true, imageUrl: true, isNSFW: true, manga: { select: { slug: true } }, organization: { select: { slug: true, isNSFW: true } } } })
+    const map = new Map(works.map((w) => [w.id, w]))
+    for (const x of items) {
+      if (!x._workId) { delete x._workId; continue }
+      const w = map.get(x._workId)
+      x.work = w ? { title: w.title, imageUrl: w.imageUrl, mangaSlug: w.manga?.slug ?? null, orgSlug: w.organization?.slug ?? null, isNSFW: w.isNSFW || w.organization?.isNSFW || false } : null
+      delete x._workId
+    }
+  } else { for (const x of items) delete x._workId }
 }
 
 async function hydrateSpoilers(items: any[], userId?: number) {
@@ -399,6 +415,7 @@ const interactions = () =>
           isSpoiler: !!body.isSpoiler, isSensitive: !!body.isSensitive,
           spoilerOfMangaCustomId: body.spoilerOfMangaCustomId ? Number(body.spoilerOfMangaCustomId) : null,
           spoilerChapter: body.spoilerChapter != null ? Number(body.spoilerChapter) : null,
+          workMangaCustomId: body.workMangaCustomId ? Number(body.workMangaCustomId) : null,
         },
         select: postSelect,
       })
@@ -429,7 +446,7 @@ const interactions = () =>
       const [full] = await withReposts([post], v, user.id)
       if (createdPoll) full.poll = { id: createdPoll.id, options: createdPoll.options, votesCount: 0, endsAt: createdPoll.endsAt, myVote: null }
       return { status: true, data: full }
-    }, { body: t.Object({ content: t.Optional(t.String()), images: t.Optional(t.Array(t.String())), orgSlug: t.Optional(t.Union([t.String(), t.Null()])), parentId: t.Optional(t.Union([t.Number(), t.Null()])), repostOf: t.Optional(t.Union([t.Number(), t.Null()])), isSpoiler: t.Optional(t.Boolean()), isSensitive: t.Optional(t.Boolean()), spoilerOfMangaCustomId: t.Optional(t.Union([t.Number(), t.Null()])), spoilerChapter: t.Optional(t.Union([t.Number(), t.Null()])), poll: t.Optional(t.Any()) }) })
+    }, { body: t.Object({ content: t.Optional(t.String()), images: t.Optional(t.Array(t.String())), orgSlug: t.Optional(t.Union([t.String(), t.Null()])), parentId: t.Optional(t.Union([t.Number(), t.Null()])), repostOf: t.Optional(t.Union([t.Number(), t.Null()])), isSpoiler: t.Optional(t.Boolean()), isSensitive: t.Optional(t.Boolean()), spoilerOfMangaCustomId: t.Optional(t.Union([t.Number(), t.Null()])), spoilerChapter: t.Optional(t.Union([t.Number(), t.Null()])), workMangaCustomId: t.Optional(t.Union([t.Number(), t.Null()])), poll: t.Optional(t.Any()) }) })
     .post('/api/posts/:id/like', async ({ params, user }: any) => {
       assertRateLimit(`like:${user.id}`, 300, 3600 * 1000, 'Demasiadas acciones, espera un momento.')
       const id = Number(params.id)

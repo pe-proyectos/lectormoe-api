@@ -234,6 +234,7 @@ export const OrganizationPostScalarFieldEnum = {
   isSensitive: 'isSensitive',
   spoilerOfMangaCustomId: 'spoilerOfMangaCustomId',
   spoilerChapter: 'spoilerChapter',
+  workMangaCustomId: 'workMangaCustomId',
   reportsCount: 'reportsCount',
   hiddenReason: 'hiddenReason',
   hiddenByUserId: 'hiddenByUserId',

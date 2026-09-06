@@ -337,7 +337,9 @@ const statements: string[] = [
   `CREATE TABLE IF NOT EXISTS "post_poll" ("id" SERIAL PRIMARY KEY,"postId" INTEGER NOT NULL UNIQUE REFERENCES "organization_post"("id") ON DELETE CASCADE,"options" JSONB NOT NULL,"votesCount" INTEGER NOT NULL DEFAULT 0,"endsAt" TIMESTAMP(6) NOT NULL,"createdAt" TIMESTAMP(6) NOT NULL DEFAULT now());`,
   `CREATE TABLE IF NOT EXISTS "post_poll_vote" ("id" SERIAL PRIMARY KEY,"pollId" INTEGER NOT NULL REFERENCES "post_poll"("id") ON DELETE CASCADE,"userId" INTEGER NOT NULL,"optionIndex" INTEGER NOT NULL,"createdAt" TIMESTAMP(6) NOT NULL DEFAULT now());`,
   `CREATE UNIQUE INDEX IF NOT EXISTS "post_poll_vote_pollId_userId_key" ON "post_poll_vote"("pollId","userId");`,
-  `CREATE INDEX IF NOT EXISTS "post_poll_vote_pollId_idx" ON "post_poll_vote"("pollId");`
+  `CREATE INDEX IF NOT EXISTS "post_poll_vote_pollId_idx" ON "post_poll_vote"("pollId");`,
+  // Fase social 5b: card nativa de obra adjunta a un post.
+  `ALTER TABLE "organization_post" ADD COLUMN IF NOT EXISTS "workMangaCustomId" INTEGER REFERENCES "manga_custom"("id") ON DELETE SET NULL;`
 ]
 
 for (const sql of statements) {

@@ -133,6 +133,7 @@ model OrganizationPost {
   isSensitive    Boolean       @default(false)
   spoilerOfMangaCustomId Int?
   spoilerChapter Float?
+  workMangaCustomId Int?
   reportsCount   Int           @default(0)
   hiddenReason   String?       @db.VarChar(32)
   hiddenByUserId Int?
