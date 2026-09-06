@@ -149,6 +149,7 @@ model OrganizationPost {
   likes          OrganizationPostLike[]
   saves          OrganizationPostSave[]
   hashtags       OrganizationPostHashtag[]
+  poll           PostPoll?
 
   @@index([organizationId, createdAt])
   @@index([createdAt])
@@ -1588,5 +1589,32 @@ model UserMute {
 
   @@unique([muterId, mutedId])
   @@map("user_mute")
+}
+
+// Encuestas en posts.
+model PostPoll {
+  id         Int              @id @default(autoincrement())
+  postId     Int              @unique
+  options    Json
+  votesCount Int              @default(0)
+  endsAt     DateTime         @db.Timestamp(6)
+  createdAt  DateTime         @default(now()) @db.Timestamp(6)
+  post       OrganizationPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+  votes      PostPollVote[]
+
+  @@map("post_poll")
+}
+
+model PostPollVote {
+  id          Int      @id @default(autoincrement())
+  pollId      Int
+  userId      Int
+  optionIndex Int
+  createdAt   DateTime @default(now()) @db.Timestamp(6)
+  poll        PostPoll @relation(fields: [pollId], references: [id], onDelete: Cascade)
+
+  @@unique([pollId, userId])
+  @@index([pollId])
+  @@map("post_poll_vote")
 }
 

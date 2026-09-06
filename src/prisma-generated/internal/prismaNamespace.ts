@@ -451,7 +451,9 @@ export const ModelName = {
   UserBan: 'UserBan',
   UserFollow: 'UserFollow',
   UserBlock: 'UserBlock',
-  UserMute: 'UserMute'
+  UserMute: 'UserMute',
+  PostPoll: 'PostPoll',
+  PostPollVote: 'PostPollVote'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -467,7 +469,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "token" | "organization" | "recruitmentPost" | "organizationPost" | "organizationPostLike" | "organizationPostSave" | "organizationPostHashtag" | "organizationRecommendation" | "user" | "betaTester" | "moderationLog" | "permission" | "passwordResetToken" | "countryOptions" | "author" | "bookType" | "manga" | "mangaCustom" | "chapter" | "organizationMessageThread" | "organizationMessage" | "customList" | "customListFollower" | "customListFollowerItem" | "customListItem" | "contentReport" | "mangaReview" | "chapterMilestoneAlert" | "mangaVolume" | "chapterReaction" | "page" | "comment" | "commentLike" | "ranking" | "demography" | "genre" | "analytics" | "userChapterHistory" | "favorite" | "userList" | "userPageBookmark" | "audit" | "viewsHistory" | "subscriptionPlan" | "subscription" | "organizationTransaction" | "organizationFollower" | "organizationRequest" | "emailPreference" | "emailLog" | "unsubscribeToken" | "emailVerificationToken" | "userSavedQuote" | "userDailyActivity" | "achievement" | "userAchievement" | "mangaJoint" | "jointMember" | "jointMemberHistory" | "notification" | "raffle" | "raffleTicket" | "raffleComment" | "raffleRefund" | "userBan" | "userFollow" | "userBlock" | "userMute"
+    modelProps: "token" | "organization" | "recruitmentPost" | "organizationPost" | "organizationPostLike" | "organizationPostSave" | "organizationPostHashtag" | "organizationRecommendation" | "user" | "betaTester" | "moderationLog" | "permission" | "passwordResetToken" | "countryOptions" | "author" | "bookType" | "manga" | "mangaCustom" | "chapter" | "organizationMessageThread" | "organizationMessage" | "customList" | "customListFollower" | "customListFollowerItem" | "customListItem" | "contentReport" | "mangaReview" | "chapterMilestoneAlert" | "mangaVolume" | "chapterReaction" | "page" | "comment" | "commentLike" | "ranking" | "demography" | "genre" | "analytics" | "userChapterHistory" | "favorite" | "userList" | "userPageBookmark" | "audit" | "viewsHistory" | "subscriptionPlan" | "subscription" | "organizationTransaction" | "organizationFollower" | "organizationRequest" | "emailPreference" | "emailLog" | "unsubscribeToken" | "emailVerificationToken" | "userSavedQuote" | "userDailyActivity" | "achievement" | "userAchievement" | "mangaJoint" | "jointMember" | "jointMemberHistory" | "notification" | "raffle" | "raffleTicket" | "raffleComment" | "raffleRefund" | "userBan" | "userFollow" | "userBlock" | "userMute" | "postPoll" | "postPollVote"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -5503,6 +5505,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    PostPoll: {
+      payload: Prisma.$PostPollPayload<ExtArgs>
+      fields: Prisma.PostPollFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PostPollFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostPollPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PostPollFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostPollPayload>
+        }
+        findFirst: {
+          args: Prisma.PostPollFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostPollPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PostPollFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostPollPayload>
+        }
+        findMany: {
+          args: Prisma.PostPollFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostPollPayload>[]
+        }
+        create: {
+          args: Prisma.PostPollCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostPollPayload>
+        }
+        createMany: {
+          args: Prisma.PostPollCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PostPollCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostPollPayload>[]
+        }
+        delete: {
+          args: Prisma.PostPollDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostPollPayload>
+        }
+        update: {
+          args: Prisma.PostPollUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostPollPayload>
+        }
+        deleteMany: {
+          args: Prisma.PostPollDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PostPollUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PostPollUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostPollPayload>[]
+        }
+        upsert: {
+          args: Prisma.PostPollUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostPollPayload>
+        }
+        aggregate: {
+          args: Prisma.PostPollAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePostPoll>
+        }
+        groupBy: {
+          args: Prisma.PostPollGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PostPollGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PostPollCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PostPollCountAggregateOutputType> | number
+        }
+      }
+    }
+    PostPollVote: {
+      payload: Prisma.$PostPollVotePayload<ExtArgs>
+      fields: Prisma.PostPollVoteFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PostPollVoteFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostPollVotePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PostPollVoteFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostPollVotePayload>
+        }
+        findFirst: {
+          args: Prisma.PostPollVoteFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostPollVotePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PostPollVoteFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostPollVotePayload>
+        }
+        findMany: {
+          args: Prisma.PostPollVoteFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostPollVotePayload>[]
+        }
+        create: {
+          args: Prisma.PostPollVoteCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostPollVotePayload>
+        }
+        createMany: {
+          args: Prisma.PostPollVoteCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PostPollVoteCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostPollVotePayload>[]
+        }
+        delete: {
+          args: Prisma.PostPollVoteDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostPollVotePayload>
+        }
+        update: {
+          args: Prisma.PostPollVoteUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostPollVotePayload>
+        }
+        deleteMany: {
+          args: Prisma.PostPollVoteDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PostPollVoteUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PostPollVoteUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostPollVotePayload>[]
+        }
+        upsert: {
+          args: Prisma.PostPollVoteUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostPollVotePayload>
+        }
+        aggregate: {
+          args: Prisma.PostPollVoteAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePostPollVote>
+        }
+        groupBy: {
+          args: Prisma.PostPollVoteGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PostPollVoteGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PostPollVoteCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PostPollVoteCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -6720,6 +6870,29 @@ export const UserMuteScalarFieldEnum = {
 export type UserMuteScalarFieldEnum = (typeof UserMuteScalarFieldEnum)[keyof typeof UserMuteScalarFieldEnum]
 
 
+export const PostPollScalarFieldEnum = {
+  id: 'id',
+  postId: 'postId',
+  options: 'options',
+  votesCount: 'votesCount',
+  endsAt: 'endsAt',
+  createdAt: 'createdAt'
+} as const
+
+export type PostPollScalarFieldEnum = (typeof PostPollScalarFieldEnum)[keyof typeof PostPollScalarFieldEnum]
+
+
+export const PostPollVoteScalarFieldEnum = {
+  id: 'id',
+  pollId: 'pollId',
+  userId: 'userId',
+  optionIndex: 'optionIndex',
+  createdAt: 'createdAt'
+} as const
+
+export type PostPollVoteScalarFieldEnum = (typeof PostPollVoteScalarFieldEnum)[keyof typeof PostPollVoteScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -6734,6 +6907,13 @@ export const NullableJsonNullValueInput = {
 } as const
 
 export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const QueryMode = {
@@ -7048,6 +7228,8 @@ export type GlobalOmitConfig = {
   userFollow?: Prisma.UserFollowOmit
   userBlock?: Prisma.UserBlockOmit
   userMute?: Prisma.UserMuteOmit
+  postPoll?: Prisma.PostPollOmit
+  postPollVote?: Prisma.PostPollVoteOmit
 }
 
 /* Types for Logging */

@@ -332,7 +332,12 @@ const statements: string[] = [
   `ALTER TABLE "notification" ADD COLUMN IF NOT EXISTS "groupKey" VARCHAR(120);`,
   `ALTER TABLE "notification" ADD COLUMN IF NOT EXISTS "actorsCount" INTEGER NOT NULL DEFAULT 1;`,
   `ALTER TABLE "notification" ADD COLUMN IF NOT EXISTS "extraActorIds" JSONB;`,
-  `CREATE UNIQUE INDEX IF NOT EXISTS "notification_userId_groupKey_key" ON "notification"("userId","groupKey") WHERE "groupKey" IS NOT NULL AND "readAt" IS NULL;`
+  `CREATE UNIQUE INDEX IF NOT EXISTS "notification_userId_groupKey_key" ON "notification"("userId","groupKey") WHERE "groupKey" IS NOT NULL AND "readAt" IS NULL;`,
+  // Fase social 3: encuestas.
+  `CREATE TABLE IF NOT EXISTS "post_poll" ("id" SERIAL PRIMARY KEY,"postId" INTEGER NOT NULL UNIQUE REFERENCES "organization_post"("id") ON DELETE CASCADE,"options" JSONB NOT NULL,"votesCount" INTEGER NOT NULL DEFAULT 0,"endsAt" TIMESTAMP(6) NOT NULL,"createdAt" TIMESTAMP(6) NOT NULL DEFAULT now());`,
+  `CREATE TABLE IF NOT EXISTS "post_poll_vote" ("id" SERIAL PRIMARY KEY,"pollId" INTEGER NOT NULL REFERENCES "post_poll"("id") ON DELETE CASCADE,"userId" INTEGER NOT NULL,"optionIndex" INTEGER NOT NULL,"createdAt" TIMESTAMP(6) NOT NULL DEFAULT now());`,
+  `CREATE UNIQUE INDEX IF NOT EXISTS "post_poll_vote_pollId_userId_key" ON "post_poll_vote"("pollId","userId");`,
+  `CREATE INDEX IF NOT EXISTS "post_poll_vote_pollId_idx" ON "post_poll_vote"("pollId");`
 ]
 
 for (const sql of statements) {

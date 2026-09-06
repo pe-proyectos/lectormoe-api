@@ -34,6 +34,7 @@ const postSelect = {
   id: true, content: true, images: true, pinned: true, parentId: true, repostOfId: true,
   likesCount: true, commentsCount: true, repostCount: true, createdAt: true, organizationId: true, userId: true,
   isSpoiler: true, isSensitive: true, spoilerOfMangaCustomId: true, spoilerChapter: true,
+  poll: { select: { id: true, options: true, votesCount: true, endsAt: true } },
   ...authorInclude,
 }
 
@@ -71,18 +72,32 @@ function shape(p: any, v: ViewerSets, repostOf?: any): any {
     createdAt: p.createdAt,
     liked: v.likes.has(p.id), saved: v.saves.has(p.id), reposted: v.reposts.has(p.id),
     author: authorOf(p),
+    poll: p.poll ? { id: p.poll.id, options: Array.isArray(p.poll.options) ? p.poll.options : [], votesCount: p.poll.votesCount, endsAt: p.poll.endsAt, myVote: null } : null,
     repostOf: repostOf === undefined ? null : repostOf,
   }
 }
 
 // Adjunta el post citado (repostOf) a cada item, un solo nivel.
+async function hydratePolls(items: any[], userId?: number) {
+  if (!userId) return
+  const pollIds = items.map((x) => x.poll?.id).filter(Boolean) as number[]
+  if (!pollIds.length) return
+  const votes = await prisma.postPollVote.findMany({ where: { userId, pollId: { in: pollIds } }, select: { pollId: true, optionIndex: true } })
+  const vm = new Map(votes.map((x) => [x.pollId, x.optionIndex]))
+  for (const x of items) if (x.poll) x.poll.myVote = vm.get(x.poll.id) ?? null
+}
 async function withReposts(rows: any[], v: ViewerSets, userId?: number): Promise<any[]> {
   const targetIds = [...new Set(rows.map((r) => r.repostOfId).filter(Boolean))] as number[]
-  if (!targetIds.length) return rows.map((r) => shape(r, v))
-  const targets = await prisma.organizationPost.findMany({ where: { id: { in: targetIds }, deletedAt: null }, select: postSelect })
-  const tv = await viewerSets(userId, targets.map((t) => t.id))
-  const map = new Map(targets.map((t) => [t.id, shape(t, tv)]))
-  return rows.map((r) => shape(r, v, r.repostOfId ? map.get(r.repostOfId) ?? null : undefined))
+  let shaped: any[]
+  if (!targetIds.length) shaped = rows.map((r) => shape(r, v))
+  else {
+    const targets = await prisma.organizationPost.findMany({ where: { id: { in: targetIds }, deletedAt: null }, select: postSelect })
+    const tv = await viewerSets(userId, targets.map((t) => t.id))
+    const map = new Map(targets.map((t) => [t.id, shape(t, tv)]))
+    shaped = rows.map((r) => shape(r, v, r.repostOfId ? map.get(r.repostOfId) ?? null : undefined))
+  }
+  await hydratePolls(shaped, userId)
+  return shaped
 }
 
 // Conjunto de userIds que el viewer no debe ver (bloqueos en cualquier direccion + silenciados).
@@ -313,6 +328,15 @@ const interactions = () =>
 
       const tags = parseHashtags(content)
       if (tags.length) await prisma.organizationPostHashtag.createMany({ data: tags.map((tag) => ({ postId: post.id, tag })) }).catch(() => {})
+      let createdPoll: any = null
+      if (body.poll && Array.isArray(body.poll.options)) {
+        const opts = body.poll.options.map((o: any) => String(o || '').trim()).filter(Boolean).slice(0, 4)
+        if (opts.length >= 2) {
+          const hours = Math.min(168, Math.max(1, Number(body.poll.durationHours) || 24))
+          const endsAt = new Date(Date.now() + hours * 3600 * 1000)
+          createdPoll = await prisma.postPoll.create({ data: { postId: post.id, options: opts.map((text: string) => ({ text, votes: 0 })), endsAt }, select: { id: true, options: true, votesCount: true, endsAt: true } })
+        }
+      }
       if (parent) {
         await prisma.organizationPost.update({ where: { id: parent.id }, data: { commentsCount: { increment: 1 } } })
         await notify(parent.userId, 'post_reply', post.id, user.id, parent.organizationId)
@@ -325,8 +349,9 @@ const interactions = () =>
 
       const v = await viewerSets(user.id, [post.id])
       const [full] = await withReposts([post], v, user.id)
+      if (createdPoll) full.poll = { id: createdPoll.id, options: createdPoll.options, votesCount: 0, endsAt: createdPoll.endsAt, myVote: null }
       return { status: true, data: full }
-    }, { body: t.Object({ content: t.Optional(t.String()), images: t.Optional(t.Array(t.String())), orgSlug: t.Optional(t.Union([t.String(), t.Null()])), parentId: t.Optional(t.Union([t.Number(), t.Null()])), repostOf: t.Optional(t.Union([t.Number(), t.Null()])), isSpoiler: t.Optional(t.Boolean()), isSensitive: t.Optional(t.Boolean()), spoilerOfMangaCustomId: t.Optional(t.Union([t.Number(), t.Null()])), spoilerChapter: t.Optional(t.Union([t.Number(), t.Null()])) }) })
+    }, { body: t.Object({ content: t.Optional(t.String()), images: t.Optional(t.Array(t.String())), orgSlug: t.Optional(t.Union([t.String(), t.Null()])), parentId: t.Optional(t.Union([t.Number(), t.Null()])), repostOf: t.Optional(t.Union([t.Number(), t.Null()])), isSpoiler: t.Optional(t.Boolean()), isSensitive: t.Optional(t.Boolean()), spoilerOfMangaCustomId: t.Optional(t.Union([t.Number(), t.Null()])), spoilerChapter: t.Optional(t.Union([t.Number(), t.Null()])), poll: t.Optional(t.Any()) }) })
     .post('/api/posts/:id/like', async ({ params, user }: any) => {
       assertRateLimit(`like:${user.id}`, 300, 3600 * 1000, 'Demasiadas acciones, espera un momento.')
       const id = Number(params.id)
@@ -358,6 +383,20 @@ const interactions = () =>
       await prisma.organizationPostSave.create({ data: { postId: id, userId: user.id } })
       return { status: true, data: { saved: true } }
     })
+    .post('/api/polls/:id/vote', async ({ params, body, user }: any) => {
+      const pollId = Number(params.id)
+      const poll = await prisma.postPoll.findUnique({ where: { id: pollId }, select: { id: true, options: true, votesCount: true, endsAt: true } })
+      if (!poll) throw new Error('Encuesta no encontrada.')
+      if (new Date(poll.endsAt).getTime() < Date.now()) throw new Error('La encuesta ya terminó.')
+      const opts = (Array.isArray(poll.options) ? poll.options : []) as any[]
+      const oi = Number(body.optionIndex)
+      if (!Number.isInteger(oi) || oi < 0 || oi >= opts.length) throw new Error('Opción inválida.')
+      try { await prisma.postPollVote.create({ data: { pollId, userId: user.id, optionIndex: oi } }) }
+      catch { throw new Error('Ya votaste en esta encuesta.') }
+      opts[oi].votes = (opts[oi].votes || 0) + 1
+      const updated = await prisma.postPoll.update({ where: { id: pollId }, data: { options: opts, votesCount: { increment: 1 } }, select: { options: true, votesCount: true, endsAt: true } })
+      return { status: true, data: { options: updated.options, votesCount: updated.votesCount, endsAt: updated.endsAt, myVote: oi } }
+    }, { body: t.Object({ optionIndex: t.Number() }) })
     .post('/api/posts/:id/repost', async ({ params, user }: any) => {
       const id = Number(params.id)
       const post = await prisma.organizationPost.findFirst({ where: { id, deletedAt: null }, select: { id: true, userId: true } })

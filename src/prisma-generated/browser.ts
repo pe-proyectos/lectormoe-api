@@ -357,3 +357,13 @@ export type UserBlock = Prisma.UserBlockModel
  * 
  */
 export type UserMute = Prisma.UserMuteModel
+/**
+ * Model PostPoll
+ * 
+ */
+export type PostPoll = Prisma.PostPollModel
+/**
+ * Model PostPollVote
+ * 
+ */
+export type PostPollVote = Prisma.PostPollVoteModel
