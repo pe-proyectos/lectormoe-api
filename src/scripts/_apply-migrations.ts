@@ -254,7 +254,32 @@ const statements: string[] = [
   `ALTER TABLE "user_saved_quote" ADD COLUMN IF NOT EXISTS "note" VARCHAR(500);`,
   `ALTER TABLE "user_saved_quote" ADD COLUMN IF NOT EXISTS "cardConfig" JSONB;`,
   `ALTER TABLE "user_saved_quote" ADD COLUMN IF NOT EXISTS "position" INTEGER;`,
-  `CREATE INDEX IF NOT EXISTS "user_saved_quote_userId_position_idx" ON "user_saved_quote"("userId", "position");`
+  `CREATE INDEX IF NOT EXISTS "user_saved_quote_userId_position_idx" ON "user_saved_quote"("userId", "position");`,
+  // Comunidad / Posts por scan (/socials).
+  `CREATE TABLE IF NOT EXISTS "organization_post" (
+    "id" SERIAL PRIMARY KEY,
+    "organizationId" INTEGER NOT NULL REFERENCES "organization"("id") ON DELETE CASCADE,
+    "userId" INTEGER NOT NULL REFERENCES "user"("id") ON DELETE CASCADE,
+    "content" TEXT NOT NULL,
+    "images" JSONB,
+    "pinned" BOOLEAN NOT NULL DEFAULT false,
+    "likesCount" INTEGER NOT NULL DEFAULT 0,
+    "commentsCount" INTEGER NOT NULL DEFAULT 0,
+    "deletedAt" TIMESTAMP(3),
+    "hiddenAt" TIMESTAMP(3),
+    "createdAt" TIMESTAMP(6) NOT NULL DEFAULT now(),
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT now()
+  );`,
+  `CREATE INDEX IF NOT EXISTS "organization_post_organizationId_createdAt_idx" ON "organization_post"("organizationId", "createdAt");`,
+  `CREATE INDEX IF NOT EXISTS "organization_post_createdAt_idx" ON "organization_post"("createdAt");`,
+  `CREATE TABLE IF NOT EXISTS "organization_post_like" (
+    "id" SERIAL PRIMARY KEY,
+    "postId" INTEGER NOT NULL REFERENCES "organization_post"("id") ON DELETE CASCADE,
+    "userId" INTEGER NOT NULL,
+    "createdAt" TIMESTAMP(6) NOT NULL DEFAULT now()
+  );`,
+  `CREATE UNIQUE INDEX IF NOT EXISTS "organization_post_like_postId_userId_key" ON "organization_post_like"("postId", "userId");`,
+  `CREATE INDEX IF NOT EXISTS "organization_post_like_postId_idx" ON "organization_post_like"("postId");`
 ]
 
 for (const sql of statements) {

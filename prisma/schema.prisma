@@ -89,6 +89,8 @@ model Organization {
   userBans                                     UserBan[]
   messageThreads                               OrganizationMessageThread[]
   recruitmentPosts                             RecruitmentPost[]
+  communityPosts                               OrganizationPost[]
+  communityPosts                               OrganizationPost[]
   organizationRecommendations                  OrganizationRecommendation[]
 
   @@map("organization")
@@ -111,6 +113,43 @@ model RecruitmentPost {
   @@index([status, urgent, updatedAt])
   @@index([organizationId, status])
   @@map("recruitment_post")
+}
+
+// Publicaciones de comunidad de un scan (tab /socials estilo YouTube/FB):
+// avances, avisos, FAQ. Autoria del staff; likes de cualquier usuario; los
+// comentarios reutilizan la tabla `comment` con identifier `post-<id>`.
+model OrganizationPost {
+  id             Int          @id @default(autoincrement())
+  organizationId Int
+  userId         Int
+  content        String       @db.Text
+  images         Json?
+  pinned         Boolean      @default(false)
+  likesCount     Int          @default(0)
+  commentsCount  Int          @default(0)
+  deletedAt      DateTime?
+  hiddenAt       DateTime?
+  createdAt      DateTime     @default(now()) @db.Timestamp(6)
+  updatedAt      DateTime     @updatedAt
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  likes          OrganizationPostLike[]
+
+  @@index([organizationId, createdAt])
+  @@index([createdAt])
+  @@map("organization_post")
+}
+
+model OrganizationPostLike {
+  id        Int              @id @default(autoincrement())
+  postId    Int
+  userId    Int
+  createdAt DateTime         @default(now()) @db.Timestamp(6)
+  post      OrganizationPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@unique([postId, userId])
+  @@index([postId])
+  @@map("organization_post_like")
 }
 
 // "Estante curado del scan": recomendaciones editoriales que el propio scan
