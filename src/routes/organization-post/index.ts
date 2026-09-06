@@ -65,6 +65,10 @@ async function viewerSets(userId: number | undefined, postIds: number[]): Promis
   }
 }
 
+function normalizePollOptions(o: any): any[] {
+  if (typeof o === 'string') { try { o = JSON.parse(o) } catch { return [] } }
+  return Array.isArray(o) ? o : []
+}
 function shape(p: any, v: ViewerSets, repostOf?: any): any {
   return {
     id: p.id, content: p.content, images: toImages(p.images), pinned: p.pinned,
@@ -77,7 +81,7 @@ function shape(p: any, v: ViewerSets, repostOf?: any): any {
     createdAt: p.createdAt,
     liked: v.likes.has(p.id), saved: v.saves.has(p.id), reposted: v.reposts.has(p.id),
     author: authorOf(p),
-    poll: p.poll ? { id: p.poll.id, options: Array.isArray(p.poll.options) ? p.poll.options : [], votesCount: p.poll.votesCount, endsAt: p.poll.endsAt, myVote: null } : null,
+    poll: p.poll ? { id: p.poll.id, options: normalizePollOptions(p.poll.options), votesCount: p.poll.votesCount, endsAt: p.poll.endsAt, myVote: null } : null,
     repostOf: repostOf === undefined ? null : repostOf,
   }
 }
