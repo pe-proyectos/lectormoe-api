@@ -38,6 +38,16 @@ const publicPart = () =>
       const users = await prisma.user.findMany({ where: { id: { in: ids } }, select: { username: true, slug: true, imageUrl: true, description: true } })
       return { status: true, data: { items: users, hasMore: rows.length > limit } }
     })
+    .get('/api/socials/works/search', async ({ query }: any) => {
+      const q = String(query.q || '').trim().slice(0, 80)
+      if (q.length < 2) return { status: true, data: [] }
+      const rows = await prisma.mangaCustom.findMany({
+        where: { deletedAt: null, isPublic: true, title: { contains: q, mode: 'insensitive' } },
+        take: 8, orderBy: { title: 'asc' },
+        select: { id: true, title: true, imageUrl: true, isNSFW: true, manga: { select: { slug: true } }, organization: { select: { slug: true, isNSFW: true } } },
+      })
+      return { status: true, data: rows.map((r) => ({ id: r.id, title: r.title, imageUrl: r.imageUrl, isNSFW: r.isNSFW, mangaSlug: r.manga?.slug ?? null, orgSlug: r.organization?.slug ?? null, orgNsfw: r.organization?.isNSFW ?? false })) }
+    })
     .get('/api/users/:slug/following', async ({ params, query }: any) => {
       const u = await userBySlug(params.slug); if (!u) return { status: true, data: { items: [], hasMore: false } }
       const limit = 20, page = Math.max(0, Number(query.page) || 0)

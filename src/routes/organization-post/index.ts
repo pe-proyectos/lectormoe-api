@@ -72,6 +72,7 @@ function shape(p: any, v: ViewerSets, repostOf?: any): any {
     likesCount: p.likesCount, commentsCount: p.commentsCount, repostCount: p.repostCount,
     isSpoiler: !!p.isSpoiler, isSensitive: !!p.isSensitive,
     spoilerOfMangaCustomId: p.spoilerOfMangaCustomId ?? null, spoilerChapter: p.spoilerChapter ?? null,
+    spoilerSafe: false, spoilerWork: null,
     createdAt: p.createdAt,
     liked: v.likes.has(p.id), saved: v.saves.has(p.id), reposted: v.reposts.has(p.id),
     author: authorOf(p),
@@ -100,7 +101,32 @@ async function withReposts(rows: any[], v: ViewerSets, userId?: number): Promise
     shaped = rows.map((r) => shape(r, v, r.repostOfId ? map.get(r.repostOfId) ?? null : undefined))
   }
   await hydratePolls(shaped, userId)
+  await hydrateSpoilers(shaped, userId)
   return shaped
+}
+
+async function hydrateSpoilers(items: any[], userId?: number) {
+  const spoilerItems = items.filter((x) => x.isSpoiler && x.spoilerOfMangaCustomId)
+  if (!spoilerItems.length) return
+  const mangaIds = [...new Set(spoilerItems.map((x) => x.spoilerOfMangaCustomId))] as number[]
+  const works = await prisma.mangaCustom.findMany({ where: { id: { in: mangaIds } }, select: { id: true, title: true } })
+  const titleMap = new Map(works.map((w) => [w.id, w.title]))
+  let maxRead = new Map<number, number>()
+  if (userId) {
+    const hist = await prisma.userChapterHistory.findMany({
+      where: { userId, chapter: { mangaCustomId: { in: mangaIds } } },
+      select: { chapter: { select: { mangaCustomId: true, number: true } } },
+    })
+    for (const h of hist) {
+      const mid = h.chapter?.mangaCustomId; if (!mid) continue
+      maxRead.set(mid, Math.max(maxRead.get(mid) ?? 0, h.chapter?.number ?? 0))
+    }
+  }
+  for (const x of spoilerItems) {
+    const mid = x.spoilerOfMangaCustomId
+    x.spoilerWork = { mangaCustomId: mid, title: titleMap.get(mid) ?? null, chapter: x.spoilerChapter ?? null }
+    if (x.spoilerChapter != null && (maxRead.get(mid) ?? -1) >= x.spoilerChapter) x.spoilerSafe = true
+  }
 }
 
 // Conjunto de userIds que el viewer no debe ver (bloqueos en cualquier direccion + silenciados).
