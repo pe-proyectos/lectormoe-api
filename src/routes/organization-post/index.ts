@@ -4,6 +4,9 @@ import { logged, loggedOptional } from '../../plugins/auth'
 import { notifySocial } from '../../util/social-notify'
 import { assertRateLimit } from '../../util/rate-limit'
 
+const forYouCache = new Map<string, { ids: number[]; ts: number }>()
+const FORYOU_TTL = 90 * 1000
+
 const MAX_CONTENT = 5000
 const MAX_IMAGES = 4
 
@@ -123,6 +126,45 @@ async function notifyMentions(content: string, postId: number, actorUserId: numb
   await Promise.all(users.map((u) => notify(u.id, 'post_mention', postId, actorUserId)))
 }
 
+async function rankForYou(userId: number | undefined, includeNsfw: boolean, excluded: number[]): Promise<number[]> {
+  const key = `foryou:${userId ?? 'anon'}:${includeNsfw ? 1 : 0}`
+  const cached = forYouCache.get(key)
+  if (cached && Date.now() - cached.ts < FORYOU_TTL) return cached.ids
+  const since = new Date(Date.now() - 30 * 86400 * 1000)
+  const where: any = { parentId: null, deletedAt: null, hiddenAt: null, createdAt: { gte: since } }
+  if (excluded.length) where.userId = { notIn: excluded }
+  if (!includeNsfw) where.OR = [{ organizationId: null }, { organization: { isNSFW: false } }]
+  const candidates = await prisma.organizationPost.findMany({
+    where, orderBy: { createdAt: 'desc' }, take: 300,
+    select: { id: true, likesCount: true, commentsCount: true, repostCount: true, createdAt: true, userId: true, organizationId: true },
+  })
+  let followedUsers = new Set<number>(), followedOrgs = new Set<number>()
+  if (userId) {
+    const [fu, fo] = await Promise.all([
+      prisma.userFollow.findMany({ where: { followerId: userId }, select: { followedId: true } }),
+      prisma.organizationFollower.findMany({ where: { userId }, select: { organizationId: true } }),
+    ])
+    followedUsers = new Set(fu.map((x) => x.followedId))
+    followedOrgs = new Set(fo.map((x) => x.organizationId))
+  }
+  const now = Date.now()
+  const scored = candidates.map((c) => {
+    const ageH = Math.max(0, (now - new Date(c.createdAt).getTime()) / 3600000)
+    const engagement = Math.log(1 + c.likesCount + 2 * c.commentsCount + 3 * c.repostCount)
+    let score = engagement / Math.pow(ageH + 2, 1.5)
+    if (userId && c.userId === userId) score += 0.3
+    if (followedUsers.has(c.userId)) score += 2
+    if (c.organizationId && followedOrgs.has(c.organizationId)) score += 1.5
+    score += 1 / Math.pow(ageH + 2, 1.4)
+    return { id: c.id, score }
+  })
+  scored.sort((a, b) => b.score - a.score)
+  const ids = scored.map((x) => x.id)
+  forYouCache.set(key, { ids, ts: Date.now() })
+  if (forYouCache.size > 500) forYouCache.clear()
+  return ids
+}
+
 // ================= LECTURA =================
 const publicPart = () =>
   new Elysia()
@@ -132,8 +174,18 @@ const publicPart = () =>
       const page = Math.max(0, Number(query.page) || 0)
       const scope = query.scope || 'foryou'
       const includeNsfw = query.nsfw === '1' || query.nsfw === 'true'
-      const where: any = { deletedAt: null, hiddenAt: null, parentId: null }
       const excluded = await excludedAuthorIds(user?.id)
+      if (scope === 'foryou') {
+        const ranked = await rankForYou(user?.id, includeNsfw, excluded)
+        const pageIds = ranked.slice(page * limit, page * limit + limit)
+        const hasMore = ranked.length > (page + 1) * limit
+        if (!pageIds.length) return { status: true, data: { items: [], hasMore: false } }
+        const rows = await prisma.organizationPost.findMany({ where: { id: { in: pageIds }, deletedAt: null, hiddenAt: null }, select: postSelect })
+        rows.sort((a, b) => pageIds.indexOf(a.id) - pageIds.indexOf(b.id))
+        const v = await viewerSets(user?.id, rows.map((p) => p.id))
+        return { status: true, data: { items: await withReposts(rows, v, user?.id), hasMore } }
+      }
+      const where: any = { deletedAt: null, hiddenAt: null, parentId: null }
       if (excluded.length) where.userId = { notIn: excluded }
       if (scope === 'following' && user) {
         const [orgs, users] = await Promise.all([
