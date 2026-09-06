@@ -256,6 +256,18 @@ const publicPart = () =>
       const v = await viewerSets(user?.id, items.map((p) => p.id))
       return { status: true, data: { items: await withReposts(items, v, user?.id), hasMore } }
     })
+    .get('/api/socials/feed/updates', async ({ query, user }: any) => {
+      const sinceId = Number(query.sinceId) || 0
+      if (!sinceId) return { status: true, data: { count: 0 } }
+      const includeNsfw = query.nsfw === '1' || query.nsfw === 'true'
+      const where: any = { parentId: null, deletedAt: null, hiddenAt: null, id: { gt: sinceId } }
+      const excluded = await excludedAuthorIds(user?.id)
+      if (excluded.length) where.userId = { notIn: excluded }
+      if (user) where.NOT = { userId: user.id }
+      if (!includeNsfw) where.OR = [{ organizationId: null }, { organization: { isNSFW: false } }]
+      const count = await prisma.organizationPost.count({ where })
+      return { status: true, data: { count } }
+    })
     .get('/api/organizations/:slug/posts', async ({ params, query, user }: any) => {
       const org = await prisma.organization.findFirst({ where: { slug: params.slug }, select: { id: true } })
       if (!org) return { status: true, data: { items: [], hasMore: false } }
