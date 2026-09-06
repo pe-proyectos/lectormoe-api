@@ -90,7 +90,6 @@ model Organization {
   messageThreads                               OrganizationMessageThread[]
   recruitmentPosts                             RecruitmentPost[]
   communityPosts                               OrganizationPost[]
-  communityPosts                               OrganizationPost[]
   organizationRecommendations                  OrganizationRecommendation[]
 
   @@map("organization")
@@ -221,6 +220,7 @@ model User {
   userList                UserList[]
   pageBookmarks           UserPageBookmark[]
   organizationFollows     OrganizationFollower[]
+  communityPosts          OrganizationPost[]
   passwordResetTokens     PasswordResetToken[]
   permissions             Permission[]
   rankings                Ranking[]

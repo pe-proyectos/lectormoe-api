@@ -387,6 +387,8 @@ export const ModelName = {
   Token: 'Token',
   Organization: 'Organization',
   RecruitmentPost: 'RecruitmentPost',
+  OrganizationPost: 'OrganizationPost',
+  OrganizationPostLike: 'OrganizationPostLike',
   OrganizationRecommendation: 'OrganizationRecommendation',
   User: 'User',
   BetaTester: 'BetaTester',
@@ -460,7 +462,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "token" | "organization" | "recruitmentPost" | "organizationRecommendation" | "user" | "betaTester" | "moderationLog" | "permission" | "passwordResetToken" | "countryOptions" | "author" | "bookType" | "manga" | "mangaCustom" | "chapter" | "organizationMessageThread" | "organizationMessage" | "customList" | "customListFollower" | "customListFollowerItem" | "customListItem" | "contentReport" | "mangaReview" | "chapterMilestoneAlert" | "mangaVolume" | "chapterReaction" | "page" | "comment" | "commentLike" | "ranking" | "demography" | "genre" | "analytics" | "userChapterHistory" | "favorite" | "userList" | "userPageBookmark" | "audit" | "viewsHistory" | "subscriptionPlan" | "subscription" | "organizationTransaction" | "organizationFollower" | "organizationRequest" | "emailPreference" | "emailLog" | "unsubscribeToken" | "emailVerificationToken" | "userSavedQuote" | "userDailyActivity" | "achievement" | "userAchievement" | "mangaJoint" | "jointMember" | "jointMemberHistory" | "notification" | "raffle" | "raffleTicket" | "raffleComment" | "raffleRefund" | "userBan"
+    modelProps: "token" | "organization" | "recruitmentPost" | "organizationPost" | "organizationPostLike" | "organizationRecommendation" | "user" | "betaTester" | "moderationLog" | "permission" | "passwordResetToken" | "countryOptions" | "author" | "bookType" | "manga" | "mangaCustom" | "chapter" | "organizationMessageThread" | "organizationMessage" | "customList" | "customListFollower" | "customListFollowerItem" | "customListItem" | "contentReport" | "mangaReview" | "chapterMilestoneAlert" | "mangaVolume" | "chapterReaction" | "page" | "comment" | "commentLike" | "ranking" | "demography" | "genre" | "analytics" | "userChapterHistory" | "favorite" | "userList" | "userPageBookmark" | "audit" | "viewsHistory" | "subscriptionPlan" | "subscription" | "organizationTransaction" | "organizationFollower" | "organizationRequest" | "emailPreference" | "emailLog" | "unsubscribeToken" | "emailVerificationToken" | "userSavedQuote" | "userDailyActivity" | "achievement" | "userAchievement" | "mangaJoint" | "jointMember" | "jointMemberHistory" | "notification" | "raffle" | "raffleTicket" | "raffleComment" | "raffleRefund" | "userBan"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -683,6 +685,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.RecruitmentPostCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.RecruitmentPostCountAggregateOutputType> | number
+        }
+      }
+    }
+    OrganizationPost: {
+      payload: Prisma.$OrganizationPostPayload<ExtArgs>
+      fields: Prisma.OrganizationPostFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.OrganizationPostFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.OrganizationPostFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostPayload>
+        }
+        findFirst: {
+          args: Prisma.OrganizationPostFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.OrganizationPostFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostPayload>
+        }
+        findMany: {
+          args: Prisma.OrganizationPostFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostPayload>[]
+        }
+        create: {
+          args: Prisma.OrganizationPostCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostPayload>
+        }
+        createMany: {
+          args: Prisma.OrganizationPostCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.OrganizationPostCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostPayload>[]
+        }
+        delete: {
+          args: Prisma.OrganizationPostDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostPayload>
+        }
+        update: {
+          args: Prisma.OrganizationPostUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostPayload>
+        }
+        deleteMany: {
+          args: Prisma.OrganizationPostDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.OrganizationPostUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.OrganizationPostUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostPayload>[]
+        }
+        upsert: {
+          args: Prisma.OrganizationPostUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostPayload>
+        }
+        aggregate: {
+          args: Prisma.OrganizationPostAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOrganizationPost>
+        }
+        groupBy: {
+          args: Prisma.OrganizationPostGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OrganizationPostGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.OrganizationPostCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OrganizationPostCountAggregateOutputType> | number
+        }
+      }
+    }
+    OrganizationPostLike: {
+      payload: Prisma.$OrganizationPostLikePayload<ExtArgs>
+      fields: Prisma.OrganizationPostLikeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.OrganizationPostLikeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostLikePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.OrganizationPostLikeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostLikePayload>
+        }
+        findFirst: {
+          args: Prisma.OrganizationPostLikeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostLikePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.OrganizationPostLikeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostLikePayload>
+        }
+        findMany: {
+          args: Prisma.OrganizationPostLikeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostLikePayload>[]
+        }
+        create: {
+          args: Prisma.OrganizationPostLikeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostLikePayload>
+        }
+        createMany: {
+          args: Prisma.OrganizationPostLikeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.OrganizationPostLikeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostLikePayload>[]
+        }
+        delete: {
+          args: Prisma.OrganizationPostLikeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostLikePayload>
+        }
+        update: {
+          args: Prisma.OrganizationPostLikeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostLikePayload>
+        }
+        deleteMany: {
+          args: Prisma.OrganizationPostLikeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.OrganizationPostLikeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.OrganizationPostLikeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostLikePayload>[]
+        }
+        upsert: {
+          args: Prisma.OrganizationPostLikeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostLikePayload>
+        }
+        aggregate: {
+          args: Prisma.OrganizationPostLikeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOrganizationPostLike>
+        }
+        groupBy: {
+          args: Prisma.OrganizationPostLikeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OrganizationPostLikeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.OrganizationPostLikeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OrganizationPostLikeCountAggregateOutputType> | number
         }
       }
     }
@@ -5096,6 +5246,34 @@ export const RecruitmentPostScalarFieldEnum = {
 export type RecruitmentPostScalarFieldEnum = (typeof RecruitmentPostScalarFieldEnum)[keyof typeof RecruitmentPostScalarFieldEnum]
 
 
+export const OrganizationPostScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  userId: 'userId',
+  content: 'content',
+  images: 'images',
+  pinned: 'pinned',
+  likesCount: 'likesCount',
+  commentsCount: 'commentsCount',
+  deletedAt: 'deletedAt',
+  hiddenAt: 'hiddenAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OrganizationPostScalarFieldEnum = (typeof OrganizationPostScalarFieldEnum)[keyof typeof OrganizationPostScalarFieldEnum]
+
+
+export const OrganizationPostLikeScalarFieldEnum = {
+  id: 'id',
+  postId: 'postId',
+  userId: 'userId',
+  createdAt: 'createdAt'
+} as const
+
+export type OrganizationPostLikeScalarFieldEnum = (typeof OrganizationPostLikeScalarFieldEnum)[keyof typeof OrganizationPostLikeScalarFieldEnum]
+
+
 export const OrganizationRecommendationScalarFieldEnum = {
   id: 'id',
   organizationId: 'organizationId',
@@ -6193,20 +6371,6 @@ export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
 
 
 /**
- * Reference to a field of type 'Float'
- */
-export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
-    
-
-
-/**
- * Reference to a field of type 'Float[]'
- */
-export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
-    
-
-
-/**
  * Reference to a field of type 'Json'
  */
 export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
@@ -6217,6 +6381,20 @@ export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'J
  * Reference to a field of type 'QueryMode'
  */
 export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
+
+
+/**
+ * Reference to a field of type 'Float'
+ */
+export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+/**
+ * Reference to a field of type 'Float[]'
+ */
+export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
 
 
@@ -6359,6 +6537,8 @@ export type GlobalOmitConfig = {
   token?: Prisma.TokenOmit
   organization?: Prisma.OrganizationOmit
   recruitmentPost?: Prisma.RecruitmentPostOmit
+  organizationPost?: Prisma.OrganizationPostOmit
+  organizationPostLike?: Prisma.OrganizationPostLikeOmit
   organizationRecommendation?: Prisma.OrganizationRecommendationOmit
   user?: Prisma.UserOmit
   betaTester?: Prisma.BetaTesterOmit

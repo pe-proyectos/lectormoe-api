@@ -54,6 +54,8 @@ export const ModelName = {
   Token: 'Token',
   Organization: 'Organization',
   RecruitmentPost: 'RecruitmentPost',
+  OrganizationPost: 'OrganizationPost',
+  OrganizationPostLike: 'OrganizationPostLike',
   OrganizationRecommendation: 'OrganizationRecommendation',
   User: 'User',
   BetaTester: 'BetaTester',
@@ -207,6 +209,34 @@ export const RecruitmentPostScalarFieldEnum = {
 } as const
 
 export type RecruitmentPostScalarFieldEnum = (typeof RecruitmentPostScalarFieldEnum)[keyof typeof RecruitmentPostScalarFieldEnum]
+
+
+export const OrganizationPostScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  userId: 'userId',
+  content: 'content',
+  images: 'images',
+  pinned: 'pinned',
+  likesCount: 'likesCount',
+  commentsCount: 'commentsCount',
+  deletedAt: 'deletedAt',
+  hiddenAt: 'hiddenAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OrganizationPostScalarFieldEnum = (typeof OrganizationPostScalarFieldEnum)[keyof typeof OrganizationPostScalarFieldEnum]
+
+
+export const OrganizationPostLikeScalarFieldEnum = {
+  id: 'id',
+  postId: 'postId',
+  userId: 'userId',
+  createdAt: 'createdAt'
+} as const
+
+export type OrganizationPostLikeScalarFieldEnum = (typeof OrganizationPostLikeScalarFieldEnum)[keyof typeof OrganizationPostLikeScalarFieldEnum]
 
 
 export const OrganizationRecommendationScalarFieldEnum = {

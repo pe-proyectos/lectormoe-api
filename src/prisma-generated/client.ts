@@ -55,6 +55,16 @@ export type Organization = Prisma.OrganizationModel
  */
 export type RecruitmentPost = Prisma.RecruitmentPostModel
 /**
+ * Model OrganizationPost
+ * 
+ */
+export type OrganizationPost = Prisma.OrganizationPostModel
+/**
+ * Model OrganizationPostLike
+ * 
+ */
+export type OrganizationPostLike = Prisma.OrganizationPostLikeModel
+/**
  * Model OrganizationRecommendation
  * 
  */

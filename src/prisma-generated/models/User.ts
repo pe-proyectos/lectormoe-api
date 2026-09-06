@@ -427,6 +427,7 @@ export type UserWhereInput = {
   userList?: Prisma.UserListListRelationFilter
   pageBookmarks?: Prisma.UserPageBookmarkListRelationFilter
   organizationFollows?: Prisma.OrganizationFollowerListRelationFilter
+  communityPosts?: Prisma.OrganizationPostListRelationFilter
   passwordResetTokens?: Prisma.PasswordResetTokenListRelationFilter
   permissions?: Prisma.PermissionListRelationFilter
   rankings?: Prisma.RankingListRelationFilter
@@ -500,6 +501,7 @@ export type UserOrderByWithRelationInput = {
   userList?: Prisma.UserListOrderByRelationAggregateInput
   pageBookmarks?: Prisma.UserPageBookmarkOrderByRelationAggregateInput
   organizationFollows?: Prisma.OrganizationFollowerOrderByRelationAggregateInput
+  communityPosts?: Prisma.OrganizationPostOrderByRelationAggregateInput
   passwordResetTokens?: Prisma.PasswordResetTokenOrderByRelationAggregateInput
   permissions?: Prisma.PermissionOrderByRelationAggregateInput
   rankings?: Prisma.RankingOrderByRelationAggregateInput
@@ -576,6 +578,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   userList?: Prisma.UserListListRelationFilter
   pageBookmarks?: Prisma.UserPageBookmarkListRelationFilter
   organizationFollows?: Prisma.OrganizationFollowerListRelationFilter
+  communityPosts?: Prisma.OrganizationPostListRelationFilter
   passwordResetTokens?: Prisma.PasswordResetTokenListRelationFilter
   permissions?: Prisma.PermissionListRelationFilter
   rankings?: Prisma.RankingListRelationFilter
@@ -722,6 +725,7 @@ export type UserCreateInput = {
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -795,6 +799,7 @@ export type UserUncheckedCreateInput = {
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -867,6 +872,7 @@ export type UserUpdateInput = {
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -940,6 +946,7 @@ export type UserUncheckedUpdateInput = {
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -1198,6 +1205,20 @@ export type UserUpdateOneRequiredWithoutTokensNestedInput = {
   upsert?: Prisma.UserUpsertWithoutTokensInput
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTokensInput, Prisma.UserUpdateWithoutTokensInput>, Prisma.UserUncheckedUpdateWithoutTokensInput>
+}
+
+export type UserCreateNestedOneWithoutCommunityPostsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCommunityPostsInput, Prisma.UserUncheckedCreateWithoutCommunityPostsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCommunityPostsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutCommunityPostsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCommunityPostsInput, Prisma.UserUncheckedCreateWithoutCommunityPostsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCommunityPostsInput
+  upsert?: Prisma.UserUpsertWithoutCommunityPostsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCommunityPostsInput, Prisma.UserUpdateWithoutCommunityPostsInput>, Prisma.UserUncheckedUpdateWithoutCommunityPostsInput>
 }
 
 export type UserCreateNestedOneWithoutBetaTesterInput = {
@@ -1803,6 +1824,7 @@ export type UserCreateWithoutTokensInput = {
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -1875,6 +1897,7 @@ export type UserUncheckedCreateWithoutTokensInput = {
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -1962,6 +1985,7 @@ export type UserUpdateWithoutTokensInput = {
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -2034,10 +2058,317 @@ export type UserUncheckedUpdateWithoutTokensInput = {
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedUpdateManyWithoutUserNestedInput
+  achievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUncheckedUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUncheckedUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUncheckedUpdateManyWithoutBannedByUserNestedInput
+  chapterReactions?: Prisma.ChapterReactionUncheckedUpdateManyWithoutUserNestedInput
+  milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUncheckedUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedUpdateManyWithoutHiddenByUserNestedInput
+  contentReports?: Prisma.ContentReportUncheckedUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUncheckedUpdateManyWithoutUserNestedInput
+  customListFollows?: Prisma.CustomListFollowerUncheckedUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedUpdateManyWithoutUserNestedInput
+  messageThreads?: Prisma.OrganizationMessageThreadUncheckedUpdateManyWithoutUserNestedInput
+  organizationMessages?: Prisma.OrganizationMessageUncheckedUpdateManyWithoutSenderNestedInput
+  contentReportsReviewed?: Prisma.ContentReportUncheckedUpdateManyWithoutReviewedByNestedInput
+  moderationLogs?: Prisma.ModerationLogUncheckedUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedUpdateManyWithoutUserNestedInput
+  betaTester?: Prisma.BetaTesterUncheckedUpdateOneWithoutUserNestedInput
+  savedQuotes?: Prisma.UserSavedQuoteUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutCommunityPostsInput = {
+  username: string
+  slug: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  description?: string | null
+  imageUrl?: string | null
+  birthdate?: Date | string | null
+  bannerUrl?: string | null
+  bannerUrlChangedAt?: Date | string | null
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
+  emailNotifications?: boolean
+  emailVerified?: boolean
+  deletedAt?: Date | string | null
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
+  pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
+  hideAds?: boolean
+  theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
+  savedQuotesPublic?: boolean
+  analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
+  audits?: Prisma.AuditCreateNestedManyWithoutUserInput
+  Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  userList?: Prisma.UserListCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
+  rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenCreateNestedManyWithoutUserInput
+  achievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanCreateNestedManyWithoutBannedByUserInput
+  chapterReactions?: Prisma.ChapterReactionCreateNestedManyWithoutUserInput
+  milestoneAlerts?: Prisma.ChapterMilestoneAlertCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewCreateNestedManyWithoutHiddenByUserInput
+  contentReports?: Prisma.ContentReportCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListCreateNestedManyWithoutUserInput
+  customListFollows?: Prisma.CustomListFollowerCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemCreateNestedManyWithoutUserInput
+  messageThreads?: Prisma.OrganizationMessageThreadCreateNestedManyWithoutUserInput
+  organizationMessages?: Prisma.OrganizationMessageCreateNestedManyWithoutSenderInput
+  contentReportsReviewed?: Prisma.ContentReportCreateNestedManyWithoutReviewedByInput
+  moderationLogs?: Prisma.ModerationLogCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestCreateNestedManyWithoutUserInput
+  betaTester?: Prisma.BetaTesterCreateNestedOneWithoutUserInput
+  savedQuotes?: Prisma.UserSavedQuoteCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutCommunityPostsInput = {
+  id?: number
+  username: string
+  slug: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  description?: string | null
+  imageUrl?: string | null
+  birthdate?: Date | string | null
+  bannerUrl?: string | null
+  bannerUrlChangedAt?: Date | string | null
+  imageUrlChangedAt?: Date | string | null
+  usernameChangedAt?: Date | string | null
+  emailNotifications?: boolean
+  emailVerified?: boolean
+  deletedAt?: Date | string | null
+  isPrivateHistory?: boolean
+  isPublicProfile?: boolean
+  pushNotifications?: boolean
+  notifyCommentsOnOwnedContent?: boolean
+  hideAds?: boolean
+  theme?: string
+  discordId?: string | null
+  discordUsername?: string | null
+  discordAvatar?: string | null
+  discordVerifiedAt?: Date | string | null
+  discordLastCheckAt?: Date | string | null
+  listIsPublic?: boolean
+  savedQuotesPublic?: boolean
+  analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
+  audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
+  Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedCreateNestedOneWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
+  rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedCreateNestedManyWithoutUserInput
+  achievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserChapterHistoryUncheckedCreateNestedManyWithoutUserInput
+  dailyActivities?: Prisma.UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  raffleTickets?: Prisma.RaffleTicketUncheckedCreateNestedManyWithoutUserInput
+  raffleComments?: Prisma.RaffleCommentUncheckedCreateNestedManyWithoutUserInput
+  bansReceived?: Prisma.UserBanUncheckedCreateNestedManyWithoutUserInput
+  bansIssued?: Prisma.UserBanUncheckedCreateNestedManyWithoutBannedByUserInput
+  chapterReactions?: Prisma.ChapterReactionUncheckedCreateNestedManyWithoutUserInput
+  milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedCreateNestedManyWithoutUserInput
+  reviews?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutUserInput
+  reviewsHidden?: Prisma.MangaReviewUncheckedCreateNestedManyWithoutHiddenByUserInput
+  contentReports?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReporterInput
+  customLists?: Prisma.CustomListUncheckedCreateNestedManyWithoutUserInput
+  customListFollows?: Prisma.CustomListFollowerUncheckedCreateNestedManyWithoutUserInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUncheckedCreateNestedManyWithoutUserInput
+  messageThreads?: Prisma.OrganizationMessageThreadUncheckedCreateNestedManyWithoutUserInput
+  organizationMessages?: Prisma.OrganizationMessageUncheckedCreateNestedManyWithoutSenderInput
+  contentReportsReviewed?: Prisma.ContentReportUncheckedCreateNestedManyWithoutReviewedByInput
+  moderationLogs?: Prisma.ModerationLogUncheckedCreateNestedManyWithoutActorInput
+  organizationRequests?: Prisma.OrganizationRequestUncheckedCreateNestedManyWithoutUserInput
+  betaTester?: Prisma.BetaTesterUncheckedCreateNestedOneWithoutUserInput
+  savedQuotes?: Prisma.UserSavedQuoteUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutCommunityPostsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCommunityPostsInput, Prisma.UserUncheckedCreateWithoutCommunityPostsInput>
+}
+
+export type UserUpsertWithoutCommunityPostsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCommunityPostsInput, Prisma.UserUncheckedUpdateWithoutCommunityPostsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCommunityPostsInput, Prisma.UserUncheckedCreateWithoutCommunityPostsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCommunityPostsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCommunityPostsInput, Prisma.UserUncheckedUpdateWithoutCommunityPostsInput>
+}
+
+export type UserUpdateWithoutCommunityPostsInput = {
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
+  audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
+  Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
+  rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
+  unsubscribeTokens?: Prisma.UnsubscribeTokenUpdateManyWithoutUserNestedInput
+  achievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserChapterHistoryUpdateManyWithoutUserNestedInput
+  dailyActivities?: Prisma.UserDailyActivityUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  raffleTickets?: Prisma.RaffleTicketUpdateManyWithoutUserNestedInput
+  raffleComments?: Prisma.RaffleCommentUpdateManyWithoutUserNestedInput
+  bansReceived?: Prisma.UserBanUpdateManyWithoutUserNestedInput
+  bansIssued?: Prisma.UserBanUpdateManyWithoutBannedByUserNestedInput
+  chapterReactions?: Prisma.ChapterReactionUpdateManyWithoutUserNestedInput
+  milestoneAlerts?: Prisma.ChapterMilestoneAlertUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.MangaReviewUpdateManyWithoutUserNestedInput
+  reviewsHidden?: Prisma.MangaReviewUpdateManyWithoutHiddenByUserNestedInput
+  contentReports?: Prisma.ContentReportUpdateManyWithoutReporterNestedInput
+  customLists?: Prisma.CustomListUpdateManyWithoutUserNestedInput
+  customListFollows?: Prisma.CustomListFollowerUpdateManyWithoutUserNestedInput
+  customListFollowerItems?: Prisma.CustomListFollowerItemUpdateManyWithoutUserNestedInput
+  messageThreads?: Prisma.OrganizationMessageThreadUpdateManyWithoutUserNestedInput
+  organizationMessages?: Prisma.OrganizationMessageUpdateManyWithoutSenderNestedInput
+  contentReportsReviewed?: Prisma.ContentReportUpdateManyWithoutReviewedByNestedInput
+  moderationLogs?: Prisma.ModerationLogUpdateManyWithoutActorNestedInput
+  organizationRequests?: Prisma.OrganizationRequestUpdateManyWithoutUserNestedInput
+  betaTester?: Prisma.BetaTesterUpdateOneWithoutUserNestedInput
+  savedQuotes?: Prisma.UserSavedQuoteUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCommunityPostsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannerUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  imageUrlChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usernameChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isPrivateHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublicProfile?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notifyCommentsOnOwnedContent?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
+  audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
+  Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
+  emailPreference?: Prisma.EmailPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
+  pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
+  organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
+  rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
   unsubscribeTokens?: Prisma.UnsubscribeTokenUncheckedUpdateManyWithoutUserNestedInput
   achievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
   history?: Prisma.UserChapterHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -2105,6 +2436,7 @@ export type UserCreateWithoutBetaTesterInput = {
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -2177,6 +2509,7 @@ export type UserUncheckedCreateWithoutBetaTesterInput = {
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -2264,6 +2597,7 @@ export type UserUpdateWithoutBetaTesterInput = {
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -2336,6 +2670,7 @@ export type UserUncheckedUpdateWithoutBetaTesterInput = {
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -2407,6 +2742,7 @@ export type UserCreateWithoutModerationLogsInput = {
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -2479,6 +2815,7 @@ export type UserUncheckedCreateWithoutModerationLogsInput = {
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -2566,6 +2903,7 @@ export type UserUpdateWithoutModerationLogsInput = {
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -2638,6 +2976,7 @@ export type UserUncheckedUpdateWithoutModerationLogsInput = {
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -2709,6 +3048,7 @@ export type UserCreateWithoutPermissionsInput = {
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
@@ -2781,6 +3121,7 @@ export type UserUncheckedCreateWithoutPermissionsInput = {
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
@@ -2868,6 +3209,7 @@ export type UserUpdateWithoutPermissionsInput = {
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
@@ -2940,6 +3282,7 @@ export type UserUncheckedUpdateWithoutPermissionsInput = {
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
@@ -3011,6 +3354,7 @@ export type UserCreateWithoutPasswordResetTokensInput = {
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
@@ -3083,6 +3427,7 @@ export type UserUncheckedCreateWithoutPasswordResetTokensInput = {
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
@@ -3170,6 +3515,7 @@ export type UserUpdateWithoutPasswordResetTokensInput = {
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
@@ -3242,6 +3588,7 @@ export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
@@ -3313,6 +3660,7 @@ export type UserCreateWithoutMessageThreadsInput = {
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -3385,6 +3733,7 @@ export type UserUncheckedCreateWithoutMessageThreadsInput = {
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -3472,6 +3821,7 @@ export type UserUpdateWithoutMessageThreadsInput = {
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -3544,6 +3894,7 @@ export type UserUncheckedUpdateWithoutMessageThreadsInput = {
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -3615,6 +3966,7 @@ export type UserCreateWithoutOrganizationMessagesInput = {
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -3687,6 +4039,7 @@ export type UserUncheckedCreateWithoutOrganizationMessagesInput = {
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -3774,6 +4127,7 @@ export type UserUpdateWithoutOrganizationMessagesInput = {
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -3846,6 +4200,7 @@ export type UserUncheckedUpdateWithoutOrganizationMessagesInput = {
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -3917,6 +4272,7 @@ export type UserCreateWithoutCustomListsInput = {
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -3989,6 +4345,7 @@ export type UserUncheckedCreateWithoutCustomListsInput = {
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -4076,6 +4433,7 @@ export type UserUpdateWithoutCustomListsInput = {
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -4148,6 +4506,7 @@ export type UserUncheckedUpdateWithoutCustomListsInput = {
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -4219,6 +4578,7 @@ export type UserCreateWithoutCustomListFollowsInput = {
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -4291,6 +4651,7 @@ export type UserUncheckedCreateWithoutCustomListFollowsInput = {
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -4378,6 +4739,7 @@ export type UserUpdateWithoutCustomListFollowsInput = {
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -4450,6 +4812,7 @@ export type UserUncheckedUpdateWithoutCustomListFollowsInput = {
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -4521,6 +4884,7 @@ export type UserCreateWithoutCustomListFollowerItemsInput = {
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -4593,6 +4957,7 @@ export type UserUncheckedCreateWithoutCustomListFollowerItemsInput = {
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -4680,6 +5045,7 @@ export type UserUpdateWithoutCustomListFollowerItemsInput = {
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -4752,6 +5118,7 @@ export type UserUncheckedUpdateWithoutCustomListFollowerItemsInput = {
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -4823,6 +5190,7 @@ export type UserCreateWithoutContentReportsInput = {
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -4895,6 +5263,7 @@ export type UserUncheckedCreateWithoutContentReportsInput = {
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -4971,6 +5340,7 @@ export type UserCreateWithoutContentReportsReviewedInput = {
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -5043,6 +5413,7 @@ export type UserUncheckedCreateWithoutContentReportsReviewedInput = {
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -5130,6 +5501,7 @@ export type UserUpdateWithoutContentReportsInput = {
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -5202,6 +5574,7 @@ export type UserUncheckedUpdateWithoutContentReportsInput = {
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -5284,6 +5657,7 @@ export type UserUpdateWithoutContentReportsReviewedInput = {
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -5356,6 +5730,7 @@ export type UserUncheckedUpdateWithoutContentReportsReviewedInput = {
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -5427,6 +5802,7 @@ export type UserCreateWithoutReviewsInput = {
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -5499,6 +5875,7 @@ export type UserUncheckedCreateWithoutReviewsInput = {
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -5575,6 +5952,7 @@ export type UserCreateWithoutReviewsHiddenInput = {
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -5647,6 +6025,7 @@ export type UserUncheckedCreateWithoutReviewsHiddenInput = {
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -5734,6 +6113,7 @@ export type UserUpdateWithoutReviewsInput = {
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -5806,6 +6186,7 @@ export type UserUncheckedUpdateWithoutReviewsInput = {
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -5888,6 +6269,7 @@ export type UserUpdateWithoutReviewsHiddenInput = {
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -5960,6 +6342,7 @@ export type UserUncheckedUpdateWithoutReviewsHiddenInput = {
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -6031,6 +6414,7 @@ export type UserCreateWithoutMilestoneAlertsInput = {
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -6103,6 +6487,7 @@ export type UserUncheckedCreateWithoutMilestoneAlertsInput = {
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -6190,6 +6575,7 @@ export type UserUpdateWithoutMilestoneAlertsInput = {
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -6262,6 +6648,7 @@ export type UserUncheckedUpdateWithoutMilestoneAlertsInput = {
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -6333,6 +6720,7 @@ export type UserCreateWithoutChapterReactionsInput = {
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -6405,6 +6793,7 @@ export type UserUncheckedCreateWithoutChapterReactionsInput = {
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -6492,6 +6881,7 @@ export type UserUpdateWithoutChapterReactionsInput = {
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -6564,6 +6954,7 @@ export type UserUncheckedUpdateWithoutChapterReactionsInput = {
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -6634,6 +7025,7 @@ export type UserCreateWithoutCommentInput = {
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -6706,6 +7098,7 @@ export type UserUncheckedCreateWithoutCommentInput = {
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -6782,6 +7175,7 @@ export type UserCreateWithoutCommentsInput = {
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -6854,6 +7248,7 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -6941,6 +7336,7 @@ export type UserUpdateWithoutCommentInput = {
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -7013,6 +7409,7 @@ export type UserUncheckedUpdateWithoutCommentInput = {
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -7095,6 +7492,7 @@ export type UserUpdateWithoutCommentsInput = {
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -7167,6 +7565,7 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -7239,6 +7638,7 @@ export type UserCreateWithoutRankingsInput = {
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
@@ -7311,6 +7711,7 @@ export type UserUncheckedCreateWithoutRankingsInput = {
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
@@ -7398,6 +7799,7 @@ export type UserUpdateWithoutRankingsInput = {
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
@@ -7470,6 +7872,7 @@ export type UserUncheckedUpdateWithoutRankingsInput = {
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
@@ -7540,6 +7943,7 @@ export type UserCreateWithoutAnalyticsInput = {
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -7612,6 +8016,7 @@ export type UserUncheckedCreateWithoutAnalyticsInput = {
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -7699,6 +8104,7 @@ export type UserUpdateWithoutAnalyticsInput = {
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -7771,6 +8177,7 @@ export type UserUncheckedUpdateWithoutAnalyticsInput = {
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -7843,6 +8250,7 @@ export type UserCreateWithoutHistoryInput = {
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -7915,6 +8323,7 @@ export type UserUncheckedCreateWithoutHistoryInput = {
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -8002,6 +8411,7 @@ export type UserUpdateWithoutHistoryInput = {
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -8074,6 +8484,7 @@ export type UserUncheckedUpdateWithoutHistoryInput = {
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -8144,6 +8555,7 @@ export type UserCreateWithoutFavoritesInput = {
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -8216,6 +8628,7 @@ export type UserUncheckedCreateWithoutFavoritesInput = {
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -8303,6 +8716,7 @@ export type UserUpdateWithoutFavoritesInput = {
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -8375,6 +8789,7 @@ export type UserUncheckedUpdateWithoutFavoritesInput = {
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -8446,6 +8861,7 @@ export type UserCreateWithoutUserListInput = {
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -8518,6 +8934,7 @@ export type UserUncheckedCreateWithoutUserListInput = {
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -8605,6 +9022,7 @@ export type UserUpdateWithoutUserListInput = {
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -8677,6 +9095,7 @@ export type UserUncheckedUpdateWithoutUserListInput = {
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -8748,6 +9167,7 @@ export type UserCreateWithoutPageBookmarksInput = {
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -8820,6 +9240,7 @@ export type UserUncheckedCreateWithoutPageBookmarksInput = {
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -8907,6 +9328,7 @@ export type UserUpdateWithoutPageBookmarksInput = {
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -8979,6 +9401,7 @@ export type UserUncheckedUpdateWithoutPageBookmarksInput = {
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -9050,6 +9473,7 @@ export type UserCreateWithoutAuditsInput = {
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -9122,6 +9546,7 @@ export type UserUncheckedCreateWithoutAuditsInput = {
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -9209,6 +9634,7 @@ export type UserUpdateWithoutAuditsInput = {
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -9281,6 +9707,7 @@ export type UserUncheckedUpdateWithoutAuditsInput = {
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -9353,6 +9780,7 @@ export type UserCreateWithoutSubscriptionsInput = {
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -9425,6 +9853,7 @@ export type UserUncheckedCreateWithoutSubscriptionsInput = {
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -9512,6 +9941,7 @@ export type UserUpdateWithoutSubscriptionsInput = {
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -9584,6 +10014,7 @@ export type UserUncheckedUpdateWithoutSubscriptionsInput = {
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -9654,6 +10085,7 @@ export type UserCreateWithoutOrganizationFollowsInput = {
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -9726,6 +10158,7 @@ export type UserUncheckedCreateWithoutOrganizationFollowsInput = {
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -9813,6 +10246,7 @@ export type UserUpdateWithoutOrganizationFollowsInput = {
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -9885,6 +10319,7 @@ export type UserUncheckedUpdateWithoutOrganizationFollowsInput = {
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -9957,6 +10392,7 @@ export type UserCreateWithoutOrganizationRequestsInput = {
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -10029,6 +10465,7 @@ export type UserUncheckedCreateWithoutOrganizationRequestsInput = {
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -10116,6 +10553,7 @@ export type UserUpdateWithoutOrganizationRequestsInput = {
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -10188,6 +10626,7 @@ export type UserUncheckedUpdateWithoutOrganizationRequestsInput = {
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -10258,6 +10697,7 @@ export type UserCreateWithoutEmailPreferenceInput = {
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -10330,6 +10770,7 @@ export type UserUncheckedCreateWithoutEmailPreferenceInput = {
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -10417,6 +10858,7 @@ export type UserUpdateWithoutEmailPreferenceInput = {
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -10489,6 +10931,7 @@ export type UserUncheckedUpdateWithoutEmailPreferenceInput = {
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -10560,6 +11003,7 @@ export type UserCreateWithoutEmailLogsInput = {
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -10632,6 +11076,7 @@ export type UserUncheckedCreateWithoutEmailLogsInput = {
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -10719,6 +11164,7 @@ export type UserUpdateWithoutEmailLogsInput = {
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -10791,6 +11237,7 @@ export type UserUncheckedUpdateWithoutEmailLogsInput = {
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -10863,6 +11310,7 @@ export type UserCreateWithoutUnsubscribeTokensInput = {
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -10935,6 +11383,7 @@ export type UserUncheckedCreateWithoutUnsubscribeTokensInput = {
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -11022,6 +11471,7 @@ export type UserUpdateWithoutUnsubscribeTokensInput = {
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -11094,6 +11544,7 @@ export type UserUncheckedUpdateWithoutUnsubscribeTokensInput = {
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -11164,6 +11615,7 @@ export type UserCreateWithoutEmailVerificationTokensInput = {
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -11236,6 +11688,7 @@ export type UserUncheckedCreateWithoutEmailVerificationTokensInput = {
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -11323,6 +11776,7 @@ export type UserUpdateWithoutEmailVerificationTokensInput = {
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -11395,6 +11849,7 @@ export type UserUncheckedUpdateWithoutEmailVerificationTokensInput = {
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -11467,6 +11922,7 @@ export type UserCreateWithoutSavedQuotesInput = {
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -11539,6 +11995,7 @@ export type UserUncheckedCreateWithoutSavedQuotesInput = {
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -11626,6 +12083,7 @@ export type UserUpdateWithoutSavedQuotesInput = {
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -11698,6 +12156,7 @@ export type UserUncheckedUpdateWithoutSavedQuotesInput = {
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -11769,6 +12228,7 @@ export type UserCreateWithoutDailyActivitiesInput = {
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -11841,6 +12301,7 @@ export type UserUncheckedCreateWithoutDailyActivitiesInput = {
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -11928,6 +12389,7 @@ export type UserUpdateWithoutDailyActivitiesInput = {
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -12000,6 +12462,7 @@ export type UserUncheckedUpdateWithoutDailyActivitiesInput = {
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -12071,6 +12534,7 @@ export type UserCreateWithoutAchievementsInput = {
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -12143,6 +12607,7 @@ export type UserUncheckedCreateWithoutAchievementsInput = {
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -12230,6 +12695,7 @@ export type UserUpdateWithoutAchievementsInput = {
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -12302,6 +12768,7 @@ export type UserUncheckedUpdateWithoutAchievementsInput = {
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -12373,6 +12840,7 @@ export type UserCreateWithoutNotificationsInput = {
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -12445,6 +12913,7 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -12532,6 +13001,7 @@ export type UserUpdateWithoutNotificationsInput = {
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -12604,6 +13074,7 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -12675,6 +13146,7 @@ export type UserCreateWithoutRaffleTicketsInput = {
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -12747,6 +13219,7 @@ export type UserUncheckedCreateWithoutRaffleTicketsInput = {
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -12834,6 +13307,7 @@ export type UserUpdateWithoutRaffleTicketsInput = {
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -12906,6 +13380,7 @@ export type UserUncheckedUpdateWithoutRaffleTicketsInput = {
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -12977,6 +13452,7 @@ export type UserCreateWithoutRaffleCommentsInput = {
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -13049,6 +13525,7 @@ export type UserUncheckedCreateWithoutRaffleCommentsInput = {
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -13136,6 +13613,7 @@ export type UserUpdateWithoutRaffleCommentsInput = {
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -13208,6 +13686,7 @@ export type UserUncheckedUpdateWithoutRaffleCommentsInput = {
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -13279,6 +13758,7 @@ export type UserCreateWithoutBansReceivedInput = {
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -13351,6 +13831,7 @@ export type UserUncheckedCreateWithoutBansReceivedInput = {
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -13427,6 +13908,7 @@ export type UserCreateWithoutBansIssuedInput = {
   userList?: Prisma.UserListCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingCreateNestedManyWithoutUserInput
@@ -13499,6 +13981,7 @@ export type UserUncheckedCreateWithoutBansIssuedInput = {
   userList?: Prisma.UserListUncheckedCreateNestedManyWithoutUserInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedCreateNestedManyWithoutUserInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedCreateNestedManyWithoutUserInput
+  communityPosts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUserInput
   rankings?: Prisma.RankingUncheckedCreateNestedManyWithoutUserInput
@@ -13586,6 +14069,7 @@ export type UserUpdateWithoutBansReceivedInput = {
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -13658,6 +14142,7 @@ export type UserUncheckedUpdateWithoutBansReceivedInput = {
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -13740,6 +14225,7 @@ export type UserUpdateWithoutBansIssuedInput = {
   userList?: Prisma.UserListUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUpdateManyWithoutUserNestedInput
@@ -13812,6 +14298,7 @@ export type UserUncheckedUpdateWithoutBansIssuedInput = {
   userList?: Prisma.UserListUncheckedUpdateManyWithoutUserNestedInput
   pageBookmarks?: Prisma.UserPageBookmarkUncheckedUpdateManyWithoutUserNestedInput
   organizationFollows?: Prisma.OrganizationFollowerUncheckedUpdateManyWithoutUserNestedInput
+  communityPosts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.PermissionUncheckedUpdateManyWithoutUserNestedInput
   rankings?: Prisma.RankingUncheckedUpdateManyWithoutUserNestedInput
@@ -13858,6 +14345,7 @@ export type UserCountOutputType = {
   userList: number
   pageBookmarks: number
   organizationFollows: number
+  communityPosts: number
   passwordResetTokens: number
   permissions: number
   rankings: number
@@ -13899,6 +14387,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   userList?: boolean | UserCountOutputTypeCountUserListArgs
   pageBookmarks?: boolean | UserCountOutputTypeCountPageBookmarksArgs
   organizationFollows?: boolean | UserCountOutputTypeCountOrganizationFollowsArgs
+  communityPosts?: boolean | UserCountOutputTypeCountCommunityPostsArgs
   passwordResetTokens?: boolean | UserCountOutputTypeCountPasswordResetTokensArgs
   permissions?: boolean | UserCountOutputTypeCountPermissionsArgs
   rankings?: boolean | UserCountOutputTypeCountRankingsArgs
@@ -14007,6 +14496,13 @@ export type UserCountOutputTypeCountPageBookmarksArgs<ExtArgs extends runtime.Ty
  */
 export type UserCountOutputTypeCountOrganizationFollowsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.OrganizationFollowerWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCommunityPostsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OrganizationPostWhereInput
 }
 
 /**
@@ -14248,6 +14744,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   userList?: boolean | Prisma.User$userListArgs<ExtArgs>
   pageBookmarks?: boolean | Prisma.User$pageBookmarksArgs<ExtArgs>
   organizationFollows?: boolean | Prisma.User$organizationFollowsArgs<ExtArgs>
+  communityPosts?: boolean | Prisma.User$communityPostsArgs<ExtArgs>
   passwordResetTokens?: boolean | Prisma.User$passwordResetTokensArgs<ExtArgs>
   permissions?: boolean | Prisma.User$permissionsArgs<ExtArgs>
   rankings?: boolean | Prisma.User$rankingsArgs<ExtArgs>
@@ -14392,6 +14889,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   userList?: boolean | Prisma.User$userListArgs<ExtArgs>
   pageBookmarks?: boolean | Prisma.User$pageBookmarksArgs<ExtArgs>
   organizationFollows?: boolean | Prisma.User$organizationFollowsArgs<ExtArgs>
+  communityPosts?: boolean | Prisma.User$communityPostsArgs<ExtArgs>
   passwordResetTokens?: boolean | Prisma.User$passwordResetTokensArgs<ExtArgs>
   permissions?: boolean | Prisma.User$permissionsArgs<ExtArgs>
   rankings?: boolean | Prisma.User$rankingsArgs<ExtArgs>
@@ -14440,6 +14938,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     userList: Prisma.$UserListPayload<ExtArgs>[]
     pageBookmarks: Prisma.$UserPageBookmarkPayload<ExtArgs>[]
     organizationFollows: Prisma.$OrganizationFollowerPayload<ExtArgs>[]
+    communityPosts: Prisma.$OrganizationPostPayload<ExtArgs>[]
     passwordResetTokens: Prisma.$PasswordResetTokenPayload<ExtArgs>[]
     permissions: Prisma.$PermissionPayload<ExtArgs>[]
     rankings: Prisma.$RankingPayload<ExtArgs>[]
@@ -14906,6 +15405,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   userList<T extends Prisma.User$userListArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$userListArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserListPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   pageBookmarks<T extends Prisma.User$pageBookmarksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$pageBookmarksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPageBookmarkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   organizationFollows<T extends Prisma.User$organizationFollowsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$organizationFollowsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrganizationFollowerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  communityPosts<T extends Prisma.User$communityPostsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$communityPostsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrganizationPostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   passwordResetTokens<T extends Prisma.User$passwordResetTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$passwordResetTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PasswordResetTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   permissions<T extends Prisma.User$permissionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$permissionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PermissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   rankings<T extends Prisma.User$rankingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$rankingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RankingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -15638,6 +16138,30 @@ export type User$organizationFollowsArgs<ExtArgs extends runtime.Types.Extension
   take?: number
   skip?: number
   distinct?: Prisma.OrganizationFollowerScalarFieldEnum | Prisma.OrganizationFollowerScalarFieldEnum[]
+}
+
+/**
+ * User.communityPosts
+ */
+export type User$communityPostsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OrganizationPost
+   */
+  select?: Prisma.OrganizationPostSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OrganizationPost
+   */
+  omit?: Prisma.OrganizationPostOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrganizationPostInclude<ExtArgs> | null
+  where?: Prisma.OrganizationPostWhereInput
+  orderBy?: Prisma.OrganizationPostOrderByWithRelationInput | Prisma.OrganizationPostOrderByWithRelationInput[]
+  cursor?: Prisma.OrganizationPostWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OrganizationPostScalarFieldEnum | Prisma.OrganizationPostScalarFieldEnum[]
 }
 
 /**
