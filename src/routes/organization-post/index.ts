@@ -168,7 +168,7 @@ async function notify(recipientUserId: number | null | undefined, type: string, 
 async function notifyMentions(content: string, postId: number, actorUserId: number) {
   const names = parseMentions(content)
   if (!names.length) return
-  const users = await prisma.user.findMany({ where: { username: { in: names } }, select: { id: true } })
+  const users = await prisma.user.findMany({ where: { slug: { in: names.map((n) => n.toLowerCase()) } }, select: { id: true } })
   await Promise.all(users.map((u) => notify(u.id, 'post_mention', postId, actorUserId)))
 }
 
