@@ -30,16 +30,22 @@ export type OrganizationPostAvgAggregateOutputType = {
   id: number | null
   organizationId: number | null
   userId: number | null
+  parentId: number | null
+  repostOfId: number | null
   likesCount: number | null
   commentsCount: number | null
+  repostCount: number | null
 }
 
 export type OrganizationPostSumAggregateOutputType = {
   id: number | null
   organizationId: number | null
   userId: number | null
+  parentId: number | null
+  repostOfId: number | null
   likesCount: number | null
   commentsCount: number | null
+  repostCount: number | null
 }
 
 export type OrganizationPostMinAggregateOutputType = {
@@ -48,8 +54,11 @@ export type OrganizationPostMinAggregateOutputType = {
   userId: number | null
   content: string | null
   pinned: boolean | null
+  parentId: number | null
+  repostOfId: number | null
   likesCount: number | null
   commentsCount: number | null
+  repostCount: number | null
   deletedAt: Date | null
   hiddenAt: Date | null
   createdAt: Date | null
@@ -62,8 +71,11 @@ export type OrganizationPostMaxAggregateOutputType = {
   userId: number | null
   content: string | null
   pinned: boolean | null
+  parentId: number | null
+  repostOfId: number | null
   likesCount: number | null
   commentsCount: number | null
+  repostCount: number | null
   deletedAt: Date | null
   hiddenAt: Date | null
   createdAt: Date | null
@@ -77,8 +89,11 @@ export type OrganizationPostCountAggregateOutputType = {
   content: number
   images: number
   pinned: number
+  parentId: number
+  repostOfId: number
   likesCount: number
   commentsCount: number
+  repostCount: number
   deletedAt: number
   hiddenAt: number
   createdAt: number
@@ -91,16 +106,22 @@ export type OrganizationPostAvgAggregateInputType = {
   id?: true
   organizationId?: true
   userId?: true
+  parentId?: true
+  repostOfId?: true
   likesCount?: true
   commentsCount?: true
+  repostCount?: true
 }
 
 export type OrganizationPostSumAggregateInputType = {
   id?: true
   organizationId?: true
   userId?: true
+  parentId?: true
+  repostOfId?: true
   likesCount?: true
   commentsCount?: true
+  repostCount?: true
 }
 
 export type OrganizationPostMinAggregateInputType = {
@@ -109,8 +130,11 @@ export type OrganizationPostMinAggregateInputType = {
   userId?: true
   content?: true
   pinned?: true
+  parentId?: true
+  repostOfId?: true
   likesCount?: true
   commentsCount?: true
+  repostCount?: true
   deletedAt?: true
   hiddenAt?: true
   createdAt?: true
@@ -123,8 +147,11 @@ export type OrganizationPostMaxAggregateInputType = {
   userId?: true
   content?: true
   pinned?: true
+  parentId?: true
+  repostOfId?: true
   likesCount?: true
   commentsCount?: true
+  repostCount?: true
   deletedAt?: true
   hiddenAt?: true
   createdAt?: true
@@ -138,8 +165,11 @@ export type OrganizationPostCountAggregateInputType = {
   content?: true
   images?: true
   pinned?: true
+  parentId?: true
+  repostOfId?: true
   likesCount?: true
   commentsCount?: true
+  repostCount?: true
   deletedAt?: true
   hiddenAt?: true
   createdAt?: true
@@ -235,13 +265,16 @@ export type OrganizationPostGroupByArgs<ExtArgs extends runtime.Types.Extensions
 
 export type OrganizationPostGroupByOutputType = {
   id: number
-  organizationId: number
+  organizationId: number | null
   userId: number
   content: string
   images: runtime.JsonValue | null
   pinned: boolean
+  parentId: number | null
+  repostOfId: number | null
   likesCount: number
   commentsCount: number
+  repostCount: number
   deletedAt: Date | null
   hiddenAt: Date | null
   createdAt: Date
@@ -273,38 +306,56 @@ export type OrganizationPostWhereInput = {
   OR?: Prisma.OrganizationPostWhereInput[]
   NOT?: Prisma.OrganizationPostWhereInput | Prisma.OrganizationPostWhereInput[]
   id?: Prisma.IntFilter<"OrganizationPost"> | number
-  organizationId?: Prisma.IntFilter<"OrganizationPost"> | number
+  organizationId?: Prisma.IntNullableFilter<"OrganizationPost"> | number | null
   userId?: Prisma.IntFilter<"OrganizationPost"> | number
   content?: Prisma.StringFilter<"OrganizationPost"> | string
   images?: Prisma.JsonNullableFilter<"OrganizationPost">
   pinned?: Prisma.BoolFilter<"OrganizationPost"> | boolean
+  parentId?: Prisma.IntNullableFilter<"OrganizationPost"> | number | null
+  repostOfId?: Prisma.IntNullableFilter<"OrganizationPost"> | number | null
   likesCount?: Prisma.IntFilter<"OrganizationPost"> | number
   commentsCount?: Prisma.IntFilter<"OrganizationPost"> | number
+  repostCount?: Prisma.IntFilter<"OrganizationPost"> | number
   deletedAt?: Prisma.DateTimeNullableFilter<"OrganizationPost"> | Date | string | null
   hiddenAt?: Prisma.DateTimeNullableFilter<"OrganizationPost"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"OrganizationPost"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"OrganizationPost"> | Date | string
-  organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
+  organization?: Prisma.XOR<Prisma.OrganizationNullableScalarRelationFilter, Prisma.OrganizationWhereInput> | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  parent?: Prisma.XOR<Prisma.OrganizationPostNullableScalarRelationFilter, Prisma.OrganizationPostWhereInput> | null
+  replies?: Prisma.OrganizationPostListRelationFilter
+  repostOf?: Prisma.XOR<Prisma.OrganizationPostNullableScalarRelationFilter, Prisma.OrganizationPostWhereInput> | null
+  reposts?: Prisma.OrganizationPostListRelationFilter
   likes?: Prisma.OrganizationPostLikeListRelationFilter
+  saves?: Prisma.OrganizationPostSaveListRelationFilter
+  hashtags?: Prisma.OrganizationPostHashtagListRelationFilter
 }
 
 export type OrganizationPostOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  organizationId?: Prisma.SortOrder
+  organizationId?: Prisma.SortOrderInput | Prisma.SortOrder
   userId?: Prisma.SortOrder
   content?: Prisma.SortOrder
   images?: Prisma.SortOrderInput | Prisma.SortOrder
   pinned?: Prisma.SortOrder
+  parentId?: Prisma.SortOrderInput | Prisma.SortOrder
+  repostOfId?: Prisma.SortOrderInput | Prisma.SortOrder
   likesCount?: Prisma.SortOrder
   commentsCount?: Prisma.SortOrder
+  repostCount?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   hiddenAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   organization?: Prisma.OrganizationOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
+  parent?: Prisma.OrganizationPostOrderByWithRelationInput
+  replies?: Prisma.OrganizationPostOrderByRelationAggregateInput
+  repostOf?: Prisma.OrganizationPostOrderByWithRelationInput
+  reposts?: Prisma.OrganizationPostOrderByRelationAggregateInput
   likes?: Prisma.OrganizationPostLikeOrderByRelationAggregateInput
+  saves?: Prisma.OrganizationPostSaveOrderByRelationAggregateInput
+  hashtags?: Prisma.OrganizationPostHashtagOrderByRelationAggregateInput
 }
 
 export type OrganizationPostWhereUniqueInput = Prisma.AtLeast<{
@@ -312,31 +363,43 @@ export type OrganizationPostWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.OrganizationPostWhereInput | Prisma.OrganizationPostWhereInput[]
   OR?: Prisma.OrganizationPostWhereInput[]
   NOT?: Prisma.OrganizationPostWhereInput | Prisma.OrganizationPostWhereInput[]
-  organizationId?: Prisma.IntFilter<"OrganizationPost"> | number
+  organizationId?: Prisma.IntNullableFilter<"OrganizationPost"> | number | null
   userId?: Prisma.IntFilter<"OrganizationPost"> | number
   content?: Prisma.StringFilter<"OrganizationPost"> | string
   images?: Prisma.JsonNullableFilter<"OrganizationPost">
   pinned?: Prisma.BoolFilter<"OrganizationPost"> | boolean
+  parentId?: Prisma.IntNullableFilter<"OrganizationPost"> | number | null
+  repostOfId?: Prisma.IntNullableFilter<"OrganizationPost"> | number | null
   likesCount?: Prisma.IntFilter<"OrganizationPost"> | number
   commentsCount?: Prisma.IntFilter<"OrganizationPost"> | number
+  repostCount?: Prisma.IntFilter<"OrganizationPost"> | number
   deletedAt?: Prisma.DateTimeNullableFilter<"OrganizationPost"> | Date | string | null
   hiddenAt?: Prisma.DateTimeNullableFilter<"OrganizationPost"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"OrganizationPost"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"OrganizationPost"> | Date | string
-  organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
+  organization?: Prisma.XOR<Prisma.OrganizationNullableScalarRelationFilter, Prisma.OrganizationWhereInput> | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  parent?: Prisma.XOR<Prisma.OrganizationPostNullableScalarRelationFilter, Prisma.OrganizationPostWhereInput> | null
+  replies?: Prisma.OrganizationPostListRelationFilter
+  repostOf?: Prisma.XOR<Prisma.OrganizationPostNullableScalarRelationFilter, Prisma.OrganizationPostWhereInput> | null
+  reposts?: Prisma.OrganizationPostListRelationFilter
   likes?: Prisma.OrganizationPostLikeListRelationFilter
+  saves?: Prisma.OrganizationPostSaveListRelationFilter
+  hashtags?: Prisma.OrganizationPostHashtagListRelationFilter
 }, "id">
 
 export type OrganizationPostOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  organizationId?: Prisma.SortOrder
+  organizationId?: Prisma.SortOrderInput | Prisma.SortOrder
   userId?: Prisma.SortOrder
   content?: Prisma.SortOrder
   images?: Prisma.SortOrderInput | Prisma.SortOrder
   pinned?: Prisma.SortOrder
+  parentId?: Prisma.SortOrderInput | Prisma.SortOrder
+  repostOfId?: Prisma.SortOrderInput | Prisma.SortOrder
   likesCount?: Prisma.SortOrder
   commentsCount?: Prisma.SortOrder
+  repostCount?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   hiddenAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -353,13 +416,16 @@ export type OrganizationPostScalarWhereWithAggregatesInput = {
   OR?: Prisma.OrganizationPostScalarWhereWithAggregatesInput[]
   NOT?: Prisma.OrganizationPostScalarWhereWithAggregatesInput | Prisma.OrganizationPostScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"OrganizationPost"> | number
-  organizationId?: Prisma.IntWithAggregatesFilter<"OrganizationPost"> | number
+  organizationId?: Prisma.IntNullableWithAggregatesFilter<"OrganizationPost"> | number | null
   userId?: Prisma.IntWithAggregatesFilter<"OrganizationPost"> | number
   content?: Prisma.StringWithAggregatesFilter<"OrganizationPost"> | string
   images?: Prisma.JsonNullableWithAggregatesFilter<"OrganizationPost">
   pinned?: Prisma.BoolWithAggregatesFilter<"OrganizationPost"> | boolean
+  parentId?: Prisma.IntNullableWithAggregatesFilter<"OrganizationPost"> | number | null
+  repostOfId?: Prisma.IntNullableWithAggregatesFilter<"OrganizationPost"> | number | null
   likesCount?: Prisma.IntWithAggregatesFilter<"OrganizationPost"> | number
   commentsCount?: Prisma.IntWithAggregatesFilter<"OrganizationPost"> | number
+  repostCount?: Prisma.IntWithAggregatesFilter<"OrganizationPost"> | number
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"OrganizationPost"> | Date | string | null
   hiddenAt?: Prisma.DateTimeNullableWithAggregatesFilter<"OrganizationPost"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"OrganizationPost"> | Date | string
@@ -372,29 +438,43 @@ export type OrganizationPostCreateInput = {
   pinned?: boolean
   likesCount?: number
   commentsCount?: number
+  repostCount?: number
   deletedAt?: Date | string | null
   hiddenAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  organization: Prisma.OrganizationCreateNestedOneWithoutCommunityPostsInput
+  organization?: Prisma.OrganizationCreateNestedOneWithoutCommunityPostsInput
   user: Prisma.UserCreateNestedOneWithoutCommunityPostsInput
+  parent?: Prisma.OrganizationPostCreateNestedOneWithoutRepliesInput
+  replies?: Prisma.OrganizationPostCreateNestedManyWithoutParentInput
+  repostOf?: Prisma.OrganizationPostCreateNestedOneWithoutRepostsInput
+  reposts?: Prisma.OrganizationPostCreateNestedManyWithoutRepostOfInput
   likes?: Prisma.OrganizationPostLikeCreateNestedManyWithoutPostInput
+  saves?: Prisma.OrganizationPostSaveCreateNestedManyWithoutPostInput
+  hashtags?: Prisma.OrganizationPostHashtagCreateNestedManyWithoutPostInput
 }
 
 export type OrganizationPostUncheckedCreateInput = {
   id?: number
-  organizationId: number
+  organizationId?: number | null
   userId: number
   content: string
   images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   pinned?: boolean
+  parentId?: number | null
+  repostOfId?: number | null
   likesCount?: number
   commentsCount?: number
+  repostCount?: number
   deletedAt?: Date | string | null
   hiddenAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  replies?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutParentInput
+  reposts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutRepostOfInput
   likes?: Prisma.OrganizationPostLikeUncheckedCreateNestedManyWithoutPostInput
+  saves?: Prisma.OrganizationPostSaveUncheckedCreateNestedManyWithoutPostInput
+  hashtags?: Prisma.OrganizationPostHashtagUncheckedCreateNestedManyWithoutPostInput
 }
 
 export type OrganizationPostUpdateInput = {
@@ -403,40 +483,57 @@ export type OrganizationPostUpdateInput = {
   pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   likesCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  repostCount?: Prisma.IntFieldUpdateOperationsInput | number
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  organization?: Prisma.OrganizationUpdateOneRequiredWithoutCommunityPostsNestedInput
+  organization?: Prisma.OrganizationUpdateOneWithoutCommunityPostsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutCommunityPostsNestedInput
+  parent?: Prisma.OrganizationPostUpdateOneWithoutRepliesNestedInput
+  replies?: Prisma.OrganizationPostUpdateManyWithoutParentNestedInput
+  repostOf?: Prisma.OrganizationPostUpdateOneWithoutRepostsNestedInput
+  reposts?: Prisma.OrganizationPostUpdateManyWithoutRepostOfNestedInput
   likes?: Prisma.OrganizationPostLikeUpdateManyWithoutPostNestedInput
+  saves?: Prisma.OrganizationPostSaveUpdateManyWithoutPostNestedInput
+  hashtags?: Prisma.OrganizationPostHashtagUpdateManyWithoutPostNestedInput
 }
 
 export type OrganizationPostUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  organizationId?: Prisma.IntFieldUpdateOperationsInput | number
+  organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   content?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  parentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  repostOfId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   likesCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  repostCount?: Prisma.IntFieldUpdateOperationsInput | number
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  replies?: Prisma.OrganizationPostUncheckedUpdateManyWithoutParentNestedInput
+  reposts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutRepostOfNestedInput
   likes?: Prisma.OrganizationPostLikeUncheckedUpdateManyWithoutPostNestedInput
+  saves?: Prisma.OrganizationPostSaveUncheckedUpdateManyWithoutPostNestedInput
+  hashtags?: Prisma.OrganizationPostHashtagUncheckedUpdateManyWithoutPostNestedInput
 }
 
 export type OrganizationPostCreateManyInput = {
   id?: number
-  organizationId: number
+  organizationId?: number | null
   userId: number
   content: string
   images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   pinned?: boolean
+  parentId?: number | null
+  repostOfId?: number | null
   likesCount?: number
   commentsCount?: number
+  repostCount?: number
   deletedAt?: Date | string | null
   hiddenAt?: Date | string | null
   createdAt?: Date | string
@@ -449,6 +546,7 @@ export type OrganizationPostUpdateManyMutationInput = {
   pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   likesCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  repostCount?: Prisma.IntFieldUpdateOperationsInput | number
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -457,13 +555,16 @@ export type OrganizationPostUpdateManyMutationInput = {
 
 export type OrganizationPostUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  organizationId?: Prisma.IntFieldUpdateOperationsInput | number
+  organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   content?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  parentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  repostOfId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   likesCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  repostCount?: Prisma.IntFieldUpdateOperationsInput | number
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -480,6 +581,11 @@ export type OrganizationPostOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type OrganizationPostNullableScalarRelationFilter = {
+  is?: Prisma.OrganizationPostWhereInput | null
+  isNot?: Prisma.OrganizationPostWhereInput | null
+}
+
 export type OrganizationPostCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   organizationId?: Prisma.SortOrder
@@ -487,8 +593,11 @@ export type OrganizationPostCountOrderByAggregateInput = {
   content?: Prisma.SortOrder
   images?: Prisma.SortOrder
   pinned?: Prisma.SortOrder
+  parentId?: Prisma.SortOrder
+  repostOfId?: Prisma.SortOrder
   likesCount?: Prisma.SortOrder
   commentsCount?: Prisma.SortOrder
+  repostCount?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   hiddenAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -499,8 +608,11 @@ export type OrganizationPostAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   organizationId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  parentId?: Prisma.SortOrder
+  repostOfId?: Prisma.SortOrder
   likesCount?: Prisma.SortOrder
   commentsCount?: Prisma.SortOrder
+  repostCount?: Prisma.SortOrder
 }
 
 export type OrganizationPostMaxOrderByAggregateInput = {
@@ -509,8 +621,11 @@ export type OrganizationPostMaxOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   content?: Prisma.SortOrder
   pinned?: Prisma.SortOrder
+  parentId?: Prisma.SortOrder
+  repostOfId?: Prisma.SortOrder
   likesCount?: Prisma.SortOrder
   commentsCount?: Prisma.SortOrder
+  repostCount?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   hiddenAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -523,8 +638,11 @@ export type OrganizationPostMinOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   content?: Prisma.SortOrder
   pinned?: Prisma.SortOrder
+  parentId?: Prisma.SortOrder
+  repostOfId?: Prisma.SortOrder
   likesCount?: Prisma.SortOrder
   commentsCount?: Prisma.SortOrder
+  repostCount?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   hiddenAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -535,8 +653,11 @@ export type OrganizationPostSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   organizationId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  parentId?: Prisma.SortOrder
+  repostOfId?: Prisma.SortOrder
   likesCount?: Prisma.SortOrder
   commentsCount?: Prisma.SortOrder
+  repostCount?: Prisma.SortOrder
 }
 
 export type OrganizationPostScalarRelationFilter = {
@@ -586,8 +707,132 @@ export type OrganizationPostUncheckedUpdateManyWithoutOrganizationNestedInput = 
   deleteMany?: Prisma.OrganizationPostScalarWhereInput | Prisma.OrganizationPostScalarWhereInput[]
 }
 
+export type OrganizationPostCreateNestedOneWithoutRepliesInput = {
+  create?: Prisma.XOR<Prisma.OrganizationPostCreateWithoutRepliesInput, Prisma.OrganizationPostUncheckedCreateWithoutRepliesInput>
+  connectOrCreate?: Prisma.OrganizationPostCreateOrConnectWithoutRepliesInput
+  connect?: Prisma.OrganizationPostWhereUniqueInput
+}
+
+export type OrganizationPostCreateNestedManyWithoutParentInput = {
+  create?: Prisma.XOR<Prisma.OrganizationPostCreateWithoutParentInput, Prisma.OrganizationPostUncheckedCreateWithoutParentInput> | Prisma.OrganizationPostCreateWithoutParentInput[] | Prisma.OrganizationPostUncheckedCreateWithoutParentInput[]
+  connectOrCreate?: Prisma.OrganizationPostCreateOrConnectWithoutParentInput | Prisma.OrganizationPostCreateOrConnectWithoutParentInput[]
+  createMany?: Prisma.OrganizationPostCreateManyParentInputEnvelope
+  connect?: Prisma.OrganizationPostWhereUniqueInput | Prisma.OrganizationPostWhereUniqueInput[]
+}
+
+export type OrganizationPostCreateNestedOneWithoutRepostsInput = {
+  create?: Prisma.XOR<Prisma.OrganizationPostCreateWithoutRepostsInput, Prisma.OrganizationPostUncheckedCreateWithoutRepostsInput>
+  connectOrCreate?: Prisma.OrganizationPostCreateOrConnectWithoutRepostsInput
+  connect?: Prisma.OrganizationPostWhereUniqueInput
+}
+
+export type OrganizationPostCreateNestedManyWithoutRepostOfInput = {
+  create?: Prisma.XOR<Prisma.OrganizationPostCreateWithoutRepostOfInput, Prisma.OrganizationPostUncheckedCreateWithoutRepostOfInput> | Prisma.OrganizationPostCreateWithoutRepostOfInput[] | Prisma.OrganizationPostUncheckedCreateWithoutRepostOfInput[]
+  connectOrCreate?: Prisma.OrganizationPostCreateOrConnectWithoutRepostOfInput | Prisma.OrganizationPostCreateOrConnectWithoutRepostOfInput[]
+  createMany?: Prisma.OrganizationPostCreateManyRepostOfInputEnvelope
+  connect?: Prisma.OrganizationPostWhereUniqueInput | Prisma.OrganizationPostWhereUniqueInput[]
+}
+
+export type OrganizationPostUncheckedCreateNestedManyWithoutParentInput = {
+  create?: Prisma.XOR<Prisma.OrganizationPostCreateWithoutParentInput, Prisma.OrganizationPostUncheckedCreateWithoutParentInput> | Prisma.OrganizationPostCreateWithoutParentInput[] | Prisma.OrganizationPostUncheckedCreateWithoutParentInput[]
+  connectOrCreate?: Prisma.OrganizationPostCreateOrConnectWithoutParentInput | Prisma.OrganizationPostCreateOrConnectWithoutParentInput[]
+  createMany?: Prisma.OrganizationPostCreateManyParentInputEnvelope
+  connect?: Prisma.OrganizationPostWhereUniqueInput | Prisma.OrganizationPostWhereUniqueInput[]
+}
+
+export type OrganizationPostUncheckedCreateNestedManyWithoutRepostOfInput = {
+  create?: Prisma.XOR<Prisma.OrganizationPostCreateWithoutRepostOfInput, Prisma.OrganizationPostUncheckedCreateWithoutRepostOfInput> | Prisma.OrganizationPostCreateWithoutRepostOfInput[] | Prisma.OrganizationPostUncheckedCreateWithoutRepostOfInput[]
+  connectOrCreate?: Prisma.OrganizationPostCreateOrConnectWithoutRepostOfInput | Prisma.OrganizationPostCreateOrConnectWithoutRepostOfInput[]
+  createMany?: Prisma.OrganizationPostCreateManyRepostOfInputEnvelope
+  connect?: Prisma.OrganizationPostWhereUniqueInput | Prisma.OrganizationPostWhereUniqueInput[]
+}
+
 export type NullableDateTimeFieldUpdateOperationsInput = {
   set?: Date | string | null
+}
+
+export type OrganizationPostUpdateOneWithoutRepliesNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationPostCreateWithoutRepliesInput, Prisma.OrganizationPostUncheckedCreateWithoutRepliesInput>
+  connectOrCreate?: Prisma.OrganizationPostCreateOrConnectWithoutRepliesInput
+  upsert?: Prisma.OrganizationPostUpsertWithoutRepliesInput
+  disconnect?: Prisma.OrganizationPostWhereInput | boolean
+  delete?: Prisma.OrganizationPostWhereInput | boolean
+  connect?: Prisma.OrganizationPostWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationPostUpdateToOneWithWhereWithoutRepliesInput, Prisma.OrganizationPostUpdateWithoutRepliesInput>, Prisma.OrganizationPostUncheckedUpdateWithoutRepliesInput>
+}
+
+export type OrganizationPostUpdateManyWithoutParentNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationPostCreateWithoutParentInput, Prisma.OrganizationPostUncheckedCreateWithoutParentInput> | Prisma.OrganizationPostCreateWithoutParentInput[] | Prisma.OrganizationPostUncheckedCreateWithoutParentInput[]
+  connectOrCreate?: Prisma.OrganizationPostCreateOrConnectWithoutParentInput | Prisma.OrganizationPostCreateOrConnectWithoutParentInput[]
+  upsert?: Prisma.OrganizationPostUpsertWithWhereUniqueWithoutParentInput | Prisma.OrganizationPostUpsertWithWhereUniqueWithoutParentInput[]
+  createMany?: Prisma.OrganizationPostCreateManyParentInputEnvelope
+  set?: Prisma.OrganizationPostWhereUniqueInput | Prisma.OrganizationPostWhereUniqueInput[]
+  disconnect?: Prisma.OrganizationPostWhereUniqueInput | Prisma.OrganizationPostWhereUniqueInput[]
+  delete?: Prisma.OrganizationPostWhereUniqueInput | Prisma.OrganizationPostWhereUniqueInput[]
+  connect?: Prisma.OrganizationPostWhereUniqueInput | Prisma.OrganizationPostWhereUniqueInput[]
+  update?: Prisma.OrganizationPostUpdateWithWhereUniqueWithoutParentInput | Prisma.OrganizationPostUpdateWithWhereUniqueWithoutParentInput[]
+  updateMany?: Prisma.OrganizationPostUpdateManyWithWhereWithoutParentInput | Prisma.OrganizationPostUpdateManyWithWhereWithoutParentInput[]
+  deleteMany?: Prisma.OrganizationPostScalarWhereInput | Prisma.OrganizationPostScalarWhereInput[]
+}
+
+export type OrganizationPostUpdateOneWithoutRepostsNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationPostCreateWithoutRepostsInput, Prisma.OrganizationPostUncheckedCreateWithoutRepostsInput>
+  connectOrCreate?: Prisma.OrganizationPostCreateOrConnectWithoutRepostsInput
+  upsert?: Prisma.OrganizationPostUpsertWithoutRepostsInput
+  disconnect?: Prisma.OrganizationPostWhereInput | boolean
+  delete?: Prisma.OrganizationPostWhereInput | boolean
+  connect?: Prisma.OrganizationPostWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationPostUpdateToOneWithWhereWithoutRepostsInput, Prisma.OrganizationPostUpdateWithoutRepostsInput>, Prisma.OrganizationPostUncheckedUpdateWithoutRepostsInput>
+}
+
+export type OrganizationPostUpdateManyWithoutRepostOfNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationPostCreateWithoutRepostOfInput, Prisma.OrganizationPostUncheckedCreateWithoutRepostOfInput> | Prisma.OrganizationPostCreateWithoutRepostOfInput[] | Prisma.OrganizationPostUncheckedCreateWithoutRepostOfInput[]
+  connectOrCreate?: Prisma.OrganizationPostCreateOrConnectWithoutRepostOfInput | Prisma.OrganizationPostCreateOrConnectWithoutRepostOfInput[]
+  upsert?: Prisma.OrganizationPostUpsertWithWhereUniqueWithoutRepostOfInput | Prisma.OrganizationPostUpsertWithWhereUniqueWithoutRepostOfInput[]
+  createMany?: Prisma.OrganizationPostCreateManyRepostOfInputEnvelope
+  set?: Prisma.OrganizationPostWhereUniqueInput | Prisma.OrganizationPostWhereUniqueInput[]
+  disconnect?: Prisma.OrganizationPostWhereUniqueInput | Prisma.OrganizationPostWhereUniqueInput[]
+  delete?: Prisma.OrganizationPostWhereUniqueInput | Prisma.OrganizationPostWhereUniqueInput[]
+  connect?: Prisma.OrganizationPostWhereUniqueInput | Prisma.OrganizationPostWhereUniqueInput[]
+  update?: Prisma.OrganizationPostUpdateWithWhereUniqueWithoutRepostOfInput | Prisma.OrganizationPostUpdateWithWhereUniqueWithoutRepostOfInput[]
+  updateMany?: Prisma.OrganizationPostUpdateManyWithWhereWithoutRepostOfInput | Prisma.OrganizationPostUpdateManyWithWhereWithoutRepostOfInput[]
+  deleteMany?: Prisma.OrganizationPostScalarWhereInput | Prisma.OrganizationPostScalarWhereInput[]
+}
+
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type OrganizationPostUncheckedUpdateManyWithoutParentNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationPostCreateWithoutParentInput, Prisma.OrganizationPostUncheckedCreateWithoutParentInput> | Prisma.OrganizationPostCreateWithoutParentInput[] | Prisma.OrganizationPostUncheckedCreateWithoutParentInput[]
+  connectOrCreate?: Prisma.OrganizationPostCreateOrConnectWithoutParentInput | Prisma.OrganizationPostCreateOrConnectWithoutParentInput[]
+  upsert?: Prisma.OrganizationPostUpsertWithWhereUniqueWithoutParentInput | Prisma.OrganizationPostUpsertWithWhereUniqueWithoutParentInput[]
+  createMany?: Prisma.OrganizationPostCreateManyParentInputEnvelope
+  set?: Prisma.OrganizationPostWhereUniqueInput | Prisma.OrganizationPostWhereUniqueInput[]
+  disconnect?: Prisma.OrganizationPostWhereUniqueInput | Prisma.OrganizationPostWhereUniqueInput[]
+  delete?: Prisma.OrganizationPostWhereUniqueInput | Prisma.OrganizationPostWhereUniqueInput[]
+  connect?: Prisma.OrganizationPostWhereUniqueInput | Prisma.OrganizationPostWhereUniqueInput[]
+  update?: Prisma.OrganizationPostUpdateWithWhereUniqueWithoutParentInput | Prisma.OrganizationPostUpdateWithWhereUniqueWithoutParentInput[]
+  updateMany?: Prisma.OrganizationPostUpdateManyWithWhereWithoutParentInput | Prisma.OrganizationPostUpdateManyWithWhereWithoutParentInput[]
+  deleteMany?: Prisma.OrganizationPostScalarWhereInput | Prisma.OrganizationPostScalarWhereInput[]
+}
+
+export type OrganizationPostUncheckedUpdateManyWithoutRepostOfNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationPostCreateWithoutRepostOfInput, Prisma.OrganizationPostUncheckedCreateWithoutRepostOfInput> | Prisma.OrganizationPostCreateWithoutRepostOfInput[] | Prisma.OrganizationPostUncheckedCreateWithoutRepostOfInput[]
+  connectOrCreate?: Prisma.OrganizationPostCreateOrConnectWithoutRepostOfInput | Prisma.OrganizationPostCreateOrConnectWithoutRepostOfInput[]
+  upsert?: Prisma.OrganizationPostUpsertWithWhereUniqueWithoutRepostOfInput | Prisma.OrganizationPostUpsertWithWhereUniqueWithoutRepostOfInput[]
+  createMany?: Prisma.OrganizationPostCreateManyRepostOfInputEnvelope
+  set?: Prisma.OrganizationPostWhereUniqueInput | Prisma.OrganizationPostWhereUniqueInput[]
+  disconnect?: Prisma.OrganizationPostWhereUniqueInput | Prisma.OrganizationPostWhereUniqueInput[]
+  delete?: Prisma.OrganizationPostWhereUniqueInput | Prisma.OrganizationPostWhereUniqueInput[]
+  connect?: Prisma.OrganizationPostWhereUniqueInput | Prisma.OrganizationPostWhereUniqueInput[]
+  update?: Prisma.OrganizationPostUpdateWithWhereUniqueWithoutRepostOfInput | Prisma.OrganizationPostUpdateWithWhereUniqueWithoutRepostOfInput[]
+  updateMany?: Prisma.OrganizationPostUpdateManyWithWhereWithoutRepostOfInput | Prisma.OrganizationPostUpdateManyWithWhereWithoutRepostOfInput[]
+  deleteMany?: Prisma.OrganizationPostScalarWhereInput | Prisma.OrganizationPostScalarWhereInput[]
 }
 
 export type OrganizationPostCreateNestedOneWithoutLikesInput = {
@@ -602,6 +847,34 @@ export type OrganizationPostUpdateOneRequiredWithoutLikesNestedInput = {
   upsert?: Prisma.OrganizationPostUpsertWithoutLikesInput
   connect?: Prisma.OrganizationPostWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationPostUpdateToOneWithWhereWithoutLikesInput, Prisma.OrganizationPostUpdateWithoutLikesInput>, Prisma.OrganizationPostUncheckedUpdateWithoutLikesInput>
+}
+
+export type OrganizationPostCreateNestedOneWithoutSavesInput = {
+  create?: Prisma.XOR<Prisma.OrganizationPostCreateWithoutSavesInput, Prisma.OrganizationPostUncheckedCreateWithoutSavesInput>
+  connectOrCreate?: Prisma.OrganizationPostCreateOrConnectWithoutSavesInput
+  connect?: Prisma.OrganizationPostWhereUniqueInput
+}
+
+export type OrganizationPostUpdateOneRequiredWithoutSavesNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationPostCreateWithoutSavesInput, Prisma.OrganizationPostUncheckedCreateWithoutSavesInput>
+  connectOrCreate?: Prisma.OrganizationPostCreateOrConnectWithoutSavesInput
+  upsert?: Prisma.OrganizationPostUpsertWithoutSavesInput
+  connect?: Prisma.OrganizationPostWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationPostUpdateToOneWithWhereWithoutSavesInput, Prisma.OrganizationPostUpdateWithoutSavesInput>, Prisma.OrganizationPostUncheckedUpdateWithoutSavesInput>
+}
+
+export type OrganizationPostCreateNestedOneWithoutHashtagsInput = {
+  create?: Prisma.XOR<Prisma.OrganizationPostCreateWithoutHashtagsInput, Prisma.OrganizationPostUncheckedCreateWithoutHashtagsInput>
+  connectOrCreate?: Prisma.OrganizationPostCreateOrConnectWithoutHashtagsInput
+  connect?: Prisma.OrganizationPostWhereUniqueInput
+}
+
+export type OrganizationPostUpdateOneRequiredWithoutHashtagsNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationPostCreateWithoutHashtagsInput, Prisma.OrganizationPostUncheckedCreateWithoutHashtagsInput>
+  connectOrCreate?: Prisma.OrganizationPostCreateOrConnectWithoutHashtagsInput
+  upsert?: Prisma.OrganizationPostUpsertWithoutHashtagsInput
+  connect?: Prisma.OrganizationPostWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationPostUpdateToOneWithWhereWithoutHashtagsInput, Prisma.OrganizationPostUpdateWithoutHashtagsInput>, Prisma.OrganizationPostUncheckedUpdateWithoutHashtagsInput>
 }
 
 export type OrganizationPostCreateNestedManyWithoutUserInput = {
@@ -652,12 +925,19 @@ export type OrganizationPostCreateWithoutOrganizationInput = {
   pinned?: boolean
   likesCount?: number
   commentsCount?: number
+  repostCount?: number
   deletedAt?: Date | string | null
   hiddenAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCommunityPostsInput
+  parent?: Prisma.OrganizationPostCreateNestedOneWithoutRepliesInput
+  replies?: Prisma.OrganizationPostCreateNestedManyWithoutParentInput
+  repostOf?: Prisma.OrganizationPostCreateNestedOneWithoutRepostsInput
+  reposts?: Prisma.OrganizationPostCreateNestedManyWithoutRepostOfInput
   likes?: Prisma.OrganizationPostLikeCreateNestedManyWithoutPostInput
+  saves?: Prisma.OrganizationPostSaveCreateNestedManyWithoutPostInput
+  hashtags?: Prisma.OrganizationPostHashtagCreateNestedManyWithoutPostInput
 }
 
 export type OrganizationPostUncheckedCreateWithoutOrganizationInput = {
@@ -666,13 +946,20 @@ export type OrganizationPostUncheckedCreateWithoutOrganizationInput = {
   content: string
   images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   pinned?: boolean
+  parentId?: number | null
+  repostOfId?: number | null
   likesCount?: number
   commentsCount?: number
+  repostCount?: number
   deletedAt?: Date | string | null
   hiddenAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  replies?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutParentInput
+  reposts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutRepostOfInput
   likes?: Prisma.OrganizationPostLikeUncheckedCreateNestedManyWithoutPostInput
+  saves?: Prisma.OrganizationPostSaveUncheckedCreateNestedManyWithoutPostInput
+  hashtags?: Prisma.OrganizationPostHashtagUncheckedCreateNestedManyWithoutPostInput
 }
 
 export type OrganizationPostCreateOrConnectWithoutOrganizationInput = {
@@ -706,17 +993,362 @@ export type OrganizationPostScalarWhereInput = {
   OR?: Prisma.OrganizationPostScalarWhereInput[]
   NOT?: Prisma.OrganizationPostScalarWhereInput | Prisma.OrganizationPostScalarWhereInput[]
   id?: Prisma.IntFilter<"OrganizationPost"> | number
-  organizationId?: Prisma.IntFilter<"OrganizationPost"> | number
+  organizationId?: Prisma.IntNullableFilter<"OrganizationPost"> | number | null
   userId?: Prisma.IntFilter<"OrganizationPost"> | number
   content?: Prisma.StringFilter<"OrganizationPost"> | string
   images?: Prisma.JsonNullableFilter<"OrganizationPost">
   pinned?: Prisma.BoolFilter<"OrganizationPost"> | boolean
+  parentId?: Prisma.IntNullableFilter<"OrganizationPost"> | number | null
+  repostOfId?: Prisma.IntNullableFilter<"OrganizationPost"> | number | null
   likesCount?: Prisma.IntFilter<"OrganizationPost"> | number
   commentsCount?: Prisma.IntFilter<"OrganizationPost"> | number
+  repostCount?: Prisma.IntFilter<"OrganizationPost"> | number
   deletedAt?: Prisma.DateTimeNullableFilter<"OrganizationPost"> | Date | string | null
   hiddenAt?: Prisma.DateTimeNullableFilter<"OrganizationPost"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"OrganizationPost"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"OrganizationPost"> | Date | string
+}
+
+export type OrganizationPostCreateWithoutRepliesInput = {
+  content: string
+  images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  pinned?: boolean
+  likesCount?: number
+  commentsCount?: number
+  repostCount?: number
+  deletedAt?: Date | string | null
+  hiddenAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization?: Prisma.OrganizationCreateNestedOneWithoutCommunityPostsInput
+  user: Prisma.UserCreateNestedOneWithoutCommunityPostsInput
+  parent?: Prisma.OrganizationPostCreateNestedOneWithoutRepliesInput
+  repostOf?: Prisma.OrganizationPostCreateNestedOneWithoutRepostsInput
+  reposts?: Prisma.OrganizationPostCreateNestedManyWithoutRepostOfInput
+  likes?: Prisma.OrganizationPostLikeCreateNestedManyWithoutPostInput
+  saves?: Prisma.OrganizationPostSaveCreateNestedManyWithoutPostInput
+  hashtags?: Prisma.OrganizationPostHashtagCreateNestedManyWithoutPostInput
+}
+
+export type OrganizationPostUncheckedCreateWithoutRepliesInput = {
+  id?: number
+  organizationId?: number | null
+  userId: number
+  content: string
+  images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  pinned?: boolean
+  parentId?: number | null
+  repostOfId?: number | null
+  likesCount?: number
+  commentsCount?: number
+  repostCount?: number
+  deletedAt?: Date | string | null
+  hiddenAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  reposts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutRepostOfInput
+  likes?: Prisma.OrganizationPostLikeUncheckedCreateNestedManyWithoutPostInput
+  saves?: Prisma.OrganizationPostSaveUncheckedCreateNestedManyWithoutPostInput
+  hashtags?: Prisma.OrganizationPostHashtagUncheckedCreateNestedManyWithoutPostInput
+}
+
+export type OrganizationPostCreateOrConnectWithoutRepliesInput = {
+  where: Prisma.OrganizationPostWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationPostCreateWithoutRepliesInput, Prisma.OrganizationPostUncheckedCreateWithoutRepliesInput>
+}
+
+export type OrganizationPostCreateWithoutParentInput = {
+  content: string
+  images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  pinned?: boolean
+  likesCount?: number
+  commentsCount?: number
+  repostCount?: number
+  deletedAt?: Date | string | null
+  hiddenAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization?: Prisma.OrganizationCreateNestedOneWithoutCommunityPostsInput
+  user: Prisma.UserCreateNestedOneWithoutCommunityPostsInput
+  replies?: Prisma.OrganizationPostCreateNestedManyWithoutParentInput
+  repostOf?: Prisma.OrganizationPostCreateNestedOneWithoutRepostsInput
+  reposts?: Prisma.OrganizationPostCreateNestedManyWithoutRepostOfInput
+  likes?: Prisma.OrganizationPostLikeCreateNestedManyWithoutPostInput
+  saves?: Prisma.OrganizationPostSaveCreateNestedManyWithoutPostInput
+  hashtags?: Prisma.OrganizationPostHashtagCreateNestedManyWithoutPostInput
+}
+
+export type OrganizationPostUncheckedCreateWithoutParentInput = {
+  id?: number
+  organizationId?: number | null
+  userId: number
+  content: string
+  images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  pinned?: boolean
+  repostOfId?: number | null
+  likesCount?: number
+  commentsCount?: number
+  repostCount?: number
+  deletedAt?: Date | string | null
+  hiddenAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  replies?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutParentInput
+  reposts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutRepostOfInput
+  likes?: Prisma.OrganizationPostLikeUncheckedCreateNestedManyWithoutPostInput
+  saves?: Prisma.OrganizationPostSaveUncheckedCreateNestedManyWithoutPostInput
+  hashtags?: Prisma.OrganizationPostHashtagUncheckedCreateNestedManyWithoutPostInput
+}
+
+export type OrganizationPostCreateOrConnectWithoutParentInput = {
+  where: Prisma.OrganizationPostWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationPostCreateWithoutParentInput, Prisma.OrganizationPostUncheckedCreateWithoutParentInput>
+}
+
+export type OrganizationPostCreateManyParentInputEnvelope = {
+  data: Prisma.OrganizationPostCreateManyParentInput | Prisma.OrganizationPostCreateManyParentInput[]
+  skipDuplicates?: boolean
+}
+
+export type OrganizationPostCreateWithoutRepostsInput = {
+  content: string
+  images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  pinned?: boolean
+  likesCount?: number
+  commentsCount?: number
+  repostCount?: number
+  deletedAt?: Date | string | null
+  hiddenAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization?: Prisma.OrganizationCreateNestedOneWithoutCommunityPostsInput
+  user: Prisma.UserCreateNestedOneWithoutCommunityPostsInput
+  parent?: Prisma.OrganizationPostCreateNestedOneWithoutRepliesInput
+  replies?: Prisma.OrganizationPostCreateNestedManyWithoutParentInput
+  repostOf?: Prisma.OrganizationPostCreateNestedOneWithoutRepostsInput
+  likes?: Prisma.OrganizationPostLikeCreateNestedManyWithoutPostInput
+  saves?: Prisma.OrganizationPostSaveCreateNestedManyWithoutPostInput
+  hashtags?: Prisma.OrganizationPostHashtagCreateNestedManyWithoutPostInput
+}
+
+export type OrganizationPostUncheckedCreateWithoutRepostsInput = {
+  id?: number
+  organizationId?: number | null
+  userId: number
+  content: string
+  images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  pinned?: boolean
+  parentId?: number | null
+  repostOfId?: number | null
+  likesCount?: number
+  commentsCount?: number
+  repostCount?: number
+  deletedAt?: Date | string | null
+  hiddenAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  replies?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutParentInput
+  likes?: Prisma.OrganizationPostLikeUncheckedCreateNestedManyWithoutPostInput
+  saves?: Prisma.OrganizationPostSaveUncheckedCreateNestedManyWithoutPostInput
+  hashtags?: Prisma.OrganizationPostHashtagUncheckedCreateNestedManyWithoutPostInput
+}
+
+export type OrganizationPostCreateOrConnectWithoutRepostsInput = {
+  where: Prisma.OrganizationPostWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationPostCreateWithoutRepostsInput, Prisma.OrganizationPostUncheckedCreateWithoutRepostsInput>
+}
+
+export type OrganizationPostCreateWithoutRepostOfInput = {
+  content: string
+  images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  pinned?: boolean
+  likesCount?: number
+  commentsCount?: number
+  repostCount?: number
+  deletedAt?: Date | string | null
+  hiddenAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization?: Prisma.OrganizationCreateNestedOneWithoutCommunityPostsInput
+  user: Prisma.UserCreateNestedOneWithoutCommunityPostsInput
+  parent?: Prisma.OrganizationPostCreateNestedOneWithoutRepliesInput
+  replies?: Prisma.OrganizationPostCreateNestedManyWithoutParentInput
+  reposts?: Prisma.OrganizationPostCreateNestedManyWithoutRepostOfInput
+  likes?: Prisma.OrganizationPostLikeCreateNestedManyWithoutPostInput
+  saves?: Prisma.OrganizationPostSaveCreateNestedManyWithoutPostInput
+  hashtags?: Prisma.OrganizationPostHashtagCreateNestedManyWithoutPostInput
+}
+
+export type OrganizationPostUncheckedCreateWithoutRepostOfInput = {
+  id?: number
+  organizationId?: number | null
+  userId: number
+  content: string
+  images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  pinned?: boolean
+  parentId?: number | null
+  likesCount?: number
+  commentsCount?: number
+  repostCount?: number
+  deletedAt?: Date | string | null
+  hiddenAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  replies?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutParentInput
+  reposts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutRepostOfInput
+  likes?: Prisma.OrganizationPostLikeUncheckedCreateNestedManyWithoutPostInput
+  saves?: Prisma.OrganizationPostSaveUncheckedCreateNestedManyWithoutPostInput
+  hashtags?: Prisma.OrganizationPostHashtagUncheckedCreateNestedManyWithoutPostInput
+}
+
+export type OrganizationPostCreateOrConnectWithoutRepostOfInput = {
+  where: Prisma.OrganizationPostWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationPostCreateWithoutRepostOfInput, Prisma.OrganizationPostUncheckedCreateWithoutRepostOfInput>
+}
+
+export type OrganizationPostCreateManyRepostOfInputEnvelope = {
+  data: Prisma.OrganizationPostCreateManyRepostOfInput | Prisma.OrganizationPostCreateManyRepostOfInput[]
+  skipDuplicates?: boolean
+}
+
+export type OrganizationPostUpsertWithoutRepliesInput = {
+  update: Prisma.XOR<Prisma.OrganizationPostUpdateWithoutRepliesInput, Prisma.OrganizationPostUncheckedUpdateWithoutRepliesInput>
+  create: Prisma.XOR<Prisma.OrganizationPostCreateWithoutRepliesInput, Prisma.OrganizationPostUncheckedCreateWithoutRepliesInput>
+  where?: Prisma.OrganizationPostWhereInput
+}
+
+export type OrganizationPostUpdateToOneWithWhereWithoutRepliesInput = {
+  where?: Prisma.OrganizationPostWhereInput
+  data: Prisma.XOR<Prisma.OrganizationPostUpdateWithoutRepliesInput, Prisma.OrganizationPostUncheckedUpdateWithoutRepliesInput>
+}
+
+export type OrganizationPostUpdateWithoutRepliesInput = {
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  likesCount?: Prisma.IntFieldUpdateOperationsInput | number
+  commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  repostCount?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneWithoutCommunityPostsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutCommunityPostsNestedInput
+  parent?: Prisma.OrganizationPostUpdateOneWithoutRepliesNestedInput
+  repostOf?: Prisma.OrganizationPostUpdateOneWithoutRepostsNestedInput
+  reposts?: Prisma.OrganizationPostUpdateManyWithoutRepostOfNestedInput
+  likes?: Prisma.OrganizationPostLikeUpdateManyWithoutPostNestedInput
+  saves?: Prisma.OrganizationPostSaveUpdateManyWithoutPostNestedInput
+  hashtags?: Prisma.OrganizationPostHashtagUpdateManyWithoutPostNestedInput
+}
+
+export type OrganizationPostUncheckedUpdateWithoutRepliesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  parentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  repostOfId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  likesCount?: Prisma.IntFieldUpdateOperationsInput | number
+  commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  repostCount?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reposts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutRepostOfNestedInput
+  likes?: Prisma.OrganizationPostLikeUncheckedUpdateManyWithoutPostNestedInput
+  saves?: Prisma.OrganizationPostSaveUncheckedUpdateManyWithoutPostNestedInput
+  hashtags?: Prisma.OrganizationPostHashtagUncheckedUpdateManyWithoutPostNestedInput
+}
+
+export type OrganizationPostUpsertWithWhereUniqueWithoutParentInput = {
+  where: Prisma.OrganizationPostWhereUniqueInput
+  update: Prisma.XOR<Prisma.OrganizationPostUpdateWithoutParentInput, Prisma.OrganizationPostUncheckedUpdateWithoutParentInput>
+  create: Prisma.XOR<Prisma.OrganizationPostCreateWithoutParentInput, Prisma.OrganizationPostUncheckedCreateWithoutParentInput>
+}
+
+export type OrganizationPostUpdateWithWhereUniqueWithoutParentInput = {
+  where: Prisma.OrganizationPostWhereUniqueInput
+  data: Prisma.XOR<Prisma.OrganizationPostUpdateWithoutParentInput, Prisma.OrganizationPostUncheckedUpdateWithoutParentInput>
+}
+
+export type OrganizationPostUpdateManyWithWhereWithoutParentInput = {
+  where: Prisma.OrganizationPostScalarWhereInput
+  data: Prisma.XOR<Prisma.OrganizationPostUpdateManyMutationInput, Prisma.OrganizationPostUncheckedUpdateManyWithoutParentInput>
+}
+
+export type OrganizationPostUpsertWithoutRepostsInput = {
+  update: Prisma.XOR<Prisma.OrganizationPostUpdateWithoutRepostsInput, Prisma.OrganizationPostUncheckedUpdateWithoutRepostsInput>
+  create: Prisma.XOR<Prisma.OrganizationPostCreateWithoutRepostsInput, Prisma.OrganizationPostUncheckedCreateWithoutRepostsInput>
+  where?: Prisma.OrganizationPostWhereInput
+}
+
+export type OrganizationPostUpdateToOneWithWhereWithoutRepostsInput = {
+  where?: Prisma.OrganizationPostWhereInput
+  data: Prisma.XOR<Prisma.OrganizationPostUpdateWithoutRepostsInput, Prisma.OrganizationPostUncheckedUpdateWithoutRepostsInput>
+}
+
+export type OrganizationPostUpdateWithoutRepostsInput = {
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  likesCount?: Prisma.IntFieldUpdateOperationsInput | number
+  commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  repostCount?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneWithoutCommunityPostsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutCommunityPostsNestedInput
+  parent?: Prisma.OrganizationPostUpdateOneWithoutRepliesNestedInput
+  replies?: Prisma.OrganizationPostUpdateManyWithoutParentNestedInput
+  repostOf?: Prisma.OrganizationPostUpdateOneWithoutRepostsNestedInput
+  likes?: Prisma.OrganizationPostLikeUpdateManyWithoutPostNestedInput
+  saves?: Prisma.OrganizationPostSaveUpdateManyWithoutPostNestedInput
+  hashtags?: Prisma.OrganizationPostHashtagUpdateManyWithoutPostNestedInput
+}
+
+export type OrganizationPostUncheckedUpdateWithoutRepostsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  parentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  repostOfId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  likesCount?: Prisma.IntFieldUpdateOperationsInput | number
+  commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  repostCount?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  replies?: Prisma.OrganizationPostUncheckedUpdateManyWithoutParentNestedInput
+  likes?: Prisma.OrganizationPostLikeUncheckedUpdateManyWithoutPostNestedInput
+  saves?: Prisma.OrganizationPostSaveUncheckedUpdateManyWithoutPostNestedInput
+  hashtags?: Prisma.OrganizationPostHashtagUncheckedUpdateManyWithoutPostNestedInput
+}
+
+export type OrganizationPostUpsertWithWhereUniqueWithoutRepostOfInput = {
+  where: Prisma.OrganizationPostWhereUniqueInput
+  update: Prisma.XOR<Prisma.OrganizationPostUpdateWithoutRepostOfInput, Prisma.OrganizationPostUncheckedUpdateWithoutRepostOfInput>
+  create: Prisma.XOR<Prisma.OrganizationPostCreateWithoutRepostOfInput, Prisma.OrganizationPostUncheckedCreateWithoutRepostOfInput>
+}
+
+export type OrganizationPostUpdateWithWhereUniqueWithoutRepostOfInput = {
+  where: Prisma.OrganizationPostWhereUniqueInput
+  data: Prisma.XOR<Prisma.OrganizationPostUpdateWithoutRepostOfInput, Prisma.OrganizationPostUncheckedUpdateWithoutRepostOfInput>
+}
+
+export type OrganizationPostUpdateManyWithWhereWithoutRepostOfInput = {
+  where: Prisma.OrganizationPostScalarWhereInput
+  data: Prisma.XOR<Prisma.OrganizationPostUpdateManyMutationInput, Prisma.OrganizationPostUncheckedUpdateManyWithoutRepostOfInput>
 }
 
 export type OrganizationPostCreateWithoutLikesInput = {
@@ -725,27 +1357,41 @@ export type OrganizationPostCreateWithoutLikesInput = {
   pinned?: boolean
   likesCount?: number
   commentsCount?: number
+  repostCount?: number
   deletedAt?: Date | string | null
   hiddenAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  organization: Prisma.OrganizationCreateNestedOneWithoutCommunityPostsInput
+  organization?: Prisma.OrganizationCreateNestedOneWithoutCommunityPostsInput
   user: Prisma.UserCreateNestedOneWithoutCommunityPostsInput
+  parent?: Prisma.OrganizationPostCreateNestedOneWithoutRepliesInput
+  replies?: Prisma.OrganizationPostCreateNestedManyWithoutParentInput
+  repostOf?: Prisma.OrganizationPostCreateNestedOneWithoutRepostsInput
+  reposts?: Prisma.OrganizationPostCreateNestedManyWithoutRepostOfInput
+  saves?: Prisma.OrganizationPostSaveCreateNestedManyWithoutPostInput
+  hashtags?: Prisma.OrganizationPostHashtagCreateNestedManyWithoutPostInput
 }
 
 export type OrganizationPostUncheckedCreateWithoutLikesInput = {
   id?: number
-  organizationId: number
+  organizationId?: number | null
   userId: number
   content: string
   images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   pinned?: boolean
+  parentId?: number | null
+  repostOfId?: number | null
   likesCount?: number
   commentsCount?: number
+  repostCount?: number
   deletedAt?: Date | string | null
   hiddenAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  replies?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutParentInput
+  reposts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutRepostOfInput
+  saves?: Prisma.OrganizationPostSaveUncheckedCreateNestedManyWithoutPostInput
+  hashtags?: Prisma.OrganizationPostHashtagUncheckedCreateNestedManyWithoutPostInput
 }
 
 export type OrganizationPostCreateOrConnectWithoutLikesInput = {
@@ -770,27 +1416,245 @@ export type OrganizationPostUpdateWithoutLikesInput = {
   pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   likesCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  repostCount?: Prisma.IntFieldUpdateOperationsInput | number
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  organization?: Prisma.OrganizationUpdateOneRequiredWithoutCommunityPostsNestedInput
+  organization?: Prisma.OrganizationUpdateOneWithoutCommunityPostsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutCommunityPostsNestedInput
+  parent?: Prisma.OrganizationPostUpdateOneWithoutRepliesNestedInput
+  replies?: Prisma.OrganizationPostUpdateManyWithoutParentNestedInput
+  repostOf?: Prisma.OrganizationPostUpdateOneWithoutRepostsNestedInput
+  reposts?: Prisma.OrganizationPostUpdateManyWithoutRepostOfNestedInput
+  saves?: Prisma.OrganizationPostSaveUpdateManyWithoutPostNestedInput
+  hashtags?: Prisma.OrganizationPostHashtagUpdateManyWithoutPostNestedInput
 }
 
 export type OrganizationPostUncheckedUpdateWithoutLikesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  organizationId?: Prisma.IntFieldUpdateOperationsInput | number
+  organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  parentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  repostOfId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  likesCount?: Prisma.IntFieldUpdateOperationsInput | number
+  commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  repostCount?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  replies?: Prisma.OrganizationPostUncheckedUpdateManyWithoutParentNestedInput
+  reposts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutRepostOfNestedInput
+  saves?: Prisma.OrganizationPostSaveUncheckedUpdateManyWithoutPostNestedInput
+  hashtags?: Prisma.OrganizationPostHashtagUncheckedUpdateManyWithoutPostNestedInput
+}
+
+export type OrganizationPostCreateWithoutSavesInput = {
+  content: string
+  images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  pinned?: boolean
+  likesCount?: number
+  commentsCount?: number
+  repostCount?: number
+  deletedAt?: Date | string | null
+  hiddenAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization?: Prisma.OrganizationCreateNestedOneWithoutCommunityPostsInput
+  user: Prisma.UserCreateNestedOneWithoutCommunityPostsInput
+  parent?: Prisma.OrganizationPostCreateNestedOneWithoutRepliesInput
+  replies?: Prisma.OrganizationPostCreateNestedManyWithoutParentInput
+  repostOf?: Prisma.OrganizationPostCreateNestedOneWithoutRepostsInput
+  reposts?: Prisma.OrganizationPostCreateNestedManyWithoutRepostOfInput
+  likes?: Prisma.OrganizationPostLikeCreateNestedManyWithoutPostInput
+  hashtags?: Prisma.OrganizationPostHashtagCreateNestedManyWithoutPostInput
+}
+
+export type OrganizationPostUncheckedCreateWithoutSavesInput = {
+  id?: number
+  organizationId?: number | null
+  userId: number
+  content: string
+  images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  pinned?: boolean
+  parentId?: number | null
+  repostOfId?: number | null
+  likesCount?: number
+  commentsCount?: number
+  repostCount?: number
+  deletedAt?: Date | string | null
+  hiddenAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  replies?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutParentInput
+  reposts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutRepostOfInput
+  likes?: Prisma.OrganizationPostLikeUncheckedCreateNestedManyWithoutPostInput
+  hashtags?: Prisma.OrganizationPostHashtagUncheckedCreateNestedManyWithoutPostInput
+}
+
+export type OrganizationPostCreateOrConnectWithoutSavesInput = {
+  where: Prisma.OrganizationPostWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationPostCreateWithoutSavesInput, Prisma.OrganizationPostUncheckedCreateWithoutSavesInput>
+}
+
+export type OrganizationPostUpsertWithoutSavesInput = {
+  update: Prisma.XOR<Prisma.OrganizationPostUpdateWithoutSavesInput, Prisma.OrganizationPostUncheckedUpdateWithoutSavesInput>
+  create: Prisma.XOR<Prisma.OrganizationPostCreateWithoutSavesInput, Prisma.OrganizationPostUncheckedCreateWithoutSavesInput>
+  where?: Prisma.OrganizationPostWhereInput
+}
+
+export type OrganizationPostUpdateToOneWithWhereWithoutSavesInput = {
+  where?: Prisma.OrganizationPostWhereInput
+  data: Prisma.XOR<Prisma.OrganizationPostUpdateWithoutSavesInput, Prisma.OrganizationPostUncheckedUpdateWithoutSavesInput>
+}
+
+export type OrganizationPostUpdateWithoutSavesInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   likesCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  repostCount?: Prisma.IntFieldUpdateOperationsInput | number
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneWithoutCommunityPostsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutCommunityPostsNestedInput
+  parent?: Prisma.OrganizationPostUpdateOneWithoutRepliesNestedInput
+  replies?: Prisma.OrganizationPostUpdateManyWithoutParentNestedInput
+  repostOf?: Prisma.OrganizationPostUpdateOneWithoutRepostsNestedInput
+  reposts?: Prisma.OrganizationPostUpdateManyWithoutRepostOfNestedInput
+  likes?: Prisma.OrganizationPostLikeUpdateManyWithoutPostNestedInput
+  hashtags?: Prisma.OrganizationPostHashtagUpdateManyWithoutPostNestedInput
+}
+
+export type OrganizationPostUncheckedUpdateWithoutSavesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  parentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  repostOfId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  likesCount?: Prisma.IntFieldUpdateOperationsInput | number
+  commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  repostCount?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  replies?: Prisma.OrganizationPostUncheckedUpdateManyWithoutParentNestedInput
+  reposts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutRepostOfNestedInput
+  likes?: Prisma.OrganizationPostLikeUncheckedUpdateManyWithoutPostNestedInput
+  hashtags?: Prisma.OrganizationPostHashtagUncheckedUpdateManyWithoutPostNestedInput
+}
+
+export type OrganizationPostCreateWithoutHashtagsInput = {
+  content: string
+  images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  pinned?: boolean
+  likesCount?: number
+  commentsCount?: number
+  repostCount?: number
+  deletedAt?: Date | string | null
+  hiddenAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization?: Prisma.OrganizationCreateNestedOneWithoutCommunityPostsInput
+  user: Prisma.UserCreateNestedOneWithoutCommunityPostsInput
+  parent?: Prisma.OrganizationPostCreateNestedOneWithoutRepliesInput
+  replies?: Prisma.OrganizationPostCreateNestedManyWithoutParentInput
+  repostOf?: Prisma.OrganizationPostCreateNestedOneWithoutRepostsInput
+  reposts?: Prisma.OrganizationPostCreateNestedManyWithoutRepostOfInput
+  likes?: Prisma.OrganizationPostLikeCreateNestedManyWithoutPostInput
+  saves?: Prisma.OrganizationPostSaveCreateNestedManyWithoutPostInput
+}
+
+export type OrganizationPostUncheckedCreateWithoutHashtagsInput = {
+  id?: number
+  organizationId?: number | null
+  userId: number
+  content: string
+  images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  pinned?: boolean
+  parentId?: number | null
+  repostOfId?: number | null
+  likesCount?: number
+  commentsCount?: number
+  repostCount?: number
+  deletedAt?: Date | string | null
+  hiddenAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  replies?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutParentInput
+  reposts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutRepostOfInput
+  likes?: Prisma.OrganizationPostLikeUncheckedCreateNestedManyWithoutPostInput
+  saves?: Prisma.OrganizationPostSaveUncheckedCreateNestedManyWithoutPostInput
+}
+
+export type OrganizationPostCreateOrConnectWithoutHashtagsInput = {
+  where: Prisma.OrganizationPostWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationPostCreateWithoutHashtagsInput, Prisma.OrganizationPostUncheckedCreateWithoutHashtagsInput>
+}
+
+export type OrganizationPostUpsertWithoutHashtagsInput = {
+  update: Prisma.XOR<Prisma.OrganizationPostUpdateWithoutHashtagsInput, Prisma.OrganizationPostUncheckedUpdateWithoutHashtagsInput>
+  create: Prisma.XOR<Prisma.OrganizationPostCreateWithoutHashtagsInput, Prisma.OrganizationPostUncheckedCreateWithoutHashtagsInput>
+  where?: Prisma.OrganizationPostWhereInput
+}
+
+export type OrganizationPostUpdateToOneWithWhereWithoutHashtagsInput = {
+  where?: Prisma.OrganizationPostWhereInput
+  data: Prisma.XOR<Prisma.OrganizationPostUpdateWithoutHashtagsInput, Prisma.OrganizationPostUncheckedUpdateWithoutHashtagsInput>
+}
+
+export type OrganizationPostUpdateWithoutHashtagsInput = {
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  likesCount?: Prisma.IntFieldUpdateOperationsInput | number
+  commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  repostCount?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneWithoutCommunityPostsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutCommunityPostsNestedInput
+  parent?: Prisma.OrganizationPostUpdateOneWithoutRepliesNestedInput
+  replies?: Prisma.OrganizationPostUpdateManyWithoutParentNestedInput
+  repostOf?: Prisma.OrganizationPostUpdateOneWithoutRepostsNestedInput
+  reposts?: Prisma.OrganizationPostUpdateManyWithoutRepostOfNestedInput
+  likes?: Prisma.OrganizationPostLikeUpdateManyWithoutPostNestedInput
+  saves?: Prisma.OrganizationPostSaveUpdateManyWithoutPostNestedInput
+}
+
+export type OrganizationPostUncheckedUpdateWithoutHashtagsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  parentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  repostOfId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  likesCount?: Prisma.IntFieldUpdateOperationsInput | number
+  commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  repostCount?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  replies?: Prisma.OrganizationPostUncheckedUpdateManyWithoutParentNestedInput
+  reposts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutRepostOfNestedInput
+  likes?: Prisma.OrganizationPostLikeUncheckedUpdateManyWithoutPostNestedInput
+  saves?: Prisma.OrganizationPostSaveUncheckedUpdateManyWithoutPostNestedInput
 }
 
 export type OrganizationPostCreateWithoutUserInput = {
@@ -799,27 +1663,41 @@ export type OrganizationPostCreateWithoutUserInput = {
   pinned?: boolean
   likesCount?: number
   commentsCount?: number
+  repostCount?: number
   deletedAt?: Date | string | null
   hiddenAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  organization: Prisma.OrganizationCreateNestedOneWithoutCommunityPostsInput
+  organization?: Prisma.OrganizationCreateNestedOneWithoutCommunityPostsInput
+  parent?: Prisma.OrganizationPostCreateNestedOneWithoutRepliesInput
+  replies?: Prisma.OrganizationPostCreateNestedManyWithoutParentInput
+  repostOf?: Prisma.OrganizationPostCreateNestedOneWithoutRepostsInput
+  reposts?: Prisma.OrganizationPostCreateNestedManyWithoutRepostOfInput
   likes?: Prisma.OrganizationPostLikeCreateNestedManyWithoutPostInput
+  saves?: Prisma.OrganizationPostSaveCreateNestedManyWithoutPostInput
+  hashtags?: Prisma.OrganizationPostHashtagCreateNestedManyWithoutPostInput
 }
 
 export type OrganizationPostUncheckedCreateWithoutUserInput = {
   id?: number
-  organizationId: number
+  organizationId?: number | null
   content: string
   images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   pinned?: boolean
+  parentId?: number | null
+  repostOfId?: number | null
   likesCount?: number
   commentsCount?: number
+  repostCount?: number
   deletedAt?: Date | string | null
   hiddenAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  replies?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutParentInput
+  reposts?: Prisma.OrganizationPostUncheckedCreateNestedManyWithoutRepostOfInput
   likes?: Prisma.OrganizationPostLikeUncheckedCreateNestedManyWithoutPostInput
+  saves?: Prisma.OrganizationPostSaveUncheckedCreateNestedManyWithoutPostInput
+  hashtags?: Prisma.OrganizationPostHashtagUncheckedCreateNestedManyWithoutPostInput
 }
 
 export type OrganizationPostCreateOrConnectWithoutUserInput = {
@@ -854,8 +1732,11 @@ export type OrganizationPostCreateManyOrganizationInput = {
   content: string
   images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   pinned?: boolean
+  parentId?: number | null
+  repostOfId?: number | null
   likesCount?: number
   commentsCount?: number
+  repostCount?: number
   deletedAt?: Date | string | null
   hiddenAt?: Date | string | null
   createdAt?: Date | string
@@ -868,12 +1749,19 @@ export type OrganizationPostUpdateWithoutOrganizationInput = {
   pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   likesCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  repostCount?: Prisma.IntFieldUpdateOperationsInput | number
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCommunityPostsNestedInput
+  parent?: Prisma.OrganizationPostUpdateOneWithoutRepliesNestedInput
+  replies?: Prisma.OrganizationPostUpdateManyWithoutParentNestedInput
+  repostOf?: Prisma.OrganizationPostUpdateOneWithoutRepostsNestedInput
+  reposts?: Prisma.OrganizationPostUpdateManyWithoutRepostOfNestedInput
   likes?: Prisma.OrganizationPostLikeUpdateManyWithoutPostNestedInput
+  saves?: Prisma.OrganizationPostSaveUpdateManyWithoutPostNestedInput
+  hashtags?: Prisma.OrganizationPostHashtagUpdateManyWithoutPostNestedInput
 }
 
 export type OrganizationPostUncheckedUpdateWithoutOrganizationInput = {
@@ -882,13 +1770,20 @@ export type OrganizationPostUncheckedUpdateWithoutOrganizationInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  parentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  repostOfId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   likesCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  repostCount?: Prisma.IntFieldUpdateOperationsInput | number
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  replies?: Prisma.OrganizationPostUncheckedUpdateManyWithoutParentNestedInput
+  reposts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutRepostOfNestedInput
   likes?: Prisma.OrganizationPostLikeUncheckedUpdateManyWithoutPostNestedInput
+  saves?: Prisma.OrganizationPostSaveUncheckedUpdateManyWithoutPostNestedInput
+  hashtags?: Prisma.OrganizationPostHashtagUncheckedUpdateManyWithoutPostNestedInput
 }
 
 export type OrganizationPostUncheckedUpdateManyWithoutOrganizationInput = {
@@ -897,8 +1792,165 @@ export type OrganizationPostUncheckedUpdateManyWithoutOrganizationInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  parentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  repostOfId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   likesCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  repostCount?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type OrganizationPostCreateManyParentInput = {
+  id?: number
+  organizationId?: number | null
+  userId: number
+  content: string
+  images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  pinned?: boolean
+  repostOfId?: number | null
+  likesCount?: number
+  commentsCount?: number
+  repostCount?: number
+  deletedAt?: Date | string | null
+  hiddenAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type OrganizationPostCreateManyRepostOfInput = {
+  id?: number
+  organizationId?: number | null
+  userId: number
+  content: string
+  images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  pinned?: boolean
+  parentId?: number | null
+  likesCount?: number
+  commentsCount?: number
+  repostCount?: number
+  deletedAt?: Date | string | null
+  hiddenAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type OrganizationPostUpdateWithoutParentInput = {
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  likesCount?: Prisma.IntFieldUpdateOperationsInput | number
+  commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  repostCount?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneWithoutCommunityPostsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutCommunityPostsNestedInput
+  replies?: Prisma.OrganizationPostUpdateManyWithoutParentNestedInput
+  repostOf?: Prisma.OrganizationPostUpdateOneWithoutRepostsNestedInput
+  reposts?: Prisma.OrganizationPostUpdateManyWithoutRepostOfNestedInput
+  likes?: Prisma.OrganizationPostLikeUpdateManyWithoutPostNestedInput
+  saves?: Prisma.OrganizationPostSaveUpdateManyWithoutPostNestedInput
+  hashtags?: Prisma.OrganizationPostHashtagUpdateManyWithoutPostNestedInput
+}
+
+export type OrganizationPostUncheckedUpdateWithoutParentInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  repostOfId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  likesCount?: Prisma.IntFieldUpdateOperationsInput | number
+  commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  repostCount?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  replies?: Prisma.OrganizationPostUncheckedUpdateManyWithoutParentNestedInput
+  reposts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutRepostOfNestedInput
+  likes?: Prisma.OrganizationPostLikeUncheckedUpdateManyWithoutPostNestedInput
+  saves?: Prisma.OrganizationPostSaveUncheckedUpdateManyWithoutPostNestedInput
+  hashtags?: Prisma.OrganizationPostHashtagUncheckedUpdateManyWithoutPostNestedInput
+}
+
+export type OrganizationPostUncheckedUpdateManyWithoutParentInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  repostOfId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  likesCount?: Prisma.IntFieldUpdateOperationsInput | number
+  commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  repostCount?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type OrganizationPostUpdateWithoutRepostOfInput = {
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  likesCount?: Prisma.IntFieldUpdateOperationsInput | number
+  commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  repostCount?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneWithoutCommunityPostsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutCommunityPostsNestedInput
+  parent?: Prisma.OrganizationPostUpdateOneWithoutRepliesNestedInput
+  replies?: Prisma.OrganizationPostUpdateManyWithoutParentNestedInput
+  reposts?: Prisma.OrganizationPostUpdateManyWithoutRepostOfNestedInput
+  likes?: Prisma.OrganizationPostLikeUpdateManyWithoutPostNestedInput
+  saves?: Prisma.OrganizationPostSaveUpdateManyWithoutPostNestedInput
+  hashtags?: Prisma.OrganizationPostHashtagUpdateManyWithoutPostNestedInput
+}
+
+export type OrganizationPostUncheckedUpdateWithoutRepostOfInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  parentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  likesCount?: Prisma.IntFieldUpdateOperationsInput | number
+  commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  repostCount?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  replies?: Prisma.OrganizationPostUncheckedUpdateManyWithoutParentNestedInput
+  reposts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutRepostOfNestedInput
+  likes?: Prisma.OrganizationPostLikeUncheckedUpdateManyWithoutPostNestedInput
+  saves?: Prisma.OrganizationPostSaveUncheckedUpdateManyWithoutPostNestedInput
+  hashtags?: Prisma.OrganizationPostHashtagUncheckedUpdateManyWithoutPostNestedInput
+}
+
+export type OrganizationPostUncheckedUpdateManyWithoutRepostOfInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  parentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  likesCount?: Prisma.IntFieldUpdateOperationsInput | number
+  commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  repostCount?: Prisma.IntFieldUpdateOperationsInput | number
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -907,12 +1959,15 @@ export type OrganizationPostUncheckedUpdateManyWithoutOrganizationInput = {
 
 export type OrganizationPostCreateManyUserInput = {
   id?: number
-  organizationId: number
+  organizationId?: number | null
   content: string
   images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   pinned?: boolean
+  parentId?: number | null
+  repostOfId?: number | null
   likesCount?: number
   commentsCount?: number
+  repostCount?: number
   deletedAt?: Date | string | null
   hiddenAt?: Date | string | null
   createdAt?: Date | string
@@ -925,37 +1980,54 @@ export type OrganizationPostUpdateWithoutUserInput = {
   pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   likesCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  repostCount?: Prisma.IntFieldUpdateOperationsInput | number
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  organization?: Prisma.OrganizationUpdateOneRequiredWithoutCommunityPostsNestedInput
+  organization?: Prisma.OrganizationUpdateOneWithoutCommunityPostsNestedInput
+  parent?: Prisma.OrganizationPostUpdateOneWithoutRepliesNestedInput
+  replies?: Prisma.OrganizationPostUpdateManyWithoutParentNestedInput
+  repostOf?: Prisma.OrganizationPostUpdateOneWithoutRepostsNestedInput
+  reposts?: Prisma.OrganizationPostUpdateManyWithoutRepostOfNestedInput
   likes?: Prisma.OrganizationPostLikeUpdateManyWithoutPostNestedInput
+  saves?: Prisma.OrganizationPostSaveUpdateManyWithoutPostNestedInput
+  hashtags?: Prisma.OrganizationPostHashtagUpdateManyWithoutPostNestedInput
 }
 
 export type OrganizationPostUncheckedUpdateWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  organizationId?: Prisma.IntFieldUpdateOperationsInput | number
+  organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   content?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  parentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  repostOfId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   likesCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  repostCount?: Prisma.IntFieldUpdateOperationsInput | number
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  replies?: Prisma.OrganizationPostUncheckedUpdateManyWithoutParentNestedInput
+  reposts?: Prisma.OrganizationPostUncheckedUpdateManyWithoutRepostOfNestedInput
   likes?: Prisma.OrganizationPostLikeUncheckedUpdateManyWithoutPostNestedInput
+  saves?: Prisma.OrganizationPostSaveUncheckedUpdateManyWithoutPostNestedInput
+  hashtags?: Prisma.OrganizationPostHashtagUncheckedUpdateManyWithoutPostNestedInput
 }
 
 export type OrganizationPostUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  organizationId?: Prisma.IntFieldUpdateOperationsInput | number
+  organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   content?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  parentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  repostOfId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   likesCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  repostCount?: Prisma.IntFieldUpdateOperationsInput | number
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -968,11 +2040,19 @@ export type OrganizationPostUncheckedUpdateManyWithoutUserInput = {
  */
 
 export type OrganizationPostCountOutputType = {
+  replies: number
+  reposts: number
   likes: number
+  saves: number
+  hashtags: number
 }
 
 export type OrganizationPostCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  replies?: boolean | OrganizationPostCountOutputTypeCountRepliesArgs
+  reposts?: boolean | OrganizationPostCountOutputTypeCountRepostsArgs
   likes?: boolean | OrganizationPostCountOutputTypeCountLikesArgs
+  saves?: boolean | OrganizationPostCountOutputTypeCountSavesArgs
+  hashtags?: boolean | OrganizationPostCountOutputTypeCountHashtagsArgs
 }
 
 /**
@@ -988,8 +2068,36 @@ export type OrganizationPostCountOutputTypeDefaultArgs<ExtArgs extends runtime.T
 /**
  * OrganizationPostCountOutputType without action
  */
+export type OrganizationPostCountOutputTypeCountRepliesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OrganizationPostWhereInput
+}
+
+/**
+ * OrganizationPostCountOutputType without action
+ */
+export type OrganizationPostCountOutputTypeCountRepostsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OrganizationPostWhereInput
+}
+
+/**
+ * OrganizationPostCountOutputType without action
+ */
 export type OrganizationPostCountOutputTypeCountLikesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.OrganizationPostLikeWhereInput
+}
+
+/**
+ * OrganizationPostCountOutputType without action
+ */
+export type OrganizationPostCountOutputTypeCountSavesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OrganizationPostSaveWhereInput
+}
+
+/**
+ * OrganizationPostCountOutputType without action
+ */
+export type OrganizationPostCountOutputTypeCountHashtagsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OrganizationPostHashtagWhereInput
 }
 
 
@@ -1000,15 +2108,24 @@ export type OrganizationPostSelect<ExtArgs extends runtime.Types.Extensions.Inte
   content?: boolean
   images?: boolean
   pinned?: boolean
+  parentId?: boolean
+  repostOfId?: boolean
   likesCount?: boolean
   commentsCount?: boolean
+  repostCount?: boolean
   deletedAt?: boolean
   hiddenAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
+  organization?: boolean | Prisma.OrganizationPost$organizationArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  parent?: boolean | Prisma.OrganizationPost$parentArgs<ExtArgs>
+  replies?: boolean | Prisma.OrganizationPost$repliesArgs<ExtArgs>
+  repostOf?: boolean | Prisma.OrganizationPost$repostOfArgs<ExtArgs>
+  reposts?: boolean | Prisma.OrganizationPost$repostsArgs<ExtArgs>
   likes?: boolean | Prisma.OrganizationPost$likesArgs<ExtArgs>
+  saves?: boolean | Prisma.OrganizationPost$savesArgs<ExtArgs>
+  hashtags?: boolean | Prisma.OrganizationPost$hashtagsArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationPostCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["organizationPost"]>
 
@@ -1019,14 +2136,19 @@ export type OrganizationPostSelectCreateManyAndReturn<ExtArgs extends runtime.Ty
   content?: boolean
   images?: boolean
   pinned?: boolean
+  parentId?: boolean
+  repostOfId?: boolean
   likesCount?: boolean
   commentsCount?: boolean
+  repostCount?: boolean
   deletedAt?: boolean
   hiddenAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
+  organization?: boolean | Prisma.OrganizationPost$organizationArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  parent?: boolean | Prisma.OrganizationPost$parentArgs<ExtArgs>
+  repostOf?: boolean | Prisma.OrganizationPost$repostOfArgs<ExtArgs>
 }, ExtArgs["result"]["organizationPost"]>
 
 export type OrganizationPostSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1036,14 +2158,19 @@ export type OrganizationPostSelectUpdateManyAndReturn<ExtArgs extends runtime.Ty
   content?: boolean
   images?: boolean
   pinned?: boolean
+  parentId?: boolean
+  repostOfId?: boolean
   likesCount?: boolean
   commentsCount?: boolean
+  repostCount?: boolean
   deletedAt?: boolean
   hiddenAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
+  organization?: boolean | Prisma.OrganizationPost$organizationArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  parent?: boolean | Prisma.OrganizationPost$parentArgs<ExtArgs>
+  repostOf?: boolean | Prisma.OrganizationPost$repostOfArgs<ExtArgs>
 }, ExtArgs["result"]["organizationPost"]>
 
 export type OrganizationPostSelectScalar = {
@@ -1053,46 +2180,68 @@ export type OrganizationPostSelectScalar = {
   content?: boolean
   images?: boolean
   pinned?: boolean
+  parentId?: boolean
+  repostOfId?: boolean
   likesCount?: boolean
   commentsCount?: boolean
+  repostCount?: boolean
   deletedAt?: boolean
   hiddenAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type OrganizationPostOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "userId" | "content" | "images" | "pinned" | "likesCount" | "commentsCount" | "deletedAt" | "hiddenAt" | "createdAt" | "updatedAt", ExtArgs["result"]["organizationPost"]>
+export type OrganizationPostOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "userId" | "content" | "images" | "pinned" | "parentId" | "repostOfId" | "likesCount" | "commentsCount" | "repostCount" | "deletedAt" | "hiddenAt" | "createdAt" | "updatedAt", ExtArgs["result"]["organizationPost"]>
 export type OrganizationPostInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
+  organization?: boolean | Prisma.OrganizationPost$organizationArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  parent?: boolean | Prisma.OrganizationPost$parentArgs<ExtArgs>
+  replies?: boolean | Prisma.OrganizationPost$repliesArgs<ExtArgs>
+  repostOf?: boolean | Prisma.OrganizationPost$repostOfArgs<ExtArgs>
+  reposts?: boolean | Prisma.OrganizationPost$repostsArgs<ExtArgs>
   likes?: boolean | Prisma.OrganizationPost$likesArgs<ExtArgs>
+  saves?: boolean | Prisma.OrganizationPost$savesArgs<ExtArgs>
+  hashtags?: boolean | Prisma.OrganizationPost$hashtagsArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationPostCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type OrganizationPostIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
+  organization?: boolean | Prisma.OrganizationPost$organizationArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  parent?: boolean | Prisma.OrganizationPost$parentArgs<ExtArgs>
+  repostOf?: boolean | Prisma.OrganizationPost$repostOfArgs<ExtArgs>
 }
 export type OrganizationPostIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
+  organization?: boolean | Prisma.OrganizationPost$organizationArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  parent?: boolean | Prisma.OrganizationPost$parentArgs<ExtArgs>
+  repostOf?: boolean | Prisma.OrganizationPost$repostOfArgs<ExtArgs>
 }
 
 export type $OrganizationPostPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "OrganizationPost"
   objects: {
-    organization: Prisma.$OrganizationPayload<ExtArgs>
+    organization: Prisma.$OrganizationPayload<ExtArgs> | null
     user: Prisma.$UserPayload<ExtArgs>
+    parent: Prisma.$OrganizationPostPayload<ExtArgs> | null
+    replies: Prisma.$OrganizationPostPayload<ExtArgs>[]
+    repostOf: Prisma.$OrganizationPostPayload<ExtArgs> | null
+    reposts: Prisma.$OrganizationPostPayload<ExtArgs>[]
     likes: Prisma.$OrganizationPostLikePayload<ExtArgs>[]
+    saves: Prisma.$OrganizationPostSavePayload<ExtArgs>[]
+    hashtags: Prisma.$OrganizationPostHashtagPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
-    organizationId: number
+    organizationId: number | null
     userId: number
     content: string
     images: runtime.JsonValue | null
     pinned: boolean
+    parentId: number | null
+    repostOfId: number | null
     likesCount: number
     commentsCount: number
+    repostCount: number
     deletedAt: Date | null
     hiddenAt: Date | null
     createdAt: Date
@@ -1491,9 +2640,15 @@ readonly fields: OrganizationPostFieldRefs;
  */
 export interface Prisma__OrganizationPostClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  organization<T extends Prisma.OrganizationDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationDefaultArgs<ExtArgs>>): Prisma.Prisma__OrganizationClient<runtime.Types.Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  organization<T extends Prisma.OrganizationPost$organizationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationPost$organizationArgs<ExtArgs>>): Prisma.Prisma__OrganizationClient<runtime.Types.Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  parent<T extends Prisma.OrganizationPost$parentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationPost$parentArgs<ExtArgs>>): Prisma.Prisma__OrganizationPostClient<runtime.Types.Result.GetResult<Prisma.$OrganizationPostPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  replies<T extends Prisma.OrganizationPost$repliesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationPost$repliesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrganizationPostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  repostOf<T extends Prisma.OrganizationPost$repostOfArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationPost$repostOfArgs<ExtArgs>>): Prisma.Prisma__OrganizationPostClient<runtime.Types.Result.GetResult<Prisma.$OrganizationPostPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  reposts<T extends Prisma.OrganizationPost$repostsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationPost$repostsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrganizationPostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   likes<T extends Prisma.OrganizationPost$likesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationPost$likesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrganizationPostLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  saves<T extends Prisma.OrganizationPost$savesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationPost$savesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrganizationPostSavePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  hashtags<T extends Prisma.OrganizationPost$hashtagsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationPost$hashtagsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrganizationPostHashtagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1529,8 +2684,11 @@ export interface OrganizationPostFieldRefs {
   readonly content: Prisma.FieldRef<"OrganizationPost", 'String'>
   readonly images: Prisma.FieldRef<"OrganizationPost", 'Json'>
   readonly pinned: Prisma.FieldRef<"OrganizationPost", 'Boolean'>
+  readonly parentId: Prisma.FieldRef<"OrganizationPost", 'Int'>
+  readonly repostOfId: Prisma.FieldRef<"OrganizationPost", 'Int'>
   readonly likesCount: Prisma.FieldRef<"OrganizationPost", 'Int'>
   readonly commentsCount: Prisma.FieldRef<"OrganizationPost", 'Int'>
+  readonly repostCount: Prisma.FieldRef<"OrganizationPost", 'Int'>
   readonly deletedAt: Prisma.FieldRef<"OrganizationPost", 'DateTime'>
   readonly hiddenAt: Prisma.FieldRef<"OrganizationPost", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"OrganizationPost", 'DateTime'>
@@ -1931,6 +3089,111 @@ export type OrganizationPostDeleteManyArgs<ExtArgs extends runtime.Types.Extensi
 }
 
 /**
+ * OrganizationPost.organization
+ */
+export type OrganizationPost$organizationArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Organization
+   */
+  select?: Prisma.OrganizationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Organization
+   */
+  omit?: Prisma.OrganizationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrganizationInclude<ExtArgs> | null
+  where?: Prisma.OrganizationWhereInput
+}
+
+/**
+ * OrganizationPost.parent
+ */
+export type OrganizationPost$parentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OrganizationPost
+   */
+  select?: Prisma.OrganizationPostSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OrganizationPost
+   */
+  omit?: Prisma.OrganizationPostOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrganizationPostInclude<ExtArgs> | null
+  where?: Prisma.OrganizationPostWhereInput
+}
+
+/**
+ * OrganizationPost.replies
+ */
+export type OrganizationPost$repliesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OrganizationPost
+   */
+  select?: Prisma.OrganizationPostSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OrganizationPost
+   */
+  omit?: Prisma.OrganizationPostOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrganizationPostInclude<ExtArgs> | null
+  where?: Prisma.OrganizationPostWhereInput
+  orderBy?: Prisma.OrganizationPostOrderByWithRelationInput | Prisma.OrganizationPostOrderByWithRelationInput[]
+  cursor?: Prisma.OrganizationPostWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OrganizationPostScalarFieldEnum | Prisma.OrganizationPostScalarFieldEnum[]
+}
+
+/**
+ * OrganizationPost.repostOf
+ */
+export type OrganizationPost$repostOfArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OrganizationPost
+   */
+  select?: Prisma.OrganizationPostSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OrganizationPost
+   */
+  omit?: Prisma.OrganizationPostOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrganizationPostInclude<ExtArgs> | null
+  where?: Prisma.OrganizationPostWhereInput
+}
+
+/**
+ * OrganizationPost.reposts
+ */
+export type OrganizationPost$repostsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OrganizationPost
+   */
+  select?: Prisma.OrganizationPostSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OrganizationPost
+   */
+  omit?: Prisma.OrganizationPostOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrganizationPostInclude<ExtArgs> | null
+  where?: Prisma.OrganizationPostWhereInput
+  orderBy?: Prisma.OrganizationPostOrderByWithRelationInput | Prisma.OrganizationPostOrderByWithRelationInput[]
+  cursor?: Prisma.OrganizationPostWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OrganizationPostScalarFieldEnum | Prisma.OrganizationPostScalarFieldEnum[]
+}
+
+/**
  * OrganizationPost.likes
  */
 export type OrganizationPost$likesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1952,6 +3215,54 @@ export type OrganizationPost$likesArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   distinct?: Prisma.OrganizationPostLikeScalarFieldEnum | Prisma.OrganizationPostLikeScalarFieldEnum[]
+}
+
+/**
+ * OrganizationPost.saves
+ */
+export type OrganizationPost$savesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OrganizationPostSave
+   */
+  select?: Prisma.OrganizationPostSaveSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OrganizationPostSave
+   */
+  omit?: Prisma.OrganizationPostSaveOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrganizationPostSaveInclude<ExtArgs> | null
+  where?: Prisma.OrganizationPostSaveWhereInput
+  orderBy?: Prisma.OrganizationPostSaveOrderByWithRelationInput | Prisma.OrganizationPostSaveOrderByWithRelationInput[]
+  cursor?: Prisma.OrganizationPostSaveWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OrganizationPostSaveScalarFieldEnum | Prisma.OrganizationPostSaveScalarFieldEnum[]
+}
+
+/**
+ * OrganizationPost.hashtags
+ */
+export type OrganizationPost$hashtagsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OrganizationPostHashtag
+   */
+  select?: Prisma.OrganizationPostHashtagSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OrganizationPostHashtag
+   */
+  omit?: Prisma.OrganizationPostHashtagOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrganizationPostHashtagInclude<ExtArgs> | null
+  where?: Prisma.OrganizationPostHashtagWhereInput
+  orderBy?: Prisma.OrganizationPostHashtagOrderByWithRelationInput | Prisma.OrganizationPostHashtagOrderByWithRelationInput[]
+  cursor?: Prisma.OrganizationPostHashtagWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OrganizationPostHashtagScalarFieldEnum | Prisma.OrganizationPostHashtagScalarFieldEnum[]
 }
 
 /**

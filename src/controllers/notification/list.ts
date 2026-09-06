@@ -91,6 +91,18 @@ export const listNotifications = async (userId: number, filters: NotificationLis
 		prisma.notification.count({ where: { userId, readAt: null } }),
 	]);
 
+	// Adjunta el actor (quien genero la notificacion social) por lookup, ya que
+	// actorUserId es columna plana sin relacion Prisma.
+	const actorIds = [...new Set(items.map((n: any) => n.actorUserId).filter(Boolean))] as number[];
+	if (actorIds.length) {
+		const actors = await prisma.user.findMany({
+			where: { id: { in: actorIds } },
+			select: { id: true, username: true, slug: true, imageUrl: true },
+		});
+		const map = new Map(actors.map((a) => [a.id, a]));
+		for (const n of items as any[]) n.actor = n.actorUserId ? map.get(n.actorUserId) ?? null : null;
+	}
+
 	return {
 		items,
 		maxPage: Math.max(1, Math.ceil(total / limit)),

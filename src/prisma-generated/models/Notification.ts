@@ -37,6 +37,8 @@ export type NotificationAvgAggregateOutputType = {
   parentCommentId: number | null
   subscriptionId: number | null
   organizationId: number | null
+  postId: number | null
+  actorUserId: number | null
 }
 
 export type NotificationSumAggregateOutputType = {
@@ -50,6 +52,8 @@ export type NotificationSumAggregateOutputType = {
   parentCommentId: number | null
   subscriptionId: number | null
   organizationId: number | null
+  postId: number | null
+  actorUserId: number | null
 }
 
 export type NotificationMinAggregateOutputType = {
@@ -69,6 +73,8 @@ export type NotificationMinAggregateOutputType = {
   parentCommentId: number | null
   subscriptionId: number | null
   organizationId: number | null
+  postId: number | null
+  actorUserId: number | null
 }
 
 export type NotificationMaxAggregateOutputType = {
@@ -88,6 +94,8 @@ export type NotificationMaxAggregateOutputType = {
   parentCommentId: number | null
   subscriptionId: number | null
   organizationId: number | null
+  postId: number | null
+  actorUserId: number | null
 }
 
 export type NotificationCountAggregateOutputType = {
@@ -107,6 +115,8 @@ export type NotificationCountAggregateOutputType = {
   parentCommentId: number
   subscriptionId: number
   organizationId: number
+  postId: number
+  actorUserId: number
   _all: number
 }
 
@@ -122,6 +132,8 @@ export type NotificationAvgAggregateInputType = {
   parentCommentId?: true
   subscriptionId?: true
   organizationId?: true
+  postId?: true
+  actorUserId?: true
 }
 
 export type NotificationSumAggregateInputType = {
@@ -135,6 +147,8 @@ export type NotificationSumAggregateInputType = {
   parentCommentId?: true
   subscriptionId?: true
   organizationId?: true
+  postId?: true
+  actorUserId?: true
 }
 
 export type NotificationMinAggregateInputType = {
@@ -154,6 +168,8 @@ export type NotificationMinAggregateInputType = {
   parentCommentId?: true
   subscriptionId?: true
   organizationId?: true
+  postId?: true
+  actorUserId?: true
 }
 
 export type NotificationMaxAggregateInputType = {
@@ -173,6 +189,8 @@ export type NotificationMaxAggregateInputType = {
   parentCommentId?: true
   subscriptionId?: true
   organizationId?: true
+  postId?: true
+  actorUserId?: true
 }
 
 export type NotificationCountAggregateInputType = {
@@ -192,6 +210,8 @@ export type NotificationCountAggregateInputType = {
   parentCommentId?: true
   subscriptionId?: true
   organizationId?: true
+  postId?: true
+  actorUserId?: true
   _all?: true
 }
 
@@ -298,6 +318,8 @@ export type NotificationGroupByOutputType = {
   parentCommentId: number | null
   subscriptionId: number | null
   organizationId: number | null
+  postId: number | null
+  actorUserId: number | null
   _count: NotificationCountAggregateOutputType | null
   _avg: NotificationAvgAggregateOutputType | null
   _sum: NotificationSumAggregateOutputType | null
@@ -340,6 +362,8 @@ export type NotificationWhereInput = {
   parentCommentId?: Prisma.IntNullableFilter<"Notification"> | number | null
   subscriptionId?: Prisma.IntNullableFilter<"Notification"> | number | null
   organizationId?: Prisma.IntNullableFilter<"Notification"> | number | null
+  postId?: Prisma.IntNullableFilter<"Notification"> | number | null
+  actorUserId?: Prisma.IntNullableFilter<"Notification"> | number | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   mangaCustom?: Prisma.XOR<Prisma.MangaCustomNullableScalarRelationFilter, Prisma.MangaCustomWhereInput> | null
   joint?: Prisma.XOR<Prisma.MangaJointNullableScalarRelationFilter, Prisma.MangaJointWhereInput> | null
@@ -368,6 +392,8 @@ export type NotificationOrderByWithRelationInput = {
   parentCommentId?: Prisma.SortOrderInput | Prisma.SortOrder
   subscriptionId?: Prisma.SortOrderInput | Prisma.SortOrder
   organizationId?: Prisma.SortOrderInput | Prisma.SortOrder
+  postId?: Prisma.SortOrderInput | Prisma.SortOrder
+  actorUserId?: Prisma.SortOrderInput | Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   mangaCustom?: Prisma.MangaCustomOrderByWithRelationInput
   joint?: Prisma.MangaJointOrderByWithRelationInput
@@ -399,6 +425,8 @@ export type NotificationWhereUniqueInput = Prisma.AtLeast<{
   parentCommentId?: Prisma.IntNullableFilter<"Notification"> | number | null
   subscriptionId?: Prisma.IntNullableFilter<"Notification"> | number | null
   organizationId?: Prisma.IntNullableFilter<"Notification"> | number | null
+  postId?: Prisma.IntNullableFilter<"Notification"> | number | null
+  actorUserId?: Prisma.IntNullableFilter<"Notification"> | number | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   mangaCustom?: Prisma.XOR<Prisma.MangaCustomNullableScalarRelationFilter, Prisma.MangaCustomWhereInput> | null
   joint?: Prisma.XOR<Prisma.MangaJointNullableScalarRelationFilter, Prisma.MangaJointWhereInput> | null
@@ -427,6 +455,8 @@ export type NotificationOrderByWithAggregationInput = {
   parentCommentId?: Prisma.SortOrderInput | Prisma.SortOrder
   subscriptionId?: Prisma.SortOrderInput | Prisma.SortOrder
   organizationId?: Prisma.SortOrderInput | Prisma.SortOrder
+  postId?: Prisma.SortOrderInput | Prisma.SortOrder
+  actorUserId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.NotificationCountOrderByAggregateInput
   _avg?: Prisma.NotificationAvgOrderByAggregateInput
   _max?: Prisma.NotificationMaxOrderByAggregateInput
@@ -454,6 +484,8 @@ export type NotificationScalarWhereWithAggregatesInput = {
   parentCommentId?: Prisma.IntNullableWithAggregatesFilter<"Notification"> | number | null
   subscriptionId?: Prisma.IntNullableWithAggregatesFilter<"Notification"> | number | null
   organizationId?: Prisma.IntNullableWithAggregatesFilter<"Notification"> | number | null
+  postId?: Prisma.IntNullableWithAggregatesFilter<"Notification"> | number | null
+  actorUserId?: Prisma.IntNullableWithAggregatesFilter<"Notification"> | number | null
 }
 
 export type NotificationCreateInput = {
@@ -463,6 +495,8 @@ export type NotificationCreateInput = {
   readAt?: Date | string | null
   createdAt?: Date | string
   emailSentAt?: Date | string | null
+  postId?: number | null
+  actorUserId?: number | null
   user: Prisma.UserCreateNestedOneWithoutNotificationsInput
   mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutNotificationsInput
   joint?: Prisma.MangaJointCreateNestedOneWithoutNotificationsInput
@@ -491,6 +525,8 @@ export type NotificationUncheckedCreateInput = {
   parentCommentId?: number | null
   subscriptionId?: number | null
   organizationId?: number | null
+  postId?: number | null
+  actorUserId?: number | null
 }
 
 export type NotificationUpdateInput = {
@@ -500,6 +536,8 @@ export type NotificationUpdateInput = {
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user?: Prisma.UserUpdateOneRequiredWithoutNotificationsNestedInput
   mangaCustom?: Prisma.MangaCustomUpdateOneWithoutNotificationsNestedInput
   joint?: Prisma.MangaJointUpdateOneWithoutNotificationsNestedInput
@@ -528,6 +566,8 @@ export type NotificationUncheckedUpdateInput = {
   parentCommentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   subscriptionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type NotificationCreateManyInput = {
@@ -547,6 +587,8 @@ export type NotificationCreateManyInput = {
   parentCommentId?: number | null
   subscriptionId?: number | null
   organizationId?: number | null
+  postId?: number | null
+  actorUserId?: number | null
 }
 
 export type NotificationUpdateManyMutationInput = {
@@ -556,6 +598,8 @@ export type NotificationUpdateManyMutationInput = {
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type NotificationUncheckedUpdateManyInput = {
@@ -575,6 +619,8 @@ export type NotificationUncheckedUpdateManyInput = {
   parentCommentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   subscriptionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type NotificationListRelationFilter = {
@@ -604,6 +650,8 @@ export type NotificationCountOrderByAggregateInput = {
   parentCommentId?: Prisma.SortOrder
   subscriptionId?: Prisma.SortOrder
   organizationId?: Prisma.SortOrder
+  postId?: Prisma.SortOrder
+  actorUserId?: Prisma.SortOrder
 }
 
 export type NotificationAvgOrderByAggregateInput = {
@@ -617,6 +665,8 @@ export type NotificationAvgOrderByAggregateInput = {
   parentCommentId?: Prisma.SortOrder
   subscriptionId?: Prisma.SortOrder
   organizationId?: Prisma.SortOrder
+  postId?: Prisma.SortOrder
+  actorUserId?: Prisma.SortOrder
 }
 
 export type NotificationMaxOrderByAggregateInput = {
@@ -636,6 +686,8 @@ export type NotificationMaxOrderByAggregateInput = {
   parentCommentId?: Prisma.SortOrder
   subscriptionId?: Prisma.SortOrder
   organizationId?: Prisma.SortOrder
+  postId?: Prisma.SortOrder
+  actorUserId?: Prisma.SortOrder
 }
 
 export type NotificationMinOrderByAggregateInput = {
@@ -655,6 +707,8 @@ export type NotificationMinOrderByAggregateInput = {
   parentCommentId?: Prisma.SortOrder
   subscriptionId?: Prisma.SortOrder
   organizationId?: Prisma.SortOrder
+  postId?: Prisma.SortOrder
+  actorUserId?: Prisma.SortOrder
 }
 
 export type NotificationSumOrderByAggregateInput = {
@@ -668,6 +722,8 @@ export type NotificationSumOrderByAggregateInput = {
   parentCommentId?: Prisma.SortOrder
   subscriptionId?: Prisma.SortOrder
   organizationId?: Prisma.SortOrder
+  postId?: Prisma.SortOrder
+  actorUserId?: Prisma.SortOrder
 }
 
 export type NotificationCreateNestedManyWithoutOrganizationInput = {
@@ -1055,6 +1111,8 @@ export type NotificationCreateWithoutOrganizationInput = {
   readAt?: Date | string | null
   createdAt?: Date | string
   emailSentAt?: Date | string | null
+  postId?: number | null
+  actorUserId?: number | null
   user: Prisma.UserCreateNestedOneWithoutNotificationsInput
   mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutNotificationsInput
   joint?: Prisma.MangaJointCreateNestedOneWithoutNotificationsInput
@@ -1081,6 +1139,8 @@ export type NotificationUncheckedCreateWithoutOrganizationInput = {
   commentId?: number | null
   parentCommentId?: number | null
   subscriptionId?: number | null
+  postId?: number | null
+  actorUserId?: number | null
 }
 
 export type NotificationCreateOrConnectWithoutOrganizationInput = {
@@ -1129,6 +1189,8 @@ export type NotificationScalarWhereInput = {
   parentCommentId?: Prisma.IntNullableFilter<"Notification"> | number | null
   subscriptionId?: Prisma.IntNullableFilter<"Notification"> | number | null
   organizationId?: Prisma.IntNullableFilter<"Notification"> | number | null
+  postId?: Prisma.IntNullableFilter<"Notification"> | number | null
+  actorUserId?: Prisma.IntNullableFilter<"Notification"> | number | null
 }
 
 export type NotificationCreateWithoutUserInput = {
@@ -1138,6 +1200,8 @@ export type NotificationCreateWithoutUserInput = {
   readAt?: Date | string | null
   createdAt?: Date | string
   emailSentAt?: Date | string | null
+  postId?: number | null
+  actorUserId?: number | null
   mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutNotificationsInput
   joint?: Prisma.MangaJointCreateNestedOneWithoutNotificationsInput
   chapter?: Prisma.ChapterCreateNestedOneWithoutNotificationsInput
@@ -1164,6 +1228,8 @@ export type NotificationUncheckedCreateWithoutUserInput = {
   parentCommentId?: number | null
   subscriptionId?: number | null
   organizationId?: number | null
+  postId?: number | null
+  actorUserId?: number | null
 }
 
 export type NotificationCreateOrConnectWithoutUserInput = {
@@ -1199,6 +1265,8 @@ export type NotificationCreateWithoutMangaCustomInput = {
   readAt?: Date | string | null
   createdAt?: Date | string
   emailSentAt?: Date | string | null
+  postId?: number | null
+  actorUserId?: number | null
   user: Prisma.UserCreateNestedOneWithoutNotificationsInput
   joint?: Prisma.MangaJointCreateNestedOneWithoutNotificationsInput
   chapter?: Prisma.ChapterCreateNestedOneWithoutNotificationsInput
@@ -1225,6 +1293,8 @@ export type NotificationUncheckedCreateWithoutMangaCustomInput = {
   parentCommentId?: number | null
   subscriptionId?: number | null
   organizationId?: number | null
+  postId?: number | null
+  actorUserId?: number | null
 }
 
 export type NotificationCreateOrConnectWithoutMangaCustomInput = {
@@ -1260,6 +1330,8 @@ export type NotificationCreateWithoutChapterInput = {
   readAt?: Date | string | null
   createdAt?: Date | string
   emailSentAt?: Date | string | null
+  postId?: number | null
+  actorUserId?: number | null
   user: Prisma.UserCreateNestedOneWithoutNotificationsInput
   mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutNotificationsInput
   joint?: Prisma.MangaJointCreateNestedOneWithoutNotificationsInput
@@ -1286,6 +1358,8 @@ export type NotificationUncheckedCreateWithoutChapterInput = {
   parentCommentId?: number | null
   subscriptionId?: number | null
   organizationId?: number | null
+  postId?: number | null
+  actorUserId?: number | null
 }
 
 export type NotificationCreateOrConnectWithoutChapterInput = {
@@ -1321,6 +1395,8 @@ export type NotificationCreateWithoutCustomListInput = {
   readAt?: Date | string | null
   createdAt?: Date | string
   emailSentAt?: Date | string | null
+  postId?: number | null
+  actorUserId?: number | null
   user: Prisma.UserCreateNestedOneWithoutNotificationsInput
   mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutNotificationsInput
   joint?: Prisma.MangaJointCreateNestedOneWithoutNotificationsInput
@@ -1347,6 +1423,8 @@ export type NotificationUncheckedCreateWithoutCustomListInput = {
   parentCommentId?: number | null
   subscriptionId?: number | null
   organizationId?: number | null
+  postId?: number | null
+  actorUserId?: number | null
 }
 
 export type NotificationCreateOrConnectWithoutCustomListInput = {
@@ -1382,6 +1460,8 @@ export type NotificationCreateWithoutCommentInput = {
   readAt?: Date | string | null
   createdAt?: Date | string
   emailSentAt?: Date | string | null
+  postId?: number | null
+  actorUserId?: number | null
   user: Prisma.UserCreateNestedOneWithoutNotificationsInput
   mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutNotificationsInput
   joint?: Prisma.MangaJointCreateNestedOneWithoutNotificationsInput
@@ -1408,6 +1488,8 @@ export type NotificationUncheckedCreateWithoutCommentInput = {
   parentCommentId?: number | null
   subscriptionId?: number | null
   organizationId?: number | null
+  postId?: number | null
+  actorUserId?: number | null
 }
 
 export type NotificationCreateOrConnectWithoutCommentInput = {
@@ -1427,6 +1509,8 @@ export type NotificationCreateWithoutParentCommentInput = {
   readAt?: Date | string | null
   createdAt?: Date | string
   emailSentAt?: Date | string | null
+  postId?: number | null
+  actorUserId?: number | null
   user: Prisma.UserCreateNestedOneWithoutNotificationsInput
   mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutNotificationsInput
   joint?: Prisma.MangaJointCreateNestedOneWithoutNotificationsInput
@@ -1453,6 +1537,8 @@ export type NotificationUncheckedCreateWithoutParentCommentInput = {
   commentId?: number | null
   subscriptionId?: number | null
   organizationId?: number | null
+  postId?: number | null
+  actorUserId?: number | null
 }
 
 export type NotificationCreateOrConnectWithoutParentCommentInput = {
@@ -1504,6 +1590,8 @@ export type NotificationCreateWithoutSubscriptionInput = {
   readAt?: Date | string | null
   createdAt?: Date | string
   emailSentAt?: Date | string | null
+  postId?: number | null
+  actorUserId?: number | null
   user: Prisma.UserCreateNestedOneWithoutNotificationsInput
   mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutNotificationsInput
   joint?: Prisma.MangaJointCreateNestedOneWithoutNotificationsInput
@@ -1530,6 +1618,8 @@ export type NotificationUncheckedCreateWithoutSubscriptionInput = {
   commentId?: number | null
   parentCommentId?: number | null
   organizationId?: number | null
+  postId?: number | null
+  actorUserId?: number | null
 }
 
 export type NotificationCreateOrConnectWithoutSubscriptionInput = {
@@ -1565,6 +1655,8 @@ export type NotificationCreateWithoutJointInput = {
   readAt?: Date | string | null
   createdAt?: Date | string
   emailSentAt?: Date | string | null
+  postId?: number | null
+  actorUserId?: number | null
   user: Prisma.UserCreateNestedOneWithoutNotificationsInput
   mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutNotificationsInput
   chapter?: Prisma.ChapterCreateNestedOneWithoutNotificationsInput
@@ -1591,6 +1683,8 @@ export type NotificationUncheckedCreateWithoutJointInput = {
   parentCommentId?: number | null
   subscriptionId?: number | null
   organizationId?: number | null
+  postId?: number | null
+  actorUserId?: number | null
 }
 
 export type NotificationCreateOrConnectWithoutJointInput = {
@@ -1635,6 +1729,8 @@ export type NotificationCreateManyOrganizationInput = {
   commentId?: number | null
   parentCommentId?: number | null
   subscriptionId?: number | null
+  postId?: number | null
+  actorUserId?: number | null
 }
 
 export type NotificationUpdateWithoutOrganizationInput = {
@@ -1644,6 +1740,8 @@ export type NotificationUpdateWithoutOrganizationInput = {
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user?: Prisma.UserUpdateOneRequiredWithoutNotificationsNestedInput
   mangaCustom?: Prisma.MangaCustomUpdateOneWithoutNotificationsNestedInput
   joint?: Prisma.MangaJointUpdateOneWithoutNotificationsNestedInput
@@ -1670,6 +1768,8 @@ export type NotificationUncheckedUpdateWithoutOrganizationInput = {
   commentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   parentCommentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   subscriptionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type NotificationUncheckedUpdateManyWithoutOrganizationInput = {
@@ -1688,6 +1788,8 @@ export type NotificationUncheckedUpdateManyWithoutOrganizationInput = {
   commentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   parentCommentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   subscriptionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type NotificationCreateManyUserInput = {
@@ -1706,6 +1808,8 @@ export type NotificationCreateManyUserInput = {
   parentCommentId?: number | null
   subscriptionId?: number | null
   organizationId?: number | null
+  postId?: number | null
+  actorUserId?: number | null
 }
 
 export type NotificationUpdateWithoutUserInput = {
@@ -1715,6 +1819,8 @@ export type NotificationUpdateWithoutUserInput = {
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   mangaCustom?: Prisma.MangaCustomUpdateOneWithoutNotificationsNestedInput
   joint?: Prisma.MangaJointUpdateOneWithoutNotificationsNestedInput
   chapter?: Prisma.ChapterUpdateOneWithoutNotificationsNestedInput
@@ -1741,6 +1847,8 @@ export type NotificationUncheckedUpdateWithoutUserInput = {
   parentCommentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   subscriptionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type NotificationUncheckedUpdateManyWithoutUserInput = {
@@ -1759,6 +1867,8 @@ export type NotificationUncheckedUpdateManyWithoutUserInput = {
   parentCommentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   subscriptionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type NotificationCreateManyMangaCustomInput = {
@@ -1777,6 +1887,8 @@ export type NotificationCreateManyMangaCustomInput = {
   parentCommentId?: number | null
   subscriptionId?: number | null
   organizationId?: number | null
+  postId?: number | null
+  actorUserId?: number | null
 }
 
 export type NotificationUpdateWithoutMangaCustomInput = {
@@ -1786,6 +1898,8 @@ export type NotificationUpdateWithoutMangaCustomInput = {
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user?: Prisma.UserUpdateOneRequiredWithoutNotificationsNestedInput
   joint?: Prisma.MangaJointUpdateOneWithoutNotificationsNestedInput
   chapter?: Prisma.ChapterUpdateOneWithoutNotificationsNestedInput
@@ -1812,6 +1926,8 @@ export type NotificationUncheckedUpdateWithoutMangaCustomInput = {
   parentCommentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   subscriptionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type NotificationUncheckedUpdateManyWithoutMangaCustomInput = {
@@ -1830,6 +1946,8 @@ export type NotificationUncheckedUpdateManyWithoutMangaCustomInput = {
   parentCommentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   subscriptionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type NotificationCreateManyChapterInput = {
@@ -1848,6 +1966,8 @@ export type NotificationCreateManyChapterInput = {
   parentCommentId?: number | null
   subscriptionId?: number | null
   organizationId?: number | null
+  postId?: number | null
+  actorUserId?: number | null
 }
 
 export type NotificationUpdateWithoutChapterInput = {
@@ -1857,6 +1977,8 @@ export type NotificationUpdateWithoutChapterInput = {
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user?: Prisma.UserUpdateOneRequiredWithoutNotificationsNestedInput
   mangaCustom?: Prisma.MangaCustomUpdateOneWithoutNotificationsNestedInput
   joint?: Prisma.MangaJointUpdateOneWithoutNotificationsNestedInput
@@ -1883,6 +2005,8 @@ export type NotificationUncheckedUpdateWithoutChapterInput = {
   parentCommentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   subscriptionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type NotificationUncheckedUpdateManyWithoutChapterInput = {
@@ -1901,6 +2025,8 @@ export type NotificationUncheckedUpdateManyWithoutChapterInput = {
   parentCommentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   subscriptionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type NotificationCreateManyCustomListInput = {
@@ -1919,6 +2045,8 @@ export type NotificationCreateManyCustomListInput = {
   parentCommentId?: number | null
   subscriptionId?: number | null
   organizationId?: number | null
+  postId?: number | null
+  actorUserId?: number | null
 }
 
 export type NotificationUpdateWithoutCustomListInput = {
@@ -1928,6 +2056,8 @@ export type NotificationUpdateWithoutCustomListInput = {
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user?: Prisma.UserUpdateOneRequiredWithoutNotificationsNestedInput
   mangaCustom?: Prisma.MangaCustomUpdateOneWithoutNotificationsNestedInput
   joint?: Prisma.MangaJointUpdateOneWithoutNotificationsNestedInput
@@ -1954,6 +2084,8 @@ export type NotificationUncheckedUpdateWithoutCustomListInput = {
   parentCommentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   subscriptionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type NotificationUncheckedUpdateManyWithoutCustomListInput = {
@@ -1972,6 +2104,8 @@ export type NotificationUncheckedUpdateManyWithoutCustomListInput = {
   parentCommentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   subscriptionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type NotificationCreateManyCommentInput = {
@@ -1990,6 +2124,8 @@ export type NotificationCreateManyCommentInput = {
   parentCommentId?: number | null
   subscriptionId?: number | null
   organizationId?: number | null
+  postId?: number | null
+  actorUserId?: number | null
 }
 
 export type NotificationCreateManyParentCommentInput = {
@@ -2008,6 +2144,8 @@ export type NotificationCreateManyParentCommentInput = {
   commentId?: number | null
   subscriptionId?: number | null
   organizationId?: number | null
+  postId?: number | null
+  actorUserId?: number | null
 }
 
 export type NotificationUpdateWithoutCommentInput = {
@@ -2017,6 +2155,8 @@ export type NotificationUpdateWithoutCommentInput = {
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user?: Prisma.UserUpdateOneRequiredWithoutNotificationsNestedInput
   mangaCustom?: Prisma.MangaCustomUpdateOneWithoutNotificationsNestedInput
   joint?: Prisma.MangaJointUpdateOneWithoutNotificationsNestedInput
@@ -2043,6 +2183,8 @@ export type NotificationUncheckedUpdateWithoutCommentInput = {
   parentCommentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   subscriptionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type NotificationUncheckedUpdateManyWithoutCommentInput = {
@@ -2061,6 +2203,8 @@ export type NotificationUncheckedUpdateManyWithoutCommentInput = {
   parentCommentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   subscriptionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type NotificationUpdateWithoutParentCommentInput = {
@@ -2070,6 +2214,8 @@ export type NotificationUpdateWithoutParentCommentInput = {
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user?: Prisma.UserUpdateOneRequiredWithoutNotificationsNestedInput
   mangaCustom?: Prisma.MangaCustomUpdateOneWithoutNotificationsNestedInput
   joint?: Prisma.MangaJointUpdateOneWithoutNotificationsNestedInput
@@ -2096,6 +2242,8 @@ export type NotificationUncheckedUpdateWithoutParentCommentInput = {
   commentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   subscriptionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type NotificationUncheckedUpdateManyWithoutParentCommentInput = {
@@ -2114,6 +2262,8 @@ export type NotificationUncheckedUpdateManyWithoutParentCommentInput = {
   commentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   subscriptionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type NotificationCreateManySubscriptionInput = {
@@ -2132,6 +2282,8 @@ export type NotificationCreateManySubscriptionInput = {
   commentId?: number | null
   parentCommentId?: number | null
   organizationId?: number | null
+  postId?: number | null
+  actorUserId?: number | null
 }
 
 export type NotificationUpdateWithoutSubscriptionInput = {
@@ -2141,6 +2293,8 @@ export type NotificationUpdateWithoutSubscriptionInput = {
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user?: Prisma.UserUpdateOneRequiredWithoutNotificationsNestedInput
   mangaCustom?: Prisma.MangaCustomUpdateOneWithoutNotificationsNestedInput
   joint?: Prisma.MangaJointUpdateOneWithoutNotificationsNestedInput
@@ -2167,6 +2321,8 @@ export type NotificationUncheckedUpdateWithoutSubscriptionInput = {
   commentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   parentCommentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type NotificationUncheckedUpdateManyWithoutSubscriptionInput = {
@@ -2185,6 +2341,8 @@ export type NotificationUncheckedUpdateManyWithoutSubscriptionInput = {
   commentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   parentCommentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type NotificationCreateManyJointInput = {
@@ -2203,6 +2361,8 @@ export type NotificationCreateManyJointInput = {
   parentCommentId?: number | null
   subscriptionId?: number | null
   organizationId?: number | null
+  postId?: number | null
+  actorUserId?: number | null
 }
 
 export type NotificationUpdateWithoutJointInput = {
@@ -2212,6 +2372,8 @@ export type NotificationUpdateWithoutJointInput = {
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user?: Prisma.UserUpdateOneRequiredWithoutNotificationsNestedInput
   mangaCustom?: Prisma.MangaCustomUpdateOneWithoutNotificationsNestedInput
   chapter?: Prisma.ChapterUpdateOneWithoutNotificationsNestedInput
@@ -2238,6 +2400,8 @@ export type NotificationUncheckedUpdateWithoutJointInput = {
   parentCommentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   subscriptionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type NotificationUncheckedUpdateManyWithoutJointInput = {
@@ -2256,6 +2420,8 @@ export type NotificationUncheckedUpdateManyWithoutJointInput = {
   parentCommentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   subscriptionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 
@@ -2277,6 +2443,8 @@ export type NotificationSelect<ExtArgs extends runtime.Types.Extensions.Internal
   parentCommentId?: boolean
   subscriptionId?: boolean
   organizationId?: boolean
+  postId?: boolean
+  actorUserId?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   mangaCustom?: boolean | Prisma.Notification$mangaCustomArgs<ExtArgs>
   joint?: boolean | Prisma.Notification$jointArgs<ExtArgs>
@@ -2305,6 +2473,8 @@ export type NotificationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   parentCommentId?: boolean
   subscriptionId?: boolean
   organizationId?: boolean
+  postId?: boolean
+  actorUserId?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   mangaCustom?: boolean | Prisma.Notification$mangaCustomArgs<ExtArgs>
   joint?: boolean | Prisma.Notification$jointArgs<ExtArgs>
@@ -2333,6 +2503,8 @@ export type NotificationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   parentCommentId?: boolean
   subscriptionId?: boolean
   organizationId?: boolean
+  postId?: boolean
+  actorUserId?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   mangaCustom?: boolean | Prisma.Notification$mangaCustomArgs<ExtArgs>
   joint?: boolean | Prisma.Notification$jointArgs<ExtArgs>
@@ -2361,9 +2533,11 @@ export type NotificationSelectScalar = {
   parentCommentId?: boolean
   subscriptionId?: boolean
   organizationId?: boolean
+  postId?: boolean
+  actorUserId?: boolean
 }
 
-export type NotificationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "type" | "mangaCustomId" | "jointId" | "chapterId" | "listId" | "source" | "details" | "readAt" | "createdAt" | "emailSentAt" | "commentId" | "parentCommentId" | "subscriptionId" | "organizationId", ExtArgs["result"]["notification"]>
+export type NotificationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "type" | "mangaCustomId" | "jointId" | "chapterId" | "listId" | "source" | "details" | "readAt" | "createdAt" | "emailSentAt" | "commentId" | "parentCommentId" | "subscriptionId" | "organizationId" | "postId" | "actorUserId", ExtArgs["result"]["notification"]>
 export type NotificationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   mangaCustom?: boolean | Prisma.Notification$mangaCustomArgs<ExtArgs>
@@ -2428,6 +2602,8 @@ export type $NotificationPayload<ExtArgs extends runtime.Types.Extensions.Intern
     parentCommentId: number | null
     subscriptionId: number | null
     organizationId: number | null
+    postId: number | null
+    actorUserId: number | null
   }, ExtArgs["result"]["notification"]>
   composites: {}
 }
@@ -2876,6 +3052,8 @@ export interface NotificationFieldRefs {
   readonly parentCommentId: Prisma.FieldRef<"Notification", 'Int'>
   readonly subscriptionId: Prisma.FieldRef<"Notification", 'Int'>
   readonly organizationId: Prisma.FieldRef<"Notification", 'Int'>
+  readonly postId: Prisma.FieldRef<"Notification", 'Int'>
+  readonly actorUserId: Prisma.FieldRef<"Notification", 'Int'>
 }
     
 

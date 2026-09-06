@@ -65,6 +65,16 @@ export type OrganizationPost = Prisma.OrganizationPostModel
  */
 export type OrganizationPostLike = Prisma.OrganizationPostLikeModel
 /**
+ * Model OrganizationPostSave
+ * 
+ */
+export type OrganizationPostSave = Prisma.OrganizationPostSaveModel
+/**
+ * Model OrganizationPostHashtag
+ * 
+ */
+export type OrganizationPostHashtag = Prisma.OrganizationPostHashtagModel
+/**
  * Model OrganizationRecommendation
  * 
  */

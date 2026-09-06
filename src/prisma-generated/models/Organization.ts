@@ -1442,10 +1442,12 @@ export type OrganizationCreateNestedOneWithoutCommunityPostsInput = {
   connect?: Prisma.OrganizationWhereUniqueInput
 }
 
-export type OrganizationUpdateOneRequiredWithoutCommunityPostsNestedInput = {
+export type OrganizationUpdateOneWithoutCommunityPostsNestedInput = {
   create?: Prisma.XOR<Prisma.OrganizationCreateWithoutCommunityPostsInput, Prisma.OrganizationUncheckedCreateWithoutCommunityPostsInput>
   connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutCommunityPostsInput
   upsert?: Prisma.OrganizationUpsertWithoutCommunityPostsInput
+  disconnect?: Prisma.OrganizationWhereInput | boolean
+  delete?: Prisma.OrganizationWhereInput | boolean
   connect?: Prisma.OrganizationWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutCommunityPostsInput, Prisma.OrganizationUpdateWithoutCommunityPostsInput>, Prisma.OrganizationUncheckedUpdateWithoutCommunityPostsInput>
 }

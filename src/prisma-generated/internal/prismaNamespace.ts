@@ -389,6 +389,8 @@ export const ModelName = {
   RecruitmentPost: 'RecruitmentPost',
   OrganizationPost: 'OrganizationPost',
   OrganizationPostLike: 'OrganizationPostLike',
+  OrganizationPostSave: 'OrganizationPostSave',
+  OrganizationPostHashtag: 'OrganizationPostHashtag',
   OrganizationRecommendation: 'OrganizationRecommendation',
   User: 'User',
   BetaTester: 'BetaTester',
@@ -462,7 +464,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "token" | "organization" | "recruitmentPost" | "organizationPost" | "organizationPostLike" | "organizationRecommendation" | "user" | "betaTester" | "moderationLog" | "permission" | "passwordResetToken" | "countryOptions" | "author" | "bookType" | "manga" | "mangaCustom" | "chapter" | "organizationMessageThread" | "organizationMessage" | "customList" | "customListFollower" | "customListFollowerItem" | "customListItem" | "contentReport" | "mangaReview" | "chapterMilestoneAlert" | "mangaVolume" | "chapterReaction" | "page" | "comment" | "commentLike" | "ranking" | "demography" | "genre" | "analytics" | "userChapterHistory" | "favorite" | "userList" | "userPageBookmark" | "audit" | "viewsHistory" | "subscriptionPlan" | "subscription" | "organizationTransaction" | "organizationFollower" | "organizationRequest" | "emailPreference" | "emailLog" | "unsubscribeToken" | "emailVerificationToken" | "userSavedQuote" | "userDailyActivity" | "achievement" | "userAchievement" | "mangaJoint" | "jointMember" | "jointMemberHistory" | "notification" | "raffle" | "raffleTicket" | "raffleComment" | "raffleRefund" | "userBan"
+    modelProps: "token" | "organization" | "recruitmentPost" | "organizationPost" | "organizationPostLike" | "organizationPostSave" | "organizationPostHashtag" | "organizationRecommendation" | "user" | "betaTester" | "moderationLog" | "permission" | "passwordResetToken" | "countryOptions" | "author" | "bookType" | "manga" | "mangaCustom" | "chapter" | "organizationMessageThread" | "organizationMessage" | "customList" | "customListFollower" | "customListFollowerItem" | "customListItem" | "contentReport" | "mangaReview" | "chapterMilestoneAlert" | "mangaVolume" | "chapterReaction" | "page" | "comment" | "commentLike" | "ranking" | "demography" | "genre" | "analytics" | "userChapterHistory" | "favorite" | "userList" | "userPageBookmark" | "audit" | "viewsHistory" | "subscriptionPlan" | "subscription" | "organizationTransaction" | "organizationFollower" | "organizationRequest" | "emailPreference" | "emailLog" | "unsubscribeToken" | "emailVerificationToken" | "userSavedQuote" | "userDailyActivity" | "achievement" | "userAchievement" | "mangaJoint" | "jointMember" | "jointMemberHistory" | "notification" | "raffle" | "raffleTicket" | "raffleComment" | "raffleRefund" | "userBan"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -833,6 +835,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.OrganizationPostLikeCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.OrganizationPostLikeCountAggregateOutputType> | number
+        }
+      }
+    }
+    OrganizationPostSave: {
+      payload: Prisma.$OrganizationPostSavePayload<ExtArgs>
+      fields: Prisma.OrganizationPostSaveFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.OrganizationPostSaveFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostSavePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.OrganizationPostSaveFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostSavePayload>
+        }
+        findFirst: {
+          args: Prisma.OrganizationPostSaveFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostSavePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.OrganizationPostSaveFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostSavePayload>
+        }
+        findMany: {
+          args: Prisma.OrganizationPostSaveFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostSavePayload>[]
+        }
+        create: {
+          args: Prisma.OrganizationPostSaveCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostSavePayload>
+        }
+        createMany: {
+          args: Prisma.OrganizationPostSaveCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.OrganizationPostSaveCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostSavePayload>[]
+        }
+        delete: {
+          args: Prisma.OrganizationPostSaveDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostSavePayload>
+        }
+        update: {
+          args: Prisma.OrganizationPostSaveUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostSavePayload>
+        }
+        deleteMany: {
+          args: Prisma.OrganizationPostSaveDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.OrganizationPostSaveUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.OrganizationPostSaveUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostSavePayload>[]
+        }
+        upsert: {
+          args: Prisma.OrganizationPostSaveUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostSavePayload>
+        }
+        aggregate: {
+          args: Prisma.OrganizationPostSaveAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOrganizationPostSave>
+        }
+        groupBy: {
+          args: Prisma.OrganizationPostSaveGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OrganizationPostSaveGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.OrganizationPostSaveCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OrganizationPostSaveCountAggregateOutputType> | number
+        }
+      }
+    }
+    OrganizationPostHashtag: {
+      payload: Prisma.$OrganizationPostHashtagPayload<ExtArgs>
+      fields: Prisma.OrganizationPostHashtagFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.OrganizationPostHashtagFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostHashtagPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.OrganizationPostHashtagFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostHashtagPayload>
+        }
+        findFirst: {
+          args: Prisma.OrganizationPostHashtagFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostHashtagPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.OrganizationPostHashtagFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostHashtagPayload>
+        }
+        findMany: {
+          args: Prisma.OrganizationPostHashtagFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostHashtagPayload>[]
+        }
+        create: {
+          args: Prisma.OrganizationPostHashtagCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostHashtagPayload>
+        }
+        createMany: {
+          args: Prisma.OrganizationPostHashtagCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.OrganizationPostHashtagCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostHashtagPayload>[]
+        }
+        delete: {
+          args: Prisma.OrganizationPostHashtagDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostHashtagPayload>
+        }
+        update: {
+          args: Prisma.OrganizationPostHashtagUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostHashtagPayload>
+        }
+        deleteMany: {
+          args: Prisma.OrganizationPostHashtagDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.OrganizationPostHashtagUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.OrganizationPostHashtagUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostHashtagPayload>[]
+        }
+        upsert: {
+          args: Prisma.OrganizationPostHashtagUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationPostHashtagPayload>
+        }
+        aggregate: {
+          args: Prisma.OrganizationPostHashtagAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOrganizationPostHashtag>
+        }
+        groupBy: {
+          args: Prisma.OrganizationPostHashtagGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OrganizationPostHashtagGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.OrganizationPostHashtagCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OrganizationPostHashtagCountAggregateOutputType> | number
         }
       }
     }
@@ -5253,8 +5403,11 @@ export const OrganizationPostScalarFieldEnum = {
   content: 'content',
   images: 'images',
   pinned: 'pinned',
+  parentId: 'parentId',
+  repostOfId: 'repostOfId',
   likesCount: 'likesCount',
   commentsCount: 'commentsCount',
+  repostCount: 'repostCount',
   deletedAt: 'deletedAt',
   hiddenAt: 'hiddenAt',
   createdAt: 'createdAt',
@@ -5272,6 +5425,26 @@ export const OrganizationPostLikeScalarFieldEnum = {
 } as const
 
 export type OrganizationPostLikeScalarFieldEnum = (typeof OrganizationPostLikeScalarFieldEnum)[keyof typeof OrganizationPostLikeScalarFieldEnum]
+
+
+export const OrganizationPostSaveScalarFieldEnum = {
+  id: 'id',
+  postId: 'postId',
+  userId: 'userId',
+  createdAt: 'createdAt'
+} as const
+
+export type OrganizationPostSaveScalarFieldEnum = (typeof OrganizationPostSaveScalarFieldEnum)[keyof typeof OrganizationPostSaveScalarFieldEnum]
+
+
+export const OrganizationPostHashtagScalarFieldEnum = {
+  id: 'id',
+  postId: 'postId',
+  tag: 'tag',
+  createdAt: 'createdAt'
+} as const
+
+export type OrganizationPostHashtagScalarFieldEnum = (typeof OrganizationPostHashtagScalarFieldEnum)[keyof typeof OrganizationPostHashtagScalarFieldEnum]
 
 
 export const OrganizationRecommendationScalarFieldEnum = {
@@ -6162,7 +6335,9 @@ export const NotificationScalarFieldEnum = {
   commentId: 'commentId',
   parentCommentId: 'parentCommentId',
   subscriptionId: 'subscriptionId',
-  organizationId: 'organizationId'
+  organizationId: 'organizationId',
+  postId: 'postId',
+  actorUserId: 'actorUserId'
 } as const
 
 export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
@@ -6539,6 +6714,8 @@ export type GlobalOmitConfig = {
   recruitmentPost?: Prisma.RecruitmentPostOmit
   organizationPost?: Prisma.OrganizationPostOmit
   organizationPostLike?: Prisma.OrganizationPostLikeOmit
+  organizationPostSave?: Prisma.OrganizationPostSaveOmit
+  organizationPostHashtag?: Prisma.OrganizationPostHashtagOmit
   organizationRecommendation?: Prisma.OrganizationRecommendationOmit
   user?: Prisma.UserOmit
   betaTester?: Prisma.BetaTesterOmit

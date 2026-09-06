@@ -118,24 +118,35 @@ model RecruitmentPost {
 // avances, avisos, FAQ. Autoria del staff; likes de cualquier usuario; los
 // comentarios reutilizan la tabla `comment` con identifier `post-<id>`.
 model OrganizationPost {
-  id             Int          @id @default(autoincrement())
-  organizationId Int
+  id             Int           @id @default(autoincrement())
+  organizationId Int?
   userId         Int
-  content        String       @db.Text
+  content        String        @db.Text
   images         Json?
-  pinned         Boolean      @default(false)
-  likesCount     Int          @default(0)
-  commentsCount  Int          @default(0)
+  pinned         Boolean       @default(false)
+  parentId       Int?
+  repostOfId     Int?
+  likesCount     Int           @default(0)
+  commentsCount  Int           @default(0)
+  repostCount    Int           @default(0)
   deletedAt      DateTime?
   hiddenAt       DateTime?
-  createdAt      DateTime     @default(now()) @db.Timestamp(6)
-  updatedAt      DateTime     @updatedAt
-  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt      DateTime      @default(now()) @db.Timestamp(6)
+  updatedAt      DateTime      @updatedAt
+  organization   Organization? @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  parent         OrganizationPost?  @relation("PostReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies        OrganizationPost[] @relation("PostReplies")
+  repostOf       OrganizationPost?  @relation("PostReposts", fields: [repostOfId], references: [id], onDelete: SetNull)
+  reposts        OrganizationPost[] @relation("PostReposts")
   likes          OrganizationPostLike[]
+  saves          OrganizationPostSave[]
+  hashtags       OrganizationPostHashtag[]
 
   @@index([organizationId, createdAt])
   @@index([createdAt])
+  @@index([parentId, createdAt])
+  @@index([userId, createdAt])
   @@map("organization_post")
 }
 
@@ -149,6 +160,30 @@ model OrganizationPostLike {
   @@unique([postId, userId])
   @@index([postId])
   @@map("organization_post_like")
+}
+
+model OrganizationPostSave {
+  id        Int              @id @default(autoincrement())
+  postId    Int
+  userId    Int
+  createdAt DateTime         @default(now()) @db.Timestamp(6)
+  post      OrganizationPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@unique([postId, userId])
+  @@index([userId, createdAt])
+  @@map("organization_post_save")
+}
+
+model OrganizationPostHashtag {
+  id        Int              @id @default(autoincrement())
+  postId    Int
+  tag       String           @db.VarChar(80)
+  createdAt DateTime         @default(now()) @db.Timestamp(6)
+  post      OrganizationPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@index([tag, createdAt])
+  @@index([postId])
+  @@map("organization_post_hashtag")
 }
 
 // "Estante curado del scan": recomendaciones editoriales que el propio scan
@@ -1343,6 +1378,11 @@ model Notification {
   // For new_manga / new_subscriber / failed_payment — the org context.
   organizationId  Int?
   organization    Organization? @relation(fields: [organizationId], references: [id])
+
+  // Interacciones sociales (/socials): el post referido y el actor que la genero.
+  // Columnas planas (sin relacion) para evitar renombrar la relacion de usuario.
+  postId          Int?
+  actorUserId     Int?
 
   @@index([userId, readAt, createdAt])
   @@index([userId, createdAt])

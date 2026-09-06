@@ -279,7 +279,33 @@ const statements: string[] = [
     "createdAt" TIMESTAMP(6) NOT NULL DEFAULT now()
   );`,
   `CREATE UNIQUE INDEX IF NOT EXISTS "organization_post_like_postId_userId_key" ON "organization_post_like"("postId", "userId");`,
-  `CREATE INDEX IF NOT EXISTS "organization_post_like_postId_idx" ON "organization_post_like"("postId");`
+  `CREATE INDEX IF NOT EXISTS "organization_post_like_postId_idx" ON "organization_post_like"("postId");`,
+  // Overhaul social: org opcional (posts de usuario), hilos, reposts, saves, hashtags.
+  `ALTER TABLE "organization_post" ALTER COLUMN "organizationId" DROP NOT NULL;`,
+  `ALTER TABLE "organization_post" ADD COLUMN IF NOT EXISTS "parentId" INTEGER;`,
+  `ALTER TABLE "organization_post" ADD COLUMN IF NOT EXISTS "repostOfId" INTEGER;`,
+  `ALTER TABLE "organization_post" ADD COLUMN IF NOT EXISTS "repostCount" INTEGER NOT NULL DEFAULT 0;`,
+  `CREATE INDEX IF NOT EXISTS "organization_post_parentId_createdAt_idx" ON "organization_post"("parentId", "createdAt");`,
+  `CREATE INDEX IF NOT EXISTS "organization_post_userId_createdAt_idx" ON "organization_post"("userId", "createdAt");`,
+  `CREATE TABLE IF NOT EXISTS "organization_post_save" (
+    "id" SERIAL PRIMARY KEY,
+    "postId" INTEGER NOT NULL REFERENCES "organization_post"("id") ON DELETE CASCADE,
+    "userId" INTEGER NOT NULL,
+    "createdAt" TIMESTAMP(6) NOT NULL DEFAULT now()
+  );`,
+  `CREATE UNIQUE INDEX IF NOT EXISTS "organization_post_save_postId_userId_key" ON "organization_post_save"("postId", "userId");`,
+  `CREATE INDEX IF NOT EXISTS "organization_post_save_userId_createdAt_idx" ON "organization_post_save"("userId", "createdAt");`,
+  `CREATE TABLE IF NOT EXISTS "organization_post_hashtag" (
+    "id" SERIAL PRIMARY KEY,
+    "postId" INTEGER NOT NULL REFERENCES "organization_post"("id") ON DELETE CASCADE,
+    "tag" VARCHAR(80) NOT NULL,
+    "createdAt" TIMESTAMP(6) NOT NULL DEFAULT now()
+  );`,
+  `CREATE INDEX IF NOT EXISTS "organization_post_hashtag_tag_createdAt_idx" ON "organization_post_hashtag"("tag", "createdAt");`,
+  `CREATE INDEX IF NOT EXISTS "organization_post_hashtag_postId_idx" ON "organization_post_hashtag"("postId");`,
+  // Notificaciones sociales: referencia a post y actor.
+  `ALTER TABLE "notification" ADD COLUMN IF NOT EXISTS "postId" INTEGER;`,
+  `ALTER TABLE "notification" ADD COLUMN IF NOT EXISTS "actorUserId" INTEGER;`
 ]
 
 for (const sql of statements) {

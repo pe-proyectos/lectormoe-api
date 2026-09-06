@@ -56,6 +56,8 @@ export const ModelName = {
   RecruitmentPost: 'RecruitmentPost',
   OrganizationPost: 'OrganizationPost',
   OrganizationPostLike: 'OrganizationPostLike',
+  OrganizationPostSave: 'OrganizationPostSave',
+  OrganizationPostHashtag: 'OrganizationPostHashtag',
   OrganizationRecommendation: 'OrganizationRecommendation',
   User: 'User',
   BetaTester: 'BetaTester',
@@ -218,8 +220,11 @@ export const OrganizationPostScalarFieldEnum = {
   content: 'content',
   images: 'images',
   pinned: 'pinned',
+  parentId: 'parentId',
+  repostOfId: 'repostOfId',
   likesCount: 'likesCount',
   commentsCount: 'commentsCount',
+  repostCount: 'repostCount',
   deletedAt: 'deletedAt',
   hiddenAt: 'hiddenAt',
   createdAt: 'createdAt',
@@ -237,6 +242,26 @@ export const OrganizationPostLikeScalarFieldEnum = {
 } as const
 
 export type OrganizationPostLikeScalarFieldEnum = (typeof OrganizationPostLikeScalarFieldEnum)[keyof typeof OrganizationPostLikeScalarFieldEnum]
+
+
+export const OrganizationPostSaveScalarFieldEnum = {
+  id: 'id',
+  postId: 'postId',
+  userId: 'userId',
+  createdAt: 'createdAt'
+} as const
+
+export type OrganizationPostSaveScalarFieldEnum = (typeof OrganizationPostSaveScalarFieldEnum)[keyof typeof OrganizationPostSaveScalarFieldEnum]
+
+
+export const OrganizationPostHashtagScalarFieldEnum = {
+  id: 'id',
+  postId: 'postId',
+  tag: 'tag',
+  createdAt: 'createdAt'
+} as const
+
+export type OrganizationPostHashtagScalarFieldEnum = (typeof OrganizationPostHashtagScalarFieldEnum)[keyof typeof OrganizationPostHashtagScalarFieldEnum]
 
 
 export const OrganizationRecommendationScalarFieldEnum = {
@@ -1127,7 +1152,9 @@ export const NotificationScalarFieldEnum = {
   commentId: 'commentId',
   parentCommentId: 'parentCommentId',
   subscriptionId: 'subscriptionId',
-  organizationId: 'organizationId'
+  organizationId: 'organizationId',
+  postId: 'postId',
+  actorUserId: 'actorUserId'
 } as const
 
 export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]

@@ -604,14 +604,6 @@ export type OrganizationRecommendationUncheckedUpdateManyWithoutOrganizationNest
   deleteMany?: Prisma.OrganizationRecommendationScalarWhereInput | Prisma.OrganizationRecommendationScalarWhereInput[]
 }
 
-export type NullableIntFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type OrganizationRecommendationCreateNestedManyWithoutMangaCustomInput = {
   create?: Prisma.XOR<Prisma.OrganizationRecommendationCreateWithoutMangaCustomInput, Prisma.OrganizationRecommendationUncheckedCreateWithoutMangaCustomInput> | Prisma.OrganizationRecommendationCreateWithoutMangaCustomInput[] | Prisma.OrganizationRecommendationUncheckedCreateWithoutMangaCustomInput[]
   connectOrCreate?: Prisma.OrganizationRecommendationCreateOrConnectWithoutMangaCustomInput | Prisma.OrganizationRecommendationCreateOrConnectWithoutMangaCustomInput[]
