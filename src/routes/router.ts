@@ -135,6 +135,7 @@ import { router as userChapterHistoryUnreadChapterRouter } from './user-chapter-
 import { router as myListRouter } from './user-list'
 import { router as userSavedQuoteRouter } from './user-saved-quote'
 import { router as organizationPostRouter } from './organization-post'
+import { router as socialGraphRouter } from './social-graph'
 import { router as userPageBookmarkRouter } from './user-page-bookmark/index'
 import { router as viewsCreateRouter } from './views/create'
 import { router as viewsJointRouter } from './views/create-joint'
@@ -306,6 +307,7 @@ export const router = () => async (app: Elysia) => {
   app.use(userPageBookmarkRouter())
   app.use(userSavedQuoteRouter())
   app.use(organizationPostRouter())
+  app.use(socialGraphRouter())
   app.use(userEditRouter())
   app.use(userDeleteAccountRouter())
   app.use(userDeleteDataRouter())

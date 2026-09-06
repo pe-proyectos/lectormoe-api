@@ -28,10 +28,16 @@ export type AggregateUser = {
 
 export type UserAvgAggregateOutputType = {
   id: number | null
+  followersCount: number | null
+  followingCount: number | null
+  postsCount: number | null
 }
 
 export type UserSumAggregateOutputType = {
   id: number | null
+  followersCount: number | null
+  followingCount: number | null
+  postsCount: number | null
 }
 
 export type UserMinAggregateOutputType = {
@@ -65,6 +71,9 @@ export type UserMinAggregateOutputType = {
   discordLastCheckAt: Date | null
   listIsPublic: boolean | null
   savedQuotesPublic: boolean | null
+  followersCount: number | null
+  followingCount: number | null
+  postsCount: number | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -98,6 +107,9 @@ export type UserMaxAggregateOutputType = {
   discordLastCheckAt: Date | null
   listIsPublic: boolean | null
   savedQuotesPublic: boolean | null
+  followersCount: number | null
+  followingCount: number | null
+  postsCount: number | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -131,16 +143,25 @@ export type UserCountAggregateOutputType = {
   discordLastCheckAt: number
   listIsPublic: number
   savedQuotesPublic: number
+  followersCount: number
+  followingCount: number
+  postsCount: number
   _all: number
 }
 
 
 export type UserAvgAggregateInputType = {
   id?: true
+  followersCount?: true
+  followingCount?: true
+  postsCount?: true
 }
 
 export type UserSumAggregateInputType = {
   id?: true
+  followersCount?: true
+  followingCount?: true
+  postsCount?: true
 }
 
 export type UserMinAggregateInputType = {
@@ -174,6 +195,9 @@ export type UserMinAggregateInputType = {
   discordLastCheckAt?: true
   listIsPublic?: true
   savedQuotesPublic?: true
+  followersCount?: true
+  followingCount?: true
+  postsCount?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -207,6 +231,9 @@ export type UserMaxAggregateInputType = {
   discordLastCheckAt?: true
   listIsPublic?: true
   savedQuotesPublic?: true
+  followersCount?: true
+  followingCount?: true
+  postsCount?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -240,6 +267,9 @@ export type UserCountAggregateInputType = {
   discordLastCheckAt?: true
   listIsPublic?: true
   savedQuotesPublic?: true
+  followersCount?: true
+  followingCount?: true
+  postsCount?: true
   _all?: true
 }
 
@@ -360,6 +390,9 @@ export type UserGroupByOutputType = {
   discordLastCheckAt: Date | null
   listIsPublic: boolean
   savedQuotesPublic: boolean
+  followersCount: number
+  followingCount: number
+  postsCount: number
   _count: UserCountAggregateOutputType | null
   _avg: UserAvgAggregateOutputType | null
   _sum: UserSumAggregateOutputType | null
@@ -416,6 +449,9 @@ export type UserWhereInput = {
   discordLastCheckAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   listIsPublic?: Prisma.BoolFilter<"User"> | boolean
   savedQuotesPublic?: Prisma.BoolFilter<"User"> | boolean
+  followersCount?: Prisma.IntFilter<"User"> | number
+  followingCount?: Prisma.IntFilter<"User"> | number
+  postsCount?: Prisma.IntFilter<"User"> | number
   analytics?: Prisma.AnalyticsListRelationFilter
   audits?: Prisma.AuditListRelationFilter
   Comment?: Prisma.CommentListRelationFilter
@@ -490,6 +526,9 @@ export type UserOrderByWithRelationInput = {
   discordLastCheckAt?: Prisma.SortOrderInput | Prisma.SortOrder
   listIsPublic?: Prisma.SortOrder
   savedQuotesPublic?: Prisma.SortOrder
+  followersCount?: Prisma.SortOrder
+  followingCount?: Prisma.SortOrder
+  postsCount?: Prisma.SortOrder
   analytics?: Prisma.AnalyticsOrderByRelationAggregateInput
   audits?: Prisma.AuditOrderByRelationAggregateInput
   Comment?: Prisma.CommentOrderByRelationAggregateInput
@@ -567,6 +606,9 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   discordLastCheckAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   listIsPublic?: Prisma.BoolFilter<"User"> | boolean
   savedQuotesPublic?: Prisma.BoolFilter<"User"> | boolean
+  followersCount?: Prisma.IntFilter<"User"> | number
+  followingCount?: Prisma.IntFilter<"User"> | number
+  postsCount?: Prisma.IntFilter<"User"> | number
   analytics?: Prisma.AnalyticsListRelationFilter
   audits?: Prisma.AuditListRelationFilter
   Comment?: Prisma.CommentListRelationFilter
@@ -641,6 +683,9 @@ export type UserOrderByWithAggregationInput = {
   discordLastCheckAt?: Prisma.SortOrderInput | Prisma.SortOrder
   listIsPublic?: Prisma.SortOrder
   savedQuotesPublic?: Prisma.SortOrder
+  followersCount?: Prisma.SortOrder
+  followingCount?: Prisma.SortOrder
+  postsCount?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
@@ -682,6 +727,9 @@ export type UserScalarWhereWithAggregatesInput = {
   discordLastCheckAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   listIsPublic?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   savedQuotesPublic?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  followersCount?: Prisma.IntWithAggregatesFilter<"User"> | number
+  followingCount?: Prisma.IntWithAggregatesFilter<"User"> | number
+  postsCount?: Prisma.IntWithAggregatesFilter<"User"> | number
 }
 
 export type UserCreateInput = {
@@ -714,6 +762,9 @@ export type UserCreateInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -788,6 +839,9 @@ export type UserUncheckedCreateInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -861,6 +915,9 @@ export type UserUpdateInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -935,6 +992,9 @@ export type UserUncheckedUpdateInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -1009,6 +1069,9 @@ export type UserCreateManyInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
 }
 
 export type UserUpdateManyMutationInput = {
@@ -1041,6 +1104,9 @@ export type UserUpdateManyMutationInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -1074,6 +1140,9 @@ export type UserUncheckedUpdateManyInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type UserScalarRelationFilter = {
@@ -1112,10 +1181,16 @@ export type UserCountOrderByAggregateInput = {
   discordLastCheckAt?: Prisma.SortOrder
   listIsPublic?: Prisma.SortOrder
   savedQuotesPublic?: Prisma.SortOrder
+  followersCount?: Prisma.SortOrder
+  followingCount?: Prisma.SortOrder
+  postsCount?: Prisma.SortOrder
 }
 
 export type UserAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  followersCount?: Prisma.SortOrder
+  followingCount?: Prisma.SortOrder
+  postsCount?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -1149,6 +1224,9 @@ export type UserMaxOrderByAggregateInput = {
   discordLastCheckAt?: Prisma.SortOrder
   listIsPublic?: Prisma.SortOrder
   savedQuotesPublic?: Prisma.SortOrder
+  followersCount?: Prisma.SortOrder
+  followingCount?: Prisma.SortOrder
+  postsCount?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -1182,10 +1260,16 @@ export type UserMinOrderByAggregateInput = {
   discordLastCheckAt?: Prisma.SortOrder
   listIsPublic?: Prisma.SortOrder
   savedQuotesPublic?: Prisma.SortOrder
+  followersCount?: Prisma.SortOrder
+  followingCount?: Prisma.SortOrder
+  postsCount?: Prisma.SortOrder
 }
 
 export type UserSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  followersCount?: Prisma.SortOrder
+  followingCount?: Prisma.SortOrder
+  postsCount?: Prisma.SortOrder
 }
 
 export type UserNullableScalarRelationFilter = {
@@ -1813,6 +1897,9 @@ export type UserCreateWithoutTokensInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -1886,6 +1973,9 @@ export type UserUncheckedCreateWithoutTokensInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -1974,6 +2064,9 @@ export type UserUpdateWithoutTokensInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -2047,6 +2140,9 @@ export type UserUncheckedUpdateWithoutTokensInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -2119,6 +2215,9 @@ export type UserCreateWithoutCommunityPostsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -2192,6 +2291,9 @@ export type UserUncheckedCreateWithoutCommunityPostsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -2280,6 +2382,9 @@ export type UserUpdateWithoutCommunityPostsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -2353,6 +2458,9 @@ export type UserUncheckedUpdateWithoutCommunityPostsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -2425,6 +2533,9 @@ export type UserCreateWithoutBetaTesterInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -2498,6 +2609,9 @@ export type UserUncheckedCreateWithoutBetaTesterInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -2586,6 +2700,9 @@ export type UserUpdateWithoutBetaTesterInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -2659,6 +2776,9 @@ export type UserUncheckedUpdateWithoutBetaTesterInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -2731,6 +2851,9 @@ export type UserCreateWithoutModerationLogsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -2804,6 +2927,9 @@ export type UserUncheckedCreateWithoutModerationLogsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -2892,6 +3018,9 @@ export type UserUpdateWithoutModerationLogsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -2965,6 +3094,9 @@ export type UserUncheckedUpdateWithoutModerationLogsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -3037,6 +3169,9 @@ export type UserCreateWithoutPermissionsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -3110,6 +3245,9 @@ export type UserUncheckedCreateWithoutPermissionsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -3198,6 +3336,9 @@ export type UserUpdateWithoutPermissionsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -3271,6 +3412,9 @@ export type UserUncheckedUpdateWithoutPermissionsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -3343,6 +3487,9 @@ export type UserCreateWithoutPasswordResetTokensInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -3416,6 +3563,9 @@ export type UserUncheckedCreateWithoutPasswordResetTokensInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -3504,6 +3654,9 @@ export type UserUpdateWithoutPasswordResetTokensInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -3577,6 +3730,9 @@ export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -3649,6 +3805,9 @@ export type UserCreateWithoutMessageThreadsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -3722,6 +3881,9 @@ export type UserUncheckedCreateWithoutMessageThreadsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -3810,6 +3972,9 @@ export type UserUpdateWithoutMessageThreadsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -3883,6 +4048,9 @@ export type UserUncheckedUpdateWithoutMessageThreadsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -3955,6 +4123,9 @@ export type UserCreateWithoutOrganizationMessagesInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -4028,6 +4199,9 @@ export type UserUncheckedCreateWithoutOrganizationMessagesInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -4116,6 +4290,9 @@ export type UserUpdateWithoutOrganizationMessagesInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -4189,6 +4366,9 @@ export type UserUncheckedUpdateWithoutOrganizationMessagesInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -4261,6 +4441,9 @@ export type UserCreateWithoutCustomListsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -4334,6 +4517,9 @@ export type UserUncheckedCreateWithoutCustomListsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -4422,6 +4608,9 @@ export type UserUpdateWithoutCustomListsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -4495,6 +4684,9 @@ export type UserUncheckedUpdateWithoutCustomListsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -4567,6 +4759,9 @@ export type UserCreateWithoutCustomListFollowsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -4640,6 +4835,9 @@ export type UserUncheckedCreateWithoutCustomListFollowsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -4728,6 +4926,9 @@ export type UserUpdateWithoutCustomListFollowsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -4801,6 +5002,9 @@ export type UserUncheckedUpdateWithoutCustomListFollowsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -4873,6 +5077,9 @@ export type UserCreateWithoutCustomListFollowerItemsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -4946,6 +5153,9 @@ export type UserUncheckedCreateWithoutCustomListFollowerItemsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -5034,6 +5244,9 @@ export type UserUpdateWithoutCustomListFollowerItemsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -5107,6 +5320,9 @@ export type UserUncheckedUpdateWithoutCustomListFollowerItemsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -5179,6 +5395,9 @@ export type UserCreateWithoutContentReportsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -5252,6 +5471,9 @@ export type UserUncheckedCreateWithoutContentReportsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -5329,6 +5551,9 @@ export type UserCreateWithoutContentReportsReviewedInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -5402,6 +5627,9 @@ export type UserUncheckedCreateWithoutContentReportsReviewedInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -5490,6 +5718,9 @@ export type UserUpdateWithoutContentReportsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -5563,6 +5794,9 @@ export type UserUncheckedUpdateWithoutContentReportsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -5646,6 +5880,9 @@ export type UserUpdateWithoutContentReportsReviewedInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -5719,6 +5956,9 @@ export type UserUncheckedUpdateWithoutContentReportsReviewedInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -5791,6 +6031,9 @@ export type UserCreateWithoutReviewsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -5864,6 +6107,9 @@ export type UserUncheckedCreateWithoutReviewsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -5941,6 +6187,9 @@ export type UserCreateWithoutReviewsHiddenInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -6014,6 +6263,9 @@ export type UserUncheckedCreateWithoutReviewsHiddenInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -6102,6 +6354,9 @@ export type UserUpdateWithoutReviewsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -6175,6 +6430,9 @@ export type UserUncheckedUpdateWithoutReviewsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -6258,6 +6516,9 @@ export type UserUpdateWithoutReviewsHiddenInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -6331,6 +6592,9 @@ export type UserUncheckedUpdateWithoutReviewsHiddenInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -6403,6 +6667,9 @@ export type UserCreateWithoutMilestoneAlertsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -6476,6 +6743,9 @@ export type UserUncheckedCreateWithoutMilestoneAlertsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -6564,6 +6834,9 @@ export type UserUpdateWithoutMilestoneAlertsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -6637,6 +6910,9 @@ export type UserUncheckedUpdateWithoutMilestoneAlertsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -6709,6 +6985,9 @@ export type UserCreateWithoutChapterReactionsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -6782,6 +7061,9 @@ export type UserUncheckedCreateWithoutChapterReactionsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -6870,6 +7152,9 @@ export type UserUpdateWithoutChapterReactionsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -6943,6 +7228,9 @@ export type UserUncheckedUpdateWithoutChapterReactionsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -7015,6 +7303,9 @@ export type UserCreateWithoutCommentInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
@@ -7088,6 +7379,9 @@ export type UserUncheckedCreateWithoutCommentInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
@@ -7165,6 +7459,9 @@ export type UserCreateWithoutCommentsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -7238,6 +7535,9 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -7326,6 +7626,9 @@ export type UserUpdateWithoutCommentInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
@@ -7399,6 +7702,9 @@ export type UserUncheckedUpdateWithoutCommentInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
@@ -7482,6 +7788,9 @@ export type UserUpdateWithoutCommentsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -7555,6 +7864,9 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -7627,6 +7939,9 @@ export type UserCreateWithoutRankingsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -7700,6 +8015,9 @@ export type UserUncheckedCreateWithoutRankingsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -7788,6 +8106,9 @@ export type UserUpdateWithoutRankingsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -7861,6 +8182,9 @@ export type UserUncheckedUpdateWithoutRankingsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -7933,6 +8257,9 @@ export type UserCreateWithoutAnalyticsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
@@ -8006,6 +8333,9 @@ export type UserUncheckedCreateWithoutAnalyticsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
@@ -8094,6 +8424,9 @@ export type UserUpdateWithoutAnalyticsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
@@ -8167,6 +8500,9 @@ export type UserUncheckedUpdateWithoutAnalyticsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
@@ -8239,6 +8575,9 @@ export type UserCreateWithoutHistoryInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -8312,6 +8651,9 @@ export type UserUncheckedCreateWithoutHistoryInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -8400,6 +8742,9 @@ export type UserUpdateWithoutHistoryInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -8473,6 +8818,9 @@ export type UserUncheckedUpdateWithoutHistoryInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -8545,6 +8893,9 @@ export type UserCreateWithoutFavoritesInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -8618,6 +8969,9 @@ export type UserUncheckedCreateWithoutFavoritesInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -8706,6 +9060,9 @@ export type UserUpdateWithoutFavoritesInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -8779,6 +9136,9 @@ export type UserUncheckedUpdateWithoutFavoritesInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -8851,6 +9211,9 @@ export type UserCreateWithoutUserListInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -8924,6 +9287,9 @@ export type UserUncheckedCreateWithoutUserListInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -9012,6 +9378,9 @@ export type UserUpdateWithoutUserListInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -9085,6 +9454,9 @@ export type UserUncheckedUpdateWithoutUserListInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -9157,6 +9529,9 @@ export type UserCreateWithoutPageBookmarksInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -9230,6 +9605,9 @@ export type UserUncheckedCreateWithoutPageBookmarksInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -9318,6 +9696,9 @@ export type UserUpdateWithoutPageBookmarksInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -9391,6 +9772,9 @@ export type UserUncheckedUpdateWithoutPageBookmarksInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -9463,6 +9847,9 @@ export type UserCreateWithoutAuditsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
@@ -9536,6 +9923,9 @@ export type UserUncheckedCreateWithoutAuditsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
@@ -9624,6 +10014,9 @@ export type UserUpdateWithoutAuditsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
@@ -9697,6 +10090,9 @@ export type UserUncheckedUpdateWithoutAuditsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
@@ -9769,6 +10165,9 @@ export type UserCreateWithoutSubscriptionsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -9842,6 +10241,9 @@ export type UserUncheckedCreateWithoutSubscriptionsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -9930,6 +10332,9 @@ export type UserUpdateWithoutSubscriptionsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -10003,6 +10408,9 @@ export type UserUncheckedUpdateWithoutSubscriptionsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -10075,6 +10483,9 @@ export type UserCreateWithoutOrganizationFollowsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -10148,6 +10559,9 @@ export type UserUncheckedCreateWithoutOrganizationFollowsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -10236,6 +10650,9 @@ export type UserUpdateWithoutOrganizationFollowsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -10309,6 +10726,9 @@ export type UserUncheckedUpdateWithoutOrganizationFollowsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -10381,6 +10801,9 @@ export type UserCreateWithoutOrganizationRequestsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -10454,6 +10877,9 @@ export type UserUncheckedCreateWithoutOrganizationRequestsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -10542,6 +10968,9 @@ export type UserUpdateWithoutOrganizationRequestsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -10615,6 +11044,9 @@ export type UserUncheckedUpdateWithoutOrganizationRequestsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -10687,6 +11119,9 @@ export type UserCreateWithoutEmailPreferenceInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -10760,6 +11195,9 @@ export type UserUncheckedCreateWithoutEmailPreferenceInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -10848,6 +11286,9 @@ export type UserUpdateWithoutEmailPreferenceInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -10921,6 +11362,9 @@ export type UserUncheckedUpdateWithoutEmailPreferenceInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -10993,6 +11437,9 @@ export type UserCreateWithoutEmailLogsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -11066,6 +11513,9 @@ export type UserUncheckedCreateWithoutEmailLogsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -11154,6 +11604,9 @@ export type UserUpdateWithoutEmailLogsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -11227,6 +11680,9 @@ export type UserUncheckedUpdateWithoutEmailLogsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -11299,6 +11755,9 @@ export type UserCreateWithoutUnsubscribeTokensInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -11372,6 +11831,9 @@ export type UserUncheckedCreateWithoutUnsubscribeTokensInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -11460,6 +11922,9 @@ export type UserUpdateWithoutUnsubscribeTokensInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -11533,6 +11998,9 @@ export type UserUncheckedUpdateWithoutUnsubscribeTokensInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -11605,6 +12073,9 @@ export type UserCreateWithoutEmailVerificationTokensInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -11678,6 +12149,9 @@ export type UserUncheckedCreateWithoutEmailVerificationTokensInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -11766,6 +12240,9 @@ export type UserUpdateWithoutEmailVerificationTokensInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -11839,6 +12316,9 @@ export type UserUncheckedUpdateWithoutEmailVerificationTokensInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -11911,6 +12391,9 @@ export type UserCreateWithoutSavedQuotesInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -11984,6 +12467,9 @@ export type UserUncheckedCreateWithoutSavedQuotesInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -12072,6 +12558,9 @@ export type UserUpdateWithoutSavedQuotesInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -12145,6 +12634,9 @@ export type UserUncheckedUpdateWithoutSavedQuotesInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -12217,6 +12709,9 @@ export type UserCreateWithoutDailyActivitiesInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -12290,6 +12785,9 @@ export type UserUncheckedCreateWithoutDailyActivitiesInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -12378,6 +12876,9 @@ export type UserUpdateWithoutDailyActivitiesInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -12451,6 +12952,9 @@ export type UserUncheckedUpdateWithoutDailyActivitiesInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -12523,6 +13027,9 @@ export type UserCreateWithoutAchievementsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -12596,6 +13103,9 @@ export type UserUncheckedCreateWithoutAchievementsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -12684,6 +13194,9 @@ export type UserUpdateWithoutAchievementsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -12757,6 +13270,9 @@ export type UserUncheckedUpdateWithoutAchievementsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -12829,6 +13345,9 @@ export type UserCreateWithoutNotificationsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -12902,6 +13421,9 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -12990,6 +13512,9 @@ export type UserUpdateWithoutNotificationsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -13063,6 +13588,9 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -13135,6 +13663,9 @@ export type UserCreateWithoutRaffleTicketsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -13208,6 +13739,9 @@ export type UserUncheckedCreateWithoutRaffleTicketsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -13296,6 +13830,9 @@ export type UserUpdateWithoutRaffleTicketsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -13369,6 +13906,9 @@ export type UserUncheckedUpdateWithoutRaffleTicketsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -13441,6 +13981,9 @@ export type UserCreateWithoutRaffleCommentsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -13514,6 +14057,9 @@ export type UserUncheckedCreateWithoutRaffleCommentsInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -13602,6 +14148,9 @@ export type UserUpdateWithoutRaffleCommentsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -13675,6 +14224,9 @@ export type UserUncheckedUpdateWithoutRaffleCommentsInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -13747,6 +14299,9 @@ export type UserCreateWithoutBansReceivedInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -13820,6 +14375,9 @@ export type UserUncheckedCreateWithoutBansReceivedInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -13897,6 +14455,9 @@ export type UserCreateWithoutBansIssuedInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentCreateNestedManyWithoutHiddenByUserInput
@@ -13970,6 +14531,9 @@ export type UserUncheckedCreateWithoutBansIssuedInput = {
   discordLastCheckAt?: Date | string | null
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: number
+  followingCount?: number
+  postsCount?: number
   analytics?: Prisma.AnalyticsUncheckedCreateNestedManyWithoutUserInput
   audits?: Prisma.AuditUncheckedCreateNestedManyWithoutUserInput
   Comment?: Prisma.CommentUncheckedCreateNestedManyWithoutHiddenByUserInput
@@ -14058,6 +14622,9 @@ export type UserUpdateWithoutBansReceivedInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -14131,6 +14698,9 @@ export type UserUncheckedUpdateWithoutBansReceivedInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -14214,6 +14784,9 @@ export type UserUpdateWithoutBansIssuedInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUpdateManyWithoutHiddenByUserNestedInput
@@ -14287,6 +14860,9 @@ export type UserUncheckedUpdateWithoutBansIssuedInput = {
   discordLastCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listIsPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   savedQuotesPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  followersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  followingCount?: Prisma.IntFieldUpdateOperationsInput | number
+  postsCount?: Prisma.IntFieldUpdateOperationsInput | number
   analytics?: Prisma.AnalyticsUncheckedUpdateManyWithoutUserNestedInput
   audits?: Prisma.AuditUncheckedUpdateManyWithoutUserNestedInput
   Comment?: Prisma.CommentUncheckedUpdateManyWithoutHiddenByUserNestedInput
@@ -14733,6 +15309,9 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   discordLastCheckAt?: boolean
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: boolean
+  followingCount?: boolean
+  postsCount?: boolean
   analytics?: boolean | Prisma.User$analyticsArgs<ExtArgs>
   audits?: boolean | Prisma.User$auditsArgs<ExtArgs>
   Comment?: boolean | Prisma.User$CommentArgs<ExtArgs>
@@ -14808,6 +15387,9 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   discordLastCheckAt?: boolean
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: boolean
+  followingCount?: boolean
+  postsCount?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -14841,6 +15423,9 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   discordLastCheckAt?: boolean
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: boolean
+  followingCount?: boolean
+  postsCount?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -14874,9 +15459,12 @@ export type UserSelectScalar = {
   discordLastCheckAt?: boolean
   listIsPublic?: boolean
   savedQuotesPublic?: boolean
+  followersCount?: boolean
+  followingCount?: boolean
+  postsCount?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "slug" | "email" | "password" | "createdAt" | "updatedAt" | "description" | "imageUrl" | "birthdate" | "bannerUrl" | "bannerUrlChangedAt" | "imageUrlChangedAt" | "usernameChangedAt" | "emailNotifications" | "emailVerified" | "deletedAt" | "isPrivateHistory" | "isPublicProfile" | "pushNotifications" | "notifyCommentsOnOwnedContent" | "hideAds" | "theme" | "discordId" | "discordUsername" | "discordAvatar" | "discordVerifiedAt" | "discordLastCheckAt" | "listIsPublic" | "savedQuotesPublic", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "slug" | "email" | "password" | "createdAt" | "updatedAt" | "description" | "imageUrl" | "birthdate" | "bannerUrl" | "bannerUrlChangedAt" | "imageUrlChangedAt" | "usernameChangedAt" | "emailNotifications" | "emailVerified" | "deletedAt" | "isPrivateHistory" | "isPublicProfile" | "pushNotifications" | "notifyCommentsOnOwnedContent" | "hideAds" | "theme" | "discordId" | "discordUsername" | "discordAvatar" | "discordVerifiedAt" | "discordLastCheckAt" | "listIsPublic" | "savedQuotesPublic" | "followersCount" | "followingCount" | "postsCount", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   analytics?: boolean | Prisma.User$analyticsArgs<ExtArgs>
   audits?: boolean | Prisma.User$auditsArgs<ExtArgs>
@@ -15000,6 +15588,9 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     discordLastCheckAt: Date | null
     listIsPublic: boolean
     savedQuotesPublic: boolean
+    followersCount: number
+    followingCount: number
+    postsCount: number
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -15494,6 +16085,9 @@ export interface UserFieldRefs {
   readonly discordLastCheckAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly listIsPublic: Prisma.FieldRef<"User", 'Boolean'>
   readonly savedQuotesPublic: Prisma.FieldRef<"User", 'Boolean'>
+  readonly followersCount: Prisma.FieldRef<"User", 'Int'>
+  readonly followingCount: Prisma.FieldRef<"User", 'Int'>
+  readonly postsCount: Prisma.FieldRef<"User", 'Int'>
 }
     
 

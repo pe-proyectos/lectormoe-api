@@ -115,7 +115,10 @@ export const ModelName = {
   RaffleTicket: 'RaffleTicket',
   RaffleComment: 'RaffleComment',
   RaffleRefund: 'RaffleRefund',
-  UserBan: 'UserBan'
+  UserBan: 'UserBan',
+  UserFollow: 'UserFollow',
+  UserBlock: 'UserBlock',
+  UserMute: 'UserMute'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -225,6 +228,13 @@ export const OrganizationPostScalarFieldEnum = {
   likesCount: 'likesCount',
   commentsCount: 'commentsCount',
   repostCount: 'repostCount',
+  isSpoiler: 'isSpoiler',
+  isSensitive: 'isSensitive',
+  spoilerOfMangaCustomId: 'spoilerOfMangaCustomId',
+  spoilerChapter: 'spoilerChapter',
+  reportsCount: 'reportsCount',
+  hiddenReason: 'hiddenReason',
+  hiddenByUserId: 'hiddenByUserId',
   deletedAt: 'deletedAt',
   hiddenAt: 'hiddenAt',
   createdAt: 'createdAt',
@@ -313,7 +323,10 @@ export const UserScalarFieldEnum = {
   discordVerifiedAt: 'discordVerifiedAt',
   discordLastCheckAt: 'discordLastCheckAt',
   listIsPublic: 'listIsPublic',
-  savedQuotesPublic: 'savedQuotesPublic'
+  savedQuotesPublic: 'savedQuotesPublic',
+  followersCount: 'followersCount',
+  followingCount: 'followingCount',
+  postsCount: 'postsCount'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -603,6 +616,8 @@ export const ContentReportScalarFieldEnum = {
   category: 'category',
   details: 'details',
   status: 'status',
+  postId: 'postId',
+  reportedUserId: 'reportedUserId',
   resolutionNote: 'resolutionNote',
   reviewedByUserId: 'reviewedByUserId',
   reviewedAt: 'reviewedAt',
@@ -1264,6 +1279,37 @@ export const UserBanScalarFieldEnum = {
 } as const
 
 export type UserBanScalarFieldEnum = (typeof UserBanScalarFieldEnum)[keyof typeof UserBanScalarFieldEnum]
+
+
+export const UserFollowScalarFieldEnum = {
+  id: 'id',
+  followerId: 'followerId',
+  followedId: 'followedId',
+  createdAt: 'createdAt'
+} as const
+
+export type UserFollowScalarFieldEnum = (typeof UserFollowScalarFieldEnum)[keyof typeof UserFollowScalarFieldEnum]
+
+
+export const UserBlockScalarFieldEnum = {
+  id: 'id',
+  blockerId: 'blockerId',
+  blockedId: 'blockedId',
+  createdAt: 'createdAt'
+} as const
+
+export type UserBlockScalarFieldEnum = (typeof UserBlockScalarFieldEnum)[keyof typeof UserBlockScalarFieldEnum]
+
+
+export const UserMuteScalarFieldEnum = {
+  id: 'id',
+  muterId: 'muterId',
+  mutedId: 'mutedId',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
+} as const
+
+export type UserMuteScalarFieldEnum = (typeof UserMuteScalarFieldEnum)[keyof typeof UserMuteScalarFieldEnum]
 
 
 export const SortOrder = {

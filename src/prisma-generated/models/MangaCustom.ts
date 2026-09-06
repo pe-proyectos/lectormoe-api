@@ -1155,14 +1155,6 @@ export type MangaCustomUncheckedUpdateManyWithoutMangaNestedInput = {
   deleteMany?: Prisma.MangaCustomScalarWhereInput | Prisma.MangaCustomScalarWhereInput[]
 }
 
-export type NullableFloatFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type MangaCustomCreateNestedOneWithoutChaptersInput = {
   create?: Prisma.XOR<Prisma.MangaCustomCreateWithoutChaptersInput, Prisma.MangaCustomUncheckedCreateWithoutChaptersInput>
   connectOrCreate?: Prisma.MangaCustomCreateOrConnectWithoutChaptersInput

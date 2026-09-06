@@ -31,6 +31,7 @@ const authorInclude = {
 const postSelect = {
   id: true, content: true, images: true, pinned: true, parentId: true, repostOfId: true,
   likesCount: true, commentsCount: true, repostCount: true, createdAt: true, organizationId: true, userId: true,
+  isSpoiler: true, isSensitive: true, spoilerOfMangaCustomId: true, spoilerChapter: true,
   ...authorInclude,
 }
 
@@ -63,6 +64,8 @@ function shape(p: any, v: ViewerSets, repostOf?: any): any {
     id: p.id, content: p.content, images: toImages(p.images), pinned: p.pinned,
     parentId: p.parentId ?? null, isReply: !!p.parentId,
     likesCount: p.likesCount, commentsCount: p.commentsCount, repostCount: p.repostCount,
+    isSpoiler: !!p.isSpoiler, isSensitive: !!p.isSensitive,
+    spoilerOfMangaCustomId: p.spoilerOfMangaCustomId ?? null, spoilerChapter: p.spoilerChapter ?? null,
     createdAt: p.createdAt,
     liked: v.likes.has(p.id), saved: v.saves.has(p.id), reposted: v.reposts.has(p.id),
     author: authorOf(p),
@@ -78,6 +81,19 @@ async function withReposts(rows: any[], v: ViewerSets, userId?: number): Promise
   const tv = await viewerSets(userId, targets.map((t) => t.id))
   const map = new Map(targets.map((t) => [t.id, shape(t, tv)]))
   return rows.map((r) => shape(r, v, r.repostOfId ? map.get(r.repostOfId) ?? null : undefined))
+}
+
+// Conjunto de userIds que el viewer no debe ver (bloqueos en cualquier direccion + silenciados).
+async function excludedAuthorIds(viewerId: number | undefined): Promise<number[]> {
+  if (!viewerId) return []
+  const [blocks, muted] = await Promise.all([
+    prisma.userBlock.findMany({ where: { OR: [{ blockerId: viewerId }, { blockedId: viewerId }] }, select: { blockerId: true, blockedId: true } }),
+    prisma.userMute.findMany({ where: { muterId: viewerId }, select: { mutedId: true } }),
+  ])
+  const set = new Set<number>()
+  for (const b of blocks) { set.add(b.blockerId === viewerId ? b.blockedId : b.blockerId) }
+  for (const m of muted) set.add(m.mutedId)
+  return [...set]
 }
 
 async function notify(recipientUserId: number | null | undefined, type: string, postId: number, actorUserId: number, orgId: number | null = null) {
@@ -101,12 +117,26 @@ const publicPart = () =>
       const scope = query.scope || 'foryou'
       const includeNsfw = query.nsfw === '1' || query.nsfw === 'true'
       const where: any = { deletedAt: null, hiddenAt: null, parentId: null }
+      const excluded = await excludedAuthorIds(user?.id)
+      if (excluded.length) where.userId = { notIn: excluded }
       if (scope === 'following' && user) {
-        const f = await prisma.organizationFollower.findMany({ where: { userId: user.id }, select: { organizationId: true } })
-        const ids = f.map((x) => x.organizationId)
-        if (ids.length) where.organizationId = { in: ids }
+        const [orgs, users] = await Promise.all([
+          prisma.organizationFollower.findMany({ where: { userId: user.id }, select: { organizationId: true } }),
+          prisma.userFollow.findMany({ where: { followerId: user.id }, select: { followedId: true } }),
+        ])
+        const orgIds = orgs.map((x) => x.organizationId)
+        const userIds = users.map((x) => x.followedId)
+        where.OR = [
+          ...(orgIds.length ? [{ organizationId: { in: orgIds } }] : []),
+          ...(userIds.length ? [{ userId: { in: userIds } }] : []),
+          { userId: user.id },
+        ]
       }
-      if (!includeNsfw) where.OR = [{ organizationId: null }, { organization: { isNSFW: false } }]
+      if (!includeNsfw) {
+        const nsfwClause = [{ organizationId: null }, { organization: { isNSFW: false } }]
+        if (where.OR) where.AND = [{ OR: where.OR }, { OR: nsfwClause }], delete where.OR
+        else where.OR = nsfwClause
+      }
       const orderBy: any = scope === 'popular'
         ? [{ likesCount: 'desc' }, { commentsCount: 'desc' }, { createdAt: 'desc' }]
         : [{ createdAt: 'desc' }]
@@ -125,6 +155,20 @@ const publicPart = () =>
         where: { organizationId: org.id, deletedAt: null, hiddenAt: null, parentId: null },
         orderBy: [{ pinned: 'desc' }, { createdAt: 'desc' }], skip: page * limit, take: limit + 1, select: postSelect,
       })
+      const hasMore = rows.length > limit
+      const items = rows.slice(0, limit)
+      const v = await viewerSets(user?.id, items.map((p) => p.id))
+      return { status: true, data: { items: await withReposts(items, v, user?.id), hasMore } }
+    })
+    .get('/api/users/:slug/posts', async ({ params, query, user }: any) => {
+      const target = await prisma.user.findFirst({ where: { slug: params.slug }, select: { id: true } })
+      if (!target) return { status: true, data: { items: [], hasMore: false } }
+      const limit = Math.min(20, Math.max(1, Number(query.limit) || 10))
+      const page = Math.max(0, Number(query.page) || 0)
+      const includeReplies = query.replies === '1'
+      const where: any = { userId: target.id, deletedAt: null, hiddenAt: null }
+      if (!includeReplies) where.parentId = null
+      const rows = await prisma.organizationPost.findMany({ where, orderBy: [{ createdAt: 'desc' }], skip: page * limit, take: limit + 1, select: postSelect })
       const hasMore = rows.length > limit
       const items = rows.slice(0, limit)
       const v = await viewerSets(user?.id, items.map((p) => p.id))
@@ -249,9 +293,15 @@ const interactions = () =>
       }
 
       const post = await prisma.organizationPost.create({
-        data: { organizationId, userId: user.id, content, images, parentId, repostOfId },
+        data: {
+          organizationId, userId: user.id, content, images, parentId, repostOfId,
+          isSpoiler: !!body.isSpoiler, isSensitive: !!body.isSensitive,
+          spoilerOfMangaCustomId: body.spoilerOfMangaCustomId ? Number(body.spoilerOfMangaCustomId) : null,
+          spoilerChapter: body.spoilerChapter != null ? Number(body.spoilerChapter) : null,
+        },
         select: postSelect,
       })
+      await prisma.user.update({ where: { id: user.id }, data: { postsCount: { increment: 1 } } }).catch(() => {})
 
       const tags = parseHashtags(content)
       if (tags.length) await prisma.organizationPostHashtag.createMany({ data: tags.map((tag) => ({ postId: post.id, tag })) }).catch(() => {})
@@ -268,7 +318,7 @@ const interactions = () =>
       const v = await viewerSets(user.id, [post.id])
       const [full] = await withReposts([post], v, user.id)
       return { status: true, data: full }
-    }, { body: t.Object({ content: t.Optional(t.String()), images: t.Optional(t.Array(t.String())), orgSlug: t.Optional(t.Union([t.String(), t.Null()])), parentId: t.Optional(t.Union([t.Number(), t.Null()])), repostOf: t.Optional(t.Union([t.Number(), t.Null()])) }) })
+    }, { body: t.Object({ content: t.Optional(t.String()), images: t.Optional(t.Array(t.String())), orgSlug: t.Optional(t.Union([t.String(), t.Null()])), parentId: t.Optional(t.Union([t.Number(), t.Null()])), repostOf: t.Optional(t.Union([t.Number(), t.Null()])), isSpoiler: t.Optional(t.Boolean()), isSensitive: t.Optional(t.Boolean()), spoilerOfMangaCustomId: t.Optional(t.Union([t.Number(), t.Null()])), spoilerChapter: t.Optional(t.Union([t.Number(), t.Null()])) }) })
     .post('/api/posts/:id/like', async ({ params, user }: any) => {
       const id = Number(params.id)
       const post = await prisma.organizationPost.findFirst({ where: { id, deletedAt: null }, select: { id: true, userId: true } })
@@ -340,6 +390,7 @@ const interactions = () =>
       const canDelete = post.userId === user.id || isStaff(user, post.organizationId)
       if (!canDelete) throw new Error('No autorizado.')
       await prisma.organizationPost.update({ where: { id }, data: { deletedAt: new Date() } })
+      await prisma.user.update({ where: { id: post.userId }, data: { postsCount: { decrement: 1 } } }).catch(() => {})
       if (post.parentId) await prisma.organizationPost.update({ where: { id: post.parentId }, data: { commentsCount: { decrement: 1 } } }).catch(() => {})
       if (post.repostOfId) await prisma.organizationPost.update({ where: { id: post.repostOfId }, data: { repostCount: { decrement: 1 } } }).catch(() => {})
       return { status: true }

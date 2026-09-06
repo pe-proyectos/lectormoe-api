@@ -31,6 +31,8 @@ export type ContentReportAvgAggregateOutputType = {
   reporterUserId: number | null
   mangaCustomId: number | null
   jointId: number | null
+  postId: number | null
+  reportedUserId: number | null
   reviewedByUserId: number | null
 }
 
@@ -39,6 +41,8 @@ export type ContentReportSumAggregateOutputType = {
   reporterUserId: number | null
   mangaCustomId: number | null
   jointId: number | null
+  postId: number | null
+  reportedUserId: number | null
   reviewedByUserId: number | null
 }
 
@@ -50,6 +54,8 @@ export type ContentReportMinAggregateOutputType = {
   category: string | null
   details: string | null
   status: string | null
+  postId: number | null
+  reportedUserId: number | null
   resolutionNote: string | null
   reviewedByUserId: number | null
   reviewedAt: Date | null
@@ -65,6 +71,8 @@ export type ContentReportMaxAggregateOutputType = {
   category: string | null
   details: string | null
   status: string | null
+  postId: number | null
+  reportedUserId: number | null
   resolutionNote: string | null
   reviewedByUserId: number | null
   reviewedAt: Date | null
@@ -80,6 +88,8 @@ export type ContentReportCountAggregateOutputType = {
   category: number
   details: number
   status: number
+  postId: number
+  reportedUserId: number
   resolutionNote: number
   reviewedByUserId: number
   reviewedAt: number
@@ -94,6 +104,8 @@ export type ContentReportAvgAggregateInputType = {
   reporterUserId?: true
   mangaCustomId?: true
   jointId?: true
+  postId?: true
+  reportedUserId?: true
   reviewedByUserId?: true
 }
 
@@ -102,6 +114,8 @@ export type ContentReportSumAggregateInputType = {
   reporterUserId?: true
   mangaCustomId?: true
   jointId?: true
+  postId?: true
+  reportedUserId?: true
   reviewedByUserId?: true
 }
 
@@ -113,6 +127,8 @@ export type ContentReportMinAggregateInputType = {
   category?: true
   details?: true
   status?: true
+  postId?: true
+  reportedUserId?: true
   resolutionNote?: true
   reviewedByUserId?: true
   reviewedAt?: true
@@ -128,6 +144,8 @@ export type ContentReportMaxAggregateInputType = {
   category?: true
   details?: true
   status?: true
+  postId?: true
+  reportedUserId?: true
   resolutionNote?: true
   reviewedByUserId?: true
   reviewedAt?: true
@@ -143,6 +161,8 @@ export type ContentReportCountAggregateInputType = {
   category?: true
   details?: true
   status?: true
+  postId?: true
+  reportedUserId?: true
   resolutionNote?: true
   reviewedByUserId?: true
   reviewedAt?: true
@@ -245,6 +265,8 @@ export type ContentReportGroupByOutputType = {
   category: string
   details: string | null
   status: string
+  postId: number | null
+  reportedUserId: number | null
   resolutionNote: string | null
   reviewedByUserId: number | null
   reviewedAt: Date | null
@@ -283,6 +305,8 @@ export type ContentReportWhereInput = {
   category?: Prisma.StringFilter<"ContentReport"> | string
   details?: Prisma.StringNullableFilter<"ContentReport"> | string | null
   status?: Prisma.StringFilter<"ContentReport"> | string
+  postId?: Prisma.IntNullableFilter<"ContentReport"> | number | null
+  reportedUserId?: Prisma.IntNullableFilter<"ContentReport"> | number | null
   resolutionNote?: Prisma.StringNullableFilter<"ContentReport"> | string | null
   reviewedByUserId?: Prisma.IntNullableFilter<"ContentReport"> | number | null
   reviewedAt?: Prisma.DateTimeNullableFilter<"ContentReport"> | Date | string | null
@@ -302,6 +326,8 @@ export type ContentReportOrderByWithRelationInput = {
   category?: Prisma.SortOrder
   details?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
+  postId?: Prisma.SortOrderInput | Prisma.SortOrder
+  reportedUserId?: Prisma.SortOrderInput | Prisma.SortOrder
   resolutionNote?: Prisma.SortOrderInput | Prisma.SortOrder
   reviewedByUserId?: Prisma.SortOrderInput | Prisma.SortOrder
   reviewedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -324,6 +350,8 @@ export type ContentReportWhereUniqueInput = Prisma.AtLeast<{
   category?: Prisma.StringFilter<"ContentReport"> | string
   details?: Prisma.StringNullableFilter<"ContentReport"> | string | null
   status?: Prisma.StringFilter<"ContentReport"> | string
+  postId?: Prisma.IntNullableFilter<"ContentReport"> | number | null
+  reportedUserId?: Prisma.IntNullableFilter<"ContentReport"> | number | null
   resolutionNote?: Prisma.StringNullableFilter<"ContentReport"> | string | null
   reviewedByUserId?: Prisma.IntNullableFilter<"ContentReport"> | number | null
   reviewedAt?: Prisma.DateTimeNullableFilter<"ContentReport"> | Date | string | null
@@ -343,6 +371,8 @@ export type ContentReportOrderByWithAggregationInput = {
   category?: Prisma.SortOrder
   details?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
+  postId?: Prisma.SortOrderInput | Prisma.SortOrder
+  reportedUserId?: Prisma.SortOrderInput | Prisma.SortOrder
   resolutionNote?: Prisma.SortOrderInput | Prisma.SortOrder
   reviewedByUserId?: Prisma.SortOrderInput | Prisma.SortOrder
   reviewedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -366,6 +396,8 @@ export type ContentReportScalarWhereWithAggregatesInput = {
   category?: Prisma.StringWithAggregatesFilter<"ContentReport"> | string
   details?: Prisma.StringNullableWithAggregatesFilter<"ContentReport"> | string | null
   status?: Prisma.StringWithAggregatesFilter<"ContentReport"> | string
+  postId?: Prisma.IntNullableWithAggregatesFilter<"ContentReport"> | number | null
+  reportedUserId?: Prisma.IntNullableWithAggregatesFilter<"ContentReport"> | number | null
   resolutionNote?: Prisma.StringNullableWithAggregatesFilter<"ContentReport"> | string | null
   reviewedByUserId?: Prisma.IntNullableWithAggregatesFilter<"ContentReport"> | number | null
   reviewedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"ContentReport"> | Date | string | null
@@ -377,6 +409,8 @@ export type ContentReportCreateInput = {
   category: string
   details?: string | null
   status?: string
+  postId?: number | null
+  reportedUserId?: number | null
   resolutionNote?: string | null
   reviewedAt?: Date | string | null
   createdAt?: Date | string
@@ -395,6 +429,8 @@ export type ContentReportUncheckedCreateInput = {
   category: string
   details?: string | null
   status?: string
+  postId?: number | null
+  reportedUserId?: number | null
   resolutionNote?: string | null
   reviewedByUserId?: number | null
   reviewedAt?: Date | string | null
@@ -406,6 +442,8 @@ export type ContentReportUpdateInput = {
   category?: Prisma.StringFieldUpdateOperationsInput | string
   details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reportedUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -424,6 +462,8 @@ export type ContentReportUncheckedUpdateInput = {
   category?: Prisma.StringFieldUpdateOperationsInput | string
   details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reportedUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -439,6 +479,8 @@ export type ContentReportCreateManyInput = {
   category: string
   details?: string | null
   status?: string
+  postId?: number | null
+  reportedUserId?: number | null
   resolutionNote?: string | null
   reviewedByUserId?: number | null
   reviewedAt?: Date | string | null
@@ -450,6 +492,8 @@ export type ContentReportUpdateManyMutationInput = {
   category?: Prisma.StringFieldUpdateOperationsInput | string
   details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reportedUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -464,6 +508,8 @@ export type ContentReportUncheckedUpdateManyInput = {
   category?: Prisma.StringFieldUpdateOperationsInput | string
   details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reportedUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -489,6 +535,8 @@ export type ContentReportCountOrderByAggregateInput = {
   category?: Prisma.SortOrder
   details?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  postId?: Prisma.SortOrder
+  reportedUserId?: Prisma.SortOrder
   resolutionNote?: Prisma.SortOrder
   reviewedByUserId?: Prisma.SortOrder
   reviewedAt?: Prisma.SortOrder
@@ -501,6 +549,8 @@ export type ContentReportAvgOrderByAggregateInput = {
   reporterUserId?: Prisma.SortOrder
   mangaCustomId?: Prisma.SortOrder
   jointId?: Prisma.SortOrder
+  postId?: Prisma.SortOrder
+  reportedUserId?: Prisma.SortOrder
   reviewedByUserId?: Prisma.SortOrder
 }
 
@@ -512,6 +562,8 @@ export type ContentReportMaxOrderByAggregateInput = {
   category?: Prisma.SortOrder
   details?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  postId?: Prisma.SortOrder
+  reportedUserId?: Prisma.SortOrder
   resolutionNote?: Prisma.SortOrder
   reviewedByUserId?: Prisma.SortOrder
   reviewedAt?: Prisma.SortOrder
@@ -527,6 +579,8 @@ export type ContentReportMinOrderByAggregateInput = {
   category?: Prisma.SortOrder
   details?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  postId?: Prisma.SortOrder
+  reportedUserId?: Prisma.SortOrder
   resolutionNote?: Prisma.SortOrder
   reviewedByUserId?: Prisma.SortOrder
   reviewedAt?: Prisma.SortOrder
@@ -539,6 +593,8 @@ export type ContentReportSumOrderByAggregateInput = {
   reporterUserId?: Prisma.SortOrder
   mangaCustomId?: Prisma.SortOrder
   jointId?: Prisma.SortOrder
+  postId?: Prisma.SortOrder
+  reportedUserId?: Prisma.SortOrder
   reviewedByUserId?: Prisma.SortOrder
 }
 
@@ -714,6 +770,8 @@ export type ContentReportCreateWithoutReporterInput = {
   category: string
   details?: string | null
   status?: string
+  postId?: number | null
+  reportedUserId?: number | null
   resolutionNote?: string | null
   reviewedAt?: Date | string | null
   createdAt?: Date | string
@@ -730,6 +788,8 @@ export type ContentReportUncheckedCreateWithoutReporterInput = {
   category: string
   details?: string | null
   status?: string
+  postId?: number | null
+  reportedUserId?: number | null
   resolutionNote?: string | null
   reviewedByUserId?: number | null
   reviewedAt?: Date | string | null
@@ -751,6 +811,8 @@ export type ContentReportCreateWithoutReviewedByInput = {
   category: string
   details?: string | null
   status?: string
+  postId?: number | null
+  reportedUserId?: number | null
   resolutionNote?: string | null
   reviewedAt?: Date | string | null
   createdAt?: Date | string
@@ -768,6 +830,8 @@ export type ContentReportUncheckedCreateWithoutReviewedByInput = {
   category: string
   details?: string | null
   status?: string
+  postId?: number | null
+  reportedUserId?: number | null
   resolutionNote?: string | null
   reviewedAt?: Date | string | null
   createdAt?: Date | string
@@ -811,6 +875,8 @@ export type ContentReportScalarWhereInput = {
   category?: Prisma.StringFilter<"ContentReport"> | string
   details?: Prisma.StringNullableFilter<"ContentReport"> | string | null
   status?: Prisma.StringFilter<"ContentReport"> | string
+  postId?: Prisma.IntNullableFilter<"ContentReport"> | number | null
+  reportedUserId?: Prisma.IntNullableFilter<"ContentReport"> | number | null
   resolutionNote?: Prisma.StringNullableFilter<"ContentReport"> | string | null
   reviewedByUserId?: Prisma.IntNullableFilter<"ContentReport"> | number | null
   reviewedAt?: Prisma.DateTimeNullableFilter<"ContentReport"> | Date | string | null
@@ -838,6 +904,8 @@ export type ContentReportCreateWithoutMangaCustomInput = {
   category: string
   details?: string | null
   status?: string
+  postId?: number | null
+  reportedUserId?: number | null
   resolutionNote?: string | null
   reviewedAt?: Date | string | null
   createdAt?: Date | string
@@ -854,6 +922,8 @@ export type ContentReportUncheckedCreateWithoutMangaCustomInput = {
   category: string
   details?: string | null
   status?: string
+  postId?: number | null
+  reportedUserId?: number | null
   resolutionNote?: string | null
   reviewedByUserId?: number | null
   reviewedAt?: Date | string | null
@@ -891,6 +961,8 @@ export type ContentReportCreateWithoutJointInput = {
   category: string
   details?: string | null
   status?: string
+  postId?: number | null
+  reportedUserId?: number | null
   resolutionNote?: string | null
   reviewedAt?: Date | string | null
   createdAt?: Date | string
@@ -907,6 +979,8 @@ export type ContentReportUncheckedCreateWithoutJointInput = {
   category: string
   details?: string | null
   status?: string
+  postId?: number | null
+  reportedUserId?: number | null
   resolutionNote?: string | null
   reviewedByUserId?: number | null
   reviewedAt?: Date | string | null
@@ -947,6 +1021,8 @@ export type ContentReportCreateManyReporterInput = {
   category: string
   details?: string | null
   status?: string
+  postId?: number | null
+  reportedUserId?: number | null
   resolutionNote?: string | null
   reviewedByUserId?: number | null
   reviewedAt?: Date | string | null
@@ -962,6 +1038,8 @@ export type ContentReportCreateManyReviewedByInput = {
   category: string
   details?: string | null
   status?: string
+  postId?: number | null
+  reportedUserId?: number | null
   resolutionNote?: string | null
   reviewedAt?: Date | string | null
   createdAt?: Date | string
@@ -972,6 +1050,8 @@ export type ContentReportUpdateWithoutReporterInput = {
   category?: Prisma.StringFieldUpdateOperationsInput | string
   details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reportedUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -988,6 +1068,8 @@ export type ContentReportUncheckedUpdateWithoutReporterInput = {
   category?: Prisma.StringFieldUpdateOperationsInput | string
   details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reportedUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1002,6 +1084,8 @@ export type ContentReportUncheckedUpdateManyWithoutReporterInput = {
   category?: Prisma.StringFieldUpdateOperationsInput | string
   details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reportedUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1013,6 +1097,8 @@ export type ContentReportUpdateWithoutReviewedByInput = {
   category?: Prisma.StringFieldUpdateOperationsInput | string
   details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reportedUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1030,6 +1116,8 @@ export type ContentReportUncheckedUpdateWithoutReviewedByInput = {
   category?: Prisma.StringFieldUpdateOperationsInput | string
   details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reportedUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1044,6 +1132,8 @@ export type ContentReportUncheckedUpdateManyWithoutReviewedByInput = {
   category?: Prisma.StringFieldUpdateOperationsInput | string
   details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reportedUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1057,6 +1147,8 @@ export type ContentReportCreateManyMangaCustomInput = {
   category: string
   details?: string | null
   status?: string
+  postId?: number | null
+  reportedUserId?: number | null
   resolutionNote?: string | null
   reviewedByUserId?: number | null
   reviewedAt?: Date | string | null
@@ -1068,6 +1160,8 @@ export type ContentReportUpdateWithoutMangaCustomInput = {
   category?: Prisma.StringFieldUpdateOperationsInput | string
   details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reportedUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1084,6 +1178,8 @@ export type ContentReportUncheckedUpdateWithoutMangaCustomInput = {
   category?: Prisma.StringFieldUpdateOperationsInput | string
   details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reportedUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1098,6 +1194,8 @@ export type ContentReportUncheckedUpdateManyWithoutMangaCustomInput = {
   category?: Prisma.StringFieldUpdateOperationsInput | string
   details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reportedUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1112,6 +1210,8 @@ export type ContentReportCreateManyJointInput = {
   category: string
   details?: string | null
   status?: string
+  postId?: number | null
+  reportedUserId?: number | null
   resolutionNote?: string | null
   reviewedByUserId?: number | null
   reviewedAt?: Date | string | null
@@ -1123,6 +1223,8 @@ export type ContentReportUpdateWithoutJointInput = {
   category?: Prisma.StringFieldUpdateOperationsInput | string
   details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reportedUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1139,6 +1241,8 @@ export type ContentReportUncheckedUpdateWithoutJointInput = {
   category?: Prisma.StringFieldUpdateOperationsInput | string
   details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reportedUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1153,6 +1257,8 @@ export type ContentReportUncheckedUpdateManyWithoutJointInput = {
   category?: Prisma.StringFieldUpdateOperationsInput | string
   details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reportedUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1170,6 +1276,8 @@ export type ContentReportSelect<ExtArgs extends runtime.Types.Extensions.Interna
   category?: boolean
   details?: boolean
   status?: boolean
+  postId?: boolean
+  reportedUserId?: boolean
   resolutionNote?: boolean
   reviewedByUserId?: boolean
   reviewedAt?: boolean
@@ -1189,6 +1297,8 @@ export type ContentReportSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   category?: boolean
   details?: boolean
   status?: boolean
+  postId?: boolean
+  reportedUserId?: boolean
   resolutionNote?: boolean
   reviewedByUserId?: boolean
   reviewedAt?: boolean
@@ -1208,6 +1318,8 @@ export type ContentReportSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   category?: boolean
   details?: boolean
   status?: boolean
+  postId?: boolean
+  reportedUserId?: boolean
   resolutionNote?: boolean
   reviewedByUserId?: boolean
   reviewedAt?: boolean
@@ -1227,6 +1339,8 @@ export type ContentReportSelectScalar = {
   category?: boolean
   details?: boolean
   status?: boolean
+  postId?: boolean
+  reportedUserId?: boolean
   resolutionNote?: boolean
   reviewedByUserId?: boolean
   reviewedAt?: boolean
@@ -1234,7 +1348,7 @@ export type ContentReportSelectScalar = {
   updatedAt?: boolean
 }
 
-export type ContentReportOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "reporterUserId" | "mangaCustomId" | "jointId" | "category" | "details" | "status" | "resolutionNote" | "reviewedByUserId" | "reviewedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["contentReport"]>
+export type ContentReportOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "reporterUserId" | "mangaCustomId" | "jointId" | "category" | "details" | "status" | "postId" | "reportedUserId" | "resolutionNote" | "reviewedByUserId" | "reviewedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["contentReport"]>
 export type ContentReportInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   reporter?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   reviewedBy?: boolean | Prisma.ContentReport$reviewedByArgs<ExtArgs>
@@ -1270,6 +1384,8 @@ export type $ContentReportPayload<ExtArgs extends runtime.Types.Extensions.Inter
     category: string
     details: string | null
     status: string
+    postId: number | null
+    reportedUserId: number | null
     resolutionNote: string | null
     reviewedByUserId: number | null
     reviewedAt: Date | null
@@ -1709,6 +1825,8 @@ export interface ContentReportFieldRefs {
   readonly category: Prisma.FieldRef<"ContentReport", 'String'>
   readonly details: Prisma.FieldRef<"ContentReport", 'String'>
   readonly status: Prisma.FieldRef<"ContentReport", 'String'>
+  readonly postId: Prisma.FieldRef<"ContentReport", 'Int'>
+  readonly reportedUserId: Prisma.FieldRef<"ContentReport", 'Int'>
   readonly resolutionNote: Prisma.FieldRef<"ContentReport", 'String'>
   readonly reviewedByUserId: Prisma.FieldRef<"ContentReport", 'Int'>
   readonly reviewedAt: Prisma.FieldRef<"ContentReport", 'DateTime'>

@@ -305,7 +305,30 @@ const statements: string[] = [
   `CREATE INDEX IF NOT EXISTS "organization_post_hashtag_postId_idx" ON "organization_post_hashtag"("postId");`,
   // Notificaciones sociales: referencia a post y actor.
   `ALTER TABLE "notification" ADD COLUMN IF NOT EXISTS "postId" INTEGER;`,
-  `ALTER TABLE "notification" ADD COLUMN IF NOT EXISTS "actorUserId" INTEGER;`
+  `ALTER TABLE "notification" ADD COLUMN IF NOT EXISTS "actorUserId" INTEGER;`,
+  // Fase social 1: grafo (follow/block/mute), contadores, flags de spoiler y reportes de posts.
+  `CREATE TABLE IF NOT EXISTS "user_follow" ("id" SERIAL PRIMARY KEY,"followerId" INTEGER NOT NULL REFERENCES "user"("id") ON DELETE CASCADE,"followedId" INTEGER NOT NULL REFERENCES "user"("id") ON DELETE CASCADE,"createdAt" TIMESTAMP(6) NOT NULL DEFAULT now(),CHECK ("followerId" <> "followedId"));`,
+  `CREATE UNIQUE INDEX IF NOT EXISTS "user_follow_followerId_followedId_key" ON "user_follow"("followerId","followedId");`,
+  `CREATE INDEX IF NOT EXISTS "user_follow_followedId_createdAt_idx" ON "user_follow"("followedId","createdAt");`,
+  `CREATE TABLE IF NOT EXISTS "user_block" ("id" SERIAL PRIMARY KEY,"blockerId" INTEGER NOT NULL REFERENCES "user"("id") ON DELETE CASCADE,"blockedId" INTEGER NOT NULL REFERENCES "user"("id") ON DELETE CASCADE,"createdAt" TIMESTAMP(6) NOT NULL DEFAULT now());`,
+  `CREATE UNIQUE INDEX IF NOT EXISTS "user_block_blockerId_blockedId_key" ON "user_block"("blockerId","blockedId");`,
+  `CREATE INDEX IF NOT EXISTS "user_block_blockedId_idx" ON "user_block"("blockedId");`,
+  `CREATE TABLE IF NOT EXISTS "user_mute" ("id" SERIAL PRIMARY KEY,"muterId" INTEGER NOT NULL REFERENCES "user"("id") ON DELETE CASCADE,"mutedId" INTEGER NOT NULL REFERENCES "user"("id") ON DELETE CASCADE,"expiresAt" TIMESTAMP(6),"createdAt" TIMESTAMP(6) NOT NULL DEFAULT now());`,
+  `CREATE UNIQUE INDEX IF NOT EXISTS "user_mute_muterId_mutedId_key" ON "user_mute"("muterId","mutedId");`,
+  `ALTER TABLE "user" ADD COLUMN IF NOT EXISTS "followersCount" INTEGER NOT NULL DEFAULT 0;`,
+  `ALTER TABLE "user" ADD COLUMN IF NOT EXISTS "followingCount" INTEGER NOT NULL DEFAULT 0;`,
+  `ALTER TABLE "user" ADD COLUMN IF NOT EXISTS "postsCount" INTEGER NOT NULL DEFAULT 0;`,
+  `ALTER TABLE "organization_post" ADD COLUMN IF NOT EXISTS "isSpoiler" BOOLEAN NOT NULL DEFAULT false;`,
+  `ALTER TABLE "organization_post" ADD COLUMN IF NOT EXISTS "isSensitive" BOOLEAN NOT NULL DEFAULT false;`,
+  `ALTER TABLE "organization_post" ADD COLUMN IF NOT EXISTS "spoilerOfMangaCustomId" INTEGER REFERENCES "manga_custom"("id") ON DELETE SET NULL;`,
+  `ALTER TABLE "organization_post" ADD COLUMN IF NOT EXISTS "spoilerChapter" DOUBLE PRECISION;`,
+  `ALTER TABLE "organization_post" ADD COLUMN IF NOT EXISTS "reportsCount" INTEGER NOT NULL DEFAULT 0;`,
+  `ALTER TABLE "organization_post" ADD COLUMN IF NOT EXISTS "hiddenReason" VARCHAR(32);`,
+  `ALTER TABLE "organization_post" ADD COLUMN IF NOT EXISTS "hiddenByUserId" INTEGER;`,
+  `ALTER TABLE "content_report" ADD COLUMN IF NOT EXISTS "postId" INTEGER REFERENCES "organization_post"("id") ON DELETE CASCADE;`,
+  `ALTER TABLE "content_report" ADD COLUMN IF NOT EXISTS "reportedUserId" INTEGER;`,
+  `CREATE INDEX IF NOT EXISTS "content_report_postId_idx" ON "content_report"("postId");`,
+  `CREATE UNIQUE INDEX IF NOT EXISTS "content_report_reporter_post_key" ON "content_report"("reporterUserId","postId") WHERE "postId" IS NOT NULL;`
 ]
 
 for (const sql of statements) {

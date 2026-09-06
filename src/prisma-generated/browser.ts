@@ -342,3 +342,18 @@ export type RaffleRefund = Prisma.RaffleRefundModel
  * 
  */
 export type UserBan = Prisma.UserBanModel
+/**
+ * Model UserFollow
+ * 
+ */
+export type UserFollow = Prisma.UserFollowModel
+/**
+ * Model UserBlock
+ * 
+ */
+export type UserBlock = Prisma.UserBlockModel
+/**
+ * Model UserMute
+ * 
+ */
+export type UserMute = Prisma.UserMuteModel

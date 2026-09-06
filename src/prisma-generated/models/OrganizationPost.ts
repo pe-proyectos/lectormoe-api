@@ -35,6 +35,10 @@ export type OrganizationPostAvgAggregateOutputType = {
   likesCount: number | null
   commentsCount: number | null
   repostCount: number | null
+  spoilerOfMangaCustomId: number | null
+  spoilerChapter: number | null
+  reportsCount: number | null
+  hiddenByUserId: number | null
 }
 
 export type OrganizationPostSumAggregateOutputType = {
@@ -46,6 +50,10 @@ export type OrganizationPostSumAggregateOutputType = {
   likesCount: number | null
   commentsCount: number | null
   repostCount: number | null
+  spoilerOfMangaCustomId: number | null
+  spoilerChapter: number | null
+  reportsCount: number | null
+  hiddenByUserId: number | null
 }
 
 export type OrganizationPostMinAggregateOutputType = {
@@ -59,6 +67,13 @@ export type OrganizationPostMinAggregateOutputType = {
   likesCount: number | null
   commentsCount: number | null
   repostCount: number | null
+  isSpoiler: boolean | null
+  isSensitive: boolean | null
+  spoilerOfMangaCustomId: number | null
+  spoilerChapter: number | null
+  reportsCount: number | null
+  hiddenReason: string | null
+  hiddenByUserId: number | null
   deletedAt: Date | null
   hiddenAt: Date | null
   createdAt: Date | null
@@ -76,6 +91,13 @@ export type OrganizationPostMaxAggregateOutputType = {
   likesCount: number | null
   commentsCount: number | null
   repostCount: number | null
+  isSpoiler: boolean | null
+  isSensitive: boolean | null
+  spoilerOfMangaCustomId: number | null
+  spoilerChapter: number | null
+  reportsCount: number | null
+  hiddenReason: string | null
+  hiddenByUserId: number | null
   deletedAt: Date | null
   hiddenAt: Date | null
   createdAt: Date | null
@@ -94,6 +116,13 @@ export type OrganizationPostCountAggregateOutputType = {
   likesCount: number
   commentsCount: number
   repostCount: number
+  isSpoiler: number
+  isSensitive: number
+  spoilerOfMangaCustomId: number
+  spoilerChapter: number
+  reportsCount: number
+  hiddenReason: number
+  hiddenByUserId: number
   deletedAt: number
   hiddenAt: number
   createdAt: number
@@ -111,6 +140,10 @@ export type OrganizationPostAvgAggregateInputType = {
   likesCount?: true
   commentsCount?: true
   repostCount?: true
+  spoilerOfMangaCustomId?: true
+  spoilerChapter?: true
+  reportsCount?: true
+  hiddenByUserId?: true
 }
 
 export type OrganizationPostSumAggregateInputType = {
@@ -122,6 +155,10 @@ export type OrganizationPostSumAggregateInputType = {
   likesCount?: true
   commentsCount?: true
   repostCount?: true
+  spoilerOfMangaCustomId?: true
+  spoilerChapter?: true
+  reportsCount?: true
+  hiddenByUserId?: true
 }
 
 export type OrganizationPostMinAggregateInputType = {
@@ -135,6 +172,13 @@ export type OrganizationPostMinAggregateInputType = {
   likesCount?: true
   commentsCount?: true
   repostCount?: true
+  isSpoiler?: true
+  isSensitive?: true
+  spoilerOfMangaCustomId?: true
+  spoilerChapter?: true
+  reportsCount?: true
+  hiddenReason?: true
+  hiddenByUserId?: true
   deletedAt?: true
   hiddenAt?: true
   createdAt?: true
@@ -152,6 +196,13 @@ export type OrganizationPostMaxAggregateInputType = {
   likesCount?: true
   commentsCount?: true
   repostCount?: true
+  isSpoiler?: true
+  isSensitive?: true
+  spoilerOfMangaCustomId?: true
+  spoilerChapter?: true
+  reportsCount?: true
+  hiddenReason?: true
+  hiddenByUserId?: true
   deletedAt?: true
   hiddenAt?: true
   createdAt?: true
@@ -170,6 +221,13 @@ export type OrganizationPostCountAggregateInputType = {
   likesCount?: true
   commentsCount?: true
   repostCount?: true
+  isSpoiler?: true
+  isSensitive?: true
+  spoilerOfMangaCustomId?: true
+  spoilerChapter?: true
+  reportsCount?: true
+  hiddenReason?: true
+  hiddenByUserId?: true
   deletedAt?: true
   hiddenAt?: true
   createdAt?: true
@@ -275,6 +333,13 @@ export type OrganizationPostGroupByOutputType = {
   likesCount: number
   commentsCount: number
   repostCount: number
+  isSpoiler: boolean
+  isSensitive: boolean
+  spoilerOfMangaCustomId: number | null
+  spoilerChapter: number | null
+  reportsCount: number
+  hiddenReason: string | null
+  hiddenByUserId: number | null
   deletedAt: Date | null
   hiddenAt: Date | null
   createdAt: Date
@@ -316,6 +381,13 @@ export type OrganizationPostWhereInput = {
   likesCount?: Prisma.IntFilter<"OrganizationPost"> | number
   commentsCount?: Prisma.IntFilter<"OrganizationPost"> | number
   repostCount?: Prisma.IntFilter<"OrganizationPost"> | number
+  isSpoiler?: Prisma.BoolFilter<"OrganizationPost"> | boolean
+  isSensitive?: Prisma.BoolFilter<"OrganizationPost"> | boolean
+  spoilerOfMangaCustomId?: Prisma.IntNullableFilter<"OrganizationPost"> | number | null
+  spoilerChapter?: Prisma.FloatNullableFilter<"OrganizationPost"> | number | null
+  reportsCount?: Prisma.IntFilter<"OrganizationPost"> | number
+  hiddenReason?: Prisma.StringNullableFilter<"OrganizationPost"> | string | null
+  hiddenByUserId?: Prisma.IntNullableFilter<"OrganizationPost"> | number | null
   deletedAt?: Prisma.DateTimeNullableFilter<"OrganizationPost"> | Date | string | null
   hiddenAt?: Prisma.DateTimeNullableFilter<"OrganizationPost"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"OrganizationPost"> | Date | string
@@ -343,6 +415,13 @@ export type OrganizationPostOrderByWithRelationInput = {
   likesCount?: Prisma.SortOrder
   commentsCount?: Prisma.SortOrder
   repostCount?: Prisma.SortOrder
+  isSpoiler?: Prisma.SortOrder
+  isSensitive?: Prisma.SortOrder
+  spoilerOfMangaCustomId?: Prisma.SortOrderInput | Prisma.SortOrder
+  spoilerChapter?: Prisma.SortOrderInput | Prisma.SortOrder
+  reportsCount?: Prisma.SortOrder
+  hiddenReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  hiddenByUserId?: Prisma.SortOrderInput | Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   hiddenAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -373,6 +452,13 @@ export type OrganizationPostWhereUniqueInput = Prisma.AtLeast<{
   likesCount?: Prisma.IntFilter<"OrganizationPost"> | number
   commentsCount?: Prisma.IntFilter<"OrganizationPost"> | number
   repostCount?: Prisma.IntFilter<"OrganizationPost"> | number
+  isSpoiler?: Prisma.BoolFilter<"OrganizationPost"> | boolean
+  isSensitive?: Prisma.BoolFilter<"OrganizationPost"> | boolean
+  spoilerOfMangaCustomId?: Prisma.IntNullableFilter<"OrganizationPost"> | number | null
+  spoilerChapter?: Prisma.FloatNullableFilter<"OrganizationPost"> | number | null
+  reportsCount?: Prisma.IntFilter<"OrganizationPost"> | number
+  hiddenReason?: Prisma.StringNullableFilter<"OrganizationPost"> | string | null
+  hiddenByUserId?: Prisma.IntNullableFilter<"OrganizationPost"> | number | null
   deletedAt?: Prisma.DateTimeNullableFilter<"OrganizationPost"> | Date | string | null
   hiddenAt?: Prisma.DateTimeNullableFilter<"OrganizationPost"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"OrganizationPost"> | Date | string
@@ -400,6 +486,13 @@ export type OrganizationPostOrderByWithAggregationInput = {
   likesCount?: Prisma.SortOrder
   commentsCount?: Prisma.SortOrder
   repostCount?: Prisma.SortOrder
+  isSpoiler?: Prisma.SortOrder
+  isSensitive?: Prisma.SortOrder
+  spoilerOfMangaCustomId?: Prisma.SortOrderInput | Prisma.SortOrder
+  spoilerChapter?: Prisma.SortOrderInput | Prisma.SortOrder
+  reportsCount?: Prisma.SortOrder
+  hiddenReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  hiddenByUserId?: Prisma.SortOrderInput | Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   hiddenAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -426,6 +519,13 @@ export type OrganizationPostScalarWhereWithAggregatesInput = {
   likesCount?: Prisma.IntWithAggregatesFilter<"OrganizationPost"> | number
   commentsCount?: Prisma.IntWithAggregatesFilter<"OrganizationPost"> | number
   repostCount?: Prisma.IntWithAggregatesFilter<"OrganizationPost"> | number
+  isSpoiler?: Prisma.BoolWithAggregatesFilter<"OrganizationPost"> | boolean
+  isSensitive?: Prisma.BoolWithAggregatesFilter<"OrganizationPost"> | boolean
+  spoilerOfMangaCustomId?: Prisma.IntNullableWithAggregatesFilter<"OrganizationPost"> | number | null
+  spoilerChapter?: Prisma.FloatNullableWithAggregatesFilter<"OrganizationPost"> | number | null
+  reportsCount?: Prisma.IntWithAggregatesFilter<"OrganizationPost"> | number
+  hiddenReason?: Prisma.StringNullableWithAggregatesFilter<"OrganizationPost"> | string | null
+  hiddenByUserId?: Prisma.IntNullableWithAggregatesFilter<"OrganizationPost"> | number | null
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"OrganizationPost"> | Date | string | null
   hiddenAt?: Prisma.DateTimeNullableWithAggregatesFilter<"OrganizationPost"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"OrganizationPost"> | Date | string
@@ -439,6 +539,13 @@ export type OrganizationPostCreateInput = {
   likesCount?: number
   commentsCount?: number
   repostCount?: number
+  isSpoiler?: boolean
+  isSensitive?: boolean
+  spoilerOfMangaCustomId?: number | null
+  spoilerChapter?: number | null
+  reportsCount?: number
+  hiddenReason?: string | null
+  hiddenByUserId?: number | null
   deletedAt?: Date | string | null
   hiddenAt?: Date | string | null
   createdAt?: Date | string
@@ -466,6 +573,13 @@ export type OrganizationPostUncheckedCreateInput = {
   likesCount?: number
   commentsCount?: number
   repostCount?: number
+  isSpoiler?: boolean
+  isSensitive?: boolean
+  spoilerOfMangaCustomId?: number | null
+  spoilerChapter?: number | null
+  reportsCount?: number
+  hiddenReason?: string | null
+  hiddenByUserId?: number | null
   deletedAt?: Date | string | null
   hiddenAt?: Date | string | null
   createdAt?: Date | string
@@ -484,6 +598,13 @@ export type OrganizationPostUpdateInput = {
   likesCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   repostCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isSpoiler?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -511,6 +632,13 @@ export type OrganizationPostUncheckedUpdateInput = {
   likesCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   repostCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isSpoiler?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -534,6 +662,13 @@ export type OrganizationPostCreateManyInput = {
   likesCount?: number
   commentsCount?: number
   repostCount?: number
+  isSpoiler?: boolean
+  isSensitive?: boolean
+  spoilerOfMangaCustomId?: number | null
+  spoilerChapter?: number | null
+  reportsCount?: number
+  hiddenReason?: string | null
+  hiddenByUserId?: number | null
   deletedAt?: Date | string | null
   hiddenAt?: Date | string | null
   createdAt?: Date | string
@@ -547,6 +682,13 @@ export type OrganizationPostUpdateManyMutationInput = {
   likesCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   repostCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isSpoiler?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -565,6 +707,13 @@ export type OrganizationPostUncheckedUpdateManyInput = {
   likesCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   repostCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isSpoiler?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -598,6 +747,13 @@ export type OrganizationPostCountOrderByAggregateInput = {
   likesCount?: Prisma.SortOrder
   commentsCount?: Prisma.SortOrder
   repostCount?: Prisma.SortOrder
+  isSpoiler?: Prisma.SortOrder
+  isSensitive?: Prisma.SortOrder
+  spoilerOfMangaCustomId?: Prisma.SortOrder
+  spoilerChapter?: Prisma.SortOrder
+  reportsCount?: Prisma.SortOrder
+  hiddenReason?: Prisma.SortOrder
+  hiddenByUserId?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   hiddenAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -613,6 +769,10 @@ export type OrganizationPostAvgOrderByAggregateInput = {
   likesCount?: Prisma.SortOrder
   commentsCount?: Prisma.SortOrder
   repostCount?: Prisma.SortOrder
+  spoilerOfMangaCustomId?: Prisma.SortOrder
+  spoilerChapter?: Prisma.SortOrder
+  reportsCount?: Prisma.SortOrder
+  hiddenByUserId?: Prisma.SortOrder
 }
 
 export type OrganizationPostMaxOrderByAggregateInput = {
@@ -626,6 +786,13 @@ export type OrganizationPostMaxOrderByAggregateInput = {
   likesCount?: Prisma.SortOrder
   commentsCount?: Prisma.SortOrder
   repostCount?: Prisma.SortOrder
+  isSpoiler?: Prisma.SortOrder
+  isSensitive?: Prisma.SortOrder
+  spoilerOfMangaCustomId?: Prisma.SortOrder
+  spoilerChapter?: Prisma.SortOrder
+  reportsCount?: Prisma.SortOrder
+  hiddenReason?: Prisma.SortOrder
+  hiddenByUserId?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   hiddenAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -643,6 +810,13 @@ export type OrganizationPostMinOrderByAggregateInput = {
   likesCount?: Prisma.SortOrder
   commentsCount?: Prisma.SortOrder
   repostCount?: Prisma.SortOrder
+  isSpoiler?: Prisma.SortOrder
+  isSensitive?: Prisma.SortOrder
+  spoilerOfMangaCustomId?: Prisma.SortOrder
+  spoilerChapter?: Prisma.SortOrder
+  reportsCount?: Prisma.SortOrder
+  hiddenReason?: Prisma.SortOrder
+  hiddenByUserId?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   hiddenAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -658,6 +832,10 @@ export type OrganizationPostSumOrderByAggregateInput = {
   likesCount?: Prisma.SortOrder
   commentsCount?: Prisma.SortOrder
   repostCount?: Prisma.SortOrder
+  spoilerOfMangaCustomId?: Prisma.SortOrder
+  spoilerChapter?: Prisma.SortOrder
+  reportsCount?: Prisma.SortOrder
+  hiddenByUserId?: Prisma.SortOrder
 }
 
 export type OrganizationPostScalarRelationFilter = {
@@ -747,6 +925,22 @@ export type OrganizationPostUncheckedCreateNestedManyWithoutRepostOfInput = {
   connect?: Prisma.OrganizationPostWhereUniqueInput | Prisma.OrganizationPostWhereUniqueInput[]
 }
 
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type NullableFloatFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type NullableDateTimeFieldUpdateOperationsInput = {
   set?: Date | string | null
 }
@@ -797,14 +991,6 @@ export type OrganizationPostUpdateManyWithoutRepostOfNestedInput = {
   update?: Prisma.OrganizationPostUpdateWithWhereUniqueWithoutRepostOfInput | Prisma.OrganizationPostUpdateWithWhereUniqueWithoutRepostOfInput[]
   updateMany?: Prisma.OrganizationPostUpdateManyWithWhereWithoutRepostOfInput | Prisma.OrganizationPostUpdateManyWithWhereWithoutRepostOfInput[]
   deleteMany?: Prisma.OrganizationPostScalarWhereInput | Prisma.OrganizationPostScalarWhereInput[]
-}
-
-export type NullableIntFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
 }
 
 export type OrganizationPostUncheckedUpdateManyWithoutParentNestedInput = {
@@ -926,6 +1112,13 @@ export type OrganizationPostCreateWithoutOrganizationInput = {
   likesCount?: number
   commentsCount?: number
   repostCount?: number
+  isSpoiler?: boolean
+  isSensitive?: boolean
+  spoilerOfMangaCustomId?: number | null
+  spoilerChapter?: number | null
+  reportsCount?: number
+  hiddenReason?: string | null
+  hiddenByUserId?: number | null
   deletedAt?: Date | string | null
   hiddenAt?: Date | string | null
   createdAt?: Date | string
@@ -951,6 +1144,13 @@ export type OrganizationPostUncheckedCreateWithoutOrganizationInput = {
   likesCount?: number
   commentsCount?: number
   repostCount?: number
+  isSpoiler?: boolean
+  isSensitive?: boolean
+  spoilerOfMangaCustomId?: number | null
+  spoilerChapter?: number | null
+  reportsCount?: number
+  hiddenReason?: string | null
+  hiddenByUserId?: number | null
   deletedAt?: Date | string | null
   hiddenAt?: Date | string | null
   createdAt?: Date | string
@@ -1003,6 +1203,13 @@ export type OrganizationPostScalarWhereInput = {
   likesCount?: Prisma.IntFilter<"OrganizationPost"> | number
   commentsCount?: Prisma.IntFilter<"OrganizationPost"> | number
   repostCount?: Prisma.IntFilter<"OrganizationPost"> | number
+  isSpoiler?: Prisma.BoolFilter<"OrganizationPost"> | boolean
+  isSensitive?: Prisma.BoolFilter<"OrganizationPost"> | boolean
+  spoilerOfMangaCustomId?: Prisma.IntNullableFilter<"OrganizationPost"> | number | null
+  spoilerChapter?: Prisma.FloatNullableFilter<"OrganizationPost"> | number | null
+  reportsCount?: Prisma.IntFilter<"OrganizationPost"> | number
+  hiddenReason?: Prisma.StringNullableFilter<"OrganizationPost"> | string | null
+  hiddenByUserId?: Prisma.IntNullableFilter<"OrganizationPost"> | number | null
   deletedAt?: Prisma.DateTimeNullableFilter<"OrganizationPost"> | Date | string | null
   hiddenAt?: Prisma.DateTimeNullableFilter<"OrganizationPost"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"OrganizationPost"> | Date | string
@@ -1016,6 +1223,13 @@ export type OrganizationPostCreateWithoutRepliesInput = {
   likesCount?: number
   commentsCount?: number
   repostCount?: number
+  isSpoiler?: boolean
+  isSensitive?: boolean
+  spoilerOfMangaCustomId?: number | null
+  spoilerChapter?: number | null
+  reportsCount?: number
+  hiddenReason?: string | null
+  hiddenByUserId?: number | null
   deletedAt?: Date | string | null
   hiddenAt?: Date | string | null
   createdAt?: Date | string
@@ -1042,6 +1256,13 @@ export type OrganizationPostUncheckedCreateWithoutRepliesInput = {
   likesCount?: number
   commentsCount?: number
   repostCount?: number
+  isSpoiler?: boolean
+  isSensitive?: boolean
+  spoilerOfMangaCustomId?: number | null
+  spoilerChapter?: number | null
+  reportsCount?: number
+  hiddenReason?: string | null
+  hiddenByUserId?: number | null
   deletedAt?: Date | string | null
   hiddenAt?: Date | string | null
   createdAt?: Date | string
@@ -1064,6 +1285,13 @@ export type OrganizationPostCreateWithoutParentInput = {
   likesCount?: number
   commentsCount?: number
   repostCount?: number
+  isSpoiler?: boolean
+  isSensitive?: boolean
+  spoilerOfMangaCustomId?: number | null
+  spoilerChapter?: number | null
+  reportsCount?: number
+  hiddenReason?: string | null
+  hiddenByUserId?: number | null
   deletedAt?: Date | string | null
   hiddenAt?: Date | string | null
   createdAt?: Date | string
@@ -1089,6 +1317,13 @@ export type OrganizationPostUncheckedCreateWithoutParentInput = {
   likesCount?: number
   commentsCount?: number
   repostCount?: number
+  isSpoiler?: boolean
+  isSensitive?: boolean
+  spoilerOfMangaCustomId?: number | null
+  spoilerChapter?: number | null
+  reportsCount?: number
+  hiddenReason?: string | null
+  hiddenByUserId?: number | null
   deletedAt?: Date | string | null
   hiddenAt?: Date | string | null
   createdAt?: Date | string
@@ -1117,6 +1352,13 @@ export type OrganizationPostCreateWithoutRepostsInput = {
   likesCount?: number
   commentsCount?: number
   repostCount?: number
+  isSpoiler?: boolean
+  isSensitive?: boolean
+  spoilerOfMangaCustomId?: number | null
+  spoilerChapter?: number | null
+  reportsCount?: number
+  hiddenReason?: string | null
+  hiddenByUserId?: number | null
   deletedAt?: Date | string | null
   hiddenAt?: Date | string | null
   createdAt?: Date | string
@@ -1143,6 +1385,13 @@ export type OrganizationPostUncheckedCreateWithoutRepostsInput = {
   likesCount?: number
   commentsCount?: number
   repostCount?: number
+  isSpoiler?: boolean
+  isSensitive?: boolean
+  spoilerOfMangaCustomId?: number | null
+  spoilerChapter?: number | null
+  reportsCount?: number
+  hiddenReason?: string | null
+  hiddenByUserId?: number | null
   deletedAt?: Date | string | null
   hiddenAt?: Date | string | null
   createdAt?: Date | string
@@ -1165,6 +1414,13 @@ export type OrganizationPostCreateWithoutRepostOfInput = {
   likesCount?: number
   commentsCount?: number
   repostCount?: number
+  isSpoiler?: boolean
+  isSensitive?: boolean
+  spoilerOfMangaCustomId?: number | null
+  spoilerChapter?: number | null
+  reportsCount?: number
+  hiddenReason?: string | null
+  hiddenByUserId?: number | null
   deletedAt?: Date | string | null
   hiddenAt?: Date | string | null
   createdAt?: Date | string
@@ -1190,6 +1446,13 @@ export type OrganizationPostUncheckedCreateWithoutRepostOfInput = {
   likesCount?: number
   commentsCount?: number
   repostCount?: number
+  isSpoiler?: boolean
+  isSensitive?: boolean
+  spoilerOfMangaCustomId?: number | null
+  spoilerChapter?: number | null
+  reportsCount?: number
+  hiddenReason?: string | null
+  hiddenByUserId?: number | null
   deletedAt?: Date | string | null
   hiddenAt?: Date | string | null
   createdAt?: Date | string
@@ -1229,6 +1492,13 @@ export type OrganizationPostUpdateWithoutRepliesInput = {
   likesCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   repostCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isSpoiler?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1255,6 +1525,13 @@ export type OrganizationPostUncheckedUpdateWithoutRepliesInput = {
   likesCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   repostCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isSpoiler?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1299,6 +1576,13 @@ export type OrganizationPostUpdateWithoutRepostsInput = {
   likesCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   repostCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isSpoiler?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1325,6 +1609,13 @@ export type OrganizationPostUncheckedUpdateWithoutRepostsInput = {
   likesCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   repostCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isSpoiler?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1358,6 +1649,13 @@ export type OrganizationPostCreateWithoutLikesInput = {
   likesCount?: number
   commentsCount?: number
   repostCount?: number
+  isSpoiler?: boolean
+  isSensitive?: boolean
+  spoilerOfMangaCustomId?: number | null
+  spoilerChapter?: number | null
+  reportsCount?: number
+  hiddenReason?: string | null
+  hiddenByUserId?: number | null
   deletedAt?: Date | string | null
   hiddenAt?: Date | string | null
   createdAt?: Date | string
@@ -1384,6 +1682,13 @@ export type OrganizationPostUncheckedCreateWithoutLikesInput = {
   likesCount?: number
   commentsCount?: number
   repostCount?: number
+  isSpoiler?: boolean
+  isSensitive?: boolean
+  spoilerOfMangaCustomId?: number | null
+  spoilerChapter?: number | null
+  reportsCount?: number
+  hiddenReason?: string | null
+  hiddenByUserId?: number | null
   deletedAt?: Date | string | null
   hiddenAt?: Date | string | null
   createdAt?: Date | string
@@ -1417,6 +1722,13 @@ export type OrganizationPostUpdateWithoutLikesInput = {
   likesCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   repostCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isSpoiler?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1443,6 +1755,13 @@ export type OrganizationPostUncheckedUpdateWithoutLikesInput = {
   likesCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   repostCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isSpoiler?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1460,6 +1779,13 @@ export type OrganizationPostCreateWithoutSavesInput = {
   likesCount?: number
   commentsCount?: number
   repostCount?: number
+  isSpoiler?: boolean
+  isSensitive?: boolean
+  spoilerOfMangaCustomId?: number | null
+  spoilerChapter?: number | null
+  reportsCount?: number
+  hiddenReason?: string | null
+  hiddenByUserId?: number | null
   deletedAt?: Date | string | null
   hiddenAt?: Date | string | null
   createdAt?: Date | string
@@ -1486,6 +1812,13 @@ export type OrganizationPostUncheckedCreateWithoutSavesInput = {
   likesCount?: number
   commentsCount?: number
   repostCount?: number
+  isSpoiler?: boolean
+  isSensitive?: boolean
+  spoilerOfMangaCustomId?: number | null
+  spoilerChapter?: number | null
+  reportsCount?: number
+  hiddenReason?: string | null
+  hiddenByUserId?: number | null
   deletedAt?: Date | string | null
   hiddenAt?: Date | string | null
   createdAt?: Date | string
@@ -1519,6 +1852,13 @@ export type OrganizationPostUpdateWithoutSavesInput = {
   likesCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   repostCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isSpoiler?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1545,6 +1885,13 @@ export type OrganizationPostUncheckedUpdateWithoutSavesInput = {
   likesCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   repostCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isSpoiler?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1562,6 +1909,13 @@ export type OrganizationPostCreateWithoutHashtagsInput = {
   likesCount?: number
   commentsCount?: number
   repostCount?: number
+  isSpoiler?: boolean
+  isSensitive?: boolean
+  spoilerOfMangaCustomId?: number | null
+  spoilerChapter?: number | null
+  reportsCount?: number
+  hiddenReason?: string | null
+  hiddenByUserId?: number | null
   deletedAt?: Date | string | null
   hiddenAt?: Date | string | null
   createdAt?: Date | string
@@ -1588,6 +1942,13 @@ export type OrganizationPostUncheckedCreateWithoutHashtagsInput = {
   likesCount?: number
   commentsCount?: number
   repostCount?: number
+  isSpoiler?: boolean
+  isSensitive?: boolean
+  spoilerOfMangaCustomId?: number | null
+  spoilerChapter?: number | null
+  reportsCount?: number
+  hiddenReason?: string | null
+  hiddenByUserId?: number | null
   deletedAt?: Date | string | null
   hiddenAt?: Date | string | null
   createdAt?: Date | string
@@ -1621,6 +1982,13 @@ export type OrganizationPostUpdateWithoutHashtagsInput = {
   likesCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   repostCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isSpoiler?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1647,6 +2015,13 @@ export type OrganizationPostUncheckedUpdateWithoutHashtagsInput = {
   likesCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   repostCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isSpoiler?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1664,6 +2039,13 @@ export type OrganizationPostCreateWithoutUserInput = {
   likesCount?: number
   commentsCount?: number
   repostCount?: number
+  isSpoiler?: boolean
+  isSensitive?: boolean
+  spoilerOfMangaCustomId?: number | null
+  spoilerChapter?: number | null
+  reportsCount?: number
+  hiddenReason?: string | null
+  hiddenByUserId?: number | null
   deletedAt?: Date | string | null
   hiddenAt?: Date | string | null
   createdAt?: Date | string
@@ -1689,6 +2071,13 @@ export type OrganizationPostUncheckedCreateWithoutUserInput = {
   likesCount?: number
   commentsCount?: number
   repostCount?: number
+  isSpoiler?: boolean
+  isSensitive?: boolean
+  spoilerOfMangaCustomId?: number | null
+  spoilerChapter?: number | null
+  reportsCount?: number
+  hiddenReason?: string | null
+  hiddenByUserId?: number | null
   deletedAt?: Date | string | null
   hiddenAt?: Date | string | null
   createdAt?: Date | string
@@ -1737,6 +2126,13 @@ export type OrganizationPostCreateManyOrganizationInput = {
   likesCount?: number
   commentsCount?: number
   repostCount?: number
+  isSpoiler?: boolean
+  isSensitive?: boolean
+  spoilerOfMangaCustomId?: number | null
+  spoilerChapter?: number | null
+  reportsCount?: number
+  hiddenReason?: string | null
+  hiddenByUserId?: number | null
   deletedAt?: Date | string | null
   hiddenAt?: Date | string | null
   createdAt?: Date | string
@@ -1750,6 +2146,13 @@ export type OrganizationPostUpdateWithoutOrganizationInput = {
   likesCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   repostCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isSpoiler?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1775,6 +2178,13 @@ export type OrganizationPostUncheckedUpdateWithoutOrganizationInput = {
   likesCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   repostCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isSpoiler?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1797,6 +2207,13 @@ export type OrganizationPostUncheckedUpdateManyWithoutOrganizationInput = {
   likesCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   repostCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isSpoiler?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1814,6 +2231,13 @@ export type OrganizationPostCreateManyParentInput = {
   likesCount?: number
   commentsCount?: number
   repostCount?: number
+  isSpoiler?: boolean
+  isSensitive?: boolean
+  spoilerOfMangaCustomId?: number | null
+  spoilerChapter?: number | null
+  reportsCount?: number
+  hiddenReason?: string | null
+  hiddenByUserId?: number | null
   deletedAt?: Date | string | null
   hiddenAt?: Date | string | null
   createdAt?: Date | string
@@ -1831,6 +2255,13 @@ export type OrganizationPostCreateManyRepostOfInput = {
   likesCount?: number
   commentsCount?: number
   repostCount?: number
+  isSpoiler?: boolean
+  isSensitive?: boolean
+  spoilerOfMangaCustomId?: number | null
+  spoilerChapter?: number | null
+  reportsCount?: number
+  hiddenReason?: string | null
+  hiddenByUserId?: number | null
   deletedAt?: Date | string | null
   hiddenAt?: Date | string | null
   createdAt?: Date | string
@@ -1844,6 +2275,13 @@ export type OrganizationPostUpdateWithoutParentInput = {
   likesCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   repostCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isSpoiler?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1869,6 +2307,13 @@ export type OrganizationPostUncheckedUpdateWithoutParentInput = {
   likesCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   repostCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isSpoiler?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1891,6 +2336,13 @@ export type OrganizationPostUncheckedUpdateManyWithoutParentInput = {
   likesCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   repostCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isSpoiler?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1904,6 +2356,13 @@ export type OrganizationPostUpdateWithoutRepostOfInput = {
   likesCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   repostCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isSpoiler?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1929,6 +2388,13 @@ export type OrganizationPostUncheckedUpdateWithoutRepostOfInput = {
   likesCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   repostCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isSpoiler?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1951,6 +2417,13 @@ export type OrganizationPostUncheckedUpdateManyWithoutRepostOfInput = {
   likesCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   repostCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isSpoiler?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1968,6 +2441,13 @@ export type OrganizationPostCreateManyUserInput = {
   likesCount?: number
   commentsCount?: number
   repostCount?: number
+  isSpoiler?: boolean
+  isSensitive?: boolean
+  spoilerOfMangaCustomId?: number | null
+  spoilerChapter?: number | null
+  reportsCount?: number
+  hiddenReason?: string | null
+  hiddenByUserId?: number | null
   deletedAt?: Date | string | null
   hiddenAt?: Date | string | null
   createdAt?: Date | string
@@ -1981,6 +2461,13 @@ export type OrganizationPostUpdateWithoutUserInput = {
   likesCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   repostCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isSpoiler?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2006,6 +2493,13 @@ export type OrganizationPostUncheckedUpdateWithoutUserInput = {
   likesCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   repostCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isSpoiler?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2028,6 +2522,13 @@ export type OrganizationPostUncheckedUpdateManyWithoutUserInput = {
   likesCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   repostCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isSpoiler?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isSensitive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  spoilerOfMangaCustomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  spoilerChapter?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  reportsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  hiddenReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hiddenByUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hiddenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2113,6 +2614,13 @@ export type OrganizationPostSelect<ExtArgs extends runtime.Types.Extensions.Inte
   likesCount?: boolean
   commentsCount?: boolean
   repostCount?: boolean
+  isSpoiler?: boolean
+  isSensitive?: boolean
+  spoilerOfMangaCustomId?: boolean
+  spoilerChapter?: boolean
+  reportsCount?: boolean
+  hiddenReason?: boolean
+  hiddenByUserId?: boolean
   deletedAt?: boolean
   hiddenAt?: boolean
   createdAt?: boolean
@@ -2141,6 +2649,13 @@ export type OrganizationPostSelectCreateManyAndReturn<ExtArgs extends runtime.Ty
   likesCount?: boolean
   commentsCount?: boolean
   repostCount?: boolean
+  isSpoiler?: boolean
+  isSensitive?: boolean
+  spoilerOfMangaCustomId?: boolean
+  spoilerChapter?: boolean
+  reportsCount?: boolean
+  hiddenReason?: boolean
+  hiddenByUserId?: boolean
   deletedAt?: boolean
   hiddenAt?: boolean
   createdAt?: boolean
@@ -2163,6 +2678,13 @@ export type OrganizationPostSelectUpdateManyAndReturn<ExtArgs extends runtime.Ty
   likesCount?: boolean
   commentsCount?: boolean
   repostCount?: boolean
+  isSpoiler?: boolean
+  isSensitive?: boolean
+  spoilerOfMangaCustomId?: boolean
+  spoilerChapter?: boolean
+  reportsCount?: boolean
+  hiddenReason?: boolean
+  hiddenByUserId?: boolean
   deletedAt?: boolean
   hiddenAt?: boolean
   createdAt?: boolean
@@ -2185,13 +2707,20 @@ export type OrganizationPostSelectScalar = {
   likesCount?: boolean
   commentsCount?: boolean
   repostCount?: boolean
+  isSpoiler?: boolean
+  isSensitive?: boolean
+  spoilerOfMangaCustomId?: boolean
+  spoilerChapter?: boolean
+  reportsCount?: boolean
+  hiddenReason?: boolean
+  hiddenByUserId?: boolean
   deletedAt?: boolean
   hiddenAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type OrganizationPostOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "userId" | "content" | "images" | "pinned" | "parentId" | "repostOfId" | "likesCount" | "commentsCount" | "repostCount" | "deletedAt" | "hiddenAt" | "createdAt" | "updatedAt", ExtArgs["result"]["organizationPost"]>
+export type OrganizationPostOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "userId" | "content" | "images" | "pinned" | "parentId" | "repostOfId" | "likesCount" | "commentsCount" | "repostCount" | "isSpoiler" | "isSensitive" | "spoilerOfMangaCustomId" | "spoilerChapter" | "reportsCount" | "hiddenReason" | "hiddenByUserId" | "deletedAt" | "hiddenAt" | "createdAt" | "updatedAt", ExtArgs["result"]["organizationPost"]>
 export type OrganizationPostInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   organization?: boolean | Prisma.OrganizationPost$organizationArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -2242,6 +2771,13 @@ export type $OrganizationPostPayload<ExtArgs extends runtime.Types.Extensions.In
     likesCount: number
     commentsCount: number
     repostCount: number
+    isSpoiler: boolean
+    isSensitive: boolean
+    spoilerOfMangaCustomId: number | null
+    spoilerChapter: number | null
+    reportsCount: number
+    hiddenReason: string | null
+    hiddenByUserId: number | null
     deletedAt: Date | null
     hiddenAt: Date | null
     createdAt: Date
@@ -2689,6 +3225,13 @@ export interface OrganizationPostFieldRefs {
   readonly likesCount: Prisma.FieldRef<"OrganizationPost", 'Int'>
   readonly commentsCount: Prisma.FieldRef<"OrganizationPost", 'Int'>
   readonly repostCount: Prisma.FieldRef<"OrganizationPost", 'Int'>
+  readonly isSpoiler: Prisma.FieldRef<"OrganizationPost", 'Boolean'>
+  readonly isSensitive: Prisma.FieldRef<"OrganizationPost", 'Boolean'>
+  readonly spoilerOfMangaCustomId: Prisma.FieldRef<"OrganizationPost", 'Int'>
+  readonly spoilerChapter: Prisma.FieldRef<"OrganizationPost", 'Float'>
+  readonly reportsCount: Prisma.FieldRef<"OrganizationPost", 'Int'>
+  readonly hiddenReason: Prisma.FieldRef<"OrganizationPost", 'String'>
+  readonly hiddenByUserId: Prisma.FieldRef<"OrganizationPost", 'Int'>
   readonly deletedAt: Prisma.FieldRef<"OrganizationPost", 'DateTime'>
   readonly hiddenAt: Prisma.FieldRef<"OrganizationPost", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"OrganizationPost", 'DateTime'>
