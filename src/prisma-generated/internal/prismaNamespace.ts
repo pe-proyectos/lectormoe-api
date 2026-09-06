@@ -6574,7 +6574,10 @@ export const NotificationScalarFieldEnum = {
   subscriptionId: 'subscriptionId',
   organizationId: 'organizationId',
   postId: 'postId',
-  actorUserId: 'actorUserId'
+  actorUserId: 'actorUserId',
+  groupKey: 'groupKey',
+  actorsCount: 'actorsCount',
+  extraActorIds: 'extraActorIds'
 } as const
 
 export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]

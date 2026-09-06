@@ -148,16 +148,27 @@ export const router = () =>
         // Conteo de reportes pendientes por objetivo (agrupar duplicados).
         const grouped = new Map<string, number>()
         for (const r of reports) {
-          const key = r.mangaCustomId
+          const key = r.postId ? `p:${r.postId}` : r.mangaCustomId
             ? `mc:${r.mangaCustomId}`
             : `j:${r.jointId}`
           grouped.set(key, (grouped.get(key) || 0) + 1)
         }
-        const data = reports.map((r) => ({
+        // Adjuntar datos de los posts reportados (postId es columna plana).
+        const postIds = [...new Set(reports.map((r: any) => r.postId).filter(Boolean))] as number[]
+        const postsMap = new Map<number, any>()
+        if (postIds.length) {
+          const posts = await prisma.organizationPost.findMany({
+            where: { id: { in: postIds } },
+            select: { id: true, content: true, images: true, hiddenAt: true, deletedAt: true, user: { select: { username: true, slug: true } }, organization: { select: { name: true, slug: true } } },
+          })
+          for (const p of posts) postsMap.set(p.id, p)
+        }
+        const data = reports.map((r: any) => ({
           ...r,
+          post: r.postId ? postsMap.get(r.postId) ?? null : null,
           reportsForTarget:
             grouped.get(
-              r.mangaCustomId ? `mc:${r.mangaCustomId}` : `j:${r.jointId}`
+              r.postId ? `p:${r.postId}` : r.mangaCustomId ? `mc:${r.mangaCustomId}` : `j:${r.jointId}`
             ) || 1
         }))
         return { status: true, data }
@@ -185,9 +196,13 @@ export const router = () =>
               where: { id: report.jointId },
               data: { deletedAt: null }
             })
+          if (report.postId)
+            await prisma.organizationPost.update({ where: { id: report.postId }, data: { hiddenAt: null, hiddenReason: null } })
           await prisma.contentReport.updateMany({
             where: {
-              ...(report.mangaCustomId
+              ...(report.postId
+                ? { postId: report.postId }
+                : report.mangaCustomId
                 ? { mangaCustomId: report.mangaCustomId }
                 : { jointId: report.jointId })
             },
@@ -217,11 +232,15 @@ export const router = () =>
               where: { id: report.jointId },
               data: { deletedAt: new Date() }
             })
+          if (report.postId)
+            await prisma.organizationPost.update({ where: { id: report.postId }, data: { hiddenAt: new Date(), hiddenReason: 'admin' } })
           // Marcar este y todos los pendientes del mismo objetivo como atendidos.
           await prisma.contentReport.updateMany({
             where: {
               status: 'pending',
-              ...(report.mangaCustomId
+              ...(report.postId
+                ? { postId: report.postId }
+                : report.mangaCustomId
                 ? { mangaCustomId: report.mangaCustomId }
                 : { jointId: report.jointId })
             },

@@ -1,6 +1,8 @@
 import { Elysia, t } from 'elysia'
 import { prisma } from '../../models/prisma'
 import { logged, loggedOptional } from '../../plugins/auth'
+import { notifySocial } from '../../util/social-notify'
+import { assertRateLimit } from '../../util/rate-limit'
 
 const MAX_CONTENT = 5000
 const MAX_IMAGES = 4
@@ -97,8 +99,7 @@ async function excludedAuthorIds(viewerId: number | undefined): Promise<number[]
 }
 
 async function notify(recipientUserId: number | null | undefined, type: string, postId: number, actorUserId: number, orgId: number | null = null) {
-  if (!recipientUserId || recipientUserId === actorUserId) return
-  await prisma.notification.create({ data: { userId: recipientUserId, type, postId, actorUserId, source: 'reply', organizationId: orgId } }).catch(() => {})
+  await notifySocial({ userId: recipientUserId, type, actorUserId, postId, organizationId: orgId })
 }
 async function notifyMentions(content: string, postId: number, actorUserId: number) {
   const names = parseMentions(content)
@@ -269,6 +270,9 @@ const interactions = () =>
       return { status: true, data: { items: await withReposts(rows, v, user.id), hasMore } }
     })
     .post('/api/socials/posts', async ({ body, user }: any) => {
+      const isReply = !!body.parentId
+      assertRateLimit(`post:${user.id}`, isReply ? 20 : 5, 5 * 60 * 1000, 'Vas muy rápido, espera un momento.')
+      assertRateLimit(`post-day:${user.id}`, 120, 24 * 3600 * 1000, 'Alcanzaste el límite diario de publicaciones.')
       const content = (body.content || '').slice(0, MAX_CONTENT)
       const images = toImages(body.images)
       const parentId = body.parentId ? Number(body.parentId) : null
@@ -292,6 +296,10 @@ const interactions = () =>
         if (!repostTarget) throw new Error('La publicacion que citas no existe.')
       }
 
+      if (content.trim().length > 0) {
+        const last = await prisma.organizationPost.findFirst({ where: { userId: user.id, deletedAt: null }, orderBy: { id: 'desc' }, select: { content: true } })
+        if (last && last.content.trim() === content.trim()) throw new Error('Ya publicaste eso mismo hace un momento.')
+      }
       const post = await prisma.organizationPost.create({
         data: {
           organizationId, userId: user.id, content, images, parentId, repostOfId,
@@ -320,6 +328,7 @@ const interactions = () =>
       return { status: true, data: full }
     }, { body: t.Object({ content: t.Optional(t.String()), images: t.Optional(t.Array(t.String())), orgSlug: t.Optional(t.Union([t.String(), t.Null()])), parentId: t.Optional(t.Union([t.Number(), t.Null()])), repostOf: t.Optional(t.Union([t.Number(), t.Null()])), isSpoiler: t.Optional(t.Boolean()), isSensitive: t.Optional(t.Boolean()), spoilerOfMangaCustomId: t.Optional(t.Union([t.Number(), t.Null()])), spoilerChapter: t.Optional(t.Union([t.Number(), t.Null()])) }) })
     .post('/api/posts/:id/like', async ({ params, user }: any) => {
+      assertRateLimit(`like:${user.id}`, 300, 3600 * 1000, 'Demasiadas acciones, espera un momento.')
       const id = Number(params.id)
       const post = await prisma.organizationPost.findFirst({ where: { id, deletedAt: null }, select: { id: true, userId: true } })
       if (!post) throw new Error('No encontrada.')

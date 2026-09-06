@@ -39,6 +39,7 @@ export type NotificationAvgAggregateOutputType = {
   organizationId: number | null
   postId: number | null
   actorUserId: number | null
+  actorsCount: number | null
 }
 
 export type NotificationSumAggregateOutputType = {
@@ -54,6 +55,7 @@ export type NotificationSumAggregateOutputType = {
   organizationId: number | null
   postId: number | null
   actorUserId: number | null
+  actorsCount: number | null
 }
 
 export type NotificationMinAggregateOutputType = {
@@ -75,6 +77,8 @@ export type NotificationMinAggregateOutputType = {
   organizationId: number | null
   postId: number | null
   actorUserId: number | null
+  groupKey: string | null
+  actorsCount: number | null
 }
 
 export type NotificationMaxAggregateOutputType = {
@@ -96,6 +100,8 @@ export type NotificationMaxAggregateOutputType = {
   organizationId: number | null
   postId: number | null
   actorUserId: number | null
+  groupKey: string | null
+  actorsCount: number | null
 }
 
 export type NotificationCountAggregateOutputType = {
@@ -117,6 +123,9 @@ export type NotificationCountAggregateOutputType = {
   organizationId: number
   postId: number
   actorUserId: number
+  groupKey: number
+  actorsCount: number
+  extraActorIds: number
   _all: number
 }
 
@@ -134,6 +143,7 @@ export type NotificationAvgAggregateInputType = {
   organizationId?: true
   postId?: true
   actorUserId?: true
+  actorsCount?: true
 }
 
 export type NotificationSumAggregateInputType = {
@@ -149,6 +159,7 @@ export type NotificationSumAggregateInputType = {
   organizationId?: true
   postId?: true
   actorUserId?: true
+  actorsCount?: true
 }
 
 export type NotificationMinAggregateInputType = {
@@ -170,6 +181,8 @@ export type NotificationMinAggregateInputType = {
   organizationId?: true
   postId?: true
   actorUserId?: true
+  groupKey?: true
+  actorsCount?: true
 }
 
 export type NotificationMaxAggregateInputType = {
@@ -191,6 +204,8 @@ export type NotificationMaxAggregateInputType = {
   organizationId?: true
   postId?: true
   actorUserId?: true
+  groupKey?: true
+  actorsCount?: true
 }
 
 export type NotificationCountAggregateInputType = {
@@ -212,6 +227,9 @@ export type NotificationCountAggregateInputType = {
   organizationId?: true
   postId?: true
   actorUserId?: true
+  groupKey?: true
+  actorsCount?: true
+  extraActorIds?: true
   _all?: true
 }
 
@@ -320,6 +338,9 @@ export type NotificationGroupByOutputType = {
   organizationId: number | null
   postId: number | null
   actorUserId: number | null
+  groupKey: string | null
+  actorsCount: number
+  extraActorIds: runtime.JsonValue | null
   _count: NotificationCountAggregateOutputType | null
   _avg: NotificationAvgAggregateOutputType | null
   _sum: NotificationSumAggregateOutputType | null
@@ -364,6 +385,9 @@ export type NotificationWhereInput = {
   organizationId?: Prisma.IntNullableFilter<"Notification"> | number | null
   postId?: Prisma.IntNullableFilter<"Notification"> | number | null
   actorUserId?: Prisma.IntNullableFilter<"Notification"> | number | null
+  groupKey?: Prisma.StringNullableFilter<"Notification"> | string | null
+  actorsCount?: Prisma.IntFilter<"Notification"> | number
+  extraActorIds?: Prisma.JsonNullableFilter<"Notification">
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   mangaCustom?: Prisma.XOR<Prisma.MangaCustomNullableScalarRelationFilter, Prisma.MangaCustomWhereInput> | null
   joint?: Prisma.XOR<Prisma.MangaJointNullableScalarRelationFilter, Prisma.MangaJointWhereInput> | null
@@ -394,6 +418,9 @@ export type NotificationOrderByWithRelationInput = {
   organizationId?: Prisma.SortOrderInput | Prisma.SortOrder
   postId?: Prisma.SortOrderInput | Prisma.SortOrder
   actorUserId?: Prisma.SortOrderInput | Prisma.SortOrder
+  groupKey?: Prisma.SortOrderInput | Prisma.SortOrder
+  actorsCount?: Prisma.SortOrder
+  extraActorIds?: Prisma.SortOrderInput | Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   mangaCustom?: Prisma.MangaCustomOrderByWithRelationInput
   joint?: Prisma.MangaJointOrderByWithRelationInput
@@ -427,6 +454,9 @@ export type NotificationWhereUniqueInput = Prisma.AtLeast<{
   organizationId?: Prisma.IntNullableFilter<"Notification"> | number | null
   postId?: Prisma.IntNullableFilter<"Notification"> | number | null
   actorUserId?: Prisma.IntNullableFilter<"Notification"> | number | null
+  groupKey?: Prisma.StringNullableFilter<"Notification"> | string | null
+  actorsCount?: Prisma.IntFilter<"Notification"> | number
+  extraActorIds?: Prisma.JsonNullableFilter<"Notification">
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   mangaCustom?: Prisma.XOR<Prisma.MangaCustomNullableScalarRelationFilter, Prisma.MangaCustomWhereInput> | null
   joint?: Prisma.XOR<Prisma.MangaJointNullableScalarRelationFilter, Prisma.MangaJointWhereInput> | null
@@ -457,6 +487,9 @@ export type NotificationOrderByWithAggregationInput = {
   organizationId?: Prisma.SortOrderInput | Prisma.SortOrder
   postId?: Prisma.SortOrderInput | Prisma.SortOrder
   actorUserId?: Prisma.SortOrderInput | Prisma.SortOrder
+  groupKey?: Prisma.SortOrderInput | Prisma.SortOrder
+  actorsCount?: Prisma.SortOrder
+  extraActorIds?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.NotificationCountOrderByAggregateInput
   _avg?: Prisma.NotificationAvgOrderByAggregateInput
   _max?: Prisma.NotificationMaxOrderByAggregateInput
@@ -486,6 +519,9 @@ export type NotificationScalarWhereWithAggregatesInput = {
   organizationId?: Prisma.IntNullableWithAggregatesFilter<"Notification"> | number | null
   postId?: Prisma.IntNullableWithAggregatesFilter<"Notification"> | number | null
   actorUserId?: Prisma.IntNullableWithAggregatesFilter<"Notification"> | number | null
+  groupKey?: Prisma.StringNullableWithAggregatesFilter<"Notification"> | string | null
+  actorsCount?: Prisma.IntWithAggregatesFilter<"Notification"> | number
+  extraActorIds?: Prisma.JsonNullableWithAggregatesFilter<"Notification">
 }
 
 export type NotificationCreateInput = {
@@ -497,6 +533,9 @@ export type NotificationCreateInput = {
   emailSentAt?: Date | string | null
   postId?: number | null
   actorUserId?: number | null
+  groupKey?: string | null
+  actorsCount?: number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   user: Prisma.UserCreateNestedOneWithoutNotificationsInput
   mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutNotificationsInput
   joint?: Prisma.MangaJointCreateNestedOneWithoutNotificationsInput
@@ -527,6 +566,9 @@ export type NotificationUncheckedCreateInput = {
   organizationId?: number | null
   postId?: number | null
   actorUserId?: number | null
+  groupKey?: string | null
+  actorsCount?: number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type NotificationUpdateInput = {
@@ -538,6 +580,9 @@ export type NotificationUpdateInput = {
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  groupKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actorsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   user?: Prisma.UserUpdateOneRequiredWithoutNotificationsNestedInput
   mangaCustom?: Prisma.MangaCustomUpdateOneWithoutNotificationsNestedInput
   joint?: Prisma.MangaJointUpdateOneWithoutNotificationsNestedInput
@@ -568,6 +613,9 @@ export type NotificationUncheckedUpdateInput = {
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  groupKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actorsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type NotificationCreateManyInput = {
@@ -589,6 +637,9 @@ export type NotificationCreateManyInput = {
   organizationId?: number | null
   postId?: number | null
   actorUserId?: number | null
+  groupKey?: string | null
+  actorsCount?: number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type NotificationUpdateManyMutationInput = {
@@ -600,6 +651,9 @@ export type NotificationUpdateManyMutationInput = {
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  groupKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actorsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type NotificationUncheckedUpdateManyInput = {
@@ -621,6 +675,9 @@ export type NotificationUncheckedUpdateManyInput = {
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  groupKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actorsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type NotificationListRelationFilter = {
@@ -652,6 +709,9 @@ export type NotificationCountOrderByAggregateInput = {
   organizationId?: Prisma.SortOrder
   postId?: Prisma.SortOrder
   actorUserId?: Prisma.SortOrder
+  groupKey?: Prisma.SortOrder
+  actorsCount?: Prisma.SortOrder
+  extraActorIds?: Prisma.SortOrder
 }
 
 export type NotificationAvgOrderByAggregateInput = {
@@ -667,6 +727,7 @@ export type NotificationAvgOrderByAggregateInput = {
   organizationId?: Prisma.SortOrder
   postId?: Prisma.SortOrder
   actorUserId?: Prisma.SortOrder
+  actorsCount?: Prisma.SortOrder
 }
 
 export type NotificationMaxOrderByAggregateInput = {
@@ -688,6 +749,8 @@ export type NotificationMaxOrderByAggregateInput = {
   organizationId?: Prisma.SortOrder
   postId?: Prisma.SortOrder
   actorUserId?: Prisma.SortOrder
+  groupKey?: Prisma.SortOrder
+  actorsCount?: Prisma.SortOrder
 }
 
 export type NotificationMinOrderByAggregateInput = {
@@ -709,6 +772,8 @@ export type NotificationMinOrderByAggregateInput = {
   organizationId?: Prisma.SortOrder
   postId?: Prisma.SortOrder
   actorUserId?: Prisma.SortOrder
+  groupKey?: Prisma.SortOrder
+  actorsCount?: Prisma.SortOrder
 }
 
 export type NotificationSumOrderByAggregateInput = {
@@ -724,6 +789,7 @@ export type NotificationSumOrderByAggregateInput = {
   organizationId?: Prisma.SortOrder
   postId?: Prisma.SortOrder
   actorUserId?: Prisma.SortOrder
+  actorsCount?: Prisma.SortOrder
 }
 
 export type NotificationCreateNestedManyWithoutOrganizationInput = {
@@ -1113,6 +1179,9 @@ export type NotificationCreateWithoutOrganizationInput = {
   emailSentAt?: Date | string | null
   postId?: number | null
   actorUserId?: number | null
+  groupKey?: string | null
+  actorsCount?: number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   user: Prisma.UserCreateNestedOneWithoutNotificationsInput
   mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutNotificationsInput
   joint?: Prisma.MangaJointCreateNestedOneWithoutNotificationsInput
@@ -1141,6 +1210,9 @@ export type NotificationUncheckedCreateWithoutOrganizationInput = {
   subscriptionId?: number | null
   postId?: number | null
   actorUserId?: number | null
+  groupKey?: string | null
+  actorsCount?: number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type NotificationCreateOrConnectWithoutOrganizationInput = {
@@ -1191,6 +1263,9 @@ export type NotificationScalarWhereInput = {
   organizationId?: Prisma.IntNullableFilter<"Notification"> | number | null
   postId?: Prisma.IntNullableFilter<"Notification"> | number | null
   actorUserId?: Prisma.IntNullableFilter<"Notification"> | number | null
+  groupKey?: Prisma.StringNullableFilter<"Notification"> | string | null
+  actorsCount?: Prisma.IntFilter<"Notification"> | number
+  extraActorIds?: Prisma.JsonNullableFilter<"Notification">
 }
 
 export type NotificationCreateWithoutUserInput = {
@@ -1202,6 +1277,9 @@ export type NotificationCreateWithoutUserInput = {
   emailSentAt?: Date | string | null
   postId?: number | null
   actorUserId?: number | null
+  groupKey?: string | null
+  actorsCount?: number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutNotificationsInput
   joint?: Prisma.MangaJointCreateNestedOneWithoutNotificationsInput
   chapter?: Prisma.ChapterCreateNestedOneWithoutNotificationsInput
@@ -1230,6 +1308,9 @@ export type NotificationUncheckedCreateWithoutUserInput = {
   organizationId?: number | null
   postId?: number | null
   actorUserId?: number | null
+  groupKey?: string | null
+  actorsCount?: number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type NotificationCreateOrConnectWithoutUserInput = {
@@ -1267,6 +1348,9 @@ export type NotificationCreateWithoutMangaCustomInput = {
   emailSentAt?: Date | string | null
   postId?: number | null
   actorUserId?: number | null
+  groupKey?: string | null
+  actorsCount?: number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   user: Prisma.UserCreateNestedOneWithoutNotificationsInput
   joint?: Prisma.MangaJointCreateNestedOneWithoutNotificationsInput
   chapter?: Prisma.ChapterCreateNestedOneWithoutNotificationsInput
@@ -1295,6 +1379,9 @@ export type NotificationUncheckedCreateWithoutMangaCustomInput = {
   organizationId?: number | null
   postId?: number | null
   actorUserId?: number | null
+  groupKey?: string | null
+  actorsCount?: number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type NotificationCreateOrConnectWithoutMangaCustomInput = {
@@ -1332,6 +1419,9 @@ export type NotificationCreateWithoutChapterInput = {
   emailSentAt?: Date | string | null
   postId?: number | null
   actorUserId?: number | null
+  groupKey?: string | null
+  actorsCount?: number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   user: Prisma.UserCreateNestedOneWithoutNotificationsInput
   mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutNotificationsInput
   joint?: Prisma.MangaJointCreateNestedOneWithoutNotificationsInput
@@ -1360,6 +1450,9 @@ export type NotificationUncheckedCreateWithoutChapterInput = {
   organizationId?: number | null
   postId?: number | null
   actorUserId?: number | null
+  groupKey?: string | null
+  actorsCount?: number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type NotificationCreateOrConnectWithoutChapterInput = {
@@ -1397,6 +1490,9 @@ export type NotificationCreateWithoutCustomListInput = {
   emailSentAt?: Date | string | null
   postId?: number | null
   actorUserId?: number | null
+  groupKey?: string | null
+  actorsCount?: number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   user: Prisma.UserCreateNestedOneWithoutNotificationsInput
   mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutNotificationsInput
   joint?: Prisma.MangaJointCreateNestedOneWithoutNotificationsInput
@@ -1425,6 +1521,9 @@ export type NotificationUncheckedCreateWithoutCustomListInput = {
   organizationId?: number | null
   postId?: number | null
   actorUserId?: number | null
+  groupKey?: string | null
+  actorsCount?: number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type NotificationCreateOrConnectWithoutCustomListInput = {
@@ -1462,6 +1561,9 @@ export type NotificationCreateWithoutCommentInput = {
   emailSentAt?: Date | string | null
   postId?: number | null
   actorUserId?: number | null
+  groupKey?: string | null
+  actorsCount?: number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   user: Prisma.UserCreateNestedOneWithoutNotificationsInput
   mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutNotificationsInput
   joint?: Prisma.MangaJointCreateNestedOneWithoutNotificationsInput
@@ -1490,6 +1592,9 @@ export type NotificationUncheckedCreateWithoutCommentInput = {
   organizationId?: number | null
   postId?: number | null
   actorUserId?: number | null
+  groupKey?: string | null
+  actorsCount?: number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type NotificationCreateOrConnectWithoutCommentInput = {
@@ -1511,6 +1616,9 @@ export type NotificationCreateWithoutParentCommentInput = {
   emailSentAt?: Date | string | null
   postId?: number | null
   actorUserId?: number | null
+  groupKey?: string | null
+  actorsCount?: number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   user: Prisma.UserCreateNestedOneWithoutNotificationsInput
   mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutNotificationsInput
   joint?: Prisma.MangaJointCreateNestedOneWithoutNotificationsInput
@@ -1539,6 +1647,9 @@ export type NotificationUncheckedCreateWithoutParentCommentInput = {
   organizationId?: number | null
   postId?: number | null
   actorUserId?: number | null
+  groupKey?: string | null
+  actorsCount?: number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type NotificationCreateOrConnectWithoutParentCommentInput = {
@@ -1592,6 +1703,9 @@ export type NotificationCreateWithoutSubscriptionInput = {
   emailSentAt?: Date | string | null
   postId?: number | null
   actorUserId?: number | null
+  groupKey?: string | null
+  actorsCount?: number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   user: Prisma.UserCreateNestedOneWithoutNotificationsInput
   mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutNotificationsInput
   joint?: Prisma.MangaJointCreateNestedOneWithoutNotificationsInput
@@ -1620,6 +1734,9 @@ export type NotificationUncheckedCreateWithoutSubscriptionInput = {
   organizationId?: number | null
   postId?: number | null
   actorUserId?: number | null
+  groupKey?: string | null
+  actorsCount?: number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type NotificationCreateOrConnectWithoutSubscriptionInput = {
@@ -1657,6 +1774,9 @@ export type NotificationCreateWithoutJointInput = {
   emailSentAt?: Date | string | null
   postId?: number | null
   actorUserId?: number | null
+  groupKey?: string | null
+  actorsCount?: number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   user: Prisma.UserCreateNestedOneWithoutNotificationsInput
   mangaCustom?: Prisma.MangaCustomCreateNestedOneWithoutNotificationsInput
   chapter?: Prisma.ChapterCreateNestedOneWithoutNotificationsInput
@@ -1685,6 +1805,9 @@ export type NotificationUncheckedCreateWithoutJointInput = {
   organizationId?: number | null
   postId?: number | null
   actorUserId?: number | null
+  groupKey?: string | null
+  actorsCount?: number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type NotificationCreateOrConnectWithoutJointInput = {
@@ -1731,6 +1854,9 @@ export type NotificationCreateManyOrganizationInput = {
   subscriptionId?: number | null
   postId?: number | null
   actorUserId?: number | null
+  groupKey?: string | null
+  actorsCount?: number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type NotificationUpdateWithoutOrganizationInput = {
@@ -1742,6 +1868,9 @@ export type NotificationUpdateWithoutOrganizationInput = {
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  groupKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actorsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   user?: Prisma.UserUpdateOneRequiredWithoutNotificationsNestedInput
   mangaCustom?: Prisma.MangaCustomUpdateOneWithoutNotificationsNestedInput
   joint?: Prisma.MangaJointUpdateOneWithoutNotificationsNestedInput
@@ -1770,6 +1899,9 @@ export type NotificationUncheckedUpdateWithoutOrganizationInput = {
   subscriptionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  groupKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actorsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type NotificationUncheckedUpdateManyWithoutOrganizationInput = {
@@ -1790,6 +1922,9 @@ export type NotificationUncheckedUpdateManyWithoutOrganizationInput = {
   subscriptionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  groupKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actorsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type NotificationCreateManyUserInput = {
@@ -1810,6 +1945,9 @@ export type NotificationCreateManyUserInput = {
   organizationId?: number | null
   postId?: number | null
   actorUserId?: number | null
+  groupKey?: string | null
+  actorsCount?: number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type NotificationUpdateWithoutUserInput = {
@@ -1821,6 +1959,9 @@ export type NotificationUpdateWithoutUserInput = {
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  groupKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actorsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   mangaCustom?: Prisma.MangaCustomUpdateOneWithoutNotificationsNestedInput
   joint?: Prisma.MangaJointUpdateOneWithoutNotificationsNestedInput
   chapter?: Prisma.ChapterUpdateOneWithoutNotificationsNestedInput
@@ -1849,6 +1990,9 @@ export type NotificationUncheckedUpdateWithoutUserInput = {
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  groupKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actorsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type NotificationUncheckedUpdateManyWithoutUserInput = {
@@ -1869,6 +2013,9 @@ export type NotificationUncheckedUpdateManyWithoutUserInput = {
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  groupKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actorsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type NotificationCreateManyMangaCustomInput = {
@@ -1889,6 +2036,9 @@ export type NotificationCreateManyMangaCustomInput = {
   organizationId?: number | null
   postId?: number | null
   actorUserId?: number | null
+  groupKey?: string | null
+  actorsCount?: number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type NotificationUpdateWithoutMangaCustomInput = {
@@ -1900,6 +2050,9 @@ export type NotificationUpdateWithoutMangaCustomInput = {
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  groupKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actorsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   user?: Prisma.UserUpdateOneRequiredWithoutNotificationsNestedInput
   joint?: Prisma.MangaJointUpdateOneWithoutNotificationsNestedInput
   chapter?: Prisma.ChapterUpdateOneWithoutNotificationsNestedInput
@@ -1928,6 +2081,9 @@ export type NotificationUncheckedUpdateWithoutMangaCustomInput = {
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  groupKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actorsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type NotificationUncheckedUpdateManyWithoutMangaCustomInput = {
@@ -1948,6 +2104,9 @@ export type NotificationUncheckedUpdateManyWithoutMangaCustomInput = {
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  groupKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actorsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type NotificationCreateManyChapterInput = {
@@ -1968,6 +2127,9 @@ export type NotificationCreateManyChapterInput = {
   organizationId?: number | null
   postId?: number | null
   actorUserId?: number | null
+  groupKey?: string | null
+  actorsCount?: number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type NotificationUpdateWithoutChapterInput = {
@@ -1979,6 +2141,9 @@ export type NotificationUpdateWithoutChapterInput = {
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  groupKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actorsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   user?: Prisma.UserUpdateOneRequiredWithoutNotificationsNestedInput
   mangaCustom?: Prisma.MangaCustomUpdateOneWithoutNotificationsNestedInput
   joint?: Prisma.MangaJointUpdateOneWithoutNotificationsNestedInput
@@ -2007,6 +2172,9 @@ export type NotificationUncheckedUpdateWithoutChapterInput = {
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  groupKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actorsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type NotificationUncheckedUpdateManyWithoutChapterInput = {
@@ -2027,6 +2195,9 @@ export type NotificationUncheckedUpdateManyWithoutChapterInput = {
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  groupKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actorsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type NotificationCreateManyCustomListInput = {
@@ -2047,6 +2218,9 @@ export type NotificationCreateManyCustomListInput = {
   organizationId?: number | null
   postId?: number | null
   actorUserId?: number | null
+  groupKey?: string | null
+  actorsCount?: number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type NotificationUpdateWithoutCustomListInput = {
@@ -2058,6 +2232,9 @@ export type NotificationUpdateWithoutCustomListInput = {
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  groupKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actorsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   user?: Prisma.UserUpdateOneRequiredWithoutNotificationsNestedInput
   mangaCustom?: Prisma.MangaCustomUpdateOneWithoutNotificationsNestedInput
   joint?: Prisma.MangaJointUpdateOneWithoutNotificationsNestedInput
@@ -2086,6 +2263,9 @@ export type NotificationUncheckedUpdateWithoutCustomListInput = {
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  groupKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actorsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type NotificationUncheckedUpdateManyWithoutCustomListInput = {
@@ -2106,6 +2286,9 @@ export type NotificationUncheckedUpdateManyWithoutCustomListInput = {
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  groupKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actorsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type NotificationCreateManyCommentInput = {
@@ -2126,6 +2309,9 @@ export type NotificationCreateManyCommentInput = {
   organizationId?: number | null
   postId?: number | null
   actorUserId?: number | null
+  groupKey?: string | null
+  actorsCount?: number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type NotificationCreateManyParentCommentInput = {
@@ -2146,6 +2332,9 @@ export type NotificationCreateManyParentCommentInput = {
   organizationId?: number | null
   postId?: number | null
   actorUserId?: number | null
+  groupKey?: string | null
+  actorsCount?: number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type NotificationUpdateWithoutCommentInput = {
@@ -2157,6 +2346,9 @@ export type NotificationUpdateWithoutCommentInput = {
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  groupKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actorsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   user?: Prisma.UserUpdateOneRequiredWithoutNotificationsNestedInput
   mangaCustom?: Prisma.MangaCustomUpdateOneWithoutNotificationsNestedInput
   joint?: Prisma.MangaJointUpdateOneWithoutNotificationsNestedInput
@@ -2185,6 +2377,9 @@ export type NotificationUncheckedUpdateWithoutCommentInput = {
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  groupKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actorsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type NotificationUncheckedUpdateManyWithoutCommentInput = {
@@ -2205,6 +2400,9 @@ export type NotificationUncheckedUpdateManyWithoutCommentInput = {
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  groupKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actorsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type NotificationUpdateWithoutParentCommentInput = {
@@ -2216,6 +2414,9 @@ export type NotificationUpdateWithoutParentCommentInput = {
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  groupKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actorsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   user?: Prisma.UserUpdateOneRequiredWithoutNotificationsNestedInput
   mangaCustom?: Prisma.MangaCustomUpdateOneWithoutNotificationsNestedInput
   joint?: Prisma.MangaJointUpdateOneWithoutNotificationsNestedInput
@@ -2244,6 +2445,9 @@ export type NotificationUncheckedUpdateWithoutParentCommentInput = {
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  groupKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actorsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type NotificationUncheckedUpdateManyWithoutParentCommentInput = {
@@ -2264,6 +2468,9 @@ export type NotificationUncheckedUpdateManyWithoutParentCommentInput = {
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  groupKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actorsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type NotificationCreateManySubscriptionInput = {
@@ -2284,6 +2491,9 @@ export type NotificationCreateManySubscriptionInput = {
   organizationId?: number | null
   postId?: number | null
   actorUserId?: number | null
+  groupKey?: string | null
+  actorsCount?: number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type NotificationUpdateWithoutSubscriptionInput = {
@@ -2295,6 +2505,9 @@ export type NotificationUpdateWithoutSubscriptionInput = {
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  groupKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actorsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   user?: Prisma.UserUpdateOneRequiredWithoutNotificationsNestedInput
   mangaCustom?: Prisma.MangaCustomUpdateOneWithoutNotificationsNestedInput
   joint?: Prisma.MangaJointUpdateOneWithoutNotificationsNestedInput
@@ -2323,6 +2536,9 @@ export type NotificationUncheckedUpdateWithoutSubscriptionInput = {
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  groupKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actorsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type NotificationUncheckedUpdateManyWithoutSubscriptionInput = {
@@ -2343,6 +2559,9 @@ export type NotificationUncheckedUpdateManyWithoutSubscriptionInput = {
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  groupKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actorsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type NotificationCreateManyJointInput = {
@@ -2363,6 +2582,9 @@ export type NotificationCreateManyJointInput = {
   organizationId?: number | null
   postId?: number | null
   actorUserId?: number | null
+  groupKey?: string | null
+  actorsCount?: number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type NotificationUpdateWithoutJointInput = {
@@ -2374,6 +2596,9 @@ export type NotificationUpdateWithoutJointInput = {
   emailSentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  groupKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actorsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   user?: Prisma.UserUpdateOneRequiredWithoutNotificationsNestedInput
   mangaCustom?: Prisma.MangaCustomUpdateOneWithoutNotificationsNestedInput
   chapter?: Prisma.ChapterUpdateOneWithoutNotificationsNestedInput
@@ -2402,6 +2627,9 @@ export type NotificationUncheckedUpdateWithoutJointInput = {
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  groupKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actorsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type NotificationUncheckedUpdateManyWithoutJointInput = {
@@ -2422,6 +2650,9 @@ export type NotificationUncheckedUpdateManyWithoutJointInput = {
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   postId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   actorUserId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  groupKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actorsCount?: Prisma.IntFieldUpdateOperationsInput | number
+  extraActorIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 
@@ -2445,6 +2676,9 @@ export type NotificationSelect<ExtArgs extends runtime.Types.Extensions.Internal
   organizationId?: boolean
   postId?: boolean
   actorUserId?: boolean
+  groupKey?: boolean
+  actorsCount?: boolean
+  extraActorIds?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   mangaCustom?: boolean | Prisma.Notification$mangaCustomArgs<ExtArgs>
   joint?: boolean | Prisma.Notification$jointArgs<ExtArgs>
@@ -2475,6 +2709,9 @@ export type NotificationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   organizationId?: boolean
   postId?: boolean
   actorUserId?: boolean
+  groupKey?: boolean
+  actorsCount?: boolean
+  extraActorIds?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   mangaCustom?: boolean | Prisma.Notification$mangaCustomArgs<ExtArgs>
   joint?: boolean | Prisma.Notification$jointArgs<ExtArgs>
@@ -2505,6 +2742,9 @@ export type NotificationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   organizationId?: boolean
   postId?: boolean
   actorUserId?: boolean
+  groupKey?: boolean
+  actorsCount?: boolean
+  extraActorIds?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   mangaCustom?: boolean | Prisma.Notification$mangaCustomArgs<ExtArgs>
   joint?: boolean | Prisma.Notification$jointArgs<ExtArgs>
@@ -2535,9 +2775,12 @@ export type NotificationSelectScalar = {
   organizationId?: boolean
   postId?: boolean
   actorUserId?: boolean
+  groupKey?: boolean
+  actorsCount?: boolean
+  extraActorIds?: boolean
 }
 
-export type NotificationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "type" | "mangaCustomId" | "jointId" | "chapterId" | "listId" | "source" | "details" | "readAt" | "createdAt" | "emailSentAt" | "commentId" | "parentCommentId" | "subscriptionId" | "organizationId" | "postId" | "actorUserId", ExtArgs["result"]["notification"]>
+export type NotificationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "type" | "mangaCustomId" | "jointId" | "chapterId" | "listId" | "source" | "details" | "readAt" | "createdAt" | "emailSentAt" | "commentId" | "parentCommentId" | "subscriptionId" | "organizationId" | "postId" | "actorUserId" | "groupKey" | "actorsCount" | "extraActorIds", ExtArgs["result"]["notification"]>
 export type NotificationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   mangaCustom?: boolean | Prisma.Notification$mangaCustomArgs<ExtArgs>
@@ -2604,6 +2847,9 @@ export type $NotificationPayload<ExtArgs extends runtime.Types.Extensions.Intern
     organizationId: number | null
     postId: number | null
     actorUserId: number | null
+    groupKey: string | null
+    actorsCount: number
+    extraActorIds: runtime.JsonValue | null
   }, ExtArgs["result"]["notification"]>
   composites: {}
 }
@@ -3054,6 +3300,9 @@ export interface NotificationFieldRefs {
   readonly organizationId: Prisma.FieldRef<"Notification", 'Int'>
   readonly postId: Prisma.FieldRef<"Notification", 'Int'>
   readonly actorUserId: Prisma.FieldRef<"Notification", 'Int'>
+  readonly groupKey: Prisma.FieldRef<"Notification", 'String'>
+  readonly actorsCount: Prisma.FieldRef<"Notification", 'Int'>
+  readonly extraActorIds: Prisma.FieldRef<"Notification", 'Json'>
 }
     
 

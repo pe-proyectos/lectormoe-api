@@ -1,13 +1,14 @@
 import { Elysia, t } from 'elysia'
 import { prisma } from '../../models/prisma'
 import { logged, loggedOptional } from '../../plugins/auth'
+import { notifySocial } from '../../util/social-notify'
+import { assertRateLimit } from '../../util/rate-limit'
 
 async function userBySlug(slug: string) {
   return prisma.user.findFirst({ where: { slug }, select: { id: true, username: true, slug: true, imageUrl: true, bannerUrl: true, description: true, followersCount: true, followingCount: true, postsCount: true } })
 }
 async function notify(recipient: number, type: string, actorUserId: number) {
-  if (recipient === actorUserId) return
-  await prisma.notification.create({ data: { userId: recipient, type, actorUserId, source: 'reply' } }).catch(() => {})
+  await notifySocial({ userId: recipient, type, actorUserId })
 }
 
 // ---------- Perfil social (público) ----------
@@ -51,6 +52,7 @@ const actions = () =>
   new Elysia()
     .use(logged())
     .post('/api/users/:slug/follow', async ({ params, user }: any) => {
+      assertRateLimit(`follow:${user.id}`, 100, 3600 * 1000, 'Demasiadas acciones, espera un momento.')
       const u = await prisma.user.findFirst({ where: { slug: params.slug }, select: { id: true } })
       if (!u) throw new Error('No encontrado.')
       if (u.id === user.id) throw new Error('No puedes seguirte a ti mismo.')
@@ -99,6 +101,7 @@ const actions = () =>
       return { status: true, data: { muted: true } }
     })
     .post('/api/posts/:id/report', async ({ params, body, user }: any) => {
+      assertRateLimit(`report:${user.id}`, 15, 24 * 3600 * 1000, 'Alcanzaste el límite de reportes.')
       const id = Number(params.id)
       const post = await prisma.organizationPost.findFirst({ where: { id, deletedAt: null }, select: { id: true, userId: true } })
       if (!post) throw new Error('No encontrada.')

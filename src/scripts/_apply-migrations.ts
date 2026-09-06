@@ -328,7 +328,11 @@ const statements: string[] = [
   `ALTER TABLE "content_report" ADD COLUMN IF NOT EXISTS "postId" INTEGER REFERENCES "organization_post"("id") ON DELETE CASCADE;`,
   `ALTER TABLE "content_report" ADD COLUMN IF NOT EXISTS "reportedUserId" INTEGER;`,
   `CREATE INDEX IF NOT EXISTS "content_report_postId_idx" ON "content_report"("postId");`,
-  `CREATE UNIQUE INDEX IF NOT EXISTS "content_report_reporter_post_key" ON "content_report"("reporterUserId","postId") WHERE "postId" IS NOT NULL;`
+  `CREATE UNIQUE INDEX IF NOT EXISTS "content_report_reporter_post_key" ON "content_report"("reporterUserId","postId") WHERE "postId" IS NOT NULL;`,
+  `ALTER TABLE "notification" ADD COLUMN IF NOT EXISTS "groupKey" VARCHAR(120);`,
+  `ALTER TABLE "notification" ADD COLUMN IF NOT EXISTS "actorsCount" INTEGER NOT NULL DEFAULT 1;`,
+  `ALTER TABLE "notification" ADD COLUMN IF NOT EXISTS "extraActorIds" JSONB;`,
+  `CREATE UNIQUE INDEX IF NOT EXISTS "notification_userId_groupKey_key" ON "notification"("userId","groupKey") WHERE "groupKey" IS NOT NULL AND "readAt" IS NULL;`
 ]
 
 for (const sql of statements) {

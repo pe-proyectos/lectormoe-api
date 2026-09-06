@@ -1395,6 +1395,9 @@ model Notification {
   // Columnas planas (sin relacion) para evitar renombrar la relacion de usuario.
   postId          Int?
   actorUserId     Int?
+  groupKey        String?       @db.VarChar(120)
+  actorsCount     Int           @default(1)
+  extraActorIds   Json?
 
   @@index([userId, readAt, createdAt])
   @@index([userId, createdAt])
