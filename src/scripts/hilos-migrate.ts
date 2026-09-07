@@ -20,16 +20,16 @@ async function pool<T>(items: T[], n: number, fn: (t: T) => Promise<void>) {
   }))
 }
 
-const orgs = await sql.unsafe(`SELECT id, name, slug, "logoUrl", "imageUrl", "isNSFW" FROM organization WHERE "isDeleted"=false ${SCAN ? `AND slug='${SCAN}'` : ''} ORDER BY id`)
+const orgs = await sql.unsafe(`SELECT id, name, slug, "logoUrl", "imageUrl", "isNSFW", "createdAt" FROM organization WHERE "isDeleted"=false ${SCAN ? `AND slug='${SCAN}'` : ''} ORDER BY id`)
 for (const org of orgs) {
   try {
-    if (!DRY) await hilos.pages.upsert({ externalId: `scan:${org.id}`, handle: `scan-${org.slug}`.slice(0, 40), type: 'scan', displayName: org.name, avatarUrl: org.logoUrl || org.imageUrl || undefined, metadata: { isNSFW: org.isNSFW } })
+    if (!DRY) await hilos.pages.upsert({ externalId: `scan:${org.id}`, handle: `scan-${org.slug}`.slice(0, 40), type: 'scan', displayName: org.name, avatarUrl: org.logoUrl || org.imageUrl || undefined, metadata: { isNSFW: org.isNSFW }, createdAt: new Date(org.createdAt).toISOString() })
     scanN++
   } catch { errN++; continue }
-  const mangas = await sql.unsafe(`SELECT mc.id, mc.title, mc."imageUrl", m.slug AS mslug FROM manga_custom mc JOIN manga m ON m.id=mc."mangaId" WHERE mc."organizationId"=${org.id} AND mc."deletedAt" IS NULL ORDER BY mc.id`)
+  const mangas = await sql.unsafe(`SELECT mc.id, mc.title, mc."imageUrl", mc."createdAt", m.slug AS mslug FROM manga_custom mc JOIN manga m ON m.id=mc."mangaId" WHERE mc."organizationId"=${org.id} AND mc."deletedAt" IS NULL ORDER BY mc.id`)
   for (const mc of mangas) {
     try {
-      if (!DRY) await hilos.pages.upsert({ externalId: `manga:${mc.id}`, handle: `m-${mc.mslug}-${mc.id}`.slice(0, 40), type: 'manga', parentExternalId: `scan:${org.id}`, displayName: mc.title, avatarUrl: mc.imageUrl || undefined })
+      if (!DRY) await hilos.pages.upsert({ externalId: `manga:${mc.id}`, handle: `m-${mc.mslug}-${mc.id}`.slice(0, 40), type: 'manga', parentExternalId: `scan:${org.id}`, displayName: mc.title, avatarUrl: mc.imageUrl || undefined, createdAt: new Date(mc.createdAt).toISOString() })
       mangaN++
     } catch { errN++; continue }
     const chLimit = MAXCH > 0 ? `LIMIT ${MAXCH}` : ''
