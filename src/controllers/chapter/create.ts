@@ -1,5 +1,6 @@
 import { prisma } from '../../models/prisma'
 import { notifyNewChapter } from '../../services/notify-new-chapter'
+import { autopostChapter } from '../../services/hilos-autopost'
 import type { CreateChapterRequest } from '../../types/chapter/create'
 import { sanitizeBodyMarkdown } from '../../services/markdown-pipeline'
 
@@ -202,6 +203,7 @@ export const createChapter = async (
   // Notify users who favorited / user-listed this manga (fire-and-forget).
   // Email is dispatched 30 min later by the notification cron if still unread.
   if (!params.isUnreleased) {
+    autopostChapter(chapter.id).catch(() => {})
     notifyNewChapter({
       chapterId: chapter.id,
       mangaCustomId: chapter.mangaCustomId
