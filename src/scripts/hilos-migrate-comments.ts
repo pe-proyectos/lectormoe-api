@@ -92,7 +92,12 @@ for (const c of comments as any[]) {
     } catch (e) { logErr(e) }
   }
   try {
-    await hilos.comments.create(postId, { content, createdAt: new Date(c.createdAt).toISOString() }, `external:${authorExt}`)
+    await hilos.comments.create(postId, {
+      content,
+      createdAt: new Date(c.createdAt).toISOString(),
+      externalRef: `comment:${c.id}`,
+      ...(c.parentId ? { parentExternalRef: `comment:${c.parentId}` } : {}),
+    }, `external:${authorExt}`)
     okN++
   } catch (e) { logErr(e) }
   if ((okN + skipN) % 200 === 0) console.log(`… ok ${okN} | skip ${skipN} | img ${imgN} | err ${errN}`)
