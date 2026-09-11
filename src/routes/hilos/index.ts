@@ -46,6 +46,8 @@ export const router = () =>
       if (!u) return { status: false, message: 'user_not_found' }
       try {
         const ext = await pageExternalId(u)
+        // Si su page ya es de La Charca, el usuario vinculo su cuenta alli.
+        const linked = ext.startsWith('lacharca:user:')
         const r = await hilos.pageTokens.create({
           externalId: ext,
           ttl: 900,
@@ -60,6 +62,8 @@ export const router = () =>
             expiresIn: r.expiresIn,
             hilosBase: process.env.HILOS_BASE || 'https://hilos.rest',
             handle: u.slug,
+            linked,
+            charcaUrl: process.env.CHARCA_URL || 'https://lacharca.com',
           },
         }
       } catch (e: any) {
@@ -93,16 +97,68 @@ export const modRouter = () =>
       }
     }, { body: t.Optional(t.Object({ hidden: t.Optional(t.Boolean()), reason: t.Optional(t.String()) })) })
 
+// Crea el hilo de una obra la primera vez que alguien entra a comentarla.
+// Sin esto, cualquier obra sin comentarios historicos se quedaba sin seccion.
+async function ensureMangaThread(mangaCustomId: number): Promise<number | null> {
+  const mc = await prisma.mangaCustom.findUnique({
+    where: { id: mangaCustomId },
+    select: {
+      id: true, title: true, imageUrl: true, createdAt: true, organizationId: true, deletedAt: true,
+      manga: { select: { slug: true } },
+    },
+  })
+  if (!mc || mc.deletedAt) return null
+
+  const ref = `manga:${mc.id}`
+  const handle = `m-${mc.manga?.slug || mc.id}-${mc.id}`.slice(0, 40)
+  const base = {
+    externalId: ref,
+    handle,
+    type: 'manga' as const,
+    displayName: mc.title,
+    avatarUrl: mc.imageUrl || undefined,
+    createdAt: mc.createdAt ? new Date(mc.createdAt).toISOString() : undefined,
+  }
+  try {
+    await hilos.pages.upsert(mc.organizationId ? ({ ...base, parentExternalId: `scan:${mc.organizationId}` } as any) : (base as any))
+  } catch (e: any) {
+    // Si el scan ya no esta en hilos, la obra vive suelta antes que perderse.
+    if (String(e?.message || e).includes('parent_not_found')) {
+      try { await hilos.pages.upsert(base as any) } catch { return null }
+    } else return null
+  }
+
+  try {
+    const created: any = await (hilos as any).posts.create({
+      content: mc.title,
+      externalRef: ref,
+      wallExternalId: ref,
+      createdAt: mc.createdAt ? new Date(mc.createdAt).toISOString() : undefined,
+    }, `external:${ref}`)
+    return created?.id ?? null
+  } catch {
+    // Carrera con otra peticion: si ya existe, lo resolvemos por referencia.
+    const again: any = await (hilos as any).posts.byRef(ref).catch(() => null)
+    return again?.id ?? null
+  }
+}
+
 // Publico: resuelve el post de hilos que corresponde a un capitulo u obra.
 // El lector lo necesita para saber donde colgar los comentarios.
 export const publicRouter = () =>
   new Elysia().get('/api/hilos/post-ref', async ({ query }: any) => {
     const ref = String(query.ref || '')
-    if (!/^(chapter|manga):\d+$/.test(ref)) return { status: false, message: 'bad_ref' }
-    try {
-      const post: any = await (hilos as any).posts.byRef(ref)
-      return { status: true, data: { postId: post?.id ?? null } }
-    } catch {
-      return { status: true, data: { postId: null } }
+    const m = ref.match(/^(chapter|manga):(\d+)$/)
+    if (!m) return { status: false, message: 'bad_ref' }
+
+    const existing: any = await (hilos as any).posts.byRef(ref).catch(() => null)
+    if (existing?.id) return { status: true, data: { postId: existing.id } }
+
+    // Solo las obras se crean al vuelo: los capitulos los publica el propio
+    // flujo de publicacion, y uno inexistente no deberia inventarse.
+    if (m[1] === 'manga') {
+      const postId = await ensureMangaThread(Number(m[2]))
+      return { status: true, data: { postId } }
     }
+    return { status: true, data: { postId: null } }
   }, { query: t.Object({ ref: t.String() }) })
