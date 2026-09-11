@@ -17,26 +17,35 @@ const SINCE = Number(arg('--since') || 0)
 const sql = new SQL({ url: (process.env.DATABASE_URL || '').split('?')[0], max: 3, connectionTimeout: 15 })
 const hilos = createHilos({ baseUrl: process.env.HILOS_BASE || 'https://hilos.rest', secretKey: process.env.HILOS_SECRET_KEY || '' })
 
-const pageCache = new Map<number, boolean>()   // userId -> page lista
+const pageCache = new Map<number, string | null>() // userId -> externalId de su page (o null)
 const postCache = new Map<string, number>()    // identifier -> postId en hilos
 let okN = 0, skipN = 0, errN = 0, imgN = 0
 const errMsgs = new Map<string, number>()
 function logErr(e: any) { errN++; const m = String(e?.message || e).slice(0, 70); errMsgs.set(m, (errMsgs.get(m) || 0) + 1) }
 
-// Asegura la page del autor (reclamable luego por su dueño).
-async function ensureAuthorPage(u: any): Promise<boolean> {
+// Devuelve el externalId de la page del autor. Si ya reclamó su cuenta en La
+// Charca (page 'lacharca:user:N'), se usa esa para no partir su historial.
+async function ensureAuthorPage(u: any): Promise<string | null> {
   if (pageCache.has(u.id)) return pageCache.get(u.id)!
+  const handle = (u.slug || `u${u.id}`).slice(0, 40)
+  // ¿El handle ya pertenece a una cuenta de La Charca de este mismo usuario?
+  try {
+    const existing: any = await (hilos as any).pages.get(handle).catch(() => null)
+    if (existing?.externalId?.startsWith('lacharca:user:')) {
+      pageCache.set(u.id, existing.externalId)
+      return existing.externalId
+    }
+  } catch { /* sigue */ }
+  const ext = `capibara:user:${u.id}`
   try {
     await hilos.pages.upsert({
-      externalId: `capibara:user:${u.id}`,
-      handle: (u.slug || `u${u.id}`).slice(0, 40),
-      type: 'user',
+      externalId: ext, handle, type: 'user',
       displayName: u.username || u.slug,
       avatarUrl: u.imageUrl || undefined,
       createdAt: u.createdAt ? new Date(u.createdAt).toISOString() : undefined,
     })
-    pageCache.set(u.id, true); return true
-  } catch (e) { logErr(e); pageCache.set(u.id, false); return false }
+    pageCache.set(u.id, ext); return ext
+  } catch (e) { logErr(e); pageCache.set(u.id, null); return null }
 }
 
 // Resuelve a que post de hilos pertenece un identifier (mangaSlug[_numero]).
@@ -73,7 +82,8 @@ for (const c of comments as any[]) {
   if (DRY) { okN++; continue }
   const postId = await resolvePost(c.identifier)
   if (!postId) { skipN++; continue }
-  if (!(await ensureAuthorPage({ id: c.uid, username: c.username, slug: c.slug, imageUrl: c.uavatar, createdAt: c.ucreated }))) { skipN++; continue }
+  const authorExt = await ensureAuthorPage({ id: c.uid, username: c.username, slug: c.slug, imageUrl: c.uavatar, createdAt: c.ucreated })
+  if (!authorExt) { skipN++; continue }
   let content = c.comment || ''
   if (c.imageUrl) {
     try {
@@ -82,7 +92,7 @@ for (const c of comments as any[]) {
     } catch (e) { logErr(e) }
   }
   try {
-    await hilos.comments.create(postId, { content, createdAt: new Date(c.createdAt).toISOString() }, `external:capibara:user:${c.uid}`)
+    await hilos.comments.create(postId, { content, createdAt: new Date(c.createdAt).toISOString() }, `external:${authorExt}`)
     okN++
   } catch (e) { logErr(e) }
   if ((okN + skipN) % 200 === 0) console.log(`… ok ${okN} | skip ${skipN} | img ${imgN} | err ${errN}`)
