@@ -4,6 +4,8 @@ import { logged } from '../../plugins/auth'
 import { useOrganizationOptional } from '../../plugins/organization'
 import { logModeration } from '../../util/moderation-log'
 import { createHilos } from '../../lib/hilos-sdk'
+import { createHmac, timingSafeEqual } from 'crypto'
+import { handleCommentEvent } from '../../services/charca-comment-emails'
 
 // BFF de hilos.rest para el lector: el navegador nunca ve la secret key, solo
 // un page token de 15 minutos con los permisos justos. Mismo patron que
@@ -163,6 +165,27 @@ async function ensureMangaThread(mangaCustomId: number): Promise<number | null> 
     return again?.id ?? null
   }
 }
+
+// Webhook de hilos.rest: el motor avisa de lo que pasa y aquí decidimos a quién
+// escribirle. La firma evita que cualquiera pueda disparar correos.
+export const webhookRouter = () =>
+  new Elysia().post('/api/hilos/webhook', async ({ request, body }: any) => {
+    const secret = process.env.HILOS_WEBHOOK_SECRET || ''
+    if (!secret) return { status: false, message: 'not_configured' }
+
+    const raw = typeof body === 'string' ? body : JSON.stringify(body)
+    const signature = request.headers.get('x-hilos-signature') || ''
+    const expected = createHmac('sha256', secret).update(raw).digest('hex')
+    const ok = signature.length === expected.length && timingSafeEqual(Buffer.from(signature), Buffer.from(expected))
+    if (!ok) return { status: false, message: 'bad_signature' }
+
+    const payload = typeof body === 'string' ? JSON.parse(body) : body
+    if (payload?.type !== 'comment.created') return { status: true, data: { ignored: payload?.type } }
+
+    // Respondemos ya: el correo no debe hacer esperar a quien comenta.
+    handleCommentEvent(payload.data).catch((e) => console.error('charca email:', e?.message))
+    return { status: true, data: { queued: true } }
+  })
 
 // Publico: resuelve el post de hilos que corresponde a un capitulo u obra.
 // El lector lo necesita para saber donde colgar los comentarios.

@@ -137,7 +137,7 @@ import { router as userSavedQuoteRouter } from './user-saved-quote'
 import { router as organizationPostRouter } from './organization-post'
 import { router as socialGraphRouter } from './social-graph'
 import { router as ssoRouter, publicRouter as ssoPublicRouter } from './sso'
-import { router as hilosRouter, publicRouter as hilosPublicRouter, modRouter as hilosModRouter } from './hilos'
+import { router as hilosRouter, publicRouter as hilosPublicRouter, modRouter as hilosModRouter, webhookRouter as hilosWebhookRouter } from './hilos'
 import { router as userPageBookmarkRouter } from './user-page-bookmark/index'
 import { router as viewsCreateRouter } from './views/create'
 import { router as viewsJointRouter } from './views/create-joint'
@@ -315,6 +315,7 @@ export const router = () => async (app: Elysia) => {
   app.use(hilosPublicRouter())
   app.use(hilosRouter())
   app.use(hilosModRouter())
+  app.use(hilosWebhookRouter())
   app.use(userEditRouter())
   app.use(userDeleteAccountRouter())
   app.use(userDeleteDataRouter())
