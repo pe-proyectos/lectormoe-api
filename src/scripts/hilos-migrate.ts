@@ -13,10 +13,12 @@ const sql = new SQL({ url: (process.env.DATABASE_URL || '').split('?')[0], max: 
 const hilos = createHilos({ baseUrl: process.env.HILOS_BASE || 'https://hilos.rest', secretKey: process.env.HILOS_SECRET_KEY || '' })
 
 let scanN = 0, mangaN = 0, chapterN = 0, errN = 0
+const errMsgs = new Map<string, number>()
+function logErr(e: any) { errN++; const m = String(e?.message || e).slice(0, 80); errMsgs.set(m, (errMsgs.get(m) || 0) + 1) }
 async function pool<T>(items: T[], n: number, fn: (t: T) => Promise<void>) {
   let i = 0
   await Promise.all(Array.from({ length: Math.min(n, items.length) }, async () => {
-    while (i < items.length) { const idx = i++; try { await fn(items[idx]) } catch { errN++ } }
+    while (i < items.length) { const idx = i++; try { await fn(items[idx]) } catch (e) { logErr(e) } }
   }))
 }
 
@@ -25,13 +27,13 @@ for (const org of orgs) {
   try {
     if (!DRY) await hilos.pages.upsert({ externalId: `scan:${org.id}`, handle: `scan-${org.slug}`.slice(0, 40), type: 'scan', displayName: org.name, avatarUrl: org.logoUrl || org.imageUrl || undefined, metadata: { isNSFW: org.isNSFW }, createdAt: new Date(org.createdAt).toISOString() })
     scanN++
-  } catch { errN++; continue }
+  } catch (e) { logErr(e); continue }
   const mangas = await sql.unsafe(`SELECT mc.id, mc.title, mc."imageUrl", mc."createdAt", m.slug AS mslug FROM manga_custom mc JOIN manga m ON m.id=mc."mangaId" WHERE mc."organizationId"=${org.id} AND mc."deletedAt" IS NULL ORDER BY mc.id`)
   for (const mc of mangas) {
     try {
       if (!DRY) await hilos.pages.upsert({ externalId: `manga:${mc.id}`, handle: `m-${mc.mslug}-${mc.id}`.slice(0, 40), type: 'manga', parentExternalId: `scan:${org.id}`, displayName: mc.title, avatarUrl: mc.imageUrl || undefined, createdAt: new Date(mc.createdAt).toISOString() })
       mangaN++
-    } catch { errN++; continue }
+    } catch (e) { logErr(e); continue }
     const chLimit = MAXCH > 0 ? `LIMIT ${MAXCH}` : ''
     const chapters = await sql.unsafe(`SELECT id, number, title, "displayNumber", "createdAt" FROM chapter WHERE "mangaCustomId"=${mc.id} ORDER BY number ASC ${chLimit}`)
     if (DRY) { chapterN += chapters.length; continue }
@@ -44,5 +46,6 @@ for (const org of orgs) {
   if (scanN % 10 === 0) console.log(`… progreso: scans ${scanN}, obras ${mangaN}, caps ${chapterN}, errs ${errN}`)
 }
 console.log(JSON.stringify({ dry: DRY, scan: SCAN || 'ALL', scans: scanN, mangas: mangaN, chapters: chapterN, errors: errN }))
+for (const [m, c] of [...errMsgs.entries()].sort((a,b)=>b[1]-a[1]).slice(0,10)) console.log(`ERRMSG x${c}: ${m}`)
 await sql.end()
 process.exit(0)
