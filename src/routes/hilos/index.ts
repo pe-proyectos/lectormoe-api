@@ -97,6 +97,27 @@ export const modRouter = () =>
       }
     }, { body: t.Optional(t.Object({ hidden: t.Optional(t.Boolean()), reason: t.Optional(t.String()) })) })
 
+    // Silenciar a alguien: el equivalente al baneo de comentarios de siempre.
+    .post('/api/hilos/pages/:handle/mute', async ({ user, params, organizationId, body }: any) => {
+      if (!organizationId) return { status: false, message: 'organization_required' }
+      const permissions = user.permissions?.find((p: any) => p.organizationId === organizationId)
+      if (!permissions?.canBanUser && !permissions?.canHideComment) return { status: false, message: 'forbidden' }
+      try {
+        const muted = body?.muted === false ? false : true
+        const r = await (hilos as any).pages.mute(String(params.handle), muted, body?.until)
+        logModeration(
+          user.id,
+          muted ? 'mute_page' : 'unmute_page',
+          'hilos_page',
+          0,
+          JSON.stringify({ organizationId, handle: params.handle, until: body?.until || null, reason: body?.reason || null }),
+        )
+        return { status: true, data: r }
+      } catch (e: any) {
+        return { status: false, message: e?.code || e?.message || 'error' }
+      }
+    }, { body: t.Optional(t.Object({ muted: t.Optional(t.Boolean()), until: t.Optional(t.String()), reason: t.Optional(t.String()) })) })
+
 // Crea el hilo de una obra la primera vez que alguien entra a comentarla.
 // Sin esto, cualquier obra sin comentarios historicos se quedaba sin seccion.
 async function ensureMangaThread(mangaCustomId: number): Promise<number | null> {
