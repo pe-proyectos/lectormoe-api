@@ -99,6 +99,57 @@ export const modRouter = () =>
       }
     }, { body: t.Optional(t.Object({ hidden: t.Optional(t.Boolean()), reason: t.Optional(t.String()) })) })
 
+    // Comentarios del scan para el panel de moderación. Viven en hilos, pero
+    // los permisos siguen siendo de CapibaraTraductor.
+    .get('/api/hilos/moderation/comments', async ({ user, organizationId, query }: any) => {
+      if (!organizationId) return { status: false, message: 'organization_required' }
+      const permissions = user.permissions?.find((p: any) => p.organizationId === organizationId)
+      if (!permissions?.canHideComment && !permissions?.canBanUser) return { status: false, message: 'forbidden' }
+
+      const qs = new URLSearchParams()
+      qs.set('page', `external:scan:${organizationId}`)
+      qs.set('page_num', String(Math.max(0, Number(query.page) || 0)))
+      qs.set('limit', String(Math.min(100, Number(query.limit) || 30)))
+      if (query.status) qs.set('status', String(query.status))
+      if (query.q) qs.set('q', String(query.q))
+
+      const res = await fetch(`${process.env.HILOS_BASE || 'https://hilos.rest'}/v1/moderation/comments?${qs}`, {
+        headers: { Authorization: `Bearer ${process.env.HILOS_SECRET_KEY || ''}` },
+      })
+      const json: any = await res.json().catch(() => ({}))
+      if (json?.error) return { status: false, message: json.error }
+      return { status: true, data: json.data }
+    })
+
+    // Responder como el scan desde el panel de moderación.
+    .post('/api/hilos/posts/:id/reply', async ({ user, params, organizationId, body }: any) => {
+      if (!organizationId) return { status: false, message: 'organization_required' }
+      const permissions = user.permissions?.find((p: any) => p.organizationId === organizationId)
+      if (!permissions?.canHideComment) return { status: false, message: 'forbidden' }
+      const content = String(body?.content || '').trim()
+      if (!content) return { status: false, message: 'empty' }
+      try {
+        const c = await (hilos as any).comments.create(
+          Number(params.id),
+          { content, ...(body?.parentCommentId ? { parentCommentId: Number(body.parentCommentId) } : {}) },
+          `external:scan:${organizationId}`,
+        )
+        return { status: true, data: c }
+      } catch (e: any) { return { status: false, message: e?.code || e?.message || 'error' } }
+    })
+
+    // Borrar un comentario del motor (moderación del scan).
+    .delete('/api/hilos/comments/:id', async ({ user, params, organizationId }: any) => {
+      if (!organizationId) return { status: false, message: 'organization_required' }
+      const permissions = user.permissions?.find((p: any) => p.organizationId === organizationId)
+      if (!permissions?.canHideComment) return { status: false, message: 'forbidden' }
+      try {
+        const r = await (hilos as any).comments.remove(Number(params.id))
+        logModeration(user.id, 'delete_comment', 'hilos_comment', Number(params.id), JSON.stringify({ organizationId }))
+        return { status: true, data: r }
+      } catch (e: any) { return { status: false, message: e?.code || 'error' } }
+    })
+
     // Silenciar a alguien: el equivalente al baneo de comentarios de siempre.
     .post('/api/hilos/pages/:handle/mute', async ({ user, params, organizationId, body }: any) => {
       if (!organizationId) return { status: false, message: 'organization_required' }
