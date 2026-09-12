@@ -113,6 +113,43 @@ async function staffOf(organizationId: number | null): Promise<number[]> {
   return perms.map((p) => p.userId)
 }
 
+// La campana de CapibaraTraductor sigue siendo la misma, pero el comentario ya
+// no vive en su base: por eso guardamos el contexto en 'details' en vez de
+// enlazar la fila antigua de comentarios.
+async function createInAppNotifications(
+  ev: CommentEvent,
+  ctx: Awaited<ReturnType<typeof resolveContext>>,
+  recipients: Recipient[],
+  actorUserId: number | null,
+  commentUrl: string,
+  authorName: string,
+) {
+  if (!recipients.length) return
+  const details = JSON.stringify({
+    author: authorName,
+    text: ev.comment.content.slice(0, 200),
+    url: commentUrl,
+    readerUrl: ctx.readerUrl,
+    context: ctx.title,
+    work: ctx.workTitle,
+    kind: ctx.kind,
+  }).slice(0, 500)
+
+  await prisma.notification.createMany({
+    data: recipients.map((r) => ({
+      userId: r.userId,
+      type: 'charca_comment',
+      source: r.reason === 'reply' ? 'reply' : r.reason === 'staff' ? 'org_staff' : 'favorite',
+      details,
+      actorUserId,
+      organizationId: ctx.organizationId,
+      // El correo lo manda este mismo servicio: marcamos para que el cron
+      // antiguo no vuelva a intentarlo.
+      emailSentAt: new Date(),
+    })),
+  }).catch((e) => console.error('charca notif:', e?.message))
+}
+
 export async function handleCommentEvent(ev: CommentEvent): Promise<{ sent: number; skipped: number }> {
   const ctx = await resolveContext(ev.post)
   const authorName = ev.author.displayName || ev.author.handle
@@ -143,6 +180,10 @@ export async function handleCommentEvent(ev: CommentEvent): Promise<{ sent: numb
   // Nunca se avisa a quien acaba de escribir.
   const self = await userFromExternalId(ev.author.externalId)
   if (self) recipients.delete(self.id)
+
+  // Aviso dentro del sitio (la campana). El correo puede estar desactivado en
+  // las preferencias, pero la notificación in-app siempre se crea.
+  await createInAppNotifications(ev, ctx, [...recipients.values()], self?.id ?? null, commentUrl, authorName)
 
   let sent = 0, skipped = 0
   for (const r of recipients.values()) {

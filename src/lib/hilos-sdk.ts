@@ -48,6 +48,7 @@ export function createHilos(opts: HilosOptions) {
       saved: (page = 0, limit = 20) => req('GET', `/saved?page=${page}&limit=${limit}`),
       byRef: (ref: string): Promise<{ id: number; wallPageId: number }> => req('GET', `/posts/by-ref?ref=${encodeURIComponent(ref)}`),
       remove: (id: number, acting?: string | number): Promise<{ ok: boolean }> => req('DELETE', `/posts/${id}`, undefined, acting),
+      update: (id: number, p: { content?: string; wallExternalId?: string }, acting?: string | number): Promise<HilosPost> => req('PATCH', `/posts/${id}`, p, acting),
       like: (id: number, acting?: string | number): Promise<{ liked: boolean; likesCount: number }> => req('POST', `/posts/${id}/like`, undefined, acting),
     },
     uploads: {
@@ -72,6 +73,7 @@ export function createHilos(opts: HilosOptions) {
       like: (id: number, acting?: string | number): Promise<{ liked: boolean; likesCount: number }> => req('POST', `/comments/${id}/like`, undefined, acting),
       hide: (id: number, hidden = true): Promise<{ id: number; hidden: boolean }> => req('POST', `/comments/${id}/hide`, { hidden }),
       edit: (id: number, content: string, acting?: string | number): Promise<HilosComment> => req('PATCH', `/comments/${id}`, { content }, acting),
+      byRef: (ref: string): Promise<{ id: number; content: string; postId: number }> => req('GET', `/comments/by-ref?ref=${encodeURIComponent(ref)}`),
     },
   }
 }

@@ -38,7 +38,7 @@ async function authorPage(userId: number): Promise<string | null> {
 
 async function ingestImage(url: string | null): Promise<string | null> {
   if (!url) return null
-  try { const r: any = await (hilos as any).uploads.fromUrl(url); if (r?.url) { imgN++; return r.url } } catch (e) { logErr(e) }
+  try { const r: any = await (hilos as any).uploads.fromUrl(url); if (r?.publicUrl) { imgN++; return r.publicUrl } } catch (e) { logErr(e) }
   return null
 }
 

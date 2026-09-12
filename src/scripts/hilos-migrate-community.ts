@@ -46,7 +46,7 @@ async function ingestImages(images: any): Promise<string[]> {
   for (const raw of list.slice(0, 4)) {
     const url = typeof raw === 'string' ? raw : raw?.url
     if (!url) continue
-    try { const r: any = await (hilos as any).uploads.fromUrl(url); if (r?.url) { out.push(r.url); imgN++ } }
+    try { const r: any = await (hilos as any).uploads.fromUrl(url); if (r?.publicUrl) { out.push(r.publicUrl); imgN++ } }
     catch (e) { logErr(e) }
   }
   return out
