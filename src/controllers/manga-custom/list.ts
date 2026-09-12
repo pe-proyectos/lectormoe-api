@@ -22,13 +22,22 @@ export const listMangaCustom = async (
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   const order: any = {}
 
-  // Búsqueda por relevancia: SOLO título (custom + base) y autor. NO descripción
-  // (una palabra corta matcheaba la descripción de cualquier obra: basura).
+  // Búsqueda por relevancia: título (custom + base), título alternativo y
+  // autor. NO descripción (una palabra corta matcheaba la descripción de
+  // cualquier obra: basura).
   const searchConditions = filters.search
     ? {
         OR: [
           {
             title: {
+              contains: filters.search,
+              mode: Prisma.QueryMode.insensitive
+            }
+          },
+          {
+            // El nombre original o en romaji que pone el scan: mucha gente
+            // busca por ahí en vez de por el título traducido.
+            alternativeTitle: {
               contains: filters.search,
               mode: Prisma.QueryMode.insensitive
             }
@@ -375,16 +384,19 @@ export const listMangaCustom = async (
   // match por autor. Ordena la página en memoria (acentos ignorados).
   if (searchNorm) {
     const rank = (mc: any): number => {
-      const title = normalize(mc.title || mc.manga?.title || '')
-      if (title.startsWith(searchNorm)) return 0
-      if (
-        new RegExp(
-          `(^|\\s)${searchNorm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`
-        ).test(title)
-      )
-        return 1
-      if (title.includes(searchNorm)) return 2
-      return 3 // match por autor u otro
+      const escaped = searchNorm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+      const candidatos = [
+        normalize(mc.title || mc.manga?.title || ''),
+        normalize(mc.alternativeTitle || ''),
+      ].filter(Boolean)
+
+      let mejor = 3 // match por autor u otro
+      for (const title of candidatos) {
+        if (title.startsWith(searchNorm)) return 0
+        if (new RegExp(`(^|\\s)${escaped}`).test(title)) mejor = Math.min(mejor, 1)
+        else if (title.includes(searchNorm)) mejor = Math.min(mejor, 2)
+      }
+      return mejor
     }
     ;(mangasCustoms as any[]).sort((a, b) => rank(a) - rank(b))
   }
@@ -543,17 +555,18 @@ async function injectMemberJointEntries(
   const existingCustoms = jointMangaIds.length
     ? await prisma.mangaCustom.findMany({
         where: { mangaId: { in: jointMangaIds }, deletedAt: null },
-        select: { mangaId: true, title: true, imageUrl: true }
+        select: { mangaId: true, title: true, alternativeTitle: true, imageUrl: true }
       })
     : []
   const customMetaByMangaId = new Map<
     number,
-    { title: string; imageUrl: string | null }
+    { title: string; alternativeTitle: string | null; imageUrl: string | null }
   >()
   for (const mc of existingCustoms) {
     if (!customMetaByMangaId.has(mc.mangaId) && mc.title) {
       customMetaByMangaId.set(mc.mangaId, {
         title: mc.title,
+        alternativeTitle: (mc as any).alternativeTitle || null,
         imageUrl: mc.imageUrl
       })
     }
@@ -570,7 +583,10 @@ async function injectMemberJointEntries(
     const searchTerm = filters?.search || filters?.title
     if (searchTerm) {
       const q = searchTerm.toLowerCase()
-      if (!displayTitle.toLowerCase().includes(q)) continue
+      const alt = (customMeta as any)?.alternativeTitle || ''
+      const base = joint.manga?.title || ''
+      const coincide = [displayTitle, alt, base].some((t) => t && t.toLowerCase().includes(q))
+      if (!coincide) continue
     }
 
     const org = joint.members[0]?.organization
@@ -672,17 +688,18 @@ async function injectGlobalJointEntries(
   const existingCustoms = jointMangaIds.length
     ? await prisma.mangaCustom.findMany({
         where: { mangaId: { in: jointMangaIds }, deletedAt: null },
-        select: { mangaId: true, title: true, imageUrl: true }
+        select: { mangaId: true, title: true, alternativeTitle: true, imageUrl: true }
       })
     : []
   const customMetaByMangaId = new Map<
     number,
-    { title: string; imageUrl: string | null }
+    { title: string; alternativeTitle: string | null; imageUrl: string | null }
   >()
   for (const mc of existingCustoms) {
     if (!customMetaByMangaId.has(mc.mangaId) && mc.title) {
       customMetaByMangaId.set(mc.mangaId, {
         title: mc.title,
+        alternativeTitle: (mc as any).alternativeTitle || null,
         imageUrl: mc.imageUrl
       })
     }
