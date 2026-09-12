@@ -339,7 +339,9 @@ const statements: string[] = [
   `CREATE UNIQUE INDEX IF NOT EXISTS "post_poll_vote_pollId_userId_key" ON "post_poll_vote"("pollId","userId");`,
   `CREATE INDEX IF NOT EXISTS "post_poll_vote_pollId_idx" ON "post_poll_vote"("pollId");`,
   // Fase social 5b: card nativa de obra adjunta a un post.
-  `ALTER TABLE "organization_post" ADD COLUMN IF NOT EXISTS "workMangaCustomId" INTEGER REFERENCES "manga_custom"("id") ON DELETE SET NULL;`
+  `ALTER TABLE "organization_post" ADD COLUMN IF NOT EXISTS "workMangaCustomId" INTEGER REFERENCES "manga_custom"("id") ON DELETE SET NULL;`,
+  // Novelas por tomo: cómo se rotula cada entrega ('chapter' | 'volume' | 'both').
+  `ALTER TABLE "manga_custom" ADD COLUMN IF NOT EXISTS "chapterLabelMode" VARCHAR(16) NOT NULL DEFAULT 'chapter';`
 ]
 
 for (const sql of statements) {

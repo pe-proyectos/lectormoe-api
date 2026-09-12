@@ -6057,6 +6057,7 @@ export const MangaCustomScalarFieldEnum = {
   usersAlsoReadMangaCustomIds: 'usersAlsoReadMangaCustomIds',
   finalChapterNumber: 'finalChapterNumber',
   groupChaptersByVolume: 'groupChaptersByVolume',
+  chapterLabelMode: 'chapterLabelMode',
   isOneShot: 'isOneShot'
 } as const
 

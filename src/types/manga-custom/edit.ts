@@ -27,6 +27,8 @@ export const EditMangaCustomRequest = t.Object({
   hideUnreleasedChapters: t.Optional(t.Boolean()),
   finalChapterNumber: t.Optional(t.Union([t.Number(), t.Null()])),
   groupChaptersByVolume: t.Optional(t.Boolean()),
+  // 'chapter' | 'volume' | 'both': cómo se rotula cada entrega.
+  chapterLabelMode: t.Optional(t.String()),
   isOneShot: t.Optional(t.Boolean()),
   demographyId: t.Optional(t.Union([t.Number(), t.Null()]))
 })

@@ -58,6 +58,13 @@ export const editMangaCustom = async (
     ...(params.finalChapterNumber !== undefined
       ? { finalChapterNumber: params.finalChapterNumber }
       : {}),
+    ...(params.chapterLabelMode !== undefined
+      ? {
+          chapterLabelMode: ['chapter', 'volume', 'both'].includes(String(params.chapterLabelMode))
+            ? String(params.chapterLabelMode)
+            : 'chapter'
+        }
+      : {}),
     ...(params.groupChaptersByVolume !== undefined
       ? { groupChaptersByVolume: params.groupChaptersByVolume }
       : {}),

@@ -72,6 +72,7 @@ export type MangaCustomMinAggregateOutputType = {
   usersAlsoReadMangaCustomIds: string | null
   finalChapterNumber: number | null
   groupChaptersByVolume: boolean | null
+  chapterLabelMode: string | null
   isOneShot: boolean | null
 }
 
@@ -105,6 +106,7 @@ export type MangaCustomMaxAggregateOutputType = {
   usersAlsoReadMangaCustomIds: string | null
   finalChapterNumber: number | null
   groupChaptersByVolume: boolean | null
+  chapterLabelMode: string | null
   isOneShot: boolean | null
 }
 
@@ -138,6 +140,7 @@ export type MangaCustomCountAggregateOutputType = {
   usersAlsoReadMangaCustomIds: number
   finalChapterNumber: number
   groupChaptersByVolume: number
+  chapterLabelMode: number
   isOneShot: number
   _all: number
 }
@@ -189,6 +192,7 @@ export type MangaCustomMinAggregateInputType = {
   usersAlsoReadMangaCustomIds?: true
   finalChapterNumber?: true
   groupChaptersByVolume?: true
+  chapterLabelMode?: true
   isOneShot?: true
 }
 
@@ -222,6 +226,7 @@ export type MangaCustomMaxAggregateInputType = {
   usersAlsoReadMangaCustomIds?: true
   finalChapterNumber?: true
   groupChaptersByVolume?: true
+  chapterLabelMode?: true
   isOneShot?: true
 }
 
@@ -255,6 +260,7 @@ export type MangaCustomCountAggregateInputType = {
   usersAlsoReadMangaCustomIds?: true
   finalChapterNumber?: true
   groupChaptersByVolume?: true
+  chapterLabelMode?: true
   isOneShot?: true
   _all?: true
 }
@@ -375,6 +381,7 @@ export type MangaCustomGroupByOutputType = {
   usersAlsoReadMangaCustomIds: string | null
   finalChapterNumber: number | null
   groupChaptersByVolume: boolean
+  chapterLabelMode: string
   isOneShot: boolean
   _count: MangaCustomCountAggregateOutputType | null
   _avg: MangaCustomAvgAggregateOutputType | null
@@ -431,6 +438,7 @@ export type MangaCustomWhereInput = {
   usersAlsoReadMangaCustomIds?: Prisma.StringNullableFilter<"MangaCustom"> | string | null
   finalChapterNumber?: Prisma.FloatNullableFilter<"MangaCustom"> | number | null
   groupChaptersByVolume?: Prisma.BoolFilter<"MangaCustom"> | boolean
+  chapterLabelMode?: Prisma.StringFilter<"MangaCustom"> | string
   isOneShot?: Prisma.BoolFilter<"MangaCustom"> | boolean
   chapters?: Prisma.ChapterListRelationFilter
   volumes?: Prisma.MangaVolumeListRelationFilter
@@ -481,6 +489,7 @@ export type MangaCustomOrderByWithRelationInput = {
   usersAlsoReadMangaCustomIds?: Prisma.SortOrderInput | Prisma.SortOrder
   finalChapterNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   groupChaptersByVolume?: Prisma.SortOrder
+  chapterLabelMode?: Prisma.SortOrder
   isOneShot?: Prisma.SortOrder
   chapters?: Prisma.ChapterOrderByRelationAggregateInput
   volumes?: Prisma.MangaVolumeOrderByRelationAggregateInput
@@ -535,6 +544,7 @@ export type MangaCustomWhereUniqueInput = Prisma.AtLeast<{
   usersAlsoReadMangaCustomIds?: Prisma.StringNullableFilter<"MangaCustom"> | string | null
   finalChapterNumber?: Prisma.FloatNullableFilter<"MangaCustom"> | number | null
   groupChaptersByVolume?: Prisma.BoolFilter<"MangaCustom"> | boolean
+  chapterLabelMode?: Prisma.StringFilter<"MangaCustom"> | string
   isOneShot?: Prisma.BoolFilter<"MangaCustom"> | boolean
   chapters?: Prisma.ChapterListRelationFilter
   volumes?: Prisma.MangaVolumeListRelationFilter
@@ -585,6 +595,7 @@ export type MangaCustomOrderByWithAggregationInput = {
   usersAlsoReadMangaCustomIds?: Prisma.SortOrderInput | Prisma.SortOrder
   finalChapterNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   groupChaptersByVolume?: Prisma.SortOrder
+  chapterLabelMode?: Prisma.SortOrder
   isOneShot?: Prisma.SortOrder
   _count?: Prisma.MangaCustomCountOrderByAggregateInput
   _avg?: Prisma.MangaCustomAvgOrderByAggregateInput
@@ -626,6 +637,7 @@ export type MangaCustomScalarWhereWithAggregatesInput = {
   usersAlsoReadMangaCustomIds?: Prisma.StringNullableWithAggregatesFilter<"MangaCustom"> | string | null
   finalChapterNumber?: Prisma.FloatNullableWithAggregatesFilter<"MangaCustom"> | number | null
   groupChaptersByVolume?: Prisma.BoolWithAggregatesFilter<"MangaCustom"> | boolean
+  chapterLabelMode?: Prisma.StringWithAggregatesFilter<"MangaCustom"> | string
   isOneShot?: Prisma.BoolWithAggregatesFilter<"MangaCustom"> | boolean
 }
 
@@ -656,6 +668,7 @@ export type MangaCustomCreateInput = {
   usersAlsoReadMangaCustomIds?: string | null
   finalChapterNumber?: number | null
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: string
   isOneShot?: boolean
   chapters?: Prisma.ChapterCreateNestedManyWithoutMangaCustomInput
   volumes?: Prisma.MangaVolumeCreateNestedManyWithoutMangaCustomInput
@@ -706,6 +719,7 @@ export type MangaCustomUncheckedCreateInput = {
   usersAlsoReadMangaCustomIds?: string | null
   finalChapterNumber?: number | null
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: string
   isOneShot?: boolean
   chapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutMangaCustomInput
   volumes?: Prisma.MangaVolumeUncheckedCreateNestedManyWithoutMangaCustomInput
@@ -751,6 +765,7 @@ export type MangaCustomUpdateInput = {
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
   chapters?: Prisma.ChapterUpdateManyWithoutMangaCustomNestedInput
   volumes?: Prisma.MangaVolumeUpdateManyWithoutMangaCustomNestedInput
@@ -801,6 +816,7 @@ export type MangaCustomUncheckedUpdateInput = {
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
   chapters?: Prisma.ChapterUncheckedUpdateManyWithoutMangaCustomNestedInput
   volumes?: Prisma.MangaVolumeUncheckedUpdateManyWithoutMangaCustomNestedInput
@@ -849,6 +865,7 @@ export type MangaCustomCreateManyInput = {
   usersAlsoReadMangaCustomIds?: string | null
   finalChapterNumber?: number | null
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: string
   isOneShot?: boolean
 }
 
@@ -879,6 +896,7 @@ export type MangaCustomUpdateManyMutationInput = {
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
@@ -912,6 +930,7 @@ export type MangaCustomUncheckedUpdateManyInput = {
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
@@ -965,6 +984,7 @@ export type MangaCustomCountOrderByAggregateInput = {
   usersAlsoReadMangaCustomIds?: Prisma.SortOrder
   finalChapterNumber?: Prisma.SortOrder
   groupChaptersByVolume?: Prisma.SortOrder
+  chapterLabelMode?: Prisma.SortOrder
   isOneShot?: Prisma.SortOrder
 }
 
@@ -1006,6 +1026,7 @@ export type MangaCustomMaxOrderByAggregateInput = {
   usersAlsoReadMangaCustomIds?: Prisma.SortOrder
   finalChapterNumber?: Prisma.SortOrder
   groupChaptersByVolume?: Prisma.SortOrder
+  chapterLabelMode?: Prisma.SortOrder
   isOneShot?: Prisma.SortOrder
 }
 
@@ -1039,6 +1060,7 @@ export type MangaCustomMinOrderByAggregateInput = {
   usersAlsoReadMangaCustomIds?: Prisma.SortOrder
   finalChapterNumber?: Prisma.SortOrder
   groupChaptersByVolume?: Prisma.SortOrder
+  chapterLabelMode?: Prisma.SortOrder
   isOneShot?: Prisma.SortOrder
 }
 
@@ -1470,6 +1492,7 @@ export type MangaCustomCreateWithoutOrganizationInput = {
   usersAlsoReadMangaCustomIds?: string | null
   finalChapterNumber?: number | null
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: string
   isOneShot?: boolean
   chapters?: Prisma.ChapterCreateNestedManyWithoutMangaCustomInput
   volumes?: Prisma.MangaVolumeCreateNestedManyWithoutMangaCustomInput
@@ -1518,6 +1541,7 @@ export type MangaCustomUncheckedCreateWithoutOrganizationInput = {
   usersAlsoReadMangaCustomIds?: string | null
   finalChapterNumber?: number | null
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: string
   isOneShot?: boolean
   chapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutMangaCustomInput
   volumes?: Prisma.MangaVolumeUncheckedCreateNestedManyWithoutMangaCustomInput
@@ -1595,6 +1619,7 @@ export type MangaCustomScalarWhereInput = {
   usersAlsoReadMangaCustomIds?: Prisma.StringNullableFilter<"MangaCustom"> | string | null
   finalChapterNumber?: Prisma.FloatNullableFilter<"MangaCustom"> | number | null
   groupChaptersByVolume?: Prisma.BoolFilter<"MangaCustom"> | boolean
+  chapterLabelMode?: Prisma.StringFilter<"MangaCustom"> | string
   isOneShot?: Prisma.BoolFilter<"MangaCustom"> | boolean
 }
 
@@ -1625,6 +1650,7 @@ export type MangaCustomCreateWithoutOrganizationRecommendationsInput = {
   usersAlsoReadMangaCustomIds?: string | null
   finalChapterNumber?: number | null
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: string
   isOneShot?: boolean
   chapters?: Prisma.ChapterCreateNestedManyWithoutMangaCustomInput
   volumes?: Prisma.MangaVolumeCreateNestedManyWithoutMangaCustomInput
@@ -1674,6 +1700,7 @@ export type MangaCustomUncheckedCreateWithoutOrganizationRecommendationsInput = 
   usersAlsoReadMangaCustomIds?: string | null
   finalChapterNumber?: number | null
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: string
   isOneShot?: boolean
   chapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutMangaCustomInput
   volumes?: Prisma.MangaVolumeUncheckedCreateNestedManyWithoutMangaCustomInput
@@ -1734,6 +1761,7 @@ export type MangaCustomUpdateWithoutOrganizationRecommendationsInput = {
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
   chapters?: Prisma.ChapterUpdateManyWithoutMangaCustomNestedInput
   volumes?: Prisma.MangaVolumeUpdateManyWithoutMangaCustomNestedInput
@@ -1783,6 +1811,7 @@ export type MangaCustomUncheckedUpdateWithoutOrganizationRecommendationsInput = 
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
   chapters?: Prisma.ChapterUncheckedUpdateManyWithoutMangaCustomNestedInput
   volumes?: Prisma.MangaVolumeUncheckedUpdateManyWithoutMangaCustomNestedInput
@@ -1827,6 +1856,7 @@ export type MangaCustomCreateWithoutMangaInput = {
   usersAlsoReadMangaCustomIds?: string | null
   finalChapterNumber?: number | null
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: string
   isOneShot?: boolean
   chapters?: Prisma.ChapterCreateNestedManyWithoutMangaCustomInput
   volumes?: Prisma.MangaVolumeCreateNestedManyWithoutMangaCustomInput
@@ -1875,6 +1905,7 @@ export type MangaCustomUncheckedCreateWithoutMangaInput = {
   usersAlsoReadMangaCustomIds?: string | null
   finalChapterNumber?: number | null
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: string
   isOneShot?: boolean
   chapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutMangaCustomInput
   volumes?: Prisma.MangaVolumeUncheckedCreateNestedManyWithoutMangaCustomInput
@@ -1946,6 +1977,7 @@ export type MangaCustomCreateWithoutChaptersInput = {
   usersAlsoReadMangaCustomIds?: string | null
   finalChapterNumber?: number | null
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: string
   isOneShot?: boolean
   volumes?: Prisma.MangaVolumeCreateNestedManyWithoutMangaCustomInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertCreateNestedManyWithoutMangaCustomInput
@@ -1995,6 +2027,7 @@ export type MangaCustomUncheckedCreateWithoutChaptersInput = {
   usersAlsoReadMangaCustomIds?: string | null
   finalChapterNumber?: number | null
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: string
   isOneShot?: boolean
   volumes?: Prisma.MangaVolumeUncheckedCreateNestedManyWithoutMangaCustomInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedCreateNestedManyWithoutMangaCustomInput
@@ -2055,6 +2088,7 @@ export type MangaCustomUpdateWithoutChaptersInput = {
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
   volumes?: Prisma.MangaVolumeUpdateManyWithoutMangaCustomNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUpdateManyWithoutMangaCustomNestedInput
@@ -2104,6 +2138,7 @@ export type MangaCustomUncheckedUpdateWithoutChaptersInput = {
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
   volumes?: Prisma.MangaVolumeUncheckedUpdateManyWithoutMangaCustomNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedUpdateManyWithoutMangaCustomNestedInput
@@ -2148,6 +2183,7 @@ export type MangaCustomCreateWithoutCustomListItemsInput = {
   usersAlsoReadMangaCustomIds?: string | null
   finalChapterNumber?: number | null
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: string
   isOneShot?: boolean
   chapters?: Prisma.ChapterCreateNestedManyWithoutMangaCustomInput
   volumes?: Prisma.MangaVolumeCreateNestedManyWithoutMangaCustomInput
@@ -2197,6 +2233,7 @@ export type MangaCustomUncheckedCreateWithoutCustomListItemsInput = {
   usersAlsoReadMangaCustomIds?: string | null
   finalChapterNumber?: number | null
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: string
   isOneShot?: boolean
   chapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutMangaCustomInput
   volumes?: Prisma.MangaVolumeUncheckedCreateNestedManyWithoutMangaCustomInput
@@ -2257,6 +2294,7 @@ export type MangaCustomUpdateWithoutCustomListItemsInput = {
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
   chapters?: Prisma.ChapterUpdateManyWithoutMangaCustomNestedInput
   volumes?: Prisma.MangaVolumeUpdateManyWithoutMangaCustomNestedInput
@@ -2306,6 +2344,7 @@ export type MangaCustomUncheckedUpdateWithoutCustomListItemsInput = {
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
   chapters?: Prisma.ChapterUncheckedUpdateManyWithoutMangaCustomNestedInput
   volumes?: Prisma.MangaVolumeUncheckedUpdateManyWithoutMangaCustomNestedInput
@@ -2350,6 +2389,7 @@ export type MangaCustomCreateWithoutContentReportsInput = {
   usersAlsoReadMangaCustomIds?: string | null
   finalChapterNumber?: number | null
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: string
   isOneShot?: boolean
   chapters?: Prisma.ChapterCreateNestedManyWithoutMangaCustomInput
   volumes?: Prisma.MangaVolumeCreateNestedManyWithoutMangaCustomInput
@@ -2399,6 +2439,7 @@ export type MangaCustomUncheckedCreateWithoutContentReportsInput = {
   usersAlsoReadMangaCustomIds?: string | null
   finalChapterNumber?: number | null
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: string
   isOneShot?: boolean
   chapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutMangaCustomInput
   volumes?: Prisma.MangaVolumeUncheckedCreateNestedManyWithoutMangaCustomInput
@@ -2459,6 +2500,7 @@ export type MangaCustomUpdateWithoutContentReportsInput = {
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
   chapters?: Prisma.ChapterUpdateManyWithoutMangaCustomNestedInput
   volumes?: Prisma.MangaVolumeUpdateManyWithoutMangaCustomNestedInput
@@ -2508,6 +2550,7 @@ export type MangaCustomUncheckedUpdateWithoutContentReportsInput = {
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
   chapters?: Prisma.ChapterUncheckedUpdateManyWithoutMangaCustomNestedInput
   volumes?: Prisma.MangaVolumeUncheckedUpdateManyWithoutMangaCustomNestedInput
@@ -2552,6 +2595,7 @@ export type MangaCustomCreateWithoutReviewsInput = {
   usersAlsoReadMangaCustomIds?: string | null
   finalChapterNumber?: number | null
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: string
   isOneShot?: boolean
   chapters?: Prisma.ChapterCreateNestedManyWithoutMangaCustomInput
   volumes?: Prisma.MangaVolumeCreateNestedManyWithoutMangaCustomInput
@@ -2601,6 +2645,7 @@ export type MangaCustomUncheckedCreateWithoutReviewsInput = {
   usersAlsoReadMangaCustomIds?: string | null
   finalChapterNumber?: number | null
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: string
   isOneShot?: boolean
   chapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutMangaCustomInput
   volumes?: Prisma.MangaVolumeUncheckedCreateNestedManyWithoutMangaCustomInput
@@ -2661,6 +2706,7 @@ export type MangaCustomUpdateWithoutReviewsInput = {
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
   chapters?: Prisma.ChapterUpdateManyWithoutMangaCustomNestedInput
   volumes?: Prisma.MangaVolumeUpdateManyWithoutMangaCustomNestedInput
@@ -2710,6 +2756,7 @@ export type MangaCustomUncheckedUpdateWithoutReviewsInput = {
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
   chapters?: Prisma.ChapterUncheckedUpdateManyWithoutMangaCustomNestedInput
   volumes?: Prisma.MangaVolumeUncheckedUpdateManyWithoutMangaCustomNestedInput
@@ -2754,6 +2801,7 @@ export type MangaCustomCreateWithoutMilestoneAlertsInput = {
   usersAlsoReadMangaCustomIds?: string | null
   finalChapterNumber?: number | null
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: string
   isOneShot?: boolean
   chapters?: Prisma.ChapterCreateNestedManyWithoutMangaCustomInput
   volumes?: Prisma.MangaVolumeCreateNestedManyWithoutMangaCustomInput
@@ -2803,6 +2851,7 @@ export type MangaCustomUncheckedCreateWithoutMilestoneAlertsInput = {
   usersAlsoReadMangaCustomIds?: string | null
   finalChapterNumber?: number | null
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: string
   isOneShot?: boolean
   chapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutMangaCustomInput
   volumes?: Prisma.MangaVolumeUncheckedCreateNestedManyWithoutMangaCustomInput
@@ -2863,6 +2912,7 @@ export type MangaCustomUpdateWithoutMilestoneAlertsInput = {
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
   chapters?: Prisma.ChapterUpdateManyWithoutMangaCustomNestedInput
   volumes?: Prisma.MangaVolumeUpdateManyWithoutMangaCustomNestedInput
@@ -2912,6 +2962,7 @@ export type MangaCustomUncheckedUpdateWithoutMilestoneAlertsInput = {
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
   chapters?: Prisma.ChapterUncheckedUpdateManyWithoutMangaCustomNestedInput
   volumes?: Prisma.MangaVolumeUncheckedUpdateManyWithoutMangaCustomNestedInput
@@ -2956,6 +3007,7 @@ export type MangaCustomCreateWithoutVolumesInput = {
   usersAlsoReadMangaCustomIds?: string | null
   finalChapterNumber?: number | null
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: string
   isOneShot?: boolean
   chapters?: Prisma.ChapterCreateNestedManyWithoutMangaCustomInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertCreateNestedManyWithoutMangaCustomInput
@@ -3005,6 +3057,7 @@ export type MangaCustomUncheckedCreateWithoutVolumesInput = {
   usersAlsoReadMangaCustomIds?: string | null
   finalChapterNumber?: number | null
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: string
   isOneShot?: boolean
   chapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutMangaCustomInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedCreateNestedManyWithoutMangaCustomInput
@@ -3065,6 +3118,7 @@ export type MangaCustomUpdateWithoutVolumesInput = {
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
   chapters?: Prisma.ChapterUpdateManyWithoutMangaCustomNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUpdateManyWithoutMangaCustomNestedInput
@@ -3114,6 +3168,7 @@ export type MangaCustomUncheckedUpdateWithoutVolumesInput = {
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
   chapters?: Prisma.ChapterUncheckedUpdateManyWithoutMangaCustomNestedInput
   milestoneAlerts?: Prisma.ChapterMilestoneAlertUncheckedUpdateManyWithoutMangaCustomNestedInput
@@ -3158,6 +3213,7 @@ export type MangaCustomCreateWithoutRankingsInput = {
   usersAlsoReadMangaCustomIds?: string | null
   finalChapterNumber?: number | null
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: string
   isOneShot?: boolean
   chapters?: Prisma.ChapterCreateNestedManyWithoutMangaCustomInput
   volumes?: Prisma.MangaVolumeCreateNestedManyWithoutMangaCustomInput
@@ -3207,6 +3263,7 @@ export type MangaCustomUncheckedCreateWithoutRankingsInput = {
   usersAlsoReadMangaCustomIds?: string | null
   finalChapterNumber?: number | null
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: string
   isOneShot?: boolean
   chapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutMangaCustomInput
   volumes?: Prisma.MangaVolumeUncheckedCreateNestedManyWithoutMangaCustomInput
@@ -3267,6 +3324,7 @@ export type MangaCustomUpdateWithoutRankingsInput = {
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
   chapters?: Prisma.ChapterUpdateManyWithoutMangaCustomNestedInput
   volumes?: Prisma.MangaVolumeUpdateManyWithoutMangaCustomNestedInput
@@ -3316,6 +3374,7 @@ export type MangaCustomUncheckedUpdateWithoutRankingsInput = {
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
   chapters?: Prisma.ChapterUncheckedUpdateManyWithoutMangaCustomNestedInput
   volumes?: Prisma.MangaVolumeUncheckedUpdateManyWithoutMangaCustomNestedInput
@@ -3360,6 +3419,7 @@ export type MangaCustomCreateWithoutGenresInput = {
   usersAlsoReadMangaCustomIds?: string | null
   finalChapterNumber?: number | null
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: string
   isOneShot?: boolean
   chapters?: Prisma.ChapterCreateNestedManyWithoutMangaCustomInput
   volumes?: Prisma.MangaVolumeCreateNestedManyWithoutMangaCustomInput
@@ -3409,6 +3469,7 @@ export type MangaCustomUncheckedCreateWithoutGenresInput = {
   usersAlsoReadMangaCustomIds?: string | null
   finalChapterNumber?: number | null
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: string
   isOneShot?: boolean
   chapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutMangaCustomInput
   volumes?: Prisma.MangaVolumeUncheckedCreateNestedManyWithoutMangaCustomInput
@@ -3474,6 +3535,7 @@ export type MangaCustomCreateWithoutFavoritesInput = {
   usersAlsoReadMangaCustomIds?: string | null
   finalChapterNumber?: number | null
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: string
   isOneShot?: boolean
   chapters?: Prisma.ChapterCreateNestedManyWithoutMangaCustomInput
   volumes?: Prisma.MangaVolumeCreateNestedManyWithoutMangaCustomInput
@@ -3523,6 +3585,7 @@ export type MangaCustomUncheckedCreateWithoutFavoritesInput = {
   usersAlsoReadMangaCustomIds?: string | null
   finalChapterNumber?: number | null
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: string
   isOneShot?: boolean
   chapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutMangaCustomInput
   volumes?: Prisma.MangaVolumeUncheckedCreateNestedManyWithoutMangaCustomInput
@@ -3583,6 +3646,7 @@ export type MangaCustomUpdateWithoutFavoritesInput = {
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
   chapters?: Prisma.ChapterUpdateManyWithoutMangaCustomNestedInput
   volumes?: Prisma.MangaVolumeUpdateManyWithoutMangaCustomNestedInput
@@ -3632,6 +3696,7 @@ export type MangaCustomUncheckedUpdateWithoutFavoritesInput = {
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
   chapters?: Prisma.ChapterUncheckedUpdateManyWithoutMangaCustomNestedInput
   volumes?: Prisma.MangaVolumeUncheckedUpdateManyWithoutMangaCustomNestedInput
@@ -3676,6 +3741,7 @@ export type MangaCustomCreateWithoutUserListEntriesInput = {
   usersAlsoReadMangaCustomIds?: string | null
   finalChapterNumber?: number | null
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: string
   isOneShot?: boolean
   chapters?: Prisma.ChapterCreateNestedManyWithoutMangaCustomInput
   volumes?: Prisma.MangaVolumeCreateNestedManyWithoutMangaCustomInput
@@ -3725,6 +3791,7 @@ export type MangaCustomUncheckedCreateWithoutUserListEntriesInput = {
   usersAlsoReadMangaCustomIds?: string | null
   finalChapterNumber?: number | null
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: string
   isOneShot?: boolean
   chapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutMangaCustomInput
   volumes?: Prisma.MangaVolumeUncheckedCreateNestedManyWithoutMangaCustomInput
@@ -3785,6 +3852,7 @@ export type MangaCustomUpdateWithoutUserListEntriesInput = {
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
   chapters?: Prisma.ChapterUpdateManyWithoutMangaCustomNestedInput
   volumes?: Prisma.MangaVolumeUpdateManyWithoutMangaCustomNestedInput
@@ -3834,6 +3902,7 @@ export type MangaCustomUncheckedUpdateWithoutUserListEntriesInput = {
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
   chapters?: Prisma.ChapterUncheckedUpdateManyWithoutMangaCustomNestedInput
   volumes?: Prisma.MangaVolumeUncheckedUpdateManyWithoutMangaCustomNestedInput
@@ -3878,6 +3947,7 @@ export type MangaCustomCreateWithoutViewsHistoryInput = {
   usersAlsoReadMangaCustomIds?: string | null
   finalChapterNumber?: number | null
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: string
   isOneShot?: boolean
   chapters?: Prisma.ChapterCreateNestedManyWithoutMangaCustomInput
   volumes?: Prisma.MangaVolumeCreateNestedManyWithoutMangaCustomInput
@@ -3927,6 +3997,7 @@ export type MangaCustomUncheckedCreateWithoutViewsHistoryInput = {
   usersAlsoReadMangaCustomIds?: string | null
   finalChapterNumber?: number | null
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: string
   isOneShot?: boolean
   chapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutMangaCustomInput
   volumes?: Prisma.MangaVolumeUncheckedCreateNestedManyWithoutMangaCustomInput
@@ -3987,6 +4058,7 @@ export type MangaCustomUpdateWithoutViewsHistoryInput = {
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
   chapters?: Prisma.ChapterUpdateManyWithoutMangaCustomNestedInput
   volumes?: Prisma.MangaVolumeUpdateManyWithoutMangaCustomNestedInput
@@ -4036,6 +4108,7 @@ export type MangaCustomUncheckedUpdateWithoutViewsHistoryInput = {
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
   chapters?: Prisma.ChapterUncheckedUpdateManyWithoutMangaCustomNestedInput
   volumes?: Prisma.MangaVolumeUncheckedUpdateManyWithoutMangaCustomNestedInput
@@ -4080,6 +4153,7 @@ export type MangaCustomCreateWithoutSubscriptionPlansCanReadReleasedInput = {
   usersAlsoReadMangaCustomIds?: string | null
   finalChapterNumber?: number | null
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: string
   isOneShot?: boolean
   chapters?: Prisma.ChapterCreateNestedManyWithoutMangaCustomInput
   volumes?: Prisma.MangaVolumeCreateNestedManyWithoutMangaCustomInput
@@ -4129,6 +4203,7 @@ export type MangaCustomUncheckedCreateWithoutSubscriptionPlansCanReadReleasedInp
   usersAlsoReadMangaCustomIds?: string | null
   finalChapterNumber?: number | null
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: string
   isOneShot?: boolean
   chapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutMangaCustomInput
   volumes?: Prisma.MangaVolumeUncheckedCreateNestedManyWithoutMangaCustomInput
@@ -4178,6 +4253,7 @@ export type MangaCustomCreateWithoutSubscriptionPlansCanReadUnreleasedInput = {
   usersAlsoReadMangaCustomIds?: string | null
   finalChapterNumber?: number | null
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: string
   isOneShot?: boolean
   chapters?: Prisma.ChapterCreateNestedManyWithoutMangaCustomInput
   volumes?: Prisma.MangaVolumeCreateNestedManyWithoutMangaCustomInput
@@ -4227,6 +4303,7 @@ export type MangaCustomUncheckedCreateWithoutSubscriptionPlansCanReadUnreleasedI
   usersAlsoReadMangaCustomIds?: string | null
   finalChapterNumber?: number | null
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: string
   isOneShot?: boolean
   chapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutMangaCustomInput
   volumes?: Prisma.MangaVolumeUncheckedCreateNestedManyWithoutMangaCustomInput
@@ -4308,6 +4385,7 @@ export type MangaCustomCreateWithoutNotificationsInput = {
   usersAlsoReadMangaCustomIds?: string | null
   finalChapterNumber?: number | null
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: string
   isOneShot?: boolean
   chapters?: Prisma.ChapterCreateNestedManyWithoutMangaCustomInput
   volumes?: Prisma.MangaVolumeCreateNestedManyWithoutMangaCustomInput
@@ -4357,6 +4435,7 @@ export type MangaCustomUncheckedCreateWithoutNotificationsInput = {
   usersAlsoReadMangaCustomIds?: string | null
   finalChapterNumber?: number | null
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: string
   isOneShot?: boolean
   chapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutMangaCustomInput
   volumes?: Prisma.MangaVolumeUncheckedCreateNestedManyWithoutMangaCustomInput
@@ -4417,6 +4496,7 @@ export type MangaCustomUpdateWithoutNotificationsInput = {
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
   chapters?: Prisma.ChapterUpdateManyWithoutMangaCustomNestedInput
   volumes?: Prisma.MangaVolumeUpdateManyWithoutMangaCustomNestedInput
@@ -4466,6 +4546,7 @@ export type MangaCustomUncheckedUpdateWithoutNotificationsInput = {
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
   chapters?: Prisma.ChapterUncheckedUpdateManyWithoutMangaCustomNestedInput
   volumes?: Prisma.MangaVolumeUncheckedUpdateManyWithoutMangaCustomNestedInput
@@ -4512,6 +4593,7 @@ export type MangaCustomCreateManyOrganizationInput = {
   usersAlsoReadMangaCustomIds?: string | null
   finalChapterNumber?: number | null
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: string
   isOneShot?: boolean
 }
 
@@ -4542,6 +4624,7 @@ export type MangaCustomUpdateWithoutOrganizationInput = {
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
   chapters?: Prisma.ChapterUpdateManyWithoutMangaCustomNestedInput
   volumes?: Prisma.MangaVolumeUpdateManyWithoutMangaCustomNestedInput
@@ -4590,6 +4673,7 @@ export type MangaCustomUncheckedUpdateWithoutOrganizationInput = {
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
   chapters?: Prisma.ChapterUncheckedUpdateManyWithoutMangaCustomNestedInput
   volumes?: Prisma.MangaVolumeUncheckedUpdateManyWithoutMangaCustomNestedInput
@@ -4637,6 +4721,7 @@ export type MangaCustomUncheckedUpdateManyWithoutOrganizationInput = {
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
@@ -4669,6 +4754,7 @@ export type MangaCustomCreateManyMangaInput = {
   usersAlsoReadMangaCustomIds?: string | null
   finalChapterNumber?: number | null
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: string
   isOneShot?: boolean
 }
 
@@ -4699,6 +4785,7 @@ export type MangaCustomUpdateWithoutMangaInput = {
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
   chapters?: Prisma.ChapterUpdateManyWithoutMangaCustomNestedInput
   volumes?: Prisma.MangaVolumeUpdateManyWithoutMangaCustomNestedInput
@@ -4747,6 +4834,7 @@ export type MangaCustomUncheckedUpdateWithoutMangaInput = {
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
   chapters?: Prisma.ChapterUncheckedUpdateManyWithoutMangaCustomNestedInput
   volumes?: Prisma.MangaVolumeUncheckedUpdateManyWithoutMangaCustomNestedInput
@@ -4794,6 +4882,7 @@ export type MangaCustomUncheckedUpdateManyWithoutMangaInput = {
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
@@ -4824,6 +4913,7 @@ export type MangaCustomUpdateWithoutGenresInput = {
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
   chapters?: Prisma.ChapterUpdateManyWithoutMangaCustomNestedInput
   volumes?: Prisma.MangaVolumeUpdateManyWithoutMangaCustomNestedInput
@@ -4873,6 +4963,7 @@ export type MangaCustomUncheckedUpdateWithoutGenresInput = {
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
   chapters?: Prisma.ChapterUncheckedUpdateManyWithoutMangaCustomNestedInput
   volumes?: Prisma.MangaVolumeUncheckedUpdateManyWithoutMangaCustomNestedInput
@@ -4920,6 +5011,7 @@ export type MangaCustomUncheckedUpdateManyWithoutGenresInput = {
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
@@ -4950,6 +5042,7 @@ export type MangaCustomUpdateWithoutSubscriptionPlansCanReadReleasedInput = {
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
   chapters?: Prisma.ChapterUpdateManyWithoutMangaCustomNestedInput
   volumes?: Prisma.MangaVolumeUpdateManyWithoutMangaCustomNestedInput
@@ -4999,6 +5092,7 @@ export type MangaCustomUncheckedUpdateWithoutSubscriptionPlansCanReadReleasedInp
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
   chapters?: Prisma.ChapterUncheckedUpdateManyWithoutMangaCustomNestedInput
   volumes?: Prisma.MangaVolumeUncheckedUpdateManyWithoutMangaCustomNestedInput
@@ -5046,6 +5140,7 @@ export type MangaCustomUncheckedUpdateManyWithoutSubscriptionPlansCanReadRelease
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
@@ -5076,6 +5171,7 @@ export type MangaCustomUpdateWithoutSubscriptionPlansCanReadUnreleasedInput = {
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
   chapters?: Prisma.ChapterUpdateManyWithoutMangaCustomNestedInput
   volumes?: Prisma.MangaVolumeUpdateManyWithoutMangaCustomNestedInput
@@ -5125,6 +5221,7 @@ export type MangaCustomUncheckedUpdateWithoutSubscriptionPlansCanReadUnreleasedI
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
   chapters?: Prisma.ChapterUncheckedUpdateManyWithoutMangaCustomNestedInput
   volumes?: Prisma.MangaVolumeUncheckedUpdateManyWithoutMangaCustomNestedInput
@@ -5172,6 +5269,7 @@ export type MangaCustomUncheckedUpdateManyWithoutSubscriptionPlansCanReadUnrelea
   usersAlsoReadMangaCustomIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   groupChaptersByVolume?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chapterLabelMode?: Prisma.StringFieldUpdateOperationsInput | string
   isOneShot?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
@@ -5362,6 +5460,7 @@ export type MangaCustomSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   usersAlsoReadMangaCustomIds?: boolean
   finalChapterNumber?: boolean
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: boolean
   isOneShot?: boolean
   chapters?: boolean | Prisma.MangaCustom$chaptersArgs<ExtArgs>
   volumes?: boolean | Prisma.MangaCustom$volumesArgs<ExtArgs>
@@ -5413,6 +5512,7 @@ export type MangaCustomSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   usersAlsoReadMangaCustomIds?: boolean
   finalChapterNumber?: boolean
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: boolean
   isOneShot?: boolean
   manga?: boolean | Prisma.MangaDefaultArgs<ExtArgs>
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
@@ -5448,6 +5548,7 @@ export type MangaCustomSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   usersAlsoReadMangaCustomIds?: boolean
   finalChapterNumber?: boolean
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: boolean
   isOneShot?: boolean
   manga?: boolean | Prisma.MangaDefaultArgs<ExtArgs>
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
@@ -5483,10 +5584,11 @@ export type MangaCustomSelectScalar = {
   usersAlsoReadMangaCustomIds?: boolean
   finalChapterNumber?: boolean
   groupChaptersByVolume?: boolean
+  chapterLabelMode?: boolean
   isOneShot?: boolean
 }
 
-export type MangaCustomOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "mangaId" | "organizationId" | "title" | "alternativeTitle" | "shortDescription" | "description" | "imageUrl" | "releasedAt" | "nextChapterAt" | "createdAt" | "updatedAt" | "views" | "lastChapterAt" | "status" | "visibility" | "bannerUrl" | "requireLogin" | "isSimulRelease" | "isNSFW" | "loggedInOnly" | "isPublic" | "workType" | "deletedAt" | "nextChapterAtMessage" | "hideUnreleasedChapters" | "usersAlsoReadMangaCustomIds" | "finalChapterNumber" | "groupChaptersByVolume" | "isOneShot", ExtArgs["result"]["mangaCustom"]>
+export type MangaCustomOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "mangaId" | "organizationId" | "title" | "alternativeTitle" | "shortDescription" | "description" | "imageUrl" | "releasedAt" | "nextChapterAt" | "createdAt" | "updatedAt" | "views" | "lastChapterAt" | "status" | "visibility" | "bannerUrl" | "requireLogin" | "isSimulRelease" | "isNSFW" | "loggedInOnly" | "isPublic" | "workType" | "deletedAt" | "nextChapterAtMessage" | "hideUnreleasedChapters" | "usersAlsoReadMangaCustomIds" | "finalChapterNumber" | "groupChaptersByVolume" | "chapterLabelMode" | "isOneShot", ExtArgs["result"]["mangaCustom"]>
 export type MangaCustomInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   chapters?: boolean | Prisma.MangaCustom$chaptersArgs<ExtArgs>
   volumes?: boolean | Prisma.MangaCustom$volumesArgs<ExtArgs>
@@ -5567,6 +5669,7 @@ export type $MangaCustomPayload<ExtArgs extends runtime.Types.Extensions.Interna
     usersAlsoReadMangaCustomIds: string | null
     finalChapterNumber: number | null
     groupChaptersByVolume: boolean
+    chapterLabelMode: string
     isOneShot: boolean
   }, ExtArgs["result"]["mangaCustom"]>
   composites: {}
@@ -6037,6 +6140,7 @@ export interface MangaCustomFieldRefs {
   readonly usersAlsoReadMangaCustomIds: Prisma.FieldRef<"MangaCustom", 'String'>
   readonly finalChapterNumber: Prisma.FieldRef<"MangaCustom", 'Float'>
   readonly groupChaptersByVolume: Prisma.FieldRef<"MangaCustom", 'Boolean'>
+  readonly chapterLabelMode: Prisma.FieldRef<"MangaCustom", 'String'>
   readonly isOneShot: Prisma.FieldRef<"MangaCustom", 'Boolean'>
 }
     

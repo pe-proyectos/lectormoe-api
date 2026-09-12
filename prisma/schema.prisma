@@ -497,6 +497,12 @@ model MangaCustom {
   usersAlsoReadMangaCustomIds        String?
   finalChapterNumber                 Float?
   groupChaptersByVolume              Boolean            @default(false)
+  // Cómo se rotula cada entrega en la ficha y el lector:
+  //   'chapter' -> "Capítulo 12"            (por defecto, lo de siempre)
+  //   'volume'  -> "Tomo 3" / "Tomo 3 - 2"  (el tomo manda; útil en novelas
+  //                                          que se publican por volúmenes)
+  //   'both'    -> "Tomo 3 · Capítulo 12"
+  chapterLabelMode                   String             @default("chapter") @db.VarChar(16)
   // Obra de un solo capítulo (one-shot). Es un flag de la obra, no un género.
   isOneShot                          Boolean            @default(false)
   chapters                           Chapter[]
