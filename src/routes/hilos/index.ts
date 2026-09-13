@@ -238,6 +238,33 @@ export const webhookRouter = () =>
     return { status: true, data: { queued: true } }
   })
 
+// Publico: dada una obra del motor ('manga:<id>'), dice dónde leerla aquí.
+// Lo usa La Charca para enlazar de vuelta al lector.
+export const workUrlRouter = () =>
+  new Elysia().get('/api/hilos/work-url', async ({ query }: any) => {
+    const m = String(query.ref || '').match(/^manga:(\d+)$/)
+    if (!m) return { status: false, message: 'bad_ref' }
+    const mc = await prisma.mangaCustom.findUnique({
+      where: { id: Number(m[1]) },
+      select: {
+        title: true, imageUrl: true, deletedAt: true, isNSFW: true,
+        manga: { select: { slug: true, bookType: { select: { code: true } } } },
+        organization: { select: { slug: true, isNSFW: true } },
+      },
+    })
+    if (!mc || mc.deletedAt || !mc.manga?.slug || !mc.organization?.slug) {
+      return { status: true, data: { url: null } }
+    }
+    const base = 'https://capibaratraductor.com'
+    const nsfw = mc.isNSFW || mc.organization.isNSFW ? '/red' : ''
+    const tipo = mc.manga.bookType?.code
+    const esLibro = tipo && ['novel', 'light-novel', 'book', 'short-story'].includes(tipo)
+    const url = esLibro
+      ? `${base}${nsfw}/writings/${mc.organization.slug}/${tipo}/${mc.manga.slug}`
+      : `${base}${nsfw}/${mc.organization.slug}/manga/${mc.manga.slug}`
+    return { status: true, data: { url, title: mc.title, cover: mc.imageUrl } }
+  }, { query: t.Object({ ref: t.String() }) })
+
 // Publico: resuelve el post de hilos que corresponde a un capitulo u obra.
 // El lector lo necesita para saber donde colgar los comentarios.
 export const publicRouter = () =>
