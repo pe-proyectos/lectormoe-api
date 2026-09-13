@@ -143,9 +143,9 @@ async function createInAppNotifications(
       details,
       actorUserId,
       organizationId: ctx.organizationId,
-      // El correo lo manda este mismo servicio: marcamos para que el cron
-      // antiguo no vuelva a intentarlo.
-      emailSentAt: new Date(),
+      // Las respuestas directas ya salen por correo desde aquí. El resto queda
+      // sin marcar para que el resumen horario las recoja.
+      emailSentAt: r.reason === 'reply' ? new Date() : null,
     })),
   }).catch((e) => console.error('charca notif:', e?.message))
 }
@@ -188,6 +188,11 @@ export async function handleCommentEvent(ev: CommentEvent): Promise<{ sent: numb
   let sent = 0, skipped = 0
   for (const r of recipients.values()) {
     const type = r.reason === 'reply' ? 'comment_reply' : 'comment_on_owned_content'
+
+    // Los comentarios sueltos (staff del scan, participantes del hilo) no
+    // mandan correo aquí: el resumen horario los agrupa.
+    if (r.reason !== 'reply') { skipped++; continue }
+
     if (!(await canSendEmail(r.userId, type))) { skipped++; continue }
 
     const unsubscribeUrl = await getUnsubscribeUrl(r.userId, type).catch(() => undefined)

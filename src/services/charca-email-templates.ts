@@ -131,3 +131,58 @@ export function commentMail(a: CommentMailArgs): { subject: string; html: string
 
   return { subject, html }
 }
+
+interface ResumenItem {
+  author: string
+  text: string
+  context: string
+  work?: string | null
+  url: string
+}
+
+/**
+ * Resumen horario: un solo correo con los comentarios nuevos en las obras del
+ * scan, en vez de uno por comentario.
+ */
+export function commentDigestMail(a: {
+  recipientName: string
+  items: ResumenItem[]
+  total: number
+  unsubscribeUrl?: string
+}): { subject: string; html: string } {
+  const n = a.total
+  const subject = n === 1 ? 'Un comentario nuevo en tus obras' : `${n} comentarios nuevos en tus obras`
+
+  // Agrupamos por obra/capítulo para que se lea de un vistazo.
+  const porContexto = new Map<string, ResumenItem[]>()
+  for (const it of a.items) {
+    const clave = [it.work, it.context].filter(Boolean).join(' — ')
+    porContexto.set(clave, [...(porContexto.get(clave) || []), it])
+  }
+
+  const bloques = [...porContexto.entries()].map(([donde, items]) => `
+    <p style="margin:22px 0 8px;color:#101f38;font-size:15px;font-weight:600;">${esc(donde || 'La Charca')}</p>
+    ${items.slice(0, 4).map((it) => `
+      <table cellpadding="0" cellspacing="0" style="width:100%;background:#f5f8fd;border:1px solid #dfe7f3;border-radius:12px;margin-bottom:8px;">
+        <tr><td style="padding:12px 14px;">
+          <p style="margin:0 0 3px;color:#101f38;font-weight:600;font-size:14px;">${esc(it.author)}</p>
+          <p style="margin:0;color:#4a5a75;font-size:14px;line-height:1.55;">${esc(it.text.slice(0, 180))}</p>
+          <p style="margin:6px 0 0;"><a href="${it.url}" style="color:#2563eb;font-size:12px;text-decoration:none;">Ver la conversación</a></p>
+        </td></tr>
+      </table>`).join('')}
+    ${items.length > 4 ? `<p style="margin:0 0 4px;color:#8a97ac;font-size:12px;">y ${items.length - 4} más aquí</p>` : ''}
+  `).join('')
+
+  const html = base(`
+    <p style="margin:0 0 6px;color:#101f38;font-size:19px;font-weight:600;letter-spacing:-0.3px;">
+      ${n === 1 ? 'Hay un comentario nuevo' : `Hay ${n} comentarios nuevos`}
+    </p>
+    <p style="margin:0;color:#8a97ac;font-size:13px;">
+      Resumen de la última hora. Las respuestas directas a tus comentarios te llegan al momento, aparte.
+    </p>
+    ${bloques}
+    ${button('Ver todo en La Charca', CHARCA_URL)}
+  `, a.unsubscribeUrl)
+
+  return { subject, html }
+}

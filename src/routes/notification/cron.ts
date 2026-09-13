@@ -3,6 +3,7 @@ import { Elysia } from 'elysia'
 import { prisma } from '../../models/prisma'
 import { dispatchNotificationEmail } from '../../services/notification-email-dispatcher'
 import { wrapCron } from '../../util/cron-alert'
+import { sendCommentDigests } from '../../services/charca-comment-digest'
 
 const THIRTY_MIN_MS = 30 * 60 * 1000
 
@@ -15,7 +16,10 @@ async function processPendingEmails() {
       where: {
         readAt: null,
         emailSentAt: null,
-        createdAt: { lt: cutoff }
+        createdAt: { lt: cutoff },
+        // Los comentarios de La Charca los agrupa su propio resumen horario:
+        // si entraran aquí volverían a salir de uno en uno.
+        type: { not: 'charca_comment' }
       },
       orderBy: { createdAt: 'asc' },
       take: 500
@@ -54,12 +58,30 @@ async function processPendingEmails() {
   }
 }
 
+// Resumen horario de comentarios de La Charca. Las respuestas directas ya se
+// envían al momento; esto agrupa el resto en un solo correo por persona.
+async function processCommentDigests() {
+  const r = await sendCommentDigests()
+  if (r.agrupados) {
+    console.log(`[Resumen La Charca] ${r.agrupados} avisos agrupados en ${r.correos} correos`)
+  }
+}
+
 export const router = () =>
-  new Elysia().use(
-    cron({
-      name: 'notification-pending-emails',
-      // Every 30 minutes, on the hour and half-hour.
-      pattern: '0,30 * * * *',
-      run: wrapCron('notification-pending-emails', processPendingEmails)
-    })
-  )
+  new Elysia()
+    .use(
+      cron({
+        name: 'notification-pending-emails',
+        // Every 30 minutes, on the hour and half-hour.
+        pattern: '0,30 * * * *',
+        run: wrapCron('notification-pending-emails', processPendingEmails)
+      })
+    )
+    .use(
+      cron({
+        name: 'charca-comment-digest',
+        // Cada hora en punto.
+        pattern: '0 * * * *',
+        run: wrapCron('charca-comment-digest', processCommentDigests)
+      })
+    )
