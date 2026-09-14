@@ -18,6 +18,7 @@ const IMAGE_EXT_BY_MIME: Record<string, string> = {
   'image/jpg': 'jpg',
   'image/gif': 'gif',
   'image/webp': 'webp',
+  'image/avif': 'avif',
   'image/svg+xml': 'svg',
 }
 

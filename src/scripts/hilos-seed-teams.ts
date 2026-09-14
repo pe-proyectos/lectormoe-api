@@ -45,8 +45,17 @@ async function run() {
 
   for (const org of orgs) {
     // La page del scan tiene que existir ya (la creó la migración inicial).
-    const scanPage: any = await (hilos as any).pages.get(`scan-${org.slug}`.slice(0, 40)).catch(() => null)
-      || await (hilos as any).pages.get(`scan_${org.slug}`.slice(0, 40)).catch(() => null)
+    // El motor normaliza los guiones del handle: probamos las dos formas.
+    const candidatos = [
+      `scan_${String(org.slug).replace(/-/g, '_')}`.slice(0, 40),
+      `scan-${org.slug}`.slice(0, 40),
+      `scan_${org.slug}`.slice(0, 40),
+    ]
+    let scanPage: any = null
+    for (const c of candidatos) {
+      scanPage = await (hilos as any).pages.get(c).catch(() => null)
+      if (scanPage?.handle) break
+    }
     if (!scanPage?.handle) { sinPage++; continue }
 
     const staff = await sql`

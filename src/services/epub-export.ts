@@ -22,7 +22,7 @@ export interface ExportNovel {
 }
 
 const EXT_BY_MIME: Record<string, string> = {
-  'image/png': 'png', 'image/jpeg': 'jpg', 'image/jpg': 'jpg', 'image/gif': 'gif', 'image/webp': 'webp',
+  'image/png': 'png', 'image/jpeg': 'jpg', 'image/jpg': 'jpg', 'image/gif': 'gif', 'image/webp': 'webp', 'image/avif': 'avif',
 }
 
 function esc(s: string): string {

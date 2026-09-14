@@ -47,7 +47,7 @@ async function run() {
 
     const current: any = await (hilos as any).posts.get(existing.id).catch(() => null)
     if (!current) { skipN++; continue }
-    if (/https?:\/\/\S+\.(png|jpe?g|gif|webp)/i.test(current.content || '')) { skipN++; continue } // ya las tiene
+    if (/https?:\/\/\S+\.(png|jpe?g|jfif|gif|webp|avif)/i.test(current.content || '')) { skipN++; continue } // ya las tiene
     if (DRY) { postN++; continue }
 
     const copied: string[] = []
@@ -71,7 +71,7 @@ async function run() {
   for (const c of comments) {
     const existing: any = await (hilos as any).comments.byRef(`comment:${c.id}`).catch(() => null)
     if (!existing?.id) { skipN++; continue }
-    if (/https?:\/\/\S+\.(png|jpe?g|gif|webp)/i.test(existing.content || '')) { skipN++; continue }
+    if (/https?:\/\/\S+\.(png|jpe?g|jfif|gif|webp|avif)/i.test(existing.content || '')) { skipN++; continue }
     if (DRY) { comN++; continue }
 
     const copied = await ingest(String(c.imageUrl))
