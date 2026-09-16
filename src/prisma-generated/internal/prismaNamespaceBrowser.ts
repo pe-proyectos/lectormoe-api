@@ -1111,6 +1111,7 @@ export const MangaJointScalarFieldEnum = {
   bannerUrl: 'bannerUrl',
   status: 'status',
   workType: 'workType',
+  isNSFW: 'isNSFW',
   lastChapterAt: 'lastChapterAt',
   views: 'views',
   finalChapterNumber: 'finalChapterNumber',

@@ -51,6 +51,7 @@ export type MangaJointMinAggregateOutputType = {
   bannerUrl: string | null
   status: string | null
   workType: string | null
+  isNSFW: boolean | null
   lastChapterAt: Date | null
   views: number | null
   finalChapterNumber: number | null
@@ -70,6 +71,7 @@ export type MangaJointMaxAggregateOutputType = {
   bannerUrl: string | null
   status: string | null
   workType: string | null
+  isNSFW: boolean | null
   lastChapterAt: Date | null
   views: number | null
   finalChapterNumber: number | null
@@ -89,6 +91,7 @@ export type MangaJointCountAggregateOutputType = {
   bannerUrl: number
   status: number
   workType: number
+  isNSFW: number
   lastChapterAt: number
   views: number
   finalChapterNumber: number
@@ -124,6 +127,7 @@ export type MangaJointMinAggregateInputType = {
   bannerUrl?: true
   status?: true
   workType?: true
+  isNSFW?: true
   lastChapterAt?: true
   views?: true
   finalChapterNumber?: true
@@ -143,6 +147,7 @@ export type MangaJointMaxAggregateInputType = {
   bannerUrl?: true
   status?: true
   workType?: true
+  isNSFW?: true
   lastChapterAt?: true
   views?: true
   finalChapterNumber?: true
@@ -162,6 +167,7 @@ export type MangaJointCountAggregateInputType = {
   bannerUrl?: true
   status?: true
   workType?: true
+  isNSFW?: true
   lastChapterAt?: true
   views?: true
   finalChapterNumber?: true
@@ -268,6 +274,7 @@ export type MangaJointGroupByOutputType = {
   bannerUrl: string | null
   status: string
   workType: string
+  isNSFW: boolean
   lastChapterAt: Date | null
   views: number
   finalChapterNumber: number | null
@@ -310,6 +317,7 @@ export type MangaJointWhereInput = {
   bannerUrl?: Prisma.StringNullableFilter<"MangaJoint"> | string | null
   status?: Prisma.StringFilter<"MangaJoint"> | string
   workType?: Prisma.StringFilter<"MangaJoint"> | string
+  isNSFW?: Prisma.BoolFilter<"MangaJoint"> | boolean
   lastChapterAt?: Prisma.DateTimeNullableFilter<"MangaJoint"> | Date | string | null
   views?: Prisma.IntFilter<"MangaJoint"> | number
   finalChapterNumber?: Prisma.FloatNullableFilter<"MangaJoint"> | number | null
@@ -344,6 +352,7 @@ export type MangaJointOrderByWithRelationInput = {
   bannerUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   workType?: Prisma.SortOrder
+  isNSFW?: Prisma.SortOrder
   lastChapterAt?: Prisma.SortOrderInput | Prisma.SortOrder
   views?: Prisma.SortOrder
   finalChapterNumber?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -381,6 +390,7 @@ export type MangaJointWhereUniqueInput = Prisma.AtLeast<{
   bannerUrl?: Prisma.StringNullableFilter<"MangaJoint"> | string | null
   status?: Prisma.StringFilter<"MangaJoint"> | string
   workType?: Prisma.StringFilter<"MangaJoint"> | string
+  isNSFW?: Prisma.BoolFilter<"MangaJoint"> | boolean
   lastChapterAt?: Prisma.DateTimeNullableFilter<"MangaJoint"> | Date | string | null
   views?: Prisma.IntFilter<"MangaJoint"> | number
   finalChapterNumber?: Prisma.FloatNullableFilter<"MangaJoint"> | number | null
@@ -415,6 +425,7 @@ export type MangaJointOrderByWithAggregationInput = {
   bannerUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   workType?: Prisma.SortOrder
+  isNSFW?: Prisma.SortOrder
   lastChapterAt?: Prisma.SortOrderInput | Prisma.SortOrder
   views?: Prisma.SortOrder
   finalChapterNumber?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -442,6 +453,7 @@ export type MangaJointScalarWhereWithAggregatesInput = {
   bannerUrl?: Prisma.StringNullableWithAggregatesFilter<"MangaJoint"> | string | null
   status?: Prisma.StringWithAggregatesFilter<"MangaJoint"> | string
   workType?: Prisma.StringWithAggregatesFilter<"MangaJoint"> | string
+  isNSFW?: Prisma.BoolWithAggregatesFilter<"MangaJoint"> | boolean
   lastChapterAt?: Prisma.DateTimeNullableWithAggregatesFilter<"MangaJoint"> | Date | string | null
   views?: Prisma.IntWithAggregatesFilter<"MangaJoint"> | number
   finalChapterNumber?: Prisma.FloatNullableWithAggregatesFilter<"MangaJoint"> | number | null
@@ -459,6 +471,7 @@ export type MangaJointCreateInput = {
   bannerUrl?: string | null
   status?: string
   workType?: string
+  isNSFW?: boolean
   lastChapterAt?: Date | string | null
   views?: number
   finalChapterNumber?: number | null
@@ -493,6 +506,7 @@ export type MangaJointUncheckedCreateInput = {
   bannerUrl?: string | null
   status?: string
   workType?: string
+  isNSFW?: boolean
   lastChapterAt?: Date | string | null
   views?: number
   finalChapterNumber?: number | null
@@ -524,6 +538,7 @@ export type MangaJointUpdateInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   workType?: Prisma.StringFieldUpdateOperationsInput | string
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -558,6 +573,7 @@ export type MangaJointUncheckedUpdateInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   workType?: Prisma.StringFieldUpdateOperationsInput | string
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -591,6 +607,7 @@ export type MangaJointCreateManyInput = {
   bannerUrl?: string | null
   status?: string
   workType?: string
+  isNSFW?: boolean
   lastChapterAt?: Date | string | null
   views?: number
   finalChapterNumber?: number | null
@@ -608,6 +625,7 @@ export type MangaJointUpdateManyMutationInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   workType?: Prisma.StringFieldUpdateOperationsInput | string
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -627,6 +645,7 @@ export type MangaJointUncheckedUpdateManyInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   workType?: Prisma.StringFieldUpdateOperationsInput | string
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -661,6 +680,7 @@ export type MangaJointCountOrderByAggregateInput = {
   bannerUrl?: Prisma.SortOrder
   status?: Prisma.SortOrder
   workType?: Prisma.SortOrder
+  isNSFW?: Prisma.SortOrder
   lastChapterAt?: Prisma.SortOrder
   views?: Prisma.SortOrder
   finalChapterNumber?: Prisma.SortOrder
@@ -687,6 +707,7 @@ export type MangaJointMaxOrderByAggregateInput = {
   bannerUrl?: Prisma.SortOrder
   status?: Prisma.SortOrder
   workType?: Prisma.SortOrder
+  isNSFW?: Prisma.SortOrder
   lastChapterAt?: Prisma.SortOrder
   views?: Prisma.SortOrder
   finalChapterNumber?: Prisma.SortOrder
@@ -706,6 +727,7 @@ export type MangaJointMinOrderByAggregateInput = {
   bannerUrl?: Prisma.SortOrder
   status?: Prisma.SortOrder
   workType?: Prisma.SortOrder
+  isNSFW?: Prisma.SortOrder
   lastChapterAt?: Prisma.SortOrder
   views?: Prisma.SortOrder
   finalChapterNumber?: Prisma.SortOrder
@@ -1019,6 +1041,7 @@ export type MangaJointCreateWithoutOrganizationRecommendationsInput = {
   bannerUrl?: string | null
   status?: string
   workType?: string
+  isNSFW?: boolean
   lastChapterAt?: Date | string | null
   views?: number
   finalChapterNumber?: number | null
@@ -1052,6 +1075,7 @@ export type MangaJointUncheckedCreateWithoutOrganizationRecommendationsInput = {
   bannerUrl?: string | null
   status?: string
   workType?: string
+  isNSFW?: boolean
   lastChapterAt?: Date | string | null
   views?: number
   finalChapterNumber?: number | null
@@ -1098,6 +1122,7 @@ export type MangaJointUpdateWithoutOrganizationRecommendationsInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   workType?: Prisma.StringFieldUpdateOperationsInput | string
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -1131,6 +1156,7 @@ export type MangaJointUncheckedUpdateWithoutOrganizationRecommendationsInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   workType?: Prisma.StringFieldUpdateOperationsInput | string
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -1161,6 +1187,7 @@ export type MangaJointCreateWithoutMangaInput = {
   bannerUrl?: string | null
   status?: string
   workType?: string
+  isNSFW?: boolean
   lastChapterAt?: Date | string | null
   views?: number
   finalChapterNumber?: number | null
@@ -1193,6 +1220,7 @@ export type MangaJointUncheckedCreateWithoutMangaInput = {
   bannerUrl?: string | null
   status?: string
   workType?: string
+  isNSFW?: boolean
   lastChapterAt?: Date | string | null
   views?: number
   finalChapterNumber?: number | null
@@ -1255,6 +1283,7 @@ export type MangaJointScalarWhereInput = {
   bannerUrl?: Prisma.StringNullableFilter<"MangaJoint"> | string | null
   status?: Prisma.StringFilter<"MangaJoint"> | string
   workType?: Prisma.StringFilter<"MangaJoint"> | string
+  isNSFW?: Prisma.BoolFilter<"MangaJoint"> | boolean
   lastChapterAt?: Prisma.DateTimeNullableFilter<"MangaJoint"> | Date | string | null
   views?: Prisma.IntFilter<"MangaJoint"> | number
   finalChapterNumber?: Prisma.FloatNullableFilter<"MangaJoint"> | number | null
@@ -1272,6 +1301,7 @@ export type MangaJointCreateWithoutChaptersInput = {
   bannerUrl?: string | null
   status?: string
   workType?: string
+  isNSFW?: boolean
   lastChapterAt?: Date | string | null
   views?: number
   finalChapterNumber?: number | null
@@ -1305,6 +1335,7 @@ export type MangaJointUncheckedCreateWithoutChaptersInput = {
   bannerUrl?: string | null
   status?: string
   workType?: string
+  isNSFW?: boolean
   lastChapterAt?: Date | string | null
   views?: number
   finalChapterNumber?: number | null
@@ -1351,6 +1382,7 @@ export type MangaJointUpdateWithoutChaptersInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   workType?: Prisma.StringFieldUpdateOperationsInput | string
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -1384,6 +1416,7 @@ export type MangaJointUncheckedUpdateWithoutChaptersInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   workType?: Prisma.StringFieldUpdateOperationsInput | string
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -1414,6 +1447,7 @@ export type MangaJointCreateWithoutCustomListItemsInput = {
   bannerUrl?: string | null
   status?: string
   workType?: string
+  isNSFW?: boolean
   lastChapterAt?: Date | string | null
   views?: number
   finalChapterNumber?: number | null
@@ -1447,6 +1481,7 @@ export type MangaJointUncheckedCreateWithoutCustomListItemsInput = {
   bannerUrl?: string | null
   status?: string
   workType?: string
+  isNSFW?: boolean
   lastChapterAt?: Date | string | null
   views?: number
   finalChapterNumber?: number | null
@@ -1493,6 +1528,7 @@ export type MangaJointUpdateWithoutCustomListItemsInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   workType?: Prisma.StringFieldUpdateOperationsInput | string
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -1526,6 +1562,7 @@ export type MangaJointUncheckedUpdateWithoutCustomListItemsInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   workType?: Prisma.StringFieldUpdateOperationsInput | string
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -1556,6 +1593,7 @@ export type MangaJointCreateWithoutContentReportsInput = {
   bannerUrl?: string | null
   status?: string
   workType?: string
+  isNSFW?: boolean
   lastChapterAt?: Date | string | null
   views?: number
   finalChapterNumber?: number | null
@@ -1589,6 +1627,7 @@ export type MangaJointUncheckedCreateWithoutContentReportsInput = {
   bannerUrl?: string | null
   status?: string
   workType?: string
+  isNSFW?: boolean
   lastChapterAt?: Date | string | null
   views?: number
   finalChapterNumber?: number | null
@@ -1635,6 +1674,7 @@ export type MangaJointUpdateWithoutContentReportsInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   workType?: Prisma.StringFieldUpdateOperationsInput | string
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -1668,6 +1708,7 @@ export type MangaJointUncheckedUpdateWithoutContentReportsInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   workType?: Prisma.StringFieldUpdateOperationsInput | string
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -1698,6 +1739,7 @@ export type MangaJointCreateWithoutReviewsInput = {
   bannerUrl?: string | null
   status?: string
   workType?: string
+  isNSFW?: boolean
   lastChapterAt?: Date | string | null
   views?: number
   finalChapterNumber?: number | null
@@ -1731,6 +1773,7 @@ export type MangaJointUncheckedCreateWithoutReviewsInput = {
   bannerUrl?: string | null
   status?: string
   workType?: string
+  isNSFW?: boolean
   lastChapterAt?: Date | string | null
   views?: number
   finalChapterNumber?: number | null
@@ -1777,6 +1820,7 @@ export type MangaJointUpdateWithoutReviewsInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   workType?: Prisma.StringFieldUpdateOperationsInput | string
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -1810,6 +1854,7 @@ export type MangaJointUncheckedUpdateWithoutReviewsInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   workType?: Prisma.StringFieldUpdateOperationsInput | string
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -1840,6 +1885,7 @@ export type MangaJointCreateWithoutMilestoneAlertsInput = {
   bannerUrl?: string | null
   status?: string
   workType?: string
+  isNSFW?: boolean
   lastChapterAt?: Date | string | null
   views?: number
   finalChapterNumber?: number | null
@@ -1873,6 +1919,7 @@ export type MangaJointUncheckedCreateWithoutMilestoneAlertsInput = {
   bannerUrl?: string | null
   status?: string
   workType?: string
+  isNSFW?: boolean
   lastChapterAt?: Date | string | null
   views?: number
   finalChapterNumber?: number | null
@@ -1919,6 +1966,7 @@ export type MangaJointUpdateWithoutMilestoneAlertsInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   workType?: Prisma.StringFieldUpdateOperationsInput | string
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -1952,6 +2000,7 @@ export type MangaJointUncheckedUpdateWithoutMilestoneAlertsInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   workType?: Prisma.StringFieldUpdateOperationsInput | string
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -1982,6 +2031,7 @@ export type MangaJointCreateWithoutVolumesInput = {
   bannerUrl?: string | null
   status?: string
   workType?: string
+  isNSFW?: boolean
   lastChapterAt?: Date | string | null
   views?: number
   finalChapterNumber?: number | null
@@ -2015,6 +2065,7 @@ export type MangaJointUncheckedCreateWithoutVolumesInput = {
   bannerUrl?: string | null
   status?: string
   workType?: string
+  isNSFW?: boolean
   lastChapterAt?: Date | string | null
   views?: number
   finalChapterNumber?: number | null
@@ -2061,6 +2112,7 @@ export type MangaJointUpdateWithoutVolumesInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   workType?: Prisma.StringFieldUpdateOperationsInput | string
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -2094,6 +2146,7 @@ export type MangaJointUncheckedUpdateWithoutVolumesInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   workType?: Prisma.StringFieldUpdateOperationsInput | string
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -2124,6 +2177,7 @@ export type MangaJointCreateWithoutGenresInput = {
   bannerUrl?: string | null
   status?: string
   workType?: string
+  isNSFW?: boolean
   lastChapterAt?: Date | string | null
   views?: number
   finalChapterNumber?: number | null
@@ -2157,6 +2211,7 @@ export type MangaJointUncheckedCreateWithoutGenresInput = {
   bannerUrl?: string | null
   status?: string
   workType?: string
+  isNSFW?: boolean
   lastChapterAt?: Date | string | null
   views?: number
   finalChapterNumber?: number | null
@@ -2208,6 +2263,7 @@ export type MangaJointCreateWithoutFavoritesInput = {
   bannerUrl?: string | null
   status?: string
   workType?: string
+  isNSFW?: boolean
   lastChapterAt?: Date | string | null
   views?: number
   finalChapterNumber?: number | null
@@ -2241,6 +2297,7 @@ export type MangaJointUncheckedCreateWithoutFavoritesInput = {
   bannerUrl?: string | null
   status?: string
   workType?: string
+  isNSFW?: boolean
   lastChapterAt?: Date | string | null
   views?: number
   finalChapterNumber?: number | null
@@ -2287,6 +2344,7 @@ export type MangaJointUpdateWithoutFavoritesInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   workType?: Prisma.StringFieldUpdateOperationsInput | string
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -2320,6 +2378,7 @@ export type MangaJointUncheckedUpdateWithoutFavoritesInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   workType?: Prisma.StringFieldUpdateOperationsInput | string
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -2350,6 +2409,7 @@ export type MangaJointCreateWithoutUserListEntriesInput = {
   bannerUrl?: string | null
   status?: string
   workType?: string
+  isNSFW?: boolean
   lastChapterAt?: Date | string | null
   views?: number
   finalChapterNumber?: number | null
@@ -2383,6 +2443,7 @@ export type MangaJointUncheckedCreateWithoutUserListEntriesInput = {
   bannerUrl?: string | null
   status?: string
   workType?: string
+  isNSFW?: boolean
   lastChapterAt?: Date | string | null
   views?: number
   finalChapterNumber?: number | null
@@ -2429,6 +2490,7 @@ export type MangaJointUpdateWithoutUserListEntriesInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   workType?: Prisma.StringFieldUpdateOperationsInput | string
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -2462,6 +2524,7 @@ export type MangaJointUncheckedUpdateWithoutUserListEntriesInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   workType?: Prisma.StringFieldUpdateOperationsInput | string
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -2492,6 +2555,7 @@ export type MangaJointCreateWithoutViewsHistoryInput = {
   bannerUrl?: string | null
   status?: string
   workType?: string
+  isNSFW?: boolean
   lastChapterAt?: Date | string | null
   views?: number
   finalChapterNumber?: number | null
@@ -2525,6 +2589,7 @@ export type MangaJointUncheckedCreateWithoutViewsHistoryInput = {
   bannerUrl?: string | null
   status?: string
   workType?: string
+  isNSFW?: boolean
   lastChapterAt?: Date | string | null
   views?: number
   finalChapterNumber?: number | null
@@ -2571,6 +2636,7 @@ export type MangaJointUpdateWithoutViewsHistoryInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   workType?: Prisma.StringFieldUpdateOperationsInput | string
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -2604,6 +2670,7 @@ export type MangaJointUncheckedUpdateWithoutViewsHistoryInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   workType?: Prisma.StringFieldUpdateOperationsInput | string
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -2634,6 +2701,7 @@ export type MangaJointCreateWithoutMembersInput = {
   bannerUrl?: string | null
   status?: string
   workType?: string
+  isNSFW?: boolean
   lastChapterAt?: Date | string | null
   views?: number
   finalChapterNumber?: number | null
@@ -2667,6 +2735,7 @@ export type MangaJointUncheckedCreateWithoutMembersInput = {
   bannerUrl?: string | null
   status?: string
   workType?: string
+  isNSFW?: boolean
   lastChapterAt?: Date | string | null
   views?: number
   finalChapterNumber?: number | null
@@ -2713,6 +2782,7 @@ export type MangaJointUpdateWithoutMembersInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   workType?: Prisma.StringFieldUpdateOperationsInput | string
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -2746,6 +2816,7 @@ export type MangaJointUncheckedUpdateWithoutMembersInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   workType?: Prisma.StringFieldUpdateOperationsInput | string
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -2776,6 +2847,7 @@ export type MangaJointCreateWithoutMemberHistoryInput = {
   bannerUrl?: string | null
   status?: string
   workType?: string
+  isNSFW?: boolean
   lastChapterAt?: Date | string | null
   views?: number
   finalChapterNumber?: number | null
@@ -2809,6 +2881,7 @@ export type MangaJointUncheckedCreateWithoutMemberHistoryInput = {
   bannerUrl?: string | null
   status?: string
   workType?: string
+  isNSFW?: boolean
   lastChapterAt?: Date | string | null
   views?: number
   finalChapterNumber?: number | null
@@ -2855,6 +2928,7 @@ export type MangaJointUpdateWithoutMemberHistoryInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   workType?: Prisma.StringFieldUpdateOperationsInput | string
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -2888,6 +2962,7 @@ export type MangaJointUncheckedUpdateWithoutMemberHistoryInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   workType?: Prisma.StringFieldUpdateOperationsInput | string
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -2918,6 +2993,7 @@ export type MangaJointCreateWithoutNotificationsInput = {
   bannerUrl?: string | null
   status?: string
   workType?: string
+  isNSFW?: boolean
   lastChapterAt?: Date | string | null
   views?: number
   finalChapterNumber?: number | null
@@ -2951,6 +3027,7 @@ export type MangaJointUncheckedCreateWithoutNotificationsInput = {
   bannerUrl?: string | null
   status?: string
   workType?: string
+  isNSFW?: boolean
   lastChapterAt?: Date | string | null
   views?: number
   finalChapterNumber?: number | null
@@ -2997,6 +3074,7 @@ export type MangaJointUpdateWithoutNotificationsInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   workType?: Prisma.StringFieldUpdateOperationsInput | string
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -3030,6 +3108,7 @@ export type MangaJointUncheckedUpdateWithoutNotificationsInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   workType?: Prisma.StringFieldUpdateOperationsInput | string
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -3061,6 +3140,7 @@ export type MangaJointCreateManyMangaInput = {
   bannerUrl?: string | null
   status?: string
   workType?: string
+  isNSFW?: boolean
   lastChapterAt?: Date | string | null
   views?: number
   finalChapterNumber?: number | null
@@ -3078,6 +3158,7 @@ export type MangaJointUpdateWithoutMangaInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   workType?: Prisma.StringFieldUpdateOperationsInput | string
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -3110,6 +3191,7 @@ export type MangaJointUncheckedUpdateWithoutMangaInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   workType?: Prisma.StringFieldUpdateOperationsInput | string
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -3142,6 +3224,7 @@ export type MangaJointUncheckedUpdateManyWithoutMangaInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   workType?: Prisma.StringFieldUpdateOperationsInput | string
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -3159,6 +3242,7 @@ export type MangaJointUpdateWithoutGenresInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   workType?: Prisma.StringFieldUpdateOperationsInput | string
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -3192,6 +3276,7 @@ export type MangaJointUncheckedUpdateWithoutGenresInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   workType?: Prisma.StringFieldUpdateOperationsInput | string
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -3224,6 +3309,7 @@ export type MangaJointUncheckedUpdateManyWithoutGenresInput = {
   bannerUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   workType?: Prisma.StringFieldUpdateOperationsInput | string
+  isNSFW?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastChapterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   finalChapterNumber?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -3391,6 +3477,7 @@ export type MangaJointSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   bannerUrl?: boolean
   status?: boolean
   workType?: boolean
+  isNSFW?: boolean
   lastChapterAt?: boolean
   views?: boolean
   finalChapterNumber?: boolean
@@ -3426,6 +3513,7 @@ export type MangaJointSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   bannerUrl?: boolean
   status?: boolean
   workType?: boolean
+  isNSFW?: boolean
   lastChapterAt?: boolean
   views?: boolean
   finalChapterNumber?: boolean
@@ -3446,6 +3534,7 @@ export type MangaJointSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   bannerUrl?: boolean
   status?: boolean
   workType?: boolean
+  isNSFW?: boolean
   lastChapterAt?: boolean
   views?: boolean
   finalChapterNumber?: boolean
@@ -3466,6 +3555,7 @@ export type MangaJointSelectScalar = {
   bannerUrl?: boolean
   status?: boolean
   workType?: boolean
+  isNSFW?: boolean
   lastChapterAt?: boolean
   views?: boolean
   finalChapterNumber?: boolean
@@ -3474,7 +3564,7 @@ export type MangaJointSelectScalar = {
   deletedAt?: boolean
 }
 
-export type MangaJointOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "mangaId" | "title" | "shortDescription" | "description" | "imageUrl" | "bannerUrl" | "status" | "workType" | "lastChapterAt" | "views" | "finalChapterNumber" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["mangaJoint"]>
+export type MangaJointOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "mangaId" | "title" | "shortDescription" | "description" | "imageUrl" | "bannerUrl" | "status" | "workType" | "isNSFW" | "lastChapterAt" | "views" | "finalChapterNumber" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["mangaJoint"]>
 export type MangaJointInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   manga?: boolean | Prisma.MangaDefaultArgs<ExtArgs>
   volumes?: boolean | Prisma.MangaJoint$volumesArgs<ExtArgs>
@@ -3530,6 +3620,7 @@ export type $MangaJointPayload<ExtArgs extends runtime.Types.Extensions.Internal
     bannerUrl: string | null
     status: string
     workType: string
+    isNSFW: boolean
     lastChapterAt: Date | null
     views: number
     finalChapterNumber: number | null
@@ -3984,6 +4075,7 @@ export interface MangaJointFieldRefs {
   readonly bannerUrl: Prisma.FieldRef<"MangaJoint", 'String'>
   readonly status: Prisma.FieldRef<"MangaJoint", 'String'>
   readonly workType: Prisma.FieldRef<"MangaJoint", 'String'>
+  readonly isNSFW: Prisma.FieldRef<"MangaJoint", 'Boolean'>
   readonly lastChapterAt: Prisma.FieldRef<"MangaJoint", 'DateTime'>
   readonly views: Prisma.FieldRef<"MangaJoint", 'Int'>
   readonly finalChapterNumber: Prisma.FieldRef<"MangaJoint", 'Float'>

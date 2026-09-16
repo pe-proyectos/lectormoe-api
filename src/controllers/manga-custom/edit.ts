@@ -1,5 +1,6 @@
 import { prisma } from '../../models/prisma'
 import type { EditMangaCustomRequest } from '../../types/manga-custom/edit'
+import { sincronizarJointsDeManga } from '../../util/joint-nsfw'
 
 export const editMangaCustom = async (
   organizationId: number,
@@ -140,6 +141,12 @@ export const editMangaCustom = async (
       }
     }
   })
+
+  // Si cambio el +18 de la obra, los joints de ese mismo manga heredan la
+  // clasificacion. Fire-and-forget: que falle no debe tumbar la edicion.
+  if (params.isNSFW !== undefined && mangaCustom.mangaId) {
+    void sincronizarJointsDeManga(mangaCustom.mangaId)
+  }
 
   return await prisma.mangaCustom.findFirst({
     where: { id: mangaCustom.id },

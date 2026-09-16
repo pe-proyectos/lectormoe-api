@@ -64,11 +64,13 @@ export const getPopularToday = async (limit: number = 5, nsfw?: boolean, content
 		take: limit * 10,
 	});
 
-	// Joint views — joints have no isNSFW field, so they only contribute when
-	// browsing the SFW landing (matches SortableMangaList convention).
-	// Also skip joints entirely when filtering to writings: joints are only used
-	// for collaborative manga uploads and have no bookType association.
-	const groupedJoint = nsfw === true || contentKind === "writing"
+	// Los joints ya tienen clasificacion propia (MangaJoint.isNSFW), asi que se
+	// filtran igual que las obras en vez de excluirlos del lado +18: antes los
+	// joints adultos no aparecian nunca en /red.
+	// Se siguen omitiendo al filtrar por novelas: los joints solo se usan para
+	// subidas colaborativas de manga y no tienen bookType.
+	const jointNsfwWhere = nsfw === true ? { isNSFW: true } : nsfw === false ? { isNSFW: false } : {}
+	const groupedJoint = contentKind === "writing"
 		? []
 		: await prisma.viewsHistory.groupBy({
 			by: ['jointId'],
@@ -76,7 +78,7 @@ export const getPopularToday = async (limit: number = 5, nsfw?: boolean, content
 				jointId: { not: null },
 				chapterId: null, // count joint-page views only, not chapter-detail views
 				viewedAt: { gte: todayStart },
-				joint: { deletedAt: null },
+				joint: { deletedAt: null, ...jointNsfwWhere },
 			},
 			_count: { _all: true },
 			orderBy: { _count: { jointId: Prisma.SortOrder.desc } },

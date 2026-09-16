@@ -63,15 +63,28 @@ export const getTrending = async (
       LIMIT 30
     `
   )
+  // Los joints ya se clasifican (MangaJoint.isNSFW): se filtran como las obras
+  // en vez de excluirlos del lado +18. Se omiten al pedir novelas porque los
+  // joints solo cubren subidas colaborativas de manga.
   const rawJoint =
-    nsfw === true || contentKind === 'writing'
+    contentKind === 'writing'
       ? []
       : await prisma.$queryRaw<Array<{ jointId: number; readers: bigint }>>(
           Prisma.sql`
-          SELECT "jointId", COUNT(DISTINCT ip) AS readers
-          FROM views
-          WHERE "viewedAt" >= ${since} AND "jointId" IS NOT NULL
-          GROUP BY "jointId"
+          SELECT v."jointId", COUNT(DISTINCT v.ip) AS readers
+          FROM views v
+          JOIN manga_joint j ON j.id = v."jointId"
+          WHERE v."viewedAt" >= ${since}
+            AND v."jointId" IS NOT NULL
+            AND j."deletedAt" IS NULL
+            ${
+              nsfw === true
+                ? Prisma.sql`AND j."isNSFW" = true`
+                : nsfw === false
+                  ? Prisma.sql`AND j."isNSFW" = false`
+                  : Prisma.empty
+            }
+          GROUP BY v."jointId"
           ORDER BY readers DESC
           LIMIT 30
         `

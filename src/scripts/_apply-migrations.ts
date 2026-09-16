@@ -341,7 +341,12 @@ const statements: string[] = [
   // Fase social 5b: card nativa de obra adjunta a un post.
   `ALTER TABLE "organization_post" ADD COLUMN IF NOT EXISTS "workMangaCustomId" INTEGER REFERENCES "manga_custom"("id") ON DELETE SET NULL;`,
   // Novelas por tomo: cómo se rotula cada entrega ('chapter' | 'volume' | 'both').
-  `ALTER TABLE "manga_custom" ADD COLUMN IF NOT EXISTS "chapterLabelMode" VARCHAR(16) NOT NULL DEFAULT 'chapter';`
+  `ALTER TABLE "manga_custom" ADD COLUMN IF NOT EXISTS "chapterLabelMode" VARCHAR(16) NOT NULL DEFAULT 'chapter';`,
+  // Clasificacion +18 propia de los joints. Sin ella no se podian filtrar: se
+  // colaban obras normales en /red y los joints adultos quedaban en el azul
+  // sirviendo AdSense. Se rellena con backfill-joint-nsfw.ts.
+  `ALTER TABLE "manga_joint" ADD COLUMN IF NOT EXISTS "isNSFW" BOOLEAN NOT NULL DEFAULT false;`,
+  `CREATE INDEX IF NOT EXISTS "manga_joint_isNSFW_idx" ON "manga_joint"("isNSFW");`
 ]
 
 for (const sql of statements) {

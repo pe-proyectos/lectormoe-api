@@ -485,6 +485,14 @@ async function mergeJointChaptersIntoMangaCustoms(
 // `organizationId` is an ACCEPTED member but the manga is not already present
 // in `mangasCustoms` (i.e., the org has no own MangaCustom for that manga).
 // This ensures invited/guest orgs see the joint on their landing page and catalog.
+// El mismo criterio que nsfwFilter pero para joints: /red solo +18, azul solo
+// no-+18, y sin filtro cuando no se pide (admin, herramientas internas).
+function jointNsfwFilter(filters: any) {
+  if (filters?.nsfw === 'true') return { isNSFW: true }
+  if (filters?.nsfw === 'false') return { isNSFW: false }
+  return {}
+}
+
 async function injectMemberJointEntries(
   mangasCustoms: any[],
   organizationId: number,
@@ -497,6 +505,9 @@ async function injectMemberJointEntries(
   const joints = await prisma.mangaJoint.findMany({
     where: {
       deletedAt: null,
+      // Los joints tienen clasificacion propia (ver util/joint-nsfw). Antes esta
+      // inyeccion no la aplicaba y metia obras normales en /red.
+      ...jointNsfwFilter(filters),
       members: { some: { organizationId, status: 'ACCEPTED' } },
       ...(coveredMangaIds.size > 0
         ? { mangaId: { notIn: [...coveredMangaIds] } }
@@ -508,6 +519,7 @@ async function injectMemberJointEntries(
       title: true,
       imageUrl: true,
       mangaId: true,
+      isNSFW: true,
       lastChapterAt: true,
       views: true,
       manga: {
@@ -603,7 +615,7 @@ async function injectMemberJointEntries(
       imageUrl: displayImage,
       slug: joint.slug,
       status: 'Ongoing',
-      isNSFW: false,
+      isNSFW: !!joint.isNSFW,
       hideUnreleasedChapters: false,
       deletedAt: null,
       lastChapterAt: joint.lastChapterAt,
@@ -634,6 +646,7 @@ async function injectGlobalJointEntries(
   const joints = await prisma.mangaJoint.findMany({
     where: {
       deletedAt: null,
+      ...jointNsfwFilter(filters),
       ...(coveredMangaIds.size > 0
         ? { mangaId: { notIn: [...coveredMangaIds] } }
         : {})
@@ -644,6 +657,7 @@ async function injectGlobalJointEntries(
       title: true,
       imageUrl: true,
       mangaId: true,
+      isNSFW: true,
       lastChapterAt: true,
       views: true,
       manga: {
@@ -735,7 +749,7 @@ async function injectGlobalJointEntries(
       lastChapterAt: joint.lastChapterAt,
       views: joint.views || 0,
       status: 'Ongoing',
-      isNSFW: false,
+      isNSFW: !!joint.isNSFW,
       hideUnreleasedChapters: false,
       deletedAt: null,
       organization: org,

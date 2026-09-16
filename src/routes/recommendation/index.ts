@@ -21,7 +21,7 @@ const workInclude = {
       organization: { select: { slug: true, name: true, isNSFW: true } },
     },
   },
-  joint: { select: { id: true, title: true, imageUrl: true, slug: true, deletedAt: true } },
+  joint: { select: { id: true, title: true, imageUrl: true, slug: true, isNSFW: true, deletedAt: true } },
 } as const
 
 // Ventana de fechas + activo. startsAt/endsAt nulos = sin límite por ese lado.
@@ -60,10 +60,20 @@ export const router = () =>
           take: 12,
           include: workInclude,
         })
-        return { status: true, data: recs.filter(hasLiveWork) }
+        // Mismo criterio que el home global: la pagina azul de un scan no
+        // promociona sus obras +18, y la /red solo promociona esas. Sin el
+        // parametro no se filtra (panel del scan, herramientas internas).
+        const vivas = recs.filter(hasLiveWork)
+        if (query.nsfw !== 'true' && query.nsfw !== 'false') {
+          return { status: true, data: vivas }
+        }
+        const quiereNsfw = query.nsfw === 'true'
+        const esNsfw = (r: any) =>
+          !!(r.mangaCustom?.isNSFW || r.mangaCustom?.organization?.isNSFW || r.joint?.isNSFW)
+        return { status: true, data: vivas.filter((r) => esNsfw(r) === quiereNsfw) }
       },
       {
-        query: t.Optional(t.Object({ org: t.Optional(t.String()) })),
+        query: t.Optional(t.Object({ org: t.Optional(t.String()), nsfw: t.Optional(t.String()) })),
         response: t.Object({ status: t.Boolean(), data: t.Any() }),
       },
     )
@@ -90,11 +100,19 @@ export const router = () =>
             organization: { select: { slug: true, name: true, logoUrl: true, isNSFW: true } },
           },
         })
-        // Filtra por contexto +18: en el home normal no mostramos obras NSFW.
-        // Para joints (sin flag propio) se usa el scan que recomienda.
+        // Filtro SIMETRICO por contexto: el azul solo promociona obras normales y
+        // /red solo obras +18. Antes el lado +18 dejaba pasar todo, asi que una
+        // obra normal podia acabar promocionada entre contenido adulto.
+        // El joint ya trae clasificacion propia; el scan que recomienda se sigue
+        // teniendo en cuenta porque un scan +18 marca todo su catalogo.
         const isNsfwRec = (r: any) =>
-          !!(r.mangaCustom?.isNSFW || r.mangaCustom?.organization?.isNSFW || r.organization?.isNSFW)
-        const pool = recs.filter(hasLiveWork).filter((r) => (nsfw ? true : !isNsfwRec(r)))
+          !!(
+            r.mangaCustom?.isNSFW ||
+            r.mangaCustom?.organization?.isNSFW ||
+            r.joint?.isNSFW ||
+            r.organization?.isNSFW
+          )
+        const pool = recs.filter(hasLiveWork).filter((r) => isNsfwRec(r) === nsfw)
 
         // Rotación JUSTA: barajado determinístico por franja de 10 min (estable
         // para todos los usuarios y cacheable) para que cada scan tenga su turno

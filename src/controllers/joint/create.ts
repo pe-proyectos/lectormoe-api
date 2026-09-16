@@ -1,5 +1,6 @@
 import { prisma } from '../../models/prisma';
 import type { CreateJointRequest } from '../../types/joint/create';
+import { sincronizarJointNSFW } from '../../util/joint-nsfw';
 
 const RESERVED_SLUGS = new Set(['admin', 'chapter', 'invite', 'member', 'respond', 'transfer']);
 
@@ -62,6 +63,9 @@ export const createJoint = async (organizationId: number, params: CreateJointReq
       members: { include: { organization: { select: { id: true, name: true, slug: true, logoUrl: true } } } },
     },
   });
+
+  // El joint hereda la clasificacion +18 de la obra que agrupa.
+  await sincronizarJointNSFW(joint.id).catch(() => {});
 
   return joint;
 };

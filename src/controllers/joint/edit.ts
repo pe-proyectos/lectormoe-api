@@ -1,6 +1,7 @@
 import { prisma } from '../../models/prisma';
 import { requireJointMember, canEdit } from '../../util/joint-auth';
 import type { EditJointRequest } from '../../types/joint/edit';
+import { sincronizarJointNSFW } from '../../util/joint-nsfw';
 
 export const editJoint = async (
   slug: string,
@@ -48,6 +49,9 @@ export const editJoint = async (
     where: { id: joint.id },
     data: updateData,
   });
+
+  // Los generos pueden haber cambiado y arrastran la clasificacion +18.
+  await sincronizarJointNSFW(joint.id).catch(() => {});
 
   return prisma.mangaJoint.findFirst({
     where: { id: joint.id },

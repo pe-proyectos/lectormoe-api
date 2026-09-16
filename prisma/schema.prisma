@@ -1291,6 +1291,11 @@ model MangaJoint {
   bannerUrl        String?
   status           String        @default("ongoing") @db.VarChar(64)
   workType         String        @default("manga") @db.VarChar(64)
+  // +18: los joints necesitan clasificacion propia igual que MangaCustom. Sin
+  // ella no se podian filtrar y se colaban obras normales en /red (y al reves,
+  // joints adultos quedaban en el azul con AdSense). Se deriva de las obras que
+  // lo componen y de sus generos; ver util/joint-nsfw.ts.
+  isNSFW           Boolean       @default(false)
   lastChapterAt    DateTime?
   views            Int           @default(0)
   finalChapterNumber Float?
