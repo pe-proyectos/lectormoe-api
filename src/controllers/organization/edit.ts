@@ -1,5 +1,6 @@
 import { prisma } from "../../models/prisma";
 import { EditOrganizationRequest } from "../../types/organization/edit";
+import { sincronizarJointsDeManga } from "../../util/joint-nsfw";
 
 export const editOrganization = async (organizationId: number, params: EditOrganizationRequest) => {
 	await prisma.organization.update({
@@ -137,9 +138,40 @@ export const editOrganization = async (organizationId: number, params: EditOrgan
 		}
 	}
 
+	// Un scan marcado +18 hace +18 todo lo que publica. La clasificacion tiene
+	// que quedar en la propia obra: los listados FILTRAN por MangaCustom.isNSFW,
+	// mientras que para pintar la tarjeta usaban "obra o scan". Con las dos
+	// definiciones desalineadas, una obra de un scan +18 pasaba el filtro azul y
+	// aparecia en la portada difuminada y enlazando a /red.
+	// No se desmarca al apagar el flag del scan: una obra puede ser +18 por si
+	// misma y quitarselo seria destructivo. Eso se ajusta obra por obra.
+	if (params.isNSFW === true) {
+		await propagarNSFWaObras(organizationId);
+	}
+
 	return await prisma.organization.findUnique({
 		where: {
 			id: organizationId,
 		}
 	});
 };
+
+async function propagarNSFWaObras(organizationId: number) {
+	try {
+		const obras = await prisma.mangaCustom.findMany({
+			where: { organizationId, deletedAt: null, isNSFW: false },
+			select: { id: true, mangaId: true },
+		});
+		if (obras.length === 0) return;
+		await prisma.mangaCustom.updateMany({
+			where: { id: { in: obras.map((o) => o.id) } },
+			data: { isNSFW: true },
+		});
+		// Los joints de esas obras heredan la clasificacion.
+		for (const mangaId of new Set(obras.map((o) => o.mangaId).filter(Boolean) as number[])) {
+			await sincronizarJointsDeManga(mangaId);
+		}
+	} catch (e) {
+		console.error('[org-nsfw] no se pudo propagar a las obras de', organizationId, e);
+	}
+}
