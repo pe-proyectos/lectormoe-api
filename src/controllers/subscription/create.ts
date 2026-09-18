@@ -40,6 +40,13 @@ export const createSubscription = async (organizationId: number, userId: number,
 		throw new Error(`Subscription plan '${params.subscriptionPlanId}' not found`);
 	}
 
+	// Un plan retirado no se puede contratar aunque alguien conserve el enlace o
+	// el boton de PayPal en cache. Las suscripciones YA existentes sobre ese plan
+	// siguen su curso: esto solo cierra la puerta a altas nuevas.
+	if (!subscriptionPlanExists.active) {
+		throw new Error("Este plan ya no está disponible.");
+	}
+
 	const paypalPlan = await getPlanById(subscriptionPlanExists.planId);
 
 	if (!paypalPlan) {

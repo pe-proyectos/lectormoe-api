@@ -24,6 +24,15 @@ export const listSubscriptionPlans = async (organizationId: number | null, filte
 		whereClause.organizationId = organizationId;
 	}
 
+	// Visibilidad del plan. Antes no habia filtro: desactivar un plan en el panel
+	// no lo quitaba de la pagina publica, seguia listandose y se podia contratar.
+	// Ahora el valor por defecto es "solo activos"; el panel pide 'all' a
+	// proposito porque necesita ver los retirados para reactivarlos.
+	const activeFilter = String(filters?.active ?? 'true').toLowerCase();
+	if (activeFilter !== 'all') {
+		whereClause.active = activeFilter !== 'false';
+	}
+
 	const subscriptionPlans = await prisma.subscriptionPlan.findMany({
 		where: whereClause,
 		include: {
@@ -66,6 +75,11 @@ export const listSubscriptionPlans = async (organizationId: number | null, filte
 	// If organizationId is provided, filter by it. Otherwise, count all plans
 	if (organizationId !== null) {
 		countWhereClause.organizationId = organizationId;
+	}
+
+	// El recuento tiene que usar el mismo criterio que el listado.
+	if (activeFilter !== 'all') {
+		countWhereClause.active = activeFilter !== 'false';
 	}
 
 	const total = await prisma.subscriptionPlan.count({

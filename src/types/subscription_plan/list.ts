@@ -8,7 +8,10 @@ export const SubscriptionPlanListQuery = t.Object({
     price: t.Optional(t.Number()),
     interval: t.Optional(t.String()),
     currency: t.Optional(t.String()),
-    active: t.Optional(t.Boolean()),
+    // 'true' (por defecto) | 'false' | 'all'. Falla cerrado: quien no lo
+    // indique recibe solo planes activos, para que un plan retirado no vuelva a
+    // aparecer en la pagina publica ni se pueda contratar.
+    active: t.Optional(t.Union([t.Boolean(), t.String()])),
     ...PaginationQuery.properties,
 });
 
