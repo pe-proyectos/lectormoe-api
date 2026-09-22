@@ -503,8 +503,8 @@ async function mergeJointChaptersIntoMangaCustoms(
 async function identidadDeJoints(
   joints: Array<{ id: number; mangaId: number; title: string | null; imageUrl: string | null }>,
   organizationId?: number
-): Promise<Map<number, { title: string; alternativeTitle: string | null; imageUrl: string | null }>> {
-  const identidad = new Map<number, { title: string; alternativeTitle: string | null; imageUrl: string | null }>()
+): Promise<Map<number, { title: string; alternativeTitle: string | null; imageUrl: string | null; alias: string[] }>> {
+  const identidad = new Map<number, { title: string; alternativeTitle: string | null; imageUrl: string | null; alias: string[] }>()
   if (joints.length === 0) return identidad
 
   const miembros = await prisma.jointMember.findMany({
@@ -532,11 +532,24 @@ async function identidadDeJoints(
       ? deMiembros.find((c) => c.organizationId === organizationId)
       : undefined
 
+    // Un joint es buscable por CUALQUIER nombre con el que se le conozca: el
+    // suyo, el del manga base, su slug y como lo titule cada miembro. Sin esto,
+    // al sustituir la ficha suelta por la del joint, buscar "koori" dejaba de
+    // encontrar una obra titulada "Rompiendo el Hielo".
+    const alias = [
+      joint.title,
+      (joint as any).slug,
+      (joint as any).manga?.title,
+      ...deMiembros.map((c) => c.title),
+      ...deMiembros.map((c) => c.alternativeTitle)
+    ].filter((t): t is string => !!t)
+
     if (propia) {
       identidad.set(joint.id, {
         title: propia.title,
         alternativeTitle: propia.alternativeTitle || null,
-        imageUrl: propia.imageUrl
+        imageUrl: propia.imageUrl,
+        alias
       })
       continue
     }
@@ -545,7 +558,8 @@ async function identidadDeJoints(
     identidad.set(joint.id, {
       title: joint.title || otroMiembro?.title || '',
       alternativeTitle: otroMiembro?.alternativeTitle || null,
-      imageUrl: joint.imageUrl || otroMiembro?.imageUrl || null
+      imageUrl: joint.imageUrl || otroMiembro?.imageUrl || null,
+      alias
     })
   }
   return identidad
@@ -641,9 +655,9 @@ async function injectMemberJointEntries(
     const searchTerm = filters?.search || filters?.title
     if (searchTerm) {
       const q = searchTerm.toLowerCase()
-      const alt = (customMeta as any)?.alternativeTitle || ''
       const base = joint.manga?.title || ''
-      const coincide = [displayTitle, alt, base].some((t) => t && t.toLowerCase().includes(q))
+      const candidatos = [displayTitle, base, ...(customMeta?.alias || [])]
+      const coincide = candidatos.some((t) => t && t.toLowerCase().includes(q))
       if (!coincide) continue
     }
 
@@ -789,11 +803,11 @@ async function injectGlobalJointEntries(
     const displayImage = customMeta?.imageUrl || joint.imageUrl || null
 
     const searchTerm = filters?.search || filters?.title
-    if (
-      searchTerm &&
-      !displayTitle.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-      continue
+    if (searchTerm) {
+      const q = searchTerm.toLowerCase()
+      const candidatos = [displayTitle, ...(customMeta?.alias || [])]
+      if (!candidatos.some((t) => t && t.toLowerCase().includes(q))) continue
+    }
 
     const taggedChapters = joint.chapters.map((c: any) => ({
       ...c,
