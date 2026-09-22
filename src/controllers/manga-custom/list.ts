@@ -485,6 +485,72 @@ async function mergeJointChaptersIntoMangaCustoms(
 // `organizationId` is an ACCEPTED member but the manga is not already present
 // in `mangasCustoms` (i.e., the org has no own MangaCustom for that manga).
 // This ensures invited/guest orgs see the joint on their landing page and catalog.
+/**
+ * Con que titulo y portada se muestra un joint.
+ *
+ * Solo cuentan las fichas de los scans que PARTICIPAN en el joint. Antes se
+ * cogia la primera MangaCustom de ese manga de CUALQUIER scan, y ganaba la de
+ * id mas bajo: por eso a katsudonmanga le salia su colaboracion con el nombre y
+ * la portada de haruscan, un scan que publica la misma obra por su cuenta pero
+ * no forma parte del joint.
+ *
+ * Orden de preferencia:
+ *   1. la ficha del scan que esta mirando, si la tiene (es su catalogo),
+ *   2. la identidad propia del joint, que es la que acordaron sus miembros,
+ *   3. la ficha de otro miembro,
+ *   4. el manga base.
+ */
+async function identidadDeJoints(
+  joints: Array<{ id: number; mangaId: number; title: string | null; imageUrl: string | null }>,
+  organizationId?: number
+): Promise<Map<number, { title: string; alternativeTitle: string | null; imageUrl: string | null }>> {
+  const identidad = new Map<number, { title: string; alternativeTitle: string | null; imageUrl: string | null }>()
+  if (joints.length === 0) return identidad
+
+  const miembros = await prisma.jointMember.findMany({
+    where: { jointId: { in: joints.map((j) => j.id) }, status: 'ACCEPTED' },
+    select: { jointId: true, organizationId: true }
+  })
+  const orgsPorJoint = new Map<number, Set<number>>()
+  for (const m of miembros) {
+    if (!orgsPorJoint.has(m.jointId)) orgsPorJoint.set(m.jointId, new Set())
+    orgsPorJoint.get(m.jointId)!.add(m.organizationId)
+  }
+
+  const customs = await prisma.mangaCustom.findMany({
+    where: { mangaId: { in: joints.map((j) => j.mangaId) }, deletedAt: null },
+    select: { mangaId: true, organizationId: true, title: true, alternativeTitle: true, imageUrl: true },
+    orderBy: { id: 'asc' }
+  })
+
+  for (const joint of joints) {
+    const orgs = orgsPorJoint.get(joint.id) ?? new Set<number>()
+    const deMiembros = customs.filter(
+      (c) => c.mangaId === joint.mangaId && orgs.has(c.organizationId) && c.title
+    )
+    const propia = organizationId
+      ? deMiembros.find((c) => c.organizationId === organizationId)
+      : undefined
+
+    if (propia) {
+      identidad.set(joint.id, {
+        title: propia.title,
+        alternativeTitle: propia.alternativeTitle || null,
+        imageUrl: propia.imageUrl
+      })
+      continue
+    }
+
+    const otroMiembro = deMiembros[0]
+    identidad.set(joint.id, {
+      title: joint.title || otroMiembro?.title || '',
+      alternativeTitle: otroMiembro?.alternativeTitle || null,
+      imageUrl: joint.imageUrl || otroMiembro?.imageUrl || null
+    })
+  }
+  return identidad
+}
+
 // El mismo criterio que nsfwFilter pero para joints: /red solo +18, azul solo
 // no-+18, y sin filtro cuando no se pide (admin, herramientas internas).
 function jointNsfwFilter(filters: any) {
@@ -529,14 +595,16 @@ async function injectMemberJointEntries(
         }
       },
       members: {
-        where: { organizationId, status: 'ACCEPTED' },
+        where: { status: 'ACCEPTED' },
         select: {
+          role: true,
           organization: {
             select: {
               id: true,
               name: true,
               slug: true,
               title: true,
+              logoUrl: true,
               isNSFW: true,
               isPublic: true
             }
@@ -560,38 +628,10 @@ async function injectMemberJointEntries(
     }
   })
 
-  // Fetch display titles/covers from existing MangaCustom records for the
-  // same manga (any org). The MangaCustom title (e.g. "Adicto a Lilim") is
-  // the localized/scan name and takes priority over the joint or manga title.
-  const jointMangaIds = joints.map((j) => j.mangaId)
-  const existingCustoms = jointMangaIds.length
-    ? await prisma.mangaCustom.findMany({
-        where: { mangaId: { in: jointMangaIds }, deletedAt: null },
-        select: { mangaId: true, organizationId: true, title: true, alternativeTitle: true, imageUrl: true },
-        orderBy: { id: 'asc' }
-      })
-    : []
-  // En el catalogo de un scan, su joint debe salir con SU titulo y SU portada.
-  // Antes se cogia la primera ficha de cualquier scan, asi que a un scan le
-  // aparecia su propia obra con el nombre y la portada de otro.
-  const customMetaByMangaId = new Map<
-    number,
-    { title: string; alternativeTitle: string | null; imageUrl: string | null }
-  >()
-  for (const mc of existingCustoms) {
-    if (!mc.title) continue
-    const esPropia = mc.organizationId === organizationId
-    if (!customMetaByMangaId.has(mc.mangaId) || esPropia) {
-      customMetaByMangaId.set(mc.mangaId, {
-        title: mc.title,
-        alternativeTitle: (mc as any).alternativeTitle || null,
-        imageUrl: mc.imageUrl
-      })
-    }
-  }
+  const identidad = await identidadDeJoints(joints, organizationId)
 
   for (const joint of joints) {
-    const customMeta = customMetaByMangaId.get(joint.mangaId)
+    const customMeta = identidad.get(joint.id)
     const displayTitle =
       customMeta?.title || joint.title || joint.manga?.title || ''
     const displayImage =
@@ -607,7 +647,13 @@ async function injectMemberJointEntries(
       if (!coincide) continue
     }
 
-    const org = joint.members[0]?.organization
+    // La tarjeta se acredita al LIDER; el resto de participantes van en
+    // `_jointMembers` para el "+N" y el desplegable al pasar el raton.
+    const miembros = (joint.members as any[])
+      .map((m) => ({ role: m.role, organization: m.organization }))
+      .filter((m) => m.organization && m.organization.isPublic !== false)
+    const lider = miembros.find((m) => m.role === 'LEADER') ?? miembros[0]
+    const org = lider?.organization
     if (!org) continue
 
     const taggedChapters = joint.chapters.map((c: any) => ({
@@ -632,7 +678,14 @@ async function injectMemberJointEntries(
       genres: [],
       subscriptionPlansCanReadUnreleased: [],
       subscriptionPlansCanReadReleased: [],
-      _jointSlug: joint.slug
+      _jointSlug: joint.slug,
+      _jointMembers: miembros.map((m) => ({
+        slug: m.organization.slug,
+        name: m.organization.name,
+        title: m.organization.title,
+        logoUrl: m.organization.logoUrl ?? null,
+        isLeader: m.role === 'LEADER'
+      }))
     })
   }
 }
@@ -645,17 +698,15 @@ async function injectGlobalJointEntries(
   mangasCustoms: any[],
   filters: any
 ): Promise<void> {
-  const coveredMangaIds = new Set(
-    mangasCustoms.map((mc) => mc.mangaId).filter(Boolean)
-  )
-
+  // Antes solo se traian los joints que la pagina no representaba. Ahora se
+  // traen todos: de los que SI aparecen hay que sustituir la ficha suelta del
+  // miembro por la tarjeta del joint, para que la colaboracion no se muestre
+  // como si fuera de un solo scan (ni duplicada cuando varios miembros tienen
+  // ficha propia de la misma obra).
   const joints = await prisma.mangaJoint.findMany({
     where: {
       deletedAt: null,
-      ...jointNsfwFilter(filters),
-      ...(coveredMangaIds.size > 0
-        ? { mangaId: { notIn: [...coveredMangaIds] } }
-        : {})
+      ...jointNsfwFilter(filters)
     },
     select: {
       id: true,
@@ -675,18 +726,19 @@ async function injectGlobalJointEntries(
       members: {
         where: { status: 'ACCEPTED' },
         select: {
+          role: true,
           organization: {
             select: {
               id: true,
               name: true,
               slug: true,
               title: true,
+              logoUrl: true,
               isNSFW: true,
               isPublic: true
             }
           }
-        },
-        take: 1
+        }
       },
       chapters: {
         where: { deletedAt: null },
@@ -704,36 +756,34 @@ async function injectGlobalJointEntries(
     }
   })
 
-  const jointMangaIds = joints.map((j) => j.mangaId)
-  const existingCustoms = jointMangaIds.length
-    ? await prisma.mangaCustom.findMany({
-        where: { mangaId: { in: jointMangaIds }, deletedAt: null },
-        select: { mangaId: true, organizationId: true, title: true, alternativeTitle: true, imageUrl: true },
-        orderBy: { id: 'asc' }
-      })
-    : []
-  // Listado global: no hay scan de referencia, pero el orden por id fija un
-  // criterio estable (la ficha mas antigua) en vez de depender de como devuelva
-  // las filas la base de datos.
-  const customMetaByMangaId = new Map<
-    number,
-    { title: string; alternativeTitle: string | null; imageUrl: string | null }
-  >()
-  for (const mc of existingCustoms) {
-    if (!customMetaByMangaId.has(mc.mangaId) && mc.title) {
-      customMetaByMangaId.set(mc.mangaId, {
-        title: mc.title,
-        alternativeTitle: (mc as any).alternativeTitle || null,
-        imageUrl: mc.imageUrl
-      })
-    }
+  // Quita las fichas sueltas de los scans que participan en el joint: su obra
+  // pasa a representarse con la tarjeta de la colaboracion.
+  const miembrosPorManga = new Map<number, Set<number>>()
+  for (const j of joints) {
+    if (!miembrosPorManga.has(j.mangaId)) miembrosPorManga.set(j.mangaId, new Set())
+    const set = miembrosPorManga.get(j.mangaId)!
+    for (const m of j.members as any[]) set.add(m.organization.id)
+  }
+  for (let i = mangasCustoms.length - 1; i >= 0; i--) {
+    const mc = mangasCustoms[i]
+    if (typeof mc.id === 'string') continue // ya es una tarjeta de joint
+    const orgs = miembrosPorManga.get(mc.mangaId)
+    if (orgs && orgs.has(mc.organization?.id)) mangasCustoms.splice(i, 1)
   }
 
+  const identidad = await identidadDeJoints(joints)
+
   for (const joint of joints) {
-    const org = joint.members[0]?.organization
+    // La tarjeta se acredita al LIDER; el resto de participantes van en
+    // `_jointMembers` para el "+N" y el desplegable al pasar el raton.
+    const miembros = (joint.members as any[])
+      .map((m) => ({ role: m.role, organization: m.organization }))
+      .filter((m) => m.organization && m.organization.isPublic !== false)
+    const lider = miembros.find((m) => m.role === 'LEADER') ?? miembros[0]
+    const org = lider?.organization
     if (!org || org.isPublic === false) continue
 
-    const customMeta = customMetaByMangaId.get(joint.mangaId)
+    const customMeta = identidad.get(joint.id)
     const displayTitle =
       customMeta?.title || joint.title || joint.manga?.title || ''
     const displayImage = customMeta?.imageUrl || joint.imageUrl || null
@@ -768,7 +818,14 @@ async function injectGlobalJointEntries(
       genres: [],
       subscriptionPlansCanReadUnreleased: [],
       subscriptionPlansCanReadReleased: [],
-      _jointSlug: joint.slug
+      _jointSlug: joint.slug,
+      _jointMembers: miembros.map((m) => ({
+        slug: m.organization.slug,
+        name: m.organization.name,
+        title: m.organization.title,
+        logoUrl: m.organization.logoUrl ?? null,
+        isLeader: m.role === 'LEADER'
+      }))
     })
   }
 }
