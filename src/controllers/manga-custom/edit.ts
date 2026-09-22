@@ -74,26 +74,31 @@ export const editMangaCustom = async (
       : {})
   }
 
-  // Manejar image
-  if (params.image !== undefined) {
-    if (params.image === null) {
-      updateData.imageUrl = null
-    } else if (typeof params.image === 'string') {
-      updateData.imageUrl = params.image.startsWith('http')
-        ? params.image
-        : `${r2PublicUrl}/${params.image}`
+  // Imagen y banner. Una cadena vacia NO es una clave de archivo: si se
+  // concatenaba igual salia `${r2PublicUrl}/`, o sea la URL base sin fichero,
+  // que el navegador pinta como imagen rota. 119 obras acabaron asi.
+  const urlDeMedia = (valor: string): string | null => {
+    const limpio = valor.trim()
+    if (!limpio) return null
+    if (limpio.startsWith('http')) {
+      // Una URL sin ruta tampoco apunta a nada.
+      try {
+        const u = new URL(limpio)
+        if (u.pathname === '' || u.pathname === '/') return null
+      } catch { return null }
+      return limpio
     }
+    return `${r2PublicUrl}/${limpio.replace(/^\/+/, '')}`
   }
 
-  // Manejar banner
+  if (params.image !== undefined) {
+    updateData.imageUrl =
+      params.image === null ? null : typeof params.image === 'string' ? urlDeMedia(params.image) : undefined
+  }
+
   if (params.banner !== undefined) {
-    if (params.banner === null) {
-      updateData.bannerUrl = null
-    } else if (typeof params.banner === 'string') {
-      updateData.bannerUrl = params.banner.startsWith('http')
-        ? params.banner
-        : `${r2PublicUrl}/${params.banner}`
-    }
+    updateData.bannerUrl =
+      params.banner === null ? null : typeof params.banner === 'string' ? urlDeMedia(params.banner) : undefined
   }
 
   await prisma.mangaCustom.update({

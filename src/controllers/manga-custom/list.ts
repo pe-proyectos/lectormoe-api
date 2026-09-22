@@ -567,15 +567,21 @@ async function injectMemberJointEntries(
   const existingCustoms = jointMangaIds.length
     ? await prisma.mangaCustom.findMany({
         where: { mangaId: { in: jointMangaIds }, deletedAt: null },
-        select: { mangaId: true, title: true, alternativeTitle: true, imageUrl: true }
+        select: { mangaId: true, organizationId: true, title: true, alternativeTitle: true, imageUrl: true },
+        orderBy: { id: 'asc' }
       })
     : []
+  // En el catalogo de un scan, su joint debe salir con SU titulo y SU portada.
+  // Antes se cogia la primera ficha de cualquier scan, asi que a un scan le
+  // aparecia su propia obra con el nombre y la portada de otro.
   const customMetaByMangaId = new Map<
     number,
     { title: string; alternativeTitle: string | null; imageUrl: string | null }
   >()
   for (const mc of existingCustoms) {
-    if (!customMetaByMangaId.has(mc.mangaId) && mc.title) {
+    if (!mc.title) continue
+    const esPropia = mc.organizationId === organizationId
+    if (!customMetaByMangaId.has(mc.mangaId) || esPropia) {
       customMetaByMangaId.set(mc.mangaId, {
         title: mc.title,
         alternativeTitle: (mc as any).alternativeTitle || null,
@@ -702,9 +708,13 @@ async function injectGlobalJointEntries(
   const existingCustoms = jointMangaIds.length
     ? await prisma.mangaCustom.findMany({
         where: { mangaId: { in: jointMangaIds }, deletedAt: null },
-        select: { mangaId: true, title: true, alternativeTitle: true, imageUrl: true }
+        select: { mangaId: true, organizationId: true, title: true, alternativeTitle: true, imageUrl: true },
+        orderBy: { id: 'asc' }
       })
     : []
+  // Listado global: no hay scan de referencia, pero el orden por id fija un
+  // criterio estable (la ficha mas antigua) en vez de depender de como devuelva
+  // las filas la base de datos.
   const customMetaByMangaId = new Map<
     number,
     { title: string; alternativeTitle: string | null; imageUrl: string | null }

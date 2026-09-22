@@ -50,17 +50,23 @@ export const createMangaCustom = async (organizationId: number, params: CreateMa
 	let bannerUrl: string | null = null;
 	const r2PublicUrl = Bun.env.R2_PUBLIC_URL || 'https://r2.capibaratraductor.com';
 
-	if (params.image && typeof params.image === 'string') {
-		imageUrl = params.image.startsWith('http') 
-			? params.image 
-			: `${r2PublicUrl}/${params.image}`;
-	}
+	// Una cadena vacia no es una clave de archivo: concatenarla dejaba
+	// `${r2PublicUrl}/`, la URL base sin fichero, que se ve como imagen rota.
+	const urlDeMedia = (valor: string): string | null => {
+		const limpio = valor.trim();
+		if (!limpio) return null;
+		if (limpio.startsWith('http')) {
+			try {
+				const u = new URL(limpio);
+				if (u.pathname === '' || u.pathname === '/') return null;
+			} catch { return null; }
+			return limpio;
+		}
+		return `${r2PublicUrl}/${limpio.replace(/^\/+/, '')}`;
+	};
 
-	if (params.banner && typeof params.banner === 'string') {
-		bannerUrl = params.banner.startsWith('http') 
-			? params.banner 
-			: `${r2PublicUrl}/${params.banner}`;
-	}
+	if (typeof params.image === 'string') imageUrl = urlDeMedia(params.image);
+	if (typeof params.banner === 'string') bannerUrl = urlDeMedia(params.banner);
 
 	const data = {
 		status: params.status || 'ongoing',
