@@ -346,7 +346,14 @@ const statements: string[] = [
   // colaban obras normales en /red y los joints adultos quedaban en el azul
   // sirviendo AdSense. Se rellena con backfill-joint-nsfw.ts.
   `ALTER TABLE "manga_joint" ADD COLUMN IF NOT EXISTS "isNSFW" BOOLEAN NOT NULL DEFAULT false;`,
-  `CREATE INDEX IF NOT EXISTS "manga_joint_isNSFW_idx" ON "manga_joint"("isNSFW");`
+  `CREATE INDEX IF NOT EXISTS "manga_joint_isNSFW_idx" ON "manga_joint"("isNSFW");`,
+  // Suscripcion Capibara (planes de plataforma).
+  `ALTER TABLE "subscription_plan" ADD COLUMN IF NOT EXISTS "isPlatform" BOOLEAN NOT NULL DEFAULT false;`,
+  `ALTER TABLE "subscription_plan" ADD COLUMN IF NOT EXISTS "tier" VARCHAR(16);`,
+  `ALTER TABLE "subscription" ADD COLUMN IF NOT EXISTS "originOrganizationId" INTEGER;`,
+  `CREATE TABLE IF NOT EXISTS "platform_payment" ("id" SERIAL PRIMARY KEY,"subscriptionId" INTEGER NOT NULL,"userId" INTEGER NOT NULL,"paypalTransactionId" VARCHAR(64) NOT NULL UNIQUE,"gross" DOUBLE PRECISION NOT NULL,"paypalFee" DOUBLE PRECISION NOT NULL DEFAULT 0,"currency" VARCHAR(10) NOT NULL DEFAULT 'USD',"originOrganizationId" INTEGER,"paidAt" TIMESTAMP(6) NOT NULL,"readingDistributedAt" TIMESTAMP(6),"createdAt" TIMESTAMP(6) NOT NULL DEFAULT now());`,
+  `CREATE INDEX IF NOT EXISTS "platform_payment_paidAt_idx" ON "platform_payment"("paidAt");`,
+  `CREATE INDEX IF NOT EXISTS "platform_payment_userId_idx" ON "platform_payment"("userId");`
 ]
 
 for (const sql of statements) {

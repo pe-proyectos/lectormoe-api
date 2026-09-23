@@ -1,6 +1,7 @@
 import type { Elysia } from 'elysia'
 
 import { router as adRevenueCronRouter } from './ad-revenue/cron'
+import { router as capibaraPlansRouter } from './capibara-plans'
 import { router as analyticsCreateRouter } from './analytics/create'
 import { router as analyticsEmailStatisticsRouter } from './analytics/email-statistics'
 import { router as analyticsEngagementStatisticsRouter } from './analytics/engagement-statistics'
@@ -353,6 +354,7 @@ export const router = () => async (app: Elysia) => {
 
   // Ad revenue (Google AdSense + Adsterra) — replaces legacy adsense-only cron.
   app.use(adRevenueCronRouter())
+  app.use(capibaraPlansRouter())
 
   console.log('Routes loaded')
 

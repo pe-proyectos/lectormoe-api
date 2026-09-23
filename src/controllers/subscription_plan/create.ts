@@ -2,8 +2,15 @@ import { prisma } from "../../models/prisma";
 import type { CreateSubscriptionPlanRequest } from "../../types/subscription_plan/create";
 import { toSlug } from "../../util/slug";
 import { createPlan, createProduct } from '../../util/paypal';
+import { LANZADO } from '../../util/capibara-plans';
 
 export const createSubscriptionPlan = async (organizationId: number, params: CreateSubscriptionPlanRequest) => {
+	// Tras el lanzamiento de los planes Capibara, los scans ya no crean planes
+	// propios: no podrian recibir altas.
+	if (LANZADO) {
+		throw new Error("Los planes por scan están en desuso. Tus lectores se suscriben ahora con los planes Capibara.");
+	}
+
 	const slug = toSlug(params.name);
 
 	const organization = await prisma.organization.findFirst({

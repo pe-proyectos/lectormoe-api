@@ -55,6 +55,8 @@ export type SubscriptionPlanMinAggregateOutputType = {
   canDownload: boolean | null
   canReadUnreleased: boolean | null
   hideAds: boolean | null
+  isPlatform: boolean | null
+  tier: string | null
 }
 
 export type SubscriptionPlanMaxAggregateOutputType = {
@@ -74,6 +76,8 @@ export type SubscriptionPlanMaxAggregateOutputType = {
   canDownload: boolean | null
   canReadUnreleased: boolean | null
   hideAds: boolean | null
+  isPlatform: boolean | null
+  tier: string | null
 }
 
 export type SubscriptionPlanCountAggregateOutputType = {
@@ -93,6 +97,8 @@ export type SubscriptionPlanCountAggregateOutputType = {
   canDownload: number
   canReadUnreleased: number
   hideAds: number
+  isPlatform: number
+  tier: number
   _all: number
 }
 
@@ -126,6 +132,8 @@ export type SubscriptionPlanMinAggregateInputType = {
   canDownload?: true
   canReadUnreleased?: true
   hideAds?: true
+  isPlatform?: true
+  tier?: true
 }
 
 export type SubscriptionPlanMaxAggregateInputType = {
@@ -145,6 +153,8 @@ export type SubscriptionPlanMaxAggregateInputType = {
   canDownload?: true
   canReadUnreleased?: true
   hideAds?: true
+  isPlatform?: true
+  tier?: true
 }
 
 export type SubscriptionPlanCountAggregateInputType = {
@@ -164,6 +174,8 @@ export type SubscriptionPlanCountAggregateInputType = {
   canDownload?: true
   canReadUnreleased?: true
   hideAds?: true
+  isPlatform?: true
+  tier?: true
   _all?: true
 }
 
@@ -270,6 +282,8 @@ export type SubscriptionPlanGroupByOutputType = {
   canDownload: boolean
   canReadUnreleased: boolean
   hideAds: boolean
+  isPlatform: boolean
+  tier: string | null
   _count: SubscriptionPlanCountAggregateOutputType | null
   _avg: SubscriptionPlanAvgAggregateOutputType | null
   _sum: SubscriptionPlanSumAggregateOutputType | null
@@ -312,6 +326,8 @@ export type SubscriptionPlanWhereInput = {
   canDownload?: Prisma.BoolFilter<"SubscriptionPlan"> | boolean
   canReadUnreleased?: Prisma.BoolFilter<"SubscriptionPlan"> | boolean
   hideAds?: Prisma.BoolFilter<"SubscriptionPlan"> | boolean
+  isPlatform?: Prisma.BoolFilter<"SubscriptionPlan"> | boolean
+  tier?: Prisma.StringNullableFilter<"SubscriptionPlan"> | string | null
   subscriptions?: Prisma.SubscriptionListRelationFilter
   organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
   mangaCustomsCanReadReleased?: Prisma.MangaCustomListRelationFilter
@@ -335,6 +351,8 @@ export type SubscriptionPlanOrderByWithRelationInput = {
   canDownload?: Prisma.SortOrder
   canReadUnreleased?: Prisma.SortOrder
   hideAds?: Prisma.SortOrder
+  isPlatform?: Prisma.SortOrder
+  tier?: Prisma.SortOrderInput | Prisma.SortOrder
   subscriptions?: Prisma.SubscriptionOrderByRelationAggregateInput
   organization?: Prisma.OrganizationOrderByWithRelationInput
   mangaCustomsCanReadReleased?: Prisma.MangaCustomOrderByRelationAggregateInput
@@ -362,6 +380,8 @@ export type SubscriptionPlanWhereUniqueInput = Prisma.AtLeast<{
   canDownload?: Prisma.BoolFilter<"SubscriptionPlan"> | boolean
   canReadUnreleased?: Prisma.BoolFilter<"SubscriptionPlan"> | boolean
   hideAds?: Prisma.BoolFilter<"SubscriptionPlan"> | boolean
+  isPlatform?: Prisma.BoolFilter<"SubscriptionPlan"> | boolean
+  tier?: Prisma.StringNullableFilter<"SubscriptionPlan"> | string | null
   subscriptions?: Prisma.SubscriptionListRelationFilter
   organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
   mangaCustomsCanReadReleased?: Prisma.MangaCustomListRelationFilter
@@ -385,6 +405,8 @@ export type SubscriptionPlanOrderByWithAggregationInput = {
   canDownload?: Prisma.SortOrder
   canReadUnreleased?: Prisma.SortOrder
   hideAds?: Prisma.SortOrder
+  isPlatform?: Prisma.SortOrder
+  tier?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.SubscriptionPlanCountOrderByAggregateInput
   _avg?: Prisma.SubscriptionPlanAvgOrderByAggregateInput
   _max?: Prisma.SubscriptionPlanMaxOrderByAggregateInput
@@ -412,6 +434,8 @@ export type SubscriptionPlanScalarWhereWithAggregatesInput = {
   canDownload?: Prisma.BoolWithAggregatesFilter<"SubscriptionPlan"> | boolean
   canReadUnreleased?: Prisma.BoolWithAggregatesFilter<"SubscriptionPlan"> | boolean
   hideAds?: Prisma.BoolWithAggregatesFilter<"SubscriptionPlan"> | boolean
+  isPlatform?: Prisma.BoolWithAggregatesFilter<"SubscriptionPlan"> | boolean
+  tier?: Prisma.StringNullableWithAggregatesFilter<"SubscriptionPlan"> | string | null
 }
 
 export type SubscriptionPlanCreateInput = {
@@ -429,6 +453,8 @@ export type SubscriptionPlanCreateInput = {
   canDownload?: boolean
   canReadUnreleased?: boolean
   hideAds?: boolean
+  isPlatform?: boolean
+  tier?: string | null
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutSubscriptionPlanInput
   organization: Prisma.OrganizationCreateNestedOneWithoutSubscriptionPlansInput
   mangaCustomsCanReadReleased?: Prisma.MangaCustomCreateNestedManyWithoutSubscriptionPlansCanReadReleasedInput
@@ -452,6 +478,8 @@ export type SubscriptionPlanUncheckedCreateInput = {
   canDownload?: boolean
   canReadUnreleased?: boolean
   hideAds?: boolean
+  isPlatform?: boolean
+  tier?: string | null
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutSubscriptionPlanInput
   mangaCustomsCanReadReleased?: Prisma.MangaCustomUncheckedCreateNestedManyWithoutSubscriptionPlansCanReadReleasedInput
   mangaCustomsCanReadUnreleased?: Prisma.MangaCustomUncheckedCreateNestedManyWithoutSubscriptionPlansCanReadUnreleasedInput
@@ -472,6 +500,8 @@ export type SubscriptionPlanUpdateInput = {
   canDownload?: Prisma.BoolFieldUpdateOperationsInput | boolean
   canReadUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPlatform?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tier?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutSubscriptionPlanNestedInput
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutSubscriptionPlansNestedInput
   mangaCustomsCanReadReleased?: Prisma.MangaCustomUpdateManyWithoutSubscriptionPlansCanReadReleasedNestedInput
@@ -495,6 +525,8 @@ export type SubscriptionPlanUncheckedUpdateInput = {
   canDownload?: Prisma.BoolFieldUpdateOperationsInput | boolean
   canReadUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPlatform?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tier?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutSubscriptionPlanNestedInput
   mangaCustomsCanReadReleased?: Prisma.MangaCustomUncheckedUpdateManyWithoutSubscriptionPlansCanReadReleasedNestedInput
   mangaCustomsCanReadUnreleased?: Prisma.MangaCustomUncheckedUpdateManyWithoutSubscriptionPlansCanReadUnreleasedNestedInput
@@ -517,6 +549,8 @@ export type SubscriptionPlanCreateManyInput = {
   canDownload?: boolean
   canReadUnreleased?: boolean
   hideAds?: boolean
+  isPlatform?: boolean
+  tier?: string | null
 }
 
 export type SubscriptionPlanUpdateManyMutationInput = {
@@ -534,6 +568,8 @@ export type SubscriptionPlanUpdateManyMutationInput = {
   canDownload?: Prisma.BoolFieldUpdateOperationsInput | boolean
   canReadUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPlatform?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tier?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SubscriptionPlanUncheckedUpdateManyInput = {
@@ -553,6 +589,8 @@ export type SubscriptionPlanUncheckedUpdateManyInput = {
   canDownload?: Prisma.BoolFieldUpdateOperationsInput | boolean
   canReadUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPlatform?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tier?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SubscriptionPlanListRelationFilter = {
@@ -587,6 +625,8 @@ export type SubscriptionPlanCountOrderByAggregateInput = {
   canDownload?: Prisma.SortOrder
   canReadUnreleased?: Prisma.SortOrder
   hideAds?: Prisma.SortOrder
+  isPlatform?: Prisma.SortOrder
+  tier?: Prisma.SortOrder
 }
 
 export type SubscriptionPlanAvgOrderByAggregateInput = {
@@ -612,6 +652,8 @@ export type SubscriptionPlanMaxOrderByAggregateInput = {
   canDownload?: Prisma.SortOrder
   canReadUnreleased?: Prisma.SortOrder
   hideAds?: Prisma.SortOrder
+  isPlatform?: Prisma.SortOrder
+  tier?: Prisma.SortOrder
 }
 
 export type SubscriptionPlanMinOrderByAggregateInput = {
@@ -631,6 +673,8 @@ export type SubscriptionPlanMinOrderByAggregateInput = {
   canDownload?: Prisma.SortOrder
   canReadUnreleased?: Prisma.SortOrder
   hideAds?: Prisma.SortOrder
+  isPlatform?: Prisma.SortOrder
+  tier?: Prisma.SortOrder
 }
 
 export type SubscriptionPlanSumOrderByAggregateInput = {
@@ -791,6 +835,8 @@ export type SubscriptionPlanCreateWithoutOrganizationInput = {
   canDownload?: boolean
   canReadUnreleased?: boolean
   hideAds?: boolean
+  isPlatform?: boolean
+  tier?: string | null
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutSubscriptionPlanInput
   mangaCustomsCanReadReleased?: Prisma.MangaCustomCreateNestedManyWithoutSubscriptionPlansCanReadReleasedInput
   mangaCustomsCanReadUnreleased?: Prisma.MangaCustomCreateNestedManyWithoutSubscriptionPlansCanReadUnreleasedInput
@@ -812,6 +858,8 @@ export type SubscriptionPlanUncheckedCreateWithoutOrganizationInput = {
   canDownload?: boolean
   canReadUnreleased?: boolean
   hideAds?: boolean
+  isPlatform?: boolean
+  tier?: string | null
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutSubscriptionPlanInput
   mangaCustomsCanReadReleased?: Prisma.MangaCustomUncheckedCreateNestedManyWithoutSubscriptionPlansCanReadReleasedInput
   mangaCustomsCanReadUnreleased?: Prisma.MangaCustomUncheckedCreateNestedManyWithoutSubscriptionPlansCanReadUnreleasedInput
@@ -863,6 +911,8 @@ export type SubscriptionPlanScalarWhereInput = {
   canDownload?: Prisma.BoolFilter<"SubscriptionPlan"> | boolean
   canReadUnreleased?: Prisma.BoolFilter<"SubscriptionPlan"> | boolean
   hideAds?: Prisma.BoolFilter<"SubscriptionPlan"> | boolean
+  isPlatform?: Prisma.BoolFilter<"SubscriptionPlan"> | boolean
+  tier?: Prisma.StringNullableFilter<"SubscriptionPlan"> | string | null
 }
 
 export type SubscriptionPlanCreateWithoutMangaCustomsCanReadReleasedInput = {
@@ -880,6 +930,8 @@ export type SubscriptionPlanCreateWithoutMangaCustomsCanReadReleasedInput = {
   canDownload?: boolean
   canReadUnreleased?: boolean
   hideAds?: boolean
+  isPlatform?: boolean
+  tier?: string | null
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutSubscriptionPlanInput
   organization: Prisma.OrganizationCreateNestedOneWithoutSubscriptionPlansInput
   mangaCustomsCanReadUnreleased?: Prisma.MangaCustomCreateNestedManyWithoutSubscriptionPlansCanReadUnreleasedInput
@@ -902,6 +954,8 @@ export type SubscriptionPlanUncheckedCreateWithoutMangaCustomsCanReadReleasedInp
   canDownload?: boolean
   canReadUnreleased?: boolean
   hideAds?: boolean
+  isPlatform?: boolean
+  tier?: string | null
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutSubscriptionPlanInput
   mangaCustomsCanReadUnreleased?: Prisma.MangaCustomUncheckedCreateNestedManyWithoutSubscriptionPlansCanReadUnreleasedInput
 }
@@ -926,6 +980,8 @@ export type SubscriptionPlanCreateWithoutMangaCustomsCanReadUnreleasedInput = {
   canDownload?: boolean
   canReadUnreleased?: boolean
   hideAds?: boolean
+  isPlatform?: boolean
+  tier?: string | null
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutSubscriptionPlanInput
   organization: Prisma.OrganizationCreateNestedOneWithoutSubscriptionPlansInput
   mangaCustomsCanReadReleased?: Prisma.MangaCustomCreateNestedManyWithoutSubscriptionPlansCanReadReleasedInput
@@ -948,6 +1004,8 @@ export type SubscriptionPlanUncheckedCreateWithoutMangaCustomsCanReadUnreleasedI
   canDownload?: boolean
   canReadUnreleased?: boolean
   hideAds?: boolean
+  isPlatform?: boolean
+  tier?: string | null
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutSubscriptionPlanInput
   mangaCustomsCanReadReleased?: Prisma.MangaCustomUncheckedCreateNestedManyWithoutSubscriptionPlansCanReadReleasedInput
 }
@@ -1004,6 +1062,8 @@ export type SubscriptionPlanCreateWithoutSubscriptionsInput = {
   canDownload?: boolean
   canReadUnreleased?: boolean
   hideAds?: boolean
+  isPlatform?: boolean
+  tier?: string | null
   organization: Prisma.OrganizationCreateNestedOneWithoutSubscriptionPlansInput
   mangaCustomsCanReadReleased?: Prisma.MangaCustomCreateNestedManyWithoutSubscriptionPlansCanReadReleasedInput
   mangaCustomsCanReadUnreleased?: Prisma.MangaCustomCreateNestedManyWithoutSubscriptionPlansCanReadUnreleasedInput
@@ -1026,6 +1086,8 @@ export type SubscriptionPlanUncheckedCreateWithoutSubscriptionsInput = {
   canDownload?: boolean
   canReadUnreleased?: boolean
   hideAds?: boolean
+  isPlatform?: boolean
+  tier?: string | null
   mangaCustomsCanReadReleased?: Prisma.MangaCustomUncheckedCreateNestedManyWithoutSubscriptionPlansCanReadReleasedInput
   mangaCustomsCanReadUnreleased?: Prisma.MangaCustomUncheckedCreateNestedManyWithoutSubscriptionPlansCanReadUnreleasedInput
 }
@@ -1061,6 +1123,8 @@ export type SubscriptionPlanUpdateWithoutSubscriptionsInput = {
   canDownload?: Prisma.BoolFieldUpdateOperationsInput | boolean
   canReadUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPlatform?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tier?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutSubscriptionPlansNestedInput
   mangaCustomsCanReadReleased?: Prisma.MangaCustomUpdateManyWithoutSubscriptionPlansCanReadReleasedNestedInput
   mangaCustomsCanReadUnreleased?: Prisma.MangaCustomUpdateManyWithoutSubscriptionPlansCanReadUnreleasedNestedInput
@@ -1083,6 +1147,8 @@ export type SubscriptionPlanUncheckedUpdateWithoutSubscriptionsInput = {
   canDownload?: Prisma.BoolFieldUpdateOperationsInput | boolean
   canReadUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPlatform?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tier?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mangaCustomsCanReadReleased?: Prisma.MangaCustomUncheckedUpdateManyWithoutSubscriptionPlansCanReadReleasedNestedInput
   mangaCustomsCanReadUnreleased?: Prisma.MangaCustomUncheckedUpdateManyWithoutSubscriptionPlansCanReadUnreleasedNestedInput
 }
@@ -1103,6 +1169,8 @@ export type SubscriptionPlanCreateManyOrganizationInput = {
   canDownload?: boolean
   canReadUnreleased?: boolean
   hideAds?: boolean
+  isPlatform?: boolean
+  tier?: string | null
 }
 
 export type SubscriptionPlanUpdateWithoutOrganizationInput = {
@@ -1120,6 +1188,8 @@ export type SubscriptionPlanUpdateWithoutOrganizationInput = {
   canDownload?: Prisma.BoolFieldUpdateOperationsInput | boolean
   canReadUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPlatform?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tier?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutSubscriptionPlanNestedInput
   mangaCustomsCanReadReleased?: Prisma.MangaCustomUpdateManyWithoutSubscriptionPlansCanReadReleasedNestedInput
   mangaCustomsCanReadUnreleased?: Prisma.MangaCustomUpdateManyWithoutSubscriptionPlansCanReadUnreleasedNestedInput
@@ -1141,6 +1211,8 @@ export type SubscriptionPlanUncheckedUpdateWithoutOrganizationInput = {
   canDownload?: Prisma.BoolFieldUpdateOperationsInput | boolean
   canReadUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPlatform?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tier?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutSubscriptionPlanNestedInput
   mangaCustomsCanReadReleased?: Prisma.MangaCustomUncheckedUpdateManyWithoutSubscriptionPlansCanReadReleasedNestedInput
   mangaCustomsCanReadUnreleased?: Prisma.MangaCustomUncheckedUpdateManyWithoutSubscriptionPlansCanReadUnreleasedNestedInput
@@ -1162,6 +1234,8 @@ export type SubscriptionPlanUncheckedUpdateManyWithoutOrganizationInput = {
   canDownload?: Prisma.BoolFieldUpdateOperationsInput | boolean
   canReadUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPlatform?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tier?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SubscriptionPlanUpdateWithoutMangaCustomsCanReadReleasedInput = {
@@ -1179,6 +1253,8 @@ export type SubscriptionPlanUpdateWithoutMangaCustomsCanReadReleasedInput = {
   canDownload?: Prisma.BoolFieldUpdateOperationsInput | boolean
   canReadUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPlatform?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tier?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutSubscriptionPlanNestedInput
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutSubscriptionPlansNestedInput
   mangaCustomsCanReadUnreleased?: Prisma.MangaCustomUpdateManyWithoutSubscriptionPlansCanReadUnreleasedNestedInput
@@ -1201,6 +1277,8 @@ export type SubscriptionPlanUncheckedUpdateWithoutMangaCustomsCanReadReleasedInp
   canDownload?: Prisma.BoolFieldUpdateOperationsInput | boolean
   canReadUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPlatform?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tier?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutSubscriptionPlanNestedInput
   mangaCustomsCanReadUnreleased?: Prisma.MangaCustomUncheckedUpdateManyWithoutSubscriptionPlansCanReadUnreleasedNestedInput
 }
@@ -1222,6 +1300,8 @@ export type SubscriptionPlanUncheckedUpdateManyWithoutMangaCustomsCanReadRelease
   canDownload?: Prisma.BoolFieldUpdateOperationsInput | boolean
   canReadUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPlatform?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tier?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SubscriptionPlanUpdateWithoutMangaCustomsCanReadUnreleasedInput = {
@@ -1239,6 +1319,8 @@ export type SubscriptionPlanUpdateWithoutMangaCustomsCanReadUnreleasedInput = {
   canDownload?: Prisma.BoolFieldUpdateOperationsInput | boolean
   canReadUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPlatform?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tier?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutSubscriptionPlanNestedInput
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutSubscriptionPlansNestedInput
   mangaCustomsCanReadReleased?: Prisma.MangaCustomUpdateManyWithoutSubscriptionPlansCanReadReleasedNestedInput
@@ -1261,6 +1343,8 @@ export type SubscriptionPlanUncheckedUpdateWithoutMangaCustomsCanReadUnreleasedI
   canDownload?: Prisma.BoolFieldUpdateOperationsInput | boolean
   canReadUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPlatform?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tier?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutSubscriptionPlanNestedInput
   mangaCustomsCanReadReleased?: Prisma.MangaCustomUncheckedUpdateManyWithoutSubscriptionPlansCanReadReleasedNestedInput
 }
@@ -1282,6 +1366,8 @@ export type SubscriptionPlanUncheckedUpdateManyWithoutMangaCustomsCanReadUnrelea
   canDownload?: Prisma.BoolFieldUpdateOperationsInput | boolean
   canReadUnreleased?: Prisma.BoolFieldUpdateOperationsInput | boolean
   hideAds?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPlatform?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tier?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -1350,6 +1436,8 @@ export type SubscriptionPlanSelect<ExtArgs extends runtime.Types.Extensions.Inte
   canDownload?: boolean
   canReadUnreleased?: boolean
   hideAds?: boolean
+  isPlatform?: boolean
+  tier?: boolean
   subscriptions?: boolean | Prisma.SubscriptionPlan$subscriptionsArgs<ExtArgs>
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
   mangaCustomsCanReadReleased?: boolean | Prisma.SubscriptionPlan$mangaCustomsCanReadReleasedArgs<ExtArgs>
@@ -1374,6 +1462,8 @@ export type SubscriptionPlanSelectCreateManyAndReturn<ExtArgs extends runtime.Ty
   canDownload?: boolean
   canReadUnreleased?: boolean
   hideAds?: boolean
+  isPlatform?: boolean
+  tier?: boolean
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["subscriptionPlan"]>
 
@@ -1394,6 +1484,8 @@ export type SubscriptionPlanSelectUpdateManyAndReturn<ExtArgs extends runtime.Ty
   canDownload?: boolean
   canReadUnreleased?: boolean
   hideAds?: boolean
+  isPlatform?: boolean
+  tier?: boolean
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["subscriptionPlan"]>
 
@@ -1414,9 +1506,11 @@ export type SubscriptionPlanSelectScalar = {
   canDownload?: boolean
   canReadUnreleased?: boolean
   hideAds?: boolean
+  isPlatform?: boolean
+  tier?: boolean
 }
 
-export type SubscriptionPlanOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "price" | "interval" | "currency" | "planId" | "createdAt" | "updatedAt" | "organizationId" | "slug" | "productId" | "active" | "canDownload" | "canReadUnreleased" | "hideAds", ExtArgs["result"]["subscriptionPlan"]>
+export type SubscriptionPlanOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "price" | "interval" | "currency" | "planId" | "createdAt" | "updatedAt" | "organizationId" | "slug" | "productId" | "active" | "canDownload" | "canReadUnreleased" | "hideAds" | "isPlatform" | "tier", ExtArgs["result"]["subscriptionPlan"]>
 export type SubscriptionPlanInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   subscriptions?: boolean | Prisma.SubscriptionPlan$subscriptionsArgs<ExtArgs>
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
@@ -1456,6 +1550,8 @@ export type $SubscriptionPlanPayload<ExtArgs extends runtime.Types.Extensions.In
     canDownload: boolean
     canReadUnreleased: boolean
     hideAds: boolean
+    isPlatform: boolean
+    tier: string | null
   }, ExtArgs["result"]["subscriptionPlan"]>
   composites: {}
 }
@@ -1899,6 +1995,8 @@ export interface SubscriptionPlanFieldRefs {
   readonly canDownload: Prisma.FieldRef<"SubscriptionPlan", 'Boolean'>
   readonly canReadUnreleased: Prisma.FieldRef<"SubscriptionPlan", 'Boolean'>
   readonly hideAds: Prisma.FieldRef<"SubscriptionPlan", 'Boolean'>
+  readonly isPlatform: Prisma.FieldRef<"SubscriptionPlan", 'Boolean'>
+  readonly tier: Prisma.FieldRef<"SubscriptionPlan", 'String'>
 }
     
 

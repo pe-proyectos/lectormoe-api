@@ -34,6 +34,7 @@ export type SubscriptionAvgAggregateOutputType = {
   failedPaymentsCount: number | null
   lastAmount: number | null
   organizationId: number | null
+  originOrganizationId: number | null
 }
 
 export type SubscriptionSumAggregateOutputType = {
@@ -44,6 +45,7 @@ export type SubscriptionSumAggregateOutputType = {
   failedPaymentsCount: number | null
   lastAmount: number | null
   organizationId: number | null
+  originOrganizationId: number | null
 }
 
 export type SubscriptionMinAggregateOutputType = {
@@ -63,6 +65,7 @@ export type SubscriptionMinAggregateOutputType = {
   failedPaymentsCount: number | null
   lastAmount: number | null
   organizationId: number | null
+  originOrganizationId: number | null
 }
 
 export type SubscriptionMaxAggregateOutputType = {
@@ -82,6 +85,7 @@ export type SubscriptionMaxAggregateOutputType = {
   failedPaymentsCount: number | null
   lastAmount: number | null
   organizationId: number | null
+  originOrganizationId: number | null
 }
 
 export type SubscriptionCountAggregateOutputType = {
@@ -101,6 +105,7 @@ export type SubscriptionCountAggregateOutputType = {
   failedPaymentsCount: number
   lastAmount: number
   organizationId: number
+  originOrganizationId: number
   _all: number
 }
 
@@ -113,6 +118,7 @@ export type SubscriptionAvgAggregateInputType = {
   failedPaymentsCount?: true
   lastAmount?: true
   organizationId?: true
+  originOrganizationId?: true
 }
 
 export type SubscriptionSumAggregateInputType = {
@@ -123,6 +129,7 @@ export type SubscriptionSumAggregateInputType = {
   failedPaymentsCount?: true
   lastAmount?: true
   organizationId?: true
+  originOrganizationId?: true
 }
 
 export type SubscriptionMinAggregateInputType = {
@@ -142,6 +149,7 @@ export type SubscriptionMinAggregateInputType = {
   failedPaymentsCount?: true
   lastAmount?: true
   organizationId?: true
+  originOrganizationId?: true
 }
 
 export type SubscriptionMaxAggregateInputType = {
@@ -161,6 +169,7 @@ export type SubscriptionMaxAggregateInputType = {
   failedPaymentsCount?: true
   lastAmount?: true
   organizationId?: true
+  originOrganizationId?: true
 }
 
 export type SubscriptionCountAggregateInputType = {
@@ -180,6 +189,7 @@ export type SubscriptionCountAggregateInputType = {
   failedPaymentsCount?: true
   lastAmount?: true
   organizationId?: true
+  originOrganizationId?: true
   _all?: true
 }
 
@@ -286,6 +296,7 @@ export type SubscriptionGroupByOutputType = {
   failedPaymentsCount: number
   lastAmount: number | null
   organizationId: number | null
+  originOrganizationId: number | null
   _count: SubscriptionCountAggregateOutputType | null
   _avg: SubscriptionAvgAggregateOutputType | null
   _sum: SubscriptionSumAggregateOutputType | null
@@ -328,6 +339,7 @@ export type SubscriptionWhereInput = {
   failedPaymentsCount?: Prisma.IntFilter<"Subscription"> | number
   lastAmount?: Prisma.FloatNullableFilter<"Subscription"> | number | null
   organizationId?: Prisma.IntNullableFilter<"Subscription"> | number | null
+  originOrganizationId?: Prisma.IntNullableFilter<"Subscription"> | number | null
   transactions?: Prisma.OrganizationTransactionListRelationFilter
   organization?: Prisma.XOR<Prisma.OrganizationNullableScalarRelationFilter, Prisma.OrganizationWhereInput> | null
   subscriptionPlan?: Prisma.XOR<Prisma.SubscriptionPlanScalarRelationFilter, Prisma.SubscriptionPlanWhereInput>
@@ -352,6 +364,7 @@ export type SubscriptionOrderByWithRelationInput = {
   failedPaymentsCount?: Prisma.SortOrder
   lastAmount?: Prisma.SortOrderInput | Prisma.SortOrder
   organizationId?: Prisma.SortOrderInput | Prisma.SortOrder
+  originOrganizationId?: Prisma.SortOrderInput | Prisma.SortOrder
   transactions?: Prisma.OrganizationTransactionOrderByRelationAggregateInput
   organization?: Prisma.OrganizationOrderByWithRelationInput
   subscriptionPlan?: Prisma.SubscriptionPlanOrderByWithRelationInput
@@ -379,6 +392,7 @@ export type SubscriptionWhereUniqueInput = Prisma.AtLeast<{
   failedPaymentsCount?: Prisma.IntFilter<"Subscription"> | number
   lastAmount?: Prisma.FloatNullableFilter<"Subscription"> | number | null
   organizationId?: Prisma.IntNullableFilter<"Subscription"> | number | null
+  originOrganizationId?: Prisma.IntNullableFilter<"Subscription"> | number | null
   transactions?: Prisma.OrganizationTransactionListRelationFilter
   organization?: Prisma.XOR<Prisma.OrganizationNullableScalarRelationFilter, Prisma.OrganizationWhereInput> | null
   subscriptionPlan?: Prisma.XOR<Prisma.SubscriptionPlanScalarRelationFilter, Prisma.SubscriptionPlanWhereInput>
@@ -403,6 +417,7 @@ export type SubscriptionOrderByWithAggregationInput = {
   failedPaymentsCount?: Prisma.SortOrder
   lastAmount?: Prisma.SortOrderInput | Prisma.SortOrder
   organizationId?: Prisma.SortOrderInput | Prisma.SortOrder
+  originOrganizationId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.SubscriptionCountOrderByAggregateInput
   _avg?: Prisma.SubscriptionAvgOrderByAggregateInput
   _max?: Prisma.SubscriptionMaxOrderByAggregateInput
@@ -430,6 +445,7 @@ export type SubscriptionScalarWhereWithAggregatesInput = {
   failedPaymentsCount?: Prisma.IntWithAggregatesFilter<"Subscription"> | number
   lastAmount?: Prisma.FloatNullableWithAggregatesFilter<"Subscription"> | number | null
   organizationId?: Prisma.IntNullableWithAggregatesFilter<"Subscription"> | number | null
+  originOrganizationId?: Prisma.IntNullableWithAggregatesFilter<"Subscription"> | number | null
 }
 
 export type SubscriptionCreateInput = {
@@ -445,6 +461,7 @@ export type SubscriptionCreateInput = {
   cycleExecutions?: number
   failedPaymentsCount?: number
   lastAmount?: number | null
+  originOrganizationId?: number | null
   transactions?: Prisma.OrganizationTransactionCreateNestedManyWithoutSubscriptionInput
   organization?: Prisma.OrganizationCreateNestedOneWithoutSubscriptionsInput
   subscriptionPlan: Prisma.SubscriptionPlanCreateNestedOneWithoutSubscriptionsInput
@@ -469,6 +486,7 @@ export type SubscriptionUncheckedCreateInput = {
   failedPaymentsCount?: number
   lastAmount?: number | null
   organizationId?: number | null
+  originOrganizationId?: number | null
   transactions?: Prisma.OrganizationTransactionUncheckedCreateNestedManyWithoutSubscriptionInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubscriptionInput
 }
@@ -486,6 +504,7 @@ export type SubscriptionUpdateInput = {
   cycleExecutions?: Prisma.IntFieldUpdateOperationsInput | number
   failedPaymentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   lastAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  originOrganizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   transactions?: Prisma.OrganizationTransactionUpdateManyWithoutSubscriptionNestedInput
   organization?: Prisma.OrganizationUpdateOneWithoutSubscriptionsNestedInput
   subscriptionPlan?: Prisma.SubscriptionPlanUpdateOneRequiredWithoutSubscriptionsNestedInput
@@ -510,6 +529,7 @@ export type SubscriptionUncheckedUpdateInput = {
   failedPaymentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   lastAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  originOrganizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   transactions?: Prisma.OrganizationTransactionUncheckedUpdateManyWithoutSubscriptionNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubscriptionNestedInput
 }
@@ -531,6 +551,7 @@ export type SubscriptionCreateManyInput = {
   failedPaymentsCount?: number
   lastAmount?: number | null
   organizationId?: number | null
+  originOrganizationId?: number | null
 }
 
 export type SubscriptionUpdateManyMutationInput = {
@@ -546,6 +567,7 @@ export type SubscriptionUpdateManyMutationInput = {
   cycleExecutions?: Prisma.IntFieldUpdateOperationsInput | number
   failedPaymentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   lastAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  originOrganizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type SubscriptionUncheckedUpdateManyInput = {
@@ -565,6 +587,7 @@ export type SubscriptionUncheckedUpdateManyInput = {
   failedPaymentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   lastAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  originOrganizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type SubscriptionListRelationFilter = {
@@ -594,6 +617,7 @@ export type SubscriptionCountOrderByAggregateInput = {
   failedPaymentsCount?: Prisma.SortOrder
   lastAmount?: Prisma.SortOrder
   organizationId?: Prisma.SortOrder
+  originOrganizationId?: Prisma.SortOrder
 }
 
 export type SubscriptionAvgOrderByAggregateInput = {
@@ -604,6 +628,7 @@ export type SubscriptionAvgOrderByAggregateInput = {
   failedPaymentsCount?: Prisma.SortOrder
   lastAmount?: Prisma.SortOrder
   organizationId?: Prisma.SortOrder
+  originOrganizationId?: Prisma.SortOrder
 }
 
 export type SubscriptionMaxOrderByAggregateInput = {
@@ -623,6 +648,7 @@ export type SubscriptionMaxOrderByAggregateInput = {
   failedPaymentsCount?: Prisma.SortOrder
   lastAmount?: Prisma.SortOrder
   organizationId?: Prisma.SortOrder
+  originOrganizationId?: Prisma.SortOrder
 }
 
 export type SubscriptionMinOrderByAggregateInput = {
@@ -642,6 +668,7 @@ export type SubscriptionMinOrderByAggregateInput = {
   failedPaymentsCount?: Prisma.SortOrder
   lastAmount?: Prisma.SortOrder
   organizationId?: Prisma.SortOrder
+  originOrganizationId?: Prisma.SortOrder
 }
 
 export type SubscriptionSumOrderByAggregateInput = {
@@ -652,6 +679,7 @@ export type SubscriptionSumOrderByAggregateInput = {
   failedPaymentsCount?: Prisma.SortOrder
   lastAmount?: Prisma.SortOrder
   organizationId?: Prisma.SortOrder
+  originOrganizationId?: Prisma.SortOrder
 }
 
 export type SubscriptionNullableScalarRelationFilter = {
@@ -830,6 +858,7 @@ export type SubscriptionCreateWithoutOrganizationInput = {
   cycleExecutions?: number
   failedPaymentsCount?: number
   lastAmount?: number | null
+  originOrganizationId?: number | null
   transactions?: Prisma.OrganizationTransactionCreateNestedManyWithoutSubscriptionInput
   subscriptionPlan: Prisma.SubscriptionPlanCreateNestedOneWithoutSubscriptionsInput
   user: Prisma.UserCreateNestedOneWithoutSubscriptionsInput
@@ -852,6 +881,7 @@ export type SubscriptionUncheckedCreateWithoutOrganizationInput = {
   cycleExecutions?: number
   failedPaymentsCount?: number
   lastAmount?: number | null
+  originOrganizationId?: number | null
   transactions?: Prisma.OrganizationTransactionUncheckedCreateNestedManyWithoutSubscriptionInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubscriptionInput
 }
@@ -902,6 +932,7 @@ export type SubscriptionScalarWhereInput = {
   failedPaymentsCount?: Prisma.IntFilter<"Subscription"> | number
   lastAmount?: Prisma.FloatNullableFilter<"Subscription"> | number | null
   organizationId?: Prisma.IntNullableFilter<"Subscription"> | number | null
+  originOrganizationId?: Prisma.IntNullableFilter<"Subscription"> | number | null
 }
 
 export type SubscriptionCreateWithoutUserInput = {
@@ -917,6 +948,7 @@ export type SubscriptionCreateWithoutUserInput = {
   cycleExecutions?: number
   failedPaymentsCount?: number
   lastAmount?: number | null
+  originOrganizationId?: number | null
   transactions?: Prisma.OrganizationTransactionCreateNestedManyWithoutSubscriptionInput
   organization?: Prisma.OrganizationCreateNestedOneWithoutSubscriptionsInput
   subscriptionPlan: Prisma.SubscriptionPlanCreateNestedOneWithoutSubscriptionsInput
@@ -939,6 +971,7 @@ export type SubscriptionUncheckedCreateWithoutUserInput = {
   failedPaymentsCount?: number
   lastAmount?: number | null
   organizationId?: number | null
+  originOrganizationId?: number | null
   transactions?: Prisma.OrganizationTransactionUncheckedCreateNestedManyWithoutSubscriptionInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubscriptionInput
 }
@@ -982,6 +1015,7 @@ export type SubscriptionCreateWithoutSubscriptionPlanInput = {
   cycleExecutions?: number
   failedPaymentsCount?: number
   lastAmount?: number | null
+  originOrganizationId?: number | null
   transactions?: Prisma.OrganizationTransactionCreateNestedManyWithoutSubscriptionInput
   organization?: Prisma.OrganizationCreateNestedOneWithoutSubscriptionsInput
   user: Prisma.UserCreateNestedOneWithoutSubscriptionsInput
@@ -1004,6 +1038,7 @@ export type SubscriptionUncheckedCreateWithoutSubscriptionPlanInput = {
   failedPaymentsCount?: number
   lastAmount?: number | null
   organizationId?: number | null
+  originOrganizationId?: number | null
   transactions?: Prisma.OrganizationTransactionUncheckedCreateNestedManyWithoutSubscriptionInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubscriptionInput
 }
@@ -1047,6 +1082,7 @@ export type SubscriptionCreateWithoutTransactionsInput = {
   cycleExecutions?: number
   failedPaymentsCount?: number
   lastAmount?: number | null
+  originOrganizationId?: number | null
   organization?: Prisma.OrganizationCreateNestedOneWithoutSubscriptionsInput
   subscriptionPlan: Prisma.SubscriptionPlanCreateNestedOneWithoutSubscriptionsInput
   user: Prisma.UserCreateNestedOneWithoutSubscriptionsInput
@@ -1070,6 +1106,7 @@ export type SubscriptionUncheckedCreateWithoutTransactionsInput = {
   failedPaymentsCount?: number
   lastAmount?: number | null
   organizationId?: number | null
+  originOrganizationId?: number | null
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubscriptionInput
 }
 
@@ -1102,6 +1139,7 @@ export type SubscriptionUpdateWithoutTransactionsInput = {
   cycleExecutions?: Prisma.IntFieldUpdateOperationsInput | number
   failedPaymentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   lastAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  originOrganizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   organization?: Prisma.OrganizationUpdateOneWithoutSubscriptionsNestedInput
   subscriptionPlan?: Prisma.SubscriptionPlanUpdateOneRequiredWithoutSubscriptionsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutSubscriptionsNestedInput
@@ -1125,6 +1163,7 @@ export type SubscriptionUncheckedUpdateWithoutTransactionsInput = {
   failedPaymentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   lastAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  originOrganizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubscriptionNestedInput
 }
 
@@ -1141,6 +1180,7 @@ export type SubscriptionCreateWithoutNotificationsInput = {
   cycleExecutions?: number
   failedPaymentsCount?: number
   lastAmount?: number | null
+  originOrganizationId?: number | null
   transactions?: Prisma.OrganizationTransactionCreateNestedManyWithoutSubscriptionInput
   organization?: Prisma.OrganizationCreateNestedOneWithoutSubscriptionsInput
   subscriptionPlan: Prisma.SubscriptionPlanCreateNestedOneWithoutSubscriptionsInput
@@ -1164,6 +1204,7 @@ export type SubscriptionUncheckedCreateWithoutNotificationsInput = {
   failedPaymentsCount?: number
   lastAmount?: number | null
   organizationId?: number | null
+  originOrganizationId?: number | null
   transactions?: Prisma.OrganizationTransactionUncheckedCreateNestedManyWithoutSubscriptionInput
 }
 
@@ -1196,6 +1237,7 @@ export type SubscriptionUpdateWithoutNotificationsInput = {
   cycleExecutions?: Prisma.IntFieldUpdateOperationsInput | number
   failedPaymentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   lastAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  originOrganizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   transactions?: Prisma.OrganizationTransactionUpdateManyWithoutSubscriptionNestedInput
   organization?: Prisma.OrganizationUpdateOneWithoutSubscriptionsNestedInput
   subscriptionPlan?: Prisma.SubscriptionPlanUpdateOneRequiredWithoutSubscriptionsNestedInput
@@ -1219,6 +1261,7 @@ export type SubscriptionUncheckedUpdateWithoutNotificationsInput = {
   failedPaymentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   lastAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  originOrganizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   transactions?: Prisma.OrganizationTransactionUncheckedUpdateManyWithoutSubscriptionNestedInput
 }
 
@@ -1238,6 +1281,7 @@ export type SubscriptionCreateManyOrganizationInput = {
   cycleExecutions?: number
   failedPaymentsCount?: number
   lastAmount?: number | null
+  originOrganizationId?: number | null
 }
 
 export type SubscriptionUpdateWithoutOrganizationInput = {
@@ -1253,6 +1297,7 @@ export type SubscriptionUpdateWithoutOrganizationInput = {
   cycleExecutions?: Prisma.IntFieldUpdateOperationsInput | number
   failedPaymentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   lastAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  originOrganizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   transactions?: Prisma.OrganizationTransactionUpdateManyWithoutSubscriptionNestedInput
   subscriptionPlan?: Prisma.SubscriptionPlanUpdateOneRequiredWithoutSubscriptionsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutSubscriptionsNestedInput
@@ -1275,6 +1320,7 @@ export type SubscriptionUncheckedUpdateWithoutOrganizationInput = {
   cycleExecutions?: Prisma.IntFieldUpdateOperationsInput | number
   failedPaymentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   lastAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  originOrganizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   transactions?: Prisma.OrganizationTransactionUncheckedUpdateManyWithoutSubscriptionNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubscriptionNestedInput
 }
@@ -1295,6 +1341,7 @@ export type SubscriptionUncheckedUpdateManyWithoutOrganizationInput = {
   cycleExecutions?: Prisma.IntFieldUpdateOperationsInput | number
   failedPaymentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   lastAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  originOrganizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type SubscriptionCreateManyUserInput = {
@@ -1313,6 +1360,7 @@ export type SubscriptionCreateManyUserInput = {
   failedPaymentsCount?: number
   lastAmount?: number | null
   organizationId?: number | null
+  originOrganizationId?: number | null
 }
 
 export type SubscriptionUpdateWithoutUserInput = {
@@ -1328,6 +1376,7 @@ export type SubscriptionUpdateWithoutUserInput = {
   cycleExecutions?: Prisma.IntFieldUpdateOperationsInput | number
   failedPaymentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   lastAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  originOrganizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   transactions?: Prisma.OrganizationTransactionUpdateManyWithoutSubscriptionNestedInput
   organization?: Prisma.OrganizationUpdateOneWithoutSubscriptionsNestedInput
   subscriptionPlan?: Prisma.SubscriptionPlanUpdateOneRequiredWithoutSubscriptionsNestedInput
@@ -1350,6 +1399,7 @@ export type SubscriptionUncheckedUpdateWithoutUserInput = {
   failedPaymentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   lastAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  originOrganizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   transactions?: Prisma.OrganizationTransactionUncheckedUpdateManyWithoutSubscriptionNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubscriptionNestedInput
 }
@@ -1370,6 +1420,7 @@ export type SubscriptionUncheckedUpdateManyWithoutUserInput = {
   failedPaymentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   lastAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  originOrganizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type SubscriptionCreateManySubscriptionPlanInput = {
@@ -1388,6 +1439,7 @@ export type SubscriptionCreateManySubscriptionPlanInput = {
   failedPaymentsCount?: number
   lastAmount?: number | null
   organizationId?: number | null
+  originOrganizationId?: number | null
 }
 
 export type SubscriptionUpdateWithoutSubscriptionPlanInput = {
@@ -1403,6 +1455,7 @@ export type SubscriptionUpdateWithoutSubscriptionPlanInput = {
   cycleExecutions?: Prisma.IntFieldUpdateOperationsInput | number
   failedPaymentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   lastAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  originOrganizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   transactions?: Prisma.OrganizationTransactionUpdateManyWithoutSubscriptionNestedInput
   organization?: Prisma.OrganizationUpdateOneWithoutSubscriptionsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutSubscriptionsNestedInput
@@ -1425,6 +1478,7 @@ export type SubscriptionUncheckedUpdateWithoutSubscriptionPlanInput = {
   failedPaymentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   lastAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  originOrganizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   transactions?: Prisma.OrganizationTransactionUncheckedUpdateManyWithoutSubscriptionNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubscriptionNestedInput
 }
@@ -1445,6 +1499,7 @@ export type SubscriptionUncheckedUpdateManyWithoutSubscriptionPlanInput = {
   failedPaymentsCount?: Prisma.IntFieldUpdateOperationsInput | number
   lastAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   organizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  originOrganizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 
@@ -1504,6 +1559,7 @@ export type SubscriptionSelect<ExtArgs extends runtime.Types.Extensions.Internal
   failedPaymentsCount?: boolean
   lastAmount?: boolean
   organizationId?: boolean
+  originOrganizationId?: boolean
   transactions?: boolean | Prisma.Subscription$transactionsArgs<ExtArgs>
   organization?: boolean | Prisma.Subscription$organizationArgs<ExtArgs>
   subscriptionPlan?: boolean | Prisma.SubscriptionPlanDefaultArgs<ExtArgs>
@@ -1529,6 +1585,7 @@ export type SubscriptionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   failedPaymentsCount?: boolean
   lastAmount?: boolean
   organizationId?: boolean
+  originOrganizationId?: boolean
   organization?: boolean | Prisma.Subscription$organizationArgs<ExtArgs>
   subscriptionPlan?: boolean | Prisma.SubscriptionPlanDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1551,6 +1608,7 @@ export type SubscriptionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   failedPaymentsCount?: boolean
   lastAmount?: boolean
   organizationId?: boolean
+  originOrganizationId?: boolean
   organization?: boolean | Prisma.Subscription$organizationArgs<ExtArgs>
   subscriptionPlan?: boolean | Prisma.SubscriptionPlanDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1573,9 +1631,10 @@ export type SubscriptionSelectScalar = {
   failedPaymentsCount?: boolean
   lastAmount?: boolean
   organizationId?: boolean
+  originOrganizationId?: boolean
 }
 
-export type SubscriptionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "subscriptionPlanId" | "status" | "startDate" | "endDate" | "lastPayment" | "createdAt" | "updatedAt" | "paypalSubscriptionId" | "active" | "nextPayment" | "cycleExecutions" | "failedPaymentsCount" | "lastAmount" | "organizationId", ExtArgs["result"]["subscription"]>
+export type SubscriptionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "subscriptionPlanId" | "status" | "startDate" | "endDate" | "lastPayment" | "createdAt" | "updatedAt" | "paypalSubscriptionId" | "active" | "nextPayment" | "cycleExecutions" | "failedPaymentsCount" | "lastAmount" | "organizationId" | "originOrganizationId", ExtArgs["result"]["subscription"]>
 export type SubscriptionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   transactions?: boolean | Prisma.Subscription$transactionsArgs<ExtArgs>
   organization?: boolean | Prisma.Subscription$organizationArgs<ExtArgs>
@@ -1621,6 +1680,7 @@ export type $SubscriptionPayload<ExtArgs extends runtime.Types.Extensions.Intern
     failedPaymentsCount: number
     lastAmount: number | null
     organizationId: number | null
+    originOrganizationId: number | null
   }, ExtArgs["result"]["subscription"]>
   composites: {}
 }
@@ -2065,6 +2125,7 @@ export interface SubscriptionFieldRefs {
   readonly failedPaymentsCount: Prisma.FieldRef<"Subscription", 'Int'>
   readonly lastAmount: Prisma.FieldRef<"Subscription", 'Float'>
   readonly organizationId: Prisma.FieldRef<"Subscription", 'Int'>
+  readonly originOrganizationId: Prisma.FieldRef<"Subscription", 'Int'>
 }
     
 

@@ -1051,6 +1051,12 @@ model SubscriptionPlan {
   canDownload                   Boolean        @default(false)
   canReadUnreleased             Boolean        @default(false)
   hideAds                       Boolean        @default(false)
+  // Suscripcion Capibara (plataforma): true en los planes globales, que
+  // pertenecen a la organizacion interna `capibara`. Los planes por scan
+  // (legacy) quedan en false.
+  isPlatform                    Boolean        @default(false)
+  // Nivel del plan de plataforma: 'lector' | 'plus' | 'premium'.
+  tier                          String?        @db.VarChar(16)
   subscriptions                 Subscription[]
   organization                  Organization   @relation(fields: [organizationId], references: [id])
   mangaCustomsCanReadReleased   MangaCustom[]  @relation("MangaCustomToSubscriptionPlanCanReadReleased")
@@ -1077,6 +1083,9 @@ model Subscription {
   failedPaymentsCount  Int                       @default(0)
   lastAmount           Float?
   organizationId       Int?
+  // Suscripcion Capibara: scan desde cuya pagina se suscribio. Se lleva el 25%
+  // de origen de cada pago. Null si se suscribio desde la pagina general.
+  originOrganizationId Int?
   transactions         OrganizationTransaction[]
   organization         Organization?             @relation(fields: [organizationId], references: [id])
   subscriptionPlan     SubscriptionPlan          @relation(fields: [subscriptionPlanId], references: [id])
@@ -1630,3 +1639,28 @@ model PostPollVote {
   @@map("post_poll_vote")
 }
 
+
+
+// Pago de una suscripcion Capibara (plataforma). Cada cobro de PayPal se parte:
+// 50% Capibara (de ahi sale la comision de PayPal), 25% para el scan de origen
+// (se abona al registrarlo) y 25% por lectura, que se reparte una vez al mes
+// segun lo que leyo ese suscriptor. Esta tabla guarda cada cobro para poder
+// hacer ese reparto mensual sin volver a preguntar a PayPal.
+model PlatformPayment {
+  id                   Int       @id @default(autoincrement())
+  subscriptionId       Int
+  userId               Int
+  paypalTransactionId  String    @unique @db.VarChar(64)
+  gross                Float
+  paypalFee            Float     @default(0)
+  currency             String    @default("USD") @db.VarChar(10)
+  originOrganizationId Int?
+  paidAt               DateTime  @db.Timestamp(6)
+  // Mes en que se repartio el 25% por lectura. Null = pendiente.
+  readingDistributedAt DateTime? @db.Timestamp(6)
+  createdAt            DateTime  @default(now()) @db.Timestamp(6)
+
+  @@index([paidAt])
+  @@index([userId])
+  @@map("platform_payment")
+}

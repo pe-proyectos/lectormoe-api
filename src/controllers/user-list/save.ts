@@ -1,19 +1,16 @@
 import { prisma } from "../../models/prisma";
+import { limitesDeUsuario } from "../../util/capibara-plans";
 
-const FREE_LIST_LIMIT = 50;
-
+// El tope depende del nivel del usuario (ver util/capibara-plans). Solo se
+// comprueba al AÑADIR: quien ya lo supera conserva todo y puede quitar.
 async function enforceLimit(userId: number) {
-	const hasActiveSubscription = await prisma.subscription.findFirst({
-		where: { userId, active: true },
-		select: { id: true },
-	});
-	if (!hasActiveSubscription) {
-		const currentCount = await prisma.userList.count({ where: { userId } });
-		if (currentCount >= FREE_LIST_LIMIT) {
-			throw new Error(
-				`Has alcanzado el límite de ${FREE_LIST_LIMIT} mangas en tu lista del plan gratuito. Suscríbete para tener una lista ilimitada.`,
-			);
-		}
+	const { miLista } = await limitesDeUsuario(userId);
+	if (miLista === null) return;
+	const currentCount = await prisma.userList.count({ where: { userId } });
+	if (currentCount >= miLista) {
+		throw new Error(
+			`Has alcanzado el límite de ${miLista} obras en tu lista. Mejora tu plan para guardar más.`,
+		);
 	}
 }
 

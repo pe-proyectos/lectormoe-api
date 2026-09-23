@@ -18,6 +18,9 @@ import {
   setUserHideAds
 } from '../../controllers/superadmin/users'
 import { prisma } from '../../models/prisma'
+import { asegurarPlanesCapibara } from '../../services/capibara-bootstrap'
+import { repartirLecturaDelMes, sincronizarPagosPlataforma } from '../../services/capibara-reparto'
+import { LANZADO } from '../../util/capibara-plans'
 import {
   getSuperadminSecret,
   superadminAuth
@@ -436,6 +439,44 @@ export const router = () =>
       { params: t.Object({ id: t.String() }) }
     )
     // ── Verificadores de Google Play (closed testing) ───────────────────────
+    // ── Suscripcion Capibara ─────────────────────────────────────────────────
+    // Crea en PayPal y en la base de datos lo que falte (idempotente).
+    .post('/api/superadmin/capibara/bootstrap', async () => {
+      const r = await asegurarPlanesCapibara()
+      return { status: true, data: r }
+    })
+    .post('/api/superadmin/capibara/sync', async () => {
+      const r = await sincronizarPagosPlataforma()
+      return { status: true, data: r }
+    })
+    // Reparte el 25% por lectura de un mes (1-12). Solo toca cobros pendientes.
+    .post(
+      '/api/superadmin/capibara/reparto',
+      async ({ body }) => {
+        const r = await repartirLecturaDelMes(body.year, body.month - 1)
+        return { status: true, data: r }
+      },
+      { body: t.Object({ year: t.Number(), month: t.Number() }) }
+    )
+    .get('/api/superadmin/capibara/estado', async () => {
+      const planes = await prisma.subscriptionPlan.findMany({
+        where: { isPlatform: true },
+        select: {
+          id: true, slug: true, name: true, tier: true, interval: true, price: true, active: true,
+          _count: { select: { subscriptions: { where: { active: true } } } },
+        },
+        orderBy: [{ price: 'asc' }],
+      })
+      const [pagos] = await prisma.$queryRaw<any[]>`
+        SELECT count(*)::int cobros, coalesce(sum(gross),0)::float bruto,
+               coalesce(sum("paypalFee"),0)::float comisiones,
+               count(*) FILTER (WHERE "readingDistributedAt" IS NULL)::int pendientes
+        FROM platform_payment`
+      const legacyActivas = await prisma.subscription.count({
+        where: { active: true, subscriptionPlan: { isPlatform: false } },
+      })
+      return { status: true, data: { lanzado: LANZADO, planes, pagos, legacyActivas } }
+    })
     .get('/api/superadmin/beta-testers', async () => {
       const testers = await prisma.betaTester.findMany({
         orderBy: [{ status: 'asc' }, { createdAt: 'asc' }],

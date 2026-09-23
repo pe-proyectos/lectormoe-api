@@ -367,3 +367,8 @@ export type PostPoll = Prisma.PostPollModel
  * 
  */
 export type PostPollVote = Prisma.PostPollVoteModel
+/**
+ * Model PlatformPayment
+ * 
+ */
+export type PlatformPayment = Prisma.PlatformPaymentModel

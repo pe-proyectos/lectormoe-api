@@ -120,7 +120,8 @@ export const ModelName = {
   UserBlock: 'UserBlock',
   UserMute: 'UserMute',
   PostPoll: 'PostPoll',
-  PostPollVote: 'PostPollVote'
+  PostPollVote: 'PostPollVote',
+  PlatformPayment: 'PlatformPayment'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -907,7 +908,9 @@ export const SubscriptionPlanScalarFieldEnum = {
   active: 'active',
   canDownload: 'canDownload',
   canReadUnreleased: 'canReadUnreleased',
-  hideAds: 'hideAds'
+  hideAds: 'hideAds',
+  isPlatform: 'isPlatform',
+  tier: 'tier'
 } as const
 
 export type SubscriptionPlanScalarFieldEnum = (typeof SubscriptionPlanScalarFieldEnum)[keyof typeof SubscriptionPlanScalarFieldEnum]
@@ -929,7 +932,8 @@ export const SubscriptionScalarFieldEnum = {
   cycleExecutions: 'cycleExecutions',
   failedPaymentsCount: 'failedPaymentsCount',
   lastAmount: 'lastAmount',
-  organizationId: 'organizationId'
+  organizationId: 'organizationId',
+  originOrganizationId: 'originOrganizationId'
 } as const
 
 export type SubscriptionScalarFieldEnum = (typeof SubscriptionScalarFieldEnum)[keyof typeof SubscriptionScalarFieldEnum]
@@ -1341,6 +1345,23 @@ export const PostPollVoteScalarFieldEnum = {
 } as const
 
 export type PostPollVoteScalarFieldEnum = (typeof PostPollVoteScalarFieldEnum)[keyof typeof PostPollVoteScalarFieldEnum]
+
+
+export const PlatformPaymentScalarFieldEnum = {
+  id: 'id',
+  subscriptionId: 'subscriptionId',
+  userId: 'userId',
+  paypalTransactionId: 'paypalTransactionId',
+  gross: 'gross',
+  paypalFee: 'paypalFee',
+  currency: 'currency',
+  originOrganizationId: 'originOrganizationId',
+  paidAt: 'paidAt',
+  readingDistributedAt: 'readingDistributedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type PlatformPaymentScalarFieldEnum = (typeof PlatformPaymentScalarFieldEnum)[keyof typeof PlatformPaymentScalarFieldEnum]
 
 
 export const SortOrder = {

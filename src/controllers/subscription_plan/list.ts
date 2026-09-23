@@ -1,5 +1,6 @@
 import { prisma, Prisma } from "../../models/prisma";
 import { type SubscriptionPlanListQuery } from "../../types/subscription_plan/list";
+import { LANZADO } from "../../util/capibara-plans";
 
 const prepareSubscriptionPlan = (subscriptionPlan: any) => {
 	return {
@@ -31,6 +32,16 @@ export const listSubscriptionPlans = async (organizationId: number | null, filte
 	const activeFilter = String(filters?.active ?? 'true').toLowerCase();
 	if (activeFilter !== 'all') {
 		whereClause.active = activeFilter !== 'false';
+	}
+
+	// Este endpoint es el de los planes POR SCAN (legacy). Los de plataforma
+	// tienen el suyo (/api/capibara-plans) y no se mezclan aqui.
+	whereClause.isPlatform = false;
+
+	// Tras el lanzamiento, el publico ya no ve planes por scan: no admiten
+	// altas nuevas. El panel (active=all) los sigue viendo para gestionarlos.
+	if (LANZADO && activeFilter !== 'all') {
+		return { data: [], maxPage: 0, total: 0 };
 	}
 
 	const subscriptionPlans = await prisma.subscriptionPlan.findMany({
@@ -81,6 +92,7 @@ export const listSubscriptionPlans = async (organizationId: number | null, filte
 	if (activeFilter !== 'all') {
 		countWhereClause.active = activeFilter !== 'false';
 	}
+	countWhereClause.isPlatform = false;
 
 	const total = await prisma.subscriptionPlan.count({
 		where: countWhereClause,

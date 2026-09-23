@@ -1,4 +1,5 @@
 import { prisma } from "../../models/prisma";
+import { LANZADO, limitesParaNivel, nivelDesdeSuscripciones } from "../../util/capibara-plans";
 
 export const checkToken = async (
   organizationId: number | null,
@@ -34,6 +35,8 @@ export const checkToken = async (
             canDownload: true,
             canReadUnreleased: true,
             active: true,
+            isPlatform: true,
+            tier: true,
           },
         },
       },
@@ -74,6 +77,15 @@ export const checkToken = async (
       (user as any).subscriptions = [];
     }
   }
+
+  // Suscripcion Capibara: nivel efectivo y limites vigentes, para que el
+  // frontend no tenga que recalcularlos (descargas offline, pagina de planes).
+  const nivel = nivelDesdeSuscripciones((user as any).subscriptions || []);
+  (user as any).capibara = {
+    nivel,
+    limites: limitesParaNivel(nivel),
+    lanzado: LANZADO,
+  };
 
   return user;
 };

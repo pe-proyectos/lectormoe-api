@@ -18,10 +18,9 @@ export const router = () => new Elysia()
             if (!user) {
                 throw new Error("Debes iniciar sesion para suscribirte.");
             }
-            if (!organizationId) {
-                throw new Error("No se pudo identificar el scan.");
-            }
-            const subscription = await createSubscription(organizationId, user.id, body);
+            // El scan es opcional: los planes Capibara se pueden contratar desde
+            // la pagina general. El controlador exige scan solo a los legacy.
+            const subscription = await createSubscription(organizationId ?? null, user.id, body);
 
             if (!subscription) {
                 throw new Error("No se pudo crear la suscripción.");

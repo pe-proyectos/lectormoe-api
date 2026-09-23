@@ -26,6 +26,24 @@ type MangaCustomWithPlans = Pick<MangaCustom, "id" | "requireLogin"> & {
 };
 
 /**
+ * ¿Tiene el usuario una suscripcion Capibara de nivel Premium vigente?
+ * Se consulta el plan en la base de datos en vez de fiarse del objeto que
+ * llega, igual que el resto de comprobaciones de este archivo.
+ */
+async function tienePremiumPlataforma(user: Partial<UserWithSubscriptions>): Promise<boolean> {
+  const ids = (user?.subscriptions || [])
+    .filter((s) => s.active !== false && !(s.endDate && new Date(s.endDate) < new Date()))
+    .map((s) => s.subscriptionPlan?.id)
+    .filter((id): id is number => typeof id === "number");
+  if (ids.length === 0) return false;
+  const premium = await prisma.subscriptionPlan.findFirst({
+    where: { id: { in: ids }, isPlatform: true, tier: "premium", active: true },
+    select: { id: true },
+  });
+  return !!premium;
+}
+
+/**
  * Verifica si un usuario tiene acceso para leer un capítulo específico
  *
  * @param user - Usuario (puede ser null si no está logueado)
@@ -61,6 +79,12 @@ const userHasAccessToChapter = async (
   if (permissions?.canReadUnreleased === true) return true;
   if (permissions?.canEditChapter === true) return true;
   if (permissions?.canEditPage === true) return true;
+
+  // 2b. Suscripcion Capibara Premium: abre el contenido de pago de TODOS los
+  // scans, tanto los capitulos anticipados como los publicados exclusivos para
+  // planes. Lo segundo es necesario: al cerrarse las altas de planes por scan,
+  // ese contenido quedaria inaccesible para cualquier lector nuevo.
+  if (user && (await tienePremiumPlataforma(user))) return true;
 
   const mangaWithPlans = manga as MangaCustomWithPlans;
   const isChapterReleased = chapter.releasedAt

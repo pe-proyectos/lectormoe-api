@@ -1,5 +1,5 @@
 import { prisma } from '../../models/prisma'
-import { FREE_FAVORITES_LIMIT, FREE_FAVORITES_LIMIT_MESSAGE } from './constants'
+import { limitesDeUsuario } from '../../util/capibara-plans'
 
 export const saveJointFavorite = async (userId: number, jointSlug: string) => {
   const joint = await prisma.mangaJoint.findFirst({
@@ -15,16 +15,12 @@ export const saveJointFavorite = async (userId: number, jointSlug: string) => {
 
   if (existing) return true
 
-  // Gratis: FREE_FAVORITES_LIMIT. Suscriptores activos: ilimitado.
-  const hasActiveSubscription = await prisma.subscription.findFirst({
-    where: { userId, active: true },
-    select: { id: true }
-  })
-
-  if (!hasActiveSubscription) {
+  // Mismo tope que los favoritos de manga: depende del nivel del usuario.
+  const { favoritos } = await limitesDeUsuario(userId)
+  if (favoritos !== null) {
     const currentCount = await prisma.favorite.count({ where: { userId } })
-    if (currentCount >= FREE_FAVORITES_LIMIT) {
-      throw new Error(FREE_FAVORITES_LIMIT_MESSAGE)
+    if (currentCount >= favoritos) {
+      throw new Error(`Has alcanzado el límite de ${favoritos} favoritos. Mejora tu plan para guardar más.`)
     }
   }
 

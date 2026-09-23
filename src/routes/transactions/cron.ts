@@ -23,7 +23,10 @@ async function calculateTransactions() {
         const subscriptions = await prisma.subscription.findMany({
           where: {
             subscriptionPlan: {
-              organizationId: organization.id
+              organizationId: organization.id,
+              // Los planes Capibara tienen su propio reparto (50/25/25) en
+              // services/capibara-reparto: este cron es solo para legacy.
+              isPlatform: false
             },
             active: true
           },
