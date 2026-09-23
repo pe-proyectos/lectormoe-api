@@ -10,9 +10,6 @@ import {
   nivelDesdeSuscripciones,
 } from '../../util/capibara-plans'
 import { wrapCron } from '../../util/cron-alert'
-import { getSubscriptionByPaypalId, reviseSubscription } from '../../util/paypal'
-
-const SITIO = Bun.env.PUBLIC_SITE_URL || 'https://capibaratraductor.com'
 
 /** Suscripcion Capibara activa del usuario, si tiene. */
 async function subPlataformaActiva(userId: number) {
@@ -59,58 +56,6 @@ export const router = () =>
         }
       },
       { query: t.Optional(t.Object({ preview: t.Optional(t.String()) })) }
-    )
-
-    // Cambiar de plan Capibara (subir o bajar). Devuelve el enlace de
-    // aprobacion de PayPal cuando hace falta; si no, el cambio ya queda hecho.
-    .post(
-      '/api/capibara-plans/change',
-      async ({ user, body }) => {
-        if (!user) throw new Error('Debes iniciar sesión.')
-        const actual = await subPlataformaActiva(user.id)
-        if (!actual) throw new Error('No tienes un plan Capibara activo.')
-        const destino = await prisma.subscriptionPlan.findFirst({
-          where: { id: body.planId, isPlatform: true, active: true },
-        })
-        if (!destino) throw new Error('Ese plan no existe.')
-        if (destino.id === actual.subscriptionPlanId) throw new Error('Ya tienes ese plan.')
-
-        const vuelta = `${SITIO}${body.returnPath || '/subscriptions'}`
-        const sep = vuelta.includes('?') ? '&' : '?'
-        const { approveUrl } = await reviseSubscription(
-          actual.paypalSubscriptionId,
-          destino.planId,
-          `${vuelta}${sep}cambio=ok&plan=${destino.id}`,
-          `${vuelta}${sep}cambio=cancelado`
-        )
-        if (approveUrl) return { status: true, data: { approveUrl } }
-
-        await prisma.subscription.update({ where: { id: actual.id }, data: { subscriptionPlanId: destino.id } })
-        return { status: true, data: { approveUrl: null, cambiado: true } }
-      },
-      { body: t.Object({ planId: t.Number(), returnPath: t.Optional(t.String()) }) }
-    )
-
-    // Vuelta de PayPal tras aprobar el cambio. No se fia del parametro: comprueba
-    // en PayPal que la suscripcion ya esta en el plan nuevo antes de aplicarlo.
-    .post(
-      '/api/capibara-plans/change/confirm',
-      async ({ user, body }) => {
-        if (!user) throw new Error('Debes iniciar sesión.')
-        const actual = await subPlataformaActiva(user.id)
-        if (!actual) throw new Error('No tienes un plan Capibara activo.')
-        const destino = await prisma.subscriptionPlan.findFirst({
-          where: { id: body.planId, isPlatform: true },
-        })
-        if (!destino) throw new Error('Ese plan no existe.')
-        const enPaypal = await getSubscriptionByPaypalId(actual.paypalSubscriptionId)
-        if (enPaypal?.plan_id !== destino.planId) {
-          return { status: false, message: 'PayPal aún no confirma el cambio. Vuelve a intentarlo en unos minutos.' }
-        }
-        await prisma.subscription.update({ where: { id: actual.id }, data: { subscriptionPlanId: destino.id } })
-        return { status: true, data: { cambiado: true } }
-      },
-      { body: t.Object({ planId: t.Number() }) }
     )
 
     .use(

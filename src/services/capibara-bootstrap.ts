@@ -23,17 +23,6 @@ export async function asegurarPlanesCapibara() {
     })
   }
 
-  // Reutiliza el producto de PayPal si ya hay algun plan creado.
-  const existente = await prisma.subscriptionPlan.findFirst({
-    where: { organizationId: plataforma.id, isPlatform: true },
-    select: { productId: true },
-  })
-  let productId = existente?.productId
-  if (!productId) {
-    const producto = await createProduct('Suscripción Capibara', 'Acceso a CapibaraTraductor en todos los scans')
-    productId = producto.id as string
-  }
-
   const creados: string[] = []
   const existian: string[] = []
   for (const t of TIERS) {
@@ -46,8 +35,13 @@ export async function asegurarPlanesCapibara() {
       }
       const precio = intervalo === 'YEAR' ? t.anual : t.mensual
       const nombre = `Capibara ${t.nombre}${intervalo === 'YEAR' ? ' anual' : ''}`
+      // Un producto de PayPal por plan: subscription_plan.productId es unico
+      // (igual que en los planes por scan). Compartir uno hacia fallar el
+      // segundo alta.
+      const producto = await createProduct(nombre, nombre)
+      const productId = producto.id as string
       const plan = await createPlan({
-        productId: productId!,
+        productId,
         name: nombre,
         description: nombre,
         price: precio,
@@ -63,7 +57,7 @@ export async function asegurarPlanesCapibara() {
           price: precio,
           interval: intervalo,
           currency: 'USD',
-          productId: productId!,
+          productId,
           planId: plan.id,
           active: true,
           isPlatform: true,
@@ -76,5 +70,5 @@ export async function asegurarPlanesCapibara() {
       creados.push(slug)
     }
   }
-  return { organizacionId: plataforma.id, productId, creados, existian }
+  return { organizacionId: plataforma.id, creados, existian }
 }
