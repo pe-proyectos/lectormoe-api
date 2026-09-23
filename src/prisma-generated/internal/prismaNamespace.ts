@@ -454,7 +454,8 @@ export const ModelName = {
   UserMute: 'UserMute',
   PostPoll: 'PostPoll',
   PostPollVote: 'PostPollVote',
-  PlatformPayment: 'PlatformPayment'
+  PlatformPayment: 'PlatformPayment',
+  PlatformPaymentDistribution: 'PlatformPaymentDistribution'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -470,7 +471,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "token" | "organization" | "recruitmentPost" | "organizationPost" | "organizationPostLike" | "organizationPostSave" | "organizationPostHashtag" | "organizationRecommendation" | "user" | "betaTester" | "moderationLog" | "permission" | "passwordResetToken" | "countryOptions" | "author" | "bookType" | "manga" | "mangaCustom" | "chapter" | "organizationMessageThread" | "organizationMessage" | "customList" | "customListFollower" | "customListFollowerItem" | "customListItem" | "contentReport" | "mangaReview" | "chapterMilestoneAlert" | "mangaVolume" | "chapterReaction" | "page" | "comment" | "commentLike" | "ranking" | "demography" | "genre" | "analytics" | "userChapterHistory" | "favorite" | "userList" | "userPageBookmark" | "audit" | "viewsHistory" | "subscriptionPlan" | "subscription" | "organizationTransaction" | "organizationFollower" | "organizationRequest" | "emailPreference" | "emailLog" | "unsubscribeToken" | "emailVerificationToken" | "userSavedQuote" | "userDailyActivity" | "achievement" | "userAchievement" | "mangaJoint" | "jointMember" | "jointMemberHistory" | "notification" | "raffle" | "raffleTicket" | "raffleComment" | "raffleRefund" | "userBan" | "userFollow" | "userBlock" | "userMute" | "postPoll" | "postPollVote" | "platformPayment"
+    modelProps: "token" | "organization" | "recruitmentPost" | "organizationPost" | "organizationPostLike" | "organizationPostSave" | "organizationPostHashtag" | "organizationRecommendation" | "user" | "betaTester" | "moderationLog" | "permission" | "passwordResetToken" | "countryOptions" | "author" | "bookType" | "manga" | "mangaCustom" | "chapter" | "organizationMessageThread" | "organizationMessage" | "customList" | "customListFollower" | "customListFollowerItem" | "customListItem" | "contentReport" | "mangaReview" | "chapterMilestoneAlert" | "mangaVolume" | "chapterReaction" | "page" | "comment" | "commentLike" | "ranking" | "demography" | "genre" | "analytics" | "userChapterHistory" | "favorite" | "userList" | "userPageBookmark" | "audit" | "viewsHistory" | "subscriptionPlan" | "subscription" | "organizationTransaction" | "organizationFollower" | "organizationRequest" | "emailPreference" | "emailLog" | "unsubscribeToken" | "emailVerificationToken" | "userSavedQuote" | "userDailyActivity" | "achievement" | "userAchievement" | "mangaJoint" | "jointMember" | "jointMemberHistory" | "notification" | "raffle" | "raffleTicket" | "raffleComment" | "raffleRefund" | "userBan" | "userFollow" | "userBlock" | "userMute" | "postPoll" | "postPollVote" | "platformPayment" | "platformPaymentDistribution"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -5728,6 +5729,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    PlatformPaymentDistribution: {
+      payload: Prisma.$PlatformPaymentDistributionPayload<ExtArgs>
+      fields: Prisma.PlatformPaymentDistributionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PlatformPaymentDistributionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlatformPaymentDistributionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PlatformPaymentDistributionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlatformPaymentDistributionPayload>
+        }
+        findFirst: {
+          args: Prisma.PlatformPaymentDistributionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlatformPaymentDistributionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PlatformPaymentDistributionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlatformPaymentDistributionPayload>
+        }
+        findMany: {
+          args: Prisma.PlatformPaymentDistributionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlatformPaymentDistributionPayload>[]
+        }
+        create: {
+          args: Prisma.PlatformPaymentDistributionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlatformPaymentDistributionPayload>
+        }
+        createMany: {
+          args: Prisma.PlatformPaymentDistributionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PlatformPaymentDistributionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlatformPaymentDistributionPayload>[]
+        }
+        delete: {
+          args: Prisma.PlatformPaymentDistributionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlatformPaymentDistributionPayload>
+        }
+        update: {
+          args: Prisma.PlatformPaymentDistributionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlatformPaymentDistributionPayload>
+        }
+        deleteMany: {
+          args: Prisma.PlatformPaymentDistributionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PlatformPaymentDistributionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PlatformPaymentDistributionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlatformPaymentDistributionPayload>[]
+        }
+        upsert: {
+          args: Prisma.PlatformPaymentDistributionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlatformPaymentDistributionPayload>
+        }
+        aggregate: {
+          args: Prisma.PlatformPaymentDistributionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePlatformPaymentDistribution>
+        }
+        groupBy: {
+          args: Prisma.PlatformPaymentDistributionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PlatformPaymentDistributionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PlatformPaymentDistributionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PlatformPaymentDistributionCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -6984,11 +7059,25 @@ export const PlatformPaymentScalarFieldEnum = {
   currency: 'currency',
   originOrganizationId: 'originOrganizationId',
   paidAt: 'paidAt',
+  months: 'months',
+  originCredited: 'originCredited',
+  refundedAt: 'refundedAt',
   readingDistributedAt: 'readingDistributedAt',
   createdAt: 'createdAt'
 } as const
 
 export type PlatformPaymentScalarFieldEnum = (typeof PlatformPaymentScalarFieldEnum)[keyof typeof PlatformPaymentScalarFieldEnum]
+
+
+export const PlatformPaymentDistributionScalarFieldEnum = {
+  id: 'id',
+  paymentId: 'paymentId',
+  month: 'month',
+  allocations: 'allocations',
+  createdAt: 'createdAt'
+} as const
+
+export type PlatformPaymentDistributionScalarFieldEnum = (typeof PlatformPaymentDistributionScalarFieldEnum)[keyof typeof PlatformPaymentDistributionScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -7329,6 +7418,7 @@ export type GlobalOmitConfig = {
   postPoll?: Prisma.PostPollOmit
   postPollVote?: Prisma.PostPollVoteOmit
   platformPayment?: Prisma.PlatformPaymentOmit
+  platformPaymentDistribution?: Prisma.PlatformPaymentDistributionOmit
 }
 
 /* Types for Logging */

@@ -94,10 +94,14 @@ export const reconcileTransactionsForSubscription = async (subscriptionId: numbe
       id: true,
       organizationId: true,
       paypalSubscriptionId: true,
-      subscriptionPlan: { select: { name: true } },
+      subscriptionPlan: { select: { name: true, isPlatform: true } },
     },
   });
   if (!sub || !sub.paypalSubscriptionId || !sub.organizationId) return { inserted: 0, skipped: 0 };
+  // Suscripcion Capibara: sus cobros los registra services/capibara-reparto con
+  // el reparto 50/25/25. Crear aqui el 50% legacy lo abonaria a la organizacion
+  // interna `capibara` como si se le debiera.
+  if (sub.subscriptionPlan?.isPlatform) return { inserted: 0, skipped: 0 };
 
   let txs: any[] = [];
   try {

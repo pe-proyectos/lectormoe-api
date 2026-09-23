@@ -30,7 +30,7 @@ type MangaCustomWithPlans = Pick<MangaCustom, "id" | "requireLogin"> & {
  * Se consulta el plan en la base de datos en vez de fiarse del objeto que
  * llega, igual que el resto de comprobaciones de este archivo.
  */
-async function tienePremiumPlataforma(user: Partial<UserWithSubscriptions>): Promise<boolean> {
+export async function tienePremiumPlataforma(user: Partial<UserWithSubscriptions>): Promise<boolean> {
   const ids = (user?.subscriptions || [])
     .filter((s) => s.active !== false && !(s.endDate && new Date(s.endDate) < new Date()))
     .map((s) => s.subscriptionPlan?.id)

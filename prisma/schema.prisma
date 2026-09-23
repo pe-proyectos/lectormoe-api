@@ -1656,11 +1656,36 @@ model PlatformPayment {
   currency             String    @default("USD") @db.VarChar(10)
   originOrganizationId Int?
   paidAt               DateTime  @db.Timestamp(6)
-  // Mes en que se repartio el 25% por lectura. Null = pendiente.
+  // Meses que cubre el cobro: 1 (mensual) o 12 (anual). El 25% por lectura de
+  // un anual se reparte en 12 partes, una por mes, segun lo leido ese mes.
+  months               Int       @default(1)
+  // Lo abonado al scan de origen, para poder revertirlo si hay reembolso.
+  originCredited       Float     @default(0)
+  // Fecha del reembolso (o contracargo) si lo hubo: se revierte lo abonado y
+  // los meses pendientes de un anual ya no se reparten.
+  refundedAt           DateTime? @db.Timestamp(6)
+  // En desuso: el reparto se registra por mes en PlatformPaymentDistribution.
   readingDistributedAt DateTime? @db.Timestamp(6)
   createdAt            DateTime  @default(now()) @db.Timestamp(6)
+  distributions        PlatformPaymentDistribution[]
 
   @@index([paidAt])
   @@index([userId])
   @@map("platform_payment")
+}
+
+// Reparto del 25% por lectura de un cobro en un mes concreto. Guarda cuanto se
+// llevo cada scan para poder revertirlo exactamente si hay un reembolso.
+model PlatformPaymentDistribution {
+  id          Int             @id @default(autoincrement())
+  paymentId   Int
+  payment     PlatformPayment @relation(fields: [paymentId], references: [id])
+  month       String          @db.VarChar(7) // YYYY-MM
+  // { "<organizationId>": importe } ; la clave "capibara" = no leyo nada y no
+  // tenia origen, asi que se quedo en la plataforma.
+  allocations Json
+  createdAt   DateTime        @default(now()) @db.Timestamp(6)
+
+  @@unique([paymentId, month])
+  @@map("platform_payment_distribution")
 }

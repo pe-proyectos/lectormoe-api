@@ -314,11 +314,21 @@ export const notifyNewManga = async (
 // Fan-out: org staff (Permission.canSeeAdminPanel = true) get notified about
 // a new active subscriber.
 export const notifyNewSubscriber = async (subscriptionId: number) => {
-  const subscription = await prisma.subscription.findUnique({
+  const sub = await prisma.subscription.findUnique({
     where: { id: subscriptionId },
-    select: { id: true, organizationId: true }
+    select: {
+      id: true,
+      organizationId: true,
+      originOrganizationId: true,
+      subscriptionPlan: { select: { isPlatform: true } }
+    }
   })
-  if (!subscription || !subscription.organizationId) return
+  if (!sub) return
+  // Suscripcion Capibara: se avisa al scan desde cuya pagina se suscribio (el
+  // que se lleva el 25% de origen). Sin origen no hay staff al que avisar.
+  const orgId = sub.subscriptionPlan?.isPlatform ? sub.originOrganizationId : sub.organizationId
+  if (!orgId) return
+  const subscription = { id: sub.id, organizationId: orgId }
 
   const staff = await prisma.permission.findMany({
     where: {

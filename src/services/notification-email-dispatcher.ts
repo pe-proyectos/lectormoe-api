@@ -56,7 +56,7 @@ const loadNotification = async (id: number) => {
       parentComment: true,
       subscription: {
         include: {
-          subscriptionPlan: { select: { name: true } },
+          subscriptionPlan: { select: { name: true, isPlatform: true } },
           user: { select: { id: true, email: true, username: true } },
         },
       },
@@ -193,9 +193,14 @@ const sendNewMangaEmail = async (n: NonNullable<Dispatchable>): Promise<boolean>
   return !!id;
 };
 
+// Los planes Capibara se llaman "Lector", "Plus" o "Premium": sin prefijo el
+// scan no sabria que es la suscripcion de plataforma.
+const nombreDePlan = (plan?: { name?: string | null; isPlatform?: boolean | null } | null) =>
+  plan?.name ? (plan.isPlatform ? `Capibara ${plan.name}` : plan.name) : 'Plan sin nombre';
+
 const sendNewSubscriberEmail = async (n: NonNullable<Dispatchable>): Promise<boolean> => {
   if (!n.subscription || !n.organization) return false;
-  const planName = n.subscription.subscriptionPlan?.name || 'Plan sin nombre';
+  const planName = nombreDePlan(n.subscription.subscriptionPlan);
   const subscriberUsername = n.subscription.user?.username || 'Usuario';
   const amount = n.subscription.lastAmount != null
     ? `${n.subscription.lastAmount.toFixed(2)} USD`
@@ -228,7 +233,7 @@ const sendNewSubscriberEmail = async (n: NonNullable<Dispatchable>): Promise<boo
 
 const sendFailedPaymentEmail = async (n: NonNullable<Dispatchable>): Promise<boolean> => {
   if (!n.subscription || !n.organization) return false;
-  const planName = n.subscription.subscriptionPlan?.name || 'Plan sin nombre';
+  const planName = nombreDePlan(n.subscription.subscriptionPlan);
   const subscriberUsername = n.subscription.user?.username || 'Usuario';
 
   const unsubscribeUrl = await getUnsubscribeUrl(n.user!.id, 'failed_payment_alert');

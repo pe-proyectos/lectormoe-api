@@ -189,11 +189,8 @@ export const createSubscription = async (organizationId: number | null, userId: 
 	// Notify org staff (fire-and-forget). Email dispatched 30 min later by the
 	// notification cron if still unread. Plan name + amount are re-fetched from
 	// the subscription row at dispatch time.
-	// Solo legacy: en un plan de plataforma organizationId es la organizacion
-	// interna, que no tiene staff al que avisar.
-	if (!subscriptionPlanExists.isPlatform) {
-		notifyNewSubscriber(createdSubscription.id).catch(console.error);
-	}
+	// En un plan Capibara se avisa al scan de origen (ver notifyNewSubscriber).
+	notifyNewSubscriber(createdSubscription.id).catch(console.error);
 
 	return createdSubscription;
 };

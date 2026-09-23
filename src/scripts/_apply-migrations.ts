@@ -353,7 +353,13 @@ const statements: string[] = [
   `ALTER TABLE "subscription" ADD COLUMN IF NOT EXISTS "originOrganizationId" INTEGER;`,
   `CREATE TABLE IF NOT EXISTS "platform_payment" ("id" SERIAL PRIMARY KEY,"subscriptionId" INTEGER NOT NULL,"userId" INTEGER NOT NULL,"paypalTransactionId" VARCHAR(64) NOT NULL UNIQUE,"gross" DOUBLE PRECISION NOT NULL,"paypalFee" DOUBLE PRECISION NOT NULL DEFAULT 0,"currency" VARCHAR(10) NOT NULL DEFAULT 'USD',"originOrganizationId" INTEGER,"paidAt" TIMESTAMP(6) NOT NULL,"readingDistributedAt" TIMESTAMP(6),"createdAt" TIMESTAMP(6) NOT NULL DEFAULT now());`,
   `CREATE INDEX IF NOT EXISTS "platform_payment_paidAt_idx" ON "platform_payment"("paidAt");`,
-  `CREATE INDEX IF NOT EXISTS "platform_payment_userId_idx" ON "platform_payment"("userId");`
+  `CREATE INDEX IF NOT EXISTS "platform_payment_userId_idx" ON "platform_payment"("userId");`,
+  // Plan anual repartido en 12 meses y reversion de reembolsos.
+  `ALTER TABLE "platform_payment" ADD COLUMN IF NOT EXISTS "months" INTEGER NOT NULL DEFAULT 1;`,
+  `ALTER TABLE "platform_payment" ADD COLUMN IF NOT EXISTS "originCredited" DOUBLE PRECISION NOT NULL DEFAULT 0;`,
+  `ALTER TABLE "platform_payment" ADD COLUMN IF NOT EXISTS "refundedAt" TIMESTAMP(6);`,
+  `CREATE TABLE IF NOT EXISTS "platform_payment_distribution" ("id" SERIAL PRIMARY KEY,"paymentId" INTEGER NOT NULL REFERENCES "platform_payment"("id"),"month" VARCHAR(7) NOT NULL,"allocations" JSONB NOT NULL,"createdAt" TIMESTAMP(6) NOT NULL DEFAULT now());`,
+  `CREATE UNIQUE INDEX IF NOT EXISTS "platform_payment_distribution_paymentId_month_key" ON "platform_payment_distribution"("paymentId","month");`
 ]
 
 for (const sql of statements) {

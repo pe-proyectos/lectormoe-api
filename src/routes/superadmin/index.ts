@@ -470,8 +470,14 @@ export const router = () =>
       const [pagos] = await prisma.$queryRaw<any[]>`
         SELECT count(*)::int cobros, coalesce(sum(gross),0)::float bruto,
                coalesce(sum("paypalFee"),0)::float comisiones,
-               count(*) FILTER (WHERE "readingDistributedAt" IS NULL)::int pendientes
-        FROM platform_payment`
+               -- Cobros a los que aun les quedan meses por repartir por lectura
+               -- (un anual tiene 12).
+               count(*) FILTER (
+                 WHERE "refundedAt" IS NULL
+                   AND (SELECT count(*) FROM platform_payment_distribution d WHERE d."paymentId" = p.id) < p.months
+               )::int pendientes,
+               count(*) FILTER (WHERE "refundedAt" IS NOT NULL)::int reembolsados
+        FROM platform_payment p`
       const legacyActivas = await prisma.subscription.count({
         where: { active: true, subscriptionPlan: { isPlatform: false } },
       })

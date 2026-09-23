@@ -33,6 +33,8 @@ export type PlatformPaymentAvgAggregateOutputType = {
   gross: number | null
   paypalFee: number | null
   originOrganizationId: number | null
+  months: number | null
+  originCredited: number | null
 }
 
 export type PlatformPaymentSumAggregateOutputType = {
@@ -42,6 +44,8 @@ export type PlatformPaymentSumAggregateOutputType = {
   gross: number | null
   paypalFee: number | null
   originOrganizationId: number | null
+  months: number | null
+  originCredited: number | null
 }
 
 export type PlatformPaymentMinAggregateOutputType = {
@@ -54,6 +58,9 @@ export type PlatformPaymentMinAggregateOutputType = {
   currency: string | null
   originOrganizationId: number | null
   paidAt: Date | null
+  months: number | null
+  originCredited: number | null
+  refundedAt: Date | null
   readingDistributedAt: Date | null
   createdAt: Date | null
 }
@@ -68,6 +75,9 @@ export type PlatformPaymentMaxAggregateOutputType = {
   currency: string | null
   originOrganizationId: number | null
   paidAt: Date | null
+  months: number | null
+  originCredited: number | null
+  refundedAt: Date | null
   readingDistributedAt: Date | null
   createdAt: Date | null
 }
@@ -82,6 +92,9 @@ export type PlatformPaymentCountAggregateOutputType = {
   currency: number
   originOrganizationId: number
   paidAt: number
+  months: number
+  originCredited: number
+  refundedAt: number
   readingDistributedAt: number
   createdAt: number
   _all: number
@@ -95,6 +108,8 @@ export type PlatformPaymentAvgAggregateInputType = {
   gross?: true
   paypalFee?: true
   originOrganizationId?: true
+  months?: true
+  originCredited?: true
 }
 
 export type PlatformPaymentSumAggregateInputType = {
@@ -104,6 +119,8 @@ export type PlatformPaymentSumAggregateInputType = {
   gross?: true
   paypalFee?: true
   originOrganizationId?: true
+  months?: true
+  originCredited?: true
 }
 
 export type PlatformPaymentMinAggregateInputType = {
@@ -116,6 +133,9 @@ export type PlatformPaymentMinAggregateInputType = {
   currency?: true
   originOrganizationId?: true
   paidAt?: true
+  months?: true
+  originCredited?: true
+  refundedAt?: true
   readingDistributedAt?: true
   createdAt?: true
 }
@@ -130,6 +150,9 @@ export type PlatformPaymentMaxAggregateInputType = {
   currency?: true
   originOrganizationId?: true
   paidAt?: true
+  months?: true
+  originCredited?: true
+  refundedAt?: true
   readingDistributedAt?: true
   createdAt?: true
 }
@@ -144,6 +167,9 @@ export type PlatformPaymentCountAggregateInputType = {
   currency?: true
   originOrganizationId?: true
   paidAt?: true
+  months?: true
+  originCredited?: true
+  refundedAt?: true
   readingDistributedAt?: true
   createdAt?: true
   _all?: true
@@ -245,6 +271,9 @@ export type PlatformPaymentGroupByOutputType = {
   currency: string
   originOrganizationId: number | null
   paidAt: Date
+  months: number
+  originCredited: number
+  refundedAt: Date | null
   readingDistributedAt: Date | null
   createdAt: Date
   _count: PlatformPaymentCountAggregateOutputType | null
@@ -282,8 +311,12 @@ export type PlatformPaymentWhereInput = {
   currency?: Prisma.StringFilter<"PlatformPayment"> | string
   originOrganizationId?: Prisma.IntNullableFilter<"PlatformPayment"> | number | null
   paidAt?: Prisma.DateTimeFilter<"PlatformPayment"> | Date | string
+  months?: Prisma.IntFilter<"PlatformPayment"> | number
+  originCredited?: Prisma.FloatFilter<"PlatformPayment"> | number
+  refundedAt?: Prisma.DateTimeNullableFilter<"PlatformPayment"> | Date | string | null
   readingDistributedAt?: Prisma.DateTimeNullableFilter<"PlatformPayment"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"PlatformPayment"> | Date | string
+  distributions?: Prisma.PlatformPaymentDistributionListRelationFilter
 }
 
 export type PlatformPaymentOrderByWithRelationInput = {
@@ -296,8 +329,12 @@ export type PlatformPaymentOrderByWithRelationInput = {
   currency?: Prisma.SortOrder
   originOrganizationId?: Prisma.SortOrderInput | Prisma.SortOrder
   paidAt?: Prisma.SortOrder
+  months?: Prisma.SortOrder
+  originCredited?: Prisma.SortOrder
+  refundedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   readingDistributedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  distributions?: Prisma.PlatformPaymentDistributionOrderByRelationAggregateInput
 }
 
 export type PlatformPaymentWhereUniqueInput = Prisma.AtLeast<{
@@ -313,8 +350,12 @@ export type PlatformPaymentWhereUniqueInput = Prisma.AtLeast<{
   currency?: Prisma.StringFilter<"PlatformPayment"> | string
   originOrganizationId?: Prisma.IntNullableFilter<"PlatformPayment"> | number | null
   paidAt?: Prisma.DateTimeFilter<"PlatformPayment"> | Date | string
+  months?: Prisma.IntFilter<"PlatformPayment"> | number
+  originCredited?: Prisma.FloatFilter<"PlatformPayment"> | number
+  refundedAt?: Prisma.DateTimeNullableFilter<"PlatformPayment"> | Date | string | null
   readingDistributedAt?: Prisma.DateTimeNullableFilter<"PlatformPayment"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"PlatformPayment"> | Date | string
+  distributions?: Prisma.PlatformPaymentDistributionListRelationFilter
 }, "id" | "paypalTransactionId">
 
 export type PlatformPaymentOrderByWithAggregationInput = {
@@ -327,6 +368,9 @@ export type PlatformPaymentOrderByWithAggregationInput = {
   currency?: Prisma.SortOrder
   originOrganizationId?: Prisma.SortOrderInput | Prisma.SortOrder
   paidAt?: Prisma.SortOrder
+  months?: Prisma.SortOrder
+  originCredited?: Prisma.SortOrder
+  refundedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   readingDistributedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.PlatformPaymentCountOrderByAggregateInput
@@ -349,6 +393,9 @@ export type PlatformPaymentScalarWhereWithAggregatesInput = {
   currency?: Prisma.StringWithAggregatesFilter<"PlatformPayment"> | string
   originOrganizationId?: Prisma.IntNullableWithAggregatesFilter<"PlatformPayment"> | number | null
   paidAt?: Prisma.DateTimeWithAggregatesFilter<"PlatformPayment"> | Date | string
+  months?: Prisma.IntWithAggregatesFilter<"PlatformPayment"> | number
+  originCredited?: Prisma.FloatWithAggregatesFilter<"PlatformPayment"> | number
+  refundedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"PlatformPayment"> | Date | string | null
   readingDistributedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"PlatformPayment"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"PlatformPayment"> | Date | string
 }
@@ -362,8 +409,12 @@ export type PlatformPaymentCreateInput = {
   currency?: string
   originOrganizationId?: number | null
   paidAt: Date | string
+  months?: number
+  originCredited?: number
+  refundedAt?: Date | string | null
   readingDistributedAt?: Date | string | null
   createdAt?: Date | string
+  distributions?: Prisma.PlatformPaymentDistributionCreateNestedManyWithoutPaymentInput
 }
 
 export type PlatformPaymentUncheckedCreateInput = {
@@ -376,8 +427,12 @@ export type PlatformPaymentUncheckedCreateInput = {
   currency?: string
   originOrganizationId?: number | null
   paidAt: Date | string
+  months?: number
+  originCredited?: number
+  refundedAt?: Date | string | null
   readingDistributedAt?: Date | string | null
   createdAt?: Date | string
+  distributions?: Prisma.PlatformPaymentDistributionUncheckedCreateNestedManyWithoutPaymentInput
 }
 
 export type PlatformPaymentUpdateInput = {
@@ -389,8 +444,12 @@ export type PlatformPaymentUpdateInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   originOrganizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   paidAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  months?: Prisma.IntFieldUpdateOperationsInput | number
+  originCredited?: Prisma.FloatFieldUpdateOperationsInput | number
+  refundedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   readingDistributedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  distributions?: Prisma.PlatformPaymentDistributionUpdateManyWithoutPaymentNestedInput
 }
 
 export type PlatformPaymentUncheckedUpdateInput = {
@@ -403,8 +462,12 @@ export type PlatformPaymentUncheckedUpdateInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   originOrganizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   paidAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  months?: Prisma.IntFieldUpdateOperationsInput | number
+  originCredited?: Prisma.FloatFieldUpdateOperationsInput | number
+  refundedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   readingDistributedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  distributions?: Prisma.PlatformPaymentDistributionUncheckedUpdateManyWithoutPaymentNestedInput
 }
 
 export type PlatformPaymentCreateManyInput = {
@@ -417,6 +480,9 @@ export type PlatformPaymentCreateManyInput = {
   currency?: string
   originOrganizationId?: number | null
   paidAt: Date | string
+  months?: number
+  originCredited?: number
+  refundedAt?: Date | string | null
   readingDistributedAt?: Date | string | null
   createdAt?: Date | string
 }
@@ -430,6 +496,9 @@ export type PlatformPaymentUpdateManyMutationInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   originOrganizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   paidAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  months?: Prisma.IntFieldUpdateOperationsInput | number
+  originCredited?: Prisma.FloatFieldUpdateOperationsInput | number
+  refundedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   readingDistributedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -444,6 +513,9 @@ export type PlatformPaymentUncheckedUpdateManyInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   originOrganizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   paidAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  months?: Prisma.IntFieldUpdateOperationsInput | number
+  originCredited?: Prisma.FloatFieldUpdateOperationsInput | number
+  refundedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   readingDistributedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -458,6 +530,9 @@ export type PlatformPaymentCountOrderByAggregateInput = {
   currency?: Prisma.SortOrder
   originOrganizationId?: Prisma.SortOrder
   paidAt?: Prisma.SortOrder
+  months?: Prisma.SortOrder
+  originCredited?: Prisma.SortOrder
+  refundedAt?: Prisma.SortOrder
   readingDistributedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -469,6 +544,8 @@ export type PlatformPaymentAvgOrderByAggregateInput = {
   gross?: Prisma.SortOrder
   paypalFee?: Prisma.SortOrder
   originOrganizationId?: Prisma.SortOrder
+  months?: Prisma.SortOrder
+  originCredited?: Prisma.SortOrder
 }
 
 export type PlatformPaymentMaxOrderByAggregateInput = {
@@ -481,6 +558,9 @@ export type PlatformPaymentMaxOrderByAggregateInput = {
   currency?: Prisma.SortOrder
   originOrganizationId?: Prisma.SortOrder
   paidAt?: Prisma.SortOrder
+  months?: Prisma.SortOrder
+  originCredited?: Prisma.SortOrder
+  refundedAt?: Prisma.SortOrder
   readingDistributedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -495,6 +575,9 @@ export type PlatformPaymentMinOrderByAggregateInput = {
   currency?: Prisma.SortOrder
   originOrganizationId?: Prisma.SortOrder
   paidAt?: Prisma.SortOrder
+  months?: Prisma.SortOrder
+  originCredited?: Prisma.SortOrder
+  refundedAt?: Prisma.SortOrder
   readingDistributedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -506,8 +589,140 @@ export type PlatformPaymentSumOrderByAggregateInput = {
   gross?: Prisma.SortOrder
   paypalFee?: Prisma.SortOrder
   originOrganizationId?: Prisma.SortOrder
+  months?: Prisma.SortOrder
+  originCredited?: Prisma.SortOrder
 }
 
+export type PlatformPaymentScalarRelationFilter = {
+  is?: Prisma.PlatformPaymentWhereInput
+  isNot?: Prisma.PlatformPaymentWhereInput
+}
+
+export type PlatformPaymentCreateNestedOneWithoutDistributionsInput = {
+  create?: Prisma.XOR<Prisma.PlatformPaymentCreateWithoutDistributionsInput, Prisma.PlatformPaymentUncheckedCreateWithoutDistributionsInput>
+  connectOrCreate?: Prisma.PlatformPaymentCreateOrConnectWithoutDistributionsInput
+  connect?: Prisma.PlatformPaymentWhereUniqueInput
+}
+
+export type PlatformPaymentUpdateOneRequiredWithoutDistributionsNestedInput = {
+  create?: Prisma.XOR<Prisma.PlatformPaymentCreateWithoutDistributionsInput, Prisma.PlatformPaymentUncheckedCreateWithoutDistributionsInput>
+  connectOrCreate?: Prisma.PlatformPaymentCreateOrConnectWithoutDistributionsInput
+  upsert?: Prisma.PlatformPaymentUpsertWithoutDistributionsInput
+  connect?: Prisma.PlatformPaymentWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PlatformPaymentUpdateToOneWithWhereWithoutDistributionsInput, Prisma.PlatformPaymentUpdateWithoutDistributionsInput>, Prisma.PlatformPaymentUncheckedUpdateWithoutDistributionsInput>
+}
+
+export type PlatformPaymentCreateWithoutDistributionsInput = {
+  subscriptionId: number
+  userId: number
+  paypalTransactionId: string
+  gross: number
+  paypalFee?: number
+  currency?: string
+  originOrganizationId?: number | null
+  paidAt: Date | string
+  months?: number
+  originCredited?: number
+  refundedAt?: Date | string | null
+  readingDistributedAt?: Date | string | null
+  createdAt?: Date | string
+}
+
+export type PlatformPaymentUncheckedCreateWithoutDistributionsInput = {
+  id?: number
+  subscriptionId: number
+  userId: number
+  paypalTransactionId: string
+  gross: number
+  paypalFee?: number
+  currency?: string
+  originOrganizationId?: number | null
+  paidAt: Date | string
+  months?: number
+  originCredited?: number
+  refundedAt?: Date | string | null
+  readingDistributedAt?: Date | string | null
+  createdAt?: Date | string
+}
+
+export type PlatformPaymentCreateOrConnectWithoutDistributionsInput = {
+  where: Prisma.PlatformPaymentWhereUniqueInput
+  create: Prisma.XOR<Prisma.PlatformPaymentCreateWithoutDistributionsInput, Prisma.PlatformPaymentUncheckedCreateWithoutDistributionsInput>
+}
+
+export type PlatformPaymentUpsertWithoutDistributionsInput = {
+  update: Prisma.XOR<Prisma.PlatformPaymentUpdateWithoutDistributionsInput, Prisma.PlatformPaymentUncheckedUpdateWithoutDistributionsInput>
+  create: Prisma.XOR<Prisma.PlatformPaymentCreateWithoutDistributionsInput, Prisma.PlatformPaymentUncheckedCreateWithoutDistributionsInput>
+  where?: Prisma.PlatformPaymentWhereInput
+}
+
+export type PlatformPaymentUpdateToOneWithWhereWithoutDistributionsInput = {
+  where?: Prisma.PlatformPaymentWhereInput
+  data: Prisma.XOR<Prisma.PlatformPaymentUpdateWithoutDistributionsInput, Prisma.PlatformPaymentUncheckedUpdateWithoutDistributionsInput>
+}
+
+export type PlatformPaymentUpdateWithoutDistributionsInput = {
+  subscriptionId?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  paypalTransactionId?: Prisma.StringFieldUpdateOperationsInput | string
+  gross?: Prisma.FloatFieldUpdateOperationsInput | number
+  paypalFee?: Prisma.FloatFieldUpdateOperationsInput | number
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  originOrganizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  paidAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  months?: Prisma.IntFieldUpdateOperationsInput | number
+  originCredited?: Prisma.FloatFieldUpdateOperationsInput | number
+  refundedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  readingDistributedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type PlatformPaymentUncheckedUpdateWithoutDistributionsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  subscriptionId?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  paypalTransactionId?: Prisma.StringFieldUpdateOperationsInput | string
+  gross?: Prisma.FloatFieldUpdateOperationsInput | number
+  paypalFee?: Prisma.FloatFieldUpdateOperationsInput | number
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  originOrganizationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  paidAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  months?: Prisma.IntFieldUpdateOperationsInput | number
+  originCredited?: Prisma.FloatFieldUpdateOperationsInput | number
+  refundedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  readingDistributedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+
+/**
+ * Count Type PlatformPaymentCountOutputType
+ */
+
+export type PlatformPaymentCountOutputType = {
+  distributions: number
+}
+
+export type PlatformPaymentCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  distributions?: boolean | PlatformPaymentCountOutputTypeCountDistributionsArgs
+}
+
+/**
+ * PlatformPaymentCountOutputType without action
+ */
+export type PlatformPaymentCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PlatformPaymentCountOutputType
+   */
+  select?: Prisma.PlatformPaymentCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * PlatformPaymentCountOutputType without action
+ */
+export type PlatformPaymentCountOutputTypeCountDistributionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PlatformPaymentDistributionWhereInput
+}
 
 
 export type PlatformPaymentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -520,8 +735,13 @@ export type PlatformPaymentSelect<ExtArgs extends runtime.Types.Extensions.Inter
   currency?: boolean
   originOrganizationId?: boolean
   paidAt?: boolean
+  months?: boolean
+  originCredited?: boolean
+  refundedAt?: boolean
   readingDistributedAt?: boolean
   createdAt?: boolean
+  distributions?: boolean | Prisma.PlatformPayment$distributionsArgs<ExtArgs>
+  _count?: boolean | Prisma.PlatformPaymentCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["platformPayment"]>
 
 export type PlatformPaymentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -534,6 +754,9 @@ export type PlatformPaymentSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   currency?: boolean
   originOrganizationId?: boolean
   paidAt?: boolean
+  months?: boolean
+  originCredited?: boolean
+  refundedAt?: boolean
   readingDistributedAt?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["platformPayment"]>
@@ -548,6 +771,9 @@ export type PlatformPaymentSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   currency?: boolean
   originOrganizationId?: boolean
   paidAt?: boolean
+  months?: boolean
+  originCredited?: boolean
+  refundedAt?: boolean
   readingDistributedAt?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["platformPayment"]>
@@ -562,15 +788,26 @@ export type PlatformPaymentSelectScalar = {
   currency?: boolean
   originOrganizationId?: boolean
   paidAt?: boolean
+  months?: boolean
+  originCredited?: boolean
+  refundedAt?: boolean
   readingDistributedAt?: boolean
   createdAt?: boolean
 }
 
-export type PlatformPaymentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "subscriptionId" | "userId" | "paypalTransactionId" | "gross" | "paypalFee" | "currency" | "originOrganizationId" | "paidAt" | "readingDistributedAt" | "createdAt", ExtArgs["result"]["platformPayment"]>
+export type PlatformPaymentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "subscriptionId" | "userId" | "paypalTransactionId" | "gross" | "paypalFee" | "currency" | "originOrganizationId" | "paidAt" | "months" | "originCredited" | "refundedAt" | "readingDistributedAt" | "createdAt", ExtArgs["result"]["platformPayment"]>
+export type PlatformPaymentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  distributions?: boolean | Prisma.PlatformPayment$distributionsArgs<ExtArgs>
+  _count?: boolean | Prisma.PlatformPaymentCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type PlatformPaymentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type PlatformPaymentIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $PlatformPaymentPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "PlatformPayment"
-  objects: {}
+  objects: {
+    distributions: Prisma.$PlatformPaymentDistributionPayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     subscriptionId: number
@@ -581,6 +818,9 @@ export type $PlatformPaymentPayload<ExtArgs extends runtime.Types.Extensions.Int
     currency: string
     originOrganizationId: number | null
     paidAt: Date
+    months: number
+    originCredited: number
+    refundedAt: Date | null
     readingDistributedAt: Date | null
     createdAt: Date
   }, ExtArgs["result"]["platformPayment"]>
@@ -977,6 +1217,7 @@ readonly fields: PlatformPaymentFieldRefs;
  */
 export interface Prisma__PlatformPaymentClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  distributions<T extends Prisma.PlatformPayment$distributionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PlatformPayment$distributionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PlatformPaymentDistributionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1015,6 +1256,9 @@ export interface PlatformPaymentFieldRefs {
   readonly currency: Prisma.FieldRef<"PlatformPayment", 'String'>
   readonly originOrganizationId: Prisma.FieldRef<"PlatformPayment", 'Int'>
   readonly paidAt: Prisma.FieldRef<"PlatformPayment", 'DateTime'>
+  readonly months: Prisma.FieldRef<"PlatformPayment", 'Int'>
+  readonly originCredited: Prisma.FieldRef<"PlatformPayment", 'Float'>
+  readonly refundedAt: Prisma.FieldRef<"PlatformPayment", 'DateTime'>
   readonly readingDistributedAt: Prisma.FieldRef<"PlatformPayment", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"PlatformPayment", 'DateTime'>
 }
@@ -1034,6 +1278,10 @@ export type PlatformPaymentFindUniqueArgs<ExtArgs extends runtime.Types.Extensio
    */
   omit?: Prisma.PlatformPaymentOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PlatformPaymentInclude<ExtArgs> | null
+  /**
    * Filter, which PlatformPayment to fetch.
    */
   where: Prisma.PlatformPaymentWhereUniqueInput
@@ -1052,6 +1300,10 @@ export type PlatformPaymentFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.E
    */
   omit?: Prisma.PlatformPaymentOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PlatformPaymentInclude<ExtArgs> | null
+  /**
    * Filter, which PlatformPayment to fetch.
    */
   where: Prisma.PlatformPaymentWhereUniqueInput
@@ -1069,6 +1321,10 @@ export type PlatformPaymentFindFirstArgs<ExtArgs extends runtime.Types.Extension
    * Omit specific fields from the PlatformPayment
    */
   omit?: Prisma.PlatformPaymentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PlatformPaymentInclude<ExtArgs> | null
   /**
    * Filter, which PlatformPayment to fetch.
    */
@@ -1118,6 +1374,10 @@ export type PlatformPaymentFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Ex
    */
   omit?: Prisma.PlatformPaymentOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PlatformPaymentInclude<ExtArgs> | null
+  /**
    * Filter, which PlatformPayment to fetch.
    */
   where?: Prisma.PlatformPaymentWhereInput
@@ -1166,6 +1426,10 @@ export type PlatformPaymentFindManyArgs<ExtArgs extends runtime.Types.Extensions
    */
   omit?: Prisma.PlatformPaymentOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PlatformPaymentInclude<ExtArgs> | null
+  /**
    * Filter, which PlatformPayments to fetch.
    */
   where?: Prisma.PlatformPaymentWhereInput
@@ -1208,6 +1472,10 @@ export type PlatformPaymentCreateArgs<ExtArgs extends runtime.Types.Extensions.I
    * Omit specific fields from the PlatformPayment
    */
   omit?: Prisma.PlatformPaymentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PlatformPaymentInclude<ExtArgs> | null
   /**
    * The data needed to create a PlatformPayment.
    */
@@ -1256,6 +1524,10 @@ export type PlatformPaymentUpdateArgs<ExtArgs extends runtime.Types.Extensions.I
    * Omit specific fields from the PlatformPayment
    */
   omit?: Prisma.PlatformPaymentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PlatformPaymentInclude<ExtArgs> | null
   /**
    * The data needed to update a PlatformPayment.
    */
@@ -1323,6 +1595,10 @@ export type PlatformPaymentUpsertArgs<ExtArgs extends runtime.Types.Extensions.I
    */
   omit?: Prisma.PlatformPaymentOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PlatformPaymentInclude<ExtArgs> | null
+  /**
    * The filter to search for the PlatformPayment to update in case it exists.
    */
   where: Prisma.PlatformPaymentWhereUniqueInput
@@ -1349,6 +1625,10 @@ export type PlatformPaymentDeleteArgs<ExtArgs extends runtime.Types.Extensions.I
    */
   omit?: Prisma.PlatformPaymentOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PlatformPaymentInclude<ExtArgs> | null
+  /**
    * Filter which PlatformPayment to delete.
    */
   where: Prisma.PlatformPaymentWhereUniqueInput
@@ -1369,6 +1649,30 @@ export type PlatformPaymentDeleteManyArgs<ExtArgs extends runtime.Types.Extensio
 }
 
 /**
+ * PlatformPayment.distributions
+ */
+export type PlatformPayment$distributionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PlatformPaymentDistribution
+   */
+  select?: Prisma.PlatformPaymentDistributionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PlatformPaymentDistribution
+   */
+  omit?: Prisma.PlatformPaymentDistributionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PlatformPaymentDistributionInclude<ExtArgs> | null
+  where?: Prisma.PlatformPaymentDistributionWhereInput
+  orderBy?: Prisma.PlatformPaymentDistributionOrderByWithRelationInput | Prisma.PlatformPaymentDistributionOrderByWithRelationInput[]
+  cursor?: Prisma.PlatformPaymentDistributionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PlatformPaymentDistributionScalarFieldEnum | Prisma.PlatformPaymentDistributionScalarFieldEnum[]
+}
+
+/**
  * PlatformPayment without action
  */
 export type PlatformPaymentDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1380,4 +1684,8 @@ export type PlatformPaymentDefaultArgs<ExtArgs extends runtime.Types.Extensions.
    * Omit specific fields from the PlatformPayment
    */
   omit?: Prisma.PlatformPaymentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PlatformPaymentInclude<ExtArgs> | null
 }

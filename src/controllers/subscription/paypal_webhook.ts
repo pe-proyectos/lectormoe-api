@@ -1,3 +1,4 @@
+import { registrarCobro, revertirCobro } from '../../services/capibara-reparto'
 import { prisma } from '../../models/prisma'
 import { notifyFailedPayment } from '../../services/notify-new-chapter'
 import { reconcileSubscriptionFromPaypal } from '../../services/subscription-reconcile'
@@ -76,7 +77,30 @@ export const handlePaypalWebhook = async (webhookEvent: PaypalWebhookEvent) => {
           }
         })
 
-        if (
+        if (subscriptionWithPlan?.subscriptionPlan?.isPlatform) {
+          // Suscripcion Capibara: el reparto es 50/25/25 y lo registra el
+          // servicio de reparto (el mismo que usa el cron, que deduplica por
+          // id de transaccion). NO se crea el 50% legacy: iria a la
+          // organizacion interna `capibara` como si se le debiera dinero.
+          await registrarCobro(
+            {
+              id: subscriptionWithPlan.id,
+              userId: subscriptionWithPlan.userId,
+              originOrganizationId: subscriptionWithPlan.originOrganizationId,
+              subscriptionPlan: {
+                name: subscriptionWithPlan.subscriptionPlan.name,
+                interval: subscriptionWithPlan.subscriptionPlan.interval
+              }
+            },
+            {
+              id: webhookEvent.resource.id,
+              gross: paymentAmount,
+              fee: Number.parseFloat(webhookEvent.resource?.transaction_fee?.value ?? '0') || 0,
+              currency: paymentCurrency,
+              time: webhookEvent.resource.create_time
+            }
+          )
+        } else if (
           subscriptionWithPlan &&
           subscriptionWithPlan.subscriptionPlan.organization
         ) {
@@ -167,6 +191,20 @@ export const handlePaypalWebhook = async (webhookEvent: PaypalWebhookEvent) => {
     case 'PAYMENT.SALE.REFUNDED':
     case 'PAYMENT.SALE.REVERSED':
       updateData = { endDate: new Date() }
+      // Suscripcion Capibara: se descuenta a los scans lo que recibieron de ese
+      // cobro. En REFUNDED el recurso es el reembolso y el cobro original va en
+      // sale_id; en REVERSED el recurso es el propio cobro.
+      try {
+        const saleId = webhookEvent.resource?.sale_id ?? webhookEvent.resource?.id
+        if (saleId) {
+          await revertirCobro(
+            saleId,
+            webhookEvent.event_type === 'PAYMENT.SALE.REVERSED' ? 'contracargo' : 'reembolso'
+          )
+        }
+      } catch (error) {
+        console.error('Error revirtiendo el reparto Capibara:', error)
+      }
       break
     default:
       console.log(`Unhandled webhook event: ${webhookEvent.event_type}`)

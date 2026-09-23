@@ -121,7 +121,8 @@ export const ModelName = {
   UserMute: 'UserMute',
   PostPoll: 'PostPoll',
   PostPollVote: 'PostPollVote',
-  PlatformPayment: 'PlatformPayment'
+  PlatformPayment: 'PlatformPayment',
+  PlatformPaymentDistribution: 'PlatformPaymentDistribution'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1357,11 +1358,25 @@ export const PlatformPaymentScalarFieldEnum = {
   currency: 'currency',
   originOrganizationId: 'originOrganizationId',
   paidAt: 'paidAt',
+  months: 'months',
+  originCredited: 'originCredited',
+  refundedAt: 'refundedAt',
   readingDistributedAt: 'readingDistributedAt',
   createdAt: 'createdAt'
 } as const
 
 export type PlatformPaymentScalarFieldEnum = (typeof PlatformPaymentScalarFieldEnum)[keyof typeof PlatformPaymentScalarFieldEnum]
+
+
+export const PlatformPaymentDistributionScalarFieldEnum = {
+  id: 'id',
+  paymentId: 'paymentId',
+  month: 'month',
+  allocations: 'allocations',
+  createdAt: 'createdAt'
+} as const
+
+export type PlatformPaymentDistributionScalarFieldEnum = (typeof PlatformPaymentDistributionScalarFieldEnum)[keyof typeof PlatformPaymentDistributionScalarFieldEnum]
 
 
 export const SortOrder = {

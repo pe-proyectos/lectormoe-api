@@ -1,5 +1,7 @@
 import { Elysia, t } from 'elysia';
 import { prisma } from '../../models/prisma';
+import { checkToken } from '../../controllers/auth/check';
+import { checkChapterAccess, tienePremiumPlataforma } from '../../util/access-control';
 import { loggedUserOnly } from '../../plugins/auth';
 import { useOrganizationOptional } from '../../plugins/organization';
 import { CreateJointRequest } from '../../types/joint/create';
@@ -34,6 +36,59 @@ import { transferChapterAuthorship } from '../../controllers/joint/chapter/trans
 import { saveJointFavorite } from '../../controllers/favorites/save-joint';
 import { deleteJointFavorite } from '../../controllers/favorites/delete-joint';
 import { getJointFavorite } from '../../controllers/favorites/get-joint';
+
+/**
+ * ¿Puede este usuario leer este capitulo servido por un joint?
+ * - Capitulo suelto de un scan miembro: el mismo control que en su pagina
+ *   normal (planes que lo restringen, anticipados, staff de ESE scan).
+ * - Capitulo propio del joint sin publicar: staff de cualquier miembro,
+ *   Premium de plataforma o suscriptor legacy de un miembro cuyo plan
+ *   incluye anticipados.
+ */
+export async function puedeLeerCapituloDeJoint(
+  user: any,
+  chapter: any,
+  miembros: number[]
+): Promise<{ ok: boolean; mensaje?: string }> {
+  const NO_PUBLICADO = 'Este capítulo aún no se ha publicado. Con Capibara Premium lo lees antes.';
+
+  if (chapter.mangaCustomId) {
+    const mangaCustom = await prisma.mangaCustom.findUnique({
+      where: { id: chapter.mangaCustomId },
+      include: {
+        subscriptionPlansCanReadUnreleased: { select: { id: true, canReadUnreleased: true, active: true, name: true } },
+        subscriptionPlansCanReadReleased: { select: { id: true, canReadUnreleased: true, active: true, name: true } },
+      },
+    });
+    if (!mangaCustom) return { ok: false, mensaje: 'Capítulo no encontrado.' };
+    const permisos = user?.permissions?.find((p: any) => p.organizationId === mangaCustom.organizationId) ?? null;
+    const r = await checkChapterAccess(user, permisos, chapter, mangaCustom as any);
+    return r.hasAccess ? { ok: true } : { ok: false, mensaje: r.message || NO_PUBLICADO };
+  }
+
+  const sinPublicar =
+    chapter.isUnreleased === true ||
+    (chapter.releasedAt ? new Date(chapter.releasedAt).getTime() > Date.now() : false);
+  if (!sinPublicar) return { ok: true };
+  if (!user) return { ok: false, mensaje: NO_PUBLICADO };
+
+  const esStaff = (user.permissions || []).some(
+    (p: any) =>
+      miembros.includes(p.organizationId) &&
+      (p.canReadUnreleased || p.canEditChapter || p.canEditPage || p.canSeeAdminPanel)
+  );
+  if (esStaff) return { ok: true };
+  if (await tienePremiumPlataforma(user)) return { ok: true };
+
+  const legacyConAnticipados = (user.subscriptions || []).some(
+    (s: any) =>
+      s.active !== false &&
+      s.subscriptionPlan?.canReadUnreleased === true &&
+      s.subscriptionPlan?.active !== false &&
+      miembros.includes(s.subscriptionPlan?.organizationId)
+  );
+  return legacyConAnticipados ? { ok: true } : { ok: false, mensaje: NO_PUBLICADO };
+}
 
 export const router = () => new Elysia()
   // ─── PUBLIC ROUTES ──────────────────────────────────────────────────────────
@@ -103,10 +158,12 @@ export const router = () => new Elysia()
     return { status: true, data };
   }, { response: t.Object({ status: t.Boolean(), data: t.Any() }) })
 
-  // Public pages endpoint — joint chapters have no subscription gating, so no org context needed.
-  // Uses the same aggregated lookup as getJointChapter: joint-anchored first, then solo chapters
-  // from accepted members, so pages load for both joint and pre-existing solo chapters.
-  .get('/api/joint/:slug/chapter/:number/pages', async ({ params: { slug, number } }) => {
+  // Pages endpoint. Uses the same aggregated lookup as getJointChapter: joint-anchored first,
+  // then solo chapters from accepted members, so pages load for both kinds.
+  // Access: before, joint chapters had NO gating at all, so an unreleased joint chapter was
+  // public, and a member's own early or plan-exclusive solo chapter could be read through the
+  // joint URL, bypassing that scan's checks. See puedeLeerCapituloDeJoint.
+  .get('/api/joint/:slug/chapter/:number/pages', async ({ params: { slug, number }, request }) => {
     const chapterNumber = parseFloat(number);
     const joint = await prisma.mangaJoint.findFirst({
       where: { slug, deletedAt: null },
@@ -153,8 +210,14 @@ export const router = () => new Elysia()
     }
 
     if (!chapter) throw new Error('Capítulo no encontrado.');
+
+    const token = request.headers.get('authorization')?.replace(/^Bearer\s+/i, '') || null;
+    const user = token ? await checkToken(null, token) : null;
+    const acceso = await puedeLeerCapituloDeJoint(user, chapter, acceptedOrgIds);
+    if (!acceso.ok) return { status: false, message: acceso.mensaje, data: [] };
+
     return { status: true, data: chapter.pages };
-  }, { response: t.Object({ status: t.Boolean(), data: t.Any() }) })
+  }, { response: t.Object({ status: t.Boolean(), data: t.Any(), message: t.Optional(t.String()) }) })
 
   // ─── AUTHENTICATED ROUTES ────────────────────────────────────────────────────
   .use(loggedUserOnly())
