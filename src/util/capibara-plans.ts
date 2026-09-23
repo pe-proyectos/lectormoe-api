@@ -12,7 +12,7 @@ import { prisma } from '../models/prisma'
  * Se hace todo junto a proposito: si se bajaran los limites antes, 1.870
  * lectores quedarian bloqueados sin ninguna forma de pagar para desbloquearse.
  */
-export const LANZADO = false
+export const LANZADO = true
 
 /** Organizacion interna a la que pertenecen los planes de plataforma. */
 export const PLATAFORMA_SLUG = 'capibara'
