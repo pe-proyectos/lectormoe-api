@@ -4,10 +4,13 @@ import { canSeeScheduledChapters } from '../../services/chapter-schedule'
 export const getMangaCustomBySlug = async (
   organizationId: number,
   mangaSlug: string,
-  user?: any
+  user?: any,
+  opts: { includeScheduled?: boolean } = {}
 ) => {
-  // Capitulos programados (publishAt): solo el staff del scan los ve.
-  const scheduledFilter = canSeeScheduledChapters(user, organizationId)
+  // Capitulos programados (publishAt): solo el staff del scan los ve, y solo
+  // cuando lo pide el admin (includeScheduled).
+  const scheduledFilter =
+    opts.includeScheduled && canSeeScheduledChapters(user, organizationId)
     ? {}
     : { publishAt: null }
   const mangaCustom = await prisma.mangaCustom.findFirst({

@@ -9,8 +9,12 @@ export const router = () => new Elysia()
     .use(loggedOptional())
     .get(
         '/api/manga-custom/:mangaSlug',
-        async ({ organizationId, user, params: { mangaSlug } }) => {
-            const manga = await getMangaCustomBySlug(organizationId, mangaSlug, user);
+        async ({ organizationId, user, params: { mangaSlug }, query }) => {
+            // ?includeScheduled=1 lo manda el admin: con permisos de staff se
+            // incluyen los capitulos programados (publishAt). La pagina publica
+            // nunca los recibe, ni siquiera para el staff.
+            const includeScheduled = (query as any)?.includeScheduled === '1';
+            const manga = await getMangaCustomBySlug(organizationId, mangaSlug, user, { includeScheduled });
 
             if (!manga) {
                 throw new Error("Manga no encontrado.");
