@@ -2,7 +2,8 @@ import { cron } from '@elysiajs/cron'
 import { Elysia } from 'elysia'
 import {
   computeMonthlyAdRevenue,
-  persistMonthlyAdRevenue
+  persistMonthlyAdRevenue,
+  repartirRedesPendientes
 } from '../../services/ad-revenue'
 import { reportCronError, wrapCron } from '../../util/cron-alert'
 import { fetchAdcashRevenue } from '../../services/adcash'
@@ -28,10 +29,9 @@ async function runMonthlyAdRevenue() {
   )
 }
 
-// Aviso previo: el reparto del dia 2 se DETIENE si Adcash o Monetag fallan
-// (mejor que repartir de menos sin poder corregirlo). Esta comprobacion diaria
-// prueba las dos conexiones con el mes en curso y avisa a Discord si alguna
-// falla, para arreglarlo antes del dia 2 y no descubrirlo ese dia.
+// Adcash y Monetag se reparten aparte (repartirRedesPendientes): un mes queda
+// pendiente hasta que su API responde. Esta comprobacion diaria prueba las dos
+// conexiones y avisa a Discord si alguna falla o no tiene token.
 async function comprobarRedesDeAnuncios() {
   const hoy = new Date()
   for (const [nombre, fn] of [['Adcash', fetchAdcashRevenue], ['Monetag', fetchMonetagRevenue]] as const) {
@@ -59,5 +59,17 @@ export const router = () =>
       // Todos los dias a las 12:00 (hora del servidor).
       pattern: '0 12 * * *',
       run: comprobarRedesDeAnuncios
+    })
+  )
+  .use(
+    cron({
+      name: 'ad-revenue-networks-pending',
+      // Todos los dias a las 05:00: reparte los meses de Adcash/Monetag pendientes.
+      pattern: '0 5 * * *',
+      run: wrapCron('ad-revenue-networks-pending', async () => {
+        for (const r of await repartirRedesPendientes()) {
+          if (!r.yaRepartido) console.log(`[AdRevenue ${r.red}] ${r.mes}: $${r.total.toFixed(2)}, ${r.inserted} scans`)
+        }
+      })
     })
   )
