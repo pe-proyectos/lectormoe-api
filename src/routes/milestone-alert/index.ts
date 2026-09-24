@@ -12,6 +12,7 @@ async function resolveMc(organizationId: number, mangaSlug: string) {
 async function lastPublishedNumber(mangaId: number): Promise<number> {
   const ch = await prisma.chapter.findFirst({
     where: {
+      publishAt: null,
       deletedAt: null,
       isUnreleased: false,
       releasedAt: { not: null, lte: new Date() },

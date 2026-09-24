@@ -10,7 +10,9 @@ export const CreateChapterRequest = t.Object({
   isUnreleased: t.Optional(t.Boolean()),
   volumeNumber: t.Optional(t.Union([t.Number(), t.Null()])),
   bodyMarkdown: t.Optional(t.Union([t.String(), t.Null()])),
-  displayNumber: t.Optional(t.Union([t.Number(), t.Null()]))
+  displayNumber: t.Optional(t.Union([t.Number(), t.Null()])),
+  // Publicacion programada (ISO). Vacio/null/pasado = publicar ya.
+  publishAt: t.Optional(t.Union([t.String(), t.Null()]))
 })
 
 export type CreateChapterRequest = Static<typeof CreateChapterRequest>

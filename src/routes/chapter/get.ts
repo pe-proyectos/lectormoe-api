@@ -4,6 +4,7 @@ import { getChapter } from '../../controllers/chapter/get';
 import { useOrganization } from '../../plugins/organization';
 import { loggedOptional } from '../../plugins/auth';
 import { getMangaCustomBySlug } from '../../controllers/manga-custom/get';
+import { canSeeScheduledChapters } from '../../services/chapter-schedule';
 import { checkChapterAccess } from '../../util/access-control';
 
 export const router = () => new Elysia()
@@ -15,7 +16,7 @@ export const router = () => new Elysia()
             const permissions = user ? user.permissions.find((p: any) => p.organizationId === organizationId) : null;
             const [mangaCustom, chapter] = await Promise.all([
                 getMangaCustomBySlug(organizationId, mangaSlug, user),
-                getChapter(organizationId, mangaSlug, chapterNumber)
+                getChapter(organizationId, mangaSlug, chapterNumber, canSeeScheduledChapters(user, organizationId))
             ]);
 
             if (!mangaCustom) {

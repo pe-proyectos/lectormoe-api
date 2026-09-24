@@ -1,10 +1,15 @@
 import { Prisma, prisma } from '../../models/prisma'
+import { canSeeScheduledChapters } from '../../services/chapter-schedule'
 
 export const getMangaCustomBySlug = async (
   organizationId: number,
   mangaSlug: string,
   user?: any
 ) => {
+  // Capitulos programados (publishAt): solo el staff del scan los ve.
+  const scheduledFilter = canSeeScheduledChapters(user, organizationId)
+    ? {}
+    : { publishAt: null }
   const mangaCustom = await prisma.mangaCustom.findFirst({
     where: {
       organization: {
@@ -32,7 +37,7 @@ export const getMangaCustomBySlug = async (
         }
       },
       chapters: {
-        where: { deletedAt: null },
+        where: { deletedAt: null, ...scheduledFilter },
         orderBy: {
           number: Prisma.SortOrder.desc
         }
@@ -120,7 +125,8 @@ export const getMangaCustomBySlug = async (
     const jointChapters = await prisma.chapter.findMany({
       where: {
         jointId: activeJoint.id,
-        deletedAt: null
+        deletedAt: null,
+        ...scheduledFilter
       },
       select: {
         id: true,
@@ -134,6 +140,7 @@ export const getMangaCustomBySlug = async (
         // del capítulo de joint sin que el staff lo tocara.
         volumeNumber: true,
         displayNumber: true,
+        publishAt: true,
         createdAt: true,
         updatedAt: true
       },

@@ -109,7 +109,7 @@ export const getPopularToday = async (limit: number = 5, nsfw?: boolean, content
 				chapters: {
 					// releasedAt not null: el schema de la ruta exige Date y un solo null
 					// tumbaba TODO el endpoint con 422 (bug "Populares del Día").
-					where: { deletedAt: null, releasedAt: { not: null } },
+					where: { publishAt: null, deletedAt: null, releasedAt: { not: null } },
 					select: { id: true, number: true, title: true, releasedAt: true },
 					orderBy: { number: Prisma.SortOrder.desc },
 					take: 2,
@@ -121,7 +121,7 @@ export const getPopularToday = async (limit: number = 5, nsfw?: boolean, content
 			include: {
 				manga: { select: { id: true, title: true, slug: true, imageUrl: true } },
 				chapters: {
-					where: { deletedAt: null, releasedAt: { not: null } },
+					where: { publishAt: null, deletedAt: null, releasedAt: { not: null } },
 					select: { id: true, number: true, title: true, releasedAt: true },
 					orderBy: { number: Prisma.SortOrder.desc },
 					take: 2,

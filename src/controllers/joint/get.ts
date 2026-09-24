@@ -35,15 +35,18 @@ const CHAPTER_INCLUDE = {
 // Dedupe by `number`, keeping the most recent (releasedAt then createdAt). Each
 // entry tags `source` ('joint' | 'solo') and the uploader org so the FE can
 // render a per-chapter badge.
-async function loadAggregatedChapters(joint: { id: number; mangaId: number }, acceptedOrgIds: number[]) {
+// includeScheduled: solo el admin del joint ve capitulos programados (publishAt).
+async function loadAggregatedChapters(joint: { id: number; mangaId: number }, acceptedOrgIds: number[], includeScheduled = false) {
+  const scheduledFilter = includeScheduled ? {} : { publishAt: null };
   const [jointChapters, soloChapters] = await Promise.all([
     prisma.chapter.findMany({
-      where: { jointId: joint.id, deletedAt: null },
+      where: { jointId: joint.id, deletedAt: null, ...scheduledFilter },
       include: CHAPTER_INCLUDE,
     }),
     acceptedOrgIds.length === 0 ? Promise.resolve([] as any[]) : prisma.chapter.findMany({
       where: {
         deletedAt: null,
+        ...scheduledFilter,
         mangaCustom: {
           mangaId: joint.mangaId,
           organizationId: { in: acceptedOrgIds },
@@ -85,6 +88,7 @@ async function loadAggregatedChapters(joint: { id: number; mangaId: number }, ac
       imageUrl: c.imageUrl,
       releasedAt: c.releasedAt,
       isUnreleased: c.isUnreleased,
+      publishAt: c.publishAt,
       views: c.views,
       createdAt: c.createdAt,
       // Authorship: prefer explicit uploadedByOrganization (set on joint chapters);
@@ -99,7 +103,7 @@ async function loadAggregatedChapters(joint: { id: number; mangaId: number }, ac
     }));
 }
 
-export const getJoint = async (slug: string) => {
+export const getJoint = async (slug: string, includeScheduled = false) => {
   const joint = await prisma.mangaJoint.findFirst({
     where: { slug, deletedAt: null },
     include: {
@@ -118,7 +122,7 @@ export const getJoint = async (slug: string) => {
   if (!joint) throw new Error('Joint no encontrado.');
 
   const acceptedOrgIds = joint.members.map(m => m.organization.id);
-  const chapters = await loadAggregatedChapters(joint, acceptedOrgIds);
+  const chapters = await loadAggregatedChapters(joint, acceptedOrgIds, includeScheduled);
 
   return { ...joint, chapters };
 };
@@ -144,7 +148,7 @@ export const getJointForAdmin = async (slug: string) => {
   const acceptedOrgIds = joint.members
     .filter(m => m.status === 'ACCEPTED')
     .map(m => m.organization.id);
-  const chapters = await loadAggregatedChapters(joint, acceptedOrgIds);
+  const chapters = await loadAggregatedChapters(joint, acceptedOrgIds, true);
 
   return { ...joint, chapters };
 };

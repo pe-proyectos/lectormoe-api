@@ -41,6 +41,7 @@ async function processDailyDigest() {
 
         const newChapters = await prisma.chapter.findMany({
           where: {
+            publishAt: null,
             mangaCustomId: { in: favIds },
             releasedAt: { gte: since },
             isUnreleased: false
@@ -671,6 +672,7 @@ async function processReEngagement() {
 
         const missedChaptersRaw = await prisma.chapter.findMany({
           where: {
+            publishAt: null,
             mangaCustomId: { in: favIds },
             releasedAt: { gte: missedSince },
             isUnreleased: false

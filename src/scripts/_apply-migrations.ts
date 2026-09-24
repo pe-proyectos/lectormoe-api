@@ -359,7 +359,11 @@ const statements: string[] = [
   `ALTER TABLE "platform_payment" ADD COLUMN IF NOT EXISTS "originCredited" DOUBLE PRECISION NOT NULL DEFAULT 0;`,
   `ALTER TABLE "platform_payment" ADD COLUMN IF NOT EXISTS "refundedAt" TIMESTAMP(6);`,
   `CREATE TABLE IF NOT EXISTS "platform_payment_distribution" ("id" SERIAL PRIMARY KEY,"paymentId" INTEGER NOT NULL REFERENCES "platform_payment"("id"),"month" VARCHAR(7) NOT NULL,"allocations" JSONB NOT NULL,"createdAt" TIMESTAMP(6) NOT NULL DEFAULT now());`,
-  `CREATE UNIQUE INDEX IF NOT EXISTS "platform_payment_distribution_paymentId_month_key" ON "platform_payment_distribution"("paymentId","month");`
+  `CREATE UNIQUE INDEX IF NOT EXISTS "platform_payment_distribution_paymentId_month_key" ON "platform_payment_distribution"("paymentId","month");`,
+  // Publicacion programada de capitulos (tambien se aplica al arrancar el API,
+  // ver src/services/chapter-schedule.ts ensureChapterPublishAtColumn).
+  `ALTER TABLE "chapter" ADD COLUMN IF NOT EXISTS "publishAt" TIMESTAMP(6);`,
+  `CREATE INDEX IF NOT EXISTS "chapter_publishAt_idx" ON "chapter"("publishAt");`
 ]
 
 for (const sql of statements) {

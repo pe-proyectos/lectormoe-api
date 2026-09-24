@@ -85,6 +85,7 @@ import { router as mangaCustomRestoreRouter } from './manga-custom/restore'
 import { router as mangaCustomUpdateUsersAlsoReadRouter } from './manga-custom/update-users-also-read'
 import { router as notificationRouter } from './notification'
 import { router as maintenanceCronRouter } from './maintenance/cron'
+import { router as chapterScheduleCronRouter } from './chapter/schedule-cron'
 import { router as notificationCronRouter } from './notification/cron'
 import { router as organizationCheckRouter } from './organization/check'
 import { router as organizationEditRouter } from './organization/edit'
@@ -221,6 +222,7 @@ export const router = () => async (app: Elysia) => {
   app.use(notificationRouter())
   app.use(notificationCronRouter())
   app.use(maintenanceCronRouter())
+  app.use(chapterScheduleCronRouter())
 
   // Files
   app.use(filesPresignedUrlRouter())

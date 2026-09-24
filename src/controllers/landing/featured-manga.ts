@@ -136,7 +136,7 @@ export const getFeaturedManga = async (limit: number = 8, nsfw?: boolean, conten
 			chapters: {
 				// releasedAt not null: el schema de la ruta exige Date y un solo null
 				// tumba el endpoint completo con 422 (mismo bug que popular-today).
-				where: { deletedAt: null, releasedAt: { not: null } },
+				where: { publishAt: null, deletedAt: null, releasedAt: { not: null } },
 				select: {
 					id: true,
 					number: true,

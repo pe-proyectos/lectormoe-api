@@ -136,7 +136,7 @@ export const getTrending = async (
               select: { id: true, name: true, slug: true, isNSFW: true }
             },
             chapters: {
-              where: { deletedAt: null, releasedAt: { not: null } },
+              where: { publishAt: null, deletedAt: null, releasedAt: { not: null } },
               select: { id: true, number: true, title: true, releasedAt: true },
               orderBy: { number: Prisma.SortOrder.desc },
               take: 2
@@ -152,7 +152,7 @@ export const getTrending = async (
               select: { id: true, title: true, slug: true, imageUrl: true }
             },
             chapters: {
-              where: { deletedAt: null, releasedAt: { not: null } },
+              where: { publishAt: null, deletedAt: null, releasedAt: { not: null } },
               select: { id: true, number: true, title: true, releasedAt: true },
               orderBy: { number: Prisma.SortOrder.desc },
               take: 2

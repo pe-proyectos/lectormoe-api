@@ -74,6 +74,7 @@ export const createViewHistoryChapter = async (
 ) => {
   const chapter = await prisma.chapter.findFirst({
     where: {
+      publishAt: null,
       mangaCustom: {
         organization: {
           id: organizationId,

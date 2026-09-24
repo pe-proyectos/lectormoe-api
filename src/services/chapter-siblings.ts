@@ -8,6 +8,7 @@ export async function getSiblingChapterIds(
 ): Promise<number[]> {
   const chapters = await prisma.chapter.findMany({
     where: {
+      publishAt: null,
       number: chapterNumber,
       deletedAt: null,
       OR: [
@@ -45,6 +46,7 @@ export async function resolveChapterAndBase(
   if (organizationId) {
     const own = await prisma.chapter.findFirst({
       where: {
+        publishAt: null,
         number: chapterNumber,
         deletedAt: null,
         mangaCustom: { organizationId, mangaId: manga.id, deletedAt: null }
@@ -57,6 +59,7 @@ export async function resolveChapterAndBase(
   // Fallback: cualquier scan o joint de la obra.
   const any = await prisma.chapter.findFirst({
     where: {
+      publishAt: null,
       number: chapterNumber,
       deletedAt: null,
       OR: [

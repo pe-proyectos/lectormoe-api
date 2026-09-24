@@ -26,6 +26,7 @@ export const saveJointUserChapterHistory = async (
       }
     },
     where: {
+      publishAt: null,
       jointId: joint.id,
       number: chapterNumber,
       deletedAt: null
@@ -78,6 +79,7 @@ export const saveJointUserChapterHistory = async (
   if (isLastPage) {
     const nextChapter = await prisma.chapter.findFirst({
       where: {
+        publishAt: null,
         number: { gt: chapterNumber },
         deletedAt: null,
         OR: [

@@ -55,6 +55,7 @@ export const createViewHistoryJointChapter = async (
 
   const chapter = await prisma.chapter.findFirst({
     where: {
+      publishAt: null,
       jointId: joint.id,
       number: chapterNumber,
       deletedAt: null,

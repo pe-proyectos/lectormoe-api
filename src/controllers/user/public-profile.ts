@@ -59,6 +59,7 @@ const PUBLIC_LIST_INCLUDE = {
       },
       manga: { select: { slug: true } },
       chapters: {
+        where: { publishAt: null },
         select: { id: true, number: true, title: true, releasedAt: true },
         orderBy: { releasedAt: Prisma.SortOrder.desc },
         take: 2,
@@ -72,7 +73,7 @@ const PUBLIC_LIST_INCLUDE = {
       title: true,
       imageUrl: true,
       chapters: {
-        where: { deletedAt: null },
+        where: { publishAt: null, deletedAt: null },
         select: { id: true, number: true, title: true, releasedAt: true },
         orderBy: { releasedAt: Prisma.SortOrder.desc },
         take: 2,

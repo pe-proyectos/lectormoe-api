@@ -25,6 +25,7 @@ import { expelFromJoint } from '../../controllers/joint/expel';
 import { transferJointLeadership } from '../../controllers/joint/transfer';
 import { updateJointMemberPermissions } from '../../controllers/joint/member-permissions';
 import { createJointChapter } from '../../controllers/joint/chapter/create';
+import { canSeeScheduledChapters } from '../../services/chapter-schedule';
 import { getJointChapter } from '../../controllers/joint/chapter/get';
 import { editJointChapter } from '../../controllers/joint/chapter/edit';
 import { deleteJointChapter } from '../../controllers/joint/chapter/delete';
@@ -110,7 +111,7 @@ export const router = () => new Elysia()
             },
           },
           chapters: {
-            where: { deletedAt: null },
+            where: { publishAt: null, deletedAt: null },
             select: { id: true, number: true, releasedAt: true },
             orderBy: { number: 'desc' },
             take: 2,
@@ -213,6 +214,11 @@ export const router = () => new Elysia()
 
     const token = request.headers.get('authorization')?.replace(/^Bearer\s+/i, '') || null;
     const user = token ? await checkToken(null, token) : null;
+    // Programado (publishAt): invisible para el publico; solo el staff de un
+    // scan miembro lo abre (edicion desde el admin del joint).
+    if (chapter.publishAt && !acceptedOrgIds.some((orgId) => canSeeScheduledChapters(user, orgId))) {
+      throw new Error('Capítulo no encontrado.');
+    }
     const acceso = await puedeLeerCapituloDeJoint(user, chapter, acceptedOrgIds);
     if (!acceso.ok) return { status: false, message: acceso.mensaje, data: [] };
 
@@ -237,7 +243,8 @@ export const router = () => new Elysia()
     // Only leaders/canEditJoint see the full list including non-accepted members
     // Regular accepted members only see the public view
     if (member.role !== 'LEADER' && !member.canEditJoint) {
-      const data = await getJoint(slug);
+      // Vista de miembro en el admin: incluye capitulos programados.
+      const data = await getJoint(slug, true);
       return { status: true, data };
     }
     const data = await getJointForAdmin(slug);

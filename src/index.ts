@@ -1,4 +1,14 @@
 import { app } from "./app";
+import { ensureChapterPublishAtColumn } from "./services/chapter-schedule";
+
+// Publicacion programada de capitulos: el deploy no corre _apply-migrations,
+// asi que la columna chapter.publishAt se crea aqui (idempotente, aditiva)
+// ANTES de aceptar peticiones: todas las consultas publicas filtran por ella.
+try {
+	await ensureChapterPublishAtColumn();
+} catch (e: any) {
+	console.error("[chapter-schedule] no se pudo asegurar chapter.publishAt:", e?.message || e);
+}
 
 const server = app.listen(Number.parseInt(process.env.PORT as string));
 

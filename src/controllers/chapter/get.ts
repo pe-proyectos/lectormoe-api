@@ -1,10 +1,13 @@
 import { prisma, Prisma } from "../../models/prisma";
 
-export const getChapter = async (organizationId: number, mangaSlug: string, number: number) => {
+// includeScheduled: solo para el staff de la organizacion (admin / vista previa).
+// Para el publico, un capitulo con publishAt (programado) no existe (404).
+export const getChapter = async (organizationId: number, mangaSlug: string, number: number, includeScheduled = false) => {
 	const chapter = await prisma.chapter.findFirst({
 		where: {
 			number,
 			deletedAt: null,
+			...(includeScheduled ? {} : { publishAt: null }),
 			mangaCustom: {
 				manga: { slug: mangaSlug },
 				organization: { id: organizationId },
@@ -19,6 +22,7 @@ export const getChapter = async (organizationId: number, mangaSlug: string, numb
 		where: {
 			mangaCustomId: chapter.mangaCustomId,
 			deletedAt: null,
+			publishAt: null,
 			number: { gt: number },
 		},
 		select: {
@@ -35,6 +39,7 @@ export const getChapter = async (organizationId: number, mangaSlug: string, numb
 		where: {
 			mangaCustomId: chapter.mangaCustomId,
 			deletedAt: null,
+			publishAt: null,
 			number: { lt: number },
 		},
 		select: {

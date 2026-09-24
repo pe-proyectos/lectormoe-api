@@ -59,7 +59,7 @@ export const getPerOrgPopular = async (nsfw: boolean = false, contentKind: Conte
       manga: { select: { slug: true } },
       organization: { select: { id: true, name: true, slug: true, isNSFW: true } },
       chapters: {
-        where: { deletedAt: null },
+        where: { publishAt: null, deletedAt: null },
         select: { id: true, number: true, title: true, releasedAt: true },
         orderBy: { releasedAt: 'desc' },
         take: 2,

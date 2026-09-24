@@ -9,6 +9,8 @@ export const EditJointChapterRequest = t.Object({
   pages: t.Optional(t.Array(t.String())),
   singlePages: t.Optional(t.Array(t.Number())),
   workedByOrganizationIds: t.Optional(t.Array(t.Number())),
+  // Publicacion programada (ISO). Vacio/null/pasado = publicar ya.
+  publishAt: t.Optional(t.Union([t.String(), t.Null()])),
 });
 
 export type EditJointChapterRequest = Static<typeof EditJointChapterRequest>;

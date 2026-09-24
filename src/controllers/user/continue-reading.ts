@@ -58,7 +58,7 @@ export const getContinueReading = async (userId: number) => {
           imageUrl: true,
           organization: { select: { slug: true } },
           manga: { select: { slug: true } },
-          chapters: { where: releasedFilter(), orderBy: { number: 'asc' }, select: { number: true } },
+          chapters: { where: { ...releasedFilter(), publishAt: null }, orderBy: { number: 'asc' }, select: { number: true } },
         },
       });
       if (!mc || mc.chapters.length === 0) continue;
@@ -82,7 +82,7 @@ export const getContinueReading = async (userId: number) => {
           slug: true,
           title: true,
           imageUrl: true,
-          chapters: { where: releasedFilter(), orderBy: { number: 'asc' }, select: { number: true } },
+          chapters: { where: { ...releasedFilter(), publishAt: null }, orderBy: { number: 'asc' }, select: { number: true } },
         },
       });
       if (!joint || joint.chapters.length === 0) continue;

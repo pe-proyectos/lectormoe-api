@@ -43,6 +43,7 @@ export const getJointChapter = async (slug: string, chapterNumber: number) => {
 
     const fallback = await prisma.chapter.findFirst({
       where: {
+        publishAt: null,
         deletedAt: null,
         number: chapterNumber,
         mangaCustom: {
@@ -70,11 +71,12 @@ export const getJointChapter = async (slug: string, chapterNumber: number) => {
 
   const [jointChapter, soloChapter] = await Promise.all([
     prisma.chapter.findFirst({
-      where: { jointId: joint.id, number: chapterNumber, deletedAt: null },
+      where: { publishAt: null, jointId: joint.id, number: chapterNumber, deletedAt: null },
       include: CHAPTER_INCLUDE,
     }),
     acceptedOrgIds.length === 0 ? Promise.resolve(null) : prisma.chapter.findFirst({
       where: {
+        publishAt: null,
         deletedAt: null,
         number: chapterNumber,
         mangaCustom: {
@@ -103,6 +105,7 @@ export const getJointChapter = async (slug: string, chapterNumber: number) => {
   // numbers between two joint chapters.
   const candidates = await prisma.chapter.findMany({
     where: {
+      publishAt: null,
       deletedAt: null,
       OR: [
         { jointId: joint.id },

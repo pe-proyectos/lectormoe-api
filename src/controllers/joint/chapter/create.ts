@@ -1,7 +1,7 @@
 import { prisma } from '../../../models/prisma';
 import { requireJointMember, canUpload } from '../../../util/joint-auth';
 import type { CreateJointChapterRequest } from '../../../types/joint/chapter/create';
-import { notifyNewChapter } from '../../../services/notify-new-chapter';
+import { firePublishEffects, resolvePublishAt } from '../../../services/chapter-schedule';
 
 export const createJointChapter = async (
   slug: string,
@@ -9,6 +9,8 @@ export const createJointChapter = async (
   params: CreateJointChapterRequest
 ) => {
   const { joint, member } = await requireJointMember(slug, organizationId);
+  // Publicacion programada: fecha futura = invisible hasta esa hora.
+  const publishAt = resolvePublishAt(params.publishAt) ?? null;
 
   if (!canUpload(member)) {
     throw new Error('No tienes permisos para subir capítulos a este joint.');
@@ -61,6 +63,7 @@ export const createJointChapter = async (
       imageUrl,
       releasedAt: params.isUnreleased ? null : (params.releasedAt ? new Date(params.releasedAt as any) : new Date()),
       isUnreleased: params.isUnreleased ?? false,
+      publishAt,
       workedByOrganizations: {
         connect: workedByIds.map(id => ({ id })),
       },
@@ -88,78 +91,11 @@ export const createJointChapter = async (
     );
   }
 
-  // Update joint lastChapterAt
-  await prisma.mangaJoint.update({
-    where: { id: joint.id },
-    data: { lastChapterAt: new Date() },
-  });
-
-  // Update lastChapterAt for all org MangaCustoms that have this manga
-  const acceptedOrgIds = joint.members
-    .filter((m: any) => m.status === 'ACCEPTED')
-    .map((m: any) => m.organizationId);
-
-  if (acceptedOrgIds.length > 0) {
-    await prisma.mangaCustom.updateMany({
-      where: {
-        mangaId: joint.mangaId,
-        organizationId: { in: acceptedOrgIds },
-        deletedAt: null,
-      },
-      data: { lastChapterAt: new Date() },
-    });
-  }
-
-  // Send Discord webhook notifications to all members that have it enabled
-  const memberOrgs = await prisma.organization.findMany({
-    where: {
-      id: { in: acceptedOrgIds },
-      enableDiscordWebhookNewChapter: true,
-      discordWebhookUrlNewChapter: { not: null },
-    },
-    select: {
-      name: true,
-      discordWebhookUrlNewChapter: true,
-      discordWebhookMessageTemplateNewChapter: true,
-    },
-  });
-
-  const chapterWithData = await prisma.chapter.findFirst({
-    where: { id: chapter.id },
-    include: { joint: { include: { manga: { select: { title: true, slug: true } } } } },
-  });
-
-  for (const org of memberOrgs) {
-    try {
-      const description = org.discordWebhookMessageTemplateNewChapter
-        ?.replaceAll('%manga%', chapterWithData?.joint?.title || chapterWithData?.joint?.manga?.title || joint.slug)
-        .replaceAll('%chapter%', `${chapter.number}`)
-        .replaceAll('%chapter_title%', chapter.title || '')
-        .replaceAll('%scan%', org.name || '')
-        .replaceAll('%link%', `https://capibaratraductor.com/joint/manga/${joint.slug}/chapters/${chapter.number}`);
-
-      await fetch(org.discordWebhookUrlNewChapter!, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          username: org.name,
-          embeds: [{
-            title: '📣 - Nuevo capítulo publicado (Joint)',
-            description,
-            color: 0x9b59b6,
-            timestamp: new Date().toISOString(),
-          }],
-        }),
-      });
-    } catch (e) {
-      console.error('Error enviando webhook de joint a Discord:', e);
-    }
-  }
-
-  // Notify users who favorited the joint (or any member org's manga) — email
-  // is dispatched 30 min later by the notification cron if still unread.
-  if (!params.isUnreleased) {
-    notifyNewChapter({ chapterId: chapter.id, jointId: joint.id }).catch(console.error);
+  // Efectos de capitulo nuevo (lastChapterAt, webhooks de Discord de los
+  // miembros, notificaciones). Si esta programado, los dispara el cron
+  // chapter-scheduled-publish al llegar la hora.
+  if (!publishAt) {
+    await firePublishEffects(chapter.id);
   }
 
   return prisma.chapter.findFirst({

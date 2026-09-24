@@ -15,7 +15,7 @@ export const listJointsForOrg = async (organizationId: number) => {
             where: { status: 'ACCEPTED' },
             include: { organization: { select: { id: true, name: true, slug: true, logoUrl: true } } },
           },
-          _count: { select: { chapters: { where: { deletedAt: null } } } },
+          _count: { select: { chapters: { where: { deletedAt: null, publishAt: null } } } },
         },
       },
     },

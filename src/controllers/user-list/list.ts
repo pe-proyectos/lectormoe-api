@@ -20,6 +20,7 @@ const INCLUDE = {
 			},
 			manga: { select: { slug: true } },
 			chapters: {
+				where: { publishAt: null },
 				select: CHAPTER_SELECT,
 				orderBy: { releasedAt: Prisma.SortOrder.desc },
 				take: 2,
@@ -33,7 +34,7 @@ const INCLUDE = {
 			title: true,
 			imageUrl: true,
 			chapters: {
-				where: { deletedAt: null },
+				where: { publishAt: null, deletedAt: null },
 				select: CHAPTER_SELECT,
 				orderBy: { releasedAt: Prisma.SortOrder.desc },
 				take: 2,

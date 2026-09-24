@@ -253,7 +253,7 @@ export const listMangaCustom = async (
           }
         },
         chapters: {
-          where: { deletedAt: null },
+          where: { publishAt: null, deletedAt: null },
           select: {
             id: true,
             number: true,
@@ -435,7 +435,7 @@ async function mergeJointChaptersIntoMangaCustoms(
         select: { organizationId: true }
       },
       chapters: {
-        where: { deletedAt: null },
+        where: { publishAt: null, deletedAt: null },
         orderBy: { number: Prisma.SortOrder.desc },
         take: 5,
         select: {
@@ -627,7 +627,7 @@ async function injectMemberJointEntries(
         take: 1
       },
       chapters: {
-        where: { deletedAt: null },
+        where: { publishAt: null, deletedAt: null },
         orderBy: { number: Prisma.SortOrder.desc },
         take: 2,
         select: {
@@ -755,7 +755,7 @@ async function injectGlobalJointEntries(
         }
       },
       chapters: {
-        where: { deletedAt: null },
+        where: { publishAt: null, deletedAt: null },
         orderBy: { number: Prisma.SortOrder.desc },
         take: 2,
         select: {

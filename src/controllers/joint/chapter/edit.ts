@@ -1,6 +1,7 @@
 import { prisma } from '../../../models/prisma';
 import { requireJointMember, canUpload } from '../../../util/joint-auth';
 import type { EditJointChapterRequest } from '../../../types/joint/chapter/edit';
+import { planPublishAtEdit, publishScheduledChapter } from '../../../services/chapter-schedule';
 
 export const editJointChapter = async (
   slug: string,
@@ -27,6 +28,8 @@ export const editJointChapter = async (
   if (params.title !== undefined) updateData.title = params.title ?? '';
   if (params.releasedAt !== undefined) updateData.releasedAt = params.releasedAt ? new Date(params.releasedAt as any) : null;
   if (params.isUnreleased !== undefined) updateData.isUnreleased = params.isUnreleased;
+  const schedule = planPublishAtEdit(chapter.publishAt, params.publishAt);
+  if (schedule.setPublishAt) updateData.publishAt = schedule.setPublishAt;
   if (params.image !== undefined) {
     updateData.imageUrl = params.image === null
       ? null
@@ -81,6 +84,9 @@ export const editJointChapter = async (
       },
     });
   }
+
+  // Quitar la programacion = publicar ya (dispara notificaciones, webhooks...).
+  if (schedule.publishNow) await publishScheduledChapter(chapter.id);
 
   return prisma.chapter.findFirst({
     where: { id: chapter.id },

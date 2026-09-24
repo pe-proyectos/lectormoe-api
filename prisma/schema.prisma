@@ -553,6 +553,11 @@ model Chapter {
   // Numero mostrado (por tomo): permite reiniciar la numeracion por volumen
   // sin romper la identidad global de `number`. Si es null, se muestra `number`.
   displayNumber             Float?
+  // Publicacion programada: mientras no sea null el capitulo es invisible para
+  // todo el publico (solo lo ve el staff en el admin). El cron
+  // chapter-scheduled-publish lo publica al llegar la hora (publishAt = null).
+  // Independiente de releasedAt/isUnreleased (acceso anticipado).
+  publishAt                 DateTime?            @db.Timestamp(6)
   mangaCustom               MangaCustom?         @relation(fields: [mangaCustomId], references: [id])
   joint                     MangaJoint?          @relation(fields: [jointId], references: [id])
   uploadedByOrganization    Organization?        @relation("ChapterUploader", fields: [uploadedByOrganizationId], references: [id])
@@ -566,6 +571,7 @@ model Chapter {
 
   @@unique([number, mangaCustomId])
   @@unique([number, jointId])
+  @@index([publishAt])
   @@map("chapter")
 }
 

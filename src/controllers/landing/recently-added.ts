@@ -56,7 +56,7 @@ export const getRecentlyAdded = async (
       },
       // Primer capítulo publicado (menor número), para el acceso directo a leer.
       chapters: {
-        where: { deletedAt: null, releasedAt: { not: null } },
+        where: { publishAt: null, deletedAt: null, releasedAt: { not: null } },
         select: { number: true },
         orderBy: { number: Prisma.SortOrder.asc },
         take: 1

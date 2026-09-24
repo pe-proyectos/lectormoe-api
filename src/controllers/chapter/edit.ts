@@ -1,6 +1,10 @@
 import { prisma } from '../../models/prisma'
 import type { EditChapterRequest } from '../../types/chapter/edit'
 import { sanitizeBodyMarkdown } from '../../services/markdown-pipeline'
+import {
+  planPublishAtEdit,
+  publishScheduledChapter
+} from '../../services/chapter-schedule'
 
 export const editChapter = async (
   organizationId: number,
@@ -87,10 +91,13 @@ export const editChapter = async (
     updateData.displayNumber = params.displayNumber
   }
 
+  const schedule = planPublishAtEdit(chapterExists.publishAt, params.publishAt)
+  if (schedule.setPublishAt) updateData.publishAt = schedule.setPublishAt
+
   // Si isUnreleased es true y releasedAt está en updateData como null,
   // intentar la actualización. Si falla porque el schema no permite null,
   // reintentar sin incluir releasedAt
-  let chapter
+  let chapter: Awaited<ReturnType<typeof prisma.chapter.update>>
   try {
     chapter = await prisma.chapter.update({
       where: {
@@ -142,6 +149,11 @@ export const editChapter = async (
         }
       })
     })
+  }
+
+  // Quitar la programacion = publicar ya (dispara notificaciones, webhooks...).
+  if (schedule.publishNow && (await publishScheduledChapter(chapter.id))) {
+    chapter = { ...chapter, publishAt: null }
   }
 
   return chapter

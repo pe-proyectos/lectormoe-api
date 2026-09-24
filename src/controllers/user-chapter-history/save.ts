@@ -71,6 +71,7 @@ export const saveUserChapterHistory = async (
   if (isLastPage) {
     const nextChapter = await prisma.chapter.findFirst({
       where: {
+        publishAt: null,
         number: { gt: chapterNumber },
         deletedAt: null,
         OR: [

@@ -6230,7 +6230,8 @@ export const ChapterScalarFieldEnum = {
   deletedAt: 'deletedAt',
   bodyMarkdown: 'bodyMarkdown',
   volumeNumber: 'volumeNumber',
-  displayNumber: 'displayNumber'
+  displayNumber: 'displayNumber',
+  publishAt: 'publishAt'
 } as const
 
 export type ChapterScalarFieldEnum = (typeof ChapterScalarFieldEnum)[keyof typeof ChapterScalarFieldEnum]

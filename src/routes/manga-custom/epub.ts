@@ -15,7 +15,7 @@ export const router = () =>
       if (!manga) throw new Error('Novela no encontrada.')
 
       const chapters = await prisma.chapter.findMany({
-        where: { mangaCustomId: manga.id, deletedAt: null, bodyMarkdown: { not: null } },
+        where: { publishAt: null, mangaCustomId: manga.id, deletedAt: null, bodyMarkdown: { not: null } },
         select: { number: true, title: true, bodyMarkdown: true },
         orderBy: { number: 'asc' },
       })

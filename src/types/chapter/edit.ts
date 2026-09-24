@@ -10,7 +10,9 @@ export const EditChapterRequest = t.Object({
   isUnreleased: t.Optional(t.Boolean()),
   volumeNumber: t.Optional(t.Union([t.Number(), t.Null()])),
   bodyMarkdown: t.Optional(t.Union([t.String(), t.Null()])),
-  displayNumber: t.Optional(t.Union([t.Number(), t.Null()]))
+  displayNumber: t.Optional(t.Union([t.Number(), t.Null()])),
+  // Publicacion programada (ISO). null/'' = quitar programacion (publicar ya).
+  publishAt: t.Optional(t.Union([t.String(), t.Null()]))
 })
 
 export type EditChapterRequest = Static<typeof EditChapterRequest>
