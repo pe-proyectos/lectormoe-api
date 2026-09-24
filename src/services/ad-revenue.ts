@@ -25,8 +25,6 @@ export interface MonthlyAdRevenueBreakdown {
 
 const PLATFORM_FEE_RATE = 0.5; // platform keeps 50%
 
-// Primer mes (indice year*12+month) en el que Adcash y Monetag forman parte
-// del reparto: septiembre de 2026.
 
 /**
  * Compute the breakdown for one calendar month. Pure function — no DB writes.
