@@ -10,7 +10,8 @@ export const router = () => new Elysia()
 			const contentKind = (query?.contentKind === 'writing' || query?.contentKind === 'manga')
 				? query.contentKind
 				: 'all';
-			const data = await getFeaturedManga(limit, nsfw, contentKind);
+			const sort = query?.sort === 'comments' || query?.sort === 'daily' ? query.sort : 'views';
+			const data = await getFeaturedManga(limit, nsfw, contentKind, sort);
 			return { status: true, data };
 		},
 		{
@@ -19,6 +20,7 @@ export const router = () => new Elysia()
 					limit: t.Optional(t.String()),
 					nsfw: t.Optional(t.String()),
 					contentKind: t.Optional(t.String()),
+					sort: t.Optional(t.String()),
 				})
 			),
 			response: t.Object({

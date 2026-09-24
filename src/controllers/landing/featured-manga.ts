@@ -1,4 +1,5 @@
 import { prisma, Prisma } from "../../models/prisma";
+import { createHilos } from "../../lib/hilos-sdk";
 
 // Generate a consistent color based on organization name
 const getBadgeColor = (orgName: string): string => {
@@ -39,7 +40,51 @@ const buildContentKindFilter = (contentKind?: ContentKind): object[] => {
 	return [];
 };
 
-export const getFeaturedManga = async (limit: number = 8, nsfw?: boolean, contentKind: ContentKind = "all") => {
+// Obras con mas comentarios en La Charca en los ultimos 7 dias, de mayor a
+// menor. Los comentarios de un capitulo viven en el muro `manga:<mangaCustomId>`.
+let comentadosCache: { at: number; ids: number[] } | null = null;
+async function masComentadosSemana(): Promise<number[]> {
+	if (comentadosCache && Date.now() - comentadosCache.at < 10 * 60 * 1000) return comentadosCache.ids;
+	const secretKey = process.env.HILOS_SECRET_KEY;
+	if (!secretKey) return [];
+	try {
+		const hilos = createHilos({ baseUrl: process.env.HILOS_BASE || "https://hilos.rest", secretKey });
+		const rows: Array<{ externalId: string; count: number }> =
+			(await hilos.request("GET", "/socials/most-commented?days=7&limit=200")) || [];
+		const ids = rows
+			.map((r) => r.externalId.match(/^manga:(\d+)$/))
+			.filter((m): m is RegExpMatchArray => !!m)
+			.map((m) => Number(m[1]));
+		comentadosCache = { at: Date.now(), ids };
+		return ids;
+	} catch (e) {
+		console.error("[featured-manga] hilos most-commented:", e);
+		return comentadosCache?.ids ?? [];
+	}
+}
+
+// Recomendaciones del dia: obras al azar sin mirar lecturas ni popularidad.
+// El azar sale de la fecha (hora de Lima), asi que la seleccion cambia a las
+// 00:00 y es la misma para todos durante el dia.
+function hashDia(dia: string, id: number): number {
+	let h = 2166136261;
+	for (const c of `${dia}:${id}`) h = Math.imul(h ^ c.charCodeAt(0), 16777619);
+	return h >>> 0;
+}
+
+async function recomendadasDelDia(where: object, limit: number): Promise<number[]> {
+	const dia = new Date().toLocaleDateString("en-CA", { timeZone: "America/Lima" });
+	const todas = await prisma.mangaCustom.findMany({ where, select: { id: true } });
+	return todas
+		.map((m) => ({ id: m.id, h: hashDia(dia, m.id) }))
+		.sort((a, b) => a.h - b.h)
+		.slice(0, limit)
+		.map((m) => m.id);
+}
+
+export type FeaturedSort = "views" | "comments" | "daily";
+
+export const getFeaturedManga = async (limit: number = 8, nsfw?: boolean, contentKind: ContentKind = "all", sort: FeaturedSort = "views") => {
 	// nsfw=false: excluir mangas con isNSFW=true o que pertenezcan a una org NSFW
 	// nsfw=true:  solo mangas marcados isNSFW=true o de una org NSFW
 	// Clasificación por MANGA: /red solo +18, azul solo no-+18.
@@ -51,25 +96,25 @@ export const getFeaturedManga = async (limit: number = 8, nsfw?: boolean, conten
 
 	const contentKindCondition = buildContentKindFilter(contentKind);
 
-	// Get all manga customs with their organization info, ordered by views
-	const mangasCustoms = await prisma.mangaCustom.findMany({
-		where: {
-			deletedAt: null,
-			isPublic: true,
-			AND: [
-				...nsfwCondition,
-				...contentKindCondition,
-				{
-					// Only include mangas with cover images
-					OR: [
-						{ imageUrl: { not: null } },
-						{ manga: { imageUrl: { not: null } } },
-					],
-				},
-				// Hide deactivated orgs (isPublic=false or isDeleted=true).
-				{ organization: { isPublic: true, isDeleted: false } },
-			],
-		},
+	const whereBase = {
+		deletedAt: null,
+		isPublic: true,
+		AND: [
+			...nsfwCondition,
+			...contentKindCondition,
+			// Solo con portada (gt "" descarta null y vacio).
+			{ OR: [{ imageUrl: { gt: "" } }, { manga: { imageUrl: { gt: "" } } }] },
+			{ organization: { isPublic: true, isDeleted: false } },
+		],
+	};
+	const comentados =
+		sort === "comments" ? await masComentadosSemana()
+		: sort === "daily" ? await recomendadasDelDia(whereBase, limit)
+		: [];
+	const rango = new Map(comentados.map((id, i) => [id, i]));
+
+	const buscar = (soloIds: number[] | null, take: number) => prisma.mangaCustom.findMany({
+		where: { ...(soloIds ? { id: { in: soloIds } } : {}), ...whereBase },
 		include: {
 			manga: {
 				select: {
@@ -104,8 +149,18 @@ export const getFeaturedManga = async (limit: number = 8, nsfw?: boolean, conten
 		orderBy: {
 			views: Prisma.SortOrder.desc,
 		},
-		take: limit * 3, // Get more to filter out ones without covers
+		take,
 	});
+
+	// Por comentarios: primero las mas comentadas de la semana; si no llegan al
+	// limite (semana floja), se completa con las mas vistas.
+	let mangasCustoms = comentados.length ? await buscar(comentados, comentados.length) : [];
+	mangasCustoms.sort((a, b) => (rango.get(a.id) ?? 0) - (rango.get(b.id) ?? 0));
+	if (mangasCustoms.length < limit) {
+		const ya = new Set(mangasCustoms.map((m) => m.id));
+		const extra = (await buscar(null, limit * 3)).filter((m) => !ya.has(m.id));
+		mangasCustoms = [...mangasCustoms, ...extra];
+	}
 
 	// Calculate total views (manga views + chapter views) and filter
 	const mangasWithViews = mangasCustoms
@@ -127,7 +182,11 @@ export const getFeaturedManga = async (limit: number = 8, nsfw?: boolean, conten
 			const coverUrl = item.mangaCustom.imageUrl || item.mangaCustom.manga.imageUrl;
 			return coverUrl && coverUrl.trim() !== '';
 		})
-		.sort((a, b) => b.totalViews - a.totalViews)
+		.sort((a, b) => {
+			const ra = rango.get(a.mangaCustom.id), rb = rango.get(b.mangaCustom.id);
+			if (ra !== undefined || rb !== undefined) return (ra ?? Infinity) - (rb ?? Infinity);
+			return b.totalViews - a.totalViews;
+		})
 		.slice(0, limit);
 
 	// Transform to the format expected by the frontend

@@ -28,6 +28,7 @@ export function createHilos(opts: HilosOptions) {
   }
 
   return {
+    request: req,
     health: () => req('GET', '/health'),
     pages: {
       upsert: (p: { externalId?: string | number; handle?: string; type?: string; displayName?: string; avatarUrl?: string; bio?: string; parentHandle?: string; parentExternalId?: string | number; metadata?: any; createdAt?: string }): Promise<HilosPage> => req('POST', '/pages', p),
