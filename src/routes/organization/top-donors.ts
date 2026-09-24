@@ -1,6 +1,7 @@
 import { Elysia, t } from 'elysia';
 import { getTopDonors } from '../../controllers/organization/top-donors';
 import { checkOrganizationBySlug } from '../../controllers/organization/check';
+import { PLATAFORMA_SLUG } from '../../util/capibara-plans';
 
 export const router = () => new Elysia()
 	.get(
@@ -14,7 +15,7 @@ export const router = () => new Elysia()
 					throw new Error('Organización no encontrada.');
 				}
 				
-				const donors = await getTopDonors(organization.id);
+				const donors = await getTopDonors(organization.id, organization.slug === PLATAFORMA_SLUG);
 				
 				return { status: true, data: donors };
 			} catch (error) {

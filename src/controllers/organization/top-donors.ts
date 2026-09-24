@@ -1,6 +1,6 @@
 import { prisma } from "../../models/prisma";
 
-export const getTopDonors = async (organizationId: number) => {
+export const getTopDonors = async (organizationId: number, plataforma = false) => {
 	const now = new Date();
 	
 	// Solo considerar suscripciones con acceso vigente:
@@ -13,7 +13,8 @@ export const getTopDonors = async (organizationId: number) => {
 			AND: [
 				// Suscriptores del scan: los de sus planes propios (legacy) y los del
 				// plan Capibara que se suscribieron desde su pagina.
-				{
+				// Pagina global (org 'capibara'): todos los suscriptores Capibara.
+				plataforma ? { subscriptionPlan: { isPlatform: true } } : {
 					OR: [
 						{ organizationId: organizationId, subscriptionPlan: { isPlatform: false } },
 						{ originOrganizationId: organizationId, subscriptionPlan: { isPlatform: true } },
