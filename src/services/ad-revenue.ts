@@ -1,6 +1,8 @@
 import { prisma } from '../models/prisma';
 import { fetchAdsterraRevenue } from './adsterra';
 import { fetchGoogleAdsenseRevenue } from './google-adsense';
+import { fetchAdcashRevenue } from './adcash';
+import { fetchMonetagRevenue } from './monetag';
 import { getJointParticipants } from './joint-participants';
 
 export interface OrgPayout {
@@ -14,12 +16,18 @@ export interface MonthlyAdRevenueBreakdown {
   monthIndex: number; // 0-indexed
   totalGoogle: number;
   totalAdsterra: number;
+  totalAdcash: number;
+  totalMonetag: number;
   platformCut: number;
   scanPool: number;
   perOrg: OrgPayout[];
 }
 
 const PLATFORM_FEE_RATE = 0.5; // platform keeps 50%
+
+// Primer mes (indice year*12+month) en el que Adcash y Monetag forman parte
+// del reparto: septiembre de 2026.
+const REDES_NUEVAS_DESDE = 2026 * 12 + 8;
 
 /**
  * Compute the breakdown for one calendar month. Pure function — no DB writes.
@@ -35,12 +43,19 @@ export async function computeMonthlyAdRevenue(
   const startOfNextMonth = new Date(year, monthIndex + 1, 1);
 
   // 1. Fetch revenue from both networks in parallel.
-  const [totalGoogle, totalAdsterra] = await Promise.all([
+  // Adcash y Monetag sirven el lado azul desde el 23-sep-2026 (AdSense quedo
+  // restringido). Antes de ese mes no se consultan. Si fallan, se LANZA el
+  // error: el reparto no se puede rehacer una vez guardado, asi que es mejor
+  // detenerlo y relanzarlo que repartir de menos sin que nadie se entere.
+  const usaRedesNuevas = year * 12 + monthIndex >= REDES_NUEVAS_DESDE;
+  const [totalGoogle, totalAdsterra, totalAdcash, totalMonetag] = await Promise.all([
     fetchGoogleAdsenseRevenue(year, monthIndex),
     fetchAdsterraRevenue(year, monthIndex),
+    usaRedesNuevas ? fetchAdcashRevenue(year, monthIndex) : Promise.resolve(0),
+    usaRedesNuevas ? fetchMonetagRevenue(year, monthIndex) : Promise.resolve(0),
   ]);
 
-  const grossTotal = totalGoogle + totalAdsterra;
+  const grossTotal = totalGoogle + totalAdsterra + totalAdcash + totalMonetag;
   const platformCut = grossTotal * PLATFORM_FEE_RATE;
   const scanPool = grossTotal - platformCut;
 
@@ -122,6 +137,8 @@ export async function computeMonthlyAdRevenue(
     monthIndex,
     totalGoogle,
     totalAdsterra,
+    totalAdcash,
+    totalMonetag,
     platformCut,
     scanPool,
     perOrg,
@@ -155,7 +172,7 @@ export interface PersistResult {
 export async function persistMonthlyAdRevenue(
   breakdown: MonthlyAdRevenueBreakdown,
 ): Promise<PersistResult> {
-  const { year, monthIndex, perOrg, totalGoogle, totalAdsterra, platformCut, scanPool } = breakdown;
+  const { year, monthIndex, perOrg, totalGoogle, totalAdsterra, totalAdcash, totalMonetag, platformCut, scanPool } = breakdown;
   // Use the actual run date so the transaction appears on the day the cron
   // executed (2nd of each month), not backdated to the last day of the covered
   // period. This makes the finance panel unambiguous.
@@ -188,12 +205,14 @@ export async function persistMonthlyAdRevenue(
         type: 'EARNING',
         status: 'COMPLETED',
         paymentMethod: 'AD_REVENUE',
-        description: `${monthLabel} | ad revenue (google + adsterra) — shares: ${row.shares.toFixed(4)}`,
+        description: `${monthLabel} | ad revenue (google + adsterra + adcash + monetag) — shares: ${row.shares.toFixed(4)}`,
         paymentDetails: JSON.stringify({
           period: monthLabel,
           shares: row.shares,
           totalGoogle,
           totalAdsterra,
+          totalAdcash,
+          totalMonetag,
           platformCut,
           scanPool,
         }),

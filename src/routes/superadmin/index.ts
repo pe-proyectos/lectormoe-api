@@ -564,6 +564,8 @@ export const router = () =>
             month,
             totalGoogle: breakdown.totalGoogle,
             totalAdsterra: breakdown.totalAdsterra,
+            totalAdcash: breakdown.totalAdcash,
+            totalMonetag: breakdown.totalMonetag,
             platformCut: breakdown.platformCut,
             scanPool: breakdown.scanPool,
             orgsWithPayout: breakdown.perOrg.length,
