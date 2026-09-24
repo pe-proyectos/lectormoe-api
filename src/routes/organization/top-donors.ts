@@ -35,10 +35,16 @@ export const router = () => new Elysia()
 						slug: t.String(),
 						imageUrl: t.Union([t.String(), t.Null()]),
 						days: t.Number(),
+						// Elysia descarta lo que no este declarado aqui: sin id, price y
+						// tier el ranking no podia ordenar ni agrupar por plan.
 						subscriptionPlan: t.Object({
+							id: t.Number(),
 							name: t.String(),
+							price: t.Number(),
+							tier: t.Optional(t.Union([t.String(), t.Null()])),
 						}),
 						subscriptionId: t.Number(),
+						legacy: t.Optional(t.Boolean()),
 					})),
 				}),
 				t.Object({
