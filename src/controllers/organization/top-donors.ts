@@ -11,7 +11,14 @@ export const getTopDonors = async (organizationId: number) => {
 	const subscriptions = await prisma.subscription.findMany({
 		where: {
 			AND: [
-				{ organizationId: organizationId },
+				// Suscriptores del scan: los de sus planes propios (legacy) y los del
+				// plan Capibara que se suscribieron desde su pagina.
+				{
+					OR: [
+						{ organizationId: organizationId, subscriptionPlan: { isPlatform: false } },
+						{ originOrganizationId: organizationId, subscriptionPlan: { isPlatform: true } },
+					]
+				},
 				{ active: true },
 				{
 					OR: [
@@ -37,6 +44,9 @@ export const getTopDonors = async (organizationId: number) => {
 					id: true,
 					name: true,
 					price: true,
+					isPlatform: true,
+					tier: true,
+					interval: true,
 				}
 			}
 		}
@@ -57,9 +67,15 @@ export const getTopDonors = async (organizationId: number) => {
 			days: diffDays,
 			subscriptionPlan: {
 				id: sub.subscriptionPlan.id,
-				name: sub.subscriptionPlan.name,
-				price: sub.subscriptionPlan.price,
+				// Los planes Capibara se llaman Lector/Plus/Premium: con prefijo se
+				// entiende que es la suscripcion de plataforma.
+				name: sub.subscriptionPlan.isPlatform ? `Capibara ${sub.subscriptionPlan.name}` : sub.subscriptionPlan.name,
+				// Precio mensual equivalente, para ordenar anuales y mensuales juntos.
+				price: sub.subscriptionPlan.interval === 'YEAR' ? sub.subscriptionPlan.price / 12 : sub.subscriptionPlan.price,
+				tier: sub.subscriptionPlan.tier,
 			},
+			// Suscripcion por scan anterior a Capibara: se agrupa aparte.
+			legacy: !sub.subscriptionPlan.isPlatform,
 			subscriptionId: sub.id,
 		};
 	});
