@@ -2,7 +2,7 @@ import { cron, Patterns } from '@elysiajs/cron'
 import { Elysia, t } from 'elysia'
 import { prisma } from '../../models/prisma'
 import { loggedOptional } from '../../plugins/auth'
-import { repartirLecturaDelMes, sincronizarPagosPlataforma } from '../../services/capibara-reparto'
+import { repartirLecturaDelMes, sincronizarPagosPlataforma, sincronizarSinPrimerCobro } from '../../services/capibara-reparto'
 import {
   LANZADO,
   LIMITES,
@@ -65,6 +65,17 @@ export const router = () =>
         run: wrapCron('capibara-sync-pagos', async () => {
           const r = await sincronizarPagosPlataforma()
           console.log(`[capibara] cobros: ${r.nuevos} nuevos de ${r.suscripciones} suscripciones (errores: ${r.errores})`)
+        }),
+      })
+    )
+    .use(
+      cron({
+        name: 'capibara-primer-cobro',
+        // Cada 15 min: suscripciones nuevas que aun no tienen su primer cobro.
+        pattern: '*/15 * * * *',
+        run: wrapCron('capibara-primer-cobro', async () => {
+          const r = await sincronizarSinPrimerCobro()
+          if (r.nuevos) console.log(`[capibara] primeros cobros: ${r.nuevos} de ${r.revisadas} suscripciones nuevas`)
         }),
       })
     )

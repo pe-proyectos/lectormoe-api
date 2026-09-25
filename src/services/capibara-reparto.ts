@@ -185,39 +185,112 @@ export async function sincronizarPagosPlataforma() {
   let revertidos = 0
   let errores = 0
   for (const sub of subs) {
-    if (!sub.paypalSubscriptionId) continue
-    let txs: any[] = []
-    try {
-      txs = await getTransactionsOfSubscription(sub.paypalSubscriptionId)
-    } catch (e: any) {
-      errores++
-      console.error(`[capibara] no se pudieron leer los cobros de la sub ${sub.id}:`, e?.message || e)
-      continue
-    }
-    if (!Array.isArray(txs)) continue
-
-    for (const tx of txs) {
-      if (!tx?.id) continue
-      if (tx.status === 'COMPLETED') {
-        const nuevo = await registrarCobro(sub, {
-          id: tx.id,
-          gross: Number.parseFloat(tx.amount_with_breakdown?.gross_amount?.value || '0'),
-          fee: Number.parseFloat(tx.amount_with_breakdown?.fee_amount?.value || '0'),
-          currency: tx.amount_with_breakdown?.gross_amount?.currency_code,
-          time: tx.time,
-        })
-        if (nuevo) nuevos++
-      } else if (ESTADOS_REEMBOLSO.has(tx.status)) {
-        const r = await revertirCobro(tx.id, tx.status === 'REVERSED' ? 'contracargo' : 'reembolso')
-        if (r.revertido) revertidos++
-      } else if (tx.status === 'PARTIALLY_REFUNDED') {
-        // PayPal no indica cuanto se devolvio en este listado: se deja para
-        // revision manual antes que descontar de mas a los scans.
-        console.warn(`[capibara] cobro ${tx.id} reembolsado en parte: revisar a mano`)
-      }
-    }
+    const r = await sincronizarCobrosDe(sub)
+    nuevos += r.nuevos
+    revertidos += r.revertidos
+    if (r.error) errores++
   }
   return { suscripciones: subs.length, nuevos, revertidos, errores }
+}
+
+type SubParaSync = SubParaCobro & { paypalSubscriptionId: string | null }
+
+/**
+ * Lee de PayPal los cobros de UNA suscripcion Capibara y registra los que
+ * falten (o revierte los reembolsados). Idempotente.
+ */
+export async function sincronizarCobrosDe(sub: SubParaSync) {
+  const r = { nuevos: 0, revertidos: 0, error: false }
+  if (!sub.paypalSubscriptionId) return r
+  let txs: any[] = []
+  try {
+    txs = await getTransactionsOfSubscription(sub.paypalSubscriptionId)
+  } catch (e: any) {
+    r.error = true
+    console.error(`[capibara] no se pudieron leer los cobros de la sub ${sub.id}:`, e?.message || e)
+    return r
+  }
+  if (!Array.isArray(txs)) return r
+
+  for (const tx of txs) {
+    if (!tx?.id) continue
+    if (tx.status === 'COMPLETED') {
+      const nuevo = await registrarCobro(sub, {
+        id: tx.id,
+        gross: Number.parseFloat(tx.amount_with_breakdown?.gross_amount?.value || '0'),
+        fee: Number.parseFloat(tx.amount_with_breakdown?.fee_amount?.value || '0'),
+        currency: tx.amount_with_breakdown?.gross_amount?.currency_code,
+        time: tx.time,
+      })
+      if (nuevo) r.nuevos++
+    } else if (ESTADOS_REEMBOLSO.has(tx.status)) {
+      const rv = await revertirCobro(tx.id, tx.status === 'REVERSED' ? 'contracargo' : 'reembolso')
+      if (rv.revertido) r.revertidos++
+    } else if (tx.status === 'PARTIALLY_REFUNDED') {
+      // PayPal no indica cuanto se devolvio en este listado: se deja para
+      // revision manual antes que descontar de mas a los scans.
+      console.warn(`[capibara] cobro ${tx.id} reembolsado en parte: revisar a mano`)
+    }
+  }
+  return r
+}
+
+async function cargarSubParaSync(subscriptionId: number) {
+  return prisma.subscription.findUnique({
+    where: { id: subscriptionId },
+    include: { subscriptionPlan: { select: { name: true, interval: true, isPlatform: true } } },
+  })
+}
+
+/**
+ * Al suscribirse, el aviso de PayPal puede llegar ANTES de que exista la
+ * suscripcion en la base (y perderse) y el primer cobro puede tardar unos
+ * minutos en aparecer en PayPal. Se busca enseguida y se reintenta; al primer
+ * cobro encontrado se deja de intentar.
+ */
+export function asegurarPrimerCobro(subscriptionId: number, esperasMs = [5_000, 60_000, 5 * 60_000, 15 * 60_000]) {
+  let i = 0
+  const intento = async () => {
+    try {
+      const sub = await cargarSubParaSync(subscriptionId)
+      if (!sub?.subscriptionPlan?.isPlatform) return
+      const ya = await prisma.platformPayment.count({ where: { subscriptionId } })
+      if (ya > 0) return
+      const r = await sincronizarCobrosDe(sub)
+      if (r.nuevos > 0) {
+        console.log(`[capibara] primer cobro de la sub ${subscriptionId} registrado`)
+        return
+      }
+    } catch (e: any) {
+      console.error(`[capibara] asegurarPrimerCobro ${subscriptionId}:`, e?.message || e)
+    }
+    if (i < esperasMs.length) setTimeout(intento, esperasMs[i++])
+  }
+  setTimeout(intento, esperasMs[i++])
+}
+
+/**
+ * Suscripciones Capibara de los ultimos 3 dias que aun no tienen ningun cobro
+ * registrado. Red de seguridad frecuente para que un pago nuevo no espere a la
+ * sincronizacion completa (cada 6 h).
+ */
+export async function sincronizarSinPrimerCobro() {
+  const hace3dias = new Date(Date.now() - 3 * 86400_000)
+  const subs = await prisma.subscription.findMany({
+    where: {
+      subscriptionPlan: { isPlatform: true },
+      createdAt: { gte: hace3dias },
+      paypalSubscriptionId: { not: '' },
+    },
+    include: { subscriptionPlan: { select: { name: true, interval: true } } },
+  })
+  let nuevos = 0
+  for (const sub of subs) {
+    const ya = await prisma.platformPayment.count({ where: { subscriptionId: sub.id } })
+    if (ya > 0) continue
+    nuevos += (await sincronizarCobrosDe(sub)).nuevos
+  }
+  return { revisadas: subs.length, nuevos }
 }
 
 /**

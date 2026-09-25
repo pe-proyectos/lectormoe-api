@@ -2,6 +2,7 @@ import { prisma } from "../../models/prisma";
 import type { CreateSubscriptionRequest } from "../../types/subscription/create";
 import { getPlanById, getSubscriptionByPaypalId, suspendSubscriptionByPaypalId } from '../../util/paypal';
 import { notifyNewSubscriber } from "../../services/notify-new-chapter";
+import { asegurarPrimerCobro } from "../../services/capibara-reparto";
 import { LANZADO, organizacionPlataforma } from "../../util/capibara-plans";
 
 export const createSubscription = async (organizationId: number | null, userId: number, params: CreateSubscriptionRequest) => {
@@ -191,6 +192,8 @@ export const createSubscription = async (organizationId: number | null, userId: 
 	// the subscription row at dispatch time.
 	// En un plan Capibara se avisa al scan de origen (ver notifyNewSubscriber).
 	notifyNewSubscriber(createdSubscription.id).catch(console.error);
+	// Plan Capibara: registrar el primer cobro sin esperar al webhook ni al cron.
+	if (planSolicitado.isPlatform) asegurarPrimerCobro(createdSubscription.id);
 
 	return createdSubscription;
 };
